@@ -660,6 +660,7 @@ my_required_modules := $(LOCAL_REQUIRED_MODULES) \
 ifdef LOCAL_IS_HOST_MODULE
 my_required_modules += $(LOCAL_REQUIRED_MODULES_$($(my_prefix)OS))
 endif
+<<<<<<< HEAD   (123cec Merge "Merge empty history for sparse-8898769-L7910000095637)
 ALL_MODULES.$(my_register_name).REQUIRED := \
     $(strip $(ALL_MODULES.$(my_register_name).REQUIRED) $(my_required_modules))
 ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED := \
@@ -671,6 +672,122 @@ ALL_MODULES.$(my_register_name).TARGET_REQUIRED := \
 ALL_MODULES.$(my_register_name).HOST_REQUIRED := \
     $(strip $(ALL_MODULES.$(my_register_name).HOST_REQUIRED)\
         $(LOCAL_HOST_REQUIRED_MODULES))
+=======
+
+ALL_MODULES.$(my_register_name).SHARED_LIBS := \
+    $(ALL_MODULES.$(my_register_name).SHARED_LIBS) $(LOCAL_SHARED_LIBRARIES)
+
+ALL_MODULES.$(my_register_name).SYSTEM_SHARED_LIBS := \
+    $(ALL_MODULES.$(my_register_name).SYSTEM_SHARED_LIBS) $(LOCAL_SYSTEM_SHARED_LIBRARIES)
+
+ALL_MODULES.$(my_register_name).LOCAL_RUNTIME_LIBRARIES := \
+    $(ALL_MODULES.$(my_register_name).LOCAL_RUNTIME_LIBRARIES) $(LOCAL_RUNTIME_LIBRARIES) \
+    $(LOCAL_JAVA_LIBRARIES)
+
+ALL_MODULES.$(my_register_name).LOCAL_STATIC_LIBRARIES := \
+    $(ALL_MODULES.$(my_register_name).LOCAL_STATIC_LIBRARIES) $(LOCAL_STATIC_JAVA_LIBRARIES)
+
+ifdef LOCAL_TEST_DATA
+  # Export the list of targets that are handled as data inputs and required
+  # by tests at runtime. The LOCAL_TEST_DATA format is generated from below
+  # https://cs.android.com/android/platform/superproject/+/master:build/soong/android/androidmk.go;l=925-944;drc=master
+  # which format is like $(path):$(relative_file) but for module-info, only
+  # the string after ":" is needed.
+  ALL_MODULES.$(my_register_name).TEST_DATA := \
+    $(strip $(ALL_MODULES.$(my_register_name).TEST_DATA) \
+      $(foreach f, $(LOCAL_TEST_DATA),\
+        $(call word-colon,2,$(f))))
+endif
+
+ifdef LOCAL_TEST_DATA_BINS
+  ALL_MODULES.$(my_register_name).TEST_DATA_BINS := \
+    $(ALL_MODULES.$(my_register_name).TEST_DATA_BINS) $(LOCAL_TEST_DATA_BINS)
+endif
+
+ALL_MODULES.$(my_register_name).SUPPORTED_VARIANTS := \
+  $(ALL_MODULES.$(my_register_name).SUPPORTED_VARIANTS) \
+  $(filter-out $(ALL_MODULES.$(my_register_name).SUPPORTED_VARIANTS),$(my_supported_variant))
+
+##########################################################################
+## When compiling against API imported module, use API import stub
+## libraries.
+##########################################################################
+ifneq ($(LOCAL_USE_VNDK),)
+  ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+    apiimport_postfix := .apiimport
+    ifeq ($(LOCAL_USE_VNDK_PRODUCT),true)
+      apiimport_postfix := .apiimport.product
+    else
+      apiimport_postfix := .apiimport.vendor
+    endif
+
+    my_required_modules := $(foreach l,$(my_required_modules), \
+      $(if $(filter $(l), $(API_IMPORTED_SHARED_LIBRARIES)), $(l)$(apiimport_postfix), $(l)))
+  endif
+endif
+
+##########################################################################
+## When compiling against the VNDK, add the .vendor or .product suffix to
+## required modules.
+##########################################################################
+ifneq ($(LOCAL_USE_VNDK),)
+  #####################################################
+  ## Soong modules may be built three times, once for
+  ## /system, once for /vendor and once for /product.
+  ## If we're using the VNDK, switch all soong
+  ## libraries over to the /vendor or /product variant.
+  #####################################################
+  ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
+    # We don't do this renaming for soong-defined modules since they already
+    # have correct names (with .vendor or .product suffix when necessary) in
+    # their LOCAL_*_LIBRARIES.
+    ifeq ($(LOCAL_USE_VNDK_PRODUCT),true)
+      my_required_modules := $(foreach l,$(my_required_modules),\
+        $(if $(SPLIT_PRODUCT.SHARED_LIBRARIES.$(l)),$(l).product,$(l)))
+    else
+      my_required_modules := $(foreach l,$(my_required_modules),\
+        $(if $(SPLIT_VENDOR.SHARED_LIBRARIES.$(l)),$(l).vendor,$(l)))
+    endif
+  endif
+endif
+
+ifdef LOCAL_IS_HOST_MODULE
+    ifneq ($(my_host_cross),true)
+        ALL_MODULES.$(my_register_name).REQUIRED_FROM_HOST := \
+            $(strip $(ALL_MODULES.$(my_register_name).REQUIRED_FROM_HOST) $(my_required_modules))
+        ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED_FROM_HOST := \
+            $(strip $(ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED_FROM_HOST)\
+                $(my_required_modules))
+        ALL_MODULES.$(my_register_name).TARGET_REQUIRED_FROM_HOST := \
+            $(strip $(ALL_MODULES.$(my_register_name).TARGET_REQUIRED_FROM_HOST)\
+                $(LOCAL_TARGET_REQUIRED_MODULES))
+    else
+        ALL_MODULES.$(my_register_name).REQUIRED_FROM_HOST_CROSS := \
+            $(strip $(ALL_MODULES.$(my_register_name).REQUIRED_FROM_HOST_CROSS) $(my_required_modules))
+        ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED_FROM_HOST_CROSS := \
+            $(strip $(ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED_FROM_HOST_CROSS)\
+                $(my_required_modules))
+        ifdef LOCAL_TARGET_REQUIRED_MODULES
+            $(call pretty-error,LOCAL_TARGET_REQUIRED_MODULES may not be used from host_cross modules)
+        endif
+    endif
+    ifdef LOCAL_HOST_REQUIRED_MODULES
+        $(call pretty-error,LOCAL_HOST_REQUIRED_MODULES may not be used from host modules. Use LOCAL_REQUIRED_MODULES instead)
+    endif
+else
+    ALL_MODULES.$(my_register_name).REQUIRED_FROM_TARGET := \
+        $(strip $(ALL_MODULES.$(my_register_name).REQUIRED_FROM_TARGET) $(my_required_modules))
+    ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED_FROM_TARGET := \
+        $(strip $(ALL_MODULES.$(my_register_name).EXPLICITLY_REQUIRED_FROM_TARGET)\
+            $(my_required_modules))
+    ALL_MODULES.$(my_register_name).HOST_REQUIRED_FROM_TARGET := \
+        $(strip $(ALL_MODULES.$(my_register_name).HOST_REQUIRED_FROM_TARGET)\
+            $(LOCAL_HOST_REQUIRED_MODULES))
+    ifdef LOCAL_TARGET_REQUIRED_MODULES
+        $(call pretty-error,LOCAL_TARGET_REQUIRED_MODULES may not be used from target modules. Use LOCAL_REQUIRED_MODULES instead)
+    endif
+endif
+>>>>>>> BRANCH (b4676c Merge "Version bump to TKB1.220911.001.A1 [core/build_id.mk])
 ALL_MODULES.$(my_register_name).EVENT_LOG_TAGS := \
     $(ALL_MODULES.$(my_register_name).EVENT_LOG_TAGS) $(event_log_tags)
 ALL_MODULES.$(my_register_name).MAKEFILE := \

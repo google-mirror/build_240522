@@ -562,7 +562,7 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     if "selinux_fc" in prop_dict:
       build_command.append(prop_dict["selinux_fc"])
   elif fs_type.startswith("squash"):
-    build_command = ["mksquashfsimage.sh"]
+    build_command = ["mksquashfsimage"]
     build_command.extend([in_dir, out_file])
     if "squashfs_sparse_flag" in prop_dict:
       build_command.extend([prop_dict["squashfs_sparse_flag"]])
@@ -584,8 +584,15 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     if prop_dict.get("squashfs_disable_4k_align") == "true":
       build_command.extend(["-a"])
   elif fs_type.startswith("f2fs"):
+<<<<<<< HEAD   (123cec Merge "Merge empty history for sparse-8898769-L7910000095637)
     build_command = ["mkf2fsuserimg.sh"]
     build_command.extend([out_file, prop_dict["partition_size"]])
+=======
+    build_command = ["mkf2fsuserimg"]
+    build_command.extend([out_file, prop_dict["image_size"]])
+    if "f2fs_sparse_flag" in prop_dict and not disable_sparse:
+      build_command.extend([prop_dict["f2fs_sparse_flag"]])
+>>>>>>> BRANCH (b4676c Merge "Version bump to TKB1.220911.001.A1 [core/build_id.mk])
     if fs_config:
       build_command.extend(["-C", fs_config])
     build_command.extend(["-f", in_dir])

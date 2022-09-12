@@ -171,7 +171,18 @@ import tempfile
 import zipfile
 
 import common
+<<<<<<< HEAD   (123cec Merge "Merge empty history for sparse-8898769-L7910000095637)
 import edify_generator
+=======
+import ota_utils
+from ota_utils import (UNZIP_PATTERN, FinalizeMetadata, GetPackageMetadata,
+                       PayloadGenerator, SECURITY_PATCH_LEVEL_PROP_NAME)
+from common import IsSparseImage
+import target_files_diff
+from check_target_files_vintf import CheckVintfIfTrebleEnabled
+from non_ab_ota import GenerateNonAbOtaPackage
+from payload_signer import PayloadSigner
+>>>>>>> BRANCH (b4676c Merge "Version bump to TKB1.220911.001.A1 [core/build_id.mk])
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -1700,6 +1711,11 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
 
   # Metadata to comply with Android OTA package format.
   metadata = GetPackageMetadata(target_info, source_info)
+<<<<<<< HEAD   (123cec Merge "Merge empty history for sparse-8898769-L7910000095637)
+=======
+  # Generate payload.
+  payload = PayloadGenerator(OPTIONS.include_secondary, OPTIONS.wipe_user_data)
+>>>>>>> BRANCH (b4676c Merge "Version bump to TKB1.220911.001.A1 [core/build_id.mk])
 
   if OPTIONS.skip_postinstall:
     target_file = GetTargetFilesZipWithoutPostinstallConfig(target_file)
@@ -1717,7 +1733,14 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
   payload.Generate(target_file, source_file, additional_args)
 
   # Sign the payload.
+<<<<<<< HEAD   (123cec Merge "Merge empty history for sparse-8898769-L7910000095637)
   payload_signer = PayloadSigner()
+=======
+  pw = OPTIONS.key_passwords[OPTIONS.package_key]
+  payload_signer = PayloadSigner(
+      OPTIONS.package_key, OPTIONS.private_key_suffix,
+      pw, OPTIONS.payload_signer)
+>>>>>>> BRANCH (b4676c Merge "Version bump to TKB1.220911.001.A1 [core/build_id.mk])
   payload.Sign(payload_signer)
 
   # Write the payload into output zip.
@@ -1761,15 +1784,8 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
   # FinalizeMetadata().
   common.ZipClose(output_zip)
 
-  # AbOtaPropertyFiles intends to replace StreamingPropertyFiles, as it covers
-  # all the info of the latter. However, system updaters and OTA servers need to
-  # take time to switch to the new flag. We keep both of the flags for
-  # P-timeframe, and will remove StreamingPropertyFiles in later release.
-  needed_property_files = (
-      AbOtaPropertyFiles(),
-      StreamingPropertyFiles(),
-  )
-  FinalizeMetadata(metadata, staging_file, output_file, needed_property_files)
+  FinalizeMetadata(metadata, staging_file, output_file,
+                   package_key=OPTIONS.package_key)
 
 
 def main(argv):

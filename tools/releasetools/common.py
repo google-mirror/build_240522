@@ -803,9 +803,17 @@ def SignFile(input_name, output_name, key, password, min_api_level=None,
   p = Run(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
   if password is not None:
     password += "\n"
+<<<<<<< HEAD   (123cec Merge "Merge empty history for sparse-8898769-L7910000095637)
   p.communicate(password)
   if p.returncode != 0:
     raise ExternalError("signapk.jar failed: return code %s" % (p.returncode,))
+=======
+  stdoutdata, _ = proc.communicate(password)
+  if proc.returncode != 0:
+    raise ExternalError(
+        "Failed to run {}: return code {}:\n{}".format(cmd,
+            proc.returncode, stdoutdata))
+>>>>>>> BRANCH (b4676c Merge "Version bump to TKB1.220911.001.A1 [core/build_id.mk])
 
 
 def CheckSize(data, target, info_dict):

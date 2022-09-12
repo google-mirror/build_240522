@@ -4,6 +4,7 @@ cat <<EOF
 Run "m help" for help with the build system itself.
 
 Invoke ". build/envsetup.sh" from your shell to add the following functions to your environment:
+<<<<<<< HEAD   (123cec Merge "Merge empty history for sparse-8898769-L7910000095637)
 - lunch:     lunch <product_name>-<build_variant>
              Selects <product_name> as the product to build, and <build_variant> as the variant to
              build, and stores those selections in the environment to be read by subsequent
@@ -26,6 +27,48 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - sepgrep:   Greps on all local sepolicy files.
 - sgrep:     Greps on all local source files.
 - godir:     Go to the directory containing a file.
+=======
+- lunch:      lunch <product_name>-<build_variant>
+              Selects <product_name> as the product to build, and <build_variant> as the variant to
+              build, and stores those selections in the environment to be read by subsequent
+              invocations of 'm' etc.
+- tapas:      tapas [<App1> <App2> ...] [arm|x86|arm64|x86_64] [eng|userdebug|user]
+              Sets up the build environment for building unbundled apps (APKs).
+- banchan:    banchan <module1> [<module2> ...] [arm|x86|arm64|x86_64|arm64_only|x86_64only] \
+                      [eng|userdebug|user]
+              Sets up the build environment for building unbundled modules (APEXes).
+- croot:      Changes directory to the top of the tree, or a subdirectory thereof.
+- m:          Makes from the top of the tree.
+- mm:         Builds and installs all of the modules in the current directory, and their
+              dependencies.
+- mmm:        Builds and installs all of the modules in the supplied directories, and their
+              dependencies.
+              To limit the modules being built use the syntax: mmm dir/:target1,target2.
+- mma:        Same as 'mm'
+- mmma:       Same as 'mmm'
+- provision:  Flash device with all required partitions. Options will be passed on to fastboot.
+- cgrep:      Greps on all local C/C++ files.
+- ggrep:      Greps on all local Gradle files.
+- gogrep:     Greps on all local Go files.
+- jgrep:      Greps on all local Java files.
+- ktgrep:     Greps on all local Kotlin files.
+- resgrep:    Greps on all local res/*.xml files.
+- mangrep:    Greps on all local AndroidManifest.xml files.
+- mgrep:      Greps on all local Makefiles and *.bp files.
+- owngrep:    Greps on all local OWNERS files.
+- rsgrep:     Greps on all local Rust files.
+- sepgrep:    Greps on all local sepolicy files.
+- sgrep:      Greps on all local source files.
+- godir:      Go to the directory containing a file.
+- allmod:     List all modules.
+- gomod:      Go to the directory containing a module.
+- pathmod:    Get the directory containing a module.
+- outmod:     Gets the location of a module's installed outputs with a certain extension.
+- dirmods:    Gets the modules defined in a given directory.
+- installmod: Adb installs a module's built APK.
+- refreshmod: Refresh list of modules for allmod/gomod/pathmod/outmod/installmod.
+- syswrite:   Remount partitions (e.g. system.img) as writable, rebooting if necessary.
+>>>>>>> BRANCH (b4676c Merge "Version bump to TKB1.220911.001.A1 [core/build_id.mk])
 
 Environment options:
 - SANITIZE_HOST: Set to 'true' to use ASAN for all host modules. Note that
@@ -714,6 +757,65 @@ function tapas()
     destroy_build_var_cache
 }
 
+<<<<<<< HEAD   (123cec Merge "Merge empty history for sparse-8898769-L7910000095637)
+=======
+# Configures the build to build unbundled Android modules (APEXes).
+# Run banchan with one or more module names (from apex{} modules).
+function banchan()
+{
+    local showHelp="$(echo $* | xargs -n 1 echo | \grep -E '^(help)$' | xargs)"
+    local product="$(echo $* | xargs -n 1 echo | \grep -E '^(.*_)?(arm|x86|arm64|x86_64|arm64only|x86_64only)$' | xargs)"
+    local variant="$(echo $* | xargs -n 1 echo | \grep -E '^(user|userdebug|eng)$' | xargs)"
+    local apps="$(echo $* | xargs -n 1 echo | \grep -E -v '^(user|userdebug|eng|(.*_)?(arm|x86|arm64|x86_64))$' | xargs)"
+
+    if [ "$showHelp" != "" ]; then
+      $(gettop)/build/make/banchanHelp.sh
+      return
+    fi
+
+    if [ -z "$product" ]; then
+        product=arm64
+    elif [ $(echo $product | wc -w) -gt 1 ]; then
+        echo "banchan: Error: Multiple build archs or products supplied: $products"
+        return
+    fi
+    if [ $(echo $variant | wc -w) -gt 1 ]; then
+        echo "banchan: Error: Multiple build variants supplied: $variant"
+        return
+    fi
+    if [ -z "$apps" ]; then
+        echo "banchan: Error: No modules supplied"
+        return
+    fi
+
+    case $product in
+      arm)    product=module_arm;;
+      x86)    product=module_x86;;
+      arm64)  product=module_arm64;;
+      x86_64) product=module_x86_64;;
+      arm64only)  product=module_arm64only;;
+      x86_64only) product=module_x86_64only;;
+    esac
+    if [ -z "$variant" ]; then
+        variant=eng
+    fi
+
+    export TARGET_PRODUCT=$product
+    export TARGET_BUILD_VARIANT=$variant
+    export TARGET_BUILD_DENSITY=alldpi
+    export TARGET_BUILD_TYPE=release
+
+    # This setup currently uses TARGET_BUILD_APPS just like tapas, but the use
+    # case is different and it may diverge in the future.
+    export TARGET_BUILD_APPS=$apps
+
+    build_build_var_cache
+    set_stuff_for_environment
+    printconfig
+    destroy_build_var_cache
+}
+
+>>>>>>> BRANCH (b4676c Merge "Version bump to TKB1.220911.001.A1 [core/build_id.mk])
 function gettop
 {
     local TOPFILE=build/make/core/envsetup.mk
@@ -1596,6 +1698,97 @@ function _wrap_build()
     return $ret
 }
 
+<<<<<<< HEAD   (123cec Merge "Merge empty history for sparse-8898769-L7910000095637)
+=======
+function _trigger_build()
+(
+    local -r bc="$1"; shift
+    local T=$(gettop)
+    if [ -n "$T" ]; then
+      _wrap_build "$T/build/soong/soong_ui.bash" --build-mode --${bc} --dir="$(pwd)" "$@"
+    else
+      >&2 echo "Couldn't locate the top of the tree. Try setting TOP."
+      return 1
+    fi
+)
+
+# Convenience entry point (like m) to use Bazel in AOSP.
+function b()
+(
+    # Look for the --run-soong-tests flag and skip passing --skip-soong-tests to Soong if present
+    local bazel_args=""
+    local skip_tests="--skip-soong-tests"
+    for i in $@; do
+        if [[ $i != "--run-soong-tests" ]]; then
+            bazel_args+="$i "
+        else
+            skip_tests=""
+        fi
+    done
+    # Generate BUILD, bzl files into the synthetic Bazel workspace (out/soong/workspace).
+    _trigger_build "all-modules" bp2build $skip_tests USE_BAZEL_ANALYSIS= || return 1
+    # Then, run Bazel using the synthetic workspace as the --package_path.
+    if [[ -z "$bazel_args" ]]; then
+        # If there are no args, show help.
+        bazel help
+    else
+        # Else, always run with the bp2build configuration, which sets Bazel's package path to the synthetic workspace.
+        # Add the --config=bp2build after the first argument that doesn't start with a dash. That should be the bazel
+        # command. (build, test, run, ect) If the --config was added at the end, it wouldn't work with commands like:
+        # b run //foo -- --args-for-foo
+        local config_set=0
+
+        # Represent the args as an array, not a string.
+        local bazel_args_with_config=()
+        for arg in $bazel_args; do
+            if [[ $arg == "--" && $config_set -ne 1 ]]; # if we find --, insert config argument here
+            then
+                bazel_args_with_config+=("--config=bp2build -- ")
+                config_set=1
+            else
+                bazel_args_with_config+=("$arg ")
+            fi
+        done
+        if [[ $config_set -ne 1 ]]; then
+            bazel_args_with_config+=("--config=bp2build ")
+        fi
+
+        if [ -n "$ZSH_VERSION" ]; then
+          # zsh breaks posix by not doing string-splitting on unquoted args
+          # by default. Enable the compatibility option.
+          setopt shwordsplit
+        fi
+        # Call Bazel.
+        bazel ${bazel_args_with_config[@]}
+    fi
+)
+
+function m()
+(
+    _trigger_build "all-modules" "$@"
+)
+
+function mm()
+(
+    _trigger_build "modules-in-a-dir-no-deps" "$@"
+)
+
+function mmm()
+(
+    _trigger_build "modules-in-dirs-no-deps" "$@"
+)
+
+function mma()
+(
+    _trigger_build "modules-in-a-dir" "$@"
+)
+
+function mmma()
+(
+    _trigger_build "modules-in-dirs" "$@"
+)
+
+>>>>>>> BRANCH (b4676c Merge "Version bump to TKB1.220911.001.A1 [core/build_id.mk])
 function make()
 {
     _wrap_build $(get_make_command "$@") "$@"
