@@ -22,6 +22,30 @@
       },
       "revId": "eaacb34c2cc3dd497268826861ebcb327afa4b75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5bf5a81_fb17220e",
+        "filename": "bazel/toolchains/cc/features.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1872231
+      },
+      "writtenOn": "2022-09-12T18:36:51Z",
+      "side": 1,
+      "message": "I believe the order of features defines the order of arguments get passed to the compiler. Some of the args do seem to affect how GCC / clang behaves esp. the linker (e.g. https://stackoverflow.com/questions/14623415/gcc-g-parameter-order).\n\nSo we\u0027d better keep the order to avoid strange issues.",
+      "parentUuid": "65c37891_0fc0b704",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 62
+      },
+      "revId": "eaacb34c2cc3dd497268826861ebcb327afa4b75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
