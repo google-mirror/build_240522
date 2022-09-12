@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "423efada_4c1f759d",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2987,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-09-12T21:11:01Z",
+      "side": 1,
+      "message": "This is going to silently skip the manifest APK whenever there are no matching files, is that what you want or would it be better to install an empty manifest APK?  It\u0027s already inside `ifdef BUILDING_SYSTEM_EXT_IMAGE`, etc.",
+      "revId": "f9eaa99fa7bb50b8a0cb0eac55a10f38b24b6154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
