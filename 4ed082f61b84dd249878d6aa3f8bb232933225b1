@@ -33,6 +33,24 @@
       "message": "Does this continue to apply after the function is finished? Should we unset it after? (or really, restore it to what it was before the function started)",
       "revId": "4ed082f61b84dd249878d6aa3f8bb232933225b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ce3cccc_81395c74",
+        "filename": "envsetup.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1888,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-09-12T14:27:52Z",
+      "side": 1,
+      "message": "you\u0027re right - it applies after the function is finished and can potentially change other behavior.\n\nSwitching to an explicit split syntax instead: https://android-review.googlesource.com/c/platform/build/+/2215101",
+      "parentUuid": "352c3782_1659dfb7",
+      "revId": "4ed082f61b84dd249878d6aa3f8bb232933225b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
