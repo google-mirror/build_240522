@@ -105,6 +105,24 @@
       "parentUuid": "2a3e4caf_b31a7a8f",
       "revId": "a4c8c036f783d922b2bb12c473585042250ad2a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64abde4c_564ba6ab",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-09-13T04:54:49Z",
+      "side": 1,
+      "message": "I\u0027m not sure, can\u0027t find any documentation on it. Let\u0027s just submit this - if it doesn\u0027t, we can roll it back.",
+      "parentUuid": "206ae9d8_76c7b461",
+      "revId": "a4c8c036f783d922b2bb12c473585042250ad2a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
