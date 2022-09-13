@@ -16,6 +16,24 @@
       "message": "This is going to silently skip the manifest APK whenever there are no matching files, is that what you want or would it be better to install an empty manifest APK?  It\u0027s already inside `ifdef BUILDING_SYSTEM_EXT_IMAGE`, etc.",
       "revId": "f9eaa99fa7bb50b8a0cb0eac55a10f38b24b6154",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32c3109c_bc6896cc",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2987,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-13T17:37:17Z",
+      "side": 1,
+      "message": "Done. Installing an empty APK seems simpler. I still need to move the check to below though, to avoid running $$\u003c / fsverity_manifest_generator.",
+      "parentUuid": "423efada_4c1f759d",
+      "revId": "f9eaa99fa7bb50b8a0cb0eac55a10f38b24b6154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

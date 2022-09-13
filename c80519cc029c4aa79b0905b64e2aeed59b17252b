@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0911f65b_8f08f4df",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3005,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-13T17:37:17Z",
+      "side": 1,
+      "message": "L2997 fixed the race condition here.",
+      "range": {
+        "startLine": 3004,
+        "startChar": 1,
+        "endLine": 3005,
+        "endChar": 28
+      },
+      "revId": "c80519cc029c4aa79b0905b64e2aeed59b17252b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
