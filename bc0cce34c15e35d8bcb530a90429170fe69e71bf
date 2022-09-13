@@ -16,6 +16,23 @@
       "message": "Would you please review this updated change please? I don\u0027t know which step blocked this process.",
       "revId": "bc0cce34c15e35d8bcb530a90429170fe69e71bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af0b11b4_8ff17b07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-09-13T17:07:16Z",
+      "side": 1,
+      "message": "Please fix the typos",
+      "revId": "bc0cce34c15e35d8bcb530a90429170fe69e71bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
