@@ -22,6 +22,30 @@
       },
       "revId": "061479c528593ea629584f5c8dce85a80b3c4f0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5014790_346e1043",
+        "filename": "core/tasks/tools/vts-kernel-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2022-09-13T17:51:31Z",
+      "side": 0,
+      "message": "I think I managed to get them all, but I\u0027m still trying to figure out the presubmit issues.",
+      "parentUuid": "3de04801_93e26dd0",
+      "range": {
+        "startLine": 21,
+        "startChar": 46,
+        "endLine": 21,
+        "endChar": 62
+      },
+      "revId": "061479c528593ea629584f5c8dce85a80b3c4f0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
