@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5f67ac5_546afae5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961266
+      },
+      "writtenOn": "2022-09-13T06:46:35Z",
+      "side": 1,
+      "message": "Would you please review this updated change please? I don\u0027t know which step blocked this process.",
+      "revId": "bc0cce34c15e35d8bcb530a90429170fe69e71bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
