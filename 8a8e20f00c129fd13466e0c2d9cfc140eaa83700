@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92d53e44_b3f6b74c",
+        "filename": "core/tasks/tools/vts-kernel-tests.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2022-09-15T00:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70af6b83_25fc06c6",
+      "range": {
+        "startLine": 21,
+        "startChar": 38,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "8a8e20f00c129fd13466e0c2d9cfc140eaa83700",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c012a212_6cf73986",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-13T23:40:40Z",
       "side": 1,
       "message": "vts_kernel_kselftest_tests",
+      "range": {
+        "startLine": 27,
+        "startChar": 44,
+        "endLine": 27,
+        "endChar": 63
+      },
+      "revId": "8a8e20f00c129fd13466e0c2d9cfc140eaa83700",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97fc3ebf_598b2dbf",
+        "filename": "core/tasks/tools/vts-kernel-tests.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2022-09-15T00:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c012a212_6cf73986",
       "range": {
         "startLine": 27,
         "startChar": 44,
