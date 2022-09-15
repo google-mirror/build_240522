@@ -49,7 +49,12 @@ class Options(object):
     self.signapk_shared_library_path = "lib64"   # Relative to search_path
     self.extra_signapk_args = []
     self.java_path = "java"  # Use the one on the path by default.
+<<<<<<< HEAD   (4b5637 Merge "Merge empty history for sparse-9051359-L4810000095636)
     self.java_args = ["-Xmx2048m"]  # The default JVM args.
+=======
+    self.java_args = ["-Xmx4096m"]  # The default JVM args.
+    self.android_jar_path = None
+>>>>>>> BRANCH (1e0652 Merge "Version bump to TKB1.220914.001.A1 [core/build_id.mk])
     self.public_key_suffix = ".x509.pem"
     self.private_key_suffix = ".pk8"
     # use otatools built boot_signer by default
