@@ -88,6 +88,24 @@
       "parentUuid": "375b6425_f938c507",
       "revId": "fbde8268a6a6f7453903cd500a4bd20784c73ce1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f3f6550_2e75d909",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1872231
+      },
+      "writtenOn": "2022-09-15T06:44:50Z",
+      "side": 1,
+      "message": "This will be reverted, replaced by new set of changes in platform/build/bazel.",
+      "parentUuid": "a3240b8a_764aa30d",
+      "revId": "fbde8268a6a6f7453903cd500a4bd20784c73ce1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
