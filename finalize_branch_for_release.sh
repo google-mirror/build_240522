@@ -34,9 +34,25 @@ function finalize_main() {
     # state and test with that.
     AIDL_FROZEN_REL=true $m droidcore
 
+    # Finalize resources
+    "$top/frameworks/base/tools/aapt2/tools/finalize_res.py" \
+           "$top/frameworks/base/core/res/res/values/public-staging.xml" \
+           "$top/frameworks/base/core/res/res/values/public-final.xml"
+
+    # SDK finalization
+    local sdk_codename='public static final int UPSIDE_DOWN_CAKE = CUR_DEVELOPMENT;'
+    local sdk_version='public static final int UPSIDE_DOWN_CAKE = 34;'
+    local sdk_build="$top/frameworks/base/core/java/android/os/Build.java"
+
+    sed -i "s%$sdk_codename%$sdk_version%g" $sdk_build
+
+    # Update the current.txt
+    $m update-api
+
     # Build SDK (TODO)
     # lunch sdk...
     # m ...
 }
 
 finalize_main
+
