@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c95111a_df63314b",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2022-09-18T19:35:31Z",
+      "side": 1,
+      "message": "Should we include this here? RKP is a GMS requirement, not all of Android.",
+      "range": {
+        "startLine": 69,
+        "startChar": 16,
+        "endLine": 69,
+        "endChar": 20
+      },
+      "revId": "096ef71a6aa0f41140e5eaa18cbf7db16c5e6fb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
