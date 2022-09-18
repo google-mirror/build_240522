@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "380f2245_e1b14177",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1617655
+      },
+      "writtenOn": "2022-09-18T12:40:53Z",
+      "side": 1,
+      "message": "sure. Neither ab nor nonab needs to be rebuild\ncommit Message updated,Thanks",
+      "parentUuid": "bce7b54c_b901adf6",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 13
+      },
+      "revId": "f7754ce05e2756ff63cec031e6a57ae7aa4ed160",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "62600a9d_7477af7b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2022-09-16T16:52:42Z",
       "side": 1,
       "message": "I believe this code path is executed for both AB and nonAB. We can\u0027t put non-AB specific code here.",
+      "revId": "f7754ce05e2756ff63cec031e6a57ae7aa4ed160",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50d50166_9a2ba07f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1617655
+      },
+      "writtenOn": "2022-09-18T12:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62600a9d_7477af7b",
       "revId": "f7754ce05e2756ff63cec031e6a57ae7aa4ed160",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
