@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a886f7ff_cb8dd63a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2022-09-19T16:25:30Z",
+      "side": 1,
+      "message": "Yi-yo, do the official GKI images get built with `BOARD_USES_GENERIC_KERNEL_IMAGE \u003d true` or is there some other way they are built?\nI want this to work for all of the GKI images we ship.",
+      "revId": "df136f696266f7a4a3b848f88b68f149d116da52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
