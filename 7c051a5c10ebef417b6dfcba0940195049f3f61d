@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d2d27e0_837c6bf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2022-09-19T16:51:29Z",
+      "side": 1,
+      "message": "This will need to wait until all of the GKI kernels/prebuilts have been updated to include the arg.\nPresubmits won\u0027t pass until then.",
+      "revId": "7c051a5c10ebef417b6dfcba0940195049f3f61d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
