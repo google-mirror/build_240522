@@ -53,9 +53,9 @@
 # -keep class * extends android.app.BackupAgent
 
 # Parcelable CREATORs must be kept for Parcelable functionality
--keep class * implements android.os.Parcelable {
-  public static final ** CREATOR;
-}
+-keepclassmembers class * implements android.os.Parcelable {
+   public static final ** CREATOR;
+ }
 
 # The support library contains references to newer platform versions.
 # Don't warn about those in case this app is linking against an older
