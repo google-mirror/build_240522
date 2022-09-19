@@ -996,9 +996,8 @@ INTERNAL_KERNEL_CMDLINE := $(strip $(INTERNAL_KERNEL_CMDLINE) buildvariant=$(TAR
 #   - If building vendor_boot, INTERNAL_KERNEL_CMDLINE, base and pagesize goes in vendor_boot.
 #   - Otherwise, put them in boot.
 ifeq (true,$(BOARD_USES_GENERIC_KERNEL_IMAGE))
-  ifdef GENERIC_KERNEL_CMDLINE
-    INTERNAL_BOOTIMAGE_ARGS += --cmdline "$(GENERIC_KERNEL_CMDLINE)"
-  endif
+  GENERIC_KERNEL_CMDLINE += bootconfig
+  INTERNAL_BOOTIMAGE_ARGS += --cmdline "$(GENERIC_KERNEL_CMDLINE)"
 else ifndef BUILDING_VENDOR_BOOT_IMAGE # && BOARD_USES_GENERIC_KERNEL_IMAGE != true
   ifdef INTERNAL_KERNEL_CMDLINE
     INTERNAL_BOOTIMAGE_ARGS += --cmdline "$(INTERNAL_KERNEL_CMDLINE)"
