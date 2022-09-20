@@ -525,12 +525,12 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       mkfs_output = BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config)
       if "erofs_sparse_flag" in prop_dict and not disable_sparse:
         image_path = UnsparseImage(out_file, replace=False)
-        size = GetDiskUsage(image_path)
+        size = os.path.getsize(image_path)
         os.remove(image_path)
       else:
-        size = GetDiskUsage(out_file)
+        size = os.path.getsize(out_file)
     else:
-      size = GetDiskUsage(in_dir)
+      size = os.path.getsize(in_dir)
     logger.info(
         "The tree size of %s is %d MB.", in_dir, size // BYTES_IN_MB)
     size = CalculateSizeAndReserved(prop_dict, size)
