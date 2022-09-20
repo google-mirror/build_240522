@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0564041f_f6d2628f",
+        "filename": "finalize-step-1.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2022-09-20T23:56:45Z",
+      "side": 1,
+      "message": "Ah? The above script is called from this, see function finalize()?",
+      "parentUuid": "5bb62639_769ab158",
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5bb3529e_f7b37ee2",
         "filename": "finalize-step-1.sh",
         "patchSetId": 1
@@ -48,6 +66,30 @@
       "writtenOn": "2022-09-20T23:12:49Z",
       "side": 1,
       "message": "nit: we\u0027re dropping this?",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 9
+      },
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc793f41_274ccadc",
+        "filename": "finalize-step-1.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2022-09-20T23:56:45Z",
+      "side": 1,
+      "message": "this will terminate script if any tool returns a non-zero status. repo+friends are returning banch of non-zeros for all kinds of reasons, terminating the script prematurely",
+      "parentUuid": "5bb3529e_f7b37ee2",
       "range": {
         "startLine": 3,
         "startChar": 0,
@@ -94,6 +136,30 @@
       "writtenOn": "2022-09-20T23:12:49Z",
       "side": 1,
       "message": "(main comment, though if you don\u0027t want to do this, I don\u0027t care): we should do this after L50 (or again). The idea of this command is that we test that the build is setup. For instance, we want to test a device can be built after update-api runs.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 37
+      },
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a726b34f_420a0ef5",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2022-09-20T23:56:45Z",
+      "side": 1,
+      "message": "Ideally I would not want to do anything here. In fact I was going to conditionally remove this build. The build has to happen in the branch and failure(s) needs to be visible.\nBut still if there is a critical error, we probably don\u0027t want to submit half-ready-half-broken CLs.\nIdeas?",
+      "parentUuid": "e2e88e8c_73fef4b5",
       "range": {
         "startLine": 29,
         "startChar": 0,
