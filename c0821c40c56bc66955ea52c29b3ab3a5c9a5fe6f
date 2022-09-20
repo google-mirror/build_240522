@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90409f15_262a208f",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-09-20T22:28:05Z",
+      "side": 1,
+      "message": "Remove from dir map and instead added below for better context.",
+      "parentUuid": "2f9ca39b_03329664",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 23
+      },
+      "revId": "c0821c40c56bc66955ea52c29b3ab3a5c9a5fe6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2f65556_3e2aa01f",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-19T04:41:29Z",
       "side": 1,
       "message": "Please add comments explaining why this has \"VENDOR/apex\" but not other partitions. IIUC, it\u0027s because only the vendor apexes can have VINTF fragments.\n\nAlternative, we can make the assumption explicit by checking if apexes from other partitions don\u0027t have etc/vintf directories.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 32
+      },
+      "revId": "c0821c40c56bc66955ea52c29b3ab3a5c9a5fe6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b14fc88_b7b21923",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-09-20T22:28:05Z",
+      "side": 1,
+      "message": "When switching to use existing DIR_SEARCH_PATHS adding all APEXes without knowing that only device side apex will be picked up by libvintf.",
+      "parentUuid": "e2f65556_3e2aa01f",
       "range": {
         "startLine": 53,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d2ddb5d_d6088281",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-09-20T22:28:05Z",
+      "side": 1,
+      "message": "Changed name to PrepareApexDirecotry() and added more comments as to how things are laid out and why.  \nIncluding why dirmap can\u0027t be used.",
+      "parentUuid": "6f42f4ba_32cd4e6a",
+      "range": {
+        "startLine": 197,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 32
+      },
+      "revId": "c0821c40c56bc66955ea52c29b3ab3a5c9a5fe6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f44e658_b71e804d",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-09-19T04:41:29Z",
       "side": 1,
       "message": "\"compressed\" / \"decompressed\" are used for \"compressed apexes\" : https://cs.android.com/android/platform/superproject/+/master:system/apex/tools/deapexer.py;l\u003d260\n\nLet\u0027s use different words to avoid confusion.",
+      "range": {
+        "startLine": 243,
+        "startChar": 45,
+        "endLine": 243,
+        "endChar": 55
+      },
+      "revId": "c0821c40c56bc66955ea52c29b3ab3a5c9a5fe6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "304fc827_e77280f7",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-09-20T22:28:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f44e658_b71e804d",
       "range": {
         "startLine": 243,
         "startChar": 45,
@@ -118,6 +214,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5525a338_c932ec62",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-09-20T22:28:05Z",
+      "side": 1,
+      "message": "Changed to use DIR_SEARCH_PATHS.",
+      "parentUuid": "764f6a5f_be4869c9",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 35
+      },
+      "revId": "c0821c40c56bc66955ea52c29b3ab3a5c9a5fe6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9afc918c_6c000114",
         "filename": "tools/releasetools/check_target_files_vintf.py",
         "patchSetId": 11
@@ -129,6 +249,30 @@
       "writtenOn": "2022-09-19T04:41:29Z",
       "side": 1,
       "message": "nit: Can we add APEX_PATTERN here instead of appending it to UNZIP_PATTERN? APEX_PATTERN is more related to GetVintfFileList().",
+      "range": {
+        "startLine": 283,
+        "startChar": 57,
+        "endLine": 283,
+        "endChar": 70
+      },
+      "revId": "c0821c40c56bc66955ea52c29b3ab3a5c9a5fe6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb9e7c6d_93ca8c3b",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1830881
+      },
+      "writtenOn": "2022-09-20T22:28:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9afc918c_6c000114",
       "range": {
         "startLine": 283,
         "startChar": 57,
