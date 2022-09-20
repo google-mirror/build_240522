@@ -16,6 +16,24 @@
       "message": "This will need to wait until all of the GKI kernels/prebuilts have been updated to include the arg.\nPresubmits won\u0027t pass until then.",
       "revId": "7c051a5c10ebef417b6dfcba0940195049f3f61d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b911b5d_9e9a7c79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-09-20T06:50:51Z",
+      "side": 1,
+      "message": "what would happen if bootconfig is specified to a GKI that already have bootconfig enabled by default? Noop (with a few wasted cpu cycles) I suppose?",
+      "parentUuid": "9d2d27e0_837c6bf8",
+      "revId": "7c051a5c10ebef417b6dfcba0940195049f3f61d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
