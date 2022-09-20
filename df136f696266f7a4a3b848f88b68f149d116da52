@@ -16,6 +16,24 @@
       "message": "Yi-yo, do the official GKI images get built with `BOARD_USES_GENERIC_KERNEL_IMAGE \u003d true` or is there some other way they are built?\nI want this to work for all of the GKI images we ship.",
       "revId": "df136f696266f7a4a3b848f88b68f149d116da52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa7d46d5_9f6f96d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-09-20T06:57:10Z",
+      "side": 1,
+      "message": "GKI built from platform tree always have `BOARD_USES_GENERIC_KERNEL_IMAGE` set to true. However we have ongoing effort to migrate GKI process to be built from the kernel tree, which is the more important route IMO.\n\nSince you mentioned this would be add to defconfig, I suppose kernel tree GKI build should \"just work\". (Don\u0027t need to change boot cmdline and stuff?)",
+      "parentUuid": "a886f7ff_cb8dd63a",
+      "revId": "df136f696266f7a4a3b848f88b68f149d116da52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
