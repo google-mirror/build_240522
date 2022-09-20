@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8f3842e_2512d17c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-09-20T23:12:49Z",
+      "side": 1,
+      "message": "Did you run this in forrest to check to see if it passes on ToT? Ping me if you aren\u0027t sure how. It\u0027s not setup in presubmit now unfortunately, but I\u0027m also okay if you want to merge this and wait a day to see, especially if you have already tested it locally. Though, I\u0027ve run into a few problems because the build server environment is different.",
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bb62639_769ab158",
+        "filename": "finalize-step-1.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-09-20T23:12:49Z",
+      "side": 1,
+      "message": "nit: explanation of what this script does (explanation of other script is buried above \"This script is WIP ..\").\n\nWhat I\u0027m confused is why the above script is not called from this.",
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bb3529e_f7b37ee2",
+        "filename": "finalize-step-1.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-09-20T23:12:49Z",
+      "side": 1,
+      "message": "nit: we\u0027re dropping this?",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 9
+      },
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a940ed7b_52cf09bf",
+        "filename": "finalize-step-1.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-09-20T23:12:49Z",
+      "side": 1,
+      "message": "self-documenting code :)",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 33
+      },
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e88e8c_73fef4b5",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-09-20T23:12:49Z",
+      "side": 1,
+      "message": "(main comment, though if you don\u0027t want to do this, I don\u0027t care): we should do this after L50 (or again). The idea of this command is that we test that the build is setup. For instance, we want to test a device can be built after update-api runs.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 37
+      },
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
