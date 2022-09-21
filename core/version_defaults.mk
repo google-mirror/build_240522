@@ -116,6 +116,7 @@ ifndef PLATFORM_VERSION_CODENAME
     PLATFORM_VERSION_CODENAME := $(TARGET_PLATFORM_VERSION)
   endif
 
+<<<<<<< HEAD   (159713 Merge "Merge empty history for sparse-9081464-L8140000095646)
   # This is all of the *active* development codenames. There are future
   # codenames not included in this list. This confusing name is needed because
   # all_codenames has been baked into build.prop for ages.
@@ -123,6 +124,11 @@ ifndef PLATFORM_VERSION_CODENAME
   # Should be either the same as PLATFORM_VERSION_CODENAME or a comma-separated
   # list of additional codenames after PLATFORM_VERSION_CODENAME.
   PLATFORM_VERSION_ALL_CODENAMES :=
+=======
+# This is the sdk extension version that PLATFORM_SDK_VERSION ships with.
+PLATFORM_BASE_SDK_EXTENSION_VERSION := $(PLATFORM_SDK_EXTENSION_VERSION)
+.KATI_READONLY := PLATFORM_BASE_SDK_EXTENSION_VERSION
+>>>>>>> BRANCH (5235f6 Merge "Version bump to TKB1.220921.001.A1 [core/build_id.mk])
 
   # Build a list of all active code names. Avoid duplicates, and stop when we
   # reach a codename that matches PLATFORM_VERSION_CODENAME (anything beyond
