@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03641a8a_f6d8f869",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-09-21T02:22:05Z",
+      "side": 1,
+      "message": "Can you add tests in test_check_target_files_vintf.py and verify with atest?",
+      "range": {
+        "startLine": 130,
+        "startChar": 30,
+        "endLine": 130,
+        "endChar": 50
+      },
+      "revId": "5972e887070dac82903b9a1cc6080ed2b8fd62c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
