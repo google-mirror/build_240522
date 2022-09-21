@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4258966_66d9ab27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2022-09-21T01:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8f3842e_2512d17c",
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bb62639_769ab158",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "ah! - I see now",
       "parentUuid": "0564041f_f6d2628f",
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a29b8765_b2492948",
+        "filename": "finalize-step-1.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2022-09-21T01:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dddd85e6_a4ac6c4d",
       "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -132,6 +168,30 @@
       "side": 1,
       "message": "You can push/pop or run them in a subshell to selectively disable this.",
       "parentUuid": "bc793f41_274ccadc",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 9
+      },
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1e3c100_42136e73",
+        "filename": "finalize-step-1.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2022-09-21T01:30:51Z",
+      "side": 1,
+      "message": "my shell-fu is not great. spent ~0.5days trying to make it work, including subshell $(). next time maybe",
+      "parentUuid": "d42f72d6_8377a4a5",
       "range": {
         "startLine": 3,
         "startChar": 0,
@@ -226,6 +286,30 @@
       "side": 1,
       "message": "We can have a few scripts:\n1. finalize branch (maybe this could be broken up further into \u0027finalize AIDL\u0027 \u0027finalize VNDK\u0027 \u0027finalize sepolicy\u0027 \u0027finalize SDK\u0027 etc..\n2. test branch\n\nCurrent nightly build calls finalize + test w/ argument nightly.\n\nYour new branch-based system calls the test script with various arguments.\n\nAnd - the reason why I suggest scripts is because this allows us to change what the build servers run without editing the build server configuration. If it always calls the scripts, we can put whatever targets we want here. It minimizes the configuration in build infra. AND it means locally, you already have a way to run the command that would run on the build server. Granted, this isn\u0027t how builds are typically configured, but I like it different :)",
       "parentUuid": "a726b34f_420a0ef5",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 37
+      },
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8434e03_5c03acb9",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2022-09-21T01:30:51Z",
+      "side": 1,
+      "message": "moved the test to after update-api to cover everything in a single run",
+      "parentUuid": "d637deaa_a46d0ce9",
       "range": {
         "startLine": 29,
         "startChar": 0,
