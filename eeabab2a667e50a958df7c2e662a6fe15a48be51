@@ -50,6 +50,24 @@
       "message": "nit: Alignment (and below)",
       "revId": "eeabab2a667e50a958df7c2e662a6fe15a48be51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "823957b4_3437ddbf",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1946265
+      },
+      "writtenOn": "2022-09-21T16:45:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fd96800_4bf0090b",
+      "revId": "eeabab2a667e50a958df7c2e662a6fe15a48be51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
