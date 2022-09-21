@@ -16,6 +16,40 @@
       "message": "Glad it\u0027s back again!",
       "revId": "eeabab2a667e50a958df7c2e662a6fe15a48be51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d242a648_8fbb7dc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1887575
+      },
+      "writtenOn": "2022-09-21T16:17:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "eeabab2a667e50a958df7c2e662a6fe15a48be51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fd96800_4bf0090b",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1887575
+      },
+      "writtenOn": "2022-09-21T16:17:55Z",
+      "side": 1,
+      "message": "nit: Alignment (and below)",
+      "revId": "eeabab2a667e50a958df7c2e662a6fe15a48be51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
