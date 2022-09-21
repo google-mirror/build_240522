@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dddd85e6_a4ac6c4d",
+        "filename": "finalize-step-1.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-09-21T00:22:33Z",
+      "side": 1,
+      "message": "ah! - I see now",
+      "parentUuid": "0564041f_f6d2628f",
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5bb3529e_f7b37ee2",
         "filename": "finalize-step-1.sh",
         "patchSetId": 1
@@ -90,6 +108,30 @@
       "side": 1,
       "message": "this will terminate script if any tool returns a non-zero status. repo+friends are returning banch of non-zeros for all kinds of reasons, terminating the script prematurely",
       "parentUuid": "5bb3529e_f7b37ee2",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 9
+      },
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d42f72d6_8377a4a5",
+        "filename": "finalize-step-1.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-09-21T00:22:33Z",
+      "side": 1,
+      "message": "You can push/pop or run them in a subshell to selectively disable this.",
+      "parentUuid": "bc793f41_274ccadc",
       "range": {
         "startLine": 3,
         "startChar": 0,
