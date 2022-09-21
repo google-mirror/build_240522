@@ -168,6 +168,30 @@
       },
       "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d637deaa_a46d0ce9",
+        "filename": "finalize_branch_for_release.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-09-21T00:21:27Z",
+      "side": 1,
+      "message": "We can have a few scripts:\n1. finalize branch (maybe this could be broken up further into \u0027finalize AIDL\u0027 \u0027finalize VNDK\u0027 \u0027finalize sepolicy\u0027 \u0027finalize SDK\u0027 etc..\n2. test branch\n\nCurrent nightly build calls finalize + test w/ argument nightly.\n\nYour new branch-based system calls the test script with various arguments.\n\nAnd - the reason why I suggest scripts is because this allows us to change what the build servers run without editing the build server configuration. If it always calls the scripts, we can put whatever targets we want here. It minimizes the configuration in build infra. AND it means locally, you already have a way to run the command that would run on the build server. Granted, this isn\u0027t how builds are typically configured, but I like it different :)",
+      "parentUuid": "a726b34f_420a0ef5",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 37
+      },
+      "revId": "91ebd4ce3d1f519523c053996957a0ea29537678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
