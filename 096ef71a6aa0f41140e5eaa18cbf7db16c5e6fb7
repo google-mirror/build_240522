@@ -46,6 +46,30 @@
       },
       "revId": "096ef71a6aa0f41140e5eaa18cbf7db16c5e6fb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb9293e9_734b11b2",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2022-09-22T08:09:15Z",
+      "side": 1,
+      "message": "Looks like we enable it for cuttlefish here: device/google/cuttlefish/shared/device.mk\n\nI\u0027m not sure where we turn it on for Pixel, but we\u0027ll need to find the Pixel 8 config files at some point and flip the switch there.",
+      "parentUuid": "7260fdc6_fc39eb8b",
+      "range": {
+        "startLine": 69,
+        "startChar": 16,
+        "endLine": 69,
+        "endChar": 20
+      },
+      "revId": "096ef71a6aa0f41140e5eaa18cbf7db16c5e6fb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
