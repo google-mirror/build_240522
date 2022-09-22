@@ -1844,6 +1844,9 @@ function _trigger_build()
 # Convenience entry point (like m) to use Bazel in AOSP.
 function b()
 (
+    # zsh is incompatible with bash in certain circumstances
+    # tell it to emulate sh for this function
+    if [ -n "$ZSH_VERSION" ]; then emulate -L sh; fi
     # Look for the --run-soong-tests flag and skip passing --skip-soong-tests to Soong if present
     local bazel_args=""
     local skip_tests="--skip-soong-tests"
@@ -1883,14 +1886,7 @@ function b()
         fi
 
         # Call Bazel.
-        if [ -n "$ZSH_VERSION" ]; then
-            # zsh breaks posix by not doing string-splitting on unquoted args
-            # by default. Explicitly use the "=" flag to split.
-            # See https://zsh.sourceforge.io/Guide/zshguide05.html section 5.4.4.
-            bazel ${=bazel_args_with_config}
-        else
-            bazel ${bazel_args_with_config[@]}
-        fi
+        bazel ${bazel_args_with_config[@]}
     fi
 )
 
