@@ -70,6 +70,30 @@
       },
       "revId": "096ef71a6aa0f41140e5eaa18cbf7db16c5e6fb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfcceac6_0bec1cfd",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1937166
+      },
+      "writtenOn": "2022-09-22T10:11:27Z",
+      "side": 1,
+      "message": "Raised https://android-review.googlesource.com/c/device/google/cuttlefish/+/2226308 for enabling RKPD in cuttlefish.",
+      "parentUuid": "bb9293e9_734b11b2",
+      "range": {
+        "startLine": 69,
+        "startChar": 16,
+        "endLine": 69,
+        "endChar": 20
+      },
+      "revId": "096ef71a6aa0f41140e5eaa18cbf7db16c5e6fb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
