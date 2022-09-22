@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a38b14c9_f6283d99",
+        "filename": "tests/b_tests.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-09-22T17:36:33Z",
+      "side": 1,
+      "message": "Some of the targets in `//build/bazel/tests/...` fail analysis (even though they have `tags \u003d [\"manual\"]`; see [https://github.com/bazelbuild/bazel/issues/707](https://github.com/bazelbuild/bazel/issues/707).",
+      "revId": "db40171ff62084e385f5078d16215111bfe1847c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
