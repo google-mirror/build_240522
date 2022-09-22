@@ -79,6 +79,53 @@ func WalkTopDown(ctx EdgeContextProvider, lg *LicenseGraph, visit VisitNode) {
 	}
 }
 
+// WalkTopDownBf is a Breadth-first top down walk of `lg` calling `visit` and descending
+// into depenencies when `visit` returns true.
+func WalkTopDownBf(ctx EdgeContextProvider, lg *LicenseGraph, visit VisitNode) {
+	path := NewTargetEdgePath(32)
+	var walk func(fnode *TargetNode)
+	walk = func(fnode *TargetNode) {
+		edgesToWalk := make(TargetEdgeList, 0, len(fnode.edges))
+		for _, edge := range fnode.edges {
+			var edgeContext interface{}
+			if ctx == nil {
+				edgeContext = nil
+			} else {
+				edgeContext = ctx.Context(lg, *path, edge)
+			}
+			path.Push(edge, edgeContext)
+			if visit(lg, edge.dependency, *path) {
+				edgesToWalk = append(edgesToWalk, edge)
+			}
+			path.Pop()
+		}
+
+		for _, edge := range edgesToWalk {
+			var edgeContext interface{}
+			if ctx == nil {
+				edgeContext = nil
+			} else {
+				edgeContext = ctx.Context(lg, *path, edge)
+			}
+			path.Push(edge, edgeContext)
+			walk(edge.dependency)
+			path.Pop()
+		}
+	}
+
+	path.Clear()
+	rootsToWalk := make([]*TargetNode, 0, len(lg.rootFiles))
+	for _, r := range lg.rootFiles {
+		if visit(lg, lg.targets[r], *path) {
+			rootsToWalk = append(rootsToWalk, lg.targets[r])
+		}
+	}
+
+	for _, rnode := range rootsToWalk {
+		walk(rnode)
+	}
+}
+
 // resolutionKey identifies results from walking a specific target for a
 // specific set of conditions.
 type resolutionKey struct {
