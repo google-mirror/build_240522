@@ -22,6 +22,30 @@
       },
       "revId": "096ef71a6aa0f41140e5eaa18cbf7db16c5e6fb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7260fdc6_fc39eb8b",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1937166
+      },
+      "writtenOn": "2022-09-22T00:44:02Z",
+      "side": 1,
+      "message": "We can skip this CR if we don\u0027t want to modify this. However, I\u0027m not sure where to add this for a GMS device-only build.",
+      "parentUuid": "3c95111a_df63314b",
+      "range": {
+        "startLine": 69,
+        "startChar": 16,
+        "endLine": 69,
+        "endChar": 20
+      },
+      "revId": "096ef71a6aa0f41140e5eaa18cbf7db16c5e6fb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
