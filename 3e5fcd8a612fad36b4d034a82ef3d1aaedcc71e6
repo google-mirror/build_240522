@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a36d46eb_8f546e60",
+        "filename": "tests/b_tests.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-09-22T17:59:11Z",
+      "side": 0,
+      "message": "This works when I run it directly in my terminal, but it doesn\u0027t work in this script. Looking into why that\u0027s the case now.",
+      "revId": "3e5fcd8a612fad36b4d034a82ef3d1aaedcc71e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
