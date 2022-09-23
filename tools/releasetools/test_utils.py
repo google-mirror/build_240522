@@ -19,6 +19,7 @@
 Utils for running unittests.
 """
 
+import avbtool
 import logging
 import os
 import os.path
@@ -57,11 +58,13 @@ def get_testdata_dir():
   current_dir = os.path.dirname(os.path.realpath(__file__))
   return os.path.join(current_dir, 'testdata')
 
+
 def get_current_dir():
   """Returns the current dir, relative to the script dir."""
   # The script dir is the one we want, which could be different from pwd.
   current_dir = os.path.dirname(os.path.realpath(__file__))
   return current_dir
+
 
 def get_search_path():
   """Returns the search path that has 'framework/signapk.jar' under."""
@@ -83,11 +86,21 @@ def get_search_path():
       # In relative to 'build/make/tools/releasetools' in the Android source.
       ['..'] * 4 + ['out', 'host', 'linux-x86'],
       # Or running the script unpacked from otatools.zip.
-      ['..']):
+          ['..']):
     full_path = os.path.realpath(os.path.join(current_dir, *path))
     if signapk_exists(full_path):
       return full_path
   return None
+
+
+def append_avb_footer(file_path: str, partition_name: str = ""):
+  avb = avbtool.AvbTool()
+  try:
+    args = ["avbtool", "add_hashtree_footer", "--image", file_path,
+            "--partition_name", partition_name, "--do_not_generate_fec"]
+    avb.run(args)
+  except SystemExit:
+    raise ValueError(f"Failed to append hashtree footer {args}")
 
 
 def construct_sparse_image(chunks):
@@ -200,6 +213,7 @@ class ReleaseToolsTestCase(unittest.TestCase):
 
   def tearDown(self):
     common.Cleanup()
+
 
 class PropertyFilesTestCase(ReleaseToolsTestCase):
 
