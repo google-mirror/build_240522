@@ -3979,6 +3979,8 @@ def GetBootImageTimestamp(boot_img):
 
 
 def IsSparseImage(filepath):
+  if not os.path.exists(filepath):
+    return False
   with open(filepath, 'rb') as fp:
     # Magic for android sparse image format
     # https://source.android.com/devices/bootloader/images
