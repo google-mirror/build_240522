@@ -16,6 +16,47 @@
       "message": "Some of the targets in `//build/bazel/tests/...` fail analysis (even though they have `tags \u003d [\"manual\"]`; see [https://github.com/bazelbuild/bazel/issues/707](https://github.com/bazelbuild/bazel/issues/707).",
       "revId": "db40171ff62084e385f5078d16215111bfe1847c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "189cee9d_dba2ec33",
+        "filename": "tests/b_tests.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-09-23T12:32:00Z",
+      "side": 1,
+      "message": "What are the failures?",
+      "parentUuid": "a38b14c9_f6283d99",
+      "revId": "db40171ff62084e385f5078d16215111bfe1847c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30fc83fe_8544d391",
+        "filename": "tests/b_tests.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-09-23T12:32:00Z",
+      "side": 1,
+      "message": "Consider limiting this to //build/bazel/examples/android_app/... for fewer packages, since this is just a smoke test for b cquery.",
+      "range": {
+        "startLine": 27,
+        "startChar": 21,
+        "endLine": 27,
+        "endChar": 48
+      },
+      "revId": "db40171ff62084e385f5078d16215111bfe1847c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
