@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49a00d27_bfb1effc",
+        "filename": "tools/compliance/policy_walk.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-09-23T21:09:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0c708e4_fdd3f01f",
+      "range": {
+        "startLine": 48,
+        "startChar": 3,
+        "endLine": 48,
+        "endChar": 14
+      },
+      "revId": "f8b6cc987083ed506d3264a76187b232246d6b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ada189df_e2f648c4",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-23T17:16:09Z",
       "side": 1,
       "message": "The other walks \"do\" or \"perform\"",
+      "range": {
+        "startLine": 82,
+        "startChar": 17,
+        "endLine": 82,
+        "endChar": 19
+      },
+      "revId": "f8b6cc987083ed506d3264a76187b232246d6b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68037570_fcefec73",
+        "filename": "tools/compliance/policy_walk.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-09-23T21:09:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ada189df_e2f648c4",
       "range": {
         "startLine": 82,
         "startChar": 17,
@@ -81,6 +129,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b40cac_03ca9d67",
+        "filename": "tools/compliance/policy_walk_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 1266,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-09-23T21:09:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14a0104c_e634c680",
+      "revId": "f8b6cc987083ed506d3264a76187b232246d6b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba8d2bd1_f50092a5",
@@ -94,6 +160,24 @@
       "writtenOn": "2022-09-23T17:16:09Z",
       "side": 1,
       "message": "line length. Each of these can go on a separate line. Especially here where you are breaking them onto multiple lines in any case.",
+      "revId": "f8b6cc987083ed506d3264a76187b232246d6b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c37e9bfc_f0323e5f",
+        "filename": "tools/compliance/policy_walk_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 1316,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-09-23T21:09:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba8d2bd1_f50092a5",
       "revId": "f8b6cc987083ed506d3264a76187b232246d6b79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -115,6 +199,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67cc69c8_aefc5ef3",
+        "filename": "tools/compliance/policy_walk_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 1566,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-09-23T21:09:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "033c96cc_d10bb906",
+      "revId": "f8b6cc987083ed506d3264a76187b232246d6b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd891caf_73d9feb2",
@@ -132,6 +234,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9627258f_8076e634",
+        "filename": "tools/compliance/policy_walk_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 1568,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-09-23T21:09:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd891caf_73d9feb2",
+      "revId": "f8b6cc987083ed506d3264a76187b232246d6b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76efdc71_8279b8a1",
@@ -145,6 +265,24 @@
       "writtenOn": "2022-09-23T17:16:09Z",
       "side": 1,
       "message": "Your visit function doesn\u0027t ever actually return false so the walk will visit nodes repeatedly.",
+      "revId": "f8b6cc987083ed506d3264a76187b232246d6b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1a1d283_7854cb05",
+        "filename": "tools/compliance/policy_walk_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 1581,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-09-23T21:09:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76efdc71_8279b8a1",
       "revId": "f8b6cc987083ed506d3264a76187b232246d6b79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
