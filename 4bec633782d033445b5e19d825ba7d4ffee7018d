@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ae5546e_4c8de48e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-09-23T20:06:34Z",
+      "side": 1,
+      "message": "How much logging does this add?  logcat is a shared resource, and using more of it for art pushes other logs out of the buffer.",
+      "revId": "4bec633782d033445b5e19d825ba7d4ffee7018d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
