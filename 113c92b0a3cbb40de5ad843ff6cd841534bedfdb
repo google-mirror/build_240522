@@ -16,6 +16,24 @@
       "message": "This works, but when I suggested sorting by the length of the prefix I meant the matched prefix, so \"prebuilts/sdk/\" would be preferred over \"prebuilts/sdk/art/\", or vice versa.  That seems especially useful since the \"safeness\" could vary based on which one matched.",
       "revId": "113c92b0a3cbb40de5ad843ff6cd841534bedfdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1db69d2c_e9c9d37c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-09-23T20:27:29Z",
+      "side": 1,
+      "message": "I removed the unknown variability of the match length.",
+      "parentUuid": "a4a60c51_52cab9a1",
+      "revId": "113c92b0a3cbb40de5ad843ff6cd841534bedfdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
