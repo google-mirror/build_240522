@@ -30,7 +30,7 @@ vendorlicense: $(call corresponding-license-metadata, $(VENDOR_NOTICE_DEPS)) rep
 
 ifneq (,$(VENDOR_NOTICE_DEPS))
 
-VENDOR_NOTICE_DEPS += $(UNMOUNTED_NOTICE_DEPS)
+VENDOR_NOTICE_DEPS += $(UNMOUNTED_NOTICE_VENDOR_DEPS)
 
 $(eval $(call text-notice-rule,$(target_vendor_notice_file_txt),"Vendor image", \
          "Notices for files contained in all filesystem images except system/system_ext/product/odm/vendor_dlkm/odm_dlkm in this directory:", \
