@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af7d237a_65739be4",
+        "filename": "tools/compliance/policy_walk_test.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 1331,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-09-23T22:54:12Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 1331,
+        "startChar": 12,
+        "endLine": 1331,
+        "endChar": 14
+      },
+      "revId": "9ce93564ab240491ddc32a3fa30cad271528ac9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f5e2c4_64f41f39",
+        "filename": "tools/compliance/policy_walk_test.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 1541,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-09-23T22:54:12Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 1541,
+        "startChar": 12,
+        "endLine": 1541,
+        "endChar": 14
+      },
+      "revId": "9ce93564ab240491ddc32a3fa30cad271528ac9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
