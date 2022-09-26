@@ -2,6 +2,7 @@ ccross@android.com
 dwillemsen@google.com
 nanzhang@google.com
 
+<<<<<<< HEAD   (cddf34 Merge "Merge empty history for sparse-9088035-L9400000095648)
 per-file * = ccross@android.com
 per-file * = dwillemsen@google.com
 per-file * = nanzhang@google.com
@@ -9,3 +10,7 @@ per-file * = nanzhang@google.com
 # for version updates
 per-file version_defaults.mk = aseaton@google.com
 per-file version_defaults.mk = elisapascual@google.com
+=======
+# Finalization scripts
+per-file finalize* = smoreland@google.com, alexbuy@google.com
+>>>>>>> BRANCH (68e5c5 Merge "Version bump to TKB1.220925.001.A1 [core/build_id.mk])
