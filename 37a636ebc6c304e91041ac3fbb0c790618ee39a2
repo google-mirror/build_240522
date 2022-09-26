@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a533274a_55cde4cd",
+        "filename": "tools/compliance/policy_walk.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-09-26T17:15:13Z",
+      "side": 1,
+      "message": "This seems unnecessary to abbreviate",
+      "range": {
+        "startLine": 84,
+        "startChar": 16,
+        "endLine": 84,
+        "endChar": 18
+      },
+      "revId": "37a636ebc6c304e91041ac3fbb0c790618ee39a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
