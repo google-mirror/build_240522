@@ -46,6 +46,30 @@
       },
       "revId": "9e8c43c5a635b5d0ed3461af184c031c9c7fdcd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e59e6c86_3065c46d",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1849,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-09-26T06:53:52Z",
+      "side": 1,
+      "message": "Thanks. Can you keep the comment about string splitting to help future readers understand why this is necessary?",
+      "parentUuid": "029eeeaf_7ebd9403",
+      "range": {
+        "startLine": 1849,
+        "startChar": 35,
+        "endLine": 1849,
+        "endChar": 49
+      },
+      "revId": "9e8c43c5a635b5d0ed3461af184c031c9c7fdcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
