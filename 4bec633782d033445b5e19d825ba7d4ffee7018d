@@ -34,6 +34,24 @@
       "parentUuid": "8ae5546e_4c8de48e",
       "revId": "4bec633782d033445b5e19d825ba7d4ffee7018d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc95a64_afbdc138",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-09-26T10:29:19Z",
+      "side": 1,
+      "message": "What about moving the relevant log messages to the info level instead, in case we add more debug log in the future without realising this filter is in effect?",
+      "parentUuid": "58cdd418_e2c7a5df",
+      "revId": "4bec633782d033445b5e19d825ba7d4ffee7018d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
