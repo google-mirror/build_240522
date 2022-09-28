@@ -57,6 +57,48 @@
       },
       "revId": "db40171ff62084e385f5078d16215111bfe1847c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41b22ba0_8b30ff98",
+        "filename": "tests/b_tests.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-09-28T13:52:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30fc83fe_8544d391",
+      "range": {
+        "startLine": 27,
+        "startChar": 21,
+        "endLine": 27,
+        "endChar": 48
+      },
+      "revId": "db40171ff62084e385f5078d16215111bfe1847c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7f6a230_7f5a0d38",
+        "filename": "tests/b_tests.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-09-28T13:52:58Z",
+      "side": 1,
+      "message": "It\u0027s for [this test](https://cs.android.com/android/platform/superproject/+/master:build/bazel/rules/cc/flex_test.bzl;l\u003d320;drc\u003db8f0d2ee23094e47b0ae7c08fda6e85b8375378c) that is expecting a failure in analysis. This target still gets analyzed in `cquery` as seen in the bug I mentioned.",
+      "parentUuid": "189cee9d_dba2ec33",
+      "revId": "db40171ff62084e385f5078d16215111bfe1847c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
