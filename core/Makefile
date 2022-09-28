@@ -6942,10 +6942,20 @@ haiku: $(SOONG_FUZZ_PACKAGING_ARCH_MODULES) $(ALL_FUZZ_TARGETS)
 $(call dist-for-goals,haiku,$(SOONG_FUZZ_PACKAGING_ARCH_MODULES))
 $(call dist-for-goals,haiku,$(PRODUCT_OUT)/module-info.json)
 
+<<<<<<< PATCH SET (da7199 Add make commands for haiku-java-host and haiku-java-device)
+.PHONY: haiku-java-device
+haiku-java-device: $(SOONG_JAVA_FUZZ_DEVICE_PACKAGING_ARCH_MODULES) $(ALL_JAVA_FUZZ_DEVICE_TARGETS)
+$(call dist-for-goals,haiku-java-device,$(SOONG_JAVA_FUZZ_DEVICE_PACKAGING_ARCH_MODULES))
+
+.PHONY: haiku-java-host
+haiku-java-host: $(SOONG_JAVA_FUZZ_HOST_PACKAGING_ARCH_MODULES) $(ALL_JAVA_FUZZ_HOST_TARGETS)
+$(call dist-for-goals,haiku-java-host,$(SOONG_JAVA_FUZZ_HOST_PACKAGING_ARCH_MODULES))
+=======
 .PHONY: haiku-java
 haiku-java: $(SOONG_JAVA_FUZZ_PACKAGING_ARCH_MODULES) $(ALL_JAVA_FUZZ_TARGETS)
 $(call dist-for-goals,haiku-java,$(SOONG_JAVA_FUZZ_PACKAGING_ARCH_MODULES))
 $(call dist-for-goals,haiku-java,$(PRODUCT_OUT)/module-info.json)
+>>>>>>> BASE      (1c5f81 Merge "Zipalign: Don't align directory entries")
 
 .PHONY: haiku-rust
 haiku-rust: $(SOONG_RUST_FUZZ_PACKAGING_ARCH_MODULES) $(ALL_RUST_FUZZ_TARGETS)
