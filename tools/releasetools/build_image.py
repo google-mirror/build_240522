@@ -23,6 +23,7 @@ Usage:  build_image input_directory properties_file output_image \\
 """
 
 from __future__ import print_function
+from pprint import pprint
 
 import glob
 import logging
@@ -38,7 +39,7 @@ import verity_utils
 logger = logging.getLogger(__name__)
 
 OPTIONS = common.OPTIONS
-BLOCK_SIZE = common.BLOCK_SIZE
+BLOCK_SIZE = 16384
 BYTES_IN_MB = 1024 * 1024
 
 
@@ -112,6 +113,7 @@ def GetFilesystemCharacteristics(fs_type, image_path, sparse_image=True):
     fields = line.split(":")
     if len(fields) == 2:
       fs_dict[fields[0].strip()] = fields[1].strip()
+  pprint(fs_dict)
   return fs_dict
 
 
@@ -283,6 +285,10 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
       run_e2fsck = RunE2fsck
     build_command.extend([in_dir, out_file, fs_type,
                           prop_dict["mount_point"]])
+
+    if 'data' in prop_dict["mount_point"]:
+      build_command.extend(["-b", 16384])
+
     build_command.append(prop_dict["image_size"])
     if "journal_size" in prop_dict:
       build_command.extend(["-j", prop_dict["journal_size"]])
