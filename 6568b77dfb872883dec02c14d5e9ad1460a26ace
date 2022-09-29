@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bf4b3e6_63150fe6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1863710
+      },
+      "writtenOn": "2022-09-29T12:05:21Z",
+      "side": 1,
+      "message": "Hi Coling, please have another look at this. The change is just to switch all the (remaining) configuration files to use JDK 17.",
+      "revId": "6568b77dfb872883dec02c14d5e9ad1460a26ace",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

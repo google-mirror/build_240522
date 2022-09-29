@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73dbe963_7fc07fb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1863710
+      },
+      "writtenOn": "2022-09-29T12:05:21Z",
+      "side": 1,
+      "message": "This CL just updates the robolectric configuration to use JDK 17. I don\u0027t think that could be done in another way, and I\u0027d like to make the switch at the same time as we remove EXPERIMENTAL_USE_OPENJDK17_TOOLCHAIN and switch to the 17 toolchain.",
+      "parentUuid": "d14e6b59_ef5b454d",
+      "revId": "f7f42d14e1071b039b53b2107459e2affa38ad87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cad68c8_6595b541",
         "filename": "core/rbe.mk",
         "patchSetId": 1
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "Make gets it from Soong, this should probably be `$(JAVA)`",
       "parentUuid": "38d5cd7c_d39aec96",
+      "revId": "f7f42d14e1071b039b53b2107459e2affa38ad87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4db56990_3c198fa7",
+        "filename": "core/rbe.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1863710
+      },
+      "writtenOn": "2022-09-29T12:05:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b09c7d42_d4c7b87d",
       "revId": "f7f42d14e1071b039b53b2107459e2affa38ad87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
