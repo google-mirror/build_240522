@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31fc2299_1119f1e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-09-30T04:52:14Z",
+      "side": 1,
+      "message": "FWIW, it\u0027s libc++ and not libc.",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "527fbdd35c71fe1150c2d67a13febc1a1c8eb363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
