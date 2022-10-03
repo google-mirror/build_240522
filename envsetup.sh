@@ -227,13 +227,15 @@ function setpaths()
             ;;
         arm64) toolchaindir=aarch64/aarch64-linux-android-$targetgccversion/bin;
                toolchaindir2=arm/arm-linux-androideabi-$targetgccversion2/bin
+               ;;
+        riscv64)
             ;;
         *)
             echo "Can't find toolchain for unknown architecture: $ARCH"
             toolchaindir=xxxxxxxxx
             ;;
     esac
-    if [ -d "$gccprebuiltdir/$toolchaindir" ]; then
+    if [ "$toolchaindir" -a -d "$gccprebuiltdir/$toolchaindir" ]; then
         export ANDROID_TOOLCHAIN=$gccprebuiltdir/$toolchaindir
     fi
 
