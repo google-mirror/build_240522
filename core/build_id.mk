@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (61818c Merge "Revert "Use the toolchain from JDK 17"")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=TP1A.221005.003
+>>>>>>> BRANCH (7e7485 Version bump to TP1A.221005.003 [core/build_id.mk])
