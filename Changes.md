@@ -2,7 +2,7 @@
 
 ## Stop referencing sysprop_library directly from cc modules
 
-For the migration to Bazel, we are no longer mapping sysprop_library targets
+For migration to Bazel, we are no longer mapping sysprop_library targets
 to their generated `cc_library` counterparts when dependning on them from a
 cc module. Instead, directly depend on the generated module by prefixing the
 module name with `lib`. For example, depending on the following module:
