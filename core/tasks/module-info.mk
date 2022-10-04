@@ -41,3 +41,6 @@ droidcore-unbundled: $(MODULE_INFO_JSON)
 
 $(call dist-for-goals, general-tests, $(MODULE_INFO_JSON))
 $(call dist-for-goals, droidcore-unbundled, $(MODULE_INFO_JSON))
+$(call dist-for-goals,haiku,$(MODULE_INFO_JSON))
+$(call dist-for-goals,haiku-java,$(MODULE_INFO_JSON))
+$(call dist-for-goals,haiku-rust,$(MODULE_INFO_JSON))
