@@ -16,6 +16,24 @@
       "message": "You need to add the vendor deps here too. The build could be using a prebuilt vendor image and needs to capture the dependencies of the other images in case anything is different.",
       "revId": "fca57648615241fde2f9cb1e195a3c27fc9eb541",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff59ccab_b9290ef8",
+        "filename": "core/os_licensing.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2022-10-05T07:52:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec86a406_675d05c2",
+      "revId": "fca57648615241fde2f9cb1e195a3c27fc9eb541",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
