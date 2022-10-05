@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b56f8cc_d2239078",
+        "filename": "core/clang/TARGET_riscv64.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-10-05T18:57:13Z",
+      "side": 1,
+      "message": "boo :-(\n\n(given that we won\u0027t be doing renderscript for riscv64, i assume we\u0027ll come back and remove this, but no point blocking immediate progress on the renderscript removal work!)",
+      "parentUuid": "8351b881_385e41b5",
+      "revId": "274d4433de6e8be5bfc2b052da8c915d94fb8902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd1a8a2c_f048cfeb",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "The arm and arm64 toolchains both still exist and have binutils binaries in them.",
       "parentUuid": "fd1a8a2c_f048cfeb",
+      "revId": "274d4433de6e8be5bfc2b052da8c915d94fb8902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbe82d99_3988f5fe",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-10-05T18:57:13Z",
+      "side": 1,
+      "message": "shouldn\u0027t block this but..\n\n+srhines/pirama: i thought we\u0027d killed the last bits of gcc/binutils? i\u0027m not seeing anything in codesearch? https://source.corp.google.com/search?q\u003dfile:arm-linux-androideabi%20-file:llvm%20-file:clang%20-file:rust\u0026sq\u003dpackage:%5Eandroid$",
+      "parentUuid": "6058a6e3_d8de53fe",
       "revId": "274d4433de6e8be5bfc2b052da8c915d94fb8902",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
