@@ -123,6 +123,24 @@
       "parentUuid": "dbe82d99_3988f5fe",
       "revId": "274d4433de6e8be5bfc2b052da8c915d94fb8902",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28fed8a5_61e10513",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-05T19:05:12Z",
+      "side": 1,
+      "message": "Removed in aosp/2242238.",
+      "parentUuid": "475acbb7_9896a2a3",
+      "revId": "274d4433de6e8be5bfc2b052da8c915d94fb8902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
