@@ -23,7 +23,13 @@
 # for 32-bit only.
 
 # Copy the 64-bit primary, 32-bit secondary zygote startup script
+<<<<<<< HEAD   (dfb5d3 Merge "Merge empty history for sparse-9119366-L7790000095660)
 PRODUCT_COPY_FILES += system/core/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc
+=======
+PRODUCT_COPY_FILES += \
+    system/core/rootdir/init.zygote64.rc:system/etc/init/hw/init.zygote64.rc \
+    system/core/rootdir/init.zygote64_32.rc:system/etc/init/hw/init.zygote64_32.rc \
+>>>>>>> BRANCH (9613b0 Merge "Version bump to TKB1.221004.001.A1 [core/build_id.mk])
 
 # Set the zygote property to select the 64-bit primary, 32-bit secondary script
 # This line must be parsed before the one in core_minimal.mk

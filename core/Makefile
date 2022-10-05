@@ -2909,6 +2909,419 @@ otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 endif    # build_ota_package
 
 # -----------------------------------------------------------------
+<<<<<<< HEAD   (dfb5d3 Merge "Merge empty history for sparse-9119366-L7790000095660)
+=======
+# A zip of the appcompat directory containing logs
+APPCOMPAT_ZIP := $(PRODUCT_OUT)/appcompat.zip
+# For apps_only build we'll establish the dependency later in build/make/core/main.mk.
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+$(APPCOMPAT_ZIP): $(FULL_SYSTEMIMAGE_DEPS) \
+	    $(INTERNAL_RAMDISK_FILES) \
+	    $(INTERNAL_USERDATAIMAGE_FILES) \
+	    $(INTERNAL_VENDORIMAGE_FILES) \
+	    $(INTERNAL_PRODUCTIMAGE_FILES) \
+	    $(INTERNAL_SYSTEM_EXTIMAGE_FILES)
+endif
+$(APPCOMPAT_ZIP): PRIVATE_LIST_FILE := $(call intermediates-dir-for,PACKAGING,appcompat)/filelist
+$(APPCOMPAT_ZIP): $(SOONG_ZIP)
+	@echo "appcompat logs: $@"
+	$(hide) rm -rf $@ $(PRIVATE_LIST_FILE)
+	$(hide) mkdir -p $(dir $@) $(PRODUCT_OUT)/appcompat $(dir $(PRIVATE_LIST_FILE))
+	$(hide) find $(PRODUCT_OUT)/appcompat | sort >$(PRIVATE_LIST_FILE)
+	$(hide) $(SOONG_ZIP) -d -o $@ -C $(PRODUCT_OUT)/appcompat -l $(PRIVATE_LIST_FILE)
+
+# The mac build doesn't build dex2oat, so create the zip file only if the build OS is linux.
+ifeq ($(BUILD_OS),linux)
+ifneq ($(DEX2OAT),)
+dexpreopt_tools_deps := $(DEXPREOPT_GEN_DEPS) $(DEXPREOPT_GEN)
+dexpreopt_tools_deps += $(HOST_OUT_EXECUTABLES)/dexdump
+dexpreopt_tools_deps += $(HOST_OUT_EXECUTABLES)/oatdump
+DEXPREOPT_TOOLS_ZIP := $(PRODUCT_OUT)/dexpreopt_tools.zip
+$(DEXPREOPT_TOOLS_ZIP): $(dexpreopt_tools_deps)
+$(DEXPREOPT_TOOLS_ZIP): PRIVATE_DEXPREOPT_TOOLS_DEPS := $(dexpreopt_tools_deps)
+$(DEXPREOPT_TOOLS_ZIP): $(SOONG_ZIP)
+	$(hide) mkdir -p $(dir $@)
+	$(hide) $(SOONG_ZIP) -d -o $@ -j $(addprefix -f ,$(PRIVATE_DEXPREOPT_TOOLS_DEPS)) -f $$(realpath $(DEX2OAT))
+$(call declare-1p-target,$(DEXPREOPT_TOOLS_ZIP),)
+endif # DEX2OAT is set
+endif # BUILD_OS == linux
+
+DEXPREOPT_CONFIG_ZIP := $(PRODUCT_OUT)/dexpreopt_config.zip
+
+$(DEXPREOPT_CONFIG_ZIP): $(INSTALLED_SYSTEMIMAGE_TARGET) \
+    $(INSTALLED_VENDORIMAGE_TARGET) \
+    $(INSTALLED_ODMIMAGE_TARGET) \
+    $(INSTALLED_PRODUCTIMAGE_TARGET) \
+
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+$(DEXPREOPT_CONFIG_ZIP): $(DEX_PREOPT_CONFIG_FOR_MAKE) \
+	  $(DEX_PREOPT_SOONG_CONFIG_FOR_MAKE) \
+
+endif
+
+$(DEXPREOPT_CONFIG_ZIP): $(SOONG_ZIP)
+	$(hide) mkdir -p $(dir $@) $(PRODUCT_OUT)/dexpreopt_config
+
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+ifneq (,$(DEX_PREOPT_CONFIG_FOR_MAKE))
+	$(hide) cp $(DEX_PREOPT_CONFIG_FOR_MAKE) $(PRODUCT_OUT)/dexpreopt_config
+endif
+ifneq (,$(DEX_PREOPT_SOONG_CONFIG_FOR_MAKE))
+	$(hide) cp $(DEX_PREOPT_SOONG_CONFIG_FOR_MAKE) $(PRODUCT_OUT)/dexpreopt_config
+endif
+endif #!TARGET_BUILD_UNBUNDLED
+	$(hide) $(SOONG_ZIP) -d -o $@ -C $(PRODUCT_OUT)/dexpreopt_config -D $(PRODUCT_OUT)/dexpreopt_config
+
+.PHONY: dexpreopt_config_zip
+dexpreopt_config_zip: $(DEXPREOPT_CONFIG_ZIP)
+
+$(call declare-1p-target,$(DEXPREOPT_CONFIG_ZIP),)
+
+# -----------------------------------------------------------------
+# A zip of the symbols directory.  Keep the full paths to make it
+# more obvious where these files came from.
+# Also produces a textproto containing mappings from elf IDs to symbols
+# filename, which will allow finding the appropriate symbols to deobfuscate
+# a stack trace frame.
+#
+
+name := $(TARGET_PRODUCT)
+ifeq ($(TARGET_BUILD_TYPE),debug)
+  name := $(name)_debug
+endif
+
+# The path to the zip file containing binaries with symbols.
+SYMBOLS_ZIP := $(PRODUCT_OUT)/$(name)-symbols-$(FILE_NAME_TAG).zip
+# The path to a file containing mappings from elf IDs to filenames.
+SYMBOLS_MAPPING := $(PRODUCT_OUT)/$(name)-symbols-mapping-$(FILE_NAME_TAG).textproto
+.KATI_READONLY := SYMBOLS_ZIP SYMBOLS_MAPPING
+# For apps_only build we'll establish the dependency later in build/make/core/main.mk.
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+$(SYMBOLS_ZIP): $(INTERNAL_ALLIMAGES_FILES) $(updater_dep)
+endif
+$(SYMBOLS_ZIP): PRIVATE_LIST_FILE := $(call intermediates-dir-for,PACKAGING,symbols)/filelist
+$(SYMBOLS_ZIP): PRIVATE_MAPPING_PACKAGING_DIR := $(call intermediates-dir-for,PACKAGING,elf_symbol_mapping)
+$(SYMBOLS_ZIP): $(SOONG_ZIP) $(SYMBOLS_MAP)
+	@echo "Package symbols: $@"
+	$(hide) rm -rf $@ $(PRIVATE_LIST_FILE)
+	$(hide) mkdir -p $(TARGET_OUT_UNSTRIPPED) $(dir $(PRIVATE_LIST_FILE)) $(PRIVATE_MAPPING_PACKAGING_DIR)
+	# Find all of the files in the symbols directory and zip them into the symbols zip.
+	$(hide) find -L $(TARGET_OUT_UNSTRIPPED) -type f | sort >$(PRIVATE_LIST_FILE)
+	$(hide) $(SOONG_ZIP) --ignore_missing_files -d -o $@ -C $(OUT_DIR)/.. -l $(PRIVATE_LIST_FILE)
+	# Find all of the files in the symbols mapping directory and merge them into the symbols mapping textproto.
+	$(hide) find -L $(PRIVATE_MAPPING_PACKAGING_DIR) -type f | sort >$(PRIVATE_LIST_FILE)
+	$(hide) $(SYMBOLS_MAP) -merge $(SYMBOLS_MAPPING) -ignore_missing_files @$(PRIVATE_LIST_FILE)
+$(SYMBOLS_ZIP): .KATI_IMPLICIT_OUTPUTS := $(SYMBOLS_MAPPING)
+
+$(call declare-1p-container,$(SYMBOLS_ZIP),)
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+$(call declare-container-license-deps,$(SYMBOLS_ZIP),$(INTERNAL_ALLIMAGES_FILES) $(updater_dep),$(PRODUCT_OUT)/:/)
+endif
+
+# -----------------------------------------------------------------
+# A zip of the coverage directory.
+#
+name := gcov-report-files-all
+ifeq ($(TARGET_BUILD_TYPE),debug)
+name := $(name)_debug
+endif
+COVERAGE_ZIP := $(PRODUCT_OUT)/$(name).zip
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+$(COVERAGE_ZIP): $(INTERNAL_ALLIMAGES_FILES)
+endif
+$(COVERAGE_ZIP): PRIVATE_LIST_FILE := $(call intermediates-dir-for,PACKAGING,coverage)/filelist
+$(COVERAGE_ZIP): $(SOONG_ZIP)
+	@echo "Package coverage: $@"
+	$(hide) rm -rf $@ $(PRIVATE_LIST_FILE)
+	$(hide) mkdir -p $(dir $@) $(TARGET_OUT_COVERAGE) $(dir $(PRIVATE_LIST_FILE))
+	$(hide) find $(TARGET_OUT_COVERAGE) | sort >$(PRIVATE_LIST_FILE)
+	$(hide) $(SOONG_ZIP) -d -o $@ -C $(TARGET_OUT_COVERAGE) -l $(PRIVATE_LIST_FILE)
+
+$(call declare-1p-container,$(COVERAGE_ZIP),)
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+$(call declare-container-license-deps,$(COVERAGE_ZIP),$(INTERNAL_ALLIMAGE_FILES),$(PRODUCT_OUT)/:/)
+endif
+
+SYSTEM_NOTICE_DEPS += $(COVERAGE_ZIP)
+
+#------------------------------------------------------------------
+# Export the LLVM profile data tool and dependencies for Clang coverage processing
+#
+ifeq (true,$(CLANG_COVERAGE))
+  LLVM_PROFDATA := $(LLVM_PREBUILTS_BASE)/linux-x86/$(LLVM_PREBUILTS_VERSION)/bin/llvm-profdata
+  LLVM_COV := $(LLVM_PREBUILTS_BASE)/linux-x86/$(LLVM_PREBUILTS_VERSION)/bin/llvm-cov
+  LIBCXX := $(LLVM_PREBUILTS_BASE)/linux-x86/$(LLVM_PREBUILTS_VERSION)/lib/x86_64-unknown-linux-gnu/libc++.so.1
+  # Use llvm-profdata.zip for backwards compatibility with tradefed code.
+  LLVM_COVERAGE_TOOLS_ZIP := $(PRODUCT_OUT)/llvm-profdata.zip
+
+  $(LLVM_COVERAGE_TOOLS_ZIP): $(SOONG_ZIP)
+	$(hide) $(SOONG_ZIP) -d -o $@ -C $(LLVM_PREBUILTS_BASE)/linux-x86/$(LLVM_PREBUILTS_VERSION) -f $(LLVM_PROFDATA) -f $(LIBCXX) -f $(LLVM_COV)
+
+  $(call dist-for-goals,droidcore-unbundled apps_only,$(LLVM_COVERAGE_TOOLS_ZIP))
+endif
+
+# -----------------------------------------------------------------
+# A zip of the Android Apps. Not keeping full path so that we don't
+# include product names when distributing
+#
+name := $(TARGET_PRODUCT)
+ifeq ($(TARGET_BUILD_TYPE),debug)
+  name := $(name)_debug
+endif
+name := $(name)-apps-$(FILE_NAME_TAG)
+
+APPS_ZIP := $(PRODUCT_OUT)/$(name).zip
+$(APPS_ZIP): $(FULL_SYSTEMIMAGE_DEPS)
+	@echo "Package apps: $@"
+	$(hide) rm -rf $@
+	$(hide) mkdir -p $(dir $@)
+	$(hide) apps_to_zip=`find $(TARGET_OUT_APPS) $(TARGET_OUT_APPS_PRIVILEGED) -mindepth 2 -maxdepth 3 -name "*.apk"`; \
+	if [ -z "$$apps_to_zip" ]; then \
+	    echo "No apps to zip up. Generating empty apps archive." ; \
+	    a=$$(mktemp /tmp/XXXXXXX) && touch $$a && zip $@ $$a && zip -d $@ $$a; \
+	else \
+	    zip -qjX $@ $$apps_to_zip; \
+	fi
+
+ifeq (true,$(EMMA_INSTRUMENT))
+#------------------------------------------------------------------
+# An archive of classes for use in generating code-coverage reports
+# These are the uninstrumented versions of any classes that were
+# to be instrumented.
+# Any dependencies are set up later in build/make/core/main.mk.
+
+JACOCO_REPORT_CLASSES_ALL := $(PRODUCT_OUT)/jacoco-report-classes-all.jar
+$(JACOCO_REPORT_CLASSES_ALL): PRIVATE_TARGET_JACOCO_DIR := $(call intermediates-dir-for,PACKAGING,jacoco)
+$(JACOCO_REPORT_CLASSES_ALL): PRIVATE_HOST_JACOCO_DIR := $(call intermediates-dir-for,PACKAGING,jacoco,HOST)
+$(JACOCO_REPORT_CLASSES_ALL): PRIVATE_TARGET_PROGUARD_USAGE_DIR := $(call intermediates-dir-for,PACKAGING,proguard_usage)
+$(JACOCO_REPORT_CLASSES_ALL): PRIVATE_HOST_PROGUARD_USAGE_DIR := $(call intermediates-dir-for,PACKAGING,proguard_usage,HOST)
+$(JACOCO_REPORT_CLASSES_ALL) :
+	@echo "Collecting uninstrumented classes"
+	mkdir -p $(PRIVATE_TARGET_JACOCO_DIR) $(PRIVATE_HOST_JACOCO_DIR) $(PRIVATE_TARGET_PROGUARD_USAGE_DIR) $(PRIVATE_HOST_PROGUARD_USAGE_DIR)
+	$(SOONG_ZIP) -o $@ -L 0 \
+	  -C $(PRIVATE_TARGET_JACOCO_DIR) -P out/target/common/obj -D $(PRIVATE_TARGET_JACOCO_DIR) \
+	  -C $(PRIVATE_HOST_JACOCO_DIR) -P out/target/common/obj -D $(PRIVATE_HOST_JACOCO_DIR) \
+	  -C $(PRIVATE_TARGET_PROGUARD_USAGE_DIR) -P out/target/common/obj -D $(PRIVATE_TARGET_PROGUARD_USAGE_DIR) \
+	  -C $(PRIVATE_HOST_PROGUARD_USAGE_DIR) -P out/target/common/obj -D $(PRIVATE_HOST_PROGUARD_USAGE_DIR)
+
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+  $(JACOCO_REPORT_CLASSES_ALL): $(INTERNAL_ALLIMAGES_FILES)
+endif
+endif # EMMA_INSTRUMENT=true
+
+
+#------------------------------------------------------------------
+# A zip of Proguard obfuscation dictionary files.
+# Also produces a textproto containing mappings from the hashes of the
+# dictionary contents (which are also stored in the dex files on the
+# devices) to the filename of the proguard dictionary, which will allow
+# finding the appropriate dictionary to deobfuscate a stack trace frame.
+#
+
+# The path to the zip file containing proguard dictionaries.
+PROGUARD_DICT_ZIP := $(PRODUCT_OUT)/$(TARGET_PRODUCT)-proguard-dict-$(FILE_NAME_TAG).zip
+# The path to the zip file containing mappings from dictionary hashes to filenames.
+PROGUARD_DICT_MAPPING := $(PRODUCT_OUT)/$(TARGET_PRODUCT)-proguard-dict-mapping-$(FILE_NAME_TAG).textproto
+.KATI_READONLY := PROGUARD_DICT_ZIP PROGUARD_DICT_MAPPING
+# For apps_only build we'll establish the dependency later in build/make/core/main.mk.
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+$(PROGUARD_DICT_ZIP): $(INTERNAL_ALLIMAGES_FILES) $(updater_dep)
+endif
+$(PROGUARD_DICT_ZIP): PRIVATE_PACKAGING_DIR := $(call intermediates-dir-for,PACKAGING,proguard_dictionary)
+$(PROGUARD_DICT_ZIP): PRIVATE_MAPPING_PACKAGING_DIR := $(call intermediates-dir-for,PACKAGING,proguard_dictionary_mapping)
+$(PROGUARD_DICT_ZIP): PRIVATE_LIST_FILE := $(call intermediates-dir-for,PACKAGING,proguard_dictionary_filelist)/filelist
+$(PROGUARD_DICT_ZIP): $(SOONG_ZIP) $(SYMBOLS_MAP)
+	@echo "Packaging Proguard obfuscation dictionary files."
+	rm -rf $@ $(PRIVATE_LIST_FILE)
+	mkdir -p $(PRIVATE_PACKAGING_DIR) $(PRIVATE_MAPPING_PACKAGING_DIR) $(dir $(PRIVATE_LIST_FILE))
+	# Zip all of the files in the proguard dictionary directory.
+	$(SOONG_ZIP) --ignore_missing_files -d -o $@ -C $(PRIVATE_PACKAGING_DIR) -D $(PRIVATE_PACKAGING_DIR)
+	# Find all of the files in the proguard dictionary mapping directory and merge them into the mapping textproto.
+	# Strip the PRIVATE_PACKAGING_DIR off the filenames to match soong_zip's -C argument.
+	$(hide) find -L $(PRIVATE_MAPPING_PACKAGING_DIR) -type f | sort >$(PRIVATE_LIST_FILE)
+	$(SYMBOLS_MAP) -merge $(PROGUARD_DICT_MAPPING) -strip_prefix $(PRIVATE_PACKAGING_DIR)/ -ignore_missing_files @$(PRIVATE_LIST_FILE)
+$(PROGUARD_DICT_ZIP): .KATI_IMPLICIT_OUTPUTS := $(PROGUARD_DICT_MAPPING)
+
+$(call declare-1p-container,$(PROGUARD_DICT_ZIP),)
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+$(call declare-container-license-deps,$(PROGUARD_DICT_ZIP),$(INTERNAL_ALLIMAGES_FILES) $(updater_dep),$(PRODUCT_OUT)/:/)
+endif
+
+#------------------------------------------------------------------
+# A zip of Proguard usage files.
+#
+PROGUARD_USAGE_ZIP := $(PRODUCT_OUT)/$(TARGET_PRODUCT)-proguard-usage-$(FILE_NAME_TAG).zip
+# For apps_only build we'll establish the dependency later in build/make/core/main.mk.
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+$(PROGUARD_USAGE_ZIP): \
+    $(INSTALLED_SYSTEMIMAGE_TARGET) \
+    $(INSTALLED_RAMDISK_TARGET) \
+    $(INSTALLED_BOOTIMAGE_TARGET) \
+    $(INSTALLED_INIT_BOOT_IMAGE_TARGET) \
+    $(INSTALLED_USERDATAIMAGE_TARGET) \
+    $(INSTALLED_VENDORIMAGE_TARGET) \
+    $(INSTALLED_PRODUCTIMAGE_TARGET) \
+    $(INSTALLED_SYSTEM_EXTIMAGE_TARGET) \
+    $(INSTALLED_ODMIMAGE_TARGET) \
+    $(INSTALLED_VENDOR_DLKMIMAGE_TARGET) \
+    $(INSTALLED_ODM_DLKMIMAGE_TARGET) \
+    $(INSTALLED_SYSTEM_DLKMIMAGE_TARGET) \
+    $(updater_dep)
+endif
+$(PROGUARD_USAGE_ZIP): PRIVATE_LIST_FILE := $(call intermediates-dir-for,PACKAGING,proguard_usage.zip)/filelist
+$(PROGUARD_USAGE_ZIP): PRIVATE_PACKAGING_DIR := $(call intermediates-dir-for,PACKAGING,proguard_usage)
+$(PROGUARD_USAGE_ZIP): $(MERGE_ZIPS)
+	@echo "Packaging Proguard usage files."
+	mkdir -p $(dir $@) $(PRIVATE_PACKAGING_DIR) $(dir $(PRIVATE_LIST_FILE))
+	find $(PRIVATE_PACKAGING_DIR) -name proguard_usage.zip > $(PRIVATE_LIST_FILE)
+	$(MERGE_ZIPS) $@ @$(PRIVATE_LIST_FILE)
+
+$(call declare-1p-container,$(PROGUARD_USAGE_ZIP),)
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+$(call declare-container-license-deps,$(PROGUARD_USAGE_ZIP),$(INSTALLED_SYSTEMIMAGE_TARGET) \
+    $(INSTALLED_RAMDISK_TARGET) \
+    $(INSTALLED_BOOTIMAGE_TARGET) \
+    $(INSTALLED_INIT_BOOT_IMAGE_TARGET) \
+    $(INSTALLED_USERDATAIMAGE_TARGET) \
+    $(INSTALLED_VENDORIMAGE_TARGET) \
+    $(INSTALLED_PRODUCTIMAGE_TARGET) \
+    $(INSTALLED_SYSTEM_EXTIMAGE_TARGET) \
+    $(INSTALLED_ODMIMAGE_TARGET) \
+    $(INSTALLED_VENDOR_DLKMIMAGE_TARGET) \
+    $(INSTALLED_ODM_DLKMIMAGE_TARGET) \
+    $(INSTALLED_SYSTEM_DLKMIMAGE_TARGET) \
+    $(updater_dep),$(PROGUARD_USAGE_ZIP):/)
+endif
+
+ifeq (true,$(PRODUCT_USE_DYNAMIC_PARTITIONS))
+
+# Dump variables used by build_super_image.py (for building super.img and super_empty.img).
+# $(1): output file
+define dump-super-image-info
+  $(call dump-dynamic-partitions-info,$(1))
+  $(if $(filter true,$(AB_OTA_UPDATER)), \
+    echo "ab_update=true" >> $(1))
+endef
+
+endif # PRODUCT_USE_DYNAMIC_PARTITIONS
+
+# -----------------------------------------------------------------
+# super partition image (dist)
+
+ifeq (true,$(PRODUCT_BUILD_SUPER_PARTITION))
+
+# BOARD_SUPER_PARTITION_SIZE must be defined to build super image.
+ifneq ($(BOARD_SUPER_PARTITION_SIZE),)
+
+ifneq (true,$(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS))
+
+# For real devices and for dist builds, build super image from target files to an intermediate directory.
+INTERNAL_SUPERIMAGE_DIST_TARGET := $(call intermediates-dir-for,PACKAGING,super.img)/super.img
+$(INTERNAL_SUPERIMAGE_DIST_TARGET): extracted_input_target_files := $(patsubst %.zip,%,$(BUILT_TARGET_FILES_PACKAGE))
+$(INTERNAL_SUPERIMAGE_DIST_TARGET): $(LPMAKE) $(BUILT_TARGET_FILES_PACKAGE) $(BUILD_SUPER_IMAGE)
+	$(call pretty,"Target super fs image from target files: $@")
+	PATH=$(dir $(LPMAKE)):$$PATH \
+	    $(BUILD_SUPER_IMAGE) -v $(extracted_input_target_files) $@
+
+# Skip packing it in dist package because it is in update package.
+ifneq (true,$(BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE))
+$(call dist-for-goals,dist_files,$(INTERNAL_SUPERIMAGE_DIST_TARGET))
+endif
+
+.PHONY: superimage_dist
+superimage_dist: $(INTERNAL_SUPERIMAGE_DIST_TARGET)
+
+endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS != "true"
+endif # BOARD_SUPER_PARTITION_SIZE != ""
+endif # PRODUCT_BUILD_SUPER_PARTITION == "true"
+
+# -----------------------------------------------------------------
+# super partition image for development
+
+ifeq (true,$(PRODUCT_BUILD_SUPER_PARTITION))
+ifneq ($(BOARD_SUPER_PARTITION_SIZE),)
+ifneq (true,$(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS))
+
+# Build super.img by using $(INSTALLED_*IMAGE_TARGET) to $(1)
+# $(1): built image path
+# $(2): misc_info.txt path; its contents should match expectation of build_super_image.py
+define build-superimage-target
+  mkdir -p $(dir $(2))
+  rm -rf $(2)
+  $(call dump-super-image-info,$(2))
+  $(foreach p,$(BOARD_SUPER_PARTITION_PARTITION_LIST), \
+    echo "$(p)_image=$(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET)" >> $(2);)
+  $(if $(BUILDING_SYSTEM_OTHER_IMAGE), $(if $(filter system,$(BOARD_SUPER_PARTITION_PARTITION_LIST)), \
+    echo "system_other_image=$(INSTALLED_SYSTEMOTHERIMAGE_TARGET)" >> $(2);))
+  mkdir -p $(dir $(1))
+  PATH=$(dir $(LPMAKE)):$$PATH \
+    $(BUILD_SUPER_IMAGE) -v $(2) $(1)
+endef
+
+INSTALLED_SUPERIMAGE_TARGET := $(PRODUCT_OUT)/super.img
+INSTALLED_SUPERIMAGE_DEPENDENCIES := $(LPMAKE) $(BUILD_SUPER_IMAGE) \
+    $(foreach p, $(BOARD_SUPER_PARTITION_PARTITION_LIST), $(INSTALLED_$(call to-upper,$(p))IMAGE_TARGET))
+
+ifdef BUILDING_SYSTEM_OTHER_IMAGE
+ifneq ($(filter system,$(BOARD_SUPER_PARTITION_PARTITION_LIST)),)
+INSTALLED_SUPERIMAGE_DEPENDENCIES += $(INSTALLED_SYSTEMOTHERIMAGE_TARGET)
+endif
+endif
+
+$(INSTALLED_SUPERIMAGE_TARGET): $(INSTALLED_SUPERIMAGE_DEPENDENCIES)
+	$(call pretty,"Target super fs image for debug: $@")
+	$(call build-superimage-target,$(INSTALLED_SUPERIMAGE_TARGET),\
+          $(call intermediates-dir-for,PACKAGING,superimage_debug)/misc_info.txt)
+
+# For devices that uses super image directly, the superimage target points to the file in $(PRODUCT_OUT).
+.PHONY: superimage
+superimage: $(INSTALLED_SUPERIMAGE_TARGET)
+
+# If BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT is set, super.img is built from images in the
+# $(PRODUCT_OUT) directory, and is built to $(PRODUCT_OUT)/super.img. Also, it will
+# be built for non-dist builds. This is useful for devices that uses super.img directly, e.g.
+# virtual devices.
+ifeq (true,$(BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT))
+droidcore-unbundled: $(INSTALLED_SUPERIMAGE_TARGET)
+
+$(call dist-for-goals,dist_files,$(INSTALLED_MISC_INFO_TARGET):super_misc_info.txt)
+endif # BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT
+
+# Build $(PRODUCT_OUT)/super.img without dependencies.
+.PHONY: superimage-nodeps supernod
+superimage-nodeps supernod: intermediates :=
+superimage-nodeps supernod: | $(INSTALLED_SUPERIMAGE_DEPENDENCIES)
+	$(call pretty,"make $(INSTALLED_SUPERIMAGE_TARGET): ignoring dependencies")
+	$(call build-superimage-target,$(INSTALLED_SUPERIMAGE_TARGET),\
+	  $(call intermediates-dir-for,PACKAGING,superimage-nodeps)/misc_info.txt)
+
+endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS != "true"
+endif # BOARD_SUPER_PARTITION_SIZE != ""
+endif # PRODUCT_BUILD_SUPER_PARTITION == "true"
+
+# -----------------------------------------------------------------
+# super empty image
+ifdef BUILDING_SUPER_EMPTY_IMAGE
+
+INSTALLED_SUPERIMAGE_EMPTY_TARGET := $(PRODUCT_OUT)/super_empty.img
+$(INSTALLED_SUPERIMAGE_EMPTY_TARGET): intermediates := $(call intermediates-dir-for,PACKAGING,super_empty)
+$(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(LPMAKE) $(BUILD_SUPER_IMAGE)
+	$(call pretty,"Target empty super fs image: $@")
+	mkdir -p $(intermediates)
+	rm -rf $(intermediates)/misc_info.txt
+	$(call dump-super-image-info,$(intermediates)/misc_info.txt)
+	PATH=$(dir $(LPMAKE)):$$PATH \
+	    $(BUILD_SUPER_IMAGE) -v $(intermediates)/misc_info.txt $@
+
+$(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_EMPTY_TARGET))
+
+$(call declare-0p-target,$(INSTALLED_SUPERIMAGE_EMPTY_TARGET))
+
+endif # BUILDING_SUPER_EMPTY_IMAGE
+
+
+# -----------------------------------------------------------------
+>>>>>>> BRANCH (9613b0 Merge "Version bump to TKB1.221004.001.A1 [core/build_id.mk])
 # The update package
 
 name := $(TARGET_PRODUCT)

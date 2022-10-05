@@ -19,7 +19,12 @@
 # build quite specifically for the emulator, and might not be
 # entirely appropriate to inherit from for on-device configurations.
 
+<<<<<<< HEAD   (dfb5d3 Merge "Merge empty history for sparse-9119366-L7790000095660)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulator.mk)
+=======
+$(call inherit-product-if-exists, device/generic/goldfish/arm32-vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
+>>>>>>> BRANCH (9613b0 Merge "Version bump to TKB1.221004.001.A1 [core/build_id.mk])
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/board/generic/device.mk)
 

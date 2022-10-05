@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (dfb5d3 Merge "Merge empty history for sparse-9119366-L7790000095660)
 #
 # Copyright (C) 2012 The Android Open Source Project
 #
@@ -190,3 +191,5 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # disable setupwizard
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.setupwizard.mode=DISABLED
+=======
+>>>>>>> BRANCH (9613b0 Merge "Version bump to TKB1.221004.001.A1 [core/build_id.mk])
