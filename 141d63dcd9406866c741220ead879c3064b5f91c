@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cca09848_695d76f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903985
+      },
+      "writtenOn": "2022-10-06T15:40:16Z",
+      "side": 1,
+      "message": "Does this also remove the 5s cost of \"setup/rbe_bootstrap\"?\nhttps://cs.android.com/android/platform/superproject/+/master:build/soong/ui/build/rbe.go;l\u003d96?q\u003d%22rbe_bootstrap%22",
+      "revId": "141d63dcd9406866c741220ead879c3064b5f91c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
