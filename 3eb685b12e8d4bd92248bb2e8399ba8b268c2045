@@ -52,6 +52,29 @@
       "parentUuid": "ef9ec4fd_5bb28e97",
       "revId": "3eb685b12e8d4bd92248bb2e8399ba8b268c2045",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be5b8859_da544f51",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1939216
+      },
+      "writtenOn": "2022-10-06T17:10:23Z",
+      "side": 1,
+      "message": "The original idea was:\n 1. Do not include omx service in 64b_only builds \n 2. Also provide a default, Include omx service for 32b or a build that doesn\u0027t define anything\n \nDoes this means that all TARGET_SUPPORTS_32_BIT_APPS \u003d\u003d true, should have TARGET_SUPPORTS_64_BIT_APPS \u003d\u003d true ???\n\nCan we have TARGET_SUPPORTS_32_BIT_APPS \u003d\u003d true and TARGET_SUPPORTS_64_BIT_APPS \u003d\u003d false  in general ?",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 62
+      },
+      "revId": "3eb685b12e8d4bd92248bb2e8399ba8b268c2045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
