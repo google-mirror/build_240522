@@ -34,6 +34,24 @@
       "parentUuid": "1488a7c7_ba02f039",
       "revId": "3eb685b12e8d4bd92248bb2e8399ba8b268c2045",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34f2bf43_00a4070f",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-10-06T14:46:55Z",
+      "side": 1,
+      "message": "Anton is talking about products like aosp_cf_x86_phone (32_BIT_APPS\u003dtrue, 64_BIT_APPS\u003dfalse)",
+      "parentUuid": "ef9ec4fd_5bb28e97",
+      "revId": "3eb685b12e8d4bd92248bb2e8399ba8b268c2045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
