@@ -75,6 +75,30 @@
       },
       "revId": "3eb685b12e8d4bd92248bb2e8399ba8b268c2045",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c11b4dc9_411ed7d4",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2022-10-06T20:40:23Z",
+      "side": 1,
+      "message": "this should absolutely remain as an OMX-driven conditional, not as a 32/64 conditional.\n\nit\u0027s possible and allowed to build a device that is 32/64 or 32 that does not have any OMX-based codecs in the /vendor partition; it should be possible to configure such a device so that it does not include the omx service.",
+      "parentUuid": "be5b8859_da544f51",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 62
+      },
+      "revId": "3eb685b12e8d4bd92248bb2e8399ba8b268c2045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
