@@ -74,10 +74,10 @@ PRODUCT_PACKAGES += \
     shell_and_utilities_vendor \
 
 # OMX not supported for 64bit_only builds
-ifneq ($(TARGET_SUPPORTS_OMX_SERVICE),false)
-    PRODUCT_PACKAGES += \
-        android.hardware.media.omx@1.0-service \
-
+ifeq ($(TARGET_SUPPORTS_64_BIT_APPS),true)
+ifeq ($(TARGET_SUPPORTS_32_BIT_APPS),true)
+    PRODUCT_PACKAGES += android.hardware.media.omx@1.0-service
+endif
 endif
 
 # Base module when shipping api level is less than or equal to 29
