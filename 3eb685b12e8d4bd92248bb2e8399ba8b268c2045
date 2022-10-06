@@ -16,6 +16,24 @@
       "message": "seems like this was included in 32-bit only builds prior to this CL, but now only in 64+32 builds? not sure if that\u0027s intentional, but the comment should probably be updated if it is",
       "revId": "3eb685b12e8d4bd92248bb2e8399ba8b268c2045",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef9ec4fd_5bb28e97",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-10-06T14:00:17Z",
+      "side": 1,
+      "message": "Unless I\u0027m missing something, I reverted the CL and still found the module in aosp_cf_x86_64_phone, which is a 64+32 build:\n\n```\n$ build/soong/soong_ui.bash --dumpvars-mode --vars\u003d\"TARGET_PRODUCT TARGET_SUPPORTS_32_BIT_APPS TARGET_SUPPORTS_64_BIT_APPS PRODUCT_PACKAGES\"\nTARGET_PRODUCT\u003d\u0027aosp_cf_x86_64_phone\u0027\nTARGET_SUPPORTS_32_BIT_APPS\u003d\u0027true\u0027\nTARGET_SUPPORTS_64_BIT_APPS\u003d\u0027true\u0027\nPRODUCT_PACKAGES\u003d\u0027... android.hardware.media.omx@1.0-service ...\u0027\n```",
+      "parentUuid": "1488a7c7_ba02f039",
+      "revId": "3eb685b12e8d4bd92248bb2e8399ba8b268c2045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
