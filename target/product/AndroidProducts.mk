@@ -45,7 +45,19 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_x86_64.mk
 else
 PRODUCT_MAKEFILES := \
+<<<<<<< HEAD   (240c89 Merge "Merge empty history for sparse-9140227-L7340000095670)
     $(LOCAL_DIR)/core.mk \
+=======
+    $(LOCAL_DIR)/aosp_64bitonly_x86_64.mk \
+    $(LOCAL_DIR)/aosp_arm64.mk \
+    $(LOCAL_DIR)/aosp_arm.mk \
+    $(LOCAL_DIR)/aosp_riscv64.mk \
+    $(LOCAL_DIR)/aosp_x86_64.mk \
+    $(LOCAL_DIR)/aosp_x86_arm.mk \
+    $(LOCAL_DIR)/aosp_x86.mk \
+    $(LOCAL_DIR)/full.mk \
+    $(LOCAL_DIR)/full_x86.mk \
+>>>>>>> BRANCH (0a00ba Merge "Version bump to TKB1.221005.001.A1 [core/build_id.mk])
     $(LOCAL_DIR)/generic.mk \
     $(LOCAL_DIR)/generic_x86.mk \
     $(LOCAL_DIR)/generic_mips.mk \

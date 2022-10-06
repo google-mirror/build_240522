@@ -5,6 +5,7 @@
 #   my_prebuilt_jni_libs
 #   my_installed_module_stem (from configure_module_stem.mk)
 #   partition_tag (from base_rules.mk)
+#   partition_lib_pairs
 #   my_prebuilt_src_file (from prebuilt_internal.mk)
 #
 # Output variables:
@@ -62,6 +63,7 @@ ifdef LOCAL_POST_INSTALL_CMD
 LOCAL_POST_INSTALL_CMD += ;
 endif
 
+<<<<<<< HEAD   (240c89 Merge "Merge empty history for sparse-9140227-L7340000095670)
 my_symlink_target_dir := $(patsubst $(PRODUCT_OUT)%,%,\
     $(my_shared_library_path))
 LOCAL_POST_INSTALL_CMD += \
@@ -73,6 +75,40 @@ ifdef LOCAL_POST_INSTALL_CMD
 $(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD)
 endif
 endif
+=======
+  # Create symlink in the app specific lib path
+  # Skip creating this symlink when running the second part of a target sanitization build.
+  ifeq ($(filter address,$(SANITIZE_TARGET)),)
+    my_symlink_target_dir := $(patsubst $(PRODUCT_OUT)%,%,\
+      $(my_shared_library_path))
+
+    ifdef partition_lib_pairs
+      # Support cross-partition jni lib dependency for bp modules
+      # API domain check is done in Soong
+      $(foreach pl_pair,$(partition_lib_pairs),\
+        $(eval lib_name := $(call word-colon, 1, $(pl_pair)))\
+        $(eval lib_partition := $(call word-colon, 2, $(pl_pair)))\
+        $(eval shared_library_path := $(call get_non_asan_path,\
+        $($(my_2nd_arch_prefix)TARGET_OUT$(lib_partition)_SHARED_LIBRARIES)))\
+        $(call symlink-file,\
+          $(shared_library_path)/$(lib_name).so,\
+          $(my_symlink_target_dir)/$(lib_name).so,\
+          $(my_app_lib_path)/$(lib_name).so)\
+        $(eval $$(LOCAL_INSTALLED_MODULE) : $$(my_app_lib_path)/$$(lib_name).so)\
+        $(eval ALL_MODULES.$(my_register_name).INSTALLED += $$(my_app_lib_path)/$$(lib_name).so))
+
+    else
+      # Cross-partition jni lib dependency currently not supported for mk modules
+      $(foreach lib,$(my_jni_filenames),\
+        $(call symlink-file, \
+          $(my_shared_library_path)/$(lib), \
+          $(my_symlink_target_dir)/$(lib), \
+          $(my_app_lib_path)/$(lib)) \
+        $(eval $$(LOCAL_INSTALLED_MODULE) : $$(my_app_lib_path)/$$(lib)) \
+        $(eval ALL_MODULES.$(my_register_name).INSTALLED += $$(my_app_lib_path)/$$(lib)))
+    endif # partition_lib_pairs
+  endif
+>>>>>>> BRANCH (0a00ba Merge "Version bump to TKB1.221005.001.A1 [core/build_id.mk])
 
 # Clear jni_shared_libraries to not embed it into the apk.
 my_jni_shared_libraries :=

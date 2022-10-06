@@ -188,6 +188,7 @@ function setpaths()
     fi
 
     # and in with the new
+<<<<<<< HEAD   (240c89 Merge "Merge empty history for sparse-9140227-L7340000095670)
     local prebuiltdir=$(getprebuilt)
     local gccprebuiltdir=$(get_abs_build_var ANDROID_GCC_PREBUILTS)
 
@@ -225,6 +226,8 @@ function setpaths()
     if [ "$toolchaindir2" -a -d "$gccprebuiltdir/$toolchaindir2" ]; then
         export ANDROID_TOOLCHAIN_2ND_ARCH=$gccprebuiltdir/$toolchaindir2
     fi
+=======
+>>>>>>> BRANCH (0a00ba Merge "Version bump to TKB1.221005.001.A1 [core/build_id.mk])
 
     export ANDROID_DEV_SCRIPTS=$T/development/scripts:$T/prebuilts/devtools/tools:$T/external/selinux/prebuilts/bin
 
@@ -237,12 +240,24 @@ function setpaths()
             ;;
     esac
 
+<<<<<<< HEAD   (240c89 Merge "Merge empty history for sparse-9140227-L7340000095670)
     ANDROID_BUILD_PATHS=$(get_build_var ANDROID_BUILD_PATHS):$ANDROID_TOOLCHAIN
     if [ -n "$ANDROID_TOOLCHAIN_2ND_ARCH" ]; then
         ANDROID_BUILD_PATHS=$ANDROID_BUILD_PATHS:$ANDROID_TOOLCHAIN_2ND_ARCH
     fi
     ANDROID_BUILD_PATHS=$ANDROID_BUILD_PATHS:$ANDROID_DEV_SCRIPTS:
     export ANDROID_BUILD_PATHS
+=======
+    ANDROID_BUILD_PATHS=$(get_build_var ANDROID_BUILD_PATHS)
+    ANDROID_BUILD_PATHS=$ANDROID_BUILD_PATHS:$ANDROID_DEV_SCRIPTS
+
+    # Append llvm binutils prebuilts path to ANDROID_BUILD_PATHS.
+    local ANDROID_LLVM_BINUTILS=$(get_abs_build_var ANDROID_CLANG_PREBUILTS)/llvm-binutils-stable
+    ANDROID_BUILD_PATHS=$ANDROID_BUILD_PATHS:$ANDROID_LLVM_BINUTILS
+
+    # Set up ASAN_SYMBOLIZER_PATH for SANITIZE_HOST=address builds.
+    export ASAN_SYMBOLIZER_PATH=$ANDROID_LLVM_BINUTILS/llvm-symbolizer
+>>>>>>> BRANCH (0a00ba Merge "Version bump to TKB1.221005.001.A1 [core/build_id.mk])
 
     # If prebuilts/android-emulator/<system>/ exists, prepend it to our PATH
     # to ensure that the corresponding 'emulator' binaries are used.
@@ -306,9 +321,12 @@ function set_stuff_for_environment()
     set_sequence_number
 
     export ANDROID_BUILD_TOP=$(gettop)
+<<<<<<< HEAD   (240c89 Merge "Merge empty history for sparse-9140227-L7340000095670)
     # With this environment variable new GCC can apply colors to warnings/errors
     export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
     export ASAN_OPTIONS=detect_leaks=0
+=======
+>>>>>>> BRANCH (0a00ba Merge "Version bump to TKB1.221005.001.A1 [core/build_id.mk])
 }
 
 function set_sequence_number()
