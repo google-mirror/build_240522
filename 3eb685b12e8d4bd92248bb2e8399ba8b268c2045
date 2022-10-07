@@ -99,6 +99,30 @@
       },
       "revId": "3eb685b12e8d4bd92248bb2e8399ba8b268c2045",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c36a474_7ef3c3e5",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-10-07T07:43:12Z",
+      "side": 1,
+      "message": "Ack, I misunderstood the intention - will revert.",
+      "parentUuid": "c11b4dc9_411ed7d4",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 62
+      },
+      "revId": "3eb685b12e8d4bd92248bb2e8399ba8b268c2045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
