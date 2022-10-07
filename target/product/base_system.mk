@@ -54,7 +54,6 @@ PRODUCT_PACKAGES += \
     com.android.appsearch \
     com.android.btservices \
     com.android.conscrypt \
-    com.android.cronet \
     com.android.extservices \
     com.android.i18n \
     com.android.ipsec \
@@ -418,3 +417,5 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
     frameworks/base/config/dirty-image-objects:system/etc/dirty-image-objects)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/runtime_libart.mk)
+
+$(call soong_config_set,cronet,enable_cronet,true)
