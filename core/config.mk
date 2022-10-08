@@ -161,7 +161,11 @@ $(KATI_obsolete_var TARGET_NO_VENDOR_BOOT,Use PRODUCT_BUILD_VENDOR_BOOT_IMAGE in
 $(KATI_obsolete_var PRODUCT_CHECK_ELF_FILES,Use BUILD_BROKEN_PREBUILT_ELF_FILES instead)
 $(KATI_obsolete_var ALL_GENERATED_SOURCES,ALL_GENERATED_SOURCES is no longer used)
 $(KATI_obsolete_var ALL_ORIGINAL_DYNAMIC_BINARIES,ALL_ORIGINAL_DYNAMIC_BINARIES is no longer used)
-
+$(KATI_obsolete_var PRODUCT_SUPPORTS_VERITY,VB 1.0 and related variables are no longer supported)
+$(KATI_obsolete_var PRODUCT_SUPPORTS_VERITY_FEC,VB 1.0 and related variables are no longer supported)
+$(KATI_obsolete_var PRODUCT_SUPPORTS_BOOT_SIGNER,VB 1.0 and related variables are no longer supported)
+$(KATI_obsolete_var PRODUCT_VERITY_SIGNING_KEY,VB 1.0 and related variables are no longer supported)
+$(KATI_obsolete_var BOARD_PREBUILT_PVMFWIMAGE,pvmfw.bin is now built in AOSP and custom versions are no longer supported)
 # Used to force goals to build.  Only use for conditionally defined goals.
 .PHONY: FORCE
 FORCE:
@@ -600,8 +604,8 @@ FS_GET_STATS := $(HOST_OUT_EXECUTABLES)/fs_get_stats$(HOST_EXECUTABLE_SUFFIX)
 MKEXTUSERIMG := $(HOST_OUT_EXECUTABLES)/mkuserimg_mke2fs
 MKE2FS_CONF := system/extras/ext4_utils/mke2fs.conf
 MKEROFS := $(HOST_OUT_EXECUTABLES)/mkfs.erofs
-MKSQUASHFSUSERIMG := $(HOST_OUT_EXECUTABLES)/mksquashfsimage.sh
-MKF2FSUSERIMG := $(HOST_OUT_EXECUTABLES)/mkf2fsuserimg.sh
+MKSQUASHFSUSERIMG := $(HOST_OUT_EXECUTABLES)/mksquashfsimage
+MKF2FSUSERIMG := $(HOST_OUT_EXECUTABLES)/mkf2fsuserimg
 SIMG2IMG := $(HOST_OUT_EXECUTABLES)/simg2img$(HOST_EXECUTABLE_SUFFIX)
 E2FSCK := $(HOST_OUT_EXECUTABLES)/e2fsck$(HOST_EXECUTABLE_SUFFIX)
 TUNE2FS := $(HOST_OUT_EXECUTABLES)/tune2fs$(HOST_EXECUTABLE_SUFFIX)
@@ -629,10 +633,8 @@ APPEND2SIMG := $(HOST_OUT_EXECUTABLES)/append2simg
 VERITY_SIGNER := $(HOST_OUT_EXECUTABLES)/verity_signer
 BUILD_VERITY_METADATA := $(HOST_OUT_EXECUTABLES)/build_verity_metadata
 BUILD_VERITY_TREE := $(HOST_OUT_EXECUTABLES)/build_verity_tree
-BOOT_SIGNER := $(HOST_OUT_EXECUTABLES)/boot_signer
 FUTILITY := $(HOST_OUT_EXECUTABLES)/futility-host
 VBOOT_SIGNER := $(HOST_OUT_EXECUTABLES)/vboot_signer
-FEC := $(HOST_OUT_EXECUTABLES)/fec
 
 DEXDUMP := $(HOST_OUT_EXECUTABLES)/dexdump$(BUILD_EXECUTABLE_SUFFIX)
 PROFMAN := $(HOST_OUT_EXECUTABLES)/profman
@@ -711,26 +713,10 @@ ifeq ($(PRODUCT_FULL_TREBLE),true)
   BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED ?= true
 endif
 
-# If PRODUCT_USE_VNDK is true and BOARD_VNDK_VERSION is not defined yet,
-# BOARD_VNDK_VERSION will be set to "current" as default.
-# PRODUCT_USE_VNDK will be true in Android-P or later launching devices.
-PRODUCT_USE_VNDK := false
-ifneq ($(PRODUCT_USE_VNDK_OVERRIDE),)
-  PRODUCT_USE_VNDK := $(PRODUCT_USE_VNDK_OVERRIDE)
-else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
-  # No shipping level defined
-else ifeq ($(call math_gt,$(PRODUCT_SHIPPING_API_LEVEL),27),true)
-  PRODUCT_USE_VNDK := $(PRODUCT_FULL_TREBLE)
+# Starting in Android U, non-VNDK devices not supported
+ifndef BOARD_VNDK_VERSION
+BOARD_VNDK_VERSION := current
 endif
-
-ifeq ($(PRODUCT_USE_VNDK),true)
-  ifndef BOARD_VNDK_VERSION
-    BOARD_VNDK_VERSION := current
-  endif
-endif
-
-$(KATI_obsolete_var PRODUCT_USE_VNDK,Use BOARD_VNDK_VERSION instead)
-$(KATI_obsolete_var PRODUCT_USE_VNDK_OVERRIDE,Use BOARD_VNDK_VERSION instead)
 
 ifdef PRODUCT_PRODUCT_VNDK_VERSION
   ifndef BOARD_VNDK_VERSION
@@ -820,7 +806,7 @@ BUILD_DATETIME_FROM_FILE := $$(cat $(BUILD_DATETIME_FILE))
 # is made which breaks compatibility with the previous platform sepolicy version,
 # not just on every increase in PLATFORM_SDK_VERSION.  The minor version should
 # be reset to 0 on every bump of the PLATFORM_SDK_VERSION.
-sepolicy_major_vers := 32
+sepolicy_major_vers := 33
 sepolicy_minor_vers := 0
 
 ifneq ($(sepolicy_major_vers), $(PLATFORM_SDK_VERSION))
@@ -878,6 +864,11 @@ ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
           PRODUCT_RETROFIT_DYNAMIC_PARTITIONS)
     endif
   endif
+endif
+
+# TODO(b/241346584): Mark BOARD_BUILD_SYSTEM_ROOT_IMAGE as KATI_obsolete_var after all users are removed
+ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+    $(error BOARD_BUILD_SYSTEM_ROOT_IMAGE is deprecated)
 endif
 
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
