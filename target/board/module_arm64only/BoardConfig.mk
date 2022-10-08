@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2014 The Android Open Source Project
+# Copyright (C) 2022 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,16 +13,9 @@
 # limitations under the License.
 #
 
-# Provides dependencies necessary for verified boot.
+include build/make/target/board/BoardConfigModuleCommon.mk
 
-PRODUCT_SUPPORTS_BOOT_SIGNER := true
-PRODUCT_SUPPORTS_VERITY := true
-PRODUCT_SUPPORTS_VERITY_FEC := true
-
-# The dev key is used to sign boot and recovery images, and the verity
-# metadata table. Actual product deliverables will be re-signed by hand.
-# We expect this file to exist with the suffixes ".x509.pem" and ".pk8".
-PRODUCT_VERITY_SIGNING_KEY := build/make/target/product/security/verity
-
-PRODUCT_PACKAGES += \
-        verity_key
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-a
+TARGET_CPU_VARIANT := generic
+TARGET_CPU_ABI := arm64-v8a

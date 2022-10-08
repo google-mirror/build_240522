@@ -136,10 +136,7 @@ _product_list_vars += PRODUCT_BOOT_JARS
 # PRODUCT_BOOT_JARS, so that device-specific jars go after common jars.
 _product_list_vars += PRODUCT_BOOT_JARS_EXTRA
 
-_product_single_value_vars += PRODUCT_SUPPORTS_BOOT_SIGNER
 _product_single_value_vars += PRODUCT_SUPPORTS_VBOOT
-_product_single_value_vars += PRODUCT_SUPPORTS_VERITY
-_product_single_value_vars += PRODUCT_SUPPORTS_VERITY_FEC
 _product_list_vars += PRODUCT_SYSTEM_SERVER_APPS
 # List of system_server classpath jars on the platform.
 _product_list_vars += PRODUCT_SYSTEM_SERVER_JARS
@@ -168,7 +165,6 @@ _product_list_vars += PRODUCT_DEXPREOPT_SPEED_APPS
 _product_list_vars += PRODUCT_LOADED_BY_PRIVILEGED_MODULES
 _product_single_value_vars += PRODUCT_VBOOT_SIGNING_KEY
 _product_single_value_vars += PRODUCT_VBOOT_SIGNING_SUBKEY
-_product_single_value_vars += PRODUCT_VERITY_SIGNING_KEY
 _product_single_value_vars += PRODUCT_SYSTEM_VERITY_PARTITION
 _product_single_value_vars += PRODUCT_VENDOR_VERITY_PARTITION
 _product_single_value_vars += PRODUCT_PRODUCT_VERITY_PARTITION
@@ -360,15 +356,12 @@ _product_single_value_vars += PRODUCT_INSTALL_EXTRA_FLATTENED_APEXES
 # This option is only meant to be set by compliance GSI targets.
 _product_single_value_vars += PRODUCT_INSTALL_DEBUG_POLICY_TO_SYSTEM_EXT
 
-# If set, metadata files for the following artifacts will be generated.
-# - system/framework/*.jar
-# - system/framework/oat/<arch>/*.{oat,vdex,art}
-# - system/etc/boot-image.prof
-# - system/etc/dirty-image-objects
-# One fsverity metadata container file per one input file will be generated in
-# system.img, with a suffix ".fsv_meta". e.g. a container file for
-# "/system/framework/foo.jar" will be "system/framework/foo.jar.fsv_meta".
-_product_single_value_vars += PRODUCT_SYSTEM_FSVERITY_GENERATE_METADATA
+# If set, fsverity metadata files will be generated for each files in the
+# allowlist, plus an manifest APK per partition. For example,
+# /system/framework/service.jar will come with service.jar.fsv_meta in the same
+# directory; the file information will also be included in
+# /system/etc/security/fsverity/BuildManifest.apk
+_product_single_value_vars += PRODUCT_FSVERITY_GENERATE_METADATA
 
 # If true, sets the default for MODULE_BUILD_FROM_SOURCE. This overrides
 # BRANCH_DEFAULT_MODULE_BUILD_FROM_SOURCE but not an explicitly set value.
