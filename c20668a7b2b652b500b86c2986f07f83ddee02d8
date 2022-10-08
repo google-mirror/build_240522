@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38c53dfb_e097fb7a",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-10-08T15:11:17Z",
+      "side": 1,
+      "message": "execute",
+      "range": {
+        "startLine": 1353,
+        "startChar": 57,
+        "endLine": 1353,
+        "endChar": 63
+      },
+      "revId": "c20668a7b2b652b500b86c2986f07f83ddee02d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
