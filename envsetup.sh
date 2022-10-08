@@ -10,7 +10,8 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
               invocations of 'm' etc.
 - tapas:      tapas [<App1> <App2> ...] [arm|x86|arm64|x86_64] [eng|userdebug|user]
               Sets up the build environment for building unbundled apps (APKs).
-- banchan:    banchan <module1> [<module2> ...] [arm|x86|arm64|x86_64] [eng|userdebug|user]
+- banchan:    banchan <module1> [<module2> ...] [arm|x86|arm64|x86_64|arm64_only|x86_64only] \
+                      [eng|userdebug|user]
               Sets up the build environment for building unbundled modules (APEXes).
 - croot:      Changes directory to the top of the tree, or a subdirectory thereof.
 - m:          Makes from the top of the tree.
@@ -37,6 +38,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - godir:      Go to the directory containing a file.
 - allmod:     List all modules.
 - gomod:      Go to the directory containing a module.
+- bmod:       Get the Bazel label of a Soong module if it is converted with bp2build.
 - pathmod:    Get the directory containing a module.
 - outmod:     Gets the location of a module's installed outputs with a certain extension.
 - dirmods:    Gets the modules defined in a given directory.
@@ -204,41 +206,6 @@ function setpaths()
     fi
 
     # and in with the new
-    local prebuiltdir=$(getprebuilt)
-    local gccprebuiltdir=$(get_abs_build_var ANDROID_GCC_PREBUILTS)
-
-    # defined in core/config.mk
-    local targetgccversion=$(get_build_var TARGET_GCC_VERSION)
-    local targetgccversion2=$(get_build_var 2ND_TARGET_GCC_VERSION)
-    export TARGET_GCC_VERSION=$targetgccversion
-
-    # The gcc toolchain does not exists for windows/cygwin. In this case, do not reference it.
-    export ANDROID_TOOLCHAIN=
-    export ANDROID_TOOLCHAIN_2ND_ARCH=
-    local ARCH=$(get_build_var TARGET_ARCH)
-    local toolchaindir toolchaindir2=
-    case $ARCH in
-        x86) toolchaindir=x86/x86_64-linux-android-$targetgccversion/bin
-            ;;
-        x86_64) toolchaindir=x86/x86_64-linux-android-$targetgccversion/bin
-            ;;
-        arm) toolchaindir=arm/arm-linux-androideabi-$targetgccversion/bin
-            ;;
-        arm64) toolchaindir=aarch64/aarch64-linux-android-$targetgccversion/bin;
-               toolchaindir2=arm/arm-linux-androideabi-$targetgccversion2/bin
-            ;;
-        *)
-            echo "Can't find toolchain for unknown architecture: $ARCH"
-            toolchaindir=xxxxxxxxx
-            ;;
-    esac
-    if [ -d "$gccprebuiltdir/$toolchaindir" ]; then
-        export ANDROID_TOOLCHAIN=$gccprebuiltdir/$toolchaindir
-    fi
-
-    if [ "$toolchaindir2" -a -d "$gccprebuiltdir/$toolchaindir2" ]; then
-        export ANDROID_TOOLCHAIN_2ND_ARCH=$gccprebuiltdir/$toolchaindir2
-    fi
 
     export ANDROID_DEV_SCRIPTS=$T/development/scripts:$T/prebuilts/devtools/tools
 
@@ -251,8 +218,7 @@ function setpaths()
             ;;
     esac
 
-    ANDROID_BUILD_PATHS=$(get_build_var ANDROID_BUILD_PATHS):$ANDROID_TOOLCHAIN
-    ANDROID_BUILD_PATHS=$ANDROID_BUILD_PATHS:$ANDROID_TOOLCHAIN_2ND_ARCH
+    ANDROID_BUILD_PATHS=$(get_build_var ANDROID_BUILD_PATHS)
     ANDROID_BUILD_PATHS=$ANDROID_BUILD_PATHS:$ANDROID_DEV_SCRIPTS
 
     # Append llvm binutils prebuilts path to ANDROID_BUILD_PATHS.
@@ -360,8 +326,6 @@ function set_stuff_for_environment()
     set_sequence_number
 
     export ANDROID_BUILD_TOP=$(gettop)
-    # With this environment variable new GCC can apply colors to warnings/errors
-    export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 }
 
 function set_sequence_number()
@@ -398,6 +362,7 @@ function addcompletions()
       packages/modules/adb/adb.bash
       system/core/fastboot/fastboot.bash
       tools/asuite/asuite.sh
+      prebuilts/bazel/common/bazel-complete.bash
     )
     # Completion can be disabled selectively to allow users to use non-standard completion.
     # e.g.
@@ -419,6 +384,8 @@ function addcompletions()
     if [ -z "$ZSH_VERSION" ]; then
         # Doesn't work in zsh.
         complete -o nospace -F _croot croot
+        # TODO(b/244559459): Support b autocompletion for zsh
+        complete -F _bazel__complete -o nospace b
     fi
     complete -F _lunch lunch
 
@@ -426,6 +393,7 @@ function addcompletions()
     complete -F _complete_android_module_names gomod
     complete -F _complete_android_module_names outmod
     complete -F _complete_android_module_names installmod
+    complete -F _complete_android_module_names bmod
     complete -F _complete_android_module_names m
 }
 
@@ -459,7 +427,7 @@ function multitree_lunch()
     # message, instead of FileNotFound.
     local T=$(multitree_gettop)
     if [ -n "$T" ]; then
-      "$T/build/build/make/orchestrator/core/orchestrator.py" "$@"
+      "$T/orchestrator/build/orchestrator/core/orchestrator.py" "$@"
     else
       _multitree_lunch_error
       return 1
@@ -467,7 +435,7 @@ function multitree_lunch()
     if $(echo "$1" | grep -q '^-') ; then
         # Calls starting with a -- argument are passed directly and the function
         # returns with the lunch.py exit code.
-        "${T}/build/build/make/orchestrator/core/lunch.py" "$@"
+        "${T}/orchestrator/build/orchestrator/core/lunch.py" "$@"
         code=$?
         if [[ $code -eq 2 ]] ; then
           echo 1>&2
@@ -478,7 +446,7 @@ function multitree_lunch()
         fi
     else
         # All other calls go through the --lunch variant of lunch.py
-        results=($(${T}/build/build/make/orchestrator/core/lunch.py --lunch "$@"))
+        results=($(${T}/orchestrator/build/orchestrator/core/lunch.py --lunch "$@"))
         code=$?
         if [[ $code -eq 2 ]] ; then
           echo 1>&2
@@ -799,6 +767,10 @@ function lunch()
     set_stuff_for_environment
     [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || printconfig
     destroy_build_var_cache
+
+    if [[ -n "${CHECK_MU_CONFIG:-}" ]]; then
+      check_mu_config
+    fi
 }
 
 unset COMMON_LUNCH_CHOICES_CACHE
@@ -889,7 +861,7 @@ function tapas()
 function banchan()
 {
     local showHelp="$(echo $* | xargs -n 1 echo | \grep -E '^(help)$' | xargs)"
-    local product="$(echo $* | xargs -n 1 echo | \grep -E '^(.*_)?(arm|x86|arm64|x86_64)$' | xargs)"
+    local product="$(echo $* | xargs -n 1 echo | \grep -E '^(.*_)?(arm|x86|arm64|x86_64|arm64only|x86_64only)$' | xargs)"
     local variant="$(echo $* | xargs -n 1 echo | \grep -E '^(user|userdebug|eng)$' | xargs)"
     local apps="$(echo $* | xargs -n 1 echo | \grep -E -v '^(user|userdebug|eng|(.*_)?(arm|x86|arm64|x86_64))$' | xargs)"
 
@@ -918,6 +890,8 @@ function banchan()
       x86)    product=module_x86;;
       arm64)  product=module_arm64;;
       x86_64) product=module_x86_64;;
+      arm64only)  product=module_arm64only;;
+      x86_64only) product=module_x86_64only;;
     esac
     if [ -z "$variant" ]; then
         variant=eng
@@ -968,7 +942,7 @@ function gettop
 # TODO: Merge into gettop as part of launching multitree
 function multitree_gettop
 {
-    local TOPFILE=build/build/make/core/envsetup.mk
+    local TOPFILE=orchestrator/build/make/core/envsetup.mk
     if [ -n "$TOP" -a -f "$TOP/$TOPFILE" ] ; then
         # The following circumlocution ensures we remove symlinks from TOP.
         (cd "$TOP"; PWD= /bin/pwd)
@@ -1065,7 +1039,7 @@ function qpid() {
 # Easy way to make system.img/etc writable
 function syswrite() {
   adb wait-for-device && adb root || return 1
-  if [[ $(adb disable-verity | grep "reboot") ]]; then
+  if [[ $(adb disable-verity | grep -i "reboot") ]]; then
       echo "rebooting"
       adb reboot && adb wait-for-device && adb root || return 1
   fi
@@ -1598,6 +1572,43 @@ function allmod() {
     python3 -c "import json; print('\n'.join(sorted(json.load(open('$ANDROID_PRODUCT_OUT/module-info.json')).keys())))"
 }
 
+# Return the Bazel label of a Soong module if it is converted with bp2build.
+function bmod()
+(
+    if [ $# -ne 1 ]; then
+        echo "usage: bmod <module>" >&2
+        return 1
+    fi
+
+    # We could run bp2build here, but it might trigger bp2build invalidation
+    # when used with `b` (e.g. --run_soong_tests) and/or add unnecessary waiting
+    # time overhead.
+    #
+    # For a snappy result, use the latest generated version in soong_injection,
+    # and ask users to run m bp2build if it doesn't exist.
+    converted_json="out/soong/soong_injection/metrics/converted_modules_path_map.json"
+
+    if [ ! -f $(gettop)/${converted_json} ]; then
+      echo "bp2build files not found. Have you ran 'm bp2build'?" >&2
+      return 1
+    fi
+
+    local target_label=$(python3 -c "import json
+module = '$1'
+converted_json='$converted_json'
+bp2build_converted_map = json.load(open(converted_json))
+if module not in bp2build_converted_map:
+    exit(1)
+print(bp2build_converted_map[module] + ':' + module)")
+
+    if [ -z "${target_label}" ]; then
+      echo "$1 is not converted to Bazel." >&2
+      return 1
+    else
+      echo "${target_label}"
+    fi
+)
+
 # Get the path of a specific module in the android tree, as cached in module-info.json.
 # If any build change is made, and it should be reflected in the output, you should run
 # 'refreshmod' first.  Note: This is the inverse of dirmods.
@@ -1834,15 +1845,53 @@ function _trigger_build()
 # Convenience entry point (like m) to use Bazel in AOSP.
 function b()
 (
+    # zsh breaks posix by not doing string-splitting on unquoted args by default.
+    # See https://zsh.sourceforge.io/Guide/zshguide05.html section 5.4.4.
+    # Tell it to emulate Bourne shell for this function.
+    if [ -n "$ZSH_VERSION" ]; then emulate -L sh; fi
+
+    # Look for the --run-soong-tests flag and skip passing --skip-soong-tests to Soong if present
+    local bazel_args=""
+    local skip_tests="--skip-soong-tests"
+    for i in $@; do
+        if [[ $i != "--run-soong-tests" ]]; then
+            bazel_args+="$i "
+        else
+            skip_tests=""
+        fi
+    done
+
     # Generate BUILD, bzl files into the synthetic Bazel workspace (out/soong/workspace).
-    _trigger_build "all-modules" bp2build USE_BAZEL_ANALYSIS= || return 1
+    # RBE is disabled because it's not used with b builds and adds overhead: b/251441524
+    USE_RBE=false _trigger_build "all-modules" bp2build $skip_tests USE_BAZEL_ANALYSIS= || return 1
     # Then, run Bazel using the synthetic workspace as the --package_path.
-    if [[ -z "$@" ]]; then
-        # If there are no args, show help.
+    if [[ -z "$bazel_args" ]]; then
+        # If there are no args, show help and exit.
         bazel help
     else
         # Else, always run with the bp2build configuration, which sets Bazel's package path to the synthetic workspace.
-        bazel "$@" --config=bp2build
+        # Add the --config=bp2build after the first argument that doesn't start with a dash. That should be the bazel
+        # command. (build, test, run, ect) If the --config was added at the end, it wouldn't work with commands like:
+        # b run //foo -- --args-for-foo
+        local config_set=0
+
+        # Represent the args as an array, not a string.
+        local bazel_args_with_config=()
+        for arg in $bazel_args; do
+            if [[ $arg == "--" && $config_set -ne 1 ]]; # if we find --, insert config argument here
+            then
+                bazel_args_with_config+=("--config=bp2build -- ")
+                config_set=1
+            else
+                bazel_args_with_config+=("$arg ")
+            fi
+        done
+        if [[ $config_set -ne 1 ]]; then
+            bazel_args_with_config+=("--config=bp2build ")
+        fi
+
+        # Call Bazel.
+        bazel ${bazel_args_with_config[@]}
     fi
 )
 
@@ -1885,7 +1934,7 @@ function multitree_build()
 {
     local T=$(multitree_gettop)
     if [ -n "$T" ]; then
-      "$T/build/build/make/orchestrator/core/orchestrator.py" "$@"
+      "$T/orchestrator/build/orchestrator/core/orchestrator.py" "$@"
     else
       _multitree_lunch_error
       return 1
@@ -2012,6 +2061,13 @@ function showcommands() {
           -f $OUT_DIR/combined-${TARGET_PRODUCT}.ninja \
           -t commands "$@")
     fi
+}
+
+function avbtool() {
+    if [[ ! -f "$ANDROID_SOONG_HOST_OUT"/bin/avbtool ]]; then
+        m avbtool
+    fi
+    "$ANDROID_SOONG_HOST_OUT"/bin/avbtool $@
 }
 
 validate_current_shell

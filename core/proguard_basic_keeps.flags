@@ -53,7 +53,7 @@
 # -keep class * extends android.app.BackupAgent
 
 # Parcelable CREATORs must be kept for Parcelable functionality
--keep class * implements android.os.Parcelable {
+-keepclassmembers class * implements android.os.Parcelable {
   public static final ** CREATOR;
 }
 
@@ -74,6 +74,19 @@
 # Futures.getChecked (which often won't work with Proguard anyway) uses this. It
 # has a fallback, but again, don't use Futures.getChecked on Android regardless.
 -dontwarn java.lang.ClassValue
+
+# Ignore missing annotation references for various support libraries.
+# While this is not ideal, it should be relatively safe given that
+# 1) runtime-visible annotations will still be kept, and 2) compile-time
+# annotations are stripped by R8 anyway.
+# Note: The ** prefix is used to accommodate jarjar repackaging.
+# TODO(b/242088131): Remove these exemptions after resolving transitive libs
+# dependencies that are provided to R8.
+-dontwarn **android**.annotation*.**
+-dontwarn **com.google.errorprone.annotations.**
+-dontwarn javax.annotation.**
+-dontwarn org.checkerframework.**
+-dontwarn org.jetbrains.annotations.**
 
 # Less spammy.
 -dontnote
