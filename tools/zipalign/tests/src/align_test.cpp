@@ -12,6 +12,51 @@
 using namespace android;
 using namespace base;
 
+// This load the whole file to memory so be careful!
+static bool sameContent(const std::string& path1, const std::string& path2) {
+  printf("%s\n",path1.c_str());
+  printf("%s\n",path2.c_str());
+    FILE* f1 = fopen(path1.c_str(), "r");
+    if (f1 == nullptr) {
+      printf("Unable to open `%s`\n", path1.c_str());
+      return false;
+    }
+
+    FILE* f2 = fopen(path2.c_str(), "r");
+    if (f2 == nullptr) {
+      fclose(f1);
+      printf("Unable to open `%s`\n", path2.c_str());
+      return false;
+    }
+
+    fseek(f1, 0, SEEK_END);
+    int f1Size = ftell(f1);
+    fseek(f1, 0, SEEK_SET);
+
+    fseek(f2, 0, SEEK_END);
+    int f2Size = ftell(f2);
+    fseek(f2, 0, SEEK_SET);
+
+    if (f1Size != f2Size) {
+        printf("File '%s' and '%s' are not the same\n", path1.c_str(), path2.c_str());
+        return false;
+    }
+
+    char* f1Content = (char*)malloc(f1Size);
+    fread(f1Content, f1Size, 1, f1);
+    fclose(f1);
+
+    char* f2Content = (char*)malloc(f2Size);
+    fread(f2Content, f2Size, 1, f2);
+    fclose(f2);
+
+    int diff = memcmp(f1Content, f2Content, f1Size);
+
+    delete f1Content;
+    delete f2Content;
+    return diff == 0;
+}
+
 static std::string GetTestPath(const std::string& filename) {
   static std::string test_data_dir = android::base::GetExecutableDirectory() + "/tests/data/";
   return test_data_dir + filename;
@@ -83,6 +128,24 @@ TEST(Align, DifferenteOrders) {
 
   int processed = process(src.c_str(), dst.c_str(), 4, true, false, 4096);
   ASSERT_EQ(0, processed);
+
+  int verified = verify(dst.c_str(), 4, false, true);
+  ASSERT_EQ(0, verified);
+}
+
+TEST(Align, DirectoryEntryDoNotRequireAlignment) {
+  const std::string src = GetTestPath("archiveWithOneDirectoryEntry.zip");
+  int verified = verify(src.c_str(), 4, false, true);
+  ASSERT_EQ(0, verified);
+}
+
+TEST(Align, DirectoryEntry) {
+  const std::string src = GetTestPath("archiveWithOneDirectoryEntry.zip");
+  const std::string dst = GetTempPath("archiveWithOneDirectoryEntry_out.zip");
+
+  int processed = process(src.c_str(), dst.c_str(), 4, true, false, 4096);
+  ASSERT_EQ(0, processed);
+  ASSERT_EQ(true, sameContent(src, dst));
 
   int verified = verify(dst.c_str(), 4, false, true);
   ASSERT_EQ(0, verified);

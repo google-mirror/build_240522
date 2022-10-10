@@ -73,6 +73,7 @@ cc_test_host {
          "tests/data/diffOrders.zip",
          "tests/data/holes.zip",
          "tests/data/unaligned.zip",
+         "tests/data/archiveWithOneDirectoryEntry.zip"
     ],
     defaults: ["zipalign_defaults"],
     test_suites: ["general-tests"],
