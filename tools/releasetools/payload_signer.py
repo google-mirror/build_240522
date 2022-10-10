@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from importlib.metadata import metadata
+import zipfile
 import common
 import logging
 from common import OPTIONS
@@ -120,3 +122,19 @@ class PayloadSigner(object):
     cmd = [self.signer] + self.signer_args + ['-in', in_file, '-out', out_file]
     common.RunAndCheckOutput(cmd)
     return out_file
+
+
+import ota_utils
+import ota_metadata_pb2
+
+def main(argv):
+  path = argv[1]
+  metadata = ota_metadata_pb2.OtaMetadata()
+  with zipfile.ZipFile(path, 'r', allowZip64=True) as zfp:
+    blob = zfp.read(ota_utils.METADATA_PROTO_NAME)
+    metadata.ParseFromString(blob)
+  ota_utils.FinalizeMetadata(metadata, path, "/tmp/signed_ota.zip")
+
+if __name__ == '__main__':
+  import sys
+  sys.exit(main(sys.argv))
