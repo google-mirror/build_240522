@@ -2868,23 +2868,27 @@ def ZipWriteStr(zip_file, zinfo_or_arcname, data, perms=None,
 def ZipDelete(zip_filename, entries):
   """Deletes entries from a ZIP file.
 
-  Since deleting entries from a ZIP file is not supported, it shells out to
-  'zip -d'.
-
   Args:
     zip_filename: The name of the ZIP file.
     entries: The name of the entry, or the list of names to be deleted.
-
-  Raises:
-    AssertionError: In case of non-zero return from 'zip'.
   """
   if isinstance(entries, str):
     entries = [entries]
   # If list is empty, nothing to do
   if not entries:
     return
-  cmd = ["zip", "-d", zip_filename] + entries
-  RunAndCheckOutput(cmd)
+
+  zin = zipfile.ZipFile(zip_filename, 'r')
+  _, new_zipfile = tempfile.mkstemp(dir=os.path.dirname(zip_filename))
+  zout = zipfile.ZipFile(new_zipfile, 'w')
+  for item in zin.infolist():
+    buffer = zin.read(item.filename)
+    if (not item.filename in entries):
+      zout.writestr(item, buffer)
+  zout.close()
+  zin.close()
+  os.remove(zip_filename)
+  os.rename(new_zipfile, zip_filename)
 
 
 def ZipClose(zip_file):
