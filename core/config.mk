@@ -926,6 +926,219 @@ PLATFORM_SEPOLICY_COMPAT_VERSIONS := \
     PLATFORM_SEPOLICY_VERSION \
     TOT_SEPOLICY_VERSION \
 
+<<<<<<< HEAD   (57df88 Merge "Merge empty history for sparse-9144638-L3330000095670)
+=======
+ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
+  ifneq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+    $(error PRODUCT_USE_DYNAMIC_PARTITIONS must be true when PRODUCT_RETROFIT_DYNAMIC_PARTITIONS \
+        is set)
+  endif
+  ifdef PRODUCT_SHIPPING_API_LEVEL
+    ifeq (true,$(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),29))
+      $(error Devices with shipping API level $(PRODUCT_SHIPPING_API_LEVEL) must not set \
+          PRODUCT_RETROFIT_DYNAMIC_PARTITIONS)
+    endif
+  endif
+endif
+
+# TODO(b/241346584): Mark BOARD_BUILD_SYSTEM_ROOT_IMAGE as KATI_obsolete_var after all users are removed
+ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+    $(error BOARD_BUILD_SYSTEM_ROOT_IMAGE is deprecated)
+endif
+
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+    ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE),true)
+        $(error BOARD_BUILD_SYSTEM_ROOT_IMAGE cannot be true for devices with dynamic partitions)
+    endif
+    ifneq ($(PRODUCT_USE_DYNAMIC_PARTITION_SIZE),true)
+        $(error PRODUCT_USE_DYNAMIC_PARTITION_SIZE must be true for devices with dynamic partitions)
+    endif
+endif
+
+ifeq ($(PRODUCT_BUILD_SUPER_PARTITION),true)
+    ifneq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+        $(error Can only build super partition for devices with dynamic partitions)
+    endif
+endif
+
+
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITION_SIZE),true)
+
+ifneq ($(BOARD_SYSTEMIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_SYSTEMIMAGE_PARTITION_SIZE and \
+    BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_VENDORIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_VENDORIMAGE_PARTITION_SIZE and \
+    BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_ODMIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_ODMIMAGE_PARTITION_SIZE and \
+    BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_VENDOR_DLKMIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_VENDOR_DLKMIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_VENDOR_DLKMIMAGE_PARTITION_SIZE and \
+    BOARD_VENDOR_DLKMIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_ODM_DLKMIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_ODM_DLKMIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_ODM_DLKMIMAGE_PARTITION_SIZE and \
+    BOARD_ODM_DLKMIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_SYSTEM_DLKMIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_SYSTEM_DLKMIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_SYSTEM_DLKMIMAGE_PARTITION_SIZE and \
+    BOARD_SYSTEM_DLKMIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_PRODUCTIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_PRODUCTIMAGE_PARTITION_SIZE and \
+    BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+ifneq ($(BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE),)
+ifneq ($(BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE),)
+$(error Should not define BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE and \
+    BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE together)
+endif
+endif
+
+endif # PRODUCT_USE_DYNAMIC_PARTITION_SIZE
+
+ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+
+# BOARD_SUPER_PARTITION_GROUPS defines a list of "updatable groups". Each updatable group is a
+# group of partitions that share the same pool of free spaces.
+# For each group in BOARD_SUPER_PARTITION_GROUPS, a BOARD_{GROUP}_SIZE and
+# BOARD_{GROUP}_PARTITION_PARTITION_LIST may be defined.
+#     - BOARD_{GROUP}_SIZE: The maximum sum of sizes of all partitions in the group.
+#       Must not be empty.
+#     - BOARD_{GROUP}_PARTITION_PARTITION_LIST: the list of partitions that belongs to this group.
+#       If empty, no partitions belong to this group, and the sum of sizes is effectively 0.
+$(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
+    $(eval BOARD_$(group)_SIZE := $(strip $(BOARD_$(group)_SIZE))) \
+    $(if $(BOARD_$(group)_SIZE),,$(error BOARD_$(group)_SIZE must not be empty)) \
+    $(eval .KATI_READONLY := BOARD_$(group)_SIZE) \
+    $(eval BOARD_$(group)_PARTITION_LIST ?=) \
+    $(eval .KATI_READONLY := BOARD_$(group)_PARTITION_LIST) \
+)
+
+# Define BOARD_SUPER_PARTITION_PARTITION_LIST, the sum of all BOARD_*_PARTITION_LIST
+ifdef BOARD_SUPER_PARTITION_PARTITION_LIST
+$(error BOARD_SUPER_PARTITION_PARTITION_LIST should not be defined, but computed from \
+    BOARD_SUPER_PARTITION_GROUPS and BOARD_*_PARTITION_LIST)
+endif
+BOARD_SUPER_PARTITION_PARTITION_LIST := \
+    $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)),$(BOARD_$(group)_PARTITION_LIST))
+.KATI_READONLY := BOARD_SUPER_PARTITION_PARTITION_LIST
+
+ifneq ($(BOARD_SUPER_PARTITION_SIZE),)
+ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
+
+# The metadata device must be specified manually for retrofitting.
+ifeq ($(BOARD_SUPER_PARTITION_METADATA_DEVICE),)
+$(error Must specify BOARD_SUPER_PARTITION_METADATA_DEVICE if PRODUCT_RETROFIT_DYNAMIC_PARTITIONS=true.)
+endif
+
+# The super partition block device list must be specified manually for retrofitting.
+ifeq ($(BOARD_SUPER_PARTITION_BLOCK_DEVICES),)
+$(error Must specify BOARD_SUPER_PARTITION_BLOCK_DEVICES if PRODUCT_RETROFIT_DYNAMIC_PARTITIONS=true.)
+endif
+
+# The metadata device must be included in the super partition block device list.
+ifeq (,$(filter $(BOARD_SUPER_PARTITION_METADATA_DEVICE),$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)))
+$(error BOARD_SUPER_PARTITION_METADATA_DEVICE is not listed in BOARD_SUPER_PARTITION_BLOCK_DEVICES.)
+endif
+
+# The metadata device must be supplied to init via the kernel command-line.
+INTERNAL_KERNEL_CMDLINE += androidboot.super_partition=$(BOARD_SUPER_PARTITION_METADATA_DEVICE)
+
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE := true
+
+# If "vendor" is listed as one of the dynamic partitions but without its image available (e.g. an
+# AOSP target built without vendor image), don't build the retrofit full OTA package. Because we
+# won't be able to build meaningful super_* images for retrofitting purpose.
+ifneq (,$(filter vendor,$(BOARD_SUPER_PARTITION_PARTITION_LIST)))
+ifndef BUILDING_VENDOR_IMAGE
+ifndef BOARD_PREBUILT_VENDORIMAGE
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE :=
+endif # BOARD_PREBUILT_VENDORIMAGE
+endif # BUILDING_VENDOR_IMAGE
+endif # BOARD_SUPER_PARTITION_PARTITION_LIST
+
+else # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
+
+# For normal devices, we populate BOARD_SUPER_PARTITION_BLOCK_DEVICES so the
+# build can handle both cases consistently.
+ifeq ($(BOARD_SUPER_PARTITION_METADATA_DEVICE),)
+BOARD_SUPER_PARTITION_METADATA_DEVICE := super
+endif
+
+ifeq ($(BOARD_SUPER_PARTITION_BLOCK_DEVICES),)
+BOARD_SUPER_PARTITION_BLOCK_DEVICES := $(BOARD_SUPER_PARTITION_METADATA_DEVICE)
+endif
+
+# If only one super block device, default to super partition size.
+ifeq ($(word 2,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)),)
+BOARD_SUPER_PARTITION_$(call to-upper,$(strip $(BOARD_SUPER_PARTITION_BLOCK_DEVICES)))_DEVICE_SIZE ?= \
+    $(BOARD_SUPER_PARTITION_SIZE)
+endif
+
+ifneq ($(BOARD_SUPER_PARTITION_METADATA_DEVICE),super)
+INTERNAL_KERNEL_CMDLINE += androidboot.super_partition=$(BOARD_SUPER_PARTITION_METADATA_DEVICE)
+endif
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE :=
+
+endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
+endif # BOARD_SUPER_PARTITION_SIZE
+BOARD_SUPER_PARTITION_BLOCK_DEVICES ?=
+.KATI_READONLY := BOARD_SUPER_PARTITION_BLOCK_DEVICES
+BOARD_SUPER_PARTITION_METADATA_DEVICE ?=
+.KATI_READONLY := BOARD_SUPER_PARTITION_METADATA_DEVICE
+BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE ?=
+.KATI_READONLY := BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE
+
+$(foreach device,$(call to-upper,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)), \
+    $(eval BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE := $(strip $(BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE))) \
+    $(if $(BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE),, \
+        $(error BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE must not be empty)) \
+    $(eval .KATI_READONLY := BOARD_SUPER_PARTITION_$(device)_DEVICE_SIZE))
+
+endif # PRODUCT_USE_DYNAMIC_PARTITIONS
+
+# By default, we build the hidden API csv files from source. You can use
+# prebuilt hiddenapi files by setting BOARD_PREBUILT_HIDDENAPI_DIR to the name
+# of a directory containing both prebuilt hiddenapi-flags.csv and
+# hiddenapi-index.csv.
+BOARD_PREBUILT_HIDDENAPI_DIR ?=
+.KATI_READONLY := BOARD_PREBUILT_HIDDENAPI_DIR
+
+ifdef USE_HOST_MUSL
+  ifneq (,$(or $(BUILD_BROKEN_USES_BUILD_HOST_EXECUTABLE),\
+               $(BUILD_BROKEN_USES_BUILD_HOST_SHARED_LIBRARY),\
+               $(BUILD_BROKEN_USES_BUILD_HOST_STATIC_LIBRARY)))
+    $(error USE_HOST_MUSL can't be set when native host builds are enabled in Make with BUILD_BROKEN_USES_BUILD_HOST_*)
+  endif
+endif
+
+>>>>>>> BRANCH (8db85e Merge "Version bump to TKB1.221010.001.A1 [core/build_id.mk])
 # ###############################################################
 # Set up final options.
 # ###############################################################

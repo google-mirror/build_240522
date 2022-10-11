@@ -28,8 +28,12 @@ PARSE_TIME_MAKE_GOALS := \
 	custom_images \
 	deps-license \
 	dicttool_aosp \
+<<<<<<< HEAD   (57df88 Merge "Merge empty history for sparse-9144638-L3330000095670)
 	dist \
 	dump-products \
+=======
+	docs \
+>>>>>>> BRANCH (8db85e Merge "Version bump to TKB1.221010.001.A1 [core/build_id.mk])
 	eng \
 	fusion \
 	oem_image \

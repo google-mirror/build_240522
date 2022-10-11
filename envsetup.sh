@@ -4,6 +4,7 @@ cat <<EOF
 Run "m help" for help with the build system itself.
 
 Invoke ". build/envsetup.sh" from your shell to add the following functions to your environment:
+<<<<<<< HEAD   (57df88 Merge "Merge empty history for sparse-9144638-L3330000095670)
 - lunch:     lunch <product_name>-<build_variant>
              Selects <product_name> as the product to build, and <build_variant> as the variant to
              build, and stores those selections in the environment to be read by subsequent
@@ -26,6 +27,49 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - sepgrep:   Greps on all local sepolicy files.
 - sgrep:     Greps on all local source files.
 - godir:     Go to the directory containing a file.
+=======
+- lunch:      lunch <product_name>-<build_variant>
+              Selects <product_name> as the product to build, and <build_variant> as the variant to
+              build, and stores those selections in the environment to be read by subsequent
+              invocations of 'm' etc.
+- tapas:      tapas [<App1> <App2> ...] [arm|x86|arm64|x86_64] [eng|userdebug|user]
+              Sets up the build environment for building unbundled apps (APKs).
+- banchan:    banchan <module1> [<module2> ...] [arm|x86|arm64|x86_64|arm64_only|x86_64only] \
+                      [eng|userdebug|user]
+              Sets up the build environment for building unbundled modules (APEXes).
+- croot:      Changes directory to the top of the tree, or a subdirectory thereof.
+- m:          Makes from the top of the tree.
+- mm:         Builds and installs all of the modules in the current directory, and their
+              dependencies.
+- mmm:        Builds and installs all of the modules in the supplied directories, and their
+              dependencies.
+              To limit the modules being built use the syntax: mmm dir/:target1,target2.
+- mma:        Same as 'mm'
+- mmma:       Same as 'mmm'
+- provision:  Flash device with all required partitions. Options will be passed on to fastboot.
+- cgrep:      Greps on all local C/C++ files.
+- ggrep:      Greps on all local Gradle files.
+- gogrep:     Greps on all local Go files.
+- jgrep:      Greps on all local Java files.
+- ktgrep:     Greps on all local Kotlin files.
+- resgrep:    Greps on all local res/*.xml files.
+- mangrep:    Greps on all local AndroidManifest.xml files.
+- mgrep:      Greps on all local Makefiles and *.bp files.
+- owngrep:    Greps on all local OWNERS files.
+- rsgrep:     Greps on all local Rust files.
+- sepgrep:    Greps on all local sepolicy files.
+- sgrep:      Greps on all local source files.
+- godir:      Go to the directory containing a file.
+- allmod:     List all modules.
+- gomod:      Go to the directory containing a module.
+- bmod:       Get the Bazel label of a Soong module if it is converted with bp2build.
+- pathmod:    Get the directory containing a module.
+- outmod:     Gets the location of a module's installed outputs with a certain extension.
+- dirmods:    Gets the modules defined in a given directory.
+- installmod: Adb installs a module's built APK.
+- refreshmod: Refresh list of modules for allmod/gomod/pathmod/outmod/installmod.
+- syswrite:   Remount partitions (e.g. system.img) as writable, rebooting if necessary.
+>>>>>>> BRANCH (8db85e Merge "Version bump to TKB1.221010.001.A1 [core/build_id.mk])
 
 Environment options:
 - SANITIZE_HOST: Set to 'true' to use ASAN for all host modules. Note that
@@ -358,7 +402,80 @@ function addcompletions()
         done
     fi
 
+<<<<<<< HEAD   (57df88 Merge "Merge empty history for sparse-9144638-L3330000095670)
     complete -C "bit --tab" bit
+=======
+    complete -F _complete_android_module_names pathmod
+    complete -F _complete_android_module_names gomod
+    complete -F _complete_android_module_names outmod
+    complete -F _complete_android_module_names installmod
+    complete -F _complete_android_module_names bmod
+    complete -F _complete_android_module_names m
+}
+
+function multitree_lunch_help()
+{
+    echo "usage: lunch PRODUCT-VARIANT" 1>&2
+    echo "    Set up android build environment based on a product short name and variant" 1>&2
+    echo 1>&2
+    echo "lunch COMBO_FILE VARIANT" 1>&2
+    echo "    Set up android build environment based on a specific lunch combo file" 1>&2
+    echo "    and variant." 1>&2
+    echo 1>&2
+    echo "lunch --print [CONFIG]" 1>&2
+    echo "    Print the contents of a configuration.  If CONFIG is supplied, that config" 1>&2
+    echo "    will be flattened and printed.  If CONFIG is not supplied, the currently" 1>&2
+    echo "    selected config will be printed.  Returns 0 on success or nonzero on error." 1>&2
+    echo 1>&2
+    echo "lunch --list" 1>&2
+    echo "    List all possible combo files available in the current tree" 1>&2
+    echo 1>&2
+    echo "lunch --help" 1>&2
+    echo "lunch -h" 1>&2
+    echo "    Prints this message." 1>&2
+}
+
+function multitree_lunch()
+{
+    local code
+    local results
+    # Lunch must be run in the topdir, but this way we get a clear error
+    # message, instead of FileNotFound.
+    local T=$(multitree_gettop)
+    if [ -n "$T" ]; then
+      "$T/orchestrator/build/orchestrator/core/orchestrator.py" "$@"
+    else
+      _multitree_lunch_error
+      return 1
+    fi
+    if $(echo "$1" | grep -q '^-') ; then
+        # Calls starting with a -- argument are passed directly and the function
+        # returns with the lunch.py exit code.
+        "${T}/orchestrator/build/orchestrator/core/lunch.py" "$@"
+        code=$?
+        if [[ $code -eq 2 ]] ; then
+          echo 1>&2
+          multitree_lunch_help
+          return $code
+        elif [[ $code -ne 0 ]] ; then
+          return $code
+        fi
+    else
+        # All other calls go through the --lunch variant of lunch.py
+        results=($(${T}/orchestrator/build/orchestrator/core/lunch.py --lunch "$@"))
+        code=$?
+        if [[ $code -eq 2 ]] ; then
+          echo 1>&2
+          multitree_lunch_help
+          return $code
+        elif [[ $code -ne 0 ]] ; then
+          return $code
+        fi
+
+        export TARGET_BUILD_COMBO=${results[0]}
+        export TARGET_BUILD_VARIANT=${results[1]}
+    fi
+>>>>>>> BRANCH (8db85e Merge "Version bump to TKB1.221010.001.A1 [core/build_id.mk])
 }
 
 function choosetype()
@@ -1528,6 +1645,230 @@ function godir () {
     \cd $T/$pathname
 }
 
+<<<<<<< HEAD   (57df88 Merge "Merge empty history for sparse-9144638-L3330000095670)
+=======
+# Update module-info.json in out.
+function refreshmod() {
+    if [ ! "$ANDROID_PRODUCT_OUT" ]; then
+        echo "No ANDROID_PRODUCT_OUT. Try running 'lunch' first." >&2
+        return 1
+    fi
+
+    echo "Refreshing modules (building module-info.json). Log at $ANDROID_PRODUCT_OUT/module-info.json.build.log." >&2
+
+    # for the output of the next command
+    mkdir -p $ANDROID_PRODUCT_OUT || return 1
+
+    # Note, can't use absolute path because of the way make works.
+    m $(get_build_var PRODUCT_OUT)/module-info.json \
+        > $ANDROID_PRODUCT_OUT/module-info.json.build.log 2>&1
+}
+
+# Verifies that module-info.txt exists, returning nonzero if it doesn't.
+function verifymodinfo() {
+    if [ ! "$ANDROID_PRODUCT_OUT" ]; then
+        if [ "$QUIET_VERIFYMODINFO" != "true" ] ; then
+            echo "No ANDROID_PRODUCT_OUT. Try running 'lunch' first." >&2
+        fi
+        return 1
+    fi
+
+    if [ ! -f "$ANDROID_PRODUCT_OUT/module-info.json" ]; then
+        if [ "$QUIET_VERIFYMODINFO" != "true" ] ; then
+            echo "Could not find module-info.json. Please run 'refreshmod' first." >&2
+        fi
+        return 1
+    fi
+}
+
+# List all modules for the current device, as cached in module-info.json. If any build change is
+# made and it should be reflected in the output, you should run 'refreshmod' first.
+function allmod() {
+    verifymodinfo || return 1
+
+    python3 -c "import json; print('\n'.join(sorted(json.load(open('$ANDROID_PRODUCT_OUT/module-info.json')).keys())))"
+}
+
+# Return the Bazel label of a Soong module if it is converted with bp2build.
+function bmod()
+(
+    if [ $# -ne 1 ]; then
+        echo "usage: bmod <module>" >&2
+        return 1
+    fi
+
+    # We could run bp2build here, but it might trigger bp2build invalidation
+    # when used with `b` (e.g. --run_soong_tests) and/or add unnecessary waiting
+    # time overhead.
+    #
+    # For a snappy result, use the latest generated version in soong_injection,
+    # and ask users to run m bp2build if it doesn't exist.
+    converted_json="out/soong/soong_injection/metrics/converted_modules_path_map.json"
+
+    if [ ! -f $(gettop)/${converted_json} ]; then
+      echo "bp2build files not found. Have you ran 'm bp2build'?" >&2
+      return 1
+    fi
+
+    local target_label=$(python3 -c "import json
+module = '$1'
+converted_json='$converted_json'
+bp2build_converted_map = json.load(open(converted_json))
+if module not in bp2build_converted_map:
+    exit(1)
+print(bp2build_converted_map[module] + ':' + module)")
+
+    if [ -z "${target_label}" ]; then
+      echo "$1 is not converted to Bazel." >&2
+      return 1
+    else
+      echo "${target_label}"
+    fi
+)
+
+# Get the path of a specific module in the android tree, as cached in module-info.json.
+# If any build change is made, and it should be reflected in the output, you should run
+# 'refreshmod' first.  Note: This is the inverse of dirmods.
+function pathmod() {
+    if [[ $# -ne 1 ]]; then
+        echo "usage: pathmod <module>" >&2
+        return 1
+    fi
+
+    verifymodinfo || return 1
+
+    local relpath=$(python3 -c "import json, os
+module = '$1'
+module_info = json.load(open('$ANDROID_PRODUCT_OUT/module-info.json'))
+if module not in module_info:
+    exit(1)
+print(module_info[module]['path'][0])" 2>/dev/null)
+
+    if [ -z "$relpath" ]; then
+        echo "Could not find module '$1' (try 'refreshmod' if there have been build changes?)." >&2
+        return 1
+    else
+        echo "$ANDROID_BUILD_TOP/$relpath"
+    fi
+}
+
+# Get the path of a specific module in the android tree, as cached in module-info.json.
+# If any build change is made, and it should be reflected in the output, you should run
+# 'refreshmod' first.  Note: This is the inverse of pathmod.
+function dirmods() {
+    if [[ $# -ne 1 ]]; then
+        echo "usage: dirmods <path>" >&2
+        return 1
+    fi
+
+    verifymodinfo || return 1
+
+    python3 -c "import json, os
+dir = '$1'
+while dir.endswith('/'):
+    dir = dir[:-1]
+prefix = dir + '/'
+module_info = json.load(open('$ANDROID_PRODUCT_OUT/module-info.json'))
+results = set()
+for m in module_info.values():
+    for path in m.get(u'path', []):
+        if path == dir or path.startswith(prefix):
+            name = m.get(u'module_name')
+            if name:
+                results.add(name)
+for name in sorted(results):
+    print(name)
+"
+}
+
+
+# Go to a specific module in the android tree, as cached in module-info.json. If any build change
+# is made, and it should be reflected in the output, you should run 'refreshmod' first.
+function gomod() {
+    if [[ $# -ne 1 ]]; then
+        echo "usage: gomod <module>" >&2
+        return 1
+    fi
+
+    local path="$(pathmod $@)"
+    if [ -z "$path" ]; then
+        return 1
+    fi
+    cd $path
+}
+
+# Gets the list of a module's installed outputs, as cached in module-info.json.
+# If any build change is made, and it should be reflected in the output, you should run 'refreshmod' first.
+function outmod() {
+    if [[ $# -ne 1 ]]; then
+        echo "usage: outmod <module>" >&2
+        return 1
+    fi
+
+    verifymodinfo || return 1
+
+    local relpath
+    relpath=$(python3 -c "import json, os
+module = '$1'
+module_info = json.load(open('$ANDROID_PRODUCT_OUT/module-info.json'))
+if module not in module_info:
+    exit(1)
+for output in module_info[module]['installed']:
+    print(os.path.join('$ANDROID_BUILD_TOP', output))" 2>/dev/null)
+
+    if [ $? -ne 0 ]; then
+        echo "Could not find module '$1' (try 'refreshmod' if there have been build changes?)" >&2
+        return 1
+    elif [ ! -z "$relpath" ]; then
+        echo "$relpath"
+    fi
+}
+
+# adb install a module's apk, as cached in module-info.json. If any build change
+# is made, and it should be reflected in the output, you should run 'refreshmod' first.
+# Usage: installmod [adb install arguments] <module>
+# For example: installmod -r Dialer -> adb install -r /path/to/Dialer.apk
+function installmod() {
+    if [[ $# -eq 0 ]]; then
+        echo "usage: installmod [adb install arguments] <module>" >&2
+        echo "" >&2
+        echo "Only flags to be passed after the \"install\" in adb install are supported," >&2
+        echo "with the exception of -s. If -s is passed it will be placed before the \"install\"." >&2
+        echo "-s must be the first flag passed if it exists." >&2
+        return 1
+    fi
+
+    local _path
+    _path=$(outmod ${@:$#:1})
+    if [ $? -ne 0 ]; then
+        return 1
+    fi
+
+    _path=$(echo "$_path" | grep -E \\.apk$ | head -n 1)
+    if [ -z "$_path" ]; then
+        echo "Module '$1' does not produce a file ending with .apk (try 'refreshmod' if there have been build changes?)" >&2
+        return 1
+    fi
+    local serial_device=""
+    if [[ "$1" == "-s" ]]; then
+        if [[ $# -le 2 ]]; then
+            echo "-s requires an argument" >&2
+            return 1
+        fi
+        serial_device="-s $2"
+        shift 2
+    fi
+    local length=$(( $# - 1 ))
+    echo adb $serial_device install ${@:1:$length} $_path
+    adb $serial_device install ${@:1:$length} $_path
+}
+
+function _complete_android_module_names() {
+    local word=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(QUIET_VERIFYMODINFO=true allmod | grep -E "^$word") )
+}
+
+>>>>>>> BRANCH (8db85e Merge "Version bump to TKB1.221010.001.A1 [core/build_id.mk])
 # Print colored exit condition
 function pez {
     "$@"
@@ -1596,6 +1937,99 @@ function _wrap_build()
     return $ret
 }
 
+<<<<<<< HEAD   (57df88 Merge "Merge empty history for sparse-9144638-L3330000095670)
+=======
+function _trigger_build()
+(
+    local -r bc="$1"; shift
+    local T=$(gettop)
+    if [ -n "$T" ]; then
+      _wrap_build "$T/build/soong/soong_ui.bash" --build-mode --${bc} --dir="$(pwd)" "$@"
+    else
+      >&2 echo "Couldn't locate the top of the tree. Try setting TOP."
+      return 1
+    fi
+)
+
+# Convenience entry point (like m) to use Bazel in AOSP.
+function b()
+(
+    # zsh breaks posix by not doing string-splitting on unquoted args by default.
+    # See https://zsh.sourceforge.io/Guide/zshguide05.html section 5.4.4.
+    # Tell it to emulate Bourne shell for this function.
+    if [ -n "$ZSH_VERSION" ]; then emulate -L sh; fi
+
+    # Look for the --run-soong-tests flag and skip passing --skip-soong-tests to Soong if present
+    local bazel_args=""
+    local skip_tests="--skip-soong-tests"
+    for i in $@; do
+        if [[ $i != "--run-soong-tests" ]]; then
+            bazel_args+="$i "
+        else
+            skip_tests=""
+        fi
+    done
+
+    # Generate BUILD, bzl files into the synthetic Bazel workspace (out/soong/workspace).
+    # RBE is disabled because it's not used with b builds and adds overhead: b/251441524
+    USE_RBE=false _trigger_build "all-modules" bp2build $skip_tests USE_BAZEL_ANALYSIS= || return 1
+    # Then, run Bazel using the synthetic workspace as the --package_path.
+    if [[ -z "$bazel_args" ]]; then
+        # If there are no args, show help and exit.
+        bazel help
+    else
+        # Else, always run with the bp2build configuration, which sets Bazel's package path to the synthetic workspace.
+        # Add the --config=bp2build after the first argument that doesn't start with a dash. That should be the bazel
+        # command. (build, test, run, ect) If the --config was added at the end, it wouldn't work with commands like:
+        # b run //foo -- --args-for-foo
+        local config_set=0
+
+        # Represent the args as an array, not a string.
+        local bazel_args_with_config=()
+        for arg in $bazel_args; do
+            if [[ $arg == "--" && $config_set -ne 1 ]]; # if we find --, insert config argument here
+            then
+                bazel_args_with_config+=("--config=bp2build -- ")
+                config_set=1
+            else
+                bazel_args_with_config+=("$arg ")
+            fi
+        done
+        if [[ $config_set -ne 1 ]]; then
+            bazel_args_with_config+=("--config=bp2build ")
+        fi
+
+        # Call Bazel.
+        bazel ${bazel_args_with_config[@]}
+    fi
+)
+
+function m()
+(
+    _trigger_build "all-modules" "$@"
+)
+
+function mm()
+(
+    _trigger_build "modules-in-a-dir-no-deps" "$@"
+)
+
+function mmm()
+(
+    _trigger_build "modules-in-dirs-no-deps" "$@"
+)
+
+function mma()
+(
+    _trigger_build "modules-in-a-dir" "$@"
+)
+
+function mmma()
+(
+    _trigger_build "modules-in-dirs" "$@"
+)
+
+>>>>>>> BRANCH (8db85e Merge "Version bump to TKB1.221010.001.A1 [core/build_id.mk])
 function make()
 {
     _wrap_build $(get_make_command "$@") "$@"

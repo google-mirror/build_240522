@@ -3284,8 +3284,60 @@ ifneq ($(sdk_repo_goal),)
 include $(TOPDIR)development/build/tools/sdk_repo.mk
 endif
 
+<<<<<<< HEAD   (57df88 Merge "Merge empty history for sparse-9144638-L3330000095670)
 #------------------------------------------------------------------
 # Find lsdump paths
 FIND_LSDUMPS_FILE := $(PRODUCT_OUT)/lsdump_paths.txt
 $(FIND_LSDUMPS_FILE) : $(LSDUMP_PATHS)
 	$(hide) rm -rf $@ && echo "$^" > $@
+=======
+# -----------------------------------------------------------------
+# Soong generates the list of all shared libraries that are depended on by fuzz
+# targets. It saves this list as a source:destination pair to
+# FUZZ_TARGET_SHARED_DEPS_INSTALL_PAIRS, where the source is the path to the
+# build of the unstripped shared library, and the destination is the
+# /data/fuzz/$ARCH/lib (for device) or /fuzz/$ARCH/lib (for host) directory
+# where fuzz target shared libraries are to be "reinstalled". The
+# copy-many-files below generates the rules to copy the unstripped shared
+# libraries to the device or host "reinstallation" directory. These rules are
+# depended on by each module in soong_cc_prebuilt.mk, where the module will have
+# a dependency on each shared library that it needs to be "reinstalled".
+FUZZ_SHARED_DEPS := $(call copy-many-files,$(strip $(FUZZ_TARGET_SHARED_DEPS_INSTALL_PAIRS)))
+
+# -----------------------------------------------------------------
+# The rule to build all fuzz targets for C++ and Rust, and package them.
+# Note: The packages are created in Soong, and in a perfect world,
+# we'd be able to create the phony rule there. But, if we want to
+# have dist goals for the fuzz target, we need to have the PHONY
+# target defined in make. MakeVarsContext.DistForGoal doesn't take
+# into account that a PHONY rule create by Soong won't be available
+# during make, and such will fail with `writing to readonly
+# directory`, because kati will see 'haiku' as being a file, not a
+# phony target.
+.PHONY: haiku
+haiku: $(SOONG_FUZZ_PACKAGING_ARCH_MODULES) $(ALL_FUZZ_TARGETS)
+$(call dist-for-goals,haiku,$(SOONG_FUZZ_PACKAGING_ARCH_MODULES))
+$(call dist-for-goals,haiku,$(PRODUCT_OUT)/module-info.json)
+
+.PHONY: haiku-java
+haiku-java: $(SOONG_JAVA_FUZZ_PACKAGING_ARCH_MODULES) $(ALL_JAVA_FUZZ_TARGETS)
+$(call dist-for-goals,haiku-java,$(SOONG_JAVA_FUZZ_PACKAGING_ARCH_MODULES))
+$(call dist-for-goals,haiku-java,$(PRODUCT_OUT)/module-info.json)
+
+.PHONY: haiku-rust
+haiku-rust: $(SOONG_RUST_FUZZ_PACKAGING_ARCH_MODULES) $(ALL_RUST_FUZZ_TARGETS)
+$(call dist-for-goals,haiku-rust,$(SOONG_RUST_FUZZ_PACKAGING_ARCH_MODULES))
+$(call dist-for-goals,haiku-rust,$(PRODUCT_OUT)/module-info.json)
+
+# -----------------------------------------------------------------
+# Extract platform fonts used in Layoutlib
+include $(BUILD_SYSTEM)/layoutlib_fonts.mk
+
+
+# -----------------------------------------------------------------
+# OS Licensing
+
+include $(BUILD_SYSTEM)/os_licensing.mk
+
+# When appending new code to this file, please insert above OS Licensing
+>>>>>>> BRANCH (8db85e Merge "Version bump to TKB1.221010.001.A1 [core/build_id.mk])
