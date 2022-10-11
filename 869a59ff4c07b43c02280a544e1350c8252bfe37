@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f86543_04525844",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2881,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-11T20:28:46Z",
+      "side": 1,
+      "message": "Use `with zipfile.ZipFile(zip_filename, \u0027r\u0027) as zin:`, and remove the `zin.close()`. Same with zout.",
+      "revId": "869a59ff4c07b43c02280a544e1350c8252bfe37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d166a632_fda9f044",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2882,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-11T20:28:46Z",
+      "side": 1,
+      "message": "The `_` you\u0027re ignoring here is an open file descriptor. We should make sure to close it, either with an `os.close(fd)` right after the mkstemp, or by using `zipfile.ZipFile(os.fdopen(fd, \u0027wb\u0027), \u0027w\u0027)` when creating `zout` in order to reuse it there. (And then the `with` statement will close the zipfile object and the file descriptor after)",
+      "revId": "869a59ff4c07b43c02280a544e1350c8252bfe37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b380b8c_8b62faad",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2885,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-11T20:28:46Z",
+      "side": 1,
+      "message": "Inline this into the writestr call so that it\u0027s not read if we\u0027re deleting it.",
+      "revId": "869a59ff4c07b43c02280a544e1350c8252bfe37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96390228_3ab1e971",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2886,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-11T20:28:46Z",
+      "side": 1,
+      "message": "nit: Remove parenthesis and change to `if item.filename not in entries:`",
+      "revId": "869a59ff4c07b43c02280a544e1350c8252bfe37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0573ece3_f422da7c",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2891,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-11T20:28:46Z",
+      "side": 1,
+      "message": "Replace both of these with `os.replace`",
+      "range": {
+        "startLine": 2890,
+        "startChar": 0,
+        "endLine": 2891,
+        "endChar": 38
+      },
+      "revId": "869a59ff4c07b43c02280a544e1350c8252bfe37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
