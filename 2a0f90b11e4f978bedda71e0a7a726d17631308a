@@ -22,6 +22,30 @@
       },
       "revId": "2a0f90b11e4f978bedda71e0a7a726d17631308a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebeee1b6_cf40eaf7",
+        "filename": "tools/zipalign/ZipAlign.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2022-10-11T16:39:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "276fa0f3_09a9560e",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 49
+      },
+      "revId": "2a0f90b11e4f978bedda71e0a7a726d17631308a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
