@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6a166f7_27d07997",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-10-11T18:22:49Z",
+      "side": 1,
+      "message": "otherwise lgtm...",
+      "revId": "69740be80348d4c9de36097cfe53537be410263f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daac873e_f36a8137",
+        "filename": "tools/zipalign/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-10-11T18:22:49Z",
+      "side": 1,
+      "message": "|sort",
+      "revId": "69740be80348d4c9de36097cfe53537be410263f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbbc715a_4b845741",
+        "filename": "tools/zipalign/ZipAlign.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-10-11T18:22:49Z",
+      "side": 1,
+      "message": "or print an \"(OK - directory)\" message if verbose, similar to the isCompressed() case?",
+      "revId": "69740be80348d4c9de36097cfe53537be410263f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7645b80d_e797c9b4",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-10-11T18:22:49Z",
+      "side": 1,
+      "message": "oops?",
+      "revId": "69740be80348d4c9de36097cfe53537be410263f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5538011_c280d82c",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-10-11T18:22:49Z",
+      "side": 1,
+      "message": "you already have libbase, so just ReadFileToString()?",
+      "revId": "69740be80348d4c9de36097cfe53537be410263f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
