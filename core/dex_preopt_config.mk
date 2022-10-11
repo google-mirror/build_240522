@@ -1,24 +1,10 @@
 DEX_PREOPT_CONFIG := $(SOONG_OUT_DIR)/dexpreopt.config
 
-ENABLE_PREOPT := true
-ENABLE_PREOPT_BOOT_IMAGES := true
-ifneq (true,$(filter true,$(WITH_DEXPREOPT)))
-  # Disable dexpreopt for libraries/apps and for boot images.
-  ENABLE_PREOPT :=
-  ENABLE_PREOPT_BOOT_IMAGES :=
-else ifneq (true,$(filter true,$(PRODUCT_USES_DEFAULT_ART_CONFIG)))
-  # Disable dexpreopt for libraries/apps and for boot images: not having default
-  # ART config means that some important system properties are not set, which
-  # would result in passing bad arguments to dex2oat and failing the build.
-  ENABLE_PREOPT :=
-  ENABLE_PREOPT_BOOT_IMAGES :=
-else ifeq (true,$(DISABLE_PREOPT))
-  # Disable dexpreopt for libraries/apps, but do compile boot images.
-  ENABLE_PREOPT :=
-endif
+ENABLE_PREOPT := false
+ENABLE_PREOPT_BOOT_IMAGES := false
 
 # The default value for LOCAL_DEX_PREOPT
-DEX_PREOPT_DEFAULT ?= $(ENABLE_PREOPT)
+DEX_PREOPT_DEFAULT := false
 
 # Whether to fail immediately if verify_uses_libraries check fails, or to keep
 # going and restrict dexpreopt to not compile any code for the failed module.
@@ -48,28 +34,18 @@ SYSTEM_OTHER_ODEX_FILTER ?= \
     product/priv-app/% \
 
 # Global switch to control if updatable boot jars are included in dexpreopt.
-DEX_PREOPT_WITH_UPDATABLE_BCP := true
+DEX_PREOPT_WITH_UPDATABLE_BCP := false
 
 # Conditional to building on linux, as dex2oat currently does not work on darwin.
 ifeq ($(HOST_OS),linux)
   ifeq (eng,$(TARGET_BUILD_VARIANT))
     # For an eng build only pre-opt the boot image and system server. This gives reasonable performance
     # and still allows a simple workflow: building in frameworks/base and syncing.
-    WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY ?= true
+    WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := false
   endif
   # Add mini-debug-info to the boot classpath unless explicitly asked not to.
   ifneq (false,$(WITH_DEXPREOPT_DEBUG_INFO))
     PRODUCT_DEX_PREOPT_BOOT_FLAGS += --generate-mini-debug-info
-  endif
-
-  # Non eng linux builds must have preopt enabled so that system server doesn't run as interpreter
-  # only. b/74209329
-  ifeq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
-    ifneq (true,$(WITH_DEXPREOPT))
-      ifneq (true,$(WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY))
-        $(call pretty-error, DEXPREOPT must be enabled for user and userdebug builds)
-      endif
-    endif
   endif
 endif
 
@@ -91,8 +67,8 @@ ifeq ($(WRITE_SOONG_VARIABLES),true)
 
   $(call json_start)
 
-  $(call add_json_bool, DisablePreopt,                           $(call invert_bool,$(ENABLE_PREOPT)))
-  $(call add_json_bool, DisablePreoptBootImages,                 $(call invert_bool,$(ENABLE_PREOPT_BOOT_IMAGES)))
+  # $(call add_json_bool, DisablePreopt,                           $(call invert_bool,$(ENABLE_PREOPT)))
+  # $(call add_json_bool, DisablePreoptBootImages,                 $(call invert_bool,$(ENABLE_PREOPT_BOOT_IMAGES)))
   $(call add_json_list, DisablePreoptModules,                    $(DEXPREOPT_DISABLED_MODULES))
   $(call add_json_bool, OnlyPreoptBootImageAndSystemServer,      $(filter true,$(WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY)))
   $(call add_json_bool, PreoptWithUpdatableBcp,                  $(filter true,$(DEX_PREOPT_WITH_UPDATABLE_BCP)))

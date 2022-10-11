@@ -37,3 +37,6 @@ endif
 
 TARGET_SUPPORTS_32_BIT_APPS := true
 TARGET_SUPPORTS_64_BIT_APPS := true
+
+# Disable DEXPREOPT for 16k experiment
+WITH_DEXPREOPT := false
