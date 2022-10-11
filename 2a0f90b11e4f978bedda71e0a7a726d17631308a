@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "276fa0f3_09a9560e",
+        "filename": "tools/zipalign/ZipAlign.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1578256
+      },
+      "writtenOn": "2022-10-11T15:13:02Z",
+      "side": 1,
+      "message": "should be \"it ends with \u0027/\u0027 or \u0027\\ \u0027 character\", right?",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 49
+      },
+      "revId": "2a0f90b11e4f978bedda71e0a7a726d17631308a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
