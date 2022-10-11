@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f5523e2_9ced8721",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2022-10-11T23:26:38Z",
+      "side": 1,
+      "message": "Hi Joe,\nThis CL is ready. Can I get owner\u0027s review?",
+      "revId": "dd15ec1fd1ca4dff2cc2253a01864e3f1ba49b75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
