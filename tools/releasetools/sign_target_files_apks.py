@@ -548,8 +548,6 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
     # Sets this to zero for targets without APK files, e.g., gki_arm64.
     maxsize = 0
 
-  system_root_image = misc_info.get("system_root_image") == "true"
-
   for info in input_tf_zip.infolist():
     filename = info.filename
     if filename.startswith("IMAGES/"):

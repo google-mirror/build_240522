@@ -1342,7 +1342,6 @@ class CommonUtilsTest(test_utils.ReleaseToolsTestCase):
   INFO_DICT_DEFAULT = {
       'recovery_api_version': 3,
       'fstab_version': 2,
-      'system_root_image': 'true',
       'no_recovery' : 'true',
       'recovery_as_boot': 'true',
   }
@@ -1371,14 +1370,8 @@ class CommonUtilsTest(test_utils.ReleaseToolsTestCase):
       info_values = ''.join(
           ['{}={}\n'.format(k, v) for k, v in sorted(info_dict.items())])
       common.ZipWriteStr(target_files_zip, 'META/misc_info.txt', info_values)
-
-      FSTAB_TEMPLATE = "/dev/block/system {} ext4 ro,barrier=1 defaults"
-      if info_dict.get('system_root_image') == 'true':
-        fstab_values = FSTAB_TEMPLATE.format('/')
-      else:
-        fstab_values = FSTAB_TEMPLATE.format('/system')
-      common.ZipWriteStr(target_files_zip, fstab_path, fstab_values)
-
+      common.ZipWriteStr(target_files_zip, fstab_path,
+                         "/dev/block/system /system ext4 ro,barrier=1 defaults")
       common.ZipWriteStr(
           target_files_zip, 'META/file_contexts', 'file-contexts')
     return target_files
@@ -1429,12 +1422,9 @@ class CommonUtilsTest(test_utils.ReleaseToolsTestCase):
     self.assertIn('/', loaded_dict['fstab'])
     self.assertIn('/system', loaded_dict['fstab'])
 
-  def test_LoadInfoDict_systemRootImageFalse(self):
-    # Devices not using system-as-root nor recovery-as-boot. Non-A/B devices
-    # launched prior to P will likely have this config.
+  def test_LoadInfoDict_recoveryAsBootFalse(self):
     info_dict = copy.copy(self.INFO_DICT_DEFAULT)
     del info_dict['no_recovery']
-    del info_dict['system_root_image']
     del info_dict['recovery_as_boot']
     target_files = self._test_LoadInfoDict_createTargetFiles(
         info_dict,
@@ -1444,22 +1434,6 @@ class CommonUtilsTest(test_utils.ReleaseToolsTestCase):
       self.assertEqual(3, loaded_dict['recovery_api_version'])
       self.assertEqual(2, loaded_dict['fstab_version'])
       self.assertNotIn('/', loaded_dict['fstab'])
-      self.assertIn('/system', loaded_dict['fstab'])
-
-  def test_LoadInfoDict_recoveryAsBootFalse(self):
-    # Devices using system-as-root, but with standalone recovery image. Non-A/B
-    # devices launched since P will likely have this config.
-    info_dict = copy.copy(self.INFO_DICT_DEFAULT)
-    del info_dict['no_recovery']
-    del info_dict['recovery_as_boot']
-    target_files = self._test_LoadInfoDict_createTargetFiles(
-        info_dict,
-        'RECOVERY/RAMDISK/system/etc/recovery.fstab')
-    with zipfile.ZipFile(target_files, 'r', allowZip64=True) as target_files_zip:
-      loaded_dict = common.LoadInfoDict(target_files_zip)
-      self.assertEqual(3, loaded_dict['recovery_api_version'])
-      self.assertEqual(2, loaded_dict['fstab_version'])
-      self.assertIn('/', loaded_dict['fstab'])
       self.assertIn('/system', loaded_dict['fstab'])
 
   def test_LoadInfoDict_noRecoveryTrue(self):
