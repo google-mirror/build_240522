@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f1c6a68_f7bc7753",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2022-10-12T21:00:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1be78d25_03c49f68",
+      "revId": "4b6ec485d61ab2e7540fab5eab0791d5d147e085",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6909fa30_cd71dcca",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-10-12T00:33:28Z",
       "side": 1,
       "message": "did you mean `: %m\\n` here and below rather than just ` `?",
+      "range": {
+        "startLine": 22,
+        "startChar": 39,
+        "endLine": 22,
+        "endChar": 40
+      },
+      "revId": "4b6ec485d61ab2e7540fab5eab0791d5d147e085",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b7b95f4_c06b4202",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2022-10-12T21:00:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6909fa30_cd71dcca",
       "range": {
         "startLine": 22,
         "startChar": 39,
