@@ -377,6 +377,7 @@ PRODUCT_PACKAGES_DEBUG := \
     iw \
     logpersist.start \
     logtagd.rc \
+    memhogger \
     procrank \
     profcollectd \
     profcollectctl \
