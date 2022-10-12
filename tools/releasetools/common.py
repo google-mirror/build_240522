@@ -1059,8 +1059,7 @@ class PartitionBuildProps(object):
     return self.build_props.get(prop)
 
 
-def LoadRecoveryFSTab(read_helper, fstab_version, recovery_fstab_path,
-                      system_root_image=False):
+def LoadRecoveryFSTab(read_helper, fstab_version, recovery_fstab_path):
   class Partition(object):
     def __init__(self, mount_point, fs_type, device, length, context, slotselect):
       self.mount_point = mount_point
@@ -1119,12 +1118,6 @@ def LoadRecoveryFSTab(read_helper, fstab_version, recovery_fstab_path,
                                device=pieces[0], length=length, context=context,
                                slotselect=slotselect)
 
-  # / is used for the system mount point when the root directory is included in
-  # system. Other areas assume system is always at "/system" so point /system
-  # at /.
-  if system_root_image:
-    assert '/system' not in d and '/' in d
-    d["/system"] = d["/"]
   return d
 
 
@@ -1140,7 +1133,6 @@ def _FindAndLoadRecoveryFstab(info_dict, input_file, read_helper):
   # ../RAMDISK/system/etc/recovery.fstab. This function has to handle both
   # cases, since it may load the info_dict from an old build (e.g. when
   # generating incremental OTAs from that build).
-  system_root_image = info_dict.get('system_root_image') == 'true'
   if info_dict.get('no_recovery') != 'true':
     recovery_fstab_path = 'RECOVERY/RAMDISK/system/etc/recovery.fstab'
     if isinstance(input_file, zipfile.ZipFile):
@@ -1151,8 +1143,7 @@ def _FindAndLoadRecoveryFstab(info_dict, input_file, read_helper):
       if not os.path.exists(path):
         recovery_fstab_path = 'RECOVERY/RAMDISK/etc/recovery.fstab'
     return LoadRecoveryFSTab(
-        read_helper, info_dict['fstab_version'], recovery_fstab_path,
-        system_root_image)
+        read_helper, info_dict['fstab_version'], recovery_fstab_path)
 
   if info_dict.get('recovery_as_boot') == 'true':
     recovery_fstab_path = 'BOOT/RAMDISK/system/etc/recovery.fstab'
@@ -1164,8 +1155,7 @@ def _FindAndLoadRecoveryFstab(info_dict, input_file, read_helper):
       if not os.path.exists(path):
         recovery_fstab_path = 'BOOT/RAMDISK/etc/recovery.fstab'
     return LoadRecoveryFSTab(
-        read_helper, info_dict['fstab_version'], recovery_fstab_path,
-        system_root_image)
+        read_helper, info_dict['fstab_version'], recovery_fstab_path)
 
   return None
 
@@ -1780,11 +1770,6 @@ def HasRamdisk(partition_name, info_dict=None):
 
   if info_dict.get("gki_boot_image_without_ramdisk") == "true":
     return False  # A GKI boot.img has no ramdisk since Android-13.
-
-  if info_dict.get("system_root_image") == "true":
-    # The ramdisk content is merged into the system.img, so there is NO
-    # ramdisk in the boot.img or boot-<kernel version>.img.
-    return False
 
   if info_dict.get("init_boot") == "true":
     # The ramdisk is moved to the init_boot.img, so there is NO
@@ -3590,23 +3575,14 @@ def MakeRecoveryPatch(input_dir, output_sink, recovery_img, boot_img,
     output_sink(recovery_img_path, recovery_img.data)
 
   else:
-    system_root_image = info_dict.get("system_root_image") == "true"
     path = os.path.join(input_dir, recovery_resource_dat_path)
-    # With system-root-image, boot and recovery images will have mismatching
-    # entries (only recovery has the ramdisk entry) (Bug: 72731506). Use bsdiff
-    # to handle such a case.
-    if system_root_image:
-      diff_program = ["bsdiff"]
-      bonus_args = ""
-      assert not os.path.exists(path)
+    diff_program = ["imgdiff"]
+    if os.path.exists(path):
+      diff_program.append("-b")
+      diff_program.append(path)
+      bonus_args = "--bonus /vendor/etc/recovery-resource.dat"
     else:
-      diff_program = ["imgdiff"]
-      if os.path.exists(path):
-        diff_program.append("-b")
-        diff_program.append(path)
-        bonus_args = "--bonus /vendor/etc/recovery-resource.dat"
-      else:
-        bonus_args = ""
+      bonus_args = ""
 
     d = Difference(recovery_img, boot_img, diff_program=diff_program)
     _, _, patch = d.ComputePatch()
