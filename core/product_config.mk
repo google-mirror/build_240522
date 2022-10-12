@@ -317,6 +317,11 @@ endef
 # Extra boot jars must be appended at the end after common boot jars.
 PRODUCT_BOOT_JARS += $(PRODUCT_BOOT_JARS_EXTRA)
 
+ifneq (true, $(PRODUCT_AVF_ENABLED))
+	PRODUCT_BOOT_JARS += android.system.virtualmachine-non-updatable
+	PRODUCT_PACKAGES += android.system.virtualmachine-non-updatable
+endif
+
 PRODUCT_BOOT_JARS := $(call qualify-platform-jars,$(PRODUCT_BOOT_JARS))
 
 # b/191127295: force core-icu4j onto boot image. It comes from a non-updatable APEX jar, but has
