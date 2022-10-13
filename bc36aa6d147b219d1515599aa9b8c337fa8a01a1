@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca6a23f3_a0a0c677",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1868610
+      },
+      "writtenOn": "2022-10-13T21:22:36Z",
+      "side": 1,
+      "message": "Please take a look. It\u0027s a short CL to allow building special targets for Haiku Java fuzzers for host and device.",
+      "revId": "bc36aa6d147b219d1515599aa9b8c337fa8a01a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
