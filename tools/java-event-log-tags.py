@@ -15,7 +15,7 @@
 # limitations under the License.
 
 """
-Usage: java-event-log-tags.py [-o output_file] <input_file> <merged_tags_file>
+Usage: java-event-log-tags.py [-o output_file] <input_file> <merged_tagfile>
 
 Generate a java class containing constants for each of the event log
 tags in the given input file.
@@ -24,136 +24,122 @@ tags in the given input file.
 """
 
 from io import StringIO
-import getopt
+import argparse
 import os
-import os.path
 import re
 import sys
 
 import event_log_tags
 
-output_file = None
+def tagfile_to_java_file(tagfile: event_log_tags.TagFile) -> str:
+  if "java_package" not in tagfile.options:
+    tagfile.AddError("java_package option not specified", linenum=0)
 
-try:
-  opts, args = getopt.getopt(sys.argv[1:], "ho:")
-except getopt.GetoptError as err:
-  print(str(err))
-  print(__doc__)
-  sys.exit(2)
+  hide = True
+  if "javadoc_hide" in tagfile.options:
+    hide = event_log_tags.BooleanFromString(tagfile.options["javadoc_hide"][0])
 
-for o, a in opts:
-  if o == "-h":
-    print(__doc__)
-    sys.exit(2)
-  elif o == "-o":
-    output_file = a
-  else:
-    print("unhandled option %s" % (o,), file=sys.stderr)
+  if tagfile.errors:
+    for fn, ln, msg in tagfile.errors:
+      print("%s:%d: error: %s" % (fn, ln, msg), file=sys.stderr)
     sys.exit(1)
 
-if len(args) != 1 and len(args) != 2:
-  print("need one or two input files, not %d" % (len(args),))
-  print(__doc__)
-  sys.exit(1)
+  buffer = StringIO()
+  buffer.write("/* This file is auto-generated.  DO NOT MODIFY.\n"
+               " * Source file: %s\n"
+               " */\n\n" % tagfile.filename)
 
-fn = args[0]
-tagfile = event_log_tags.TagFile(fn)
+  # rstrip(';') because errorprone will complain if there are repeated semicolons
+  buffer.write("package %s;\n\n" % tagfile.options["java_package"][0].rstrip(';'))
 
-if len(args) > 1:
-  # Load the merged tag file (which should have numbers assigned for all
-  # tags.  Use the numbers from the merged file to fill in any missing
-  # numbers from the input file.
-  merged_fn = args[1]
-  merged_tagfile = event_log_tags.TagFile(merged_fn)
-  merged_by_name = dict([(t.tagname, t) for t in merged_tagfile.tags])
+  basename, _ = os.path.splitext(os.path.basename(tagfile.filename))
+
+  if hide:
+    buffer.write("/**\n"
+                 " * @hide\n"
+                 " */\n")
+  buffer.write("public class %s {\n" % basename)
+  buffer.write("  private %s() { }  // don't instantiate\n" % basename)
+
   for t in tagfile.tags:
-    if t.tagnum is None:
-      if t.tagname in merged_by_name:
-        t.tagnum = merged_by_name[t.tagname].tagnum
-      else:
-        # We're building something that's not being included in the
-        # product, so its tags don't appear in the merged file.  Assign
-        # them all an arbitrary number so we can emit the java and
-        # compile the (unused) package.
-        t.tagnum = 999999
-else:
-  # Not using the merged tag file, so all tags must have manually assigned
-  # numbers
+    if t.description:
+      buffer.write("\n  /** %d %s %s */\n" % (t.tagnum, t.tagname, t.description))
+    else:
+      buffer.write("\n  /** %d %s */\n" % (t.tagnum, t.tagname))
+
+    buffer.write("  public static final int %s = %d;\n" %
+                 (t.tagname.upper(), t.tagnum))
+
+  keywords = frozenset(["abstract", "continue", "for", "new", "switch", "assert",
+                        "default", "goto", "package", "synchronized", "boolean",
+                        "do", "if", "private", "this", "break", "double",
+                        "implements", "protected", "throw", "byte", "else",
+                        "import", "public", "throws", "case", "enum",
+                        "instanceof", "return", "transient", "catch", "extends",
+                        "int", "short", "try", "char", "final", "interface",
+                        "static", "void", "class", "finally", "long", "strictfp",
+                        "volatile", "const", "float", "native", "super", "while"])
+
+  def javaName(name):
+    out = name[0].lower() + re.sub(r"[^A-Za-z0-9]", "", name.title())[1:]
+    if out in keywords:
+      out += "_"
+    return out
+
+  javaTypes = ["ERROR", "int", "long", "String", "Object[]", "float"]
   for t in tagfile.tags:
-    if t.tagnum is None:
-      tagfilef.AddError("tag \"%s\" has no number" % (tagname,), tag.linenum)
+    methodName = javaName("write_" + t.tagname)
+    if t.description:
+      args = [arg.strip("() ").split("|") for arg in t.description.split(",")]
+    else:
+      args = []
+    argTypesNames = ", ".join([javaTypes[int(arg[1])] + " " + javaName(arg[0]) for arg in args])
+    argNames = "".join([", " + javaName(arg[0]) for arg in args])
+    buffer.write("\n  public static void %s(%s) {" % (methodName, argTypesNames))
+    buffer.write("\n    android.util.EventLog.writeEvent(%s%s);" % (t.tagname.upper(), argNames))
+    buffer.write("\n  }\n")
 
-if "java_package" not in tagfile.options:
-  tagfile.AddError("java_package option not specified", linenum=0)
+  buffer.write("}\n")
+  return buffer.getvalue()
 
-hide = True
-if "javadoc_hide" in tagfile.options:
-  hide = event_log_tags.BooleanFromString(tagfile.options["javadoc_hide"][0])
+def main():
+  parser = argparse.ArgumentParser(description="Generate a java class containing constants for each of the event log tags in the given input file.")
+  parser.add_argument("-o", dest="output_file")
+  parser.add_argument("input_file")
+  parser.add_argument("merged_tagfile", nargs='?')
+  args = parser.parse_args()
 
-if tagfile.errors:
-  for fn, ln, msg in tagfile.errors:
-    print("%s:%d: error: %s" % (fn, ln, msg), file=sys.stderr)
-  sys.exit(1)
+  tagfile = event_log_tags.TagFile(args.input_file)
 
-buffer = StringIO()
-buffer.write("/* This file is auto-generated.  DO NOT MODIFY.\n"
-             " * Source file: %s\n"
-             " */\n\n" % (fn,))
-
-buffer.write("package %s;\n\n" % (tagfile.options["java_package"][0],))
-
-basename, _ = os.path.splitext(os.path.basename(fn))
-
-if hide:
-  buffer.write("/**\n"
-               " * @hide\n"
-               " */\n")
-buffer.write("public class %s {\n" % (basename,))
-buffer.write("  private %s() { }  // don't instantiate\n" % (basename,))
-
-for t in tagfile.tags:
-  if t.description:
-    buffer.write("\n  /** %d %s %s */\n" % (t.tagnum, t.tagname, t.description))
+  if args.merged_tagfile:
+    # Load the merged tag file (which should have numbers assigned for all
+    # tags.  Use the numbers from the merged file to fill in any missing
+    # numbers from the input file.
+    merged_tagfile = event_log_tags.TagFile(args.merged_tagfile)
+    merged_by_name = dict([(t.tagname, t) for t in merged_tagfile.tags])
+    for t in tagfile.tags:
+      if t.tagnum is None:
+        if t.tagname in merged_by_name:
+          t.tagnum = merged_by_name[t.tagname].tagnum
+        else:
+          # We're building something that's not being included in the
+          # product, so its tags don't appear in the merged file.  Assign
+          # them all an arbitrary number so we can emit the java and
+          # compile the (unused) package.
+          t.tagnum = 999999
   else:
-    buffer.write("\n  /** %d %s */\n" % (t.tagnum, t.tagname))
+    # Not using the merged tag file, so all tags must have manually assigned
+    # numbers
+    for t in tagfile.tags:
+      if t.tagnum is None:
+        tagfile.AddError("tag \"%s\" has no number" % tagname, tag.linenum)
 
-  buffer.write("  public static final int %s = %d;\n" %
-               (t.tagname.upper(), t.tagnum))
+  java_file_contents = tagfile_to_java_file(tagfile)
 
-keywords = frozenset(["abstract", "continue", "for", "new", "switch", "assert",
-                      "default", "goto", "package", "synchronized", "boolean",
-                      "do", "if", "private", "this", "break", "double",
-                      "implements", "protected", "throw", "byte", "else",
-                      "import", "public", "throws", "case", "enum",
-                      "instanceof", "return", "transient", "catch", "extends",
-                      "int", "short", "try", "char", "final", "interface",
-                      "static", "void", "class", "finally", "long", "strictfp",
-                      "volatile", "const", "float", "native", "super", "while"])
+  if args.output_file:
+    os.makedirs(os.path.dirname(args.output_file), exist_ok=True)
 
-def javaName(name):
-  out = name[0].lower() + re.sub(r"[^A-Za-z0-9]", "", name.title())[1:]
-  if out in keywords:
-    out += "_"
-  return out
+  event_log_tags.WriteOutput(args.output_file, java_file_contents)
 
-javaTypes = ["ERROR", "int", "long", "String", "Object[]", "float"]
-for t in tagfile.tags:
-  methodName = javaName("write_" + t.tagname)
-  if t.description:
-    args = [arg.strip("() ").split("|") for arg in t.description.split(",")]
-  else:
-    args = []
-  argTypesNames = ", ".join([javaTypes[int(arg[1])] + " " + javaName(arg[0]) for arg in args])
-  argNames = "".join([", " + javaName(arg[0]) for arg in args])
-  buffer.write("\n  public static void %s(%s) {" % (methodName, argTypesNames))
-  buffer.write("\n    android.util.EventLog.writeEvent(%s%s);" % (t.tagname.upper(), argNames))
-  buffer.write("\n  }\n")
-
-
-buffer.write("}\n");
-
-output_dir = os.path.dirname(output_file)
-if not os.path.exists(output_dir):
-  os.makedirs(output_dir)
-
-event_log_tags.WriteOutput(output_file, buffer)
+if __name__ == "__main__":
+  main()

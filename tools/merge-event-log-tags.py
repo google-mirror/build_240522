@@ -18,167 +18,153 @@
 Usage: merge-event-log-tags.py [-o output_file] [input_files...]
 
 Merge together zero or more event-logs-tags files to produce a single
-output file, stripped of comments.  Checks that no tag numbers conflict
+output file, stripped of comments. Checks that no tag numbers conflict
 and fails if they do.
 
 -h to display this usage message and exit.
 """
 
 from io import StringIO
-import getopt
-try:
-  import hashlib
-except ImportError:
-  import md5 as hashlib
+import argparse
+import hashlib
 import struct
 import sys
 
 import event_log_tags
-
-errors = []
-warnings = []
-
-output_file = None
-pre_merged_file = None
 
 # Tags with a tag number of ? are assigned a tag in the range
 # [ASSIGN_START, ASSIGN_LIMIT).
 ASSIGN_START = 900000
 ASSIGN_LIMIT = 1000000
 
-try:
-  opts, args = getopt.getopt(sys.argv[1:], "ho:m:")
-except getopt.GetoptError as err:
-  print(str(err))
-  print(__doc__)
-  sys.exit(2)
+def main():
+  parser = argparse.ArgumentParser(description="Merge together zero or more event-logs-tags files to "
+    "produce a single output file, stripped of comments. Checks that no tag numbers conflict "
+    "and fails if they do.")
+  parser.add_argument("-o", dest="output_file")
+  parser.add_argument("-m", dest="pre_merged_file")
+  parser.add_argument("input_files", nargs="*")
+  args = parser.parse_args()
 
-for o, a in opts:
-  if o == "-h":
-    print(__doc__)
-    sys.exit(2)
-  elif o == "-o":
-    output_file = a
-  elif o == "-m":
-    pre_merged_file = a
-  else:
-    print("unhandled option %s" % (o,), file=sys.stderr)
-    sys.exit(1)
+  # Restrictions on tags:
+  #
+  #   Tag names must be unique.  (If the tag number and description are
+  #   also the same, a warning is issued instead of an error.)
+  #
+  #   Explicit tag numbers must be unique.  (If the tag name is also the
+  #   same, no error is issued because the above rule will issue a
+  #   warning or error.)
 
-# Restrictions on tags:
-#
-#   Tag names must be unique.  (If the tag number and description are
-#   also the same, a warning is issued instead of an error.)
-#
-#   Explicit tag numbers must be unique.  (If the tag name is also the
-#   same, no error is issued because the above rule will issue a
-#   warning or error.)
+  by_tagname = {}
+  by_tagnum = {}
 
-by_tagname = {}
-by_tagnum = {}
+  pre_merged_tags = {}
+  if args.pre_merged_file:
+    for t in event_log_tags.TagFile(args.pre_merged_file).tags:
+      pre_merged_tags[t.tagname] = t
 
-pre_merged_tags = {}
-if pre_merged_file:
-  for t in event_log_tags.TagFile(pre_merged_file).tags:
-    pre_merged_tags[t.tagname] = t
+  errors = []
+  warnings = []
+  for fn in args.input_files:
+    tagfile = event_log_tags.TagFile(fn)
 
-for fn in args:
-  tagfile = event_log_tags.TagFile(fn)
+    for t in tagfile.tags:
+      tagnum = t.tagnum
+      tagname = t.tagname
+      description = t.description
 
-  for t in tagfile.tags:
-    tagnum = t.tagnum
-    tagname = t.tagname
-    description = t.description
+      if t.tagname in by_tagname:
+        orig = by_tagname[t.tagname]
 
-    if t.tagname in by_tagname:
-      orig = by_tagname[t.tagname]
+        # Allow an explicit tag number to define an implicit tag number
+        if orig.tagnum is None:
+          orig.tagnum = t.tagnum
+        elif t.tagnum is None:
+          t.tagnum = orig.tagnum
 
-      # Allow an explicit tag number to define an implicit tag number
-      if orig.tagnum is None:
-        orig.tagnum = t.tagnum
-      elif t.tagnum is None:
-        t.tagnum = orig.tagnum
-
-      if (t.tagnum == orig.tagnum and
-          t.description == orig.description):
-        # if the name and description are identical, issue a warning
-        # instead of failing (to make it easier to move tags between
-        # projects without breaking the build).
-        tagfile.AddWarning("tag \"%s\" (%s) duplicated in %s:%d" %
-                           (t.tagname, t.tagnum, orig.filename, orig.linenum),
-                           linenum=t.linenum)
-      else:
-        tagfile.AddError(
-            "tag name \"%s\" used by conflicting tag %s from %s:%d" %
-            (t.tagname, orig.tagnum, orig.filename, orig.linenum),
-            linenum=t.linenum)
-      continue
-
-    if t.tagnum is not None and t.tagnum in by_tagnum:
-      orig = by_tagnum[t.tagnum]
-
-      if t.tagname != orig.tagname:
-        tagfile.AddError(
-            "tag number %d used by conflicting tag \"%s\" from %s:%d" %
-            (t.tagnum, orig.tagname, orig.filename, orig.linenum),
-            linenum=t.linenum)
+        if (t.tagnum == orig.tagnum and
+            t.description == orig.description):
+          # if the name and description are identical, issue a warning
+          # instead of failing (to make it easier to move tags between
+          # projects without breaking the build).
+          tagfile.AddWarning("tag \"%s\" (%s) duplicated in %s:%d" %
+                             (t.tagname, t.tagnum, orig.filename, orig.linenum),
+                             linenum=t.linenum)
+        else:
+          tagfile.AddError(
+              "tag name \"%s\" used by conflicting tag %s from %s:%d" %
+              (t.tagname, orig.tagnum, orig.filename, orig.linenum),
+              linenum=t.linenum)
         continue
 
-    by_tagname[t.tagname] = t
-    if t.tagnum is not None:
-      by_tagnum[t.tagnum] = t
+      if t.tagnum is not None and t.tagnum in by_tagnum:
+        orig = by_tagnum[t.tagnum]
 
-  errors.extend(tagfile.errors)
-  warnings.extend(tagfile.warnings)
+        if t.tagname != orig.tagname:
+          tagfile.AddError(
+              "tag number %d used by conflicting tag \"%s\" from %s:%d" %
+              (t.tagnum, orig.tagname, orig.filename, orig.linenum),
+              linenum=t.linenum)
+          continue
 
-if errors:
-  for fn, ln, msg in errors:
-    print("%s:%d: error: %s" % (fn, ln, msg), file=sys.stderr)
-  sys.exit(1)
+      by_tagname[t.tagname] = t
+      if t.tagnum is not None:
+        by_tagnum[t.tagnum] = t
 
-if warnings:
-  for fn, ln, msg in warnings:
-    print("%s:%d: warning: %s" % (fn, ln, msg), file=sys.stderr)
+    errors.extend(tagfile.errors)
+    warnings.extend(tagfile.warnings)
 
-# Python's hash function (a) isn't great and (b) varies between
-# versions of python.  Using md5 is overkill here but is the same from
-# platform to platform and speed shouldn't matter in practice.
-def hashname(str):
-  d = hashlib.md5(str).digest()[:4]
-  return struct.unpack("!I", d)[0]
+  if errors:
+    for fn, ln, msg in errors:
+      print("%s:%d: error: %s" % (fn, ln, msg), file=sys.stderr)
+    sys.exit(1)
 
-# Assign a tag number to all the entries that say they want one
-# assigned.  We do this based on a hash of the tag name so that the
-# numbers should stay relatively stable as tags are added.
+  if warnings:
+    for fn, ln, msg in warnings:
+      print("%s:%d: warning: %s" % (fn, ln, msg), file=sys.stderr)
 
-# If we were provided pre-merged tags (w/ the -m option), then don't
-# ever try to allocate one, just fail if we don't have a number
+  # Python's hash function (a) isn't great and (b) varies between
+  # versions of python.  Using md5 is overkill here but is the same from
+  # platform to platform and speed shouldn't matter in practice.
+  def hashname(str):
+    d = hashlib.md5(str).digest()[:4]
+    return struct.unpack("!I", d)[0]
 
-for name, t in sorted(by_tagname.items()):
-  if t.tagnum is None:
-    if pre_merged_tags:
-      try:
-        t.tagnum = pre_merged_tags[t.tagname]
-      except KeyError:
-        print("Error: Tag number not defined for tag `%s'. Have you done a full build?" % t.tagname,
-              file=sys.stderr)
-        sys.exit(1)
+  # Assign a tag number to all the entries that say they want one
+  # assigned.  We do this based on a hash of the tag name so that the
+  # numbers should stay relatively stable as tags are added.
+
+  # If we were provided pre-merged tags (w/ the -m option), then don't
+  # ever try to allocate one, just fail if we don't have a number
+
+  for name, t in sorted(by_tagname.items()):
+    if t.tagnum is None:
+      if pre_merged_tags:
+        try:
+          t.tagnum = pre_merged_tags[t.tagname]
+        except KeyError:
+          print("Error: Tag number not defined for tag `%s'. Have you done a full build?" % t.tagname,
+                file=sys.stderr)
+          sys.exit(1)
+      else:
+        while True:
+          x = (hashname(name) % (ASSIGN_LIMIT - ASSIGN_START - 1)) + ASSIGN_START
+          if x not in by_tagnum:
+            t.tagnum = x
+            by_tagnum[x] = t
+            break
+          name = "_" + name
+
+  # by_tagnum should be complete now; we've assigned numbers to all tags.
+
+  buffer = StringIO()
+  for n, t in sorted(by_tagnum.items()):
+    if t.description:
+      buffer.write("%d %s %s\n" % (t.tagnum, t.tagname, t.description))
     else:
-      while True:
-        x = (hashname(name) % (ASSIGN_LIMIT - ASSIGN_START - 1)) + ASSIGN_START
-        if x not in by_tagnum:
-          t.tagnum = x
-          by_tagnum[x] = t
-          break
-        name = "_" + name
+      buffer.write("%d %s\n" % (t.tagnum, t.tagname))
 
-# by_tagnum should be complete now; we've assigned numbers to all tags.
+  event_log_tags.WriteOutput(args.output_file, buffer)
 
-buffer = StringIO()
-for n, t in sorted(by_tagnum.items()):
-  if t.description:
-    buffer.write("%d %s %s\n" % (t.tagnum, t.tagname, t.description))
-  else:
-    buffer.write("%d %s\n" % (t.tagnum, t.tagname))
-
-event_log_tags.WriteOutput(output_file, buffer)
+if __name__ == "__main__":
+  main()
