@@ -40,10 +40,8 @@ class TagFile(object):
       linenum = self.linenum
     self.warnings.append((self.filename, linenum, msg))
 
-  def __init__(self, filename, file_object=None):
-    """'filename' is the name of the file (included in any error
-    messages).  If 'file_object' is None, 'filename' will be opened
-    for reading."""
+  def __init__(self, filename):
+    """'filename' is the name of the file (included in any error messages)."""
     self.errors = []
     self.warnings = []
     self.tags = []
@@ -52,55 +50,50 @@ class TagFile(object):
     self.filename = filename
     self.linenum = 0
 
-    if file_object is None:
-      try:
-        file_object = open(filename, "rb")
-      except (IOError, OSError) as e:
-        self.AddError(str(e))
-        return
-
     try:
-      for self.linenum, line in enumerate(file_object):
-        line = line.decode('utf-8')
-        self.linenum += 1
-        line = re.sub('#.*$', '', line) # strip trailing comments
-        line = line.strip()
-        if not line: continue
-        parts = re.split(r"\s+", line, 2)
+      with open(filename, "rb") as file_object:
+        for self.linenum, line in enumerate(file_object):
+          line = line.decode('utf-8')
+          self.linenum += 1
+          line = re.sub('#.*$', '', line) # strip trailing comments
+          line = line.strip()
+          if not line:
+            continue
+          parts = re.split(r"\s+", line, 2)
 
-        if len(parts) < 2:
-          self.AddError("failed to parse \"%s\"" % (line,))
-          continue
-
-        if parts[0] == "option":
-          self.options[parts[1]] = parts[2:]
-          continue
-
-        if parts[0] == "?":
-          tag = None
-        else:
-          try:
-            tag = int(parts[0])
-          except ValueError:
-            self.AddError("\"%s\" isn't an integer tag or '?'" % (parts[0],))
+          if len(parts) < 2:
+            self.AddError("failed to parse \"%s\"" % (line,))
             continue
 
-        tagname = parts[1]
-        if len(parts) == 3:
-          description = parts[2]
-        else:
-          description = None
-
-        if description:
-          # EventLog.java checks that the description field is
-          # surrounded by parens, so we should too (to avoid a runtime
-          # crash from badly-formatted descriptions).
-          if not re.match(r"\(.*\)\s*$", description):
-            self.AddError("tag \"%s\" has unparseable description" % (tagname,))
+          if parts[0] == "option":
+            self.options[parts[1]] = parts[2:]
             continue
 
-        self.tags.append(Tag(tag, tagname, description,
-                             self.filename, self.linenum))
+          if parts[0] == "?":
+            tag = None
+          else:
+            try:
+              tag = int(parts[0])
+            except ValueError:
+              self.AddError("\"%s\" isn't an integer tag or '?'" % (parts[0],))
+              continue
+
+          tagname = parts[1]
+          if len(parts) == 3:
+            description = parts[2]
+          else:
+            description = None
+
+          if description:
+            # EventLog.java checks that the description field is
+            # surrounded by parens, so we should too (to avoid a runtime
+            # crash from badly-formatted descriptions).
+            if not re.match(r"\(.*\)\s*$", description):
+              self.AddError("tag \"%s\" has unparseable description" % (tagname,))
+              continue
+
+          self.tags.append(Tag(tag, tagname, description,
+                               self.filename, self.linenum))
     except (IOError, OSError) as e:
       self.AddError(str(e))
 
@@ -123,14 +116,14 @@ def WriteOutput(output_file, data):
   'data' may be a string or a StringIO object."""
   if not isinstance(data, str):
     data = data.getvalue()
+
+  if output_file is None:
+    print(data)
+    return
+
   try:
-    if output_file is None:
-      out = sys.stdout
-      output_file = "<stdout>"
-    else:
-      out = open(output_file, "wb")
-    out.write(str.encode(data))
-    out.close()
+    with open(output_file, "wb") as out:
+      out.write(str.encode(data))
   except (IOError, OSError) as e:
     print("failed to write %s: %s" % (output_file, e), file=sys.stderr)
     sys.exit(1)
