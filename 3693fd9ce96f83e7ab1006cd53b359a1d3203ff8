@@ -16,6 +16,24 @@
       "message": "Public function need comments (description)",
       "revId": "3693fd9ce96f83e7ab1006cd53b359a1d3203ff8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8950228_95d89583",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-13T20:55:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc261f3c_07cf2aae",
+      "revId": "3693fd9ce96f83e7ab1006cd53b359a1d3203ff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
