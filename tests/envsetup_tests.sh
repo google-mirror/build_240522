@@ -15,6 +15,7 @@
 
 tests=(
  $(dirname $0)/lunch_tests.sh
+ $(dirname $0)/getoutdir_tests.sh
 )
 
 for test in $tests; do
