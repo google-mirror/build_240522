@@ -156,6 +156,8 @@ bootstrap_go_package {
         "test_util.go",
     ],
     deps: [
+        "compliance-test-fs-module",
+        "projectmetadata-module",
         "golang-protobuf-proto",
         "golang-protobuf-encoding-prototext",
         "license_metadata_proto",
