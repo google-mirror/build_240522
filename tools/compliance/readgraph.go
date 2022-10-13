@@ -38,6 +38,10 @@ func (s globalFS) Open(name string) (fs.File, error) {
 	return os.Open(name)
 }
 
+func (s globalFS) Stat(name string) (fs.FileInfo, error) {
+	return os.Stat(name)
+}
+
 var FS globalFS
 
 // GetFS returns a filesystem for accessing files under the OUT_DIR environment variable.
