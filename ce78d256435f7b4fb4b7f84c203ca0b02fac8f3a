@@ -34,6 +34,24 @@
       "parentUuid": "46ce5bc4_fe38a22a",
       "revId": "ce78d256435f7b4fb4b7f84c203ca0b02fac8f3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "453214b5_ed0671d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-14T21:54:37Z",
+      "side": 1,
+      "message": "It looks like no, but it would allow you to build with `m WITH_DEXPREOPT\u003dfalse`.",
+      "parentUuid": "5e4d020c_67371b75",
+      "revId": "ce78d256435f7b4fb4b7f84c203ca0b02fac8f3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
