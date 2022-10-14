@@ -16,6 +16,24 @@
       "message": "Why do you say \"less than or equal to 33\" when the code in product_config.mk says greater than or equal to 33? Also the commit message seems to imply it\u0027s installed on devices older than 33.",
       "revId": "a835eb9810c260dbee73c8fd0643372573f5d182",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eca5fc2_d215330e",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-10-14T20:41:16Z",
+      "side": 1,
+      "message": "it says \u0027ifneq empty string gt 33\u0027 like the other property here - make math has always been a bit illegible 😞, but the tests on cuttlefish around HAL installation verifies the configuration! 😄",
+      "parentUuid": "287dd6d1_2f2dd07a",
+      "revId": "a835eb9810c260dbee73c8fd0643372573f5d182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
