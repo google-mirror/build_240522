@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f7b8a7b_8f0a1b9c",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2884,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-14T18:49:11Z",
+      "side": 1,
+      "message": "Lets just remove the force option because it\u0027s unused.",
+      "revId": "746e5339d7c2720d29637001f15df440a12c8184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

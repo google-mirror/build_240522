@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa32406e_06f34b5d",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2881,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-14T18:49:11Z",
+      "side": 1,
+      "message": "Why are you using ZipClose? Was there something wrong with using a `with` statement for zout as well?\n\n\nI looked into the ZIP64_LIMIT stuff, and it appears to no longer be relevant now that we\u0027re on python3, so you shouldn\u0027t need to worry about that.",
+      "parentUuid": "25a13e61_83152ee1",
+      "revId": "869a59ff4c07b43c02280a544e1350c8252bfe37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d166a632_fda9f044",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 2
