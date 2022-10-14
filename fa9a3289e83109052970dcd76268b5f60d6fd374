@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1adfcd4_27677531",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-14T21:43:06Z",
+      "side": 1,
+      "message": "This should get some ABTD runs on various branches and builds to make sure there are no more invalid METADATA files.",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ba7a34f_fb9f12d4",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
