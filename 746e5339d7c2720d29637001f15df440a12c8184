@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "716db156_d84d86d9",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2881,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-14T18:51:41Z",
+      "side": 1,
+      "message": "I actually liked how you used to have `dir\u003dos.path.dirname(zip_filename)`, because it will make the replacement faster. Without it it could be created on a seperate tmpfs filesystem, and thus require a copy to replace the original file.",
+      "revId": "746e5339d7c2720d29637001f15df440a12c8184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f7b8a7b_8f0a1b9c",
         "filename": "tools/releasetools/common.py",
         "patchSetId": 4
