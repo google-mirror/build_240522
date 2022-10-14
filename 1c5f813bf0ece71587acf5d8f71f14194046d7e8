@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c35d334a_c97cfe6e",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-14T02:40:32Z",
+      "side": 0,
+      "message": "Do you want to `$(.KATI_obsolete_var BOARD_BUILD_SYSTEM_ROOT_IAMGE)`?",
+      "revId": "1c5f813bf0ece71587acf5d8f71f14194046d7e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
