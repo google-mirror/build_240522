@@ -1049,6 +1049,9 @@ endif # PRODUCT_USE_DYNAMIC_PARTITIONS
 BOARD_PREBUILT_HIDDENAPI_DIR ?=
 .KATI_READONLY := BOARD_PREBUILT_HIDDENAPI_DIR
 
+# DO NOT SUBMIT: test with musl on
+USE_HOST_MUSL := true
+
 # ###############################################################
 # Set up final options.
 # ###############################################################
