@@ -16,6 +16,24 @@
       "message": "Do you want to `$(.KATI_obsolete_var BOARD_BUILD_SYSTEM_ROOT_IAMGE)`?",
       "revId": "1c5f813bf0ece71587acf5d8f71f14194046d7e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f618e614_fea1520f",
+        "filename": "core/board_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-10-14T06:06:30Z",
+      "side": 0,
+      "message": "yeah. I have it ready at https://android-review.googlesource.com/c/platform/build/+/2253578\n\nbut there are still some intermediate -plus-aosp branches I need to resolve first before I can mark it as obsolete",
+      "parentUuid": "c35d334a_c97cfe6e",
+      "revId": "1c5f813bf0ece71587acf5d8f71f14194046d7e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
