@@ -33,6 +33,47 @@
       "message": "Lets just remove the force option because it\u0027s unused.",
       "revId": "746e5339d7c2720d29637001f15df440a12c8184",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87c60b16_d656b1ed",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2884,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-14T18:57:08Z",
+      "side": 1,
+      "message": "Also if you keep the check that the intersection of zin.namelist() and entries is 0 around, make the temporary file after you do the check.",
+      "parentUuid": "2f7b8a7b_8f0a1b9c",
+      "revId": "746e5339d7c2720d29637001f15df440a12c8184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca4e1374_44eb7beb",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2886,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-14T18:57:08Z",
+      "side": 1,
+      "message": "This should be the intersection set. Also use an f string instead of `.format()`",
+      "range": {
+        "startLine": 2886,
+        "startChar": 70,
+        "endLine": 2886,
+        "endChar": 77
+      },
+      "revId": "746e5339d7c2720d29637001f15df440a12c8184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
