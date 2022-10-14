@@ -34,6 +34,24 @@
       "parentUuid": "287dd6d1_2f2dd07a",
       "revId": "a835eb9810c260dbee73c8fd0643372573f5d182",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e510105_63c6c6c2",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-14T21:12:12Z",
+      "side": 1,
+      "message": "Ah you\u0027re right, I got confused by the make math. Maybe `PRODUCT_PACKAGES_UNTIL_SHIPPING_API_LEVEL_33` would be a clearer name? But optional.",
+      "parentUuid": "0eca5fc2_d215330e",
+      "revId": "a835eb9810c260dbee73c8fd0643372573f5d182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
