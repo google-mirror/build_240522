@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ba7a34f_fb9f12d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-14T21:42:07Z",
+      "side": 1,
+      "message": "This needs some unit tests.",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a2124aa_2c9d6553",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-14T21:42:07Z",
+      "side": 1,
+      "message": "Use named initializers",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca75c5d8_de50d840",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-14T21:42:07Z",
+      "side": 1,
+      "message": "Add a comment that you expect this to be called multiple times concurrently",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "892a3078_a525c31b",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-14T21:42:07Z",
+      "side": 1,
+      "message": "A waitgroup that you only ever add 1 to seems unnecessary.",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f2e1f1_d33bc64a",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-14T21:42:07Z",
+      "side": 1,
+      "message": "This could be called in parallel once for every entry in projects, each time using global resources like file descriptors.  To avoid hitting file descriptor limits you may need to limit this to something like 200 running in parallel.",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46e9faef_a40ad65c",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-14T21:42:07Z",
+      "side": 1,
+      "message": "You could significantly simplify your locking here, possibly removing it completely in favor of more go idiomatic channels, by replacing `ix.projectMetadata` and `ix.projectError` with a `sync.Map` that stores `*projectMetadataRecord` for each project:\n\n```\nstruct projectMetadataRecord {\n    pm ProjectMetadata\n    err error\n    done chan{}\n}\n```\n\nIn the initial loop add new records to the sync.Map if they don\u0027t exist.  If they were added, call `read()` on the `*projectMetadataRecord` to fill out `pm` and `err`, and then close the `done` channel.  Then iterate through all projects and read the `done` channel.\n\nThe synchronization is then unnecessary for the `sync.Map`, and the onwership of the `*projectMetadataRecord` is controlled by the `done` channel.  Before `done` is closed it is owned by the one goroutine that is writing to it, and after it is closed it is immutable and readable by any goroutine.",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb5a8797_488bfbda",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-14T21:42:07Z",
+      "side": 1,
+      "message": "You could move this into the goroutine to parallelize the stat calls",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c22adc7_3bf64737",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-14T21:42:07Z",
+      "side": 1,
+      "message": "I think `%w` is only expected to be used for `fmt.Errorf`, and may be a `go vet` error in `fmt.Fprintf`.",
+      "range": {
+        "startLine": 157,
+        "startChar": 24,
+        "endLine": 157,
+        "endChar": 26
+      },
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
