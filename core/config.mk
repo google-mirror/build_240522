@@ -1063,6 +1063,9 @@ ifdef USE_HOST_MUSL
   endif
 endif
 
+# DO NOT SUBMIT: test with musl on
+USE_HOST_MUSL := true
+
 # ###############################################################
 # Set up final options.
 # ###############################################################
