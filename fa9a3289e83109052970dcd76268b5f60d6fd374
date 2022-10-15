@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23cef997_9c023c6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:24:53Z",
+      "side": 1,
+      "message": "Are there any branches you have particular concern for? Changes in tm-dev, sc-dev or rvc-dev require Dr. No, and I doubt any of those branches will end up getting the change to the build system.\n\nI added the `repo forall ...` check to find invalid METADATA files regardless whether they are referenced by the build system and ran it in all the downstream branches.",
+      "parentUuid": "f1adfcd4_27677531",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ba7a34f_fb9f12d4",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-14T21:42:07Z",
       "side": 1,
       "message": "This needs some unit tests.",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15f702b6_cfe825e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:24:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ba7a34f_fb9f12d4",
       "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99ae67d4_1a8a4e8a",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:24:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a2124aa_2c9d6553",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca75c5d8_de50d840",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-10-14T21:42:07Z",
       "side": 1,
       "message": "Add a comment that you expect this to be called multiple times concurrently",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30a75bec_3307cb04",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:24:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca75c5d8_de50d840",
       "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29993436_11cacb4e",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:24:53Z",
+      "side": 1,
+      "message": "We could possibly use a condition instead, but that just complicates the code because after you get the lock you have to loop and check the condition again.\n\nWaiting for 1 tasl is waiting for greater than 0 tasks, which I think is all that\u0027s required. There is no guidance in the sync.WaitGroup docs suggesting there is some minimum number of goroutines to wait for.\n\nDo you have a suggestion that would be simpler and clearer?",
+      "parentUuid": "892a3078_a525c31b",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13f2e1f1_d33bc64a",
         "filename": "tools/compliance/projectmetadata/projectmetadata.go",
         "patchSetId": 6
@@ -99,6 +189,24 @@
       "writtenOn": "2022-10-14T21:42:07Z",
       "side": 1,
       "message": "This could be called in parallel once for every entry in projects, each time using global resources like file descriptors.  To avoid hitting file descriptor limits you may need to limit this to something like 200 running in parallel.",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3fa85eb_d06c7c79",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:24:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f2e1f1_d33bc64a",
       "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -120,6 +228,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3daad5ac_39599930",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:24:53Z",
+      "side": 1,
+      "message": "I don\u0027t follow the comments re: done. Hiding the syncronization inside a structure makes the code harder to reason about, in my view.\n\nEven the docs for sync.Map say: \"Most code should use a plain Go map instead, with separate locking or coordination, for better type safety and to make it easier to maintain other invariants along with the map content. \"",
+      "parentUuid": "46e9faef_a40ad65c",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb5a8797_488bfbda",
@@ -137,6 +263,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c3a53cd_37505849",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:24:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb5a8797_488bfbda",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c22adc7_3bf64737",
@@ -150,6 +294,30 @@
       "writtenOn": "2022-10-14T21:42:07Z",
       "side": 1,
       "message": "I think `%w` is only expected to be used for `fmt.Errorf`, and may be a `go vet` error in `fmt.Fprintf`.",
+      "range": {
+        "startLine": 157,
+        "startChar": 24,
+        "endLine": 157,
+        "endChar": 26
+      },
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb8969a_bb9a9480",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:24:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c22adc7_3bf64737",
       "range": {
         "startLine": 157,
         "startChar": 24,
