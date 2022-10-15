@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aa36dee_be12e951",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2881,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2022-10-15T01:36:04Z",
+      "side": 1,
+      "message": "The ZipClose was used to follow the existing pattern, but it is better if it is not applicable any more.",
+      "parentUuid": "aa32406e_06f34b5d",
+      "revId": "869a59ff4c07b43c02280a544e1350c8252bfe37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d166a632_fda9f044",

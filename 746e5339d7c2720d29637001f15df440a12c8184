@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7064dd2b_33bb93b2",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2881,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2022-10-15T01:36:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "716db156_d84d86d9",
+      "revId": "746e5339d7c2720d29637001f15df440a12c8184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f7b8a7b_8f0a1b9c",
@@ -53,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87fc8fd4_2e652512",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2884,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2022-10-15T01:36:04Z",
+      "side": 1,
+      "message": "Done. The force parameter will be used, so we need to keep it.",
+      "parentUuid": "87c60b16_d656b1ed",
+      "revId": "746e5339d7c2720d29637001f15df440a12c8184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca4e1374_44eb7beb",
@@ -66,6 +102,30 @@
       "writtenOn": "2022-10-14T18:57:08Z",
       "side": 1,
       "message": "This should be the intersection set. Also use an f string instead of `.format()`",
+      "range": {
+        "startLine": 2886,
+        "startChar": 70,
+        "endLine": 2886,
+        "endChar": 77
+      },
+      "revId": "746e5339d7c2720d29637001f15df440a12c8184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e782908b_499fcf84",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2886,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2022-10-15T01:36:04Z",
+      "side": 1,
+      "message": "Done. Here the intersection set is empty actually. This is to simulate the behavior of zip command that when no entries match it returns error code and print out the entries to be deleted.",
+      "parentUuid": "ca4e1374_44eb7beb",
       "range": {
         "startLine": 2886,
         "startChar": 70,
