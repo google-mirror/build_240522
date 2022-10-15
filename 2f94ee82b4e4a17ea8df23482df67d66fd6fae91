@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c761519b_bfdab8b2",
+        "filename": "tools/compliance/cmd/checkmetadata/checkmetadata.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:55:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6216621_24ca9c6f",
+      "revId": "2f94ee82b4e4a17ea8df23482df67d66fd6fae91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23bd9760_cb6ceb37",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-10-15T23:24:53Z",
       "side": 1,
       "message": "s/metadata files/projects/",
+      "range": {
+        "startLine": 33,
+        "startChar": 38,
+        "endLine": 33,
+        "endChar": 52
+      },
+      "revId": "2f94ee82b4e4a17ea8df23482df67d66fd6fae91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d151ad8d_2ace326a",
+        "filename": "tools/compliance/cmd/checkmetadata/checkmetadata.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:55:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23bd9760_cb6ceb37",
       "range": {
         "startLine": 33,
         "startChar": 38,
@@ -75,6 +117,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29bfa5aa_4130984d",
+        "filename": "tools/compliance/cmd/checkmetadata/checkmetadata_test.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:55:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14fddfad_9f0f4faa",
+      "revId": "2f94ee82b4e4a17ea8df23482df67d66fd6fae91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62aed209_79f34077",
@@ -88,6 +148,24 @@
       "writtenOn": "2022-10-15T23:24:53Z",
       "side": 1,
       "message": "line length",
+      "revId": "2f94ee82b4e4a17ea8df23482df67d66fd6fae91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb924fbe_7f426fdf",
+        "filename": "tools/compliance/cmd/checkmetadata/checkmetadata_test.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-15T23:55:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62aed209_79f34077",
       "revId": "2f94ee82b4e4a17ea8df23482df67d66fd6fae91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
