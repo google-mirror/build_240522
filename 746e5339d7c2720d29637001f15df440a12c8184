@@ -134,6 +134,30 @@
       },
       "revId": "746e5339d7c2720d29637001f15df440a12c8184",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "570a2c96_27bfcc0a",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2886,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-16T01:30:57Z",
+      "side": 1,
+      "message": "Oh I see. I thought that we would error out if any of the names weren\u0027t present in the zip file, but I see that the zip command only errors out if all of them aren\u0027t present.",
+      "parentUuid": "e782908b_499fcf84",
+      "range": {
+        "startLine": 2886,
+        "startChar": 70,
+        "endLine": 2886,
+        "endChar": 77
+      },
+      "revId": "746e5339d7c2720d29637001f15df440a12c8184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
