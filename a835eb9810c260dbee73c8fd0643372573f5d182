@@ -52,6 +52,24 @@
       "parentUuid": "0eca5fc2_d215330e",
       "revId": "a835eb9810c260dbee73c8fd0643372573f5d182",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8716dd0_c74d957c",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2022-10-17T15:23:05Z",
+      "side": 1,
+      "message": "I like it! https://android-review.googlesource.com/c/platform/build/+/2257861",
+      "parentUuid": "1e510105_63c6c6c2",
+      "revId": "a835eb9810c260dbee73c8fd0643372573f5d182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
