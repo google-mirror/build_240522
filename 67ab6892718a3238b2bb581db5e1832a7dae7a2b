@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15fbe293_6ebb2cef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2022-10-17T17:25:36Z",
+      "side": 1,
+      "message": "dump_apex_info was added in https://android.googlesource.com/platform/build/+/3f1c9577e821855513e63f970000ed2a3c9d9a59%5E%21/#F1",
+      "revId": "67ab6892718a3238b2bb581db5e1832a7dae7a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
