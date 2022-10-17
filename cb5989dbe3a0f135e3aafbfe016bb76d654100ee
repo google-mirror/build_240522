@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1daf7466_91091b55",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-17T18:36:48Z",
+      "side": 1,
+      "message": "unnecessary",
+      "revId": "cb5989dbe3a0f135e3aafbfe016bb76d654100ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
