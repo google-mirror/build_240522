@@ -16,6 +16,57 @@
       "message": "PTAL",
       "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17abd9f1_34d11758",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-17T23:48:35Z",
+      "side": 1,
+      "message": "const?",
+      "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e32d3452_53b9c979",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-17T23:48:35Z",
+      "side": 1,
+      "message": "5 is pretty low, is something like 200 any faster?",
+      "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13602e9c_b7d09907",
+        "filename": "tools/compliance/testfs/testfs.go",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-17T23:48:35Z",
+      "side": 1,
+      "message": "I think this already exists in in the stdlib as `testing.MapFS`.",
+      "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
