@@ -74,9 +74,8 @@ PRODUCT_PACKAGES += \
     shell_and_utilities_vendor \
 
 # OMX not supported for 64bit_only builds
-# Only supported when SHIPPING_API_LEVEL is less than or equal to 33
 ifneq ($(TARGET_SUPPORTS_OMX_SERVICE),false)
-    PRODUCT_PACKAGES_SHIPPING_API_LEVEL_33 += \
+    PRODUCT_PACKAGES += \
         android.hardware.media.omx@1.0-service \
 
 endif
