@@ -76,17 +76,17 @@ PRODUCT_PACKAGES += \
 # OMX not supported for 64bit_only builds
 # Only supported when SHIPPING_API_LEVEL is less than or equal to 33
 ifneq ($(TARGET_SUPPORTS_OMX_SERVICE),false)
-    PRODUCT_PACKAGES_SHIPPING_API_LEVEL_33 += \
+    PRODUCT_PACKAGES_AT_AND_BEFORE_SHIPPING_API_LEVEL_33 += \
         android.hardware.media.omx@1.0-service \
 
 endif
 
 # Base modules when shipping api level is less than or equal to 33
-PRODUCT_PACKAGES_SHIPPING_API_LEVEL_33 += \
+PRODUCT_PACKAGES_AT_AND_BEFORE_SHIPPING_API_LEVEL_33 += \
     android.hardware.cas@1.2-service \
 
-# Base modules when shipping api level is less than or equal to 29
-PRODUCT_PACKAGES_SHIPPING_API_LEVEL_29 += \
+# Base module when shipping api level is less than or equal to 29
+PRODUCT_PACKAGES_AT_AND_BEFORE_SHIPPING_API_LEVEL_29 += \
     android.hardware.configstore@1.1-service \
     vndservice \
     vndservicemanager \
