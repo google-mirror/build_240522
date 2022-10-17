@@ -16,6 +16,24 @@
       "message": "unnecessary",
       "revId": "cb5989dbe3a0f135e3aafbfe016bb76d654100ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df3ea0f4_c6a3949a",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-10-17T22:46:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1daf7466_91091b55",
+      "revId": "cb5989dbe3a0f135e3aafbfe016bb76d654100ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
