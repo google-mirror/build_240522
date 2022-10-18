@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3b0d867_20ccc65b",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 15
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1d769d2_f0c2665f",
+      "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "009748a0_144e0cdc",
@@ -52,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c043f1f_b3d80a14",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 15
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "009748a0_144e0cdc",
+      "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df2ab1b2_bac2556b",
@@ -65,6 +101,24 @@
       "writtenOn": "2022-10-18T05:21:53Z",
       "side": 1,
       "message": "Use a list of `*projectIndex` here so that you don\u0027t have to go back to the map.  Put the `p` string into `projectIndex`.",
+      "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eb1e21f_2b675c0e",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 15
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df2ab1b2_bac2556b",
       "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -92,6 +146,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10dc5477_f1137b20",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 15
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bdaa3fe_1d5921ff",
+      "range": {
+        "startLine": 139,
+        "startChar": 14,
+        "endLine": 139,
+        "endChar": 21
+      },
+      "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e88188c6_84255915",
@@ -105,6 +183,24 @@
       "writtenOn": "2022-10-18T05:21:53Z",
       "side": 1,
       "message": "If you already have the `*projectIndex` here this can be `pi.pm, pi.err \u003d ix.readMetadataFile(pi, path)`",
+      "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eea46bce_a7f5b3de",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 15
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e88188c6_84255915",
       "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

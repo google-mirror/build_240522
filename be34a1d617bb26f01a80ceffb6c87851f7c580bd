@@ -139,6 +139,24 @@
       "parentUuid": "cc212884_81ca388a",
       "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1407bd08_3fb1c7c4",
+        "filename": "tools/compliance/testfs/testfs.go",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T15:29:09Z",
+      "side": 1,
+      "message": "I mean I went to all the trouble of deleting this and replacing TestFS with fstest.MapFS. It was no trivial matter. I had to change all of my test data from []byte(...) to something that used a named initializer to put the content in a Data member plus initialize the test ModTime. Even putting that inside a small function, it nevertheless changed the structure of the test data initializers.\n\nAfter I did so, all of my tests failed because Open + ReadAll invariably resulted in empty results instead of the configured test data.\n\nIf you look below, you may note that TestFile keeps track of how much has been read allowing for multiple calls to Read each grabbing only part of the content. If you look at the definition of fstest.MapFile, you may note it has no similar member.\n\nI don\u0027t know how Read is implemented for fstest.MapFile, and I didn\u0027t have the time to try to investigate it further. Instead, I reverted those changes and continued with TestFS, which has been working just fine for at least a year.",
+      "parentUuid": "40e0257f_a5ff124d",
+      "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
