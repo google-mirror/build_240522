@@ -535,6 +535,22 @@ def AddCustomImages(output_zip, partition_name):
   Raises:
     AssertionError: If image can't be found.
   """
+  # create custom images if building_image is enable.
+  # Turn the contents of CUSTOM into an custom image and store it in output_zip.
+  building_image = OPTIONS.info_dict.get("building_{}_image".format(partition_name))
+  if building_image:
+    """Turn the contents of CUSTOM into an custom image and store it in output_zip."""
+    img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", partition_name + ".img")
+    if os.path.exists(img.name):
+      logger.info("%s.img already exists; no need to rebuild...", partition_name)
+      return img.name
+
+    block_list = OutputFile(
+        output_zip, OPTIONS.input_tmp, "IMAGES", partition_name + ".map")
+    CreateImage(
+        OPTIONS.input_tmp, OPTIONS.info_dict, partition_name, img,
+        block_list=block_list)
+    return img.name
 
   key_path = OPTIONS.info_dict.get("avb_{}_key_path".format(partition_name))
   algorithm = OPTIONS.info_dict.get("avb_{}_algorithm".format(partition_name))
@@ -598,10 +614,13 @@ def CreateImage(input_dir, info_dict, what, output_file, block_list=None):
   # build fingerprint). Also use the legacy build id, because the vbmeta digest
   # isn't available at this point.
   build_info = common.BuildInfo(info_dict, use_legacy_id=True)
-  uuid_seed = what + "-" + build_info.GetPartitionFingerprint(what)
-  image_props["uuid"] = str(uuid.uuid5(uuid.NAMESPACE_URL, uuid_seed))
-  hash_seed = "hash_seed-" + uuid_seed
-  image_props["hash_seed"] = str(uuid.uuid5(uuid.NAMESPACE_URL, hash_seed))
+  # If the partition does not have a build fingerprint, then skip it!
+  fingerprint = build_info.GetPartitionFingerprint(what)
+  if fingerprint:
+    uuid_seed = what + "-" + fingerprint
+    image_props["uuid"] = str(uuid.uuid5(uuid.NAMESPACE_URL, uuid_seed))
+    hash_seed = "hash_seed-" + uuid_seed
+    image_props["hash_seed"] = str(uuid.uuid5(uuid.NAMESPACE_URL, hash_seed))
 
   build_image.BuildImage(
       os.path.join(input_dir, what.upper()), image_props, output_file.name)
