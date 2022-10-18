@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04a57a4e_da6fce1f",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T17:20:45Z",
+      "side": 1,
+      "message": "Having to make a lot of channels only to throw them away argues strongly in favor of the original mutex.",
+      "parentUuid": "1796a25e_9fa73ef9",
+      "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a28b22ea_42405142",
         "filename": "tools/compliance/projectmetadata/projectmetadata.go",
         "patchSetId": 16
@@ -48,6 +66,24 @@
       "writtenOn": "2022-10-18T16:45:30Z",
       "side": 1,
       "message": "There\u0027s no need to go back to the map here either, you can put the `pi` returned by `LoadOrStore` into a list.",
+      "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f87bfb1_cdc63abb",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T17:20:45Z",
+      "side": 1,
+      "message": "Ack\n\nThere is also no reason not to. I don\u0027t see the need for allocating another array.",
+      "parentUuid": "a28b22ea_42405142",
       "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
