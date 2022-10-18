@@ -19,6 +19,7 @@ import (
 	"io"
 	"io/fs"
 	"path/filepath"
+	"sort"
 	"strings"
 	"sync"
 
@@ -69,6 +70,7 @@ func (pm *ProjectMetadata) VersionedName() string {
 // a `ProjectMetadata`, pm (can be nil even without error), or a non-nil `err`.
 type projectIndex struct {
 	project string
+	path string
 	pm *ProjectMetadata
 	err error
 	done chan struct{}
@@ -181,6 +183,29 @@ func (ix *Index) MetadataForProjects(projects ...string) ([]*ProjectMetadata, er
 	return result, nil
 }
 
+
+// AllMetadataFiles returns the sorted list of all METADATA files read thus far.
+func (ix *Index) AllMetadataFiles() []string {
+	size := 0
+	ix.projects.Range(func(key, value any) bool {
+		pi := value.(*projectIndex)
+		if pi.path != "" {
+			size++
+		}
+                return true
+	})
+	files := make([]string, 0, size)
+	ix.projects.Range(func(key, value any) bool {
+		pi := value.(*projectIndex)
+		if pi.path != "" {
+			files = append(files, pi.path)
+		}
+		return true
+	})
+	sort.Strings(files)
+	return files
+}
+
 // readMetadataFile tries to read and parse a METADATA file at `path` for `project`.
 func (ix *Index) readMetadataFile(pi *projectIndex, path string) {
 	f, err := ix.rootFS.Open(path)
@@ -205,5 +230,6 @@ func (ix *Index) readMetadataFile(pi *projectIndex, path string) {
 		return
 	}
 
+	pi.path = path
 	pi.pm = pm
 }
