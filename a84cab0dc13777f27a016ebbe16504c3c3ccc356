@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aace580_44842092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-18T21:55:37Z",
+      "side": 1,
+      "message": "There\u0027s no new patch set",
+      "parentUuid": "104e9e7d_11e713ee",
+      "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1796a25e_9fa73ef9",
