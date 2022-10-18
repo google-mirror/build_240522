@@ -275,7 +275,7 @@ func htmlNotice(ctx *context, files ...string) error {
 	}
 	fmt.Fprintln(ctx.stdout, "</body></html>")
 
-	*ctx.deps = ni.InputNoticeFiles()
+	*ctx.deps = ni.InputFiles()
 
 	return nil
 }

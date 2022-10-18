@@ -230,7 +230,7 @@ func textNotice(ctx *context, files ...string) error {
 		fmt.Fprintln(ctx.stdout)
 	}
 
-	*ctx.deps = ni.InputNoticeFiles()
+	*ctx.deps = ni.InputFiles()
 
 	return nil
 }

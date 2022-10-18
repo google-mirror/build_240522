@@ -238,7 +238,7 @@ func xmlNotice(ctx *context, files ...string) error {
 	}
 	fmt.Fprintln(ctx.stdout, "</licenses>")
 
-	*ctx.deps = ni.InputNoticeFiles()
+	*ctx.deps = ni.InputFiles()
 
 	return nil
 }
