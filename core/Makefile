@@ -4000,8 +4000,9 @@ INSTALLED_CUSTOMIMAGES_TARGET += $(3)
 endef
 
 $(foreach partition,$(BOARD_CUSTOMIMAGES_PARTITION_LIST), \
+    $(if $(BOARD_AVB_$(call to-upper,$(partition))_KEY_PATH),\
   $(foreach image,$(BOARD_AVB_$(call to-upper,$(partition))_IMAGE_LIST), \
-     $(eval $(call sign_custom_image,$(image),$(partition),$(PRODUCT_OUT)/$(notdir $(image))))))
+        $(eval $(call sign_custom_image,$(image),$(partition),$(PRODUCT_OUT)/$(notdir $(image)))))))
 endif
 
 # -----------------------------------------------------------------
@@ -4354,7 +4355,8 @@ endif
 
 ifneq ($(strip $(BOARD_CUSTOMIMAGES_PARTITION_LIST)),)
 $(foreach partition,$(BOARD_CUSTOMIMAGES_PARTITION_LIST), \
-    $(eval $(call check-and-set-custom-avb-chain-args,$(partition))))
+    $(if $(BOARD_AVB_$(call to-upper,$(partition))_KEY_PATH),\
+        $(eval $(call check-and-set-custom-avb-chain-args,$(partition)))))
 endif
 
 # Add kernel cmdline descriptor for kernel to mount system.img as root with
@@ -4447,8 +4449,9 @@ define extract-avb-chain-public-keys
         --output $(1)/vbmeta_vendor.avbpubkey)
   $(if $(BOARD_CUSTOMIMAGES_PARTITION_LIST),\
     $(hide) $(foreach partition,$(BOARD_CUSTOMIMAGES_PARTITION_LIST), \
+        $(if $(BOARD_AVB_$(call to-upper,$(partition))_KEY_PATH),\
         $(AVBTOOL) extract_public_key --key $(BOARD_AVB_$(call to-upper,$(partition))_KEY_PATH) \
-            --output $(1)/$(partition).avbpubkey;))
+                --output $(1)/$(partition).avbpubkey;)))
 endef
 
 # Builds a chained VBMeta image. This VBMeta image will contain the descriptors for the partitions
@@ -5250,11 +5253,23 @@ endif # BOARD_AVB_RECOVERY_KEY_PATH
 ifneq (,$(strip $(BOARD_CUSTOMIMAGES_PARTITION_LIST)))
 	$(hide) echo "avb_custom_images_partition_list=$(BOARD_CUSTOMIMAGES_PARTITION_LIST)" >> $@
 	$(hide) $(foreach partition,$(BOARD_CUSTOMIMAGES_PARTITION_LIST), \
+	    $(if $(BOARD_AVB_ENABLE),\
+	        $(if $(BOARD_AVB_$(call to-upper,$(partition))_KEY_PATH), \
 	    echo "avb_$(partition)_key_path=$(BOARD_AVB_$(call to-upper,$(partition))_KEY_PATH)"  >> $@; \
 	    echo "avb_$(partition)_algorithm=$(BOARD_AVB_$(call to-upper,$(partition))_ALGORITHM)"  >> $@; \
-	    echo "avb_$(partition)_add_hashtree_footer_args=$(BOARD_AVB_$(call to-upper,$(partition))_ADD_HASHTREE_FOOTER_ARGS)"  >> $@; \
 	    echo "avb_$(partition)_rollback_index_location=$(BOARD_AVB_$(call to-upper,$(partition))_ROLLBACK_INDEX_LOCATION)"  >> $@; \
+	    )) \
+	    $(if $(BOARD_AVB_ENABLE),\
+	        echo "avb_$(partition)_hashtree_enable=$(BOARD_AVB_ENABLE)"  >> $@; \
+	        echo "avb_$(partition)_add_hashtree_footer_args=$(BOARD_AVB_$(call to-upper,$(partition))_ADD_HASHTREE_FOOTER_ARGS)"  >> $@; \
+	    ) \
+	    $(if $(BUILDING_$(call to-upper,$(partition))_IMAGE),\
 	    echo "avb_$(partition)_partition_size=$(BOARD_AVB_$(call to-upper,$(partition))_PARTITION_SIZE)"  >> $@; \
+	        echo "$(partition)_fs_type=$(BOARD_$(call to-upper,$(partition))IMAGE_FILE_SYSTEM_TYPE)" >> $@; \
+	        echo "$(partition)_size=$(BOARD_$(call to-upper,$(partition))IMAGE_PARTITION_SIZE)" >> $@; \
+	        echo "$(partition)_selinux_fc=$(SELINUX_FC)" >> $@; \
+	        echo "building_$(partition)_image=$(BUILDING_$(call to-upper,$(partition))_IMAGE)" >> $@; \
+	    ) \
 	    echo "avb_$(partition)_image_list=$(foreach image,$(BOARD_AVB_$(call to-upper,$(partition))_IMAGE_LIST),$(notdir $(image)))" >> $@;)
 endif # BOARD_CUSTOMIMAGES_PARTITION_LIST
 ifneq (,$(strip $(BOARD_AVB_VBMETA_SYSTEM)))
@@ -5835,6 +5850,14 @@ ifdef BUILDING_ODM_IMAGE
 	$(hide) $(call package_files-copy-root, \
 	    $(TARGET_OUT_ODM),$(zip_root)/ODM)
 endif
+ifneq (,$(strip $(BOARD_CUSTOMIMAGES_PARTITION_LIST)))
+	$(hide) $(foreach partition,$(BOARD_CUSTOMIMAGES_PARTITION_LIST), \
+	    $(if $(BUILDING_$(call to-upper,$(partition))_IMAGE),\
+	        $(call package_files-copy-root, \
+	        $(call intermediates-dir-for,PACKAGING,$(partition))/$(partition),\
+	        $(zip_root)/$(call to-upper,$(partition))); \
+	    ))
+endif
 ifdef BUILDING_VENDOR_DLKM_IMAGE
 	@# Contents of the vendor_dlkm image
 	$(hide) $(call package_files-copy-root, \
@@ -6024,6 +6047,13 @@ ifdef BUILDING_SYSTEM_EXT_IMAGE
 endif
 ifdef BUILDING_ODM_IMAGE
 	$(hide) $(call fs_config,$(zip_root)/ODM,odm/) > $(zip_root)/META/odm_filesystem_config.txt
+endif
+ifneq ($(strip $(BOARD_CUSTOMIMAGES_PARTITION_LIST)),)
+	$(hide) $(foreach partition,$(BOARD_CUSTOMIMAGES_PARTITION_LIST), \
+	    $(if $(BUILDING_$(call to-upper,$(partition))_IMAGE),\
+	        cp -f $(call intermediates-dir-for,PACKAGING,$(partition))/image_info.txt $(zip_root)/META/$(partition)_image_info.txt; \
+	        $(call fs_config,$(zip_root)/$(call to-upper,$(partition)),$(partition)/) > $(zip_root)/META/$(partition)_filesystem_config.txt; \
+	    ))
 endif
 ifdef BUILDING_VENDOR_DLKM_IMAGE
 	$(hide) $(call fs_config,$(zip_root)/VENDOR_DLKM,vendor_dlkm/) > $(zip_root)/META/vendor_dlkm_filesystem_config.txt

@@ -691,6 +691,9 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
       "vendor_dlkm",
   ])
 
+  custom_partitions = glob_dict.get(
+      "avb_custom_images_partition_list", "").strip().split()
+  ro_mount_points.update(custom_partitions)
   # Tuple layout: (readonly, specific prop, general prop)
   fmt_props = (
       # Generic first, then specific file type.
@@ -771,6 +774,8 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
     copy_prop("needs_casefold", "needs_casefold")
     copy_prop("needs_projid", "needs_projid")
     copy_prop("needs_compress", "needs_compress")
+  elif mount_point in custom_partitions:
+    copy_prop("avb_custom_images_partition_list", "avb_custom_images_partition_list")
   d["partition_name"] = mount_point
   return d
 
@@ -815,6 +820,11 @@ def GlobalDictFromImageProp(image_prop, mount_point):
     copy_prop("partition_size", "product_size")
   elif mount_point == "system_ext":
     copy_prop("partition_size", "system_ext_size")
+  else:
+    custom_partitions = image_prop.get(
+        "avb_custom_images_partition_list", "").strip().split()
+    if mount_point in custom_partitions:
+      copy_prop("partition_size", "{}_size".format(mount_point))
   return d
 
 
@@ -865,8 +875,15 @@ def main(argv):
     elif image_filename == "system_ext.img":
       mount_point = "system_ext"
     else:
-      logger.error("Unknown image file name %s", image_filename)
-      sys.exit(1)
+      # consider custom partition
+      custom_partitions = glob_dict.get(
+        "avb_custom_images_partition_list", "").strip().split()
+      partition = os.path.splitext(image_filename)
+      if partition in custom_partitions:
+        mount_point = partition
+      else:
+        logger.error("Unknown image file name %s", image_filename)
+        sys.exit(1)
 
     image_properties = ImagePropFromGlobalDict(glob_dict, mount_point)
 
