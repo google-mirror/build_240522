@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "314469d0_65073101",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T03:48:41Z",
+      "side": 1,
+      "message": "Ack\n\nThat\u0027s a var so that it is possible to override from the binary using a flag if needed.",
+      "parentUuid": "17abd9f1_34d11758",
+      "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e32d3452_53b9c979",
@@ -52,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8806b338_511c70ea",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T03:48:41Z",
+      "side": 1,
+      "message": "Ack\n\nIf it ever becomes a performance issue, we can add a flag to the binary and measure empirically.",
+      "parentUuid": "e32d3452_53b9c979",
+      "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13602e9c_b7d09907",
@@ -65,6 +101,24 @@
       "writtenOn": "2022-10-17T23:48:35Z",
       "side": 1,
       "message": "I think this already exists in in the stdlib as `testing.MapFS`.",
+      "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc212884_81ca388a",
+        "filename": "tools/compliance/testfs/testfs.go",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T03:48:41Z",
+      "side": 1,
+      "message": "Open and ReadAll don\u0027t seem to work with fstest.MapFS or more specifically with fstest.MapFile.",
+      "parentUuid": "13602e9c_b7d09907",
       "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

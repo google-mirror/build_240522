@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0e86401_7d845014",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T03:48:41Z",
+      "side": 1,
+      "message": "I split out the final breaking change to noticeindex into a separate commit so that I can send a PSA to the keystone folks with the `repo forall ...` test to run ahead of the breaking change.\n\nThe only branch between stage-aosp-master and master is tm-qpr-dev-plus-aosp now, and I already ran the `repo forall ...` there.",
+      "parentUuid": "9bddedb9_80a7cd43",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ba7a34f_fb9f12d4",
@@ -212,6 +230,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a921e28_b10d0bed",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T03:48:41Z",
+      "side": 1,
+      "message": "I don\u0027t find the channel at all readable, but I suppose if I put the close and \u003c- inside finish() and wait() methods most of my objections disappear.",
+      "parentUuid": "00b80cf3_f209f611",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13f2e1f1_d33bc64a",
@@ -296,6 +332,24 @@
       "side": 1,
       "message": "It\u0027s impossible to look at this code and be sure the synchronization is correct, because you are constantly having to lock and unlock the locks.  You also have a secondary per-project synchronization in the waitgroups.  Using a channel solves both, and matches the \"synchronization by communication\" style that works well in Go.  Readers read the `done` channel, which will block.  The single, one-time writer closes the `done` channel, which will unblock the readers.  That single action both provides all the barriers necessary to ensure the writes are visible to the readers and signals that the writer no longer owns the memory.\n\nIdiomatic go very rarely uses mutexes, there are almost always better ways to solve synchronization.\n\nRe: sync.Map, the godoc also says \"The Map type is optimized for two common use cases: (1) when the entry for a given key is only ever written once but read many times, as in caches that only grow...\".  That is exactly what you are doing here.  It is certainly possible to use a mutex to protect the map, and that plus the pointer to a struct in the map would still be much easier to follow than this, but I generally find the more explicit synchronization you can remove in favor of abstracted types that handle internally it the better.  The loss of type safety is unfortunate, and will improve in the future as the Go standard library uses generics more, but for this case where there is exactly one type in the map it is a small downside.  And with ownership of each struct protected by the `done` channel there are no other invariants to be maintained on the map content.\n\nThere are 3 changes here I\u0027m requesting, and I think only one is really important: store a pointer to a struct in a single map.  This simplifies locking by only requiring locking at the beginning, when you are checking if the map already has an entry for a project, adding it if not.  After that everything is operating on the pointer and never has to go back to the map, so never needs the map lock.\n \nThe second suggestion is to use a sync.Map.  That has upsides (it handles all the synchronization), but also downsides (loss of type safety).\n\nThe third suggestion is to replace the waitgroups with channels.",
       "parentUuid": "3daad5ac_39599930",
+      "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c583ccdc_dc72db33",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T03:48:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "104b09d6_ead40251",
       "revId": "fa9a3289e83109052970dcd76268b5f60d6fd374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
