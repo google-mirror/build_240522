@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "104e9e7d_11e713ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T20:21:38Z",
+      "side": 1,
+      "message": "PTAL",
+      "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1796a25e_9fa73ef9",
@@ -71,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca309289_d2cbb5ca",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T20:21:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1fd911f_24e148d0",
+      "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a28b22ea_42405142",
@@ -120,6 +155,24 @@
       "side": 1,
       "message": "I expect going back to the map for every project to be more expensive than the channel allocation above.  A map lookup requires both synchronization and hashing the project string.",
       "parentUuid": "1f87bfb1_cdc63abb",
+      "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "696201a2_3450687f",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T20:21:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaffcff7_46013b06",
       "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
