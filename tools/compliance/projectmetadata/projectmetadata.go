@@ -120,11 +120,13 @@ func (ix *Index) MetadataForProjects(projects ...string) ([]*ProjectMetadata, er
 	}
 	// Identify the projects that have never been read
 	projectsToRead := make([]*projectIndex, 0, len(projects))
+	projectIndexes := make([]*projectIndex, 0, len(projects))
 	for _, p := range projects {
-		if pi, loaded := ix.projects.LoadOrStore(p, &projectIndex{project: p}); !loaded {
+		pi, loaded := ix.projects.LoadOrStore(p, &projectIndex{project: p, done: make(chan struct{})})
+		if !loaded {
 			projectsToRead = append(projectsToRead, pi.(*projectIndex))
-			pi.(*projectIndex).done = make(chan struct{})
 		}
+		projectIndexes = append(projectIndexes, pi.(*projectIndex))
 	}
 	// findMeta locates and reads the appropriate METADATA file, if any.
 	findMeta := func(pi *projectIndex) {
@@ -161,14 +163,13 @@ func (ix *Index) MetadataForProjects(projects ...string) ([]*ProjectMetadata, er
 	// Wait until all of the projects have been read.
 	var msg strings.Builder
 	result := make([]*ProjectMetadata, 0, len(projects))
-	for _, p := range projects {
-		pi, _ := ix.projects.Load(p)
-		pi.(*projectIndex).wait()
+	for _, pi := range projectIndexes {
+		pi.wait()
 		// Combine any errors into a single error.
-		if pi.(*projectIndex).err != nil {
-			fmt.Fprintf(&msg, "  %v\n", pi.(*projectIndex).err)
-		} else if pi.(*projectIndex).pm != nil {
-			result = append(result, pi.(*projectIndex).pm)
+		if pi.err != nil {
+			fmt.Fprintf(&msg, "  %v\n", pi.err)
+		} else if pi.pm != nil {
+			result = append(result, pi.pm)
 		}
 	}
 	if msg.Len() > 0 {
