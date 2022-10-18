@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97148715_6f47d55d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-10-18T21:41:55Z",
+      "side": 1,
+      "message": "We should remove the file too - only leave stuff laying around that\u0027s used. It\u0027ll always exist in old branches.",
+      "revId": "09741e4e4dfc2a0a3784c2fbd5f2125b177c4ade",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
