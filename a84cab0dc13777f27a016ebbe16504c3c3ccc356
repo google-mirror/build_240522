@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1796a25e_9fa73ef9",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-18T16:45:30Z",
+      "side": 1,
+      "message": "This needs to happen before `LoadOrStore`, otherwise one call to `MetadataForProjects` could add the `*projectIndex` with a nil channel to the map, and another call to `MetadataForProjects` could read it from the map and try to use it before the first call initializes it.",
+      "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a28b22ea_42405142",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-18T16:45:30Z",
+      "side": 1,
+      "message": "There\u0027s no need to go back to the map here either, you can put the `pi` returned by `LoadOrStore` into a list.",
+      "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

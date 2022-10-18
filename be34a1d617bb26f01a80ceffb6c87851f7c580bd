@@ -157,6 +157,24 @@
       "parentUuid": "40e0257f_a5ff124d",
       "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c42d5c3_f451b007",
+        "filename": "tools/compliance/testfs/testfs.go",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-18T16:45:30Z",
+      "side": 1,
+      "message": "Ack.  I didn\u0027t notice this is just moving the code, so fine to leave as is for now.\n\nopenedMapFile has an offset that should support multiple reads, and not supporting Open and ReadAll would make the whole thing pretty useless, so there\u0027s probably a way to make it work.  Can you upload the MapFS changes to projectmetadata_test.go as a separate CL and I can take a look some time?",
+      "parentUuid": "1407bd08_3fb1c7c4",
+      "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
