@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b689a681_bf1611eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-18T23:57:49Z",
+      "side": 1,
+      "message": "Sorry. I forgot to `git rebase -i` and the patchset ended up in the follow-on change. Fixed now.",
+      "revId": "dc62de4760f47b65800d2037d6210573316d3151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
