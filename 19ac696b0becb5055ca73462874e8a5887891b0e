@@ -16,6 +16,97 @@
       "message": "PTAL",
       "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1d769d2_f0c2665f",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 15
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-18T05:21:53Z",
+      "side": 1,
+      "message": "If you init this in NewIndex then you don\u0027t need to protect it with the lock",
+      "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "009748a0_144e0cdc",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 15
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-18T05:21:53Z",
+      "side": 1,
+      "message": "If you use `LoadOrStore` to atomically insert a new *projectIndex if it doesn\u0027t already exist you don\u0027t need to protect the map with a lock.",
+      "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df2ab1b2_bac2556b",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 15
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-18T05:21:53Z",
+      "side": 1,
+      "message": "Use a list of `*projectIndex` here so that you don\u0027t have to go back to the map.  Put the `p` string into `projectIndex`.",
+      "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bdaa3fe_1d5921ff",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 15
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-18T05:21:53Z",
+      "side": 1,
+      "message": "take a `*projectIndex` instead of the project string so you don\u0027t have to go back to the map",
+      "range": {
+        "startLine": 139,
+        "startChar": 14,
+        "endLine": 139,
+        "endChar": 21
+      },
+      "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e88188c6_84255915",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 15
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-18T05:21:53Z",
+      "side": 1,
+      "message": "If you already have the `*projectIndex` here this can be `pi.pm, pi.err \u003d ix.readMetadataFile(pi, path)`",
+      "revId": "19ac696b0becb5055ca73462874e8a5887891b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

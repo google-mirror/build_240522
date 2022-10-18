@@ -121,6 +121,24 @@
       "parentUuid": "13602e9c_b7d09907",
       "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40e0257f_a5ff124d",
+        "filename": "tools/compliance/testfs/testfs.go",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-18T05:21:53Z",
+      "side": 1,
+      "message": "What do you mean \"don\u0027t seem to work\"?  That seems like it would defeat the point of `fstest.MapFS`.  It claims to support `Open`: https://pkg.go.dev/testing/fstest#MapFS.Open",
+      "parentUuid": "cc212884_81ca388a",
+      "revId": "be34a1d617bb26f01a80ceffb6c87851f7c580bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
