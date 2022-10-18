@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1fd911f_24e148d0",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-18T17:53:37Z",
+      "side": 1,
+      "message": "Making a channel is cheap, this has zero element size and zero buffer depth, so its basically a single malloc, similar to the cost of creating the `*projectIndex`: https://cs.android.com/android/platform/superproject/+/master:prebuilts/go/linux-x86/src/runtime/chan.go;l\u003d72;drc\u003d1cbb82abab1e31bb6b63b0d1fda8071b9e72510e\n\nIf benchmarking shows these two allocations are an issue, then it would be simple enough to save and reuse the unused `*projectIndex` if `loaded \u003d\u003d true`.",
+      "parentUuid": "04a57a4e_da6fce1f",
+      "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a28b22ea_42405142",
         "filename": "tools/compliance/projectmetadata/projectmetadata.go",
         "patchSetId": 16
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Ack\n\nThere is also no reason not to. I don\u0027t see the need for allocating another array.",
       "parentUuid": "a28b22ea_42405142",
+      "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaffcff7_46013b06",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-18T17:53:37Z",
+      "side": 1,
+      "message": "I expect going back to the map for every project to be more expensive than the channel allocation above.  A map lookup requires both synchronization and hashing the project string.",
+      "parentUuid": "1f87bfb1_cdc63abb",
       "revId": "a84cab0dc13777f27a016ebbe16504c3c3ccc356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
