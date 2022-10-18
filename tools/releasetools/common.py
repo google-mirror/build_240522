@@ -930,6 +930,17 @@ class PartitionBuildProps(object):
     if placeholder_values:
       self.placeholder_values = copy.deepcopy(placeholder_values)
 
+  def __deepcopy__(self, memo):
+    cls = self.__class__
+    result = cls.__new__(cls)
+    memo[id(self)] = result
+    for k, v in self.__dict__.items():
+      if k == 'input_file':
+        setattr(result, k, v)
+      else:
+        setattr(result, k, copy.deepcopy(v, memo))
+    return result
+
   @staticmethod
   def FromDictionary(name, build_props):
     """Constructs an instance from a build prop dictionary."""
