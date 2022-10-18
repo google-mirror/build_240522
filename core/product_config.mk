@@ -314,6 +314,11 @@ define qualify-platform-jars
   $(foreach jar,$(1),$(if $(findstring :,$(jar)),,platform:)$(jar))
 endef
 
+ifneq (true,$(PRODUCT_AVF_ENABLED))
+  PRODUCT_BOOT_JARS += system_ext:android.system.virtualmachine.impl
+  PRODUCT_PACKAGES += android.system.virtualmachine.impl
+endif
+
 # Extra boot jars must be appended at the end after common boot jars.
 PRODUCT_BOOT_JARS += $(PRODUCT_BOOT_JARS_EXTRA)
 
