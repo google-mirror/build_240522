@@ -69,6 +69,24 @@
       "message": "Hi, Roman\n\nCould you please help give some description on why it\u0027s possible to remove this file now?\n\nthere are several devices that have the file there, can we remove for all of them?\n```\ndevice/linaro/dragonboard/compatibility_matrix.xml\ndevice/linaro/hikey/compatibility_matrix.xml\ndevice/generic/goldfish/compatibility_matrix.xml\ndevice/amlogic/yukawa/compatibility_matrix.xml\ndevice/google/coral/compatibility_matrix.xml\ndevice/google/trout/compatibility_matrix.xml\ndevice/google/gs101/compatibility_matrix.xml\ndevice/google/sunfish/compatibility_matrix.xml\ndevice/google/redbull/compatibility_matrix.xml\ndevice/ti/beagle_x15/compatibility_matrix.xml\n```",
       "revId": "09741e4e4dfc2a0a3784c2fbd5f2125b177c4ade",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82014140_432d03d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2022-10-19T01:07:39Z",
+      "side": 1,
+      "message": "Hi Yongqin, unfortunately I am not an expert here.",
+      "parentUuid": "be86014f_d157b44d",
+      "revId": "09741e4e4dfc2a0a3784c2fbd5f2125b177c4ade",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
