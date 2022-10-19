@@ -9,6 +9,17 @@
 # that isn't explicitly part of the API
 -dontskipnonpubliclibraryclasses -dontskipnonpubliclibraryclassmembers
 
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
+=======
+# Preserve line number information for debugging stack traces.
+-keepattributes SourceFile,LineNumberTable
+
+# Annotations are implemented as attributes, so we have to explicitly keep them.
+# Keep all runtime-visible annotations like RuntimeVisibleParameterAnnotations
+# and RuntimeVisibleTypeAnnotations, as well as associated defaults.
+-keepattributes RuntimeVisible*Annotation*,AnnotationDefault
+
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
 # For enumeration classes, see http://proguard.sourceforge.net/manual/examples.html#enumerations
 -keepclassmembers enum * {
     public static **[] values();

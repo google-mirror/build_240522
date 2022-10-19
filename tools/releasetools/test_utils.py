@@ -18,6 +18,11 @@
 Utils for running unittests.
 """
 
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
+=======
+import avbtool
+import logging
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
 import os
 import os.path
 import struct
@@ -31,6 +36,16 @@ def get_testdata_dir():
   current_dir = os.path.dirname(os.path.realpath(__file__))
   return os.path.join(current_dir, 'testdata')
 
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
+=======
+
+def get_current_dir():
+  """Returns the current dir, relative to the script dir."""
+  # The script dir is the one we want, which could be different from pwd.
+  current_dir = os.path.dirname(os.path.realpath(__file__))
+  return current_dir
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
+
 
 def get_search_path():
   """Returns the search path that has 'framework/signapk.jar' under."""
@@ -39,7 +54,7 @@ def get_search_path():
       # In relative to 'build/make/tools/releasetools' in the Android source.
       ['..'] * 4 + ['out', 'host', 'linux-x86'],
       # Or running the script unpacked from otatools.zip.
-      ['..']):
+          ['..']):
     full_path = os.path.realpath(os.path.join(current_dir, *path))
     signapk_path = os.path.realpath(
         os.path.join(full_path, 'framework', 'signapk.jar'))
@@ -48,7 +63,26 @@ def get_search_path():
   return None
 
 
-def construct_sparse_image(chunks):
+def append_avb_footer(file_path: str, partition_name: str = ""):
+  avb = avbtool.AvbTool()
+  try:
+    args = ["avbtool", "add_hashtree_footer", "--image", file_path,
+            "--partition_name", partition_name, "--do_not_generate_fec"]
+    avb.run(args)
+  except SystemExit:
+    raise ValueError(f"Failed to append hashtree footer {args}")
+
+
+def erase_avb_footer(file_path: str):
+  avb = avbtool.AvbTool()
+  try:
+    args = ["avbtool", "erase_footer", "--image", file_path]
+    avb.run(args)
+  except SystemExit:
+    raise ValueError(f"Failed to erase hashtree footer {args}")
+
+
+def construct_sparse_image(chunks, partition_name: str = ""):
   """Returns a sparse image file constructed from the given chunks.
 
   From system/core/libsparse/sparse_format.h.
@@ -109,4 +143,115 @@ def construct_sparse_image(chunks):
       if data_size != 0:
         fp.write(os.urandom(data_size))
 
+  append_avb_footer(sparse_image, partition_name)
   return sparse_image
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
+=======
+
+
+class MockScriptWriter(object):
+  """A class that mocks edify_generator.EdifyGenerator.
+
+  It simply pushes the incoming arguments onto script stack, which is to assert
+  the calls to EdifyGenerator functions.
+  """
+
+  def __init__(self, enable_comments=False):
+    self.lines = []
+    self.enable_comments = enable_comments
+
+  def Mount(self, *args):
+    self.lines.append(('Mount',) + args)
+
+  def AssertDevice(self, *args):
+    self.lines.append(('AssertDevice',) + args)
+
+  def AssertOemProperty(self, *args):
+    self.lines.append(('AssertOemProperty',) + args)
+
+  def AssertFingerprintOrThumbprint(self, *args):
+    self.lines.append(('AssertFingerprintOrThumbprint',) + args)
+
+  def AssertSomeFingerprint(self, *args):
+    self.lines.append(('AssertSomeFingerprint',) + args)
+
+  def AssertSomeThumbprint(self, *args):
+    self.lines.append(('AssertSomeThumbprint',) + args)
+
+  def Comment(self, comment):
+    if not self.enable_comments:
+      return
+    self.lines.append('# {}'.format(comment))
+
+  def AppendExtra(self, extra):
+    self.lines.append(extra)
+
+  def __str__(self):
+    return '\n'.join(self.lines)
+
+
+class ReleaseToolsTestCase(unittest.TestCase):
+  """A common base class for all the releasetools unittests."""
+
+  def tearDown(self):
+    common.Cleanup()
+
+
+class PropertyFilesTestCase(ReleaseToolsTestCase):
+
+  @staticmethod
+  def construct_zip_package(entries):
+    zip_file = common.MakeTempFile(suffix='.zip')
+    with zipfile.ZipFile(zip_file, 'w', allowZip64=True) as zip_fp:
+      for entry in entries:
+        zip_fp.writestr(
+            entry,
+            entry.replace('.', '-').upper(),
+            zipfile.ZIP_STORED)
+    return zip_file
+
+  @staticmethod
+  def _parse_property_files_string(data):
+    result = {}
+    for token in data.split(','):
+      name, info = token.split(':', 1)
+      result[name] = info
+    return result
+
+  def setUp(self):
+    common.OPTIONS.no_signing = False
+
+  def _verify_entries(self, input_file, tokens, entries):
+    for entry in entries:
+      offset, size = map(int, tokens[entry].split(':'))
+      with open(input_file, 'rb') as input_fp:
+        input_fp.seek(offset)
+        if entry == 'metadata':
+          expected = b'META-INF/COM/ANDROID/METADATA'
+        elif entry == 'metadata.pb':
+          expected = b'META-INF/COM/ANDROID/METADATA-PB'
+        else:
+          expected = entry.replace('.', '-').upper().encode()
+        self.assertEqual(expected, input_fp.read(size))
+
+
+if __name__ == '__main__':
+  # We only want to run tests from the top level directory. Unfortunately the
+  # pattern option of unittest.discover, internally using fnmatch, doesn't
+  # provide a good API to filter the test files based on directory. So we do an
+  # os walk and load them manually.
+  test_modules = []
+  base_path = os.path.dirname(os.path.realpath(__file__))
+  test_dirs = [base_path] + [
+      os.path.join(base_path, subdir) for subdir in ALLOWED_TEST_SUBDIRS
+  ]
+  for dirpath, _, files in os.walk(base_path):
+    for fn in files:
+      if dirpath in test_dirs and re.match('test_.*\\.py$', fn):
+        test_modules.append(fn[:-3])
+
+  test_suite = unittest.TestLoader().loadTestsFromNames(test_modules)
+
+  # atest needs a verbosity level of >= 2 to correctly parse the result.
+  unittest.TextTestRunner(verbosity=2).run(test_suite)
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])

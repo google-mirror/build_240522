@@ -45,6 +45,7 @@ Usage:  add_img_to_target_files [flag] target_files
 
 from __future__ import print_function
 
+import avbtool
 import datetime
 import os
 import shlex
@@ -56,8 +57,18 @@ import zipfile
 
 import build_image
 import common
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
 import rangelib
 import sparse_img
+=======
+import verity_utils
+import ota_metadata_pb2
+import rangelib
+import sparse_img
+
+from apex_utils import GetApexInfoFromTargetFiles
+from common import ZipDelete, PARTITIONS_WITH_CARE_MAP, ExternalError, RunAndCheckOutput, IsSparseImage, MakeTempFile, ZipWrite
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
 
 if sys.hexversion < 0x02070000:
   print("Python 2.7 or newer is required.", file=sys.stderr)
@@ -75,6 +86,159 @@ OPTIONS.is_signing = False
 
 # Partitions that should have their care_map added to META/care_map.txt.
 PARTITIONS_WITH_CARE_MAP = ('system', 'vendor', 'product')
+
+
+def ParseAvbFooter(img_path) -> avbtool.AvbFooter:
+  with open(img_path, 'rb') as fp:
+    fp.seek(-avbtool.AvbFooter.SIZE, os.SEEK_END)
+    data = fp.read(avbtool.AvbFooter.SIZE)
+    return avbtool.AvbFooter(data)
+
+
+def GetCareMap(which, imgname):
+  """Returns the care_map string for the given partition.
+
+  Args:
+    which: The partition name, must be listed in PARTITIONS_WITH_CARE_MAP.
+    imgname: The filename of the image.
+
+  Returns:
+    (which, care_map_ranges): care_map_ranges is the raw string of the care_map
+    RangeSet; or None.
+  """
+  assert which in PARTITIONS_WITH_CARE_MAP
+
+  is_sparse_img = IsSparseImage(imgname)
+  unsparsed_image_size = os.path.getsize(imgname)
+
+  # A verified image contains original image + hash tree data + FEC data
+  # + AVB footer, all concatenated together. The caremap specifies a range
+  # of blocks that update_verifier should read on top of dm-verity device
+  # to verify correctness of OTA updates. When reading off of dm-verity device,
+  # the hashtree and FEC part of image isn't available. So caremap should
+  # only contain the original image blocks.
+  try:
+    avbfooter = None
+    if is_sparse_img:
+      with tempfile.NamedTemporaryFile() as tmpfile:
+        img = sparse_img.SparseImage(imgname)
+        unsparsed_image_size = img.total_blocks * img.blocksize
+        for data in img.ReadBlocks(img.total_blocks - 1, 1):
+          tmpfile.write(data)
+        tmpfile.flush()
+        avbfooter = ParseAvbFooter(tmpfile.name)
+    else:
+      avbfooter = ParseAvbFooter(imgname)
+  except LookupError as e:
+    logger.warning(
+        "Failed to parse avbfooter for partition %s image %s, %s", which, imgname, e)
+    return None
+
+  image_size = avbfooter.original_image_size
+  assert image_size < unsparsed_image_size, f"AVB footer's original image size {image_size} is larger than or equal to image size on disk {unsparsed_image_size}, this can't happen because a verified image = original image + hash tree data + FEC data + avbfooter."
+  assert image_size > 0
+
+  image_blocks = int(image_size) // 4096 - 1
+  # It's OK for image_blocks to be 0, because care map ranges are inclusive.
+  # So 0-0 means "just block 0", which is valid.
+  assert image_blocks >= 0, "blocks for {} must be non-negative, image size: {}".format(
+      which, image_size)
+
+  # For sparse images, we will only check the blocks that are listed in the care
+  # map, i.e. the ones with meaningful data.
+  if is_sparse_img:
+    simg = sparse_img.SparseImage(imgname)
+    care_map_ranges = simg.care_map.intersect(
+        rangelib.RangeSet("0-{}".format(image_blocks)))
+
+  # Otherwise for non-sparse images, we read all the blocks in the filesystem
+  # image.
+  else:
+    care_map_ranges = rangelib.RangeSet("0-{}".format(image_blocks))
+
+  return [which, care_map_ranges.to_string_raw()]
+
+
+def AddCareMapForAbOta(output_file, ab_partitions, image_paths):
+  """Generates and adds care_map.pb for a/b partition that has care_map.
+
+  Args:
+    output_file: The output zip file (needs to be already open),
+        or file path to write care_map.pb.
+    ab_partitions: The list of A/B partitions.
+    image_paths: A map from the partition name to the image path.
+  """
+  if not output_file:
+    raise ExternalError('Expected output_file for AddCareMapForAbOta')
+
+  care_map_list = []
+  for partition in ab_partitions:
+    partition = partition.strip()
+    if partition not in PARTITIONS_WITH_CARE_MAP:
+      continue
+
+    verity_block_device = "{}_verity_block_device".format(partition)
+    avb_hashtree_enable = "avb_{}_hashtree_enable".format(partition)
+    if (verity_block_device in OPTIONS.info_dict or
+            OPTIONS.info_dict.get(avb_hashtree_enable) == "true"):
+      if partition not in image_paths:
+        logger.warning('Potential partition with care_map missing from images: %s',
+                       partition)
+        continue
+      image_path = image_paths[partition]
+      if not os.path.exists(image_path):
+        raise ExternalError('Expected image at path {}'.format(image_path))
+
+      care_map = GetCareMap(partition, image_path)
+      if not care_map:
+        continue
+      care_map_list += care_map
+
+      # adds fingerprint field to the care_map
+      # TODO(xunchang) revisit the fingerprint calculation for care_map.
+      partition_props = OPTIONS.info_dict.get(partition + ".build.prop")
+      prop_name_list = ["ro.{}.build.fingerprint".format(partition),
+                        "ro.{}.build.thumbprint".format(partition)]
+
+      present_props = [x for x in prop_name_list if
+                       partition_props and partition_props.GetProp(x)]
+      if not present_props:
+        logger.warning(
+            "fingerprint is not present for partition %s", partition)
+        property_id, fingerprint = "unknown", "unknown"
+      else:
+        property_id = present_props[0]
+        fingerprint = partition_props.GetProp(property_id)
+      care_map_list += [property_id, fingerprint]
+
+  if not care_map_list:
+    return
+
+  # Converts the list into proto buf message by calling care_map_generator; and
+  # writes the result to a temp file.
+  temp_care_map_text = MakeTempFile(prefix="caremap_text-",
+                                           suffix=".txt")
+  with open(temp_care_map_text, 'w') as text_file:
+    text_file.write('\n'.join(care_map_list))
+
+  temp_care_map = MakeTempFile(prefix="caremap-", suffix=".pb")
+  care_map_gen_cmd = ["care_map_generator", temp_care_map_text, temp_care_map]
+  RunAndCheckOutput(care_map_gen_cmd)
+
+  if not isinstance(output_file, zipfile.ZipFile):
+    shutil.copy(temp_care_map, output_file)
+    return
+  # output_file is a zip file
+  care_map_path = "META/care_map.pb"
+  if care_map_path in output_file.namelist():
+    # Copy the temp file into the OPTIONS.input_tmp dir and update the
+    # replace_updated_files_list used by add_img_to_target_files
+    if not OPTIONS.replace_updated_files_list:
+      OPTIONS.replace_updated_files_list = []
+    shutil.copy(temp_care_map, os.path.join(OPTIONS.input_tmp, care_map_path))
+    OPTIONS.replace_updated_files_list.append(care_map_path)
+  else:
+    ZipWrite(output_file, temp_care_map, arcname=care_map_path)
 
 
 class OutputFile(object):
@@ -196,6 +360,91 @@ def AddProduct(output_zip):
   return img.name
 
 
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
+=======
+def AddSystemExt(output_zip):
+  """Turn the contents of SYSTEM_EXT into a system_ext image and store it in
+  output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES",
+                   "system_ext.img")
+  if os.path.exists(img.name):
+    logger.info("system_ext.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "system_ext.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "system_ext", img,
+      block_list=block_list)
+  return img.name
+
+
+def AddOdm(output_zip):
+  """Turn the contents of ODM into an odm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "odm.img")
+  if os.path.exists(img.name):
+    logger.info("odm.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "odm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "odm", img,
+      block_list=block_list)
+  return img.name
+
+
+def AddVendorDlkm(output_zip):
+  """Turn the contents of VENDOR_DLKM into an vendor_dlkm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "vendor_dlkm.img")
+  if os.path.exists(img.name):
+    logger.info("vendor_dlkm.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "vendor_dlkm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "vendor_dlkm", img,
+      block_list=block_list)
+  return img.name
+
+
+def AddOdmDlkm(output_zip):
+  """Turn the contents of OdmDlkm into an odm_dlkm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "odm_dlkm.img")
+  if os.path.exists(img.name):
+    logger.info("odm_dlkm.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "odm_dlkm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "odm_dlkm", img,
+      block_list=block_list)
+  return img.name
+
+
+def AddSystemDlkm(output_zip):
+  """Turn the contents of SystemDlkm into an system_dlkm image and store it in output_zip."""
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "IMAGES", "system_dlkm.img")
+  if os.path.exists(img.name):
+    logger.info("system_dlkm.img already exists; no need to rebuild...")
+    return img.name
+
+  block_list = OutputFile(
+      output_zip, OPTIONS.input_tmp, "IMAGES", "system_dlkm.map")
+  CreateImage(
+      OPTIONS.input_tmp, OPTIONS.info_dict, "system_dlkm", img,
+      block_list=block_list)
+  return img.name
+
+
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
 def AddDtbo(output_zip):
   """Adds the DTBO image.
 
@@ -647,6 +896,14 @@ def AddImagesToTargetFiles(filename):
   OPTIONS.info_dict = common.LoadInfoDict(OPTIONS.input_tmp, OPTIONS.input_tmp)
 
   has_recovery = OPTIONS.info_dict.get("no_recovery") != "true"
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
+=======
+  has_boot = OPTIONS.info_dict.get("no_boot") != "true"
+  has_init_boot = OPTIONS.info_dict.get("init_boot") == "true"
+  has_vendor_boot = OPTIONS.info_dict.get("vendor_boot") == "true"
+  has_vendor_kernel_boot = OPTIONS.info_dict.get(
+      "vendor_kernel_boot") == "true"
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
 
   # {vendor,product}.img is unlike system.img or system_other.img. Because it
   # could be built from source, or dropped into target_files.zip as a prebuilt
@@ -684,6 +941,7 @@ def AddImagesToTargetFiles(filename):
   def banner(s):
     print("\n\n++++ " + s + " ++++\n\n")
 
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
   banner("boot")
   # common.GetBootableImage() returns the image directly if present.
   boot_image = common.GetBootableImage(
@@ -695,6 +953,67 @@ def AddImagesToTargetFiles(filename):
       boot_image.WriteToDir(OPTIONS.input_tmp)
       if output_zip:
         boot_image.AddToZip(output_zip)
+=======
+  boot_image = None
+  if has_boot:
+    banner("boot")
+    boot_images = OPTIONS.info_dict.get("boot_images")
+    if boot_images is None:
+      boot_images = "boot.img"
+    for index, b in enumerate(boot_images.split()):
+      # common.GetBootableImage() returns the image directly if present.
+      boot_image = common.GetBootableImage(
+          "IMAGES/" + b, b, OPTIONS.input_tmp, "BOOT")
+      # boot.img may be unavailable in some targets (e.g. aosp_arm64).
+      if boot_image:
+        boot_image_path = os.path.join(OPTIONS.input_tmp, "IMAGES", b)
+        # Although multiple boot images can be generated, include the image
+        # descriptor of only the first boot image in vbmeta
+        if index == 0:
+          partitions['boot'] = boot_image_path
+        if not os.path.exists(boot_image_path):
+          boot_image.WriteToDir(OPTIONS.input_tmp)
+          if output_zip:
+            boot_image.AddToZip(output_zip)
+
+  if has_init_boot:
+    banner("init_boot")
+    init_boot_image = common.GetBootableImage(
+        "IMAGES/init_boot.img", "init_boot.img", OPTIONS.input_tmp, "INIT_BOOT")
+    if init_boot_image:
+      partitions['init_boot'] = os.path.join(
+          OPTIONS.input_tmp, "IMAGES", "init_boot.img")
+      if not os.path.exists(partitions['init_boot']):
+        init_boot_image.WriteToDir(OPTIONS.input_tmp)
+        if output_zip:
+          init_boot_image.AddToZip(output_zip)
+
+  if has_vendor_boot:
+    banner("vendor_boot")
+    vendor_boot_image = common.GetVendorBootImage(
+        "IMAGES/vendor_boot.img", "vendor_boot.img", OPTIONS.input_tmp,
+        "VENDOR_BOOT")
+    if vendor_boot_image:
+      partitions['vendor_boot'] = os.path.join(OPTIONS.input_tmp, "IMAGES",
+                                               "vendor_boot.img")
+      if not os.path.exists(partitions['vendor_boot']):
+        vendor_boot_image.WriteToDir(OPTIONS.input_tmp)
+        if output_zip:
+          vendor_boot_image.AddToZip(output_zip)
+
+  if has_vendor_kernel_boot:
+    banner("vendor_kernel_boot")
+    vendor_kernel_boot_image = common.GetVendorKernelBootImage(
+        "IMAGES/vendor_kernel_boot.img", "vendor_kernel_boot.img", OPTIONS.input_tmp,
+        "VENDOR_KERNEL_BOOT")
+    if vendor_kernel_boot_image:
+      partitions['vendor_kernel_boot'] = os.path.join(OPTIONS.input_tmp, "IMAGES",
+                                                      "vendor_kernel_boot.img")
+      if not os.path.exists(partitions['vendor_kernel_boot']):
+        vendor_kernel_boot_image.WriteToDir(OPTIONS.input_tmp)
+        if output_zip:
+          vendor_kernel_boot_image.AddToZip(output_zip)
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
 
   recovery_image = None
   if has_recovery:
@@ -786,6 +1105,40 @@ def AddImagesToTargetFiles(filename):
                           OPTIONS.replace_updated_files_list)
 
 
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
+=======
+def OptimizeCompressedEntries(zipfile_path):
+  """Convert files that do not compress well to uncompressed storage
+
+  EROFS images tend to be compressed already, so compressing them again
+  yields little space savings. Leaving them uncompressed will make
+  downstream tooling's job easier, and save compute time.
+  """
+  if not zipfile.is_zipfile(zipfile_path):
+    return
+  entries_to_store = []
+  with tempfile.TemporaryDirectory() as tmpdir:
+    with zipfile.ZipFile(zipfile_path, "r", allowZip64=True) as zfp:
+      for zinfo in zfp.filelist:
+        if not zinfo.filename.startswith("IMAGES/") and not zinfo.filename.startswith("META"):
+          continue
+        # Don't try to store userdata.img uncompressed, it's usually huge.
+        if zinfo.filename.endswith("userdata.img"):
+          continue
+        if zinfo.compress_size > zinfo.file_size * 0.80 and zinfo.compress_type != zipfile.ZIP_STORED:
+          entries_to_store.append(zinfo)
+          zfp.extract(zinfo, tmpdir)
+    if len(entries_to_store) == 0:
+      return
+    # Remove these entries, then re-add them as ZIP_STORED
+    ZipDelete(zipfile_path, [entry.filename for entry in entries_to_store])
+    with zipfile.ZipFile(zipfile_path, "a", allowZip64=True) as zfp:
+      for entry in entries_to_store:
+        zfp.write(os.path.join(tmpdir, entry.filename),
+                  entry.filename, compress_type=zipfile.ZIP_STORED)
+
+
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
 def main(argv):
   def option_handler(o, a):
     if o in ("-a", "--add_missing"):

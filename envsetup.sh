@@ -358,7 +358,80 @@ function addcompletions()
         done
     fi
 
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
     complete -C "bit --tab" bit
+=======
+    complete -F _complete_android_module_names pathmod
+    complete -F _complete_android_module_names gomod
+    complete -F _complete_android_module_names outmod
+    complete -F _complete_android_module_names installmod
+    complete -F _complete_android_module_names bmod
+    complete -F _complete_android_module_names m
+}
+
+function multitree_lunch_help()
+{
+    echo "usage: lunch PRODUCT-VARIANT" 1>&2
+    echo "    Set up android build environment based on a product short name and variant" 1>&2
+    echo 1>&2
+    echo "lunch COMBO_FILE VARIANT" 1>&2
+    echo "    Set up android build environment based on a specific lunch combo file" 1>&2
+    echo "    and variant." 1>&2
+    echo 1>&2
+    echo "lunch --print [CONFIG]" 1>&2
+    echo "    Print the contents of a configuration.  If CONFIG is supplied, that config" 1>&2
+    echo "    will be flattened and printed.  If CONFIG is not supplied, the currently" 1>&2
+    echo "    selected config will be printed.  Returns 0 on success or nonzero on error." 1>&2
+    echo 1>&2
+    echo "lunch --list" 1>&2
+    echo "    List all possible combo files available in the current tree" 1>&2
+    echo 1>&2
+    echo "lunch --help" 1>&2
+    echo "lunch -h" 1>&2
+    echo "    Prints this message." 1>&2
+}
+
+function multitree_lunch()
+{
+    local code
+    local results
+    # Lunch must be run in the topdir, but this way we get a clear error
+    # message, instead of FileNotFound.
+    local T=$(multitree_gettop)
+    if [ -n "$T" ]; then
+      "$T/orchestrator/build/orchestrator/core/lunch.py" "$@"
+    else
+      _multitree_lunch_error
+      return 1
+    fi
+    if $(echo "$1" | grep -q '^-') ; then
+        # Calls starting with a -- argument are passed directly and the function
+        # returns with the lunch.py exit code.
+        "${T}/orchestrator/build/orchestrator/core/lunch.py" "$@"
+        code=$?
+        if [[ $code -eq 2 ]] ; then
+          echo 1>&2
+          multitree_lunch_help
+          return $code
+        elif [[ $code -ne 0 ]] ; then
+          return $code
+        fi
+    else
+        # All other calls go through the --lunch variant of lunch.py
+        results=($(${T}/orchestrator/build/orchestrator/core/lunch.py --lunch "$@"))
+        code=$?
+        if [[ $code -eq 2 ]] ; then
+          echo 1>&2
+          multitree_lunch_help
+          return $code
+        elif [[ $code -ne 0 ]] ; then
+          return $code
+        fi
+
+        export TARGET_BUILD_COMBO=${results[0]}
+        export TARGET_BUILD_VARIANT=${results[1]}
+    fi
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
 }
 
 function choosetype()

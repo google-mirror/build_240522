@@ -16,14 +16,24 @@
 
 import os
 import os.path
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
 import unittest
+=======
+import tempfile
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
 import zipfile
 
 import common
 import test_utils
 from add_img_to_target_files import (
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
     AddCareMapTxtForAbOta, AddPackRadioImages, AddRadioImagesForAbOta,
     GetCareMap)
+=======
+    AddPackRadioImages,
+    AddCareMapForAbOta, GetCareMap,
+    CheckAbOtaImages)
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
 from rangelib import RangeSet
 
 
@@ -175,8 +185,23 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
   def _test_AddCareMapTxtForAbOta():
     """Helper function to set up the test for test_AddCareMapTxtForAbOta()."""
     OPTIONS.info_dict = {
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
         'system_verity_block_device' : '/dev/block/system',
         'vendor_verity_block_device' : '/dev/block/vendor',
+=======
+        'system_verity_block_device': '/dev/block/system',
+        'vendor_verity_block_device': '/dev/block/vendor',
+        'system.build.prop': common.PartitionBuildProps.FromDictionary(
+            'system', {
+                'ro.system.build.fingerprint':
+                'google/sailfish/12345:user/dev-keys'}
+        ),
+        'vendor.build.prop': common.PartitionBuildProps.FromDictionary(
+            'vendor', {
+                'ro.vendor.build.fingerprint':
+                'google/sailfish/678:user/dev-keys'}
+        ),
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
     }
 
     # Prepare the META/ folder.
@@ -187,13 +212,21 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     system_image = test_utils.construct_sparse_image([
         (0xCAC1, 6),
         (0xCAC3, 4),
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
         (0xCAC1, 6)])
+=======
+        (0xCAC1, 6)], "system")
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
     vendor_image = test_utils.construct_sparse_image([
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
         (0xCAC2, 10)])
+=======
+        (0xCAC2, 10)], "vendor")
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
 
     image_paths = {
-        'system' : system_image,
-        'vendor' : vendor_image,
+        'system': system_image,
+        'vendor': vendor_image,
     }
     return image_paths
 
@@ -235,8 +268,23 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     """Tests the case for device using AVB."""
     image_paths = self._test_AddCareMapTxtForAbOta()
     OPTIONS.info_dict = {
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
         'avb_system_hashtree_enable' : 'true',
         'avb_vendor_hashtree_enable' : 'true',
+=======
+        'avb_system_hashtree_enable': 'true',
+        'avb_vendor_hashtree_enable': 'true',
+        'system.build.prop': common.PartitionBuildProps.FromDictionary(
+            'system', {
+                'ro.system.build.fingerprint':
+                'google/sailfish/12345:user/dev-keys'}
+        ),
+        'vendor.build.prop': common.PartitionBuildProps.FromDictionary(
+            'vendor', {
+                'ro.vendor.build.fingerprint':
+                'google/sailfish/678:user/dev-keys'}
+        ),
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
     }
 
     AddCareMapTxtForAbOta(None, ['system', 'vendor'], image_paths)
@@ -252,9 +300,90 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     self.assertEqual('vendor', lines[2])
     self.assertEqual(RangeSet("0-9").to_string_raw(), lines[3])
 
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
   def test_AddCareMapTxtForAbOta_verityNotEnabled(self):
     """No care_map.txt should be generated if verity not enabled."""
     image_paths = self._test_AddCareMapTxtForAbOta()
+=======
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AddCareMapForAbOta_noFingerprint(self):
+    """Tests the case for partitions without fingerprint."""
+    image_paths = self._test_AddCareMapForAbOta()
+    OPTIONS.info_dict = {
+        'system_verity_block_device': '/dev/block/system',
+        'vendor_verity_block_device': '/dev/block/vendor',
+    }
+
+    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
+    AddCareMapForAbOta(care_map_file, ['system', 'vendor'], image_paths)
+
+    expected = ['system', RangeSet("0-5 10-15").to_string_raw(), "unknown",
+                "unknown", 'vendor', RangeSet(
+        "0-9").to_string_raw(), "unknown",
+        "unknown"]
+
+    self._verifyCareMap(expected, care_map_file)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AddCareMapForAbOta_withThumbprint(self):
+    """Tests the case for partitions with thumbprint."""
+    image_paths = self._test_AddCareMapForAbOta()
+    OPTIONS.info_dict = {
+        'system_verity_block_device': '/dev/block/system',
+        'vendor_verity_block_device': '/dev/block/vendor',
+        'system.build.prop': common.PartitionBuildProps.FromDictionary(
+            'system', {
+                'ro.system.build.thumbprint':
+                'google/sailfish/123:user/dev-keys'}
+        ),
+        'vendor.build.prop': common.PartitionBuildProps.FromDictionary(
+            'vendor', {
+                'ro.vendor.build.thumbprint':
+                'google/sailfish/456:user/dev-keys'}
+        ),
+    }
+
+    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
+    AddCareMapForAbOta(care_map_file, ['system', 'vendor'], image_paths)
+
+    expected = ['system', RangeSet("0-5 10-15").to_string_raw(),
+                "ro.system.build.thumbprint",
+                "google/sailfish/123:user/dev-keys",
+                'vendor', RangeSet("0-9").to_string_raw(),
+                "ro.vendor.build.thumbprint",
+                "google/sailfish/456:user/dev-keys"]
+
+    self._verifyCareMap(expected, care_map_file)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AddCareMapForAbOta_skipPartition(self):
+    image_paths = self._test_AddCareMapForAbOta()
+    test_utils.erase_avb_footer(image_paths["vendor"])
+
+    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
+    AddCareMapForAbOta(care_map_file, ['system', 'vendor'], image_paths)
+
+    expected = ['system', RangeSet("0-5 10-15").to_string_raw(),
+                "ro.system.build.fingerprint",
+                "google/sailfish/12345:user/dev-keys"]
+
+    self._verifyCareMap(expected, care_map_file)
+
+  @test_utils.SkipIfExternalToolsUnavailable()
+  def test_AddCareMapForAbOta_skipAllPartitions(self):
+    image_paths = self._test_AddCareMapForAbOta()
+    test_utils.erase_avb_footer(image_paths["system"])
+    test_utils.erase_avb_footer(image_paths["vendor"])
+
+    care_map_file = os.path.join(OPTIONS.input_tmp, 'META', 'care_map.pb')
+    AddCareMapForAbOta(care_map_file, ['system', 'vendor'], image_paths)
+
+    self.assertFalse(os.path.exists(care_map_file))
+
+  def test_AddCareMapForAbOta_verityNotEnabled(self):
+    """No care_map.pb should be generated if verity not enabled."""
+    image_paths = self._test_AddCareMapForAbOta()
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
     OPTIONS.info_dict = {}
     AddCareMapTxtForAbOta(None, ['system', 'vendor'], image_paths)
 
@@ -317,17 +446,22 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
     sparse_image = test_utils.construct_sparse_image([
         (0xCAC1, 6),
         (0xCAC3, 4),
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
         (0xCAC1, 6)])
     OPTIONS.info_dict = {
         'system_adjusted_partition_size' : 12,
     }
+=======
+        (0xCAC1, 6)], "system")
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
     name, care_map = GetCareMap('system', sparse_image)
     self.assertEqual('system', name)
-    self.assertEqual(RangeSet("0-5 10-12").to_string_raw(), care_map)
+    self.assertEqual(RangeSet("0-5 10-15").to_string_raw(), care_map)
 
   def test_GetCareMap_invalidPartition(self):
     self.assertRaises(AssertionError, GetCareMap, 'oem', None)
 
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
   def test_GetCareMap_invalidAdjustedPartitionSize(self):
     sparse_image = test_utils.construct_sparse_image([
         (0xCAC1, 6),
@@ -337,3 +471,12 @@ class AddImagesToTargetFilesTest(unittest.TestCase):
         'system_adjusted_partition_size' : -12,
     }
     self.assertRaises(AssertionError, GetCareMap, 'system', sparse_image)
+=======
+  def test_GetCareMap_nonSparseImage(self):
+    with tempfile.NamedTemporaryFile() as tmpfile:
+      tmpfile.truncate(4096 * 13)
+      test_utils.append_avb_footer(tmpfile.name, "system")
+      name, care_map = GetCareMap('system', tmpfile.name)
+      self.assertEqual('system', name)
+      self.assertEqual(RangeSet("0-12").to_string_raw(), care_map)
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])

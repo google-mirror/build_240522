@@ -44,6 +44,19 @@ void usage(void)
     fprintf(stderr, "  -z: recompress using Zopfli\n");
 }
 
+// An entry is considered a directory if it has a stored size of zero
+// and it ends with '/' or '\' character.
+static bool isDirectory(ZipEntry* entry) {
+   if (entry->getUncompressedLen() != 0) {
+       return false;
+   }
+
+   const char* name = entry->getFileName();
+   size_t nameLength = strlen(name);
+   char lastChar = name[nameLength-1];
+   return lastChar == '/' || lastChar == '\\';
+}
+
 static int getAlignment(bool pageAlignSharedLibs, int defaultAlignment,
     ZipEntry* pEntry) {
 
@@ -82,7 +95,7 @@ static int copyAndAlign(ZipFile* pZin, ZipFile* pZout, int alignment, bool zopfl
             return 1;
         }
 
-        if (pEntry->isCompressed()) {
+        if (pEntry->isCompressed() || isDirectory(pEntry)) {
             /* copy the entry without padding */
             //printf("--- %s: orig at %ld len=%ld (compressed)\n",
             //    pEntry->getFileName(), (long) pEntry->getFileOffset(),
@@ -193,8 +206,19 @@ static int verify(const char* fileName, int alignment, bool verbose,
                 printf("%8ld %s (OK - compressed)\n",
                     (long) pEntry->getFileOffset(), pEntry->getFileName());
             }
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
         } else {
             long offset = pEntry->getFileOffset();
+=======
+        } else if(isDirectory(pEntry)) {
+            // Directory entries do not need to be aligned.
+            if (verbose)
+                printf("%8jd %s (OK - directory)\n",
+                       (intmax_t) pEntry->getFileOffset(), pEntry->getFileName());
+            continue;
+       } else {
+            off_t offset = pEntry->getFileOffset();
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
             const int alignTo = getAlignment(pageAlignSharedLibs, alignment, pEntry);
             if ((offset % alignTo) != 0) {
                 if (verbose) {

@@ -502,6 +502,143 @@ PRODUCT_SOONG_NAMESPACES := \
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE))
 
+<<<<<<< HEAD   (823d2d Merge "Merge empty history for sparse-9157811-L2200000095679)
 # Whether the whitelist of actionable compatible properties should be disabled or not
 PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE))
+=======
+ifeq ($(PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS),)
+  ifdef PRODUCT_SHIPPING_API_LEVEL
+    ifeq (true,$(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),29))
+      PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := true
+    endif
+  endif
+endif
+
+ifeq ($(PRODUCT_SET_DEBUGFS_RESTRICTIONS),)
+  ifdef PRODUCT_SHIPPING_API_LEVEL
+    ifeq (true,$(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),31))
+      PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
+    endif
+  endif
+endif
+
+ifdef PRODUCT_SHIPPING_API_LEVEL
+  ifneq (,$(call math_gt_or_eq,29,$(PRODUCT_SHIPPING_API_LEVEL)))
+    PRODUCT_PACKAGES += $(PRODUCT_PACKAGES_SHIPPING_API_LEVEL_29)
+  endif
+  ifneq (,$(call math_gt_or_eq,33,$(PRODUCT_SHIPPING_API_LEVEL)))
+    PRODUCT_PACKAGES += $(PRODUCT_PACKAGES_SHIPPING_API_LEVEL_33)
+  endif
+endif
+
+# If build command defines OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS,
+# override PRODUCT_EXTRA_VNDK_VERSIONS with it.
+ifdef OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS
+  PRODUCT_EXTRA_VNDK_VERSIONS := $(OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS)
+endif
+
+###########################################
+# APEXes are by default not compressed
+#
+# APEX compression can be forcibly enabled (resp. disabled) by
+# setting OVERRIDE_PRODUCT_COMPRESSED_APEX to true (resp. false), e.g. by
+# setting the OVERRIDE_PRODUCT_COMPRESSED_APEX environment variable.
+ifdef OVERRIDE_PRODUCT_COMPRESSED_APEX
+  PRODUCT_COMPRESSED_APEX := $(OVERRIDE_PRODUCT_COMPRESSED_APEX)
+endif
+
+$(KATI_obsolete_var OVERRIDE_PRODUCT_EXTRA_VNDK_VERSIONS \
+    ,Use PRODUCT_EXTRA_VNDK_VERSIONS instead)
+
+# If build command defines OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE,
+# override PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE with it unless it is
+# defined as `false`. If the value is `false` clear
+# PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE
+# OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE can be used for
+# testing only.
+ifdef OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE
+  ifeq (false,$(OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE))
+    PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE :=
+  else
+    PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := $(OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE)
+  endif
+else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
+  # No shipping level defined
+else ifeq ($(call math_gt,$(PRODUCT_SHIPPING_API_LEVEL),29),true)
+  # Enforce product interface if PRODUCT_SHIPPING_API_LEVEL is greater than 29.
+  PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
+endif
+
+$(KATI_obsolete_var OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE,Use PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE instead)
+
+# If build command defines PRODUCT_USE_PRODUCT_VNDK_OVERRIDE as `false`,
+# PRODUCT_PRODUCT_VNDK_VERSION will not be defined automatically.
+# PRODUCT_USE_PRODUCT_VNDK_OVERRIDE can be used for testing only.
+PRODUCT_USE_PRODUCT_VNDK := false
+ifneq ($(PRODUCT_USE_PRODUCT_VNDK_OVERRIDE),)
+  PRODUCT_USE_PRODUCT_VNDK := $(PRODUCT_USE_PRODUCT_VNDK_OVERRIDE)
+else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
+  # No shipping level defined
+else ifeq ($(call math_gt,$(PRODUCT_SHIPPING_API_LEVEL),29),true)
+  # Enforce product interface for VNDK if PRODUCT_SHIPPING_API_LEVEL is greater
+  # than 29.
+  PRODUCT_USE_PRODUCT_VNDK := true
+endif
+
+ifeq ($(PRODUCT_USE_PRODUCT_VNDK),true)
+  ifndef PRODUCT_PRODUCT_VNDK_VERSION
+    PRODUCT_PRODUCT_VNDK_VERSION := current
+  endif
+endif
+
+$(KATI_obsolete_var PRODUCT_USE_PRODUCT_VNDK,Use PRODUCT_PRODUCT_VNDK_VERSION instead)
+$(KATI_obsolete_var PRODUCT_USE_PRODUCT_VNDK_OVERRIDE,Use PRODUCT_PRODUCT_VNDK_VERSION instead)
+
+ifdef PRODUCT_ENFORCE_RRO_EXEMPTED_TARGETS
+    $(error PRODUCT_ENFORCE_RRO_EXEMPTED_TARGETS is deprecated, consider using RRO for \
+      $(PRODUCT_ENFORCE_RRO_EXEMPTED_TARGETS))
+endif
+
+define product-overrides-config
+$$(foreach rule,$$(PRODUCT_$(1)_OVERRIDES),\
+    $$(if $$(filter 2,$$(words $$(subst :,$$(space),$$(rule)))),,\
+        $$(error Rule "$$(rule)" in PRODUCT_$(1)_OVERRIDE is not <module_name>:<new_value>)))
+endef
+
+$(foreach var, \
+    MANIFEST_PACKAGE_NAME \
+    PACKAGE_NAME \
+    CERTIFICATE, \
+  $(eval $(call product-overrides-config,$(var))))
+
+# Macro to use below. $(1) is the name of the partition
+define product-build-image-config
+ifneq ($$(filter-out true false,$$(PRODUCT_BUILD_$(1)_IMAGE)),)
+    $$(error Invalid PRODUCT_BUILD_$(1)_IMAGE: $$(PRODUCT_BUILD_$(1)_IMAGE) -- true false and empty are supported)
+endif
+endef
+
+# Copy and check the value of each PRODUCT_BUILD_*_IMAGE variable
+$(foreach image, \
+    PVMFW \
+    SYSTEM \
+    SYSTEM_OTHER \
+    VENDOR \
+    PRODUCT \
+    SYSTEM_EXT \
+    ODM \
+    VENDOR_DLKM \
+    ODM_DLKM \
+    SYSTEM_DLKM \
+    CACHE \
+    RAMDISK \
+    USERDATA \
+    BOOT \
+    RECOVERY, \
+  $(eval $(call product-build-image-config,$(image))))
+
+product-build-image-config :=
+
+$(call readonly-product-vars)
+>>>>>>> BRANCH (0cc272 Merge "Version bump to TKB1.221018.001.A1 [core/build_id.mk])
