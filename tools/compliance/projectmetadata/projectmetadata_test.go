@@ -42,7 +42,7 @@ const (
 	// NO_NAME_0_1 represents a METADATA file with a description but no name
 	NO_NAME_0_1 = `description: "my library" third_party { version: "0.1" }`
 
-	// URL value per type
+	// URL values per type
 	GIT_URL          = "http://example.github.com/my_lib"
 	SVN_URL          = "http://example.svn.com/my_lib"
 	HG_URL           = "http://example.hg.com/my_lib"
@@ -122,13 +122,19 @@ func TestReadMetadataForProjects(t *testing.T) {
 		expectedError string
 		expected      []pmeta
 	}{
-		{ // TO DO: SWITCH TO VERTICALLY FOR EXPECTED
+		{
 			name: "trivial",
 			fs: &testfs.TestFS{
 				"/a/METADATA": []byte("name: \"Android\"\n"),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "Android", name: "Android", version: "", downloadUrl: ""}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "Android",
+				name:          "Android",
+				version:       "",
+				downloadUrl:   "",
+			}},
 		},
 		{
 			name: "versioned",
@@ -136,7 +142,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(MY_LIB_1_0),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   "",
+			}},
 		},
 		{
 			name: "lib_with_homepage",
@@ -144,7 +156,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("HOMEPAGE")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   "",
+			}},
 		},
 		{
 			name: "lib_with_git",
@@ -152,7 +170,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("GIT")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: GIT_URL}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   GIT_URL,
+			}},
 		},
 		{
 			name: "lib_with_svn",
@@ -160,7 +184,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("SVN")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: SVN_URL}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   SVN_URL,
+			}},
 		},
 		{
 			name: "lib_with_hg",
@@ -168,7 +198,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("HG")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: HG_URL}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   HG_URL,
+			}},
 		},
 		{
 			name: "lib_with_darcs",
@@ -176,7 +212,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("DARCS")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: DARCS_URL}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   DARCS_URL,
+			}},
 		},
 		{
 			name: "lib_with_piper",
@@ -184,7 +226,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("PIPER")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   "",
+			}},
 		},
 		{
 			name: "lib_with_other",
@@ -192,7 +240,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("OTHER")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   "",
+			}},
 		},
 		{
 			name: "lib_with_local_source",
@@ -200,7 +254,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("LOCAL_SOURCE")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   "",
+			}},
 		},
 		{
 			name: "lib_with_archive",
@@ -208,7 +268,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("ARCHIVE")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   "",
+			}},
 		},
 		{
 			name: "lib_with_all_downloads",
@@ -216,7 +282,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("DARCS", "HG", "SVN", "GIT")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: GIT_URL}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   GIT_URL,
+			}},
 		},
 		{
 			name: "lib_with_all_downloads_in_different_order",
@@ -224,7 +296,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("DARCS", "GIT", "SVN", "HG")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: GIT_URL}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   GIT_URL,
+			}},
 		},
 		{
 			name: "lib_with_all_but_git",
@@ -232,7 +310,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("DARCS", "HG", "SVN")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: SVN_URL}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   SVN_URL,
+			}},
 		},
 		{
 			name: "lib_with_all_but_git_and_svn",
@@ -240,7 +324,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("DARCS", "HG")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: HG_URL}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   HG_URL,
+			}},
 		},
 		{
 			name: "lib_with_all_nondownloads_and_git",
@@ -248,7 +338,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("HOMEPAGE", "LOCAL_SOURCE", "PIPER", "ARCHIVE", "GIT")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: GIT_URL}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   GIT_URL,
+			}},
 		},
 		{
 			name: "lib_with_all_nondownloads",
@@ -256,7 +352,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl("HOMEPAGE", "LOCAL_SOURCE", "PIPER", "ARCHIVE")),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   "",
+			}},
 		},
 		{
 			name: "lib_with_all_nondownloads",
@@ -264,7 +366,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(libWithUrl()),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   "",
+			}},
 		},
 		{
 			name: "versioneddesc",
@@ -272,7 +380,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(NO_NAME_0_1),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "my library", name: "", version: "0.1", downloadUrl: ""}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "my library",
+				name:          "",
+				version:       "0.1",
+				downloadUrl:   "",
+			}},
 		},
 		{
 			name: "unterminated",
@@ -291,9 +405,27 @@ func TestReadMetadataForProjects(t *testing.T) {
 			},
 			projects: []string{"/a", "/b", "/c"},
 			expected: []pmeta{
-				{project: "/a", versionedName: "", name: "", version: "", downloadUrl: ""},
-				{project: "/b", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""},
-				{project: "/c", versionedName: "my library", name: "", version: "0.1", downloadUrl: ""},
+				{
+					project:       "/a",
+					versionedName: "",
+					name:          "",
+					version:       "",
+					downloadUrl:   "",
+				},
+				{
+					project:       "/b",
+					versionedName: "mylib_v_1.0",
+					name:          "mylib",
+					version:       "1.0",
+					downloadUrl:   "",
+				},
+				{
+					project:       "/c",
+					versionedName: "my library",
+					name:          "",
+					version:       "0.1",
+					downloadUrl:   "",
+				},
 			},
 		},
 		{
@@ -304,8 +436,20 @@ func TestReadMetadataForProjects(t *testing.T) {
 			},
 			projects: []string{"/a", "/b", "/c"},
 			expected: []pmeta{
-				{project: "/a", versionedName: "", name: "", version: "", downloadUrl: ""},
-				{project: "/b", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""},
+				{
+					project:       "/a",
+					versionedName: "",
+					name:          "",
+					version:       "",
+					downloadUrl:   "",
+				},
+				{
+					project:       "/b",
+					versionedName: "mylib_v_1.0",
+					name:          "mylib",
+					version:       "1.0",
+					downloadUrl:   "",
+				},
 			},
 		},
 		{
@@ -316,8 +460,20 @@ func TestReadMetadataForProjects(t *testing.T) {
 			},
 			projects: []string{"/a", "/b", "/c"},
 			expected: []pmeta{
-				{project: "/a", versionedName: "", name: "", version: "", downloadUrl: ""},
-				{project: "/c", versionedName: "my library", name: "", version: "0.1", downloadUrl: ""},
+				{
+					project:       "/a",
+					versionedName: "",
+					name:          "",
+					version:       "",
+					downloadUrl:   "",
+				},
+				{
+					project:       "/c",
+					versionedName: "my library",
+					name:          "",
+					version:       "0.1",
+					downloadUrl:   "",
+				},
 			},
 		},
 		{
@@ -328,8 +484,20 @@ func TestReadMetadataForProjects(t *testing.T) {
 			},
 			projects: []string{"/a", "/b", "/c"},
 			expected: []pmeta{
-				{project: "/b", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""},
-				{project: "/c", versionedName: "my library", name: "", version: "0.1", downloadUrl: ""},
+				{
+					project:       "/b",
+					versionedName: "mylib_v_1.0",
+					name:          "mylib",
+					version:       "1.0",
+					downloadUrl:   "",
+				},
+				{
+					project:       "/c",
+					versionedName: "my library",
+					name:          "",
+					version:       "0.1",
+					downloadUrl:   "",
+				},
 			},
 		},
 		{
@@ -370,7 +538,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA": []byte(EMPTY),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "", name: "", version: "", downloadUrl: ""}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "",
+				name:          "",
+				version:       "",
+				downloadUrl:   "",
+			}},
 		},
 		{
 			name: "emptyother",
@@ -391,7 +565,13 @@ func TestReadMetadataForProjects(t *testing.T) {
 				"/a/METADATA.android": []byte(MY_LIB_1_0),
 			},
 			projects: []string{"/a"},
-			expected: []pmeta{{project: "/a", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""}},
+			expected: []pmeta{{
+				project:       "/a",
+				versionedName: "mylib_v_1.0",
+				name:          "mylib",
+				version:       "1.0",
+				downloadUrl:   "",
+			}},
 		},
 		{
 			name: "enchilada",
@@ -403,9 +583,27 @@ func TestReadMetadataForProjects(t *testing.T) {
 			},
 			projects: []string{"/a", "/b", "/c"},
 			expected: []pmeta{
-				{project: "/a", versionedName: "", name: "", version: "", downloadUrl: ""},
-				{project: "/b", versionedName: "mylib_v_1.0", name: "mylib", version: "1.0", downloadUrl: ""},
-				{project: "/c", versionedName: "my library", name: "", version: "0.1", downloadUrl: ""},
+				{
+					project:       "/a",
+					versionedName: "",
+					name:          "",
+					version:       "",
+					downloadUrl:   "",
+				},
+				{
+					project:       "/b",
+					versionedName: "mylib_v_1.0",
+					name:          "mylib",
+					version:       "1.0",
+					downloadUrl:   "",
+				},
+				{
+					project:       "/c",
+					versionedName: "my library",
+					name:          "",
+					version:       "0.1",
+					downloadUrl:   "",
+				},
 			},
 		},
 	}
