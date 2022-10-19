@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dc2490a_c40f2da6",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-10-19T17:19:36Z",
+      "side": 1,
+      "message": "Can we give this a shorter name, maybe \"framework-virtualmachine\" to match the framework jars in other apexes?\n\nI don\u0027t think the .impl suffix is required, is it?",
+      "range": {
+        "startLine": 318,
+        "startChar": 34,
+        "endLine": 318,
+        "endChar": 68
+      },
+      "revId": "abc0c86b8a10e4fd8ddd9a1afbbc18adf61baa74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
