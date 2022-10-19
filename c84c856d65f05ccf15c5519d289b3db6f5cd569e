@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7924e258_36287c16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-19T19:46:22Z",
+      "side": 1,
+      "message": "PTAL (I voted -2 on OSL so that nothing can accidentally merge this change prior to the announced Nov. 2)",
+      "revId": "c84c856d65f05ccf15c5519d289b3db6f5cd569e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
