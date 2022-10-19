@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40a8f477_eb8677f9",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3853,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-19T17:36:14Z",
+      "side": 1,
+      "message": "This can\u0027t use `$(shell)`, that causes it to run on every kati invocation.  What\u0027s the error you are seeing?",
+      "revId": "c9b85c1caa4fdc72e95ab9018fb48816fe856b55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
