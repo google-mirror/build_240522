@@ -52,7 +52,7 @@ $(foreach makefile,$(ARTIFACT_PATH_REQUIREMENT_PRODUCTS),\
   $(eval enforcement := $(PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS)) \
   $(if $(filter-out false,$(enforcement)),\
     $(call maybe-print-list-and-error,$(offending_files),\
-      $(INTERNAL_PRODUCT) produces files inside $(makefile)s artifact path requirement. \
+      $(INTERNAL_PRODUCT) produces files inside $(makefile) artifact path requirement. \
       $(PRODUCT_ARTIFACT_PATH_REQUIREMENT_HINT)) \
     $(eval unused_allowed := $(if $(filter true strict,$(enforcement)),\
       $(foreach p,$(allowed_patterns),$(if $(filter $(p),$(extra_files)),,$(p))))) \
