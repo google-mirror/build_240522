@@ -16,6 +16,74 @@
       "message": "PTAL\n\nIt was easier to incorporate the depsfile change into this change than to do it ahead of time.",
       "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bd3600a_a67390b3",
+        "filename": "tools/compliance/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-20T22:40:24Z",
+      "side": 1,
+      "message": "nit: InputNoticeFiles is only used for computing the deps, would it make sense to combine InputNoticeFiles and InputMetadataFiles into a single method?",
+      "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320cc8ca_2032f296",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-20T22:40:24Z",
+      "side": 1,
+      "message": "There\u0027s no need to precompute the size, its probably more expensive than the amortized append cost on a slice that starts as nil.",
+      "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4242992_5f2dfb3f",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-20T22:40:24Z",
+      "side": 1,
+      "message": "Run gofmt",
+      "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f547a168_452e7fb5",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-20T22:40:24Z",
+      "side": 1,
+      "message": "var files []string and let Go manage the size.",
+      "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
