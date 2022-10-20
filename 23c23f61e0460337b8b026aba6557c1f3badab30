@@ -51,6 +51,24 @@
       "message": "Fixed in https://android-review.googlesource.com/c/platform/build/+/2261500 already",
       "revId": "23c23f61e0460337b8b026aba6557c1f3badab30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "933f40cd_3201e3bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1362120
+      },
+      "writtenOn": "2022-10-20T01:38:22Z",
+      "side": 1,
+      "message": "shall we add a test case in test_common.py?",
+      "parentUuid": "c4622a47_2ff41f28",
+      "revId": "23c23f61e0460337b8b026aba6557c1f3badab30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
