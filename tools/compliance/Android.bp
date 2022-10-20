@@ -17,6 +17,13 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
+
+blueprint_go_binary {
+    name: "bazelhtmlnotice",
+    srcs: ["cmd/bazelhtmlnotice/bazelhtmlnotice.go"],
+    testSrcs: ["cmd/bazelhtmlnotice/bazelhtmlnotice_test.go"],
+}
+
 blueprint_go_binary {
     name: "compliance_checkshare",
     srcs: ["cmd/checkshare/checkshare.go"],
