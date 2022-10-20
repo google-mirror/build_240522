@@ -54,13 +54,13 @@ type generator struct {
 	LicenseTextIndex map[LicenseTextHash]string
 }
 
-func newGenerator(in string) generator {
+func newGenerator(in string) *generator {
 	g := generator{}
 	decoder := json.NewDecoder(strings.NewReader(in))
 	decoder.DisallowUnknownFields() //useful to detect typos, e.g. in unit tests
 	err := decoder.Decode(&g.Licenses)
 	maybeQuit(err)
-	return g
+	return &g
 }
 
 func (g *generator) buildLicenseTextIndex() {
@@ -83,26 +83,24 @@ func (g *generator) buildLicenseTextIndex() {
 	}
 }
 
-func (g generator) generate(sink io.Writer) {
-	const tpl = `	
+func (g *generator) generate(sink io.Writer) {
+	const tpl = `<!DOCTYPE html>
 <html>
   <head>
-
     <style type="text/css">
       body { padding: 2px; margin: 0; }
       .license { background-color: seashell; margin: 1em;}
-      pre { padding: 1em; }
-    </style>
-  </head>
+      pre { padding: 1em; }</style></head>
   <body>
     The following software has been included in this product and contains the license and notice as shown below.<p>
-    {{ $x := . }}
-	{{ range .Licenses }}
-    {{ if .PackageName  }}<strong>{{.PackageName}}</strong><br>{{- else }}Rule: {{.Rule}}<br>{{ end }}	{{- if .CopyrightNotice }}Copyright Notice: {{.CopyrightNotice}}<br>{{ end }}
-    {{- $v := index $x.LicenseTextHash .Rule }}
-	{{- if $v }}<a href=#{{$v}}>License</a>{{- end }}<hr> 
-    {{  end }}
-{{ range $k, $v := .LicenseTextIndex }}<div id="{{$k}}" class="license"><pre>{{$v}}</pre></div> {{ end}} 
+    {{- $x := . }}
+	{{- range .Licenses }}
+    {{ if .PackageName  }}<strong>{{.PackageName}}</strong>{{- else }}Rule: {{.Rule}}{{ end }}
+    {{- if .CopyrightNotice }}<br>Copyright Notice: {{.CopyrightNotice}}{{ end }}
+    {{- $v := index $x.LicenseTextHash .Rule }}{{- if $v }}<br><a href=#{{$v}}>License</a>{{- end }}<hr> 
+    {{-  end }}
+    {{ range $k, $v := .LicenseTextIndex }}<div id="{{$k}}" class="license"><pre>{{$v}}
+    </pre></div> {{ end}} 
   </body>
 </html>
 `
