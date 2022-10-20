@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eba03bdc_2251e163",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-20T16:40:39Z",
+      "side": 0,
+      "message": "I think this should actually be an apostrophe s. Or change to \"produces files inside the artifact path requirements of $(makefile)\"",
+      "revId": "eb5f9e2bef6a620cba79554b26b64e2155710f1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
