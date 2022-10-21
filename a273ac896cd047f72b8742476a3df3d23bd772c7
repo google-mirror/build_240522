@@ -107,6 +107,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "994b14e1_db084db5",
+        "filename": "tools/compliance/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-21T22:49:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e5eeeaf3_8842dbee",
+      "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "320cc8ca_2032f296",
