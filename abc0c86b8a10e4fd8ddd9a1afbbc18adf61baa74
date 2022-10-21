@@ -46,6 +46,30 @@
       },
       "revId": "abc0c86b8a10e4fd8ddd9a1afbbc18adf61baa74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1891263_2b0d191c",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-10-21T16:24:00Z",
+      "side": 1,
+      "message": "- yes, I\u0027d like to see a design doc that describes the agreed-upon plan (because the thread you cc\u0027d me on seemed like it was still an open discussion)\n- why don\u0027t other apexes need .impl?",
+      "parentUuid": "14890fd6_5489f453",
+      "range": {
+        "startLine": 318,
+        "startChar": 34,
+        "endLine": 318,
+        "endChar": 68
+      },
+      "revId": "abc0c86b8a10e4fd8ddd9a1afbbc18adf61baa74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
