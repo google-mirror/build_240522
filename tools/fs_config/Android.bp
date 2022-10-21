@@ -22,6 +22,7 @@ cc_binary_host {
     cflags: ["-Werror"],
 }
 
+<<<<<<< HEAD   (599d29 Merge "Merge empty history for sparse-9199314-L5050000095697)
 // -----------------------------------------------------------------------------
 // Unit tests.
 // -----------------------------------------------------------------------------
@@ -47,8 +48,43 @@ cc_test_host {
     no_named_install_directory: true,
     gtest: false,
 
+=======
+python_binary_host {
+    name: "fs_config_generator",
+    srcs: ["fs_config_generator.py"],
+    version: {
+        py2: {
+            enabled: true,
+        },
+        py3: {
+            enabled: false,
+        },
+    },
 }
 
+python_test_host {
+    name: "test_fs_config_generator",
+    main: "test_fs_config_generator.py",
+    srcs: [
+        "test_fs_config_generator.py",
+        "fs_config_generator.py",
+    ],
+    version: {
+        py2: {
+            enabled: true,
+        },
+        py3: {
+            enabled: false,
+        },
+    },
+}
+
+target_fs_config_gen_filegroup {
+    name: "target_fs_config_gen",
+>>>>>>> BRANCH (cb4260 Merge "Version bump to TKB1.221021.001.A1 [core/build_id.mk])
+}
+
+<<<<<<< HEAD   (599d29 Merge "Merge empty history for sparse-9199314-L5050000095697)
 //#################################
 // gTest tool
 cc_test_host {
@@ -58,6 +94,210 @@ cc_test_host {
         "liblog",
         "libcutils",
         "libbase",
+=======
+genrule {
+    name: "oemaids_header_gen",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) oemaid --aid-header=$(location :android_filesystem_config_header) $(locations :target_fs_config_gen) >$(out)",
+    srcs: [
+        ":target_fs_config_gen",
+        ":android_filesystem_config_header",
+>>>>>>> BRANCH (cb4260 Merge "Version bump to TKB1.221021.001.A1 [core/build_id.mk])
     ],
+<<<<<<< HEAD   (599d29 Merge "Merge empty history for sparse-9199314-L5050000095697)
     srcs: ["fs_config_test.cpp"],
+=======
+    out: ["generated_oem_aid.h"],
+}
+
+cc_library_headers {
+    name: "oemaids_headers",
+    vendor_available: true,
+    generated_headers: ["oemaids_header_gen"],
+    export_generated_headers: ["oemaids_header_gen"],
+}
+
+// Generate the */etc/passwd text files for the target
+// These files may be empty if no AIDs are defined in
+// TARGET_FS_CONFIG_GEN files.
+genrule {
+    name: "passwd_gen_system",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) passwd --partition=system --aid-header=$(location :android_filesystem_config_header) $(locations :target_fs_config_gen) >$(out)",
+    srcs: [
+        ":target_fs_config_gen",
+        ":android_filesystem_config_header",
+    ],
+    out: ["passwd"],
+}
+
+prebuilt_etc {
+    name: "passwd_system",
+    filename: "passwd",
+    src: ":passwd_gen_system",
+}
+
+genrule {
+    name: "passwd_gen_vendor",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) passwd --partition=vendor --aid-header=$(location :android_filesystem_config_header) $(locations :target_fs_config_gen) >$(out)",
+    srcs: [
+        ":target_fs_config_gen",
+        ":android_filesystem_config_header",
+    ],
+    out: ["passwd"],
+}
+
+prebuilt_etc {
+    name: "passwd_vendor",
+    filename: "passwd",
+    vendor: true,
+    src: ":passwd_gen_vendor",
+}
+
+genrule {
+    name: "passwd_gen_odm",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) passwd --partition=odm --aid-header=$(location :android_filesystem_config_header) $(locations :target_fs_config_gen) >$(out)",
+    srcs: [
+        ":target_fs_config_gen",
+        ":android_filesystem_config_header",
+    ],
+    out: ["passwd"],
+}
+
+prebuilt_etc {
+    name: "passwd_odm",
+    filename: "passwd",
+    device_specific: true,
+    src: ":passwd_gen_odm",
+}
+
+genrule {
+    name: "passwd_gen_product",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) passwd --partition=product --aid-header=$(location :android_filesystem_config_header) $(locations :target_fs_config_gen) >$(out)",
+    srcs: [
+        ":target_fs_config_gen",
+        ":android_filesystem_config_header",
+    ],
+    out: ["passwd"],
+}
+
+prebuilt_etc {
+    name: "passwd_product",
+    filename: "passwd",
+    product_specific: true,
+    src: ":passwd_gen_product",
+}
+
+genrule {
+    name: "passwd_gen_system_ext",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) passwd --partition=system_ext --aid-header=$(location :android_filesystem_config_header) $(locations :target_fs_config_gen) >$(out)",
+    srcs: [
+        ":target_fs_config_gen",
+        ":android_filesystem_config_header",
+    ],
+    out: ["passwd"],
+}
+
+prebuilt_etc {
+    name: "passwd_system_ext",
+    filename: "passwd",
+    system_ext_specific: true,
+    src: ":passwd_gen_system_ext",
+}
+
+// Generate the */etc/group text files for the target
+// These files may be empty if no AIDs are defined in
+// TARGET_FS_CONFIG_GEN files.
+genrule {
+    name: "group_gen_system",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) group --partition=system --aid-header=$(location :android_filesystem_config_header) $(locations :target_fs_config_gen) >$(out)",
+    srcs: [
+        ":target_fs_config_gen",
+        ":android_filesystem_config_header",
+    ],
+    out: ["group"],
+}
+
+prebuilt_etc {
+    name: "group_system",
+    filename: "group",
+    src: ":group_gen_system",
+}
+
+genrule {
+    name: "group_gen_vendor",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) group --partition=vendor --aid-header=$(location :android_filesystem_config_header) $(locations :target_fs_config_gen) >$(out)",
+    srcs: [
+        ":target_fs_config_gen",
+        ":android_filesystem_config_header",
+    ],
+    out: ["group"],
+}
+
+prebuilt_etc {
+    name: "group_vendor",
+    filename: "group",
+    vendor: true,
+    src: ":group_gen_vendor",
+}
+
+genrule {
+    name: "group_gen_odm",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) group --partition=odm --aid-header=$(location :android_filesystem_config_header) $(locations :target_fs_config_gen) >$(out)",
+    srcs: [
+        ":target_fs_config_gen",
+        ":android_filesystem_config_header",
+    ],
+    out: ["group"],
+}
+
+prebuilt_etc {
+    name: "group_odm",
+    filename: "group",
+    device_specific: true,
+    src: ":group_gen_odm",
+}
+
+genrule {
+    name: "group_gen_product",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) group --partition=product --aid-header=$(location :android_filesystem_config_header) $(locations :target_fs_config_gen) >$(out)",
+    srcs: [
+        ":target_fs_config_gen",
+        ":android_filesystem_config_header",
+    ],
+    out: ["group"],
+}
+
+prebuilt_etc {
+    name: "group_product",
+    filename: "group",
+    product_specific: true,
+    src: ":group_gen_product",
+}
+
+genrule {
+    name: "group_gen_system_ext",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) group --partition=system_ext --aid-header=$(location :android_filesystem_config_header) $(locations :target_fs_config_gen) >$(out)",
+    srcs: [
+        ":target_fs_config_gen",
+        ":android_filesystem_config_header",
+    ],
+    out: ["group"],
+}
+
+prebuilt_etc {
+    name: "group_system_ext",
+    filename: "group",
+    system_ext_specific: true,
+    src: ":group_gen_system_ext",
+>>>>>>> BRANCH (cb4260 Merge "Version bump to TKB1.221021.001.A1 [core/build_id.mk])
 }

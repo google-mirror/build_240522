@@ -173,6 +173,10 @@ class AID(object):
             and self.value == other.value and self.found == other.found \
             and self.normalized_value == other.normalized_value
 
+    def __repr__(self):
+        return "AID { identifier = %s, value = %s, normalized_value = %s, login_shell = %s }" % (
+            self.identifier, self.value, self.normalized_value, self.login_shell)
+
     @staticmethod
     def is_friendly(name):
         """Determines if an AID is a freindly name or C define.
@@ -259,10 +263,16 @@ class AIDHeaderParser(object):
         re.compile(r'%sAPP' % AID.PREFIX), re.compile(r'%sUSER' % AID.PREFIX)
     ]
     _AID_DEFINE = re.compile(r'\s*#define\s+%s.*' % AID.PREFIX)
+<<<<<<< HEAD   (599d29 Merge "Merge empty history for sparse-9199314-L5050000095697)
     _OEM_START_KW = 'START'
     _OEM_END_KW = 'END'
     _OEM_RANGE = re.compile('%sOEM_RESERVED_[0-9]*_{0,1}(%s|%s)' %
                             (AID.PREFIX, _OEM_START_KW, _OEM_END_KW))
+=======
+    _RESERVED_RANGE = re.compile(
+        r'#define AID_(.+)_RESERVED_(?:(\d+)_)?(START|END)\s+(\d+)')
+
+>>>>>>> BRANCH (cb4260 Merge "Version bump to TKB1.221021.001.A1 [core/build_id.mk])
     # AID lines cannot end with _START or _END, ie AID_FOO is OK
     # but AID_FOO_START is skiped. Note that AID_FOOSTART is NOT skipped.
     _AID_SKIP_RANGE = ['_' + _OEM_START_KW, '_' + _OEM_END_KW]
@@ -294,6 +304,7 @@ class AIDHeaderParser(object):
             aid_file (file): The open AID header file to parse.
         """
 
+        ranges_by_name = {}
         for lineno, line in enumerate(aid_file):
 
             def error_message(msg):
@@ -302,6 +313,30 @@ class AIDHeaderParser(object):
                 return 'Error "{}" in file: "{}" on line: {}'.format(
                     msg, self._aid_header, str(lineno))
 
+<<<<<<< HEAD   (599d29 Merge "Merge empty history for sparse-9199314-L5050000095697)
+=======
+            range_match = self._RESERVED_RANGE.match(line)
+            if range_match:
+                partition, name, start, value = range_match.groups()
+                partition = partition.lower()
+                if name is None:
+                    name = "unnamed"
+                start = start == "START"
+                value = int(value, 0)
+
+                if partition == 'oem':
+                    partition = 'vendor'
+
+                if partition not in ranges_by_name:
+                    ranges_by_name[partition] = {}
+                if name not in ranges_by_name[partition]:
+                    ranges_by_name[partition][name] = [None, None]
+                if ranges_by_name[partition][name][0 if start else 1] is not None:
+                    sys.exit(error_message("{} of range {} of partition {} was already defined".format(
+                        "Start" if start else "End", name, partition)))
+                ranges_by_name[partition][name][0 if start else 1] = value
+
+>>>>>>> BRANCH (cb4260 Merge "Version bump to TKB1.221021.001.A1 [core/build_id.mk])
             if AIDHeaderParser._AID_DEFINE.match(line):
                 chunks = line.split()
                 identifier = chunks[1]
@@ -321,6 +356,21 @@ class AIDHeaderParser(object):
                     sys.exit(
                         error_message('{} for "{}"'.format(exception,
                                                            identifier)))
+
+        for partition in ranges_by_name:
+            for name in ranges_by_name[partition]:
+                start = ranges_by_name[partition][name][0]
+                end = ranges_by_name[partition][name][1]
+                if start is None:
+                    sys.exit("Range '%s' for partition '%s' had undefined start" % (name, partition))
+                if end is None:
+                    sys.exit("Range '%s' for partition '%s' had undefined end" % (name, partition))
+                if start > end:
+                    sys.exit("Range '%s' for partition '%s' had start after end. Start: %d, end: %d" % (name, partition, start, end))
+
+                if partition not in self._ranges:
+                    self._ranges[partition] = []
+                self._ranges[partition].append((start, end))
 
     def _handle_aid(self, identifier, value):
         """Handle an AID C #define.

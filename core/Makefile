@@ -2865,11 +2865,23 @@ endif
 # -----------------------------------------------------------------
 # NDK Sysroot Package
 NDK_SYSROOT_TARGET := $(PRODUCT_OUT)/ndk_sysroot.tar.bz2
+<<<<<<< HEAD   (599d29 Merge "Merge empty history for sparse-9199314-L5050000095697)
 $(NDK_SYSROOT_TARGET): ndk
+=======
+.PHONY: ndk_sysroot
+ndk_sysroot: $(NDK_SYSROOT_TARGET)
+$(NDK_SYSROOT_TARGET): $(SOONG_OUT_DIR)/ndk.timestamp
+>>>>>>> BRANCH (cb4260 Merge "Version bump to TKB1.221021.001.A1 [core/build_id.mk])
 	@echo Package NDK sysroot...
 	$(hide) tar cjf $@ -C $(SOONG_OUT_DIR) ndk
 
+<<<<<<< HEAD   (599d29 Merge "Merge empty history for sparse-9199314-L5050000095697)
 $(call dist-for-goals,sdk,$(NDK_SYSROOT_TARGET))
+=======
+ifeq ($(HOST_OS),linux)
+$(call dist-for-goals,sdk ndk_sysroot,$(NDK_SYSROOT_TARGET))
+endif
+>>>>>>> BRANCH (cb4260 Merge "Version bump to TKB1.221021.001.A1 [core/build_id.mk])
 
 ifeq ($(build_ota_package),true)
 # -----------------------------------------------------------------
