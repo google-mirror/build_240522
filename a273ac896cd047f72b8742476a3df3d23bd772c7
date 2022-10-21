@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4cb52e0e_bb5e291c",
+        "filename": "tools/compliance/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-21T18:16:23Z",
+      "side": 1,
+      "message": "Ah, it\u0027s the license metadata that has order only: https://cs.android.com/android/platform/superproject/+/master:build/soong/android/license_metadata.go;l\u003d164\n\nBut it doesn\u0027t even have a depsfile: https://android.googlesource.com/platform/build/soong/+/refs/heads/master/compliance/build_license_metadata/build_license_metadata.go\n\nI think we need to change that to a regular Input dep. Does that make sense to you?",
+      "parentUuid": "57228252_6ca000e0",
+      "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "320cc8ca_2032f296",
         "filename": "tools/compliance/projectmetadata/projectmetadata.go",
         "patchSetId": 9
