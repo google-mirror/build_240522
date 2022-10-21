@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57228252_6ca000e0",
+        "filename": "tools/compliance/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-21T01:39:42Z",
+      "side": 1,
+      "message": "If I understand correctly, https://cs.android.com/android/platform/superproject/+/master:build/soong/android/notices.go;l\u003d79;drc\u003db45a2ea782074944f79fc388df20b06e01f265f7 is the dependency on the input license metadata files and those are passed with `cmd.Input` so they will be normal dependencies not order only dependencies.",
+      "parentUuid": "a13762a5_e8f454d0",
+      "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "320cc8ca_2032f296",
         "filename": "tools/compliance/projectmetadata/projectmetadata.go",
         "patchSetId": 9
