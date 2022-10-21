@@ -16,6 +16,11 @@ from __future__ import print_function
 
 import copy
 import errno
+<<<<<<< HEAD   (a38206 Merge "Merge empty history for sparse-9192609-L4550000095692)
+=======
+import fnmatch
+from genericpath import isdir
+>>>>>>> BRANCH (b32e8d Merge "Version bump to TKB1.221020.001.A1 [core/build_id.mk])
 import getopt
 import getpass
 import gzip
@@ -147,9 +152,453 @@ def CloseInheritedPipes():
       pass
 
 
+<<<<<<< HEAD   (a38206 Merge "Merge empty history for sparse-9192609-L4550000095692)
 def LoadInfoDict(input_file, input_dir=None):
   """Read and parse the META/misc_info.txt key/value pairs from the
   input target files and return a dict."""
+=======
+class BuildInfo(object):
+  """A class that holds the information for a given build.
+
+  This class wraps up the property querying for a given source or target build.
+  It abstracts away the logic of handling OEM-specific properties, and caches
+  the commonly used properties such as fingerprint.
+
+  There are two types of info dicts: a) build-time info dict, which is generated
+  at build time (i.e. included in a target_files zip); b) OEM info dict that is
+  specified at package generation time (via command line argument
+  '--oem_settings'). If a build doesn't use OEM-specific properties (i.e. not
+  having "oem_fingerprint_properties" in build-time info dict), all the queries
+  would be answered based on build-time info dict only. Otherwise if using
+  OEM-specific properties, some of them will be calculated from two info dicts.
+
+  Users can query properties similarly as using a dict() (e.g. info['fstab']),
+  or to query build properties via GetBuildProp() or GetPartitionBuildProp().
+
+  Attributes:
+    info_dict: The build-time info dict.
+    is_ab: Whether it's a build that uses A/B OTA.
+    oem_dicts: A list of OEM dicts.
+    oem_props: A list of OEM properties that should be read from OEM dicts; None
+        if the build doesn't use any OEM-specific property.
+    fingerprint: The fingerprint of the build, which would be calculated based
+        on OEM properties if applicable.
+    device: The device name, which could come from OEM dicts if applicable.
+  """
+
+  _RO_PRODUCT_RESOLVE_PROPS = ["ro.product.brand", "ro.product.device",
+                               "ro.product.manufacturer", "ro.product.model",
+                               "ro.product.name"]
+  _RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER_CURRENT = [
+      "product", "odm", "vendor", "system_ext", "system"]
+  _RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER_ANDROID_10 = [
+      "product", "product_services", "odm", "vendor", "system"]
+  _RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER_LEGACY = []
+
+  # The length of vbmeta digest to append to the fingerprint
+  _VBMETA_DIGEST_SIZE_USED = 8
+
+  def __init__(self, info_dict, oem_dicts=None, use_legacy_id=False):
+    """Initializes a BuildInfo instance with the given dicts.
+
+    Note that it only wraps up the given dicts, without making copies.
+
+    Arguments:
+      info_dict: The build-time info dict.
+      oem_dicts: A list of OEM dicts (which is parsed from --oem_settings). Note
+          that it always uses the first dict to calculate the fingerprint or the
+          device name. The rest would be used for asserting OEM properties only
+          (e.g. one package can be installed on one of these devices).
+      use_legacy_id: Use the legacy build id to construct the fingerprint. This
+          is used when we need a BuildInfo class, while the vbmeta digest is
+          unavailable.
+
+    Raises:
+      ValueError: On invalid inputs.
+    """
+    self.info_dict = info_dict
+    self.oem_dicts = oem_dicts
+
+    self._is_ab = info_dict.get("ab_update") == "true"
+    self.use_legacy_id = use_legacy_id
+
+    # Skip _oem_props if oem_dicts is None to use BuildInfo in
+    # sign_target_files_apks
+    if self.oem_dicts:
+      self._oem_props = info_dict.get("oem_fingerprint_properties")
+    else:
+      self._oem_props = None
+
+    def check_fingerprint(fingerprint):
+      if (" " in fingerprint or any(ord(ch) > 127 for ch in fingerprint)):
+        raise ValueError(
+            'Invalid build fingerprint: "{}". See the requirement in Android CDD '
+            "3.2.2. Build Parameters.".format(fingerprint))
+
+    self._partition_fingerprints = {}
+    for partition in PARTITIONS_WITH_BUILD_PROP:
+      try:
+        fingerprint = self.CalculatePartitionFingerprint(partition)
+        check_fingerprint(fingerprint)
+        self._partition_fingerprints[partition] = fingerprint
+      except ExternalError:
+        continue
+    if "system" in self._partition_fingerprints:
+      # system_other is not included in PARTITIONS_WITH_BUILD_PROP, but does
+      # need a fingerprint when creating the image.
+      self._partition_fingerprints[
+          "system_other"] = self._partition_fingerprints["system"]
+
+    # These two should be computed only after setting self._oem_props.
+    self._device = self.GetOemProperty("ro.product.device")
+    self._fingerprint = self.CalculateFingerprint()
+    check_fingerprint(self._fingerprint)
+
+  @property
+  def is_ab(self):
+    return self._is_ab
+
+  @property
+  def device(self):
+    return self._device
+
+  @property
+  def fingerprint(self):
+    return self._fingerprint
+
+  @property
+  def is_vabc(self):
+    vendor_prop = self.info_dict.get("vendor.build.prop")
+    vabc_enabled = vendor_prop and \
+        vendor_prop.GetProp("ro.virtual_ab.compression.enabled") == "true"
+    return vabc_enabled
+
+  @property
+  def is_android_r(self):
+    system_prop = self.info_dict.get("system.build.prop")
+    return system_prop and system_prop.GetProp("ro.build.version.release") == "11"
+
+  @property
+  def is_vabc_xor(self):
+    vendor_prop = self.info_dict.get("vendor.build.prop")
+    vabc_xor_enabled = vendor_prop and \
+        vendor_prop.GetProp("ro.virtual_ab.compression.xor.enabled") == "true"
+    return vabc_xor_enabled
+
+  @property
+  def vendor_suppressed_vabc(self):
+    vendor_prop = self.info_dict.get("vendor.build.prop")
+    vabc_suppressed = vendor_prop and \
+        vendor_prop.GetProp("ro.vendor.build.dont_use_vabc")
+    return vabc_suppressed and vabc_suppressed.lower() == "true"
+
+  @property
+  def oem_props(self):
+    return self._oem_props
+
+  def __getitem__(self, key):
+    return self.info_dict[key]
+
+  def __setitem__(self, key, value):
+    self.info_dict[key] = value
+
+  def get(self, key, default=None):
+    return self.info_dict.get(key, default)
+
+  def items(self):
+    return self.info_dict.items()
+
+  def _GetRawBuildProp(self, prop, partition):
+    prop_file = '{}.build.prop'.format(
+        partition) if partition else 'build.prop'
+    partition_props = self.info_dict.get(prop_file)
+    if not partition_props:
+      return None
+    return partition_props.GetProp(prop)
+
+  def GetPartitionBuildProp(self, prop, partition):
+    """Returns the inquired build property for the provided partition."""
+
+    # Boot image and init_boot image uses ro.[product.]bootimage instead of boot.
+    # This comes from the generic ramdisk
+    prop_partition = "bootimage" if partition == "boot" or partition == "init_boot" else partition
+
+    # If provided a partition for this property, only look within that
+    # partition's build.prop.
+    if prop in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
+      prop = prop.replace("ro.product", "ro.product.{}".format(prop_partition))
+    else:
+      prop = prop.replace("ro.", "ro.{}.".format(prop_partition))
+
+    prop_val = self._GetRawBuildProp(prop, partition)
+    if prop_val is not None:
+      return prop_val
+    raise ExternalError("couldn't find %s in %s.build.prop" %
+                        (prop, partition))
+
+  def GetBuildProp(self, prop):
+    """Returns the inquired build property from the standard build.prop file."""
+    if prop in BuildInfo._RO_PRODUCT_RESOLVE_PROPS:
+      return self._ResolveRoProductBuildProp(prop)
+
+    if prop == "ro.build.id":
+      return self._GetBuildId()
+
+    prop_val = self._GetRawBuildProp(prop, None)
+    if prop_val is not None:
+      return prop_val
+
+    raise ExternalError("couldn't find %s in build.prop" % (prop,))
+
+  def _ResolveRoProductBuildProp(self, prop):
+    """Resolves the inquired ro.product.* build property"""
+    prop_val = self._GetRawBuildProp(prop, None)
+    if prop_val:
+      return prop_val
+
+    default_source_order = self._GetRoProductPropsDefaultSourceOrder()
+    source_order_val = self._GetRawBuildProp(
+        "ro.product.property_source_order", None)
+    if source_order_val:
+      source_order = source_order_val.split(",")
+    else:
+      source_order = default_source_order
+
+    # Check that all sources in ro.product.property_source_order are valid
+    if any([x not in default_source_order for x in source_order]):
+      raise ExternalError(
+          "Invalid ro.product.property_source_order '{}'".format(source_order))
+
+    for source_partition in source_order:
+      source_prop = prop.replace(
+          "ro.product", "ro.product.{}".format(source_partition), 1)
+      prop_val = self._GetRawBuildProp(source_prop, source_partition)
+      if prop_val:
+        return prop_val
+
+    raise ExternalError("couldn't resolve {}".format(prop))
+
+  def _GetRoProductPropsDefaultSourceOrder(self):
+    # NOTE: refer to CDDs and android.os.Build.VERSION for the definition and
+    # values of these properties for each Android release.
+    android_codename = self._GetRawBuildProp("ro.build.version.codename", None)
+    if android_codename == "REL":
+      android_version = self._GetRawBuildProp("ro.build.version.release", None)
+      if android_version == "10":
+        return BuildInfo._RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER_ANDROID_10
+      # NOTE: float() conversion of android_version will have rounding error.
+      # We are checking for "9" or less, and using "< 10" is well outside of
+      # possible floating point rounding.
+      try:
+        android_version_val = float(android_version)
+      except ValueError:
+        android_version_val = 0
+      if android_version_val < 10:
+        return BuildInfo._RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER_LEGACY
+    return BuildInfo._RO_PRODUCT_PROPS_DEFAULT_SOURCE_ORDER_CURRENT
+
+  def _GetPlatformVersion(self):
+    version_sdk = self.GetBuildProp("ro.build.version.sdk")
+    # init code switches to version_release_or_codename (see b/158483506). After
+    # API finalization, release_or_codename will be the same as release. This
+    # is the best effort to support pre-S dev stage builds.
+    if int(version_sdk) >= 30:
+      try:
+        return self.GetBuildProp("ro.build.version.release_or_codename")
+      except ExternalError:
+        logger.warning('Failed to find ro.build.version.release_or_codename')
+
+    return self.GetBuildProp("ro.build.version.release")
+
+  def _GetBuildId(self):
+    build_id = self._GetRawBuildProp("ro.build.id", None)
+    if build_id:
+      return build_id
+
+    legacy_build_id = self.GetBuildProp("ro.build.legacy.id")
+    if not legacy_build_id:
+      raise ExternalError("Couldn't find build id in property file")
+
+    if self.use_legacy_id:
+      return legacy_build_id
+
+    # Append the top 8 chars of vbmeta digest to the existing build id. The
+    # logic needs to match the one in init, so that OTA can deliver correctly.
+    avb_enable = self.info_dict.get("avb_enable") == "true"
+    if not avb_enable:
+      raise ExternalError("AVB isn't enabled when using legacy build id")
+
+    vbmeta_digest = self.info_dict.get("vbmeta_digest")
+    if not vbmeta_digest:
+      raise ExternalError("Vbmeta digest isn't provided when using legacy build"
+                          " id")
+    if len(vbmeta_digest) < self._VBMETA_DIGEST_SIZE_USED:
+      raise ExternalError("Invalid vbmeta digest " + vbmeta_digest)
+
+    digest_prefix = vbmeta_digest[:self._VBMETA_DIGEST_SIZE_USED]
+    return legacy_build_id + '.' + digest_prefix
+
+  def _GetPartitionPlatformVersion(self, partition):
+    try:
+      return self.GetPartitionBuildProp("ro.build.version.release_or_codename",
+                                        partition)
+    except ExternalError:
+      return self.GetPartitionBuildProp("ro.build.version.release",
+                                        partition)
+
+  def GetOemProperty(self, key):
+    if self.oem_props is not None and key in self.oem_props:
+      return self.oem_dicts[0][key]
+    return self.GetBuildProp(key)
+
+  def GetPartitionFingerprint(self, partition):
+    return self._partition_fingerprints.get(partition, None)
+
+  def CalculatePartitionFingerprint(self, partition):
+    try:
+      return self.GetPartitionBuildProp("ro.build.fingerprint", partition)
+    except ExternalError:
+      return "{}/{}/{}:{}/{}/{}:{}/{}".format(
+          self.GetPartitionBuildProp("ro.product.brand", partition),
+          self.GetPartitionBuildProp("ro.product.name", partition),
+          self.GetPartitionBuildProp("ro.product.device", partition),
+          self._GetPartitionPlatformVersion(partition),
+          self.GetPartitionBuildProp("ro.build.id", partition),
+          self.GetPartitionBuildProp(
+              "ro.build.version.incremental", partition),
+          self.GetPartitionBuildProp("ro.build.type", partition),
+          self.GetPartitionBuildProp("ro.build.tags", partition))
+
+  def CalculateFingerprint(self):
+    if self.oem_props is None:
+      try:
+        return self.GetBuildProp("ro.build.fingerprint")
+      except ExternalError:
+        return "{}/{}/{}:{}/{}/{}:{}/{}".format(
+            self.GetBuildProp("ro.product.brand"),
+            self.GetBuildProp("ro.product.name"),
+            self.GetBuildProp("ro.product.device"),
+            self._GetPlatformVersion(),
+            self.GetBuildProp("ro.build.id"),
+            self.GetBuildProp("ro.build.version.incremental"),
+            self.GetBuildProp("ro.build.type"),
+            self.GetBuildProp("ro.build.tags"))
+    return "%s/%s/%s:%s" % (
+        self.GetOemProperty("ro.product.brand"),
+        self.GetOemProperty("ro.product.name"),
+        self.GetOemProperty("ro.product.device"),
+        self.GetBuildProp("ro.build.thumbprint"))
+
+  def WriteMountOemScript(self, script):
+    assert self.oem_props is not None
+    recovery_mount_options = self.info_dict.get("recovery_mount_options")
+    script.Mount("/oem", recovery_mount_options)
+
+  def WriteDeviceAssertions(self, script, oem_no_mount):
+    # Read the property directly if not using OEM properties.
+    if not self.oem_props:
+      script.AssertDevice(self.device)
+      return
+
+    # Otherwise assert OEM properties.
+    if not self.oem_dicts:
+      raise ExternalError(
+          "No OEM file provided to answer expected assertions")
+
+    for prop in self.oem_props.split():
+      values = []
+      for oem_dict in self.oem_dicts:
+        if prop in oem_dict:
+          values.append(oem_dict[prop])
+      if not values:
+        raise ExternalError(
+            "The OEM file is missing the property %s" % (prop,))
+      script.AssertOemProperty(prop, values, oem_no_mount)
+
+
+def ReadFromInputFile(input_file, fn):
+  """Reads the contents of fn from input zipfile or directory."""
+  if isinstance(input_file, zipfile.ZipFile):
+    return input_file.read(fn).decode()
+  elif zipfile.is_zipfile(input_file):
+    with zipfile.ZipFile(input_file, "r", allowZip64=True) as zfp:
+      return zfp.read(fn).decode()
+  else:
+    if not os.path.isdir(input_file):
+      raise ValueError(
+          "Invalid input_file, accepted inputs are ZipFile object, path to .zip file on disk, or path to extracted directory. Actual: " + input_file)
+    path = os.path.join(input_file, *fn.split("/"))
+    try:
+      with open(path) as f:
+        return f.read()
+    except IOError as e:
+      if e.errno == errno.ENOENT:
+        raise KeyError(fn)
+
+
+def ExtractFromInputFile(input_file, fn):
+  """Extracts the contents of fn from input zipfile or directory into a file."""
+  if isinstance(input_file, zipfile.ZipFile):
+    tmp_file = MakeTempFile(os.path.basename(fn))
+    with open(tmp_file, 'wb') as f:
+      f.write(input_file.read(fn))
+    return tmp_file
+  else:
+    file = os.path.join(input_file, *fn.split("/"))
+    if not os.path.exists(file):
+      raise KeyError(fn)
+    return file
+
+
+class RamdiskFormat(object):
+  LZ4 = 1
+  GZ = 2
+
+
+def GetRamdiskFormat(info_dict):
+  if info_dict.get('lz4_ramdisks') == 'true':
+    ramdisk_format = RamdiskFormat.LZ4
+  else:
+    ramdisk_format = RamdiskFormat.GZ
+  return ramdisk_format
+
+
+def LoadInfoDict(input_file, repacking=False):
+  """Loads the key/value pairs from the given input target_files.
+
+  It reads `META/misc_info.txt` file in the target_files input, does validation
+  checks and returns the parsed key/value pairs for to the given build. It's
+  usually called early when working on input target_files files, e.g. when
+  generating OTAs, or signing builds. Note that the function may be called
+  against an old target_files file (i.e. from past dessert releases). So the
+  property parsing needs to be backward compatible.
+
+  In a `META/misc_info.txt`, a few properties are stored as links to the files
+  in the PRODUCT_OUT directory. It works fine with the build system. However,
+  they are no longer available when (re)generating images from target_files zip.
+  When `repacking` is True, redirect these properties to the actual files in the
+  unzipped directory.
+
+  Args:
+    input_file: The input target_files file, which could be an open
+        zipfile.ZipFile instance, or a str for the dir that contains the files
+        unzipped from a target_files file.
+    repacking: Whether it's trying repack an target_files file after loading the
+        info dict (default: False). If so, it will rewrite a few loaded
+        properties (e.g. selinux_fc, root_dir) to point to the actual files in
+        target_files file. When doing repacking, `input_file` must be a dir.
+
+  Returns:
+    A dict that contains the parsed key/value pairs.
+
+  Raises:
+    AssertionError: On invalid input arguments.
+    ValueError: On malformed input values.
+  """
+  if repacking:
+    assert isinstance(input_file, str), \
+        "input_file must be a path str when doing repacking"
+>>>>>>> BRANCH (b32e8d Merge "Version bump to TKB1.221020.001.A1 [core/build_id.mk])
 
   def read_helper(fn):
     if isinstance(input_file, zipfile.ZipFile):
@@ -287,6 +736,179 @@ def LoadDictionaryFromLines(lines):
   return d
 
 
+<<<<<<< HEAD   (a38206 Merge "Merge empty history for sparse-9192609-L4550000095692)
+=======
+class PartitionBuildProps(object):
+  """The class holds the build prop of a particular partition.
+
+  This class loads the build.prop and holds the build properties for a given
+  partition. It also partially recognizes the 'import' statement in the
+  build.prop; and calculates alternative values of some specific build
+  properties during runtime.
+
+  Attributes:
+    input_file: a zipped target-file or an unzipped target-file directory.
+    partition: name of the partition.
+    props_allow_override: a list of build properties to search for the
+        alternative values during runtime.
+    build_props: a dict of build properties for the given partition.
+    prop_overrides: a set of props that are overridden by import.
+    placeholder_values: A dict of runtime variables' values to replace the
+        placeholders in the build.prop file. We expect exactly one value for
+        each of the variables.
+    ramdisk_format: If name is "boot", the format of ramdisk inside the
+        boot image. Otherwise, its value is ignored.
+        Use lz4 to decompress by default. If its value is gzip, use minigzip.
+  """
+
+  def __init__(self, input_file, name, placeholder_values=None):
+    self.input_file = input_file
+    self.partition = name
+    self.props_allow_override = [props.format(name) for props in [
+        'ro.product.{}.brand', 'ro.product.{}.name', 'ro.product.{}.device']]
+    self.build_props = {}
+    self.prop_overrides = set()
+    self.placeholder_values = {}
+    if placeholder_values:
+      self.placeholder_values = copy.deepcopy(placeholder_values)
+
+  @staticmethod
+  def FromDictionary(name, build_props):
+    """Constructs an instance from a build prop dictionary."""
+
+    props = PartitionBuildProps("unknown", name)
+    props.build_props = build_props.copy()
+    return props
+
+  @staticmethod
+  def FromInputFile(input_file, name, placeholder_values=None, ramdisk_format=RamdiskFormat.LZ4):
+    """Loads the build.prop file and builds the attributes."""
+
+    if name in ("boot", "init_boot"):
+      data = PartitionBuildProps._ReadBootPropFile(
+          input_file, name, ramdisk_format=ramdisk_format)
+    else:
+      data = PartitionBuildProps._ReadPartitionPropFile(input_file, name)
+
+    props = PartitionBuildProps(input_file, name, placeholder_values)
+    props._LoadBuildProp(data)
+    return props
+
+  @staticmethod
+  def _ReadBootPropFile(input_file, partition_name, ramdisk_format):
+    """
+    Read build.prop for boot image from input_file.
+    Return empty string if not found.
+    """
+    image_path = 'IMAGES/' + partition_name + '.img'
+    try:
+      boot_img = ExtractFromInputFile(input_file, image_path)
+    except KeyError:
+      logger.warning('Failed to read %s', image_path)
+      return ''
+    prop_file = GetBootImageBuildProp(boot_img, ramdisk_format=ramdisk_format)
+    if prop_file is None:
+      return ''
+    with open(prop_file, "r") as f:
+      return f.read()
+
+  @staticmethod
+  def _ReadPartitionPropFile(input_file, name):
+    """
+    Read build.prop for name from input_file.
+    Return empty string if not found.
+    """
+    data = ''
+    for prop_file in ['{}/etc/build.prop'.format(name.upper()),
+                      '{}/build.prop'.format(name.upper())]:
+      try:
+        data = ReadFromInputFile(input_file, prop_file)
+        break
+      except KeyError:
+        logger.warning('Failed to read %s', prop_file)
+    if data == '':
+      logger.warning("Failed to read build.prop for partition {}".format(name))
+    return data
+
+  @staticmethod
+  def FromBuildPropFile(name, build_prop_file):
+    """Constructs an instance from a build prop file."""
+
+    props = PartitionBuildProps("unknown", name)
+    with open(build_prop_file) as f:
+      props._LoadBuildProp(f.read())
+    return props
+
+  def _LoadBuildProp(self, data):
+    for line in data.split('\n'):
+      line = line.strip()
+      if not line or line.startswith("#"):
+        continue
+      if line.startswith("import"):
+        overrides = self._ImportParser(line)
+        duplicates = self.prop_overrides.intersection(overrides.keys())
+        if duplicates:
+          raise ValueError('prop {} is overridden multiple times'.format(
+              ','.join(duplicates)))
+        self.prop_overrides = self.prop_overrides.union(overrides.keys())
+        self.build_props.update(overrides)
+      elif "=" in line:
+        name, value = line.split("=", 1)
+        if name in self.prop_overrides:
+          raise ValueError('prop {} is set again after overridden by import '
+                           'statement'.format(name))
+        self.build_props[name] = value
+
+  def _ImportParser(self, line):
+    """Parses the build prop in a given import statement."""
+
+    tokens = line.split()
+    if tokens[0] != 'import' or (len(tokens) != 2 and len(tokens) != 3):
+      raise ValueError('Unrecognized import statement {}'.format(line))
+
+    if len(tokens) == 3:
+      logger.info("Import %s from %s, skip", tokens[2], tokens[1])
+      return {}
+
+    import_path = tokens[1]
+    if not re.match(r'^/{}/.*\.prop$'.format(self.partition), import_path):
+      logger.warn('Unrecognized import path {}'.format(line))
+      return {}
+
+    # We only recognize a subset of import statement that the init process
+    # supports. And we can loose the restriction based on how the dynamic
+    # fingerprint is used in practice. The placeholder format should be
+    # ${placeholder}, and its value should be provided by the caller through
+    # the placeholder_values.
+    for prop, value in self.placeholder_values.items():
+      prop_place_holder = '${{{}}}'.format(prop)
+      if prop_place_holder in import_path:
+        import_path = import_path.replace(prop_place_holder, value)
+    if '$' in import_path:
+      logger.info('Unresolved place holder in import path %s', import_path)
+      return {}
+
+    import_path = import_path.replace('/{}'.format(self.partition),
+                                      self.partition.upper())
+    logger.info('Parsing build props override from %s', import_path)
+
+    lines = ReadFromInputFile(self.input_file, import_path).split('\n')
+    d = LoadDictionaryFromLines(lines)
+    return {key: val for key, val in d.items()
+            if key in self.props_allow_override}
+
+  def __getstate__(self):
+    state = self.__dict__.copy()
+    # Don't pickle baz
+    if "input_file" in state and isinstance(state["input_file"], zipfile.ZipFile):
+      state["input_file"] = state["input_file"].filename
+    return state
+
+  def GetProp(self, prop):
+    return self.build_props.get(prop)
+
+
+>>>>>>> BRANCH (b32e8d Merge "Version bump to TKB1.221020.001.A1 [core/build_id.mk])
 def LoadRecoveryFSTab(read_helper, fstab_version, recovery_fstab_path,
                       system_root_image=False):
   class Partition(object):

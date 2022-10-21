@@ -3190,7 +3190,11 @@ $(INTERNAL_SDK_TARGET): PRIVATE_NAME := $(sdk_name)
 $(INTERNAL_SDK_TARGET): PRIVATE_DIR := $(sdk_dir)/$(sdk_name)
 $(INTERNAL_SDK_TARGET): PRIVATE_DEP_FILE := $(sdk_dep_file)
 $(INTERNAL_SDK_TARGET): PRIVATE_INPUT_FILES := $(sdk_atree_files)
-
+$(INTERNAL_SDK_TARGET): PRIVATE_PLATFORM_NAME := \
+  $(strip $(if $(filter $(PLATFORM_SDK_EXTENSION_VERSION),$(PLATFORM_BASE_SDK_EXTENSION_VERSION)),\
+    android-$(PLATFORM_SDK_VERSION),\
+    android-$(PLATFORM_SDK_VERSION)-ext$(PLATFORM_SDK_EXTENSION_VERSION)) \
+)
 # Set SDK_GNU_ERROR to non-empty to fail when a GNU target is built.
 #
 #SDK_GNU_ERROR := true
@@ -3208,6 +3212,7 @@ $(INTERNAL_SDK_TARGET): $(deps)
 	if [ $$FAIL ]; then exit 1; fi
 	$(hide) echo $(notdir $(SDK_FONT_DEPS)) | tr " " "\n"  > $(SDK_FONT_TEMP)/fontsInSdk.txt
 	$(hide) ( \
+<<<<<<< HEAD   (a38206 Merge "Merge empty history for sparse-9192609-L4550000095692)
 		ATREE_STRIP="strip -x" \
 		$(HOST_OUT_EXECUTABLES)/atree \
 		$(addprefix -f ,$(PRIVATE_INPUT_FILES)) \
@@ -3231,6 +3236,27 @@ $(INTERNAL_SDK_TARGET): $(deps)
 			development/build/tools/sdk_clean.sh $(PRIVATE_DIR) && \
 		chmod -R ug+rwX $(PRIVATE_DIR) && \
 		cd $(dir $@) && zip -rqX $(notdir $@) $(PRIVATE_NAME) \
+=======
+	    ATREE_STRIP="$(HOST_STRIP) -x" \
+	    $(HOST_OUT_EXECUTABLES)/atree \
+	    $(addprefix -f ,$(PRIVATE_INPUT_FILES)) \
+	        -m $(PRIVATE_DEP_FILE) \
+	        -I . \
+	        -I $(PRODUCT_OUT) \
+	        -I $(HOST_OUT) \
+	        -I $(TARGET_COMMON_OUT_ROOT) \
+	        -v "PLATFORM_NAME=$(PRIVATE_PLATFORM_NAME)" \
+	        -v "OUT_DIR=$(OUT_DIR)" \
+	        -v "HOST_OUT=$(HOST_OUT)" \
+	        -v "TARGET_ARCH=$(TARGET_ARCH)" \
+	        -v "TARGET_CPU_ABI=$(TARGET_CPU_ABI)" \
+	        -v "DLL_EXTENSION=$(HOST_SHLIB_SUFFIX)" \
+	        -o $(PRIVATE_DIR) && \
+	    HOST_OUT_EXECUTABLES=$(HOST_OUT_EXECUTABLES) HOST_OS=$(HOST_OS) \
+	        development/build/tools/sdk_clean.sh $(PRIVATE_DIR) && \
+	    chmod -R ug+rwX $(PRIVATE_DIR) && \
+	    cd $(dir $@) && zip -rqX $(notdir $@) $(PRIVATE_NAME) \
+>>>>>>> BRANCH (b32e8d Merge "Version bump to TKB1.221020.001.A1 [core/build_id.mk])
 	) || ( rm -rf $(PRIVATE_DIR) $@ && exit 44 )
 
 
