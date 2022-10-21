@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40095d5a_93243975",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1637924
+      },
+      "writtenOn": "2022-10-21T15:40:36Z",
+      "side": 1,
+      "message": "Verified that futility-host is placed in the otatools package for a custom ryu target.",
+      "revId": "b5070d57eb6e795faed0572273735ccc20e46255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
