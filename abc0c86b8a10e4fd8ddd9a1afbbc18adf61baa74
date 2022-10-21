@@ -22,6 +22,30 @@
       },
       "revId": "abc0c86b8a10e4fd8ddd9a1afbbc18adf61baa74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14890fd6_5489f453",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-21T16:10:32Z",
+      "side": 1,
+      "message": "Non-impl variant fails the build with the following error:\n\n```\nerror: frameworks/base/boot/Android.bp:44:1: module \"platform-bootclasspath\" variant \"android_common\": module android.system.virtualmachine does not provide a dex boot jar (see comment next to this message in So\nong for details)\n```\n\nRE: naming. Will work on the renaming cl, but it will take some time. Do you have any other concerns?",
+      "parentUuid": "1dc2490a_c40f2da6",
+      "range": {
+        "startLine": 318,
+        "startChar": 34,
+        "endLine": 318,
+        "endChar": 68
+      },
+      "revId": "abc0c86b8a10e4fd8ddd9a1afbbc18adf61baa74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
