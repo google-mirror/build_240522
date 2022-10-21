@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5eeeaf3_8842dbee",
+        "filename": "tools/compliance/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-21T18:41:05Z",
+      "side": 1,
+      "message": "build_license_metadata doesn\u0027t read those files, I think the dependency is there so that the files are in place for the first run of xmlnotice.  After xmlnotice has run once they will be in the .d file for xmlnotice.",
+      "parentUuid": "4cb52e0e_bb5e291c",
+      "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "320cc8ca_2032f296",
         "filename": "tools/compliance/projectmetadata/projectmetadata.go",
         "patchSetId": 9
