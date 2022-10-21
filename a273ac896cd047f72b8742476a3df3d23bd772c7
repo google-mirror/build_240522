@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a13762a5_e8f454d0",
+        "filename": "tools/compliance/noticeindex.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-21T00:17:20Z",
+      "side": 1,
+      "message": "I prefer to keep conceptually different things separate.\n\nBut that raises a different issue: Do we need to include the input license metadata files too? I seem to recall the initial dependency is order-only. If a license metadata file changes, will it cause a rebuild if we do not include it as a dependency in the depsfile?",
+      "parentUuid": "5bd3600a_a67390b3",
+      "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "320cc8ca_2032f296",
         "filename": "tools/compliance/projectmetadata/projectmetadata.go",
         "patchSetId": 9
@@ -48,6 +66,24 @@
       "writtenOn": "2022-10-20T22:40:24Z",
       "side": 1,
       "message": "There\u0027s no need to precompute the size, its probably more expensive than the amortized append cost on a slice that starts as nil.",
+      "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bc24924_b74594d8",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-21T00:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "320cc8ca_2032f296",
       "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c184a82_3902aee1",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-21T00:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4242992_5f2dfb3f",
+      "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f547a168_452e7fb5",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-10-20T22:40:24Z",
       "side": 1,
       "message": "var files []string and let Go manage the size.",
+      "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62acded6_ef05c0c3",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-21T00:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f547a168_452e7fb5",
       "revId": "a273ac896cd047f72b8742476a3df3d23bd772c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
