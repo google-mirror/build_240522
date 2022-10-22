@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d645df3_f6d23b4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-22T00:47:07Z",
+      "side": 1,
+      "message": "PTAL I made the depsfile complete by adding all the `*meta_lic` files read too.",
+      "revId": "53d7c706b317f658ddc776b1edf37bfde9d48f32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
