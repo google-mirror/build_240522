@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58256797_318ef710",
+        "filename": "tools/check_radio_versions.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-23T21:29:38Z",
+      "side": 1,
+      "message": "You can move the make code that runs the script into the `ifdef board_info_check` to resolve that issue.",
+      "parentUuid": "b55e45a7_e25f0c4d",
+      "revId": "00243001ca645bdd128c3caeb74810478aebc5ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea6d9c50_5b284d19",
         "filename": "tools/check_radio_versions.py",
         "patchSetId": 2
