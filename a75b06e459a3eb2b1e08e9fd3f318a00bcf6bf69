@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aee008e9_c838e360",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-24T23:20:44Z",
+      "side": 1,
+      "message": "year",
+      "revId": "a75b06e459a3eb2b1e08e9fd3f318a00bcf6bf69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703b4217_ee47d643",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-24T23:20:44Z",
+      "side": 1,
+      "message": "Using . is not good for readability because you cannot see where things are coming from.",
+      "revId": "a75b06e459a3eb2b1e08e9fd3f318a00bcf6bf69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72d0ab1b_2d030c56",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-24T23:20:44Z",
+      "side": 1,
+      "message": "You will need a depsfile tool. You can see examples in the notice binaries.",
+      "revId": "a75b06e459a3eb2b1e08e9fd3f318a00bcf6bf69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
