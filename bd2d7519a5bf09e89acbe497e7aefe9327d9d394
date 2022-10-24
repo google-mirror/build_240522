@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "423cd113_a9c98bb6",
+        "filename": "finalize-aidl-vndk-sdk-resources.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-10-24T22:50:17Z",
+      "side": 1,
+      "message": "and this is the step that is stuck currently.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 17
+      },
+      "revId": "bd2d7519a5bf09e89acbe497e7aefe9327d9d394",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
