@@ -33,6 +33,24 @@
       "message": "Please fix the typos",
       "revId": "bc0cce34c15e35d8bcb530a90429170fe69e71bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b03ebea_b415a5d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961266
+      },
+      "writtenOn": "2022-10-24T01:54:04Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "af0b11b4_8ff17b07",
+      "revId": "bc0cce34c15e35d8bcb530a90429170fe69e71bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
