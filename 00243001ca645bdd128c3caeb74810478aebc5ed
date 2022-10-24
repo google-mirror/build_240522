@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e2f8439_158995f2",
+        "filename": "tools/check_radio_versions.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-10-24T19:10:12Z",
+      "side": 1,
+      "message": "Won\u0027t using positional args cause issues if `$(board_info_txt)` from the corresponding makefile is empty?\n\nAs an example, if we use positional args,\n```\n$ (INFO\u003dinfo.txt CHECK\u003dcheck1.txt check2.txt \n\u0026\u0026 check_radio_versions.py $INFO $CHECK)\n\n# Inside check_radio_versions.py\n# board_info_txt \u003d info.txt # OK\n# check_files \u003d check1.txt check2.txt # OK\n```\n\nBut, if INFO is empty\n```\n# Inside check_radio_versions.py\n# board_info_txt \u003d check1.txt # NOT OK\n# check_files \u003d check2.txt # NOT OK\n```\n\nWe could use `ifdef board_info_check`, and that would resolve it for actions that run within the build, but its behavior will be incorrect/unpredictable when run standalone",
+      "parentUuid": "58256797_318ef710",
+      "revId": "00243001ca645bdd128c3caeb74810478aebc5ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea6d9c50_5b284d19",
         "filename": "tools/check_radio_versions.py",
         "patchSetId": 2
@@ -49,6 +67,30 @@
       "writtenOn": "2022-10-23T21:26:01Z",
       "side": 1,
       "message": "Nit: remove the space after the prints for style reasons, and it makes it easier to search for python 2 style prints later.",
+      "range": {
+        "startLine": 63,
+        "startChar": 9,
+        "endLine": 63,
+        "endChar": 10
+      },
+      "revId": "00243001ca645bdd128c3caeb74810478aebc5ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fce6920d_70d56091",
+        "filename": "tools/check_radio_versions.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-10-24T19:10:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea6d9c50_5b284d19",
       "range": {
         "startLine": 63,
         "startChar": 9,
