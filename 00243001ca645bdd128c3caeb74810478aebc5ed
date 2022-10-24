@@ -146,6 +146,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb57ab19_4d3bd8d2",
+        "filename": "tools/check_radio_versions.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-10-24T21:04:00Z",
+      "side": 1,
+      "message": "\u003e but I still think the better course of action is to make --board_info_text required, even if it is more of a breaking change.\n\nI think making this flag required makes sense. I have added this to the parser, but with nargs\u003d?. An invariant I would not like to break (atleast not yet) is to raise an error if `$(board_info_txt)` is an empty string.",
+      "parentUuid": "6ff4dde3_067ebceb",
+      "revId": "00243001ca645bdd128c3caeb74810478aebc5ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea6d9c50_5b284d19",
         "filename": "tools/check_radio_versions.py",
         "patchSetId": 2
