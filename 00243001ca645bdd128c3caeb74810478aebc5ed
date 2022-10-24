@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3caa00e9_c9927cf8",
+        "filename": "tools/check_radio_versions.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-24T19:47:03Z",
+      "side": 1,
+      "message": "The cl is already a breaking change because you\u0027re adding these flags. If we\u0027re making breaking changes, shouldn\u0027t we also do the right thing while we\u0027re at it? Exiting with status code 0 and not doing anything is not the right thing to do.",
+      "parentUuid": "2c61fa1f_f199c128",
+      "revId": "00243001ca645bdd128c3caeb74810478aebc5ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea6d9c50_5b284d19",
         "filename": "tools/check_radio_versions.py",
         "patchSetId": 2
