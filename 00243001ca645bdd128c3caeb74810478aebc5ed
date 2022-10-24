@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3253a02d_61758696",
+        "filename": "tools/check_radio_versions.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-10-24T20:34:50Z",
+      "side": 1,
+      "message": "Breaking the CLI is not the same as breaking the business logic. In its current state, this CL does the former but not the latter.\n\n\u003e Exiting with status code 0 and not doing anything is not the right thing to do.\n\nimo this really depends on how the author intends the script to be used. e.g. I could see a script `./my_script /dev/null` return an exit code of 0 without doing anything",
+      "parentUuid": "3caa00e9_c9927cf8",
+      "revId": "00243001ca645bdd128c3caeb74810478aebc5ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea6d9c50_5b284d19",
         "filename": "tools/check_radio_versions.py",
         "patchSetId": 2
