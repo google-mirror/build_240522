@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "887c2bcc_c4b15020",
+        "filename": "tools/check_radio_versions.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-24T19:17:45Z",
+      "side": 1,
+      "message": "hmm... I suppose you\u0027re right that this could be used mistakenly. I guess in that case, just make `--board_info_txt` a required flag? (remove `nargs`, add `required\u003dTrue`)\n\nAlso change the `nargs` of `--board_info_check` to `+`, which I believe still allows not passing the flag, but requires at least one argument if you do pass it.",
+      "parentUuid": "7e2f8439_158995f2",
+      "revId": "00243001ca645bdd128c3caeb74810478aebc5ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea6d9c50_5b284d19",
         "filename": "tools/check_radio_versions.py",
         "patchSetId": 2
