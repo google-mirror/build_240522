@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "452e7d41_f4efff02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-10-24T21:19:08Z",
+      "side": 1,
+      "message": "Small follow-up from the July train preload work. Once this has propagated we should be able to clean up these settings from various downstream mk files.",
+      "revId": "6c26128fe68ae17d83155e187dbd2d10182e3f57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
