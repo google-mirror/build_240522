@@ -16,6 +16,75 @@
       "message": "How about this path going?",
       "revId": "bd080058b817ccac32804cb45231ca14c9fd2874",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d813612_9c1977d7",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2022-10-24T16:49:17Z",
+      "side": 1,
+      "message": "does this method need to be public?",
+      "range": {
+        "startLine": 1348,
+        "startChar": 4,
+        "endLine": 1348,
+        "endChar": 29
+      },
+      "revId": "bd080058b817ccac32804cb45231ca14c9fd2874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d05c3e2_597821d3",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 1356,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2022-10-24T16:49:17Z",
+      "side": 1,
+      "message": "can this arg appear multiple times or can we break out of the loop once we\u0027ve handled it?",
+      "range": {
+        "startLine": 1356,
+        "startChar": 4,
+        "endLine": 1356,
+        "endChar": 33
+      },
+      "revId": "bd080058b817ccac32804cb45231ca14c9fd2874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee678204_7d747df9",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2022-10-24T16:49:17Z",
+      "side": 1,
+      "message": "It looks like a number of places have similar logic without the error (e.g. https://cs.android.com/android/platform/superproject/+/master:build/make/tools/releasetools/common.py;l\u003d1424;drc\u003deb147e051ed0f762fd36de73fbc34b5087bba69d), mind pulling this out into a helper function so we can migrate existing cases to share logic for potentially prepending `OPTIONS.search_path`?",
+      "range": {
+        "startLine": 1358,
+        "startChar": 0,
+        "endLine": 1367,
+        "endChar": 63
+      },
+      "revId": "bd080058b817ccac32804cb45231ca14c9fd2874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
