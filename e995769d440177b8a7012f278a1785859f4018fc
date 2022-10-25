@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa003aa3_a64655e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-10-25T02:01:21Z",
+      "side": 1,
+      "message": "pre-ninja analysis. ninja -t does everything this does and more.",
+      "revId": "e995769d440177b8a7012f278a1785859f4018fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
