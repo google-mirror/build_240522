@@ -16,6 +16,29 @@
       "message": "Small follow-up from the July train preload work. Once this has propagated we should be able to clean up these settings from various downstream mk files.",
       "revId": "6c26128fe68ae17d83155e187dbd2d10182e3f57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fa84cf9_02275e32",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-10-25T10:20:13Z",
+      "side": 1,
+      "message": "Can we extend these to `%.art` and so on?",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 26
+      },
+      "revId": "6c26128fe68ae17d83155e187dbd2d10182e3f57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
