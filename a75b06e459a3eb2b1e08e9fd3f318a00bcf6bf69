@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8713f467_1d01438a",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-10-25T21:27:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aee008e9_c838e360",
+      "revId": "a75b06e459a3eb2b1e08e9fd3f318a00bcf6bf69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "703b4217_ee47d643",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d9d0843_7fd05b9e",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-10-25T21:27:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "703b4217_ee47d643",
+      "revId": "a75b06e459a3eb2b1e08e9fd3f318a00bcf6bf69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72d0ab1b_2d030c56",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-10-24T23:20:44Z",
       "side": 1,
       "message": "You will need a depsfile tool. You can see examples in the notice binaries.",
+      "revId": "a75b06e459a3eb2b1e08e9fd3f318a00bcf6bf69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb1648a_5adf6ff8",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-10-25T21:27:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72d0ab1b_2d030c56",
       "revId": "a75b06e459a3eb2b1e08e9fd3f318a00bcf6bf69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
