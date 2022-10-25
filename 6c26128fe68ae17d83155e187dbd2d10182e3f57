@@ -39,6 +39,30 @@
       },
       "revId": "6c26128fe68ae17d83155e187dbd2d10182e3f57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c48683_86e7d484",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-10-25T14:38:21Z",
+      "side": 1,
+      "message": "I think it\u0027s better to restrict them to the paths where we actually expect these files, to avoid false negatives. What other paths do we need to consider?",
+      "parentUuid": "7fa84cf9_02275e32",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 26
+      },
+      "revId": "6c26128fe68ae17d83155e187dbd2d10182e3f57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
