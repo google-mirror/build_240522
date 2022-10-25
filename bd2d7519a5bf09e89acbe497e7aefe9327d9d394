@@ -22,6 +22,30 @@
       },
       "revId": "bd2d7519a5bf09e89acbe497e7aefe9327d9d394",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec8370f2_522c607d",
+        "filename": "finalize-aidl-vndk-sdk-resources.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2022-10-25T09:10:12Z",
+      "side": 1,
+      "message": "rerun it yesterday locally, passing...",
+      "parentUuid": "423cd113_a9c98bb6",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 17
+      },
+      "revId": "bd2d7519a5bf09e89acbe497e7aefe9327d9d394",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
