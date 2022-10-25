@@ -63,6 +63,30 @@
       },
       "revId": "6c26128fe68ae17d83155e187dbd2d10182e3f57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae887d5a_21a52786",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-10-25T14:52:54Z",
+      "side": 1,
+      "message": "I don\u0027t have any particular path in mind. I saw I lot of places where a looser restriction is used https://source.corp.google.com/search?q\u003d%22%25.art%22%20%22%25.vdex%22\u0026sq\u003dpackage:%5Eandroid-internal$. I wonder why those were done.",
+      "parentUuid": "28c48683_86e7d484",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 26
+      },
+      "revId": "6c26128fe68ae17d83155e187dbd2d10182e3f57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
