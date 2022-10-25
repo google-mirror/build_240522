@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dd82776_0216400c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1288034
+      },
+      "writtenOn": "2022-10-25T10:07:35Z",
+      "side": 1,
+      "message": "This isn\u0027t a great description of this change; this change removes something from the base build.\n\nYou could instead say that this is removing it from here, and why",
+      "revId": "d14c7c2fbd5b81a6e2c882e8160b2769b7039a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
