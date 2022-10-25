@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51d8ce37_22094594",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-25T09:41:10Z",
+      "side": 1,
+      "message": "Do we need to register this as a product config variable using `_product_single_value_vars +\u003d PRODUCT_AVF_ENABLED` ?",
+      "range": {
+        "startLine": 105,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 25
+      },
+      "revId": "eb500b1208f7f4b79b55aee6ab1389efa9e10cfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
