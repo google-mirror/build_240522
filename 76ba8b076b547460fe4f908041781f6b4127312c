@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02eeddaf_8baa90ab",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-10-25T14:49:49Z",
+      "side": 1,
+      "message": "Can we fix the build system\u0027s tracking such that it understands that prebuilt art pulls in these files?",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 29
+      },
+      "revId": "76ba8b076b547460fe4f908041781f6b4127312c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
