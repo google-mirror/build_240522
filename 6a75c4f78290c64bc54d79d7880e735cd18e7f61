@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10bcbe84_74efb470",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-10-25T01:59:41Z",
+      "side": 1,
+      "message": "So sad this couldn\u0027t have happened.  We missed the boat on having framework.jar split into layered packages, and there was never a good time before 1.0 to refactor the java packages to be layered.",
+      "revId": "6a75c4f78290c64bc54d79d7880e735cd18e7f61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
