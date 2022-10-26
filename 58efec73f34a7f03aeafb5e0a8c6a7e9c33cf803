@@ -39,6 +39,30 @@
       },
       "revId": "58efec73f34a7f03aeafb5e0a8c6a7e9c33cf803",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c40a5eb1_a839c562",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 13
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-26T18:39:00Z",
+      "side": 1,
+      "message": "Because it is sometimes possible and very efficient to estimate the potential size in the caller and not possible here. Callers have the option to pass nil, which will have the same behavior as if the parameter were never declared -- potentially reallocating space and copying content as each new path gets appended. Callers also have the option to allocate space sufficient for the entire result thereby avoiding all reallocations and copies.\n\nAlso, in the principal caller we have, the end result is a combination of results from 3 places. Passing a parameter allows this method to append to an existing, partially completed, and already allocated slice.",
+      "parentUuid": "2e85a35a_103ce572",
+      "range": {
+        "startLine": 186,
+        "startChar": 34,
+        "endLine": 186,
+        "endChar": 48
+      },
+      "revId": "58efec73f34a7f03aeafb5e0a8c6a7e9c33cf803",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
