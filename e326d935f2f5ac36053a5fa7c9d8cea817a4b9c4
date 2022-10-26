@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25fcd6ac_418e5327",
+        "filename": "tools/compliance/policy_resolve.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-26T22:58:59Z",
+      "side": 1,
+      "message": "This lock and the associated complexity around early returns would be unnecessary if you initialized the WaitGroup as part of the LicenseGraph.  One way to do that would be to make it a non-pointer inside LicenseGraph, which would have already been initialized to the zero value.",
+      "revId": "e326d935f2f5ac36053a5fa7c9d8cea817a4b9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe9c8ea7_dea40661",
+        "filename": "tools/compliance/policy_resolve.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-26T22:58:59Z",
+      "side": 1,
+      "message": "This extra `wg.Add(1)` and the `wg.Done()` at the end are unnecessary, they are fully synchronized with the `wg.Wait()` call.",
+      "revId": "e326d935f2f5ac36053a5fa7c9d8cea817a4b9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f92383f_b466c5c4",
+        "filename": "tools/compliance/policy_resolve.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-26T22:58:59Z",
+      "side": 1,
+      "message": "This \"unlock and return\" pattern repeated 3 times is a sign that something needs to be refactored here.  One option would be to use a sync.Map again and get rid of the locking.",
+      "revId": "e326d935f2f5ac36053a5fa7c9d8cea817a4b9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b56658db_1f0a5c89",
+        "filename": "tools/compliance/policy_resolve.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-26T22:58:59Z",
+      "side": 1,
+      "message": "It appears that this extra inline function was to allow the use of defer to unlock?  If so, its not useful any more as you don\u0027t have early returns here.  You don\u0027t appear to need the lock at all now, sync wg is threadsafe, and the goroutine spawn is running async work that can\u0027t rely on the lock.",
+      "revId": "e326d935f2f5ac36053a5fa7c9d8cea817a4b9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
