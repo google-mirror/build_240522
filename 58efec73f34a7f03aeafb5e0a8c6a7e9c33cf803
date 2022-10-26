@@ -16,6 +16,29 @@
       "message": "Really PTAL this time...",
       "revId": "58efec73f34a7f03aeafb5e0a8c6a7e9c33cf803",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e85a35a_103ce572",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 13
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-26T17:48:30Z",
+      "side": 1,
+      "message": "Why is this passed in?  It\u0027s plenty efficient to return a new []string and then append it to your existing values outside this function.",
+      "range": {
+        "startLine": 186,
+        "startChar": 34,
+        "endLine": 186,
+        "endChar": 48
+      },
+      "revId": "58efec73f34a7f03aeafb5e0a8c6a7e9c33cf803",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
