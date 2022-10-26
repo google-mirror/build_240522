@@ -16,6 +16,24 @@
       "message": "I think this should be `get_abs_build_var OUT_DIR` to be consistent with the other environment variables set up in `setpaths`",
       "revId": "0218378866d5afc60996228a3c3b07025ec376bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b3c485_ba3c25cc",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 2031,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-10-26T13:11:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70fc438b_879e7a8f",
+      "revId": "0218378866d5afc60996228a3c3b07025ec376bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
