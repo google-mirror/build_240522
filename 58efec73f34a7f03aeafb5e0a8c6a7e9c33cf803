@@ -87,6 +87,30 @@
       },
       "revId": "58efec73f34a7f03aeafb5e0a8c6a7e9c33cf803",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72f3c4ab_19b7f5cb",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 13
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-26T23:36:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df996a10_a18e309f",
+      "range": {
+        "startLine": 186,
+        "startChar": 34,
+        "endLine": 186,
+        "endChar": 48
+      },
+      "revId": "58efec73f34a7f03aeafb5e0a8c6a7e9c33cf803",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
