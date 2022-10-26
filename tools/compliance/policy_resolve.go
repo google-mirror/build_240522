@@ -172,6 +172,29 @@ func TraceTopDownConditions(lg *LicenseGraph, conditionsFn TraceConditions) {
 	walk = func(fnode *TargetNode, cs LicenseConditionSet, treatAsAggregate bool) {
 		defer wg.Done()
 		mu.Lock()
+		depcs := fnode.resolution
+		_, alreadyWalked := amap[fnode]
+		if alreadyWalked {
+			if cs.IsEmpty() {
+				mu.Unlock()
+				return
+			}
+			if cs.Difference(depcs).IsEmpty() {
+				// no new conditions
+
+				// pure aggregates never need walking a 2nd time with same conditions
+				if treatAsAggregate {
+					mu.Unlock()
+					return
+				}
+				// non-aggregates don't need walking as non-aggregate a 2nd time
+				if !fnode.pure {
+					mu.Unlock()
+					return
+				}
+				// previously walked as pure aggregate; need to re-walk as non-aggregate
+			}
+		}
 		fnode.resolution |= conditionsFn(fnode)
 		fnode.resolution |= cs
 		fnode.pure = treatAsAggregate
@@ -186,23 +209,6 @@ func TraceTopDownConditions(lg *LicenseGraph, conditionsFn TraceConditions) {
 				dnode := edge.dependency
 				mu.Lock()
 				defer mu.Unlock()
-				depcs := dnode.resolution
-				_, alreadyWalked := amap[dnode]
-				if !dcs.IsEmpty() && alreadyWalked {
-					if dcs.Difference(depcs).IsEmpty() {
-						// no new conditions
-
-						// pure aggregates never need walking a 2nd time with same conditions
-						if treatAsAggregate {
-							return
-						}
-						// non-aggregates don't need walking as non-aggregate a 2nd time
-						if !dnode.pure {
-							return
-						}
-						// previously walked as pure aggregate; need to re-walk as non-aggregate
-					}
-				}
 				// add the conditions to the dependency
 				wg.Add(1)
 				go walk(dnode, dcs, treatAsAggregate && dnode.IsContainer())
