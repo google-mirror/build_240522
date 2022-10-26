@@ -63,6 +63,30 @@
       },
       "revId": "58efec73f34a7f03aeafb5e0a8c6a7e9c33cf803",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df996a10_a18e309f",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 13
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-26T20:48:01Z",
+      "side": 1,
+      "message": "That seems like a premature optimization that makes the API unexpected and the code  less readable.  If I see a call to AllMetadataFiles() I won\u0027t have any idea what the input argument is for without going to the code (and its not mentioned in the godoc either).\n\nPre-allocating a list is a relatively small optimization that is generally only worth it if it is trivial (e.g. making a list that is the same size as another list) or if it is in a hot path.  I would expect the difference in execution time between this code and the starightforward solution of just collecting the lists and appending them to be microseconds.",
+      "parentUuid": "c40a5eb1_a839c562",
+      "range": {
+        "startLine": 186,
+        "startChar": 34,
+        "endLine": 186,
+        "endChar": 48
+      },
+      "revId": "58efec73f34a7f03aeafb5e0a8c6a7e9c33cf803",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
