@@ -24,6 +24,8 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"runtime"
+	"runtime/pprof"
 	"strings"
 
 	"android/soong/response"
@@ -36,6 +38,8 @@ var (
 	failNoneRequested = fmt.Errorf("\nNo license metadata files requested")
 	failNoLicenses    = fmt.Errorf("No licenses found")
 )
+var cpuprofile *string
+var memprofile *string
 
 type context struct {
 	stdout      io.Writer
@@ -117,6 +121,9 @@ Options:
 	stripPrefix := newMultiString(flags, "strip_prefix", "Prefix to remove from paths. i.e. path to root (multiple allowed)")
 	title := flags.String("title", "", "The title of the notice file.")
 
+	cpuprofile = flags.String("cpuprofile", "", "write cpu profile to `file`")
+	memprofile = flags.String("memprofile", "", "write memory profile to `file`")
+
 	flags.Parse(expandedArgs)
 
 	// Must specify at least one root target.
@@ -193,7 +200,50 @@ Options:
 }
 
 // xmlNotice implements the xmlnotice utility.
-func xmlNotice(ctx *context, files ...string) error {
+func xmlNotice(ctx *context, files ...string) (err error) {
+	if cpuprofile != nil && *cpuprofile != "" {
+		f, err := os.Create(*cpuprofile)
+		if err != nil {
+			return fmt.Errorf("could not create CPU profile: ", err)
+		}
+		defer func() {
+			err1 := f.Close()
+			if err1 != nil {
+				fmt.Fprintf(os.Stderr, "error closing CPU profile: ", err1)
+			}
+		}()
+		if err := pprof.StartCPUProfile(f); err != nil {
+			return fmt.Errorf("could not start CPU profile: ", err)
+		}
+		defer pprof.StopCPUProfile()
+	}
+
+	if memprofile != nil && *memprofile != "" {
+		defer func() {
+			f, err := os.Create(*memprofile)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "could not create memory profile: ", err)
+			}
+			defer func() {
+				err := f.Close()
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "error closing memory profile: ", err)
+				}
+			}()
+			runtime.GC() // get up-to-date statistics
+			if err := pprof.WriteHeapProfile(f); err != nil {
+				fmt.Fprintf(os.Stderr, "could not write memory profile: ", err)
+			}
+		}()
+	}
+
+	defer func() {
+		if r := recover(); r != nil{
+			fmt.Fprintf(os.Stderr, "recovering panic: ", r)
+			err = fmt.Errorf("panicked: %v", r)
+		}
+	}()
+
 	// Must be at least one root file.
 	if len(files) < 1 {
 		return failNoneRequested
