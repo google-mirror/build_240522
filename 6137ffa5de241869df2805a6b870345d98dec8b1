@@ -34,6 +34,24 @@
       "parentUuid": "28659a9c_6cd3f7c8",
       "revId": "6137ffa5de241869df2805a6b870345d98dec8b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f6e58bd_906d32a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044446
+      },
+      "writtenOn": "2022-10-26T14:55:11Z",
+      "side": 1,
+      "message": "I\u0027ve got a CL out that updates the SDK drop script to use whatever top-level directory exists in the ZIP, regardless of naming, so this won\u0027t matter there soon.\n\nIt would still be nice for this to match the directory that will ultimately be used by Studio, though. Using android-33 for a pre-release SDK is especially confusing for anyone trying to use the artifact manually.",
+      "parentUuid": "88db4cd0_af6415c6",
+      "revId": "6137ffa5de241869df2805a6b870345d98dec8b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
