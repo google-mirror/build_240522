@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28659a9c_6cd3f7c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044446
+      },
+      "writtenOn": "2022-10-26T14:40:43Z",
+      "side": 1,
+      "message": "Found this issue as a side-effect of ag/20272336. Pre-release SDK directories are supposed to be named android-FullCodename and release SDK directories are android-SDK_INT. This reverts to naming release SDK directories as android-MarketingName, which is wrong but still slightly _less_ wrong than always using android-SDK_INT.",
+      "revId": "6137ffa5de241869df2805a6b870345d98dec8b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
