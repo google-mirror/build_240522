@@ -22,6 +22,30 @@
       },
       "revId": "76ba8b076b547460fe4f908041781f6b4127312c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e01f0f3a_3758e0e9",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-10-26T20:49:22Z",
+      "side": 1,
+      "message": "You mean so that this special case wouldn\u0027t be required? That\u0027d be nice, but that\u0027s not what I plan to do here. My only aim is to collect these patterns in one central location. But I can open a ticket and add a TODO if you want.",
+      "parentUuid": "02eeddaf_8baa90ab",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 29
+      },
+      "revId": "76ba8b076b547460fe4f908041781f6b4127312c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

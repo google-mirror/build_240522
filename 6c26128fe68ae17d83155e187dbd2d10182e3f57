@@ -87,6 +87,30 @@
       },
       "revId": "6c26128fe68ae17d83155e187dbd2d10182e3f57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2afb9f2_3e69d90f",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-10-26T20:49:22Z",
+      "side": 1,
+      "message": "I presumed it\u0027s due to convenience only, and I wanted to be a bit more principled. If it turns out there are other paths I think it would be useful to make that clear here.",
+      "parentUuid": "ae887d5a_21a52786",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 26
+      },
+      "revId": "6c26128fe68ae17d83155e187dbd2d10182e3f57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
