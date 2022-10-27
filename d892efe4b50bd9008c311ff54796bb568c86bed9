@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c2904a7_0e7330d9",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-10-27T00:58:32Z",
+      "side": 1,
+      "message": "Could you replace all this with \n```\nout \u003d subprocess.check_output(cmd, text\u003dTrue)\nlines \u003d out.splitlines()\n```\n\nI\u0027m concerned about passing bytes to CalledProcessError. But check_output should handle that for us.",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 44
+      },
+      "revId": "d892efe4b50bd9008c311ff54796bb568c86bed9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
