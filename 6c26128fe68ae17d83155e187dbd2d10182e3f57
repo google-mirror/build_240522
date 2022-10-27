@@ -111,6 +111,30 @@
       },
       "revId": "6c26128fe68ae17d83155e187dbd2d10182e3f57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aae12111_43cee878",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-10-27T09:36:06Z",
+      "side": 1,
+      "message": "Makes sense.",
+      "parentUuid": "b2afb9f2_3e69d90f",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 26
+      },
+      "revId": "6c26128fe68ae17d83155e187dbd2d10182e3f57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
