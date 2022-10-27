@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Copyright (C) 2019 The Android Open Source Project
 #
@@ -201,7 +201,7 @@ class ELFParser(object):
     rc = proc.returncode
     if rc != 0:
       raise subprocess.CalledProcessError(rc, cmd, out)
-    lines = out.splitlines()
+    lines = out.decode("utf-8").splitlines()
     return cls._parse_llvm_readobj(elf_file_path, header, lines)
 
 
@@ -467,7 +467,7 @@ class Checker(object):
     """Check whether all undefined symbols are resolved to a definition."""
     all_elf_files = [self._file_under_test] + self._shared_libs
     missing_symbols = []
-    for sym, imported_vers in self._file_under_test.imported.iteritems():
+    for sym, imported_vers in self._file_under_test.imported.items():
       for imported_ver in imported_vers:
         lib = self._find_symbol_from_libs(all_elf_files, sym, imported_ver)
         if not lib:
