@@ -16,6 +16,23 @@
       "message": "Yifan, looks like we need a safety check to prevent further regression like this.\nBy safety net, I mean we make sure that `CheckVintfFromExtractedTargetFiles` doesn\u0027t modify the input directory.",
       "revId": "4d2f64b6f08fbe1e0e2b3262f782ed376d12eb5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e37265fb_95edeba2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-10-27T08:27:38Z",
+      "side": 1,
+      "message": "Hey Yifan, please take a look.",
+      "revId": "4d2f64b6f08fbe1e0e2b3262f782ed376d12eb5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
