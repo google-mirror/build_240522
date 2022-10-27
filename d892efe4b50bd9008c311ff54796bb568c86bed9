@@ -22,6 +22,30 @@
       },
       "revId": "d892efe4b50bd9008c311ff54796bb568c86bed9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4431ed8_b58660e6",
+        "filename": "tools/check_elf_file.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-10-27T02:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c2904a7_0e7330d9",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 44
+      },
+      "revId": "d892efe4b50bd9008c311ff54796bb568c86bed9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
