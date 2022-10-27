@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "059804ca_b914d237",
+        "filename": "tools/compliance/policy_resolve.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-27T00:13:58Z",
+      "side": 1,
+      "message": "Ack\n\nBut that wouldn\u0027t do what we need. We need both an indicator whether a walk has been started and once started, whether it has completed.\n\nIf you want, we could write another change to replace this with sync.Once, but I would not want to combine that with this change.",
+      "parentUuid": "25fcd6ac_418e5327",
+      "revId": "e326d935f2f5ac36053a5fa7c9d8cea817a4b9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe9c8ea7_dea40661",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-26T22:58:59Z",
       "side": 1,
       "message": "This extra `wg.Add(1)` and the `wg.Done()` at the end are unnecessary, they are fully synchronized with the `wg.Wait()` call.",
+      "revId": "e326d935f2f5ac36053a5fa7c9d8cea817a4b9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de4dbe8f_7744b360",
+        "filename": "tools/compliance/policy_resolve.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-27T00:13:58Z",
+      "side": 1,
+      "message": "They are needed. Suppose another thread comes through between assigning lg.wgTD and the first `go walk(..)`. Since there is nothing to wait for, it would proceed as if the entire walk were already complete.\n\nDitto if this routine suspends before starting the walks of all the roots, and all of the outstanding `go walk` complete when another thread comes through here.\n\nThe task of starting all of the root walks is one of the tasks that has to complete and wait for.",
+      "parentUuid": "fe9c8ea7_dea40661",
       "revId": "e326d935f2f5ac36053a5fa7c9d8cea817a4b9c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af9c01fb_d9d3bb32",
+        "filename": "tools/compliance/policy_resolve.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-27T00:13:58Z",
+      "side": 1,
+      "message": "A sync.Map would not get rid of the locking in this case. The read of fnode.resolution, the read of amap, the read of fnode.pure, and the conclusions from the condition set operations have to happen in a critical section.\n\nI can put this critical section inside an anonymous `func(){}()` to use `defer`. Does this help?",
+      "parentUuid": "7f92383f_b466c5c4",
+      "revId": "e326d935f2f5ac36053a5fa7c9d8cea817a4b9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b56658db_1f0a5c89",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-10-26T22:58:59Z",
       "side": 1,
       "message": "It appears that this extra inline function was to allow the use of defer to unlock?  If so, its not useful any more as you don\u0027t have early returns here.  You don\u0027t appear to need the lock at all now, sync wg is threadsafe, and the goroutine spawn is running async work that can\u0027t rely on the lock.",
+      "revId": "e326d935f2f5ac36053a5fa7c9d8cea817a4b9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8cc2c4a_b2c461b7",
+        "filename": "tools/compliance/policy_resolve.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-27T00:13:58Z",
+      "side": 1,
+      "message": "I think you are right the mutex is no longer needed. I have a concern lest anyone write a `conditionsFn` that reads `tn.resolution` or `tn.pure` but I think that\u0027s unlikely.\n\nDone.",
+      "parentUuid": "b56658db_1f0a5c89",
       "revId": "e326d935f2f5ac36053a5fa7c9d8cea817a4b9c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
