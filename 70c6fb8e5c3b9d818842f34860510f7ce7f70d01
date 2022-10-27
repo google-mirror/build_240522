@@ -16,6 +16,24 @@
       "message": "Looks good to me so far. Probably time to proceed to tests.",
       "revId": "70c6fb8e5c3b9d818842f34860510f7ce7f70d01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fd4ff17_ab861e17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-10-27T22:59:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3721df5a_a6dd779d",
+      "revId": "70c6fb8e5c3b9d818842f34860510f7ce7f70d01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
