@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "112e054d_df3ca851",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-28T01:17:12Z",
+      "side": 1,
+      "message": "Split out the deps for Ibrahim\u0027s change, and expanded the error message for invalid METADATA protobufs. Updated the commit message with an example of the error message.",
+      "revId": "d6574e5c97b374fd6270eeec24361d78b4dcf5a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
