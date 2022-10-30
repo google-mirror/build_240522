@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e30b657_78c854cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-30T05:56:13Z",
+      "side": 1,
+      "message": "This doesn\u0027t use anything in build/make/tools/compliance/\n\nMight it make sense to put it under build/soong/compliance/ instead? In a subdirectory beside build_license_metadata/ and license_metadata_proto/? Colin has previously expressed a preference for that location.\n\nIf it is to be called from both Soong and Make, you can export it via licensesMakeVarsProvider() at: https://android.googlesource.com/platform/build/soong/+/refs/heads/master/android/licenses.go#331",
+      "revId": "38477bf3ad7e5cc9b0ff8021890e30f4a384a7d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
