@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca1f05e2_83791f6e",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T19:08:29Z",
+      "side": 1,
+      "message": "closer is never set",
+      "revId": "908a8763415fbbbcb1bc2c3a157c003bd4a79d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d871380_7047ee06",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T19:08:29Z",
+      "side": 1,
+      "message": "Go supports multiple return values from functions, can sbomGenerator return deps?",
+      "range": {
+        "startLine": 159,
+        "startChar": 86,
+        "endLine": 159,
+        "endChar": 91
+      },
+      "revId": "908a8763415fbbbcb1bc2c3a157c003bd4a79d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b60a659_8e34992b",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T19:08:29Z",
+      "side": 1,
+      "message": "I think this can just be `time.Now().UTC()`",
+      "range": {
+        "startLine": 195,
+        "startChar": 1,
+        "endLine": 196,
+        "endChar": 31
+      },
+      "revId": "908a8763415fbbbcb1bc2c3a157c003bd4a79d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33100fe1_ccb1a82a",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T19:08:29Z",
+      "side": 1,
+      "message": "nit: a more description function name might help, like `replaceSlashes`",
+      "revId": "908a8763415fbbbcb1bc2c3a157c003bd4a79d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7609ea0b_c92a1a22",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T19:08:29Z",
+      "side": 1,
+      "message": "nit: strings.ReplaceAll",
+      "range": {
+        "startLine": 201,
+        "startChar": 8,
+        "endLine": 201,
+        "endChar": 40
+      },
+      "revId": "908a8763415fbbbcb1bc2c3a157c003bd4a79d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6efd03c8_5da812c1",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T19:08:29Z",
+      "side": 1,
+      "message": "Can you describe when `NOASSERTION` is returned and what it means?",
+      "revId": "908a8763415fbbbcb1bc2c3a157c003bd4a79d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc8e5596_7a5c3f2d",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T19:08:29Z",
+      "side": 1,
+      "message": "nit: line wrap here",
+      "range": {
+        "startLine": 243,
+        "startChar": 65,
+        "endLine": 243,
+        "endChar": 67
+      },
+      "revId": "908a8763415fbbbcb1bc2c3a157c003bd4a79d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8b7c6ee_752553c8",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T19:08:29Z",
+      "side": 1,
+      "message": "Use `%w` to wrap an error into an error.",
+      "range": {
+        "startLine": 246,
+        "startChar": 58,
+        "endLine": 246,
+        "endChar": 60
+      },
+      "revId": "908a8763415fbbbcb1bc2c3a157c003bd4a79d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "663615e2_36d936cb",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T19:08:29Z",
+      "side": 1,
+      "message": "nit: line wrap here (and below)",
+      "range": {
+        "startLine": 325,
+        "startChar": 117,
+        "endLine": 325,
+        "endChar": 118
+      },
+      "revId": "908a8763415fbbbcb1bc2c3a157c003bd4a79d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "357214c2_b3d9d00a",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T19:08:29Z",
+      "side": 1,
+      "message": "nit: line wrap here (and below)",
+      "range": {
+        "startLine": 325,
+        "startChar": 41,
+        "endLine": 325,
+        "endChar": 44
+      },
+      "revId": "908a8763415fbbbcb1bc2c3a157c003bd4a79d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
