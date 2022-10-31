@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ee3940f_8e3e3ed5",
+        "filename": "tools/compliance/cmd/htmlnotice/htmlnotice.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-31T22:02:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5381d1f_8fea9a66",
+      "revId": "13058d8c19d11f755817f3c1ea78fa68ded4789b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d0564b8_90085707",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-31T20:00:55Z",
       "side": 1,
       "message": "Why not handle the profiling here?  Then you don\u0027t need the global variables, and the profiles will include any extra costs from writing the outputs.",
+      "revId": "13058d8c19d11f755817f3c1ea78fa68ded4789b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49a2618a_295b84b4",
+        "filename": "tools/compliance/cmd/htmlnotice/htmlnotice.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-10-31T22:02:17Z",
+      "side": 1,
+      "message": "Pushing them into the implementation function allows use of defer/recover to capture the profile and still report the error.\n\nOtherwise, I was have difficulty even getting a profile.",
+      "parentUuid": "6d0564b8_90085707",
       "revId": "13058d8c19d11f755817f3c1ea78fa68ded4789b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
