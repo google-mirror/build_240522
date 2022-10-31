@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d6be12_cf2fa647",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T18:13:18Z",
+      "side": 1,
+      "message": "Baligh, is this a reasonable way to find the mainline module test keys, or do we need to be tracking them through Soong and exporting them here?",
+      "revId": "547812d3185a4efced0ae1145da133e7f6270e7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
