@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5381d1f_8fea9a66",
+        "filename": "tools/compliance/cmd/htmlnotice/htmlnotice.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T20:00:55Z",
+      "side": 1,
+      "message": "No need to explicitly initialize these, they are always initialized to their zero value:\n```\n    cpuprofile *string\n```",
+      "revId": "13058d8c19d11f755817f3c1ea78fa68ded4789b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d0564b8_90085707",
+        "filename": "tools/compliance/cmd/htmlnotice/htmlnotice.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T20:00:55Z",
+      "side": 1,
+      "message": "Why not handle the profiling here?  Then you don\u0027t need the global variables, and the profiles will include any extra costs from writing the outputs.",
+      "revId": "13058d8c19d11f755817f3c1ea78fa68ded4789b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
