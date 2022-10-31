@@ -46,6 +46,30 @@
       },
       "revId": "eb500b1208f7f4b79b55aee6ab1389efa9e10cfe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45e313ef_1b8c0563",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T20:19:58Z",
+      "side": 1,
+      "message": "Product variables should be listed in `product_config.mk`, which will allow the values to be set in one product makefile and overridden in another.",
+      "parentUuid": "12b48aa8_75324500",
+      "range": {
+        "startLine": 105,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 25
+      },
+      "revId": "eb500b1208f7f4b79b55aee6ab1389efa9e10cfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
