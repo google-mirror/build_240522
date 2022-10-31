@@ -52,6 +52,24 @@
       "parentUuid": "fb014a27_a8b5d83a",
       "revId": "38477bf3ad7e5cc9b0ff8021890e30f4a384a7d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33723c36_fc34cd68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-10-31T21:28:12Z",
+      "side": 1,
+      "message": "It depends on what is considered more important. Functionally it is a tool to ensure licensing compliance. If you consider this more important than the fact it is used by Bazel, the current location is correct. Otherwise ti belongs to build/bazel. Please advise.",
+      "parentUuid": "149d1d5d_ea8ad596",
+      "revId": "38477bf3ad7e5cc9b0ff8021890e30f4a384a7d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
