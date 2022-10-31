@@ -34,6 +34,24 @@
       "parentUuid": "2e30b657_78c854cd",
       "revId": "38477bf3ad7e5cc9b0ff8021890e30f4a384a7d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "149d1d5d_ea8ad596",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-10-31T07:20:14Z",
+      "side": 1,
+      "message": "Bob makes a good point - does it make sense to put this in build/bazel instead, since bazel is and will be the only user?",
+      "parentUuid": "fb014a27_a8b5d83a",
+      "revId": "38477bf3ad7e5cc9b0ff8021890e30f4a384a7d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
