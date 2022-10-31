@@ -88,6 +88,24 @@
       "parentUuid": "33723c36_fc34cd68",
       "revId": "38477bf3ad7e5cc9b0ff8021890e30f4a384a7d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70e87faa_2e3bc201",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-10-31T23:05:38Z",
+      "side": 1,
+      "message": "Colocating it in build/bazel can help to keep future Bazel changes into a single CL. It\u0027s really a style preference, and will leave it up to you.",
+      "parentUuid": "4b2bd7f1_5d17b663",
+      "revId": "38477bf3ad7e5cc9b0ff8021890e30f4a384a7d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
