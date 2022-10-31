@@ -16,6 +16,24 @@
       "message": "Baligh, is this a reasonable way to find the mainline module test keys, or do we need to be tracking them through Soong and exporting them here?",
       "revId": "547812d3185a4efced0ae1145da133e7f6270e7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0bdbf76_ce394d3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2022-10-31T20:20:01Z",
+      "side": 1,
+      "message": "Close this comment as Baligh has +2 on this CL",
+      "parentUuid": "89d6be12_cf2fa647",
+      "revId": "547812d3185a4efced0ae1145da133e7f6270e7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
