@@ -106,6 +106,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acf9c50a_8c41a844",
+        "filename": "tools/compliance/policy_resolve.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-31T19:58:02Z",
+      "side": 1,
+      "message": "Definitely better, although I think this could be further simplified by redesigning it so that a single goroutine can own any particular piece of data and not need the locks.",
+      "parentUuid": "af9c01fb_d9d3bb32",
+      "revId": "e326d935f2f5ac36053a5fa7c9d8cea817a4b9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b56658db_1f0a5c89",
