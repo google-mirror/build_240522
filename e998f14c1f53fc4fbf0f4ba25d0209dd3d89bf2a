@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0406b37_62be90f6",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-11-01T19:53:54Z",
+      "side": 1,
+      "message": "This doesn\u0027t get used, it is shadowed by the :\u003d assignment.",
+      "revId": "e998f14c1f53fc4fbf0f4ba25d0209dd3d89bf2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "393bbdf9_172bb58a",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-11-01T19:53:54Z",
+      "side": 1,
+      "message": "nit: line wrap here",
+      "range": {
+        "startLine": 299,
+        "startChar": 45,
+        "endLine": 299,
+        "endChar": 49
+      },
+      "revId": "e998f14c1f53fc4fbf0f4ba25d0209dd3d89bf2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
