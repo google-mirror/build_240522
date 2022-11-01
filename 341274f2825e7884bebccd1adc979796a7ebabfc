@@ -22,6 +22,30 @@
       },
       "revId": "341274f2825e7884bebccd1adc979796a7ebabfc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a201a5d_8ac56d9b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1965996
+      },
+      "writtenOn": "2022-11-01T12:19:55Z",
+      "side": 1,
+      "message": "The thing is I\u0027m not sure if there are any usages for this `boot.zip` (maybe other services like Art benchmark), so maybe I can separate system server jars in another zip file `system_server.zip` for example?",
+      "parentUuid": "6065234e_e728bd09",
+      "range": {
+        "startLine": 12,
+        "startChar": 38,
+        "endLine": 12,
+        "endChar": 45
+      },
+      "revId": "341274f2825e7884bebccd1adc979796a7ebabfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
