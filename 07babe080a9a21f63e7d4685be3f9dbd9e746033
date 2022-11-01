@@ -34,6 +34,24 @@
       "parentUuid": "b48fde67_d8fab979",
       "revId": "07babe080a9a21f63e7d4685be3f9dbd9e746033",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d037fd9e_6c1d2c91",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 5056,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2022-11-01T04:18:58Z",
+      "side": 1,
+      "message": "Close this comment to get the CL to be auto-merged after building, to fix the build break.",
+      "parentUuid": "e8f89f7a_9ca3eea5",
+      "revId": "07babe080a9a21f63e7d4685be3f9dbd9e746033",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
