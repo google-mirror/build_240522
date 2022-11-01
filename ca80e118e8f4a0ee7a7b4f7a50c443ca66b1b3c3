@@ -16,6 +16,24 @@
       "message": "Given that we are still debugging the reproxy crash with clang-tidy, I think its better to not turn it on for everyone until that\u0027s fixed?",
       "revId": "ca80e118e8f4a0ee7a7b4f7a50c443ca66b1b3c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da1b3134_7e297d18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2022-11-01T22:32:24Z",
+      "side": 1,
+      "message": "Kousik, we have fixed or worked around several RBE problem and have not seen RBE crash for months. Is the problem solved? Can we enable RBE for clang-tidy now?",
+      "parentUuid": "f4caa1b1_f46fed1e",
+      "revId": "ca80e118e8f4a0ee7a7b4f7a50c443ca66b1b3c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
