@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b48fde67_d8fab979",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 5056,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-11-01T00:35:49Z",
+      "side": 1,
+      "message": "Not related to this change, but why doesn\u0027t device on line 5054 match vendor on line 5056?",
+      "revId": "07babe080a9a21f63e7d4685be3f9dbd9e746033",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
