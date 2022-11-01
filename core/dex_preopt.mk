@@ -65,15 +65,25 @@ bootclasspath_jars := $(DEXPREOPT_BOOTCLASSPATH_DEX_FILES)
 system_server_jars := \
   $(foreach m,$(PRODUCT_SYSTEM_SERVER_JARS),\
     $(PRODUCT_OUT)/system/framework/$(call word-colon,2,$(m)).jar)
+apex_system_server_jars := \
+  $(foreach m,$(PRODUCT_APEX_SYSTEM_SERVER_JARS),\
+    $(PRODUCT_OUT)/apex/$(call word-colon,1,$(m))/javalib/$(call word-colon,2,$(m)).jar)
+apex_standalone_system_server_jars := \
+  $(foreach m,$(PRODUCT_APEX_STANDALONE_SYSTEM_SERVER_JARS),\
+    $(PRODUCT_OUT)/apex/$(call word-colon,1,$(m))/javalib/$(call word-colon,2,$(m)).jar)
 
 $(boot_zip): PRIVATE_BOOTCLASSPATH_JARS := $(bootclasspath_jars)
 $(boot_zip): PRIVATE_SYSTEM_SERVER_JARS := $(system_server_jars)
-$(boot_zip): $(bootclasspath_jars) $(system_server_jars) $(SOONG_ZIP) $(MERGE_ZIPS) $(DEXPREOPT_IMAGE_ZIP_boot) $(DEXPREOPT_IMAGE_ZIP_art)
+$(boot_zip): PRIVATE_APEX_SYSTEM_SERVER_JARS := $(apex_system_server_jars)
+$(boot_zip): PRIVATE_APEX_STANDALONE_SYSTEM_SERVER_JARS := $(apex_standalone_system_server_jars)
+$(boot_zip): $(bootclasspath_jars) $(system_server_jars) $(apex_system_server_jars) $(apex_standalone_system_server_jars) $(SOONG_ZIP) $(MERGE_ZIPS) $(DEXPREOPT_IMAGE_ZIP_boot) $(DEXPREOPT_IMAGE_ZIP_art)
 	@echo "Create boot package: $@"
 	rm -f $@
 	$(SOONG_ZIP) -o $@.tmp \
 	  -C $(dir $(firstword $(PRIVATE_BOOTCLASSPATH_JARS)))/.. $(addprefix -f ,$(PRIVATE_BOOTCLASSPATH_JARS)) \
-	  -C $(PRODUCT_OUT) $(addprefix -f ,$(PRIVATE_SYSTEM_SERVER_JARS))
+	  -C $(PRODUCT_OUT) $(addprefix -f ,$(PRIVATE_SYSTEM_SERVER_JARS)) \
+	  -C $(PRODUCT_OUT) $(addprefix -f ,$(PRIVATE_APEX_SYSTEM_SERVER_JARS)) \
+	  -C $(PRODUCT_OUT) $(addprefix -f ,$(PRIVATE_APEX_STANDALONE_SYSTEM_SERVER_JARS))
 	$(MERGE_ZIPS) $@ $@.tmp $(DEXPREOPT_IMAGE_ZIP_boot) $(DEXPREOPT_IMAGE_ZIP_art)
 	rm -f $@.tmp
 
