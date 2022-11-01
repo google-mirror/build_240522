@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c66099c2_ee2b508e",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-11-01T20:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0406b37_62be90f6",
+      "revId": "e998f14c1f53fc4fbf0f4ba25d0209dd3d89bf2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "393bbdf9_172bb58a",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-11-01T19:53:54Z",
       "side": 1,
       "message": "nit: line wrap here",
+      "range": {
+        "startLine": 299,
+        "startChar": 45,
+        "endLine": 299,
+        "endChar": 49
+      },
+      "revId": "e998f14c1f53fc4fbf0f4ba25d0209dd3d89bf2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cbcf182_36d42741",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-11-01T20:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "393bbdf9_172bb58a",
       "range": {
         "startLine": 299,
         "startChar": 45,
