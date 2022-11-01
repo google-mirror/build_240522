@@ -46,6 +46,30 @@
       },
       "revId": "341274f2825e7884bebccd1adc979796a7ebabfc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b7b387_40661bf9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2022-11-01T13:12:37Z",
+      "side": 1,
+      "message": "Yeah, maybe that will be clearer?\n\n(note that by adding jars to the boot.zip, you\u0027re already affecting potential other users)",
+      "parentUuid": "8a201a5d_8ac56d9b",
+      "range": {
+        "startLine": 12,
+        "startChar": 38,
+        "endLine": 12,
+        "endChar": 45
+      },
+      "revId": "341274f2825e7884bebccd1adc979796a7ebabfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
