@@ -35,7 +35,6 @@ PRODUCT_PACKAGES += \
     atrace \
     audioserver \
     BackupRestoreConfirmation \
-    bcc \
     blank_screen \
     blkid \
     bmgr \
@@ -127,7 +126,6 @@ PRODUCT_PACKAGES += \
     javax.obex \
     keystore2 \
     credstore \
-    ld.mc \
     libaaudio \
     libalarm_jni \
     libamidi \
@@ -329,7 +327,6 @@ PRODUCT_HOST_PACKAGES += \
     adb \
     art-tools \
     atest \
-    bcc \
     bit \
     dump.erofs \
     e2fsck \
@@ -340,7 +337,6 @@ PRODUCT_HOST_PACKAGES += \
     icu_tzdata.dat_host_tzdata_apex \
     idmap2 \
     incident_report \
-    ld.mc \
     lpdump \
     minigzip \
     mke2fs \
