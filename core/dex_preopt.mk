@@ -79,5 +79,26 @@ $(boot_zip): $(bootclasspath_jars) $(system_server_jars) $(SOONG_ZIP) $(MERGE_ZI
 
 $(call dist-for-goals, droidcore, $(boot_zip))
 
+# Build the apex_system_server.zip which contains the Apex system server jars and standalone system server jars
+apex_system_server_zip := $(PRODUCT_OUT)/apex_system_server.zip
+apex_system_server_jars := \
+  $(foreach m,$(PRODUCT_APEX_SYSTEM_SERVER_JARS),\
+    $(PRODUCT_OUT)/apex/$(call word-colon,1,$(m))/javalib/$(call word-colon,2,$(m)).jar)
+
+apex_standalone_system_server_jars := \
+  $(foreach m,$(PRODUCT_APEX_STANDALONE_SYSTEM_SERVER_JARS),\
+    $(PRODUCT_OUT)/apex/$(call word-colon,1,$(m))/javalib/$(call word-colon,2,$(m)).jar)
+
+$(apex_system_server_zip): PRIVATE_APEX_SYSTEM_SERVER_JARS := $(apex_system_server_jars)
+$(apex_system_server_zip): PRIVATE_APEX_STANDALONE_SYSTEM_SERVER_JARS := $(apex_standalone_system_server_jars)
+$(apex_system_server_zip): $(apex_system_server_jars) $(apex_standalone_system_server_jars) $(SOONG_ZIP)
+	@echo "Create apex system server package: $@"
+	rm -f $@
+	$(SOONG_ZIP) -o $@ \
+	  -C $(PRODUCT_OUT) $(addprefix -f ,$(PRIVATE_APEX_SYSTEM_SERVER_JARS)) \
+          -C $(PRODUCT_OUT) $(addprefix -f ,$(PRIVATE_APEX_STANDALONE_SYSTEM_SERVER_JARS))
+
+$(call dist-for-goals, droidcore, $(apex_system_server_zip))
+
 endif  #PRODUCT_USES_DEFAULT_ART_CONFIG
 endif  #WITH_DEXPREOPT
