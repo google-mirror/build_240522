@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b831f0_e2673b44",
+        "filename": "target/product/aosp_riscv64.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-11-01T20:12:02Z",
+      "side": 1,
+      "message": "my favorite three packages :-)",
+      "revId": "f310841384d7c47ae7bd710dce0780dec786c4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
