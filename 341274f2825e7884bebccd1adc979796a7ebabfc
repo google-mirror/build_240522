@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6065234e_e728bd09",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2022-11-01T12:14:58Z",
+      "side": 1,
+      "message": "Can we rename this this to boot_and_system_server.zip? \u0027boot\u0027 was used for boot classpath and it isn\u0027t the case anymore.",
+      "range": {
+        "startLine": 12,
+        "startChar": 38,
+        "endLine": 12,
+        "endChar": 45
+      },
+      "revId": "341274f2825e7884bebccd1adc979796a7ebabfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
