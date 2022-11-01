@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8d44914_242144ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1965996
+      },
+      "writtenOn": "2022-11-01T14:50:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93b7b387_40661bf9",
+      "range": {
+        "startLine": 12,
+        "startChar": 38,
+        "endLine": 12,
+        "endChar": 45
+      },
+      "revId": "341274f2825e7884bebccd1adc979796a7ebabfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8db71a06_260b45d4",
@@ -85,6 +109,30 @@
       "writtenOn": "2022-11-01T13:53:43Z",
       "side": 1,
       "message": "Can you check if this works on the internal master branch? I doubt that. On internal branches, APEX package names start with \"com.google.android\".\n\nIf this doesn\u0027t work on the internal master branch, you probably need a mapping between APEX module names (`com.android.*`) and APEX package names (`com.google.android.*`). Unfortunately, I don\u0027t know where to find it. You can ask the mainline team.",
+      "range": {
+        "startLine": 70,
+        "startChar": 24,
+        "endLine": 70,
+        "endChar": 49
+      },
+      "revId": "341274f2825e7884bebccd1adc979796a7ebabfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bf8ecaf_621ee397",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1965996
+      },
+      "writtenOn": "2022-11-01T14:50:33Z",
+      "side": 1,
+      "message": "just tried on the internal master branch and it seems working fine and I can see the jars in the generated zip file.",
+      "parentUuid": "8db71a06_260b45d4",
       "range": {
         "startLine": 70,
         "startChar": 24,
