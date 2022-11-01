@@ -141,6 +141,30 @@
       },
       "revId": "341274f2825e7884bebccd1adc979796a7ebabfc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5866ea7e_84fdb219",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-11-01T15:12:08Z",
+      "side": 1,
+      "message": "Did you try internal targets like `cf_x86_64_phone-userdebug` (i.e., not the ones starting with `aosp_`)?",
+      "parentUuid": "6bf8ecaf_621ee397",
+      "range": {
+        "startLine": 70,
+        "startChar": 24,
+        "endLine": 70,
+        "endChar": 49
+      },
+      "revId": "341274f2825e7884bebccd1adc979796a7ebabfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
