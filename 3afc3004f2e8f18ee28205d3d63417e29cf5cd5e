@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd2d0fa0_b719805e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-11-02T18:18:59Z",
+      "side": 1,
+      "message": "You may want to wait a few days to submit this in case the other change needs reverting.",
+      "revId": "3afc3004f2e8f18ee28205d3d63417e29cf5cd5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
