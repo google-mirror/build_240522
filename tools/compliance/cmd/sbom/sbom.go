@@ -314,7 +314,7 @@ func sbomGenerator(ctx *context, files ...string) ([]string, error) {
 				fmt.Fprintf(ctx.stdout, "SPDXID: SPDXRef-DOCUMENT-%s\n", mainPackage)
 				fmt.Fprintf(ctx.stdout, "DocumentNamespace: Android\n")
 				fmt.Fprintf(ctx.stdout, "Creator: Organization: Google LLC\n")
-				fmt.Fprintf(ctx.stdout, "Created: %s\n", ctx.creationTime().Format("2006-01-02T15:04:05Z"))
+				fmt.Fprintf(ctx.stdout, "Created: %s\n", ctx.creationTime().UTC().Format("2006-01-02T15:04:05Z"))
 				isMainPackage = false
 			}
 
