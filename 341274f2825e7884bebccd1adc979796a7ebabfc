@@ -213,6 +213,30 @@
       },
       "revId": "341274f2825e7884bebccd1adc979796a7ebabfc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba11014c_c9b0771b",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-11-02T16:51:08Z",
+      "side": 1,
+      "message": "Talked offline. Looks like the build system is smart enough to copy the jars from the \"google\" directories to \"non-google\" directories when they are referenced here.",
+      "parentUuid": "27a7fc9f_6adb928e",
+      "range": {
+        "startLine": 70,
+        "startChar": 24,
+        "endLine": 70,
+        "endChar": 49
+      },
+      "revId": "341274f2825e7884bebccd1adc979796a7ebabfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
