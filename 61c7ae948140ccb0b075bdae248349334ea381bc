@@ -46,6 +46,30 @@
       },
       "revId": "61c7ae948140ccb0b075bdae248349334ea381bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a98ed758_b3d788de",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-11-02T11:11:33Z",
+      "side": 1,
+      "message": "Could you also move location provider and services.jar to system_server.zip as well? It\u0027s confusing that those jars are in boot.zip rather than system_server.zip.\n\nThis is a breaking change. I suggest to put location provider and services.jar in both system_server.zip and boot.zip in this CL, and then remove location provider and services.jar from boot.zip in a separate CL, which is easier to revert if it breaks things.",
+      "parentUuid": "adcb3828_2d014dd6",
+      "range": {
+        "startLine": 82,
+        "startChar": 82,
+        "endLine": 82,
+        "endChar": 111
+      },
+      "revId": "61c7ae948140ccb0b075bdae248349334ea381bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
