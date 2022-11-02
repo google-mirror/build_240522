@@ -52,6 +52,24 @@
       "parentUuid": "da1b3134_7e297d18",
       "revId": "ca80e118e8f4a0ee7a7b4f7a50c443ca66b1b3c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d0d4e42_5447d3c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2022-11-02T19:42:22Z",
+      "side": 1,
+      "message": "Now Android RBE calls clang-tidy.sh, added in aosp/2111024, to work around the stdout/stderr issue. It saves stdout and stderr into two temp files and merges the files after execution of clang-tidy or clang. Since that change we have not seen mixed stdout/stderr or crashes due to that. Is there other kind of RBE crash or capacity issue?",
+      "parentUuid": "4fa3f90d_5c020011",
+      "revId": "ca80e118e8f4a0ee7a7b4f7a50c443ca66b1b3c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
