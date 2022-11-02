@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bf680bb_ac2e52c6",
+        "filename": "tools/compliance/noticeindex.go",
+        "patchSetId": 21
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-11-02T15:40:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "10a90432_08620d6d",
+      "revId": "ab5cfbd5b79b0ea3ea91d09229c800f0fc3f3150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0bf35bc_c93746d7",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-01T18:13:17Z",
       "side": 1,
       "message": "nit: the explicit initialization is unnecssary:\n```\nvar files []string\n```",
+      "revId": "ab5cfbd5b79b0ea3ea91d09229c800f0fc3f3150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be9b76fa_a7088df1",
+        "filename": "tools/compliance/projectmetadata/projectmetadata.go",
+        "patchSetId": 21
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-11-02T15:40:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a0bf35bc_c93746d7",
       "revId": "ab5cfbd5b79b0ea3ea91d09229c800f0fc3f3150",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
