@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "716a5afd_ed4c7ae9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2022-11-02T01:29:27Z",
+      "side": 1,
+      "message": "There\u0027s some sort of time zone confusion.\n\nMachine in California:\n\nsbom_test.go:1365: sbom: unexpected output at line 7: got \"Created: 1969-12-31T16:00:00Z\", want \"Created: 1970-01-01T00:00:00Z\"\n\nMachine in Japan:\n\nsbom_test.go:1365: sbom: unexpected output at line 7: got \"Created: 1970-01-01T09:00:00Z\", want \"Created: 1970-01-01T00:00:00Z\"\n\n(the above is with unset TZ, so presumably inhering system default, it also fails with export TZ\u003dUTC, and export TZ\u003dAmerica/Los_Angeles)",
+      "revId": "8748bd497dc406c36700431f3f1b681c23e85c05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
