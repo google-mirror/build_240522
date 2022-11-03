@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1c227e3_76d2cfbd",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-11-03T15:44:21Z",
+      "side": 1,
+      "message": "Is there a reason `\u003c` doesn\u0027t work?",
+      "revId": "0fa4c2b9cd50e999a5233301a42e61afad4ca66c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
