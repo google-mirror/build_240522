@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbeb451d_d7e99dc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-11-03T15:31:41Z",
+      "side": 1,
+      "message": "It\u0027s weird that ab/ on aosp-master is still green. The build only fails on aosp-master-throttled and the presubmit of my CL (aosp/2284233). I\u0027ll hold on this revert for now.",
+      "revId": "64c4a419c24d111187037baae2313f8a38cc5aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
