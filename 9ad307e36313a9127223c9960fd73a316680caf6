@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25662a17_bda1e770",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-11-03T01:15:02Z",
+      "side": 1,
+      "message": "There could be more than 1 pm with the same score, and the order is not guaranteed. This could lead to multiple runs of the same build without any changes generating different sboms. If the scores are equal, I recommend taking the one with the least lexicographical project.",
+      "revId": "9ad307e36313a9127223c9960fd73a316680caf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
