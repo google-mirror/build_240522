@@ -34,6 +34,24 @@
       "parentUuid": "c1c227e3_76d2cfbd",
       "revId": "0fa4c2b9cd50e999a5233301a42e61afad4ca66c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "044c9bef_e4f76050",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-11-03T16:02:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37f0576a_0e580f7a",
+      "revId": "0fa4c2b9cd50e999a5233301a42e61afad4ca66c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
