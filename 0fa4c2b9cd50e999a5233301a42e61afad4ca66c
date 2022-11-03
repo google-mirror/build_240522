@@ -16,6 +16,24 @@
       "message": "Is there a reason `\u003c` doesn\u0027t work?",
       "revId": "0fa4c2b9cd50e999a5233301a42e61afad4ca66c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f0576a_0e580f7a",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2022-11-03T15:53:08Z",
+      "side": 1,
+      "message": "No they both work. Compare is a built-in func with the strings package we\u0027re already using. We can use `\u003c` if it\u0027s \"better\".",
+      "parentUuid": "c1c227e3_76d2cfbd",
+      "revId": "0fa4c2b9cd50e999a5233301a42e61afad4ca66c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
