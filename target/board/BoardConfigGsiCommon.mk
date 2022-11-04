@@ -3,6 +3,11 @@
 # Common compile-time definitions for GSI
 # Builds upon the mainline config.
 #
+<<<<<<< HEAD
+=======
+# See device/generic/common/README.md for more details.
+#
+>>>>>>> 80ba30ae1d (Add the path of GSI document in gsi_release.mk)
 
 include build/make/target/board/BoardConfigMainlineCommon.mk
 
