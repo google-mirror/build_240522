@@ -16,6 +16,24 @@
       "message": "Hi, I found the issue with the prev CL and fixed it in this CL and tried the build on multiple targets locally, just missing a variable to add at:\n```\n$(system_server_zip): $(system_server_jars) $(apex_system_server_jars) $(apex_standalone_system_server_jars) $(standalone_system_server_jars) $(SOONG_ZIP)\n```",
       "revId": "2c5c1f22b801574ce40a604a5cb4898a3670922c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58ec5006_df4f654a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2022-11-04T15:35:51Z",
+      "side": 1,
+      "message": "Nice! When relanding a CL, we would make patchset 1 the original CL, and then patchset2 the fix. Could you do that here?",
+      "parentUuid": "af5bb476_21d9bad3",
+      "revId": "2c5c1f22b801574ce40a604a5cb4898a3670922c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
