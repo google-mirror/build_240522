@@ -2,6 +2,9 @@
 #
 # Common compile-time definitions for GSI
 # Builds upon the mainline config.
+#
+# See device/generic/common/README.md for more details.
+#
 
 include build/make/target/board/BoardConfigMainlineCommon.mk
 
