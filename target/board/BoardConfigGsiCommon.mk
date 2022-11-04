@@ -2,7 +2,6 @@
 #
 # Common compile-time definitions for GSI
 # Builds upon the mainline config.
-#
 
 include build/make/target/board/BoardConfigMainlineCommon.mk
 
@@ -16,6 +15,12 @@ GSI_FILE_SYSTEM_TYPE ?= ext4
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := $(GSI_FILE_SYSTEM_TYPE)
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
 TARGET_USERIMAGES_SPARSE_EROFS_DISABLED := true
+
+# Enable system_dlkm image which creates a symlink im GSI to support 
+# the devices with system_dlkm partition
+BOARD_USES_SYSTEM_DLKMIMAGE := true
+BOARD_SYSTEM_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
 
 # GSI also includes make_f2fs to support userdata parition in f2fs
 # for some devices
