@@ -34,6 +34,24 @@
       "parentUuid": "af5bb476_21d9bad3",
       "revId": "2c5c1f22b801574ce40a604a5cb4898a3670922c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d4b49b5_57309394",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1965996
+      },
+      "writtenOn": "2022-11-04T15:56:03Z",
+      "side": 1,
+      "message": "I wasn\u0027t sure how to override an existing patchset, so created another CL aog/2287335/2 and will abandon this one",
+      "parentUuid": "58ec5006_df4f654a",
+      "revId": "2c5c1f22b801574ce40a604a5cb4898a3670922c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
