@@ -22,6 +22,30 @@
       },
       "revId": "5865420eb196a3ea54efcc0a10cff99a3a8a8700",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd539616_38193dfa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-11-05T01:13:13Z",
+      "side": 1,
+      "message": "I don\u0027t think it really matters, because even without the built par file it will use the hermetic checked in python interpreter. \n\nIn general I do think that\u0027s a good idea, but there\u0027s a lot of scripts like this, and I think it would just be better to tackle them all at once as a separate effort than conflating that with the python 3 conversion.",
+      "parentUuid": "84bf9eda_22904a18",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "5865420eb196a3ea54efcc0a10cff99a3a8a8700",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
