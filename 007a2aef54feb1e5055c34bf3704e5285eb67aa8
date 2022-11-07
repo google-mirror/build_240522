@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbbcc751_28579826",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-11-07T05:38:45Z",
+      "side": 1,
+      "message": "huh? I don\u0027t understand this sentence...",
+      "revId": "007a2aef54feb1e5055c34bf3704e5285eb67aa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
