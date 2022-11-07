@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a42d3ad_55a1e844",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-11-07T12:39:46Z",
+      "side": 1,
+      "message": "For my own curiosity: where are the tests for this type of changes?",
+      "revId": "1c31b049c9dee2fcbb189b722c0dc4ff56d44f80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
