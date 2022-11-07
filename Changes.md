@@ -805,6 +805,14 @@ path:
 $(TARGET): myscript.py $(sort $(shell find my/python/lib -name '*.py'))
 	PYTHONPATH=my/python/lib:$$PYTHONPATH myscript.py -o $@
 ```
+
+### Python 2 to 3 migration
+
+The path set when running builds now makes the `python` executable point to python 3,
+whereas on previous versions it pointed to python 2. If you still have python 2 scripts,
+you can change the shebang line to use `python2` explicitly. This only applies for
+scripts ran directly via makefiles, soong python modules remain unchanged.
+
 ### Stop using PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE directly {#PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE}
 
 Specify Framework Compatibility Matrix Version in device manifest by adding a `target-level`
@@ -818,7 +826,7 @@ for this option to exist.
 
 ### Stop using clang property
 
-Clang has been deleted from Soong. To fix any build errors, remove the clang
+The clang property has been deleted from Soong. To fix any build errors, remove the clang
 property from affected Android.bp files using bpmodify.
 
 
