@@ -221,6 +221,23 @@
       "tag": "mailMessageId\u003d\u003cCADapnAsuX1\u003d1EL642cPBpb4z1CpP2f5R_KTn6\u003dDGeP_zZ37XWw@mail.gmail.com\u003e",
       "revId": "256b14b2f868223e9adcdd355acffb950b230fb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a8633b_a6b8a055",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1082569
+      },
+      "writtenOn": "2022-11-07T17:27:21Z",
+      "side": 1,
+      "message": "thanks",
+      "revId": "256b14b2f868223e9adcdd355acffb950b230fb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
