@@ -16,6 +16,24 @@
       "message": "huh? I don\u0027t understand this sentence...",
       "revId": "007a2aef54feb1e5055c34bf3704e5285eb67aa8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0883fc0_4f0fe50e",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2022-11-07T10:14:49Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "bbbcc751_28579826",
+      "revId": "007a2aef54feb1e5055c34bf3704e5285eb67aa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
