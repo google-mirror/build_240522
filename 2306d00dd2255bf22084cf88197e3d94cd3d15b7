@@ -22,6 +22,30 @@
       },
       "revId": "2306d00dd2255bf22084cf88197e3d94cd3d15b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "361ed356_b278c252",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2022-11-07T14:27:36Z",
+      "side": 1,
+      "message": "I prefer the source code path. The different version branches have corresponding README.md",
+      "parentUuid": "071fb073_115d9e93",
+      "range": {
+        "startLine": 6,
+        "startChar": 6,
+        "endLine": 6,
+        "endChar": 37
+      },
+      "revId": "2306d00dd2255bf22084cf88197e3d94cd3d15b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
