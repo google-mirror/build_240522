@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "071fb073_115d9e93",
+        "filename": "target/board/BoardConfigGsiCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-11-07T05:40:39Z",
+      "side": 1,
+      "message": "How about a browser link? https://android.googlesource.com/device/generic/common/+/refs/heads/master/README.md",
+      "range": {
+        "startLine": 6,
+        "startChar": 6,
+        "endLine": 6,
+        "endChar": 37
+      },
+      "revId": "2306d00dd2255bf22084cf88197e3d94cd3d15b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
