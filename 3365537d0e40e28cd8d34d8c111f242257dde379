@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee44dfb3_d5ddab55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-11-08T02:48:51Z",
+      "side": 1,
+      "message": "False positive in test data (see also bbadour\u0027s comment earlier)",
+      "revId": "3365537d0e40e28cd8d34d8c111f242257dde379",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
