@@ -860,6 +860,13 @@ These are all exported from envsetup.sh, but don't have clear equivalents within
 the makefile system. If you need one of them, you'll have to set up your own
 version.
 
+## Soong config variables
+
+### Soong config string variables must list all values they can be set to
+
+In order to facilitate the transition to bazel, all soong_config_string_variables
+must only be set to a value listed in their `values` property, or an empty string.
+It is a build error otherwise.
 
 [build/soong/Changes.md]: https://android.googlesource.com/platform/build/soong/+/master/Changes.md
 [build/soong/docs/best_practices.md#headers]: https://android.googlesource.com/platform/build/soong/+/master/docs/best_practices.md#headers
