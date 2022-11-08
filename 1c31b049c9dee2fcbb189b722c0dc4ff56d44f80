@@ -16,6 +16,24 @@
       "message": "For my own curiosity: where are the tests for this type of changes?",
       "revId": "1c31b049c9dee2fcbb189b722c0dc4ff56d44f80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9baeb672_41f394d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2022-11-08T00:42:15Z",
+      "side": 1,
+      "message": "In the official page:\nhttps://source.android.com/docs/core/architecture/bootloader/partitions/gki-partitions\n\n\u003e Note: Any device launching with Android 13 (and above) must include a system_dlkm partition.\n\nGSI is one of system_dlkm users. I believe system_dlkm owner provided a CTS (or VTS test case for that). Like:\n\nhttps://cs.android.com/android/platform/superproject/+/master:test/vts-testcase/kernel/gki/vts_dlkm_partition_test.cpp",
+      "parentUuid": "2a42d3ad_55a1e844",
+      "revId": "1c31b049c9dee2fcbb189b722c0dc4ff56d44f80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
