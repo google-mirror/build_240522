@@ -1440,7 +1440,7 @@ def _GenerateGkiCertificate(image, image_name):
   key_path = OPTIONS.info_dict.get("gki_signing_key_path")
   algorithm = OPTIONS.info_dict.get("gki_signing_algorithm")
 
-  if not os.path.exists(key_path) and OPTIONS.search_path:
+  if key_path and not os.path.exists(key_path) and OPTIONS.search_path:
     new_key_path = os.path.join(OPTIONS.search_path, key_path)
     if os.path.exists(new_key_path):
       key_path = new_key_path
