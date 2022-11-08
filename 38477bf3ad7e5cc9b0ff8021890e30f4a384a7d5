@@ -106,6 +106,24 @@
       "parentUuid": "4b2bd7f1_5d17b663",
       "revId": "38477bf3ad7e5cc9b0ff8021890e30f4a384a7d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df9c864a_98ab772e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-11-08T04:16:02Z",
+      "side": 1,
+      "message": "Moved to build/bazel: go/aog/2291663",
+      "parentUuid": "70e87faa_2e3bc201",
+      "revId": "38477bf3ad7e5cc9b0ff8021890e30f4a384a7d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
