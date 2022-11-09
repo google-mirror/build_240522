@@ -142,6 +142,30 @@
       },
       "revId": "8ddbdca1c0a30189140056ca59b74fb01f9964f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5113b5ba_56b8ab8a",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-11-09T18:51:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "574817fc_6f505ffc",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 43
+      },
+      "revId": "8ddbdca1c0a30189140056ca59b74fb01f9964f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
