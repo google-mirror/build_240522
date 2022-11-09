@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (afeadc Merge "Use full command instead of local alias.")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=TP1A.221105.002
+>>>>>>> BRANCH (9de999 Version bump to TP1A.221105.002 [core/build_id.mk])
