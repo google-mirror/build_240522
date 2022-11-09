@@ -94,6 +94,30 @@
       },
       "revId": "8ddbdca1c0a30189140056ca59b74fb01f9964f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eac040b7_7fc0869c",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-11-09T18:44:52Z",
+      "side": 1,
+      "message": "That\u0027s great! I would still recommend moving checks into ApexApkSigner\u0027s __init__ method though. Because it\u0027s earlier in the process.",
+      "parentUuid": "0e65f6f2_569e57fb",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 43
+      },
+      "revId": "8ddbdca1c0a30189140056ca59b74fb01f9964f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
