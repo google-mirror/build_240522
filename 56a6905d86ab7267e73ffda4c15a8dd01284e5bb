@@ -46,6 +46,30 @@
       },
       "revId": "56a6905d86ab7267e73ffda4c15a8dd01284e5bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0e9e14a_81d512dc",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-11-09T18:17:36Z",
+      "side": 0,
+      "message": "Reading the commit message and code, there\u0027s few things I don\u0027t understand:\n\nWhy does deapexer need blkid now? It sounds like invoking blkid directly in deapexer yields some kind of security error. But invoking a passed in blkid binary does not? please clarify.\n\nYou are removing `fsckerofs_path` dependency from `deapexer` . Why? It seems unrelated to this change. Please clarify that in commit message and/or move that to a separate CL.",
+      "parentUuid": "42bab490_da3029c8",
+      "range": {
+        "startLine": 91,
+        "startChar": 17,
+        "endLine": 91,
+        "endChar": 56
+      },
+      "revId": "56a6905d86ab7267e73ffda4c15a8dd01284e5bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
