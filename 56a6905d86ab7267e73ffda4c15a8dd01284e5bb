@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "046ee9ad_0b06f32c",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-11-09T17:51:30Z",
+      "side": 0,
+      "message": "Is it intentional that we remove --fsckerofs_path here? Why?",
+      "range": {
+        "startLine": 91,
+        "startChar": 17,
+        "endLine": 91,
+        "endChar": 56
+      },
+      "revId": "56a6905d86ab7267e73ffda4c15a8dd01284e5bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
