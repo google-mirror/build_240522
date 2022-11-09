@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee7f3e7d_77b5a236",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-11-09T17:52:10Z",
+      "side": 1,
+      "message": "`blkid` is not included in otatools package. So this might just fail when invoking out of android source tree,",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 43
+      },
+      "revId": "8ddbdca1c0a30189140056ca59b74fb01f9964f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
