@@ -16,6 +16,24 @@
       "message": "Thanks for fixing this.",
       "revId": "dd09bc88f345c7c2412082e8b3b6054611e0a5fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "734ea938_fc97700d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-11-09T20:39:18Z",
+      "side": 1,
+      "message": "I don\u0027t think it was even caused by your python3 conversion, I think it was an issue even in python 2. But since we only go down this path in the case of an error, it wasn\u0027t noticed.",
+      "parentUuid": "076dc135_b40e2fb5",
+      "revId": "dd09bc88f345c7c2412082e8b3b6054611e0a5fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
