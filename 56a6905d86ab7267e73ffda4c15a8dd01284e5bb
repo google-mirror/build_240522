@@ -70,6 +70,30 @@
       },
       "revId": "56a6905d86ab7267e73ffda4c15a8dd01284e5bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47a2b88d_4c3c927c",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2022-11-09T18:28:03Z",
+      "side": 0,
+      "message": "I have updated the commit message. The main reason we need blkid is to support EROFS signing. During signing of EROFS apexes, we need to expand the payload image. blkid is used to determine filesystem type, if it is ext4, then debugfs_static is used, if it is EROFS, then fsck.erofs is used.\n\nCould you help me understand the security error related to blkid call? Today deapexer is already calling into some c binaries like debugfs_static that we passed in, would that also has security error implications?",
+      "parentUuid": "c0e9e14a_81d512dc",
+      "range": {
+        "startLine": 91,
+        "startChar": 17,
+        "endLine": 91,
+        "endChar": 56
+      },
+      "revId": "56a6905d86ab7267e73ffda4c15a8dd01284e5bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
