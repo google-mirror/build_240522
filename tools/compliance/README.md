@@ -47,7 +47,7 @@ dependencies, and dependencies like 'contains' that make a derivative work.
 A LicenseCondition is an immutable tuple pairing a condition name with an
 originating target. e.g. Per current policy, a static library licensed under an
 MIT license would pair a "notice" condition with the static library target, and
-a dynamic license licensed under GPL would pair a "restricted" condition with
+a dynamic library licensed under GPL would pair a "restricted" condition with
 the dynamic library target.
 
 ### ResolutionSet
