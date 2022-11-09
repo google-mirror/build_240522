@@ -118,6 +118,30 @@
       },
       "revId": "8ddbdca1c0a30189140056ca59b74fb01f9964f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "574817fc_6f505ffc",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2022-11-09T18:50:09Z",
+      "side": 1,
+      "message": "Note line 132-136 is already checking the existence of blkid before calling into it. It may not be ideal to enfore at init method, because only method ExtractApexPayloadAndSignContents calls into deapexer extract, thus need blkid. Other methods of ApexApkSigner, for example ProcessApexFile does not call into deapexer extract, so really no need for blkid and fsck.erofs.",
+      "parentUuid": "eac040b7_7fc0869c",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 43
+      },
+      "revId": "8ddbdca1c0a30189140056ca59b74fb01f9964f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
