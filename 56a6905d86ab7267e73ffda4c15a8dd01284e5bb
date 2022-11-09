@@ -94,6 +94,30 @@
       },
       "revId": "56a6905d86ab7267e73ffda4c15a8dd01284e5bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6f26dab_69d8ef35",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-11-09T18:30:29Z",
+      "side": 0,
+      "message": "Looking at b/255963179, I saw\n\n```\nDisallowed PATH tool \"blkid\" used: []string{\"blkid\", \"-o\", \"value\", \"-s\", \"TYPE\", \"/buildbot/src/googleplex-android/stage-aosp-master/out/soong/.temp/tmpk0hdl9ns/apex_payload.img\"}\n```\n\nSo I assumed that invoking blkid is disallowed by some system. Ignore my comments about security if this error is irrelevant.",
+      "parentUuid": "47a2b88d_4c3c927c",
+      "range": {
+        "startLine": 91,
+        "startChar": 17,
+        "endLine": 91,
+        "endChar": 56
+      },
+      "revId": "56a6905d86ab7267e73ffda4c15a8dd01284e5bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
