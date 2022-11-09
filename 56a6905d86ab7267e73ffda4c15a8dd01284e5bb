@@ -22,6 +22,30 @@
       },
       "revId": "56a6905d86ab7267e73ffda4c15a8dd01284e5bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42bab490_da3029c8",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2022-11-09T18:13:46Z",
+      "side": 0,
+      "message": "we only need it for extract operations. previously, I was trying to be uniform, but it is unnecessarily restrictive",
+      "parentUuid": "046ee9ad_0b06f32c",
+      "range": {
+        "startLine": 91,
+        "startChar": 17,
+        "endLine": 91,
+        "endChar": 56
+      },
+      "revId": "56a6905d86ab7267e73ffda4c15a8dd01284e5bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
