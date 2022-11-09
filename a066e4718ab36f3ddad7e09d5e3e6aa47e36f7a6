@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f26e20b_cb39148b",
+        "filename": "core/tasks/general-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1121894
+      },
+      "writtenOn": "2022-11-09T20:53:39Z",
+      "side": 1,
+      "message": "this is contained in cts-tradefed, so it\u0027s actually ok.\nwe need the host/tool only",
+      "range": {
+        "startLine": 20,
+        "startChar": 21,
+        "endLine": 20,
+        "endChar": 51
+      },
+      "revId": "a066e4718ab36f3ddad7e09d5e3e6aa47e36f7a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
