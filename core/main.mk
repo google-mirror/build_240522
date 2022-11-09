@@ -909,7 +909,12 @@ $(foreach m,$($(if $(2),$($(1)2ND_ARCH_VAR_PREFIX))$(1)DEPENDENCIES_ON_SHARED_LI
     $(eval ALL_MODULES.$(mod).HOST_SHARED_LIBRARIES := $$(ALL_MODULES.$(mod).HOST_SHARED_LIBRARIES) $(deps))\
     $(eval $(call add-required-host-so-deps,$(word 2,$(p)),$(r))),\
     $(eval $(call add-required-deps,$(word 2,$(p)),$(r))))\
-  $(eval ALL_MODULES.$(mod).REQUIRED_FROM_$(patsubst %_,%,$(1)) += $(deps)))
+  $(if $(filter $(1),HOST_CROSS_),\
+    $(eval ALL_MODULES.$(mod).HOST_CROSS_SHARED_LIBRARY_FILES := $$(ALL_MODULES.$(mod).HOST_CROSS_SHARED_LIBRARY_FILES) $(word 2,$(p)) $(r))\
+    $(eval ALL_MODULES.$(mod).HOST_CROSS_SHARED_LIBRARIES := $$(ALL_MODULES.$(mod).HOST_CROSS_SHARED_LIBRARIES) $(deps))\
+    $(eval $(call add-required-host-so-deps,$(word 2,$(p)),$(r))),\
+    $(eval $(call add-required-deps,$(word 2,$(p)),$(r))))\
+$(eval ALL_MODULES.$(mod).REQUIRED_FROM_$(patsubst %_,%,$(1)) += $(deps)))
 endef
 
 # Recursively resolve host shared library dependency for a given module.
@@ -920,6 +925,22 @@ $(if $(_all_deps_for_$(1)_set_),$(_all_deps_for_$(1)_),\
   $(eval _all_deps_for_$(1)_ :=) \
   $(foreach dep,$(ALL_MODULES.$(1).HOST_SHARED_LIBRARIES),\
     $(foreach m,$(call get-all-shared-libs-deps,$(dep)),\
+      $(eval _all_deps_for_$(1)_ := $$(_all_deps_for_$(1)_) $(m))\
+      $(eval _all_deps_for_$(1)_ := $(sort $(_all_deps_for_$(1)_))))\
+    $(eval _all_deps_for_$(1)_ := $$(_all_deps_for_$(1)_) $(dep))\
+    $(eval _all_deps_for_$(1)_ := $(sort $(_all_deps_for_$(1)_) $(dep)))\
+    $(eval _all_deps_for_$(1)_set_ := true))\
+$(_all_deps_for_$(1)_))
+endef
+
+# Recursively resolve host shared library dependency for a given module.
+# $(1): module name
+# Returns all dependencies of shared library.
+define get-all-cross-shared-libs-deps
+$(if $(_all_deps_for_$(1)_set_),$(_all_deps_for_$(1)_),\
+  $(eval _all_deps_for_$(1)_ :=) \
+  $(foreach dep,$(ALL_MODULES.$(1).HOST_CROSS_SHARED_LIBRARIES),\
+    $(foreach m,$(call get-all-cross-shared-libs-deps,$(dep)),\
       $(eval _all_deps_for_$(1)_ := $$(_all_deps_for_$(1)_) $(m))\
       $(eval _all_deps_for_$(1)_ := $(sort $(_all_deps_for_$(1)_))))\
     $(eval _all_deps_for_$(1)_ := $$(_all_deps_for_$(1)_) $(dep))\
@@ -947,6 +968,24 @@ $(foreach suite,general-tests device-tests vts tvts art-host-tests host-unit-tes
           $(sort $(COMPATIBILITY.$(suite).HOST_SHARED_LIBRARY.FILES)))))))
 endef
 
+# Scan all modules in art-host-cross-test and flatten the shared library dependencies.
+define update-host-cross-shared-libs-deps-for-suites
+$(foreach suite,art-host-cross-tests,\
+  $(foreach m,$(COMPATIBILITY.$(suite).MODULES),\
+    $(eval my_deps := $(call get-all-cross-shared-libs-deps,$(m)))\
+    $(foreach dep,$(my_deps),\
+      $(foreach f,$(ALL_MODULES.$(dep).HOST_CROSS_SHARED_LIBRARY_FILES),\
+        $(if $(filter $(suite),art-host-cross-tests),\
+          $(eval my_testcases := $(HOST_CROSS_OUT_TESTCASES)),\
+          $(eval my_testcases := $$(COMPATIBILITY_TESTCASES_OUT_$(suite))))\
+        $(eval target := $(my_testcases)/$(lastword $(subst /, ,$(dir $(f))))/$(notdir $(f)))\
+        $(if $(strip $(ALL_TARGETS.$(target).META_LIC)),,$(call declare-copy-target-license-metadata,$(target),$(f)))\
+        $(eval COMPATIBILITY.$(suite).HOST_CROSS_SHARED_LIBRARY.FILES := \
+          $$(COMPATIBILITY.$(suite).HOST_CROSS_SHARED_LIBRARY.FILES) $(f):$(target))\
+        $(eval COMPATIBILITY.$(suite).HOST_CROSS_SHARED_LIBRARY.FILES := \
+          $(sort $(COMPATIBILITY.$(suite).HOST_CROSS_SHARED_LIBRARY.FILES)))))))
+endef
+
 $(call resolve-shared-libs-depes,TARGET_)
 ifdef TARGET_2ND_ARCH
 $(call resolve-shared-libs-depes,TARGET_,true)
@@ -963,6 +1002,9 @@ $(call resolve-shared-libs-depes,HOST_CROSS_,,true)
 ifdef HOST_CROSS_2ND_ARCH
 $(call resolve-shared-libs-depes,HOST_CROSS_,true,true)
 endif
+# Update host-cross shared library dependencies for tests in suite art-host-cross-tests.
+# This should be called after calling resolve-shared-libs-depes for HOST_CROSS_2ND_ARCH.
+$(call update-host-cross-shared-libs-deps-for-suites)
 endif
 
 # Pass the shared libraries dependencies to prebuilt ELF file check.
