@@ -407,8 +407,7 @@ class Checker(object):
     # Chech whether all DT_NEEDED entries are specified.
     for lib in self._file_under_test.dt_needed:
       if lib not in specified_sonames:
-        self._error('DT_NEEDED "{}" is not specified in shared_libs.'
-                    .format(lib.decode('utf-8')))
+        self._error(f'DT_NEEDED "{lib}" is not specified in shared_libs.')
         missing_shared_libs = True
 
     if missing_shared_libs:
