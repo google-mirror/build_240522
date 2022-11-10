@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91b4c598_d9ea20fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1880274
+      },
+      "writtenOn": "2022-11-10T16:33:04Z",
+      "side": 1,
+      "message": "Hi, please take a look at this problem. I just found this exception when dealing with the recent build failure.",
+      "revId": "3e3456bb7273cf4dcba73d627b5b40f359b4d705",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
