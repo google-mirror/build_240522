@@ -290,6 +290,13 @@ $(call add_json_list, SepolicyFreezeTestExtraPrebuiltDirs, $(SEPOLICY_FREEZE_TES
 
 $(call add_json_bool, GenerateAidlNdkPlatformBackend, $(filter true,$(NEED_AIDL_NDK_PLATFORM_BACKEND)))
 
+<<<<<<< HEAD   (dccd18 Do not override setting of SOONG_CONFIG_<m>_module_source_bu)
+=======
+$(call add_json_bool, IgnorePrefer32OnDevice, $(filter true,$(IGNORE_PREFER32_ON_DEVICE)))
+
+$(call add_json_list, IncludeTags,                $(PRODUCT_INCLUDE_TAGS))
+
+>>>>>>> CHANGE (00114d New product config flag to gate blueprint modules)
 $(call json_end)
 
 $(file >$(SOONG_VARIABLES).tmp,$(json_contents))
