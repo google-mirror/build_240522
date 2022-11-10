@@ -274,6 +274,14 @@ endif
 current_product_makefile :=
 
 #############################################################################
+# Check product include tag allowlist
+PRODUCT_INCLUDE_TAGS_ALLOWLIST := com.google.mainline_go com.google.mainline
+.KATI_READONLY := PRODUCT_INCLUDE_TAGS_ALLOWLIST
+$(foreach include_tag,$(PRODUCT_INCLUDE_TAGS), \
+	$(if $(filter $(include_tag),$(PRODUCT_INCLUDE_TAGS_ALLOWLIST)),,\
+	$(call pretty-error, $(include_tag) is not in PRODUCT_INCLUDE_TAGS_ALLOWLIST: $(PRODUCT_INCLUDE_TAGS_ALLOWLIST))))
+#############################################################################
+
 # Quick check and assign default values
 
 TARGET_DEVICE := $(PRODUCT_DEVICE)
