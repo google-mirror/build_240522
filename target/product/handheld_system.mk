@@ -56,6 +56,7 @@ PRODUCT_PACKAGES += \
     MusicFX \
     NfcNci \
     PacProcessor \
+    preinstalled-packages-platform-handheld-system.xml \
     PrintRecommendationService \
     PrintSpooler \
     ProxyHandler \
