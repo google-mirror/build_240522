@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f835e308_75e48816",
+        "filename": "target/product/aosp_riscv64.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2022-11-11T02:59:38Z",
+      "side": 1,
+      "message": "We don\u0027t have this file. Is there a reason this file refers to emulator?",
+      "range": {
+        "startLine": 50,
+        "startChar": 58,
+        "endLine": 50,
+        "endChar": 75
+      },
+      "revId": "dd9e1e40a305294da09d28cfcd63d2b16cb9bf89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
