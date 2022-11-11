@@ -16,6 +16,23 @@
       "message": "LGTM but adding some emu folks to +2",
       "revId": "97156bf344bc6f4eadfeeef91a1c023e86b7ee9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6a3289a_75fa6fc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2022-11-11T19:54:55Z",
+      "side": 1,
+      "message": "Do you know if aosp_x86_arm boots? If it does not, I would suggest to remove all emulator references from it.",
+      "revId": "97156bf344bc6f4eadfeeef91a1c023e86b7ee9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
