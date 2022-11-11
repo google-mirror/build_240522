@@ -46,6 +46,30 @@
       },
       "revId": "dd9e1e40a305294da09d28cfcd63d2b16cb9bf89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbac20ef_b258952f",
+        "filename": "target/product/aosp_riscv64.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2022-11-11T21:05:01Z",
+      "side": 1,
+      "message": "Do you know if aosp_arm64 boots and there is a boot test for it?",
+      "parentUuid": "34f4a044_c144473d",
+      "range": {
+        "startLine": 50,
+        "startChar": 58,
+        "endLine": 50,
+        "endChar": 75
+      },
+      "revId": "dd9e1e40a305294da09d28cfcd63d2b16cb9bf89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
