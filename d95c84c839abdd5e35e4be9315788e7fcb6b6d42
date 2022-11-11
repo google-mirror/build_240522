@@ -16,6 +16,29 @@
       "message": "Hello,\n\nThanks for the patch.\n\nMay I know did you hit some error if without this change?\n\nhttps://cs.android.com/android/platform/superproject/+/master:build/make/tools/releasetools/common.py;l\u003d1685;drc\u003d37a4290909717577731bc53c8f4ccd72c4d4d5d5\n\nThe function _GenerateGkiCertificate() will only be invoked when _HasGkiCertificationArgs() is True.",
       "revId": "d95c84c839abdd5e35e4be9315788e7fcb6b6d42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7784de0f_5afbe972",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-11-11T19:10:40Z",
+      "side": 1,
+      "message": "If `key_path` is None, we will run into same error on L1445. Are you sure this fixes the issue?",
+      "range": {
+        "startLine": 1443,
+        "startChar": 5,
+        "endLine": 1443,
+        "endChar": 13
+      },
+      "revId": "d95c84c839abdd5e35e4be9315788e7fcb6b6d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
