@@ -33,6 +33,23 @@
       "message": "Do you know if aosp_x86_arm boots? If it does not, I would suggest to remove all emulator references from it.",
       "revId": "97156bf344bc6f4eadfeeef91a1c023e86b7ee9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd1a7ef_dc70b4b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2022-11-11T21:15:55Z",
+      "side": 1,
+      "message": "I think the right thing to do is to fix b/111538404.",
+      "revId": "97156bf344bc6f4eadfeeef91a1c023e86b7ee9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
