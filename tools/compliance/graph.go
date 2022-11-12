@@ -88,6 +88,15 @@ func (lg *LicenseGraph) Targets() TargetNodeList {
 	return targets
 }
 
+// TargetNames returns the list of target node names in the graph. (unordered)
+func (lg *LicenseGraph) TargetNames() []string {
+	targets := make([]string, 0, len(lg.targets))
+	for _, target := range lg.targets {
+		targets = append(targets, target.Name())
+	}
+	return targets
+}
+
 // compliance-only LicenseGraph methods
 
 // newLicenseGraph constructs a new, empty instance of LicenseGraph.
