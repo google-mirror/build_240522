@@ -2,3 +2,4 @@
 exports_files(
     glob(["*.xml"]),
 )
+
