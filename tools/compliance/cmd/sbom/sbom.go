@@ -271,6 +271,20 @@ func getProjectMetadata(_ *context, pmix *projectmetadata.Index,
 	return pms[index], nil
 }
 
+// inputFiles returns the complete list of files read
+func inputFiles(lg *compliance.LicenseGraph, pmix *projectmetadata.Index, licenseTexts []string) []string {
+	projectMeta := pmix.AllMetadataFiles()
+	targets :=  lg.TargetNames()
+	files := make([]string, 0, len(licenseTexts)+len(targets)+len(projectMeta))
+	files = append(files, licenseTexts...)
+	for _, f := range targets {
+		files = append(files, f)
+	}
+
+	files = append(files, projectMeta...)
+	return files
+}
+
 // sbomGenerator implements the spdx bom utility
 
 // SBOM is part of the new government regulation issued to improve national cyber security
@@ -417,6 +431,7 @@ func sbomGenerator(ctx *context, files ...string) ([]string, error) {
 		fmt.Fprintf(ctx.stdout, "ExtractedText: <text>%v</text>\n", string(text))
 	}
 
-	deps := licenseTexts
+	deps := inputFiles(lg, pmix, licenseTexts)
+	sort.Strings(deps)
 	return deps, nil
 }
