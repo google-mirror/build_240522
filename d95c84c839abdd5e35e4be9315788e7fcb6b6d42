@@ -39,6 +39,30 @@
       },
       "revId": "d95c84c839abdd5e35e4be9315788e7fcb6b6d42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6550d5ea_60dfbe66",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2022-11-14T06:04:18Z",
+      "side": 1,
+      "message": "+1. It\u0027s entirely unclear to me what is broken (as explained by Bowgo), and how this change is fixing it (as explained by Kelvin)",
+      "parentUuid": "7784de0f_5afbe972",
+      "range": {
+        "startLine": 1443,
+        "startChar": 5,
+        "endLine": 1443,
+        "endChar": 13
+      },
+      "revId": "d95c84c839abdd5e35e4be9315788e7fcb6b6d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
