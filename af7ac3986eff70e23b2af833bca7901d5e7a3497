@@ -22,6 +22,30 @@
       },
       "revId": "af7ac3986eff70e23b2af833bca7901d5e7a3497",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0be1d94_a40679f4",
+        "filename": "core/host_executable_internal.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-11-14T22:08:46Z",
+      "side": 1,
+      "message": "https://cs.android.com/android/platform/superproject/+/master:build/make/core/clang/HOST_x86_64.mk;l\u003d2;drc\u003db9d89322791c84ad7a76513c6373a5ac5d0de026",
+      "parentUuid": "9d88c02a_c6d64262",
+      "range": {
+        "startLine": 48,
+        "startChar": 66,
+        "endLine": 48,
+        "endChar": 81
+      },
+      "revId": "af7ac3986eff70e23b2af833bca7901d5e7a3497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
