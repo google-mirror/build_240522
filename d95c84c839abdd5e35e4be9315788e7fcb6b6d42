@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a917c1e4_1d95ab0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951185
+      },
+      "writtenOn": "2022-11-14T07:38:35Z",
+      "side": 1,
+      "message": "No problem, I met another problem when merging S vendor and T ssi, the function _BuildBootableImage can not find key_path. it has been fix.\n _HasGkiCertificationArgs() has checked whether the keypath is empty, this change no need. thanks",
+      "parentUuid": "31196c01_75e2de6a",
+      "revId": "d95c84c839abdd5e35e4be9315788e7fcb6b6d42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7784de0f_5afbe972",
