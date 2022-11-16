@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e530eb06_eeb72975",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-11-16T21:42:50Z",
+      "side": 1,
+      "message": "Is this comment a dup of the comment in https://android-review.git.corp.google.com/c/platform/build/+/2296764/comment/706bb21b_93447c0f/?",
+      "parentUuid": "a8858a83_b0dafdf7",
+      "revId": "1f0cc0300c582159558bdaa72b29824a467c2260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "706bb21b_93447c0f",
         "filename": "core/soong_config.mk",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-16T21:22:41Z",
       "side": 1,
       "message": "You also need to add it to _product_list_vars in https://source.corp.google.com/android/build/make/core/product.mk;l\u003d289 so it is processed by the product config inheritance correctly.",
+      "revId": "1f0cc0300c582159558bdaa72b29824a467c2260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b9b2cb1_2d105306",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-11-16T21:42:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "706bb21b_93447c0f",
       "revId": "1f0cc0300c582159558bdaa72b29824a467c2260",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
