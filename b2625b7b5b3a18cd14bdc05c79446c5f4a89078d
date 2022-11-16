@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4cd0f16_41766d6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-11-16T21:48:54Z",
+      "side": 1,
+      "message": "yeah. some kind of weird gerrit bug. it didn\u0027t show both",
+      "revId": "b2625b7b5b3a18cd14bdc05c79446c5f4a89078d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

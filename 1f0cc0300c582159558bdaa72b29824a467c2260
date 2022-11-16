@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b033137b_d6496a6a",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-11-16T21:48:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e530eb06_eeb72975",
+      "revId": "1f0cc0300c582159558bdaa72b29824a467c2260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "706bb21b_93447c0f",
