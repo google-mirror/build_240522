@@ -87,6 +87,41 @@ DEX2OAT_IMAGE_XMX := $(call get-product-default-property,dalvik.vm.image-dex2oat
 DEX2OAT_XMS := $(call get-product-default-property,dalvik.vm.dex2oat-Xms)
 DEX2OAT_XMX := $(call get-product-default-property,dalvik.vm.dex2oat-Xmx)
 
+ENABLE_UFFD_GC ?= false  # TODO(jiakaiz): Change this to true.
+
+ifeq (false,$(PRODUCT_ALLOW_UFFD_GC))
+  ENABLE_UFFD_GC := false
+endif
+
+# Disable userfaultfd GC if the device doesn't support it (i.e., if
+# `min(ro.board.api_level ?? ro.board.first_api_level ?? MAX_VALUE,
+#      ro.product.first_api_level ?? ro.build.version.sdk ?? MAX_VALUE) < 31`)
+# This logic aligns with how `ro.vendor.api_level` is calculated in
+# `system/core/init/property_service.cpp`.
+# We omit the check on `ro.build.version.sdk` here because we are on the latest build system.
+ifneq (,$(BOARD_API_LEVEL))
+  uffd_not_supported := $(call math_lt,$(BOARD_API_LEVEL),31)
+  ifeq (true,$(uffd_not_supported))
+	  ENABLE_UFFD_GC := false
+  endif
+else ifneq (,$(BOARD_SHIPPING_API_LEVEL))
+  uffd_not_supported := $(call math_lt,$(BOARD_SHIPPING_API_LEVEL),31)
+  ifeq (true,$(uffd_not_supported))
+	  ENABLE_UFFD_GC := false
+  endif
+endif
+
+ifneq (,$(PRODUCT_SHIPPING_API_LEVEL))
+  uffd_not_supported := $(call math_lt,$(PRODUCT_SHIPPING_API_LEVEL),31)
+  ifeq (true,$(uffd_not_supported))
+	  ENABLE_UFFD_GC := false
+	endif
+endif
+
+ifeq (true,$(ENABLE_UFFD_GC))
+	ADDITIONAL_PRODUCT_PROPERTIES += ro.dalvik.vm.enable_uffd_gc=true
+endif
+
 ifeq ($(WRITE_SOONG_VARIABLES),true)
 
   $(call json_start)
@@ -130,6 +165,7 @@ ifeq ($(WRITE_SOONG_VARIABLES),true)
   $(call add_json_str,  Dex2oatXmx,                              $(DEX2OAT_XMX))
   $(call add_json_str,  Dex2oatXms,                              $(DEX2OAT_XMS))
   $(call add_json_str,  EmptyDirectory,                          $(OUT_DIR)/empty)
+  $(call add_json_bool, EnableUffdGc,                            $(ENABLE_UFFD_GC))
 
 ifdef TARGET_ARCH
   $(call add_json_map,  CpuVariant)

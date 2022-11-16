@@ -367,6 +367,9 @@ _product_single_value_vars += PRODUCT_FSVERITY_GENERATE_METADATA
 # BRANCH_DEFAULT_MODULE_BUILD_FROM_SOURCE but not an explicitly set value.
 _product_single_value_vars += PRODUCT_MODULE_BUILD_FROM_SOURCE
 
+# If false, disallow userfaultfd GC even if the device supports it.
+_product_single_value_vars += PRODUCT_ALLOW_UFFD_GC
+
 .KATI_READONLY := _product_single_value_vars _product_list_vars
 _product_var_list :=$= $(_product_single_value_vars) $(_product_list_vars)
 
