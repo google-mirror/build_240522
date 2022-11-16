@@ -370,6 +370,9 @@ _product_single_value_vars += PRODUCT_MODULE_BUILD_FROM_SOURCE
 # If true, installs a full version of com.android.virt APEX.
 _product_single_value_vars += PRODUCT_AVF_ENABLED
 
+# If false, disallow userfaultfd GC even if the device supports it.
+_product_single_value_vars += PRODUCT_ALLOW_UFFD_GC
+
 .KATI_READONLY := _product_single_value_vars _product_list_vars
 _product_var_list :=$= $(_product_single_value_vars) $(_product_list_vars)
 
