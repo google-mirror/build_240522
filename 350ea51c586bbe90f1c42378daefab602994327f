@@ -52,6 +52,24 @@
       "parentUuid": "cf4af63d_b81230e7",
       "revId": "350ea51c586bbe90f1c42378daefab602994327f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13c786c7_9191dd65",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-11-17T16:35:20Z",
+      "side": 1,
+      "message": "Alright, created a separate file core/art_config.mk and moved the code there.",
+      "parentUuid": "3484c088_aa00b266",
+      "revId": "350ea51c586bbe90f1c42378daefab602994327f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

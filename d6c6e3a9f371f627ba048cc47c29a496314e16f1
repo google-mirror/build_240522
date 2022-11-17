@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8722e5ea_91432fee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-11-17T16:35:20Z",
+      "side": 1,
+      "message": "PS3 -\u003e PS5 renamed the product config flag to PRODUCT_ENABLE_UFFD_GC and added a new value \"true\" to force userfaultfd GC.",
+      "revId": "d6c6e3a9f371f627ba048cc47c29a496314e16f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
