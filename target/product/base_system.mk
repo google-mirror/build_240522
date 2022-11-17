@@ -72,7 +72,6 @@ PRODUCT_PACKAGES += \
     com.android.tethering \
     com.android.tzdata \
     com.android.uwb \
-    com.android.virt \
     com.android.wifi \
     ContactsProvider \
     content \
