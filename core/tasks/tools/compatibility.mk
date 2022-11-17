@@ -88,12 +88,11 @@ compatibility_zip_deps := \
   $(test_suite_prebuilt_tools) \
   $(test_suite_dynamic_config) \
   $(test_suite_jdk) \
-  $(MERGE_ZIPS) \
   $(SOONG_ZIP) \
   $(host_shared_libs) \
   $(test_suite_extra_deps) \
 
-compatibility_zip_resources := $(out_dir)/tools $(out_dir)/testcases $(out_dir)/lib $(out_dir)/lib64
+compatibility_zip_resources := $(out_dir)/tools $(out_dir)/testcases $(out_dir)/lib $(out_dir)/lib64 $(out_dir)/jdk
 
 # Test Suite NOTICE files
 test_suite_notice_txt := $(out_dir)/NOTICE.txt
@@ -112,20 +111,22 @@ $(compatibility_zip): PRIVATE_SUITE_NAME := $(test_suite_name)
 $(compatibility_zip): PRIVATE_DYNAMIC_CONFIG := $(test_suite_dynamic_config)
 $(compatibility_zip): PRIVATE_RESOURCES := $(compatibility_zip_resources)
 $(compatibility_zip): PRIVATE_JDK := $(test_suite_jdk)
+$(compatibility_zip): PRIVATE_JDK_DIR := $(test_suite_jdk_dir)
 $(compatibility_zip): PRIVATE_tests_list := $(out_dir)-tests_list
 $(compatibility_zip): PRIVATE_tests_list_zip := $(compatibility_tests_list_zip)
 $(compatibility_zip): $(compatibility_zip_deps) | $(ADB) $(ACP)
 # Make dir structure
-	mkdir -p $(PRIVATE_OUT_DIR)/tools $(PRIVATE_OUT_DIR)/testcases
-	rm -f $@ $@.tmp $@.jdk
+	mkdir -p $(PRIVATE_OUT_DIR)/tools $(PRIVATE_OUT_DIR)/testcases $(PRIVATE_OUT_DIR)/jdk
+	rm -f $@ $@.jdk
 	echo $(BUILD_NUMBER_FROM_FILE) > $(PRIVATE_OUT_DIR)/tools/version.txt
 # Copy tools
 	cp $(PRIVATE_TOOLS) $(PRIVATE_OUT_DIR)/tools
 	$(if $(PRIVATE_DYNAMIC_CONFIG),$(hide) cp $(PRIVATE_DYNAMIC_CONFIG) $(PRIVATE_OUT_DIR)/testcases/$(PRIVATE_SUITE_NAME).dynamic)
+# Copy JDK
+	cp -R $(PRIVATE_JDK_DIR)/* $(PRIVATE_OUT_DIR)/jdk
+# Generate the zip file	
 	find $(PRIVATE_RESOURCES) | sort >$@.list
-	$(SOONG_ZIP) -d -o $@.tmp -C $(dir $@) -l $@.list
-	$(MERGE_ZIPS) $@ $@.tmp $(PRIVATE_JDK)
-	rm -f $@.tmp
+	$(SOONG_ZIP) -d -o $@ -C $(dir $@) -l $@.list
 # Build a list of tests
 	rm -f $(PRIVATE_tests_list)
 	$(hide) grep -e .*\\.config$$ $@.list | sed s%$(PRIVATE_OUT_DIR)/testcases/%%g > $(PRIVATE_tests_list)
