@@ -68,6 +68,24 @@
       "message": "Hi Colin, could you please owner review this?",
       "revId": "d6c6e3a9f371f627ba048cc47c29a496314e16f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b47d268_7a83566d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2022-11-17T21:16:33Z",
+      "side": 1,
+      "message": "OK. But wouldn\u0027t that mean that device-boot tests (in presubmit) will fail, like before, when the ART CL will make the GC runtime/boot-time enabled?",
+      "parentUuid": "bcdd4d82_eb65f158",
+      "revId": "d6c6e3a9f371f627ba048cc47c29a496314e16f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
