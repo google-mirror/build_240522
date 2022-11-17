@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a329e1df_f5f934d9",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-11-17T13:15:08Z",
+      "side": 1,
+      "message": "Why is this in the dexpreopt config? It\u0027s true it affects dexpreopt, but it also has a big impact even if dexpreopting is disabled.",
+      "revId": "350ea51c586bbe90f1c42378daefab602994327f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
