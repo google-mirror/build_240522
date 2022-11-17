@@ -34,6 +34,24 @@
       "parentUuid": "a329e1df_f5f934d9",
       "revId": "350ea51c586bbe90f1c42378daefab602994327f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3484c088_aa00b266",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2022-11-17T14:17:56Z",
+      "side": 1,
+      "message": "Right, the Soong flag is only used for dexpreopting, so this line is ok. However, the property setting on 119 above doesn\u0027t belong in this file.\n\nOrdering in the make system is a headache, I don\u0027t know where it should go. If nothing else, cramming it into main.mk somewhere around where it calls dex_preopt.mk seems better in this regard.\n\nIt is a bit odd that product mk files cannot query the API level. I suggest looping in a make system expert for advice. Looks like you need one for ORV on product.mk anyway.",
+      "parentUuid": "cf4af63d_b81230e7",
+      "revId": "350ea51c586bbe90f1c42378daefab602994327f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
