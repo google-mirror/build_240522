@@ -33,6 +33,24 @@
       "message": "Thanks for working on these CLs, Jiakai! Are we going to merge these two CLs together with the art CL that I will upload soon? I think that would be better.",
       "revId": "d6c6e3a9f371f627ba048cc47c29a496314e16f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcdd4d82_eb65f158",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-11-17T19:51:49Z",
+      "side": 1,
+      "message": "I\u0027m going to merge them as soon as they are reviewed. The flag is disabled by default, so this is a no-op change. Getting them submitted will also make it easier for you to test your ART CLs. You can run `OVERRIDE_ENABLE_UFFD_GC\u003ddefault m` to get a taste of how the build system will behave when this flag is eventually turned on.",
+      "parentUuid": "4476506e_3077b11f",
+      "revId": "d6c6e3a9f371f627ba048cc47c29a496314e16f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
