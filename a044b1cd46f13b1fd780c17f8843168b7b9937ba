@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88ca20ac_59d18d8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2022-11-18T22:30:12Z",
+      "side": 1,
+      "message": "I don\u0027t think I\u0027m the right person for this review. Removing myself.",
+      "revId": "a044b1cd46f13b1fd780c17f8843168b7b9937ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
