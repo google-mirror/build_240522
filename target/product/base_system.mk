@@ -62,12 +62,16 @@ PRODUCT_PACKAGES += \
     com.android.media \
     com.android.media.swcodec \
     com.android.mediaprovider \
+    com.android.neuralnetworks \
     com.android.ondevicepersonalization \
     com.android.os.statsd \
     com.android.permission \
     com.android.resolv \
     com.android.rkpd \
+<<<<<<< PATCH SET (5d5175 Adding rkpd app for build)
+=======
     com.android.neuralnetworks \
+>>>>>>> BASE      (2dcc38 Merge "Finalize resources before updating API.")
     com.android.scheduling \
     com.android.sdkext \
     com.android.tethering \
