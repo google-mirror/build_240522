@@ -138,6 +138,23 @@
       "message": "Hi Paul, I\u0027m adding a new file `art_config.mk` to build/make/core. Could you please owner approve it? Thanks.",
       "revId": "d6c6e3a9f371f627ba048cc47c29a496314e16f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "102b3640_b2f5351e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2022-11-21T14:28:58Z",
+      "side": 1,
+      "message": "I don\u0027t know that part of the build very well so I\u0027ll leave it up to someone else to review.",
+      "revId": "d6c6e3a9f371f627ba048cc47c29a496314e16f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
