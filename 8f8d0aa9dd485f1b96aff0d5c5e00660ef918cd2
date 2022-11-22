@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a12ae98_699ebf47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-11-22T17:26:42Z",
+      "side": 1,
+      "message": "I think this is good to land, but the work wasn\u0027t done to backport bootconfig to all the necessary branches AFAIK, so we can\u0027t land this change right now.",
+      "revId": "8f8d0aa9dd485f1b96aff0d5c5e00660ef918cd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
