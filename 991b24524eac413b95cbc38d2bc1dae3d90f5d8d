@@ -22,6 +22,30 @@
       },
       "revId": "991b24524eac413b95cbc38d2bc1dae3d90f5d8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff2c127_504045e0",
+        "filename": "core/tasks/tools/compatibility.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1933450
+      },
+      "writtenOn": "2022-11-22T06:48:51Z",
+      "side": 1,
+      "message": "The final out zipped file includes these files. Take `android-cts.zip` as example, the only difference between the generated `android-cts.zip` and the intermediate dir `android-cts` is that `android-cts.zip` contains the dir `/jdk` but the intermediate directory doesn\u0027t have.  \n\nCopying the JDK dir to the intermediate directory will make sure it is the same as the zipped zip file. Then we can skip unzipping and can directly upload the intermediate directory to CAS.\n\nIt would be great if you have other more efficient way to avoid unzip and solve the issue.",
+      "parentUuid": "f6387b9c_69b0c4f4",
+      "range": {
+        "startLine": 126,
+        "startChar": 7,
+        "endLine": 126,
+        "endChar": 27
+      },
+      "revId": "991b24524eac413b95cbc38d2bc1dae3d90f5d8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
