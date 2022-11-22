@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6387b9c_69b0c4f4",
+        "filename": "core/tasks/tools/compatibility.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-11-22T05:36:02Z",
+      "side": 1,
+      "message": "You don\u0027t depend on these files, so you shouldn\u0027t be reading them here. I can\u0027t imagine copying these files is a particularly efficient way to solve this.",
+      "range": {
+        "startLine": 126,
+        "startChar": 7,
+        "endLine": 126,
+        "endChar": 27
+      },
+      "revId": "991b24524eac413b95cbc38d2bc1dae3d90f5d8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
