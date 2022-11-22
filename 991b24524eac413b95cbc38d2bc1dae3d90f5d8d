@@ -46,6 +46,30 @@
       },
       "revId": "991b24524eac413b95cbc38d2bc1dae3d90f5d8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b9681db_b64e0141",
+        "filename": "core/tasks/tools/compatibility.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2022-11-22T19:36:36Z",
+      "side": 1,
+      "message": "You still can\u0027t read these files in this rule without depending upon them. If this isn\u0027t familiar, you need to find someone on the platform build team to work with on proper integration of this. It\u0027s very easy to break the build graph in non-obvious ways with Make, and we\u0027ve got an increasing number of use cases and tools that want a better understanding of dependencies.\n\nThe only reason that this directory isn\u0027t an implementation detail in the first place is that it\u0027s been used directly by users for running test suites locally (and with atest/etc, maybe that\u0027s less necessary now). They don\u0027t need the JDK directory because it\u0027s already set up in the environment after setting up the build.\n\nIdeally the uploads would only happen for files when they have changed, which would push the upload much earlier into the build process too. And ideally we\u0027d only upload the JDK once no matter how many test suites we are building (though we\u0027re currently zipping it up once per test suite, though only when it changes). It\u0027s far cheaper to merge zip files than to run the compression again.",
+      "parentUuid": "1ff2c127_504045e0",
+      "range": {
+        "startLine": 126,
+        "startChar": 7,
+        "endLine": 126,
+        "endChar": 27
+      },
+      "revId": "991b24524eac413b95cbc38d2bc1dae3d90f5d8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
