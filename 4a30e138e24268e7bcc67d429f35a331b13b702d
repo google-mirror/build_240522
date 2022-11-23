@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "951b8bd9_2fe88ef3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-11-23T14:01:11Z",
+      "side": 1,
+      "message": "Friendly ping. This fixes failures on git_master-art-host.",
+      "revId": "4a30e138e24268e7bcc67d429f35a331b13b702d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
