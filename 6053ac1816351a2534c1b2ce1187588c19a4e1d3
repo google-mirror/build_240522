@@ -39,6 +39,23 @@
       "message": "Just a QQ in passing, what exactly is using these now-invisible APIs?  If it\u0027s particular test modules, I think we should try to build a solution so that they can set these flags as needed.  Otherwise, this template will just become a dumping ground for every module\u0027s legacy JDK dependencies.",
       "revId": "6053ac1816351a2534c1b2ce1187588c19a4e1d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddb3bf41_f996cb09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1863710
+      },
+      "writtenOn": "2022-11-23T09:51:32Z",
+      "side": 1,
+      "message": "Thanks Hadrien!",
+      "revId": "6053ac1816351a2534c1b2ce1187588c19a4e1d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
