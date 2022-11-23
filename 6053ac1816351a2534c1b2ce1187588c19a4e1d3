@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75506432_0ba3e6a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-11-23T00:15:25Z",
+      "side": 1,
+      "message": "@ccross@android.com Any reason why you didn\u0027t add this option to this template with go/aog/2254684?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 4
+      },
+      "revId": "6053ac1816351a2534c1b2ce1187588c19a4e1d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
