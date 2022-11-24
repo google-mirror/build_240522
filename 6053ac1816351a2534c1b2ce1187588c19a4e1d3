@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ebb3b7e_63b19e5b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1863710
+      },
+      "writtenOn": "2022-11-24T09:10:12Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a typo I made in aosp/2304019. I should have copy-pasted.",
+      "parentUuid": "e992a565_e29db9f5",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 4
+      },
+      "revId": "6053ac1816351a2534c1b2ce1187588c19a4e1d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "21c6bca2_d03ccb15",
@@ -96,6 +120,24 @@
       "side": 1,
       "message": "You\u0027re right. I\u0027m not sure TBH. For now the priority is to get it back to green and aligned with the other tests. Would you mind opening a bug to figure that out?",
       "parentUuid": "21c6bca2_d03ccb15",
+      "revId": "6053ac1816351a2534c1b2ce1187588c19a4e1d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e31a8b_088641f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1863710
+      },
+      "writtenOn": "2022-11-24T09:10:12Z",
+      "side": 1,
+      "message": "The problem with some packages is that they were not meant to be used as APIs, but before Java 9 they couldn\u0027t be hidden away. Even with Java 9, by default they were available. It\u0027s only with Java 17 that access to non-exported packages gets enforced. For tests it\u0027s possible to use `--add-exports` and `--add-opens` (see https://docs.oracle.com/javase/9/migrate/toc.htm#JSMIG-GUID-2F61F3A9-0979-46A4-8B49-325BA0EE8B66).\n\nIn Android we don\u0027t use Java modules, but for host-side tests we have to support them. Running in JVM 17 makes it necessary to use these flags for some tests.\n\nI don\u0027t really like having these flags done globally in the template. I raised b/238100560 to look into doing this better, but haven\u0027t found yet a way that will work consistently. It would be good to have a proper solution to this.",
+      "parentUuid": "0527c4b5_877b2fbf",
       "revId": "6053ac1816351a2534c1b2ce1187588c19a4e1d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
