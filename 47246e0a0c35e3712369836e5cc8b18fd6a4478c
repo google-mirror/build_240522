@@ -22,6 +22,30 @@
       },
       "revId": "47246e0a0c35e3712369836e5cc8b18fd6a4478c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69369775_7180c249",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-11-28T05:27:54Z",
+      "side": 1,
+      "message": "There\u0027s two processes affected by this change.\n1. build-time checks (`m check-vintf-all`)\n2. checking target-files for OTA \n\nI guess you meant the #1.\n\nHere\u0027s how I tested with aosp_cf_x86_64_phone-userdebug:\n1. m check-vintf-all\n2. touch hardware/google/camera/common/hal/aidl_service/android.hardware.camera.provider@2.7-service-google.xml (This file is embedded in com.google.emulated.camera.provider.hal APEX)\n3. m check-vintf-all\n\nAt #3, I verified: the APEX was re-built and checkvintf re-ran",
+      "parentUuid": "e3fd9103_d836245d",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 43
+      },
+      "revId": "47246e0a0c35e3712369836e5cc8b18fd6a4478c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
