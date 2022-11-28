@@ -46,6 +46,30 @@
       },
       "revId": "47246e0a0c35e3712369836e5cc8b18fd6a4478c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "974651eb_c78c82bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-11-28T06:06:43Z",
+      "side": 1,
+      "message": "While checking #2, I found the regression and fixed it in PS3.\n\nHere\u0027s how I verified.\n1. `m dist`\n2. `check_target_files_vintf -v $OUT/obj/PACKAGING/target_files_intermediates/aosp_cf_x86_64_phone-target_files-eng.jooyung.zip`\n\nAt #2, I verified that `checkvintf --check-compat` was invoked with a correct dirmap entry and that `checkvintf` fetched the correct manifest .xml file from apex.",
+      "parentUuid": "69369775_7180c249",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 43
+      },
+      "revId": "47246e0a0c35e3712369836e5cc8b18fd6a4478c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
