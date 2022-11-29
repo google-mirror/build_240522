@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d16d2c95_35a54de8",
+        "filename": "target/product/gsi/33.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2022-11-29T14:35:24Z",
+      "side": 1,
+      "message": "I don\u0027t think this should change (API 33 is Android T which had KeyMint V2 in it) -- did this seem to be needed somewhere in the build?",
+      "revId": "e0a5f55f678eb0eb18e2ddce8cb15873c4490d5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
