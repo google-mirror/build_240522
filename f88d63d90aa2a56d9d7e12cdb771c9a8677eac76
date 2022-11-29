@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7efdf07d_c5b7932c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-11-29T22:12:18Z",
+      "side": 1,
+      "message": "Fixed typos.\n\n```\nRename BUILD file to BUILD.bazel\n\nUsing standard naming to be consistent with the rest of the bp2build workspace.\n```",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "f88d63d90aa2a56d9d7e12cdb771c9a8677eac76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
