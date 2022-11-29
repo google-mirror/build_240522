@@ -707,6 +707,13 @@ $(KATI_obsolete_var $(foreach req,$(requirements),$(req)_OVERRIDE) \
 
 requirements :=
 
+ifneq ($(PRODUCT_SEPOLICY_SPLIT),true)
+# WARNING: DO NOT CHANGE: if you are downstream of AOSP, and you change this, without
+# letting upstream know it's important to you, we may do cleanup which breaks this
+# significantly. Please let us know if you are changing this.
+$(error b/257176017 - unsplit sepolicy is no longer supported)
+endif
+
 # BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED can be true only if early-mount of
 # partitions is supported. But the early-mount must be supported for full
 # treble products, and so BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED should be set
