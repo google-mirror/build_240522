@@ -185,6 +185,7 @@ endif
 
 ifndef LOCAL_IS_HOST_MODULE
   ifdef LOCAL_SOONG_UNSTRIPPED_BINARY
+    ALL_MODULES.$(my_register_name).UNSTRIPPED := $(LOCAL_SOONG_UNSTRIPPED_BINARY)
     ifneq ($(LOCAL_UNINSTALLABLE_MODULE),true)
       my_symbol_path := $(if $(LOCAL_SOONG_SYMBOL_PATH),$(LOCAL_SOONG_SYMBOL_PATH),$(my_module_path))
       # Store a copy with symbols for symbolic debugging

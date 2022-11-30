@@ -1212,6 +1212,18 @@ $(call java-lib-files,$(module).stubs),$(ALL_MODULES.$(module).STUBS)))
 endef
 
 ###########################################################
+## Convert a list of short modules names (e.g., "framework", "Browser")
+## into the list of unstripped files that were generated for those modules.
+## NOTE: this won't return reliable results until after all
+## sub-makefiles have been included.
+## $(1): target list
+###########################################################
+
+define module-unstripped-files
+$(foreach module,$(1),$(ALL_MODULES.$(module).UNSTRIPPED))
+endef
+
+###########################################################
 ## Evaluates to the timestamp file for a doc module, which
 ## is the dependency that should be used.
 ## $(1): doc module
