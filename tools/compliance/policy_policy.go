@@ -62,7 +62,7 @@ var (
 	ImpliesPermissive = LicenseConditionSet(PermissiveCondition)
 
 	// ImpliesNotice lists the condition names implying a notice or attribution policy.
-	ImpliesNotice = LicenseConditionSet(UnencumberedCondition | PermissiveCondition | NoticeCondition | ReciprocalCondition |
+	ImpliesNotice = LicenseConditionSet(NoticeCondition | ReciprocalCondition |
 		RestrictedCondition | WeaklyRestrictedCondition | ProprietaryCondition | ByExceptionOnlyCondition)
 
 	// ImpliesReciprocal lists the condition names implying a local source-sharing policy.
