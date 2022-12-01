@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d83dc9_8d6811a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2022-12-01T08:23:34Z",
+      "side": 1,
+      "message": "Can I get an ORV for this CL?",
+      "revId": "97c140ccadbf372770badacbdb1590e72b9648ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
