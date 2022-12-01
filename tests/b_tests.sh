@@ -24,6 +24,25 @@ lunch aosp_arm64
 test_target=//build/bazel/scripts/difftool:difftool
 
 b build "$test_target"
+ps -aux | grep bazel
+PID="$(ps -aux | grep bazel\( | grep -v grep | tr -s ' ' | cut -d ' ' -f 2)"
+cat /proc/$PID/status
+echo
+echo
+echo Parent:
+echo
+echo
+PARENT_PID="$(cat /proc/$PID/status | grep ^PPid: | cut -d$'\t' -f 2)"
+cat /proc/$PARENT_PID/status
+echo
+echo
+echo Parent cmdline:
+echo
+echo
+cat /proc/$PARENT_PID/cmdline
+echo
+echo
+echo
 b build "$test_target" --run-soong-tests
 b build --run-soong-tests "$test_target"
 b --run-soong-tests build "$test_target"
