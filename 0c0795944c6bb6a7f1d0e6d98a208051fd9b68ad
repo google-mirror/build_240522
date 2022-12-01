@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b55f1735_57b8bb70",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3076,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-12-01T03:11:47Z",
+      "side": 1,
+      "message": "Just noticed this. Is it okay without `$(HOST_OUT_EXECUTABLE)/`?",
+      "range": {
+        "startLine": 3076,
+        "startChar": 89,
+        "endLine": 3076,
+        "endChar": 107
+      },
+      "revId": "0c0795944c6bb6a7f1d0e6d98a208051fd9b68ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
