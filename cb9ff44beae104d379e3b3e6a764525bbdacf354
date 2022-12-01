@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9052a72_436b9673",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 5982,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-12-01T19:49:39Z",
+      "side": 1,
+      "message": "target-files.zip normally has the exact same files that are in the images, not the unstripped versions.  Unstripped files are normally found in symbols.zip.",
+      "revId": "cb9ff44beae104d379e3b3e6a764525bbdacf354",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
