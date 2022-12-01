@@ -69,6 +69,30 @@
       },
       "revId": "70d58ba2983431f305e842bd1ddeb8de0cf0f29d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0651ee35_1c1c3ba8",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3079,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2022-12-01T02:32:48Z",
+      "side": 1,
+      "message": "Yes, but at least this change will not duplicate any values. WDYT about handle this from separated CL / bug?",
+      "parentUuid": "163dae0f_4317b42e",
+      "range": {
+        "startLine": 3079,
+        "startChar": 45,
+        "endLine": 3079,
+        "endChar": 51
+      },
+      "revId": "70d58ba2983431f305e842bd1ddeb8de0cf0f29d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
