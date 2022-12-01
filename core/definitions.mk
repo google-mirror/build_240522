@@ -599,8 +599,8 @@ $(strip $(if $(filter $(OUT_DIR)%,$(2)),$(eval _dir:=$(call license-metadata-dir
   $(eval _tgt:=$(strip $(1)))\
   $(eval _meta := $(call append-path,$(_dir),$(patsubst $(OUT_DIR)%,out%,$(_tgt).meta_lic)))\
   $(eval ALL_COPIED_TARGETS.$(_tgt).SOURCES := $(ALL_COPIED_TARGETS.$(_tgt).SOURCES) $(filter $(OUT_DIR)%,$(2)))\
-  $(eval ALL_COPIED_TARGETS += $(_tgt)),\
-  $(eval ALL_TARGETS.$(1).META_LIC:=$(module_license_metadata))))
+  $(eval ALL_COPIED_TARGETS += $(_tgt))\
+  $(eval ALL_TARGETS.$(1).META_LIC:=$(_meta))))
 endef
 
 ###########################################################
