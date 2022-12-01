@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6eba8c4_f3759419",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3078,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-12-01T01:45:11Z",
+      "side": 1,
+      "message": "We can put these tow commands in separate lines, right?",
+      "range": {
+        "startLine": 3078,
+        "startChar": 69,
+        "endLine": 3078,
+        "endChar": 70
+      },
+      "revId": "70d58ba2983431f305e842bd1ddeb8de0cf0f29d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "163dae0f_4317b42e",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3079,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-12-01T01:45:11Z",
+      "side": 1,
+      "message": "nit: `append` might add items at the end without deduplication. It would be nice if conv_linker_config supports appending with dedup. Or, conv_linker_config should know better about which property (key) should be like \"set\" or not. requireLibs is definitely a set, right?",
+      "range": {
+        "startLine": 3079,
+        "startChar": 45,
+        "endLine": 3079,
+        "endChar": 51
+      },
+      "revId": "70d58ba2983431f305e842bd1ddeb8de0cf0f29d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
