@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6eb6cbf_7cd25c32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-12-02T22:27:16Z",
+      "side": 1,
+      "message": "The fix for this was submitted yesterday. Dan says \"Staged rollouts weekly, 10% of production starting Tuesday afternoons, going to 50% on Wednesday, and 100% on Thursday\", so we need to wait a week before submitting.",
+      "revId": "f2b0c734a92d8f24f229f070a67cafcbb3c1987a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
