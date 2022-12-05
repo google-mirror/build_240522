@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bfe9f20_95e55c3b",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-12-05T20:59:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eb5ebfb_89605777",
+      "revId": "10269e4fca4f933016ba5b9b2822c208bc4b7bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6828906_12a7e53b",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-12-05T19:31:00Z",
       "side": 1,
       "message": "What is this for?  It\u0027s probably worth a comment.",
+      "revId": "10269e4fca4f933016ba5b9b2822c208bc4b7bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2869d1f_9bfbb9d4",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-12-05T20:59:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6828906_12a7e53b",
       "revId": "10269e4fca4f933016ba5b9b2822c208bc4b7bf5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
