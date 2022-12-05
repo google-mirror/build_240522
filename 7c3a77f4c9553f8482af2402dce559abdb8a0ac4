@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45917ec9_f90c51f5",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-12-05T23:43:12Z",
+      "side": 1,
+      "message": "I treated it as anything that depends on get_build_var *could* be lunch dependent, to be more robust against later changes.\n\nAlso, llvm and atest themselves won\u0027t actually be useful without having run lunch, so I doubly think it\u0027s not worth it.",
+      "parentUuid": "25b464f5_5d27dd6a",
+      "range": {
+        "startLine": 225,
+        "startChar": 10,
+        "endLine": 225,
+        "endChar": 31
+      },
+      "revId": "7c3a77f4c9553f8482af2402dce559abdb8a0ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffe3a63a_00c79473",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-05T22:10:51Z",
       "side": 1,
       "message": "Are these lunch-specific or host-specific (and hence lunch-invariant)?",
+      "range": {
+        "startLine": 233,
+        "startChar": 4,
+        "endLine": 235,
+        "endChar": 66
+      },
+      "revId": "7c3a77f4c9553f8482af2402dce559abdb8a0ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c431bbb_7d6214c9",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-12-05T23:43:12Z",
+      "side": 1,
+      "message": "see above",
+      "parentUuid": "ffe3a63a_00c79473",
       "range": {
         "startLine": 233,
         "startChar": 4,
