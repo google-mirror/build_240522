@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1682be9_f2b58679",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-12-05T18:17:01Z",
+      "side": 1,
+      "message": "Is this unnecessary now that the next patch is not using unstripped files?",
+      "revId": "0f6ab163bf20b54b34fb762ea69d1b1dc27fcb6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
