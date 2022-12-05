@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49e8b46d_9e91263e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-05T18:24:28Z",
+      "side": 1,
+      "message": "This got PS+2; removing the topic to test it without aosp/2238414.",
+      "revId": "03975ed7380b799fe7c4389bf00cedbc3e5e75e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
