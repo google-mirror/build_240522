@@ -16,6 +16,24 @@
       "message": "target-files.zip normally has the exact same files that are in the images, not the unstripped versions.  Unstripped files are normally found in symbols.zip.",
       "revId": "cb9ff44beae104d379e3b3e6a764525bbdacf354",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9589e038_125b328d",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 5982,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-05T11:09:30Z",
+      "side": 1,
+      "message": "I see, that makes sense and I\u0027ll look into adding the (unstripped) pvmfw ELF to symbols.zip. To address the ATC bug, I\u0027m now packaging the pvmfw.bin bare-metal binary, which is the unique \"file\" that the partition contains (no filesystem).",
+      "parentUuid": "d9052a72_436b9673",
+      "revId": "cb9ff44beae104d379e3b3e6a764525bbdacf354",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
