@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "422a96ef_bfbb5047",
+        "filename": "core/product.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-12-05T19:14:16Z",
+      "side": 1,
+      "message": "This should not be a product var. It should just be something like BLUEPRINT_INCLUDE_TAGS_ALLOWLIST, and only set the one place in product_config.mk",
+      "revId": "9e933b89089bf6890528b0930b3cb98b296e0b01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae8228d9_96e8cfc3",
+        "filename": "core/product_config.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-12-05T19:14:16Z",
+      "side": 1,
+      "message": "Change these to com.android.* because this is in aosp.",
+      "range": {
+        "startLine": 278,
+        "startChar": 34,
+        "endLine": 278,
+        "endChar": 76
+      },
+      "revId": "9e933b89089bf6890528b0930b3cb98b296e0b01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
