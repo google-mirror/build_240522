@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ad583d8_db00f6ef",
+        "filename": "core/product.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-12-05T19:48:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "422a96ef_bfbb5047",
+      "revId": "9e933b89089bf6890528b0930b3cb98b296e0b01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae8228d9_96e8cfc3",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-12-05T19:14:16Z",
       "side": 1,
       "message": "Change these to com.android.* because this is in aosp.",
+      "range": {
+        "startLine": 278,
+        "startChar": 34,
+        "endLine": 278,
+        "endChar": 76
+      },
+      "revId": "9e933b89089bf6890528b0930b3cb98b296e0b01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec06c9e1_1365dc4d",
+        "filename": "core/product_config.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2022-12-05T19:48:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae8228d9_96e8cfc3",
       "range": {
         "startLine": 278,
         "startChar": 34,
