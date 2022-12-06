@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bef012e4_a718d90e",
+        "filename": "shell_utils.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-12-06T01:08:19Z",
+      "side": 1,
+      "message": "Could we make gettop return the value of top instead of setting it in a global variable? And also including the \"once\" functionality that\u0027s in envsetup.sh.",
+      "revId": "61c31c268b98d0ae315737b4ae9b2e704b35a1e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23305c84_f40245ef",
+        "filename": "shell_utils.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-12-06T01:08:19Z",
+      "side": 1,
+      "message": "Consider using `return 1` instead of `exit 1` so that envsetup functions can still use it via `require_top || return 1` like how `verifymodinfo` works.",
+      "revId": "61c31c268b98d0ae315737b4ae9b2e704b35a1e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
