@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e154b0d6_a0a43a13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-12-06T00:59:41Z",
+      "side": 1,
+      "message": "fixed in followup cl",
+      "revId": "7c3a77f4c9553f8482af2402dce559abdb8a0ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25b464f5_5d27dd6a",
@@ -108,6 +125,30 @@
       "writtenOn": "2022-12-06T00:37:57Z",
       "side": 1,
       "message": "Typo?",
+      "range": {
+        "startLine": 300,
+        "startChar": 4,
+        "endLine": 300,
+        "endChar": 29
+      },
+      "revId": "7c3a77f4c9553f8482af2402dce559abdb8a0ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb7bc518_15ce349f",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-12-06T00:59:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9cf4eec_7a0ed75b",
       "range": {
         "startLine": 300,
         "startChar": 4,
