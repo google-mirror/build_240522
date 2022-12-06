@@ -5091,7 +5091,45 @@ $(call declare-container-license-deps,$(INTERNAL_OTATOOLS_PACKAGE_FILES) $(INTER
 otatools-package: $(BUILT_OTATOOLS_PACKAGE)
 
 endif # build_otatools_package
+# -----------------------------------------------------------------
+#  fastboot-info.txt
 
+INSTALLED_FASTBOOT_INFO_TARGET := $(PRODUCT_OUT)/fastboot-info.txt
+
+$(INSTALLED_FASTBOOT_INFO_TARGET):
+	rm -f $@
+	$(call pretty,"Target fastboot-info.txt: $@")
+	$(hide) echo "boot boot.img boot.sig boot false BootCritical" >> $@
+	$(hide) echo "init_boot init_boot.img init_boot.sig init_boot true BootCritical" >> $@
+	$(hide) echo "none boot_other.img boot.sig boot true Normal" >> $@
+	$(hide) echo "cache cache.img cache.sig cache true Extra" >> $@
+	$(hide) echo "dtbo dtbo.img dtbo.sig dtbo true BootCritical" >> $@
+	$(hide) echo "dts dt.img dt.sig dts true BootCritical" >> $@
+	$(hide) echo "odm odm.img odm.sig odm true Normal" >> $@
+	$(hide) echo "odm_dlkm odm_dlkm.img odm_dlkm.sig odm_dlkm true Normal" >> $@
+	$(hide) echo "product product.img product.sig product true Normal" >> $@
+	$(hide) echo "pvmfw pvmfw.img pvmfw.sig pvmfw true BootCritical" >> $@
+	$(hide) echo "recovery recovery.img recovery.sig recovery true BootCritical" >> $@
+	$(hide) echo "super super.img super.sig super true Extra" >> $@
+	$(hide) echo "system system.img system.sig system false Normal" >> $@
+	$(hide) echo "system_dlkm system_dlkm.img system_dlkm.sig system_dlkm true Normal" >> $@
+	$(hide) echo "system_ext system_ext.img system_ext.sig system_ext true Normal" >> $@
+	$(hide) echo "none system_other.img system.sig system true Normal" >> $@
+	$(hide) echo "userdata userdata.img userdata.sig userdata true Extra" >> $@
+	$(hide) echo "vbmeta vbmeta.img vbmeta.sig vbmeta true BootCritical" >> $@
+	$(hide) echo "vbmeta_system vbmeta_system.img vbmeta_system.sig vbmeta_system true BootCritical" >> $@
+	$(hide) echo "vbmeta_vendor vbmeta_vendor.img vbmeta_vendor.sig vbmeta_vendor true BootCritical" >> $@
+	$(hide) echo "vendor vendor.img vendor.sig vendor true Normal" >> $@
+	$(hide) echo "vendor_boot vendor_boot.img vendor_boot.sig vendor_boot true BootCritical" >> $@
+	$(hide) echo "vendor_dlkm vendor_dlkm.img vendor_dlkm.sig vendor_dlkm true Normal" >> $@
+	$(hide) echo "vendor_kernel_boot vendor_kernel_boot.img vendor_kernel_boot.sig vendor_kernel_boot true BootCritical" >> $@
+	$(hide) echo "none vendor_other.img vendor.sig vendor true Normal" >> $@  
+$(call declare-0p-target,$(INSTALLED_FASTBOOT_INFO_TARGET))
+
+.PHONY: fastboot-info
+misc_info: $(INSTALLED_FASTBOOT_INFO_TARGET)
+
+droidcore-unbundled: $(INSTALLED_FASTBOOT_INFO_TARGET)
 # -----------------------------------------------------------------
 #  misc_info.txt
 
