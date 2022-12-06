@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f7acea9_462043d0",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-12-06T01:02:30Z",
+      "side": 1,
+      "message": "You\u0027re also missing a colon seperator here",
+      "revId": "f4f4d7d596147f63cb6055863f9465afa2b40b28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
