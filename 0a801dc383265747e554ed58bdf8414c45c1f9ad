@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c55500c3_1450a5b3",
+        "filename": "shell_utils.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-12-06T06:07:14Z",
+      "side": 1,
+      "message": "No need to be in this CL, but this should also be kept in sync what soong_ui does here: https://cs.android.com/android/platform/superproject/+/master:build/soong/ui/build/config.go;l\u003d271-284;drc\u003dc576383336ad18aef520881ce8bd53e8ca36451f\n\nOr deduplicate this with soong_ui to have a single SoT.",
+      "range": {
+        "startLine": 56,
+        "startChar": 9,
+        "endLine": 56,
+        "endChar": 18
+      },
+      "revId": "0a801dc383265747e554ed58bdf8414c45c1f9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "408a410e_3444826d",
+        "filename": "shell_utils.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-12-06T06:07:14Z",
+      "side": 1,
+      "message": "OUT_DIR_COMMON_BASE doesn\u0027t seem to have too many usages (https://cs.android.com/search?q\u003dOUT_DIR_COMMON_BASE). Maybe we can remove it altogether.",
+      "range": {
+        "startLine": 60,
+        "startChar": 16,
+        "endLine": 60,
+        "endChar": 35
+      },
+      "revId": "0a801dc383265747e554ed58bdf8414c45c1f9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
