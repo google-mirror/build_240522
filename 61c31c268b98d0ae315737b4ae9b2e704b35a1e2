@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6af1fc38_b66f0a08",
+        "filename": "shell_utils.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-12-09T23:30:13Z",
+      "side": 1,
+      "message": "I like it this way.",
+      "parentUuid": "9a3b87d2_10abd884",
+      "revId": "61c31c268b98d0ae315737b4ae9b2e704b35a1e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23305c84_f40245ef",
@@ -49,6 +67,24 @@
       "writtenOn": "2022-12-06T01:08:19Z",
       "side": 1,
       "message": "Consider using `return 1` instead of `exit 1` so that envsetup functions can still use it via `require_top || return 1` like how `verifymodinfo` works.",
+      "revId": "61c31c268b98d0ae315737b4ae9b2e704b35a1e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ceed1e_1afcdff0",
+        "filename": "shell_utils.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-12-09T23:30:13Z",
+      "side": 1,
+      "message": "I like it this way.",
+      "parentUuid": "23305c84_f40245ef",
       "revId": "61c31c268b98d0ae315737b4ae9b2e704b35a1e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
