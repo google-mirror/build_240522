@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a3b87d2_10abd884",
+        "filename": "shell_utils.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2022-12-09T23:29:21Z",
+      "side": 1,
+      "message": "That\u0027s what gettop does.  The only global variable part is that if TOP is already set, it will just use that rather than searching for it.  require_top is what sets TOP.\n\nWe could have require_top also return that, and print the message, but then it starts to get unreadable",
+      "parentUuid": "bef012e4_a718d90e",
+      "revId": "61c31c268b98d0ae315737b4ae9b2e704b35a1e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23305c84_f40245ef",
         "filename": "shell_utils.sh",
         "patchSetId": 4
