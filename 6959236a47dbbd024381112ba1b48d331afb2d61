@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6fdea39_5ca4a135",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-12-13T18:11:50Z",
+      "side": 1,
+      "message": "Could be a dict, but it\u0027s up to you.",
+      "revId": "6959236a47dbbd024381112ba1b48d331afb2d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fe62a9a_3ebd0de8",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2022-12-13T18:11:50Z",
+      "side": 1,
+      "message": "Can a variable be both in `g` and in `cfg`?",
+      "revId": "6959236a47dbbd024381112ba1b48d331afb2d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
