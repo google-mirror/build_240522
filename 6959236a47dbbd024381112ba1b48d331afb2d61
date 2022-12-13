@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c9b9c982_7ee0fb9f",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-12-13T18:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6fdea39_5ca4a135",
+      "revId": "6959236a47dbbd024381112ba1b48d331afb2d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3fe62a9a_3ebd0de8",
         "filename": "core/product_config.rbc",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2022-12-13T18:11:50Z",
       "side": 1,
       "message": "Can a variable be both in `g` and in `cfg`?",
+      "revId": "6959236a47dbbd024381112ba1b48d331afb2d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ca204aa_c9ec6501",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 2
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-12-13T18:18:42Z",
+      "side": 1,
+      "message": "Technically no, but it could be in either/or, so I just allowed for the possibility of it being in both just in case.",
+      "parentUuid": "3fe62a9a_3ebd0de8",
       "revId": "6959236a47dbbd024381112ba1b48d331afb2d61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
