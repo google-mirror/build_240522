@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff2c1d1f_3306491d",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-12-13T05:34:00Z",
+      "side": 1,
+      "message": "Why is this \"\" and not None?\n\n(or fail?)",
+      "range": {
+        "startLine": 849,
+        "startChar": 4,
+        "endLine": 851,
+        "endChar": 0
+      },
+      "revId": "fb60871e35e2479ba94ce16fdbdae3c5f0409a57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9624822_c218cee5",
+        "filename": "core/product_config.rbc",
+        "patchSetId": 1
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2022-12-13T05:34:00Z",
+      "side": 1,
+      "message": "Are there tests?",
+      "range": {
+        "startLine": 853,
+        "startChar": 4,
+        "endLine": 853,
+        "endChar": 19
+      },
+      "revId": "fb60871e35e2479ba94ce16fdbdae3c5f0409a57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
