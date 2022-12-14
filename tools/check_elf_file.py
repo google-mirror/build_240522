@@ -45,6 +45,10 @@ _EM_AARCH64 = 183
 _KNOWN_MACHINES = {_EM_386, _EM_ARM, _EM_X86_64, _EM_AARCH64}
 
 
+# ELF object file type
+_ET_REL = 1  # relocatable file
+
+
 # ELF header struct
 _ELF_HEADER_STRUCT = (
   ('ei_magic', '4s'),
@@ -146,6 +150,13 @@ def _get_llvm_readobj():
   return llvm_readobj if os.path.exists(llvm_readobj) else 'llvm-readobj'
 
 
+def _get_llvm_ar():
+  """Find the path to llvm-ar executable."""
+  llvm_dir = _get_llvm_dir()
+  llvm_ar = os.path.join(llvm_dir, 'bin', 'llvm-ar')
+  return llvm_ar if os.path.exists(llvm_ar) else 'llvm-ar'
+
+
 class ELFError(ValueError):
   """Generic ELF parse error"""
   pass
@@ -195,18 +206,29 @@ class ELFParser(object):
   @classmethod
   def _read_llvm_readobj(cls, elf_file_path, header, llvm_readobj):
     """Run llvm-readobj and parse the output."""
-    cmd = [llvm_readobj, '--dynamic-table', '--dyn-symbols', elf_file_path]
+    cmd = [llvm_readobj, '--dynamic-table', '--dyn-symbols', '--symbols',
+           elf_file_path]
     out = subprocess.check_output(cmd, text=True)
     lines = out.splitlines()
     return cls._parse_llvm_readobj(elf_file_path, header, lines)
 
 
+  _DYNAMIC_SYMBOLS_START_PATTERN = 'DynamicSymbols ['
+  _DYNAMIC_SYMBOLS_END_PATTERN = ']'
+  _SYMBOLS_START_PATTERN = 'Symbols ['
+  _SYMBOLS_END_PATTERN = ']'
+
+
   @classmethod
   def _parse_llvm_readobj(cls, elf_file_path, header, lines):
     """Parse the output of llvm-readobj."""
-    lines_it = iter(lines)
-    dt_soname, dt_needed = cls._parse_dynamic_table(elf_file_path, lines_it)
-    imported, exported = cls._parse_dynamic_symbols(lines_it)
+    dt_soname, dt_needed = cls._parse_dynamic_table(elf_file_path, iter(lines))
+    start_pattern = (cls._SYMBOLS_START_PATTERN if header.e_type == _ET_REL
+                     else cls._DYNAMIC_SYMBOLS_START_PATTERN)
+    end_pattern = (cls._SYMBOLS_END_PATTERN if header.e_type == _ET_REL
+                   else cls._DYNAMIC_SYMBOLS_END_PATTERN)
+    imported, exported = cls._parse_symbols(
+        iter(lines), start_pattern, end_pattern)
     return ELF(dt_soname, dt_needed, imported, exported, header)
 
 
@@ -248,9 +270,6 @@ class ELFParser(object):
     return (dt_soname, dt_needed)
 
 
-  _DYNAMIC_SYMBOLS_START_PATTERN = 'DynamicSymbols ['
-  _DYNAMIC_SYMBOLS_END_PATTERN = ']'
-
   _SYMBOL_ENTRY_START_PATTERN = '  Symbol {'
   _SYMBOL_ENTRY_PATTERN = re.compile('^    ([A-Za-z0-9_]+): (.*)$')
   _SYMBOL_ENTRY_PAREN_PATTERN = re.compile(
@@ -276,12 +295,13 @@ class ELFParser(object):
 
 
   @classmethod
-  def _parse_dynamic_symbols(cls, lines_it):
+  def _parse_symbols(cls, lines_it, start_pattern, end_pattern):
     """Parse dynamic symbol table and collect imported and exported symbols."""
     imported = collections.defaultdict(set)
     exported = collections.defaultdict(set)
 
-    for symbol in cls._parse_dynamic_symbols_internal(lines_it):
+    symbols = cls._parse_symbols_internal(lines_it, start_pattern, end_pattern)
+    for symbol in symbols:
       name, version = cls._parse_symbol_name(symbol['Name'])
       if name:
         if symbol['Section'] == 'Undefined':
@@ -296,14 +316,14 @@ class ELFParser(object):
 
 
   @classmethod
-  def _parse_dynamic_symbols_internal(cls, lines_it):
+  def _parse_symbols_internal(cls, lines_it, start_pattern, end_pattern):
     """Parse symbols entries and yield each symbols."""
 
-    if not cls._find_prefix(cls._DYNAMIC_SYMBOLS_START_PATTERN, lines_it):
+    if not cls._find_prefix(start_pattern, lines_it):
       return
 
     for line in lines_it:
-      if line == cls._DYNAMIC_SYMBOLS_END_PATTERN:
+      if line == end_pattern:
         return
 
       if line == cls._SYMBOL_ENTRY_START_PATTERN:
@@ -326,12 +346,14 @@ class ELFParser(object):
 class Checker(object):
   """ELF file checker that checks DT_SONAME, DT_NEEDED, and symbols."""
 
-  def __init__(self, llvm_readobj):
+  def __init__(self, llvm_readobj, llvm_ar):
     self._file_path = ''
-    self._file_under_test = None
+    self._files_under_test = []
     self._shared_libs = []
+    self._system_shared_libs = []
 
     self._llvm_readobj = llvm_readobj
+    self._llvm_ar = llvm_ar
 
 
   if sys.stderr.isatty():
@@ -370,15 +392,37 @@ class Checker(object):
       raise
 
 
-  def load_file_under_test(self, path, skip_bad_elf_magic,
-                           skip_unknown_elf_machine):
+  def skip_unknown_elf_machine(self):
+    """Skip unknown elf machine without error."""
+    for file in self._files_under_test:
+      if file.header.e_machine not in _KNOWN_MACHINES:
+        sys.exit(0)
+
+
+  def load_shared_lib_under_test(self, path, skip_bad_elf_magic):
     """Load file-under-test (either an executable or a shared lib)."""
     self._file_path = path
-    self._file_under_test = self._load_elf_file(path, skip_bad_elf_magic)
+    self._files_under_test.append(
+        self._load_elf_file(path, skip_bad_elf_magic))
 
-    if skip_unknown_elf_machine and \
-        self._file_under_test.header.e_machine not in _KNOWN_MACHINES:
-      sys.exit(0)
+
+  def load_static_lib_under_test(self, path, extract_dir, skip_bad_elf_magic):
+    """Load file-under-test (extract from a static lib)."""
+    if not extract_dir:
+      self._error('Must specify --extract-dir for static lib check')
+      sys.exit(2)
+
+    cmd = [self._llvm_ar, '-x', path, '--output', extract_dir]
+    try:
+      subprocess.run(cmd, check=True)
+    except subprocess.CalledProcessError:
+      self._error('Failed to extract static library "{}"'.format(path))
+      sys.exit(2)
+
+    extracted_files = [
+        os.path.join(extract_dir, file) for file in os.listdir(extract_dir)]
+    for f in extracted_files:
+      self._files_under_test.append(self._load_elf_file(f, skip_bad_elf_magic))
 
 
   def load_shared_libs(self, shared_lib_paths):
@@ -387,12 +431,24 @@ class Checker(object):
       self._shared_libs.append(self._load_elf_file(path, False))
 
 
+  def load_system_shared_libs(self, system_shared_lib_paths):
+    """Load system shared libraries."""
+    for path in system_shared_lib_paths:
+      self._system_shared_libs.append(self._load_elf_file(path, False))
+
+
   def check_dt_soname(self, soname):
     """Check whether DT_SONAME matches installation file name."""
-    if self._file_under_test.dt_soname != soname:
-      self._error('DT_SONAME "{}" must be equal to the file name "{}".'
-                  .format(self._file_under_test.dt_soname, soname))
+    if len(self._files_under_test) != len(soname):
+      self._error('Need {} DT_SONAME for checking, but only get {}'
+                  .format(len(self._files_under_test), len(soname)))
       sys.exit(2)
+
+    for idx, file in enumerate(self._files_under_test):
+      if file.dt_soname != soname[idx]:
+        self._error('DT_SONAME "{}" must be equal to the file name "{}".'
+                    .format(file.dt_soname, soname[idx]))
+        sys.exit(2)
 
 
   def check_dt_needed(self, system_shared_lib_names):
@@ -405,14 +461,17 @@ class Checker(object):
     specified_sonames = {lib.dt_soname for lib in self._shared_libs}
 
     # Chech whether all DT_NEEDED entries are specified.
-    for lib in self._file_under_test.dt_needed:
-      if lib not in specified_sonames:
-        self._error(f'DT_NEEDED "{lib}" is not specified in shared_libs.')
-        missing_shared_libs = True
+    for file in self._files_under_test:
+      for lib in file.dt_needed:
+        if lib not in specified_sonames:
+          self._error(f'DT_NEEDED "{lib}" is not specified in shared_libs.')
+          missing_shared_libs = True
 
     if missing_shared_libs:
-      dt_needed = sorted(set(self._file_under_test.dt_needed))
-      modules = [re.sub('\\.so$', '', lib) for lib in dt_needed]
+      dt_needed = set()
+      for file in self._files_under_test:
+        dt_needed.add(file.dt_needed)
+      modules = [re.sub('\\.so$', '', lib) for lib in sorted(dt_needed)]
 
       # Remove system shared libraries from the suggestion since they are added
       # by default.
@@ -460,13 +519,15 @@ class Checker(object):
 
   def check_symbols(self):
     """Check whether all undefined symbols are resolved to a definition."""
-    all_elf_files = [self._file_under_test] + self._shared_libs
+    all_elf_files = (self._files_under_test + self._shared_libs +
+                     self._system_shared_libs)
     missing_symbols = []
-    for sym, imported_vers in self._file_under_test.imported.items():
-      for imported_ver in imported_vers:
-        lib = self._find_symbol_from_libs(all_elf_files, sym, imported_ver)
-        if not lib:
-          missing_symbols.append((sym, imported_ver))
+    for file in self._files_under_test:
+      for sym, imported_vers in file.imported.items():
+        for imported_ver in imported_vers:
+          lib = self._find_symbol_from_libs(all_elf_files, sym, imported_ver)
+          if not lib:
+            missing_symbols.append((sym, imported_ver))
 
     if missing_symbols:
       for sym, ver in sorted(missing_symbols):
@@ -495,8 +556,8 @@ def _parse_args():
   # Input file
   parser.add_argument('file',
                       help='Path to the input file to be checked')
-  parser.add_argument('--soname',
-                      help='Shared object name of the input file')
+  parser.add_argument('--soname', action='append', default=[],
+                      help='Shared object name of the input files')
 
   # Shared library dependencies
   parser.add_argument('--shared-lib', action='append', default=[],
@@ -514,10 +575,17 @@ def _parse_args():
                       help='Ignore the input file with unknown machine ID')
   parser.add_argument('--allow-undefined-symbols', action='store_true',
                       help='Ignore unresolved undefined symbols')
+  parser.add_argument('--check-static-lib', action='store_true',
+                      help='Check for prebuilt static library')
 
   # Other options
   parser.add_argument('--llvm-readobj',
                       help='Path to the llvm-readobj executable')
+  parser.add_argument('--llvm-ar',
+                      help='Path to the llvm-ar executable')
+  parser.add_argument('--extract-dir',
+                      help='The temporary folder for intermediate files '
+                      'extracted from LLVM archive')
 
   return parser.parse_args()
 
@@ -530,17 +598,31 @@ def main():
   if not llvm_readobj:
     llvm_readobj = _get_llvm_readobj()
 
+  llvm_ar = args.llvm_ar
+  if not llvm_ar:
+    llvm_ar = _get_llvm_ar()
+
   # Load ELF files
-  checker = Checker(llvm_readobj)
-  checker.load_file_under_test(
-    args.file, args.skip_bad_elf_magic, args.skip_unknown_elf_machine)
+  checker = Checker(llvm_readobj, llvm_ar)
+  if args.check_static_lib:
+    checker.load_static_lib_under_test(
+        args.file, args.extract_dir, args.skip_bad_elf_magic)
+  else:
+    checker.load_shared_lib_under_test(args.file, args.skip_bad_elf_magic)
+  if args.skip_unknown_elf_machine:
+    checker.skip_unknown_elf_machine()
+
   checker.load_shared_libs(args.shared_lib)
+  if args.check_static_lib:
+    # Prebuilt static libraries can resolve symbol from system_shared_lib
+    checker.load_system_shared_libs(args.system_shared_lib)
 
-  # Run checks
-  if args.soname:
-    checker.check_dt_soname(args.soname)
+  if not args.check_static_lib:
+    # Run checks for executables or shared libs
+    if args.soname:
+      checker.check_dt_soname(args.soname)
 
-  checker.check_dt_needed(args.system_shared_lib)
+    checker.check_dt_needed(args.system_shared_lib)
 
   if not args.allow_undefined_symbols:
     checker.check_symbols()
