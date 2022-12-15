@@ -1,0 +1,20 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "check_ota_package_signature",
+			"type": "python",
+			"request": "launch",
+			"program": "${workspaceFolder}/check_ota_package_signature.py",
+			"console": "integratedTerminal",
+			"justMyCode": true,
+			"args": ["/usr/local/google/home/zhangkelvin/master/vendor/google/certs/devkeys/devkey.x509.pem", "/usr/local/google/home/zhangkelvin/Downloads/bluejay-ota-tq1a.221205.012-82b18cc0.zip"],
+			"env": {
+				"PATH": "/usr/local/google/home/zhangkelvin/aosp/prebuilts/jdk/jdk17/linux-x86/bin:/usr/local/google/home/zhangkelvin/aosp/out/host/linux-x86/bin:/usr/local/google/home/zhangkelvin/aosp/out/host/linux-x86/bin:/usr/local/google/home/zhangkelvin/aosp/development/scripts:/usr/local/google/home/zhangkelvin/aosp/prebuilts/devtools/tools:/usr/local/google/home/zhangkelvin/aosp/prebuilts/misc/linux-x86/dtc:/usr/local/google/home/zhangkelvin/aosp/prebuilts/misc/linux-x86/libufdt:/usr/local/google/home/zhangkelvin/aosp/prebuilts/clang/host/linux-x86/llvm-binutils-stable:/usr/local/google/home/zhangkelvin/aosp/prebuilts/android-emulator/linux-x86_64:/usr/local/google/home/zhangkelvin/aosp/prebuilts/asuite/acloud/linux-x86:/usr/local/google/home/zhangkelvin/aosp/prebuilts/asuite/aidegen/linux-x86:/usr/local/google/home/zhangkelvin/aosp/prebuilts/asuite/atest/linux-x86:/usr/local/google/home/zhangkelvin/aosp/build/bazel/bin:/usr/local/google/home/zhangkelvin/.local/bin:/usr/local/google/home/zhangkelvin/.local/bin:/usr/local/google/home/zhangkelvin/.npm-global/bin:/usr/local/google/home/zhangkelvin/go/bin:/google/data/ro/teams/android-test/tools/:/google/data/ro/projects/android:/usr/local/google/home/zhangkelvin/.cargo/bin:/usr/lib/google-golang/bin:/usr/local/buildtools/java/jdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/google/home/zhangkelvin/.fzf/bin"
+			}
+		}
+	]
+}
