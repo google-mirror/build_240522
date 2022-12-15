@@ -273,7 +273,7 @@ func WalkActionsForCondition(lg *LicenseGraph, conditions LicenseConditionSet) A
 		}
 		cs := universe.Intersection(tn.resolution)
 		if !cs.IsEmpty() {
-			if _, ok := amap[tn]; ok {
+			if _, ok := amap[tn]; !ok {
 				amap[tn] = cs
 			} else {
 				amap[tn] = amap[tn].Union(cs)
