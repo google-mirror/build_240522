@@ -12,7 +12,7 @@ function finalize_step_1_main() {
     source $top/build/make/finalize-aidl-vndk-sdk-resources.sh
 
     # build to confirm everything is OK
-    AIDL_FROZEN_REL=true $m
+    AIDL_FROZEN_REL=true $m checkbuild
 }
 
 finalize_step_1_main

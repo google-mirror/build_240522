@@ -17,7 +17,7 @@ function finalize_main() {
     #   Resource/SDK finalization.
     # In the future, we would want to actually turn the branch into the REL
     # state and test with that.
-    AIDL_FROZEN_REL=true $m
+    AIDL_FROZEN_REL=true $m checkbuild
 
     # Build SDK (TODO)
     # lunch sdk...

@@ -20,7 +20,7 @@ function finalize_step_2_main() {
     source $top/build/make/finalize-locally-mainline-sdk.sh
 
     # build to confirm everything is OK
-    AIDL_FROZEN_REL=true $m
+    AIDL_FROZEN_REL=true $m checkbuild
 }
 
 finalize_step_2_main
