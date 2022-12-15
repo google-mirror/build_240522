@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b421703_080c0d71",
+        "filename": "tools/compliance/policy_walk.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-12-15T21:59:11Z",
+      "side": 1,
+      "message": "Is there a test that should catch this?",
+      "revId": "e4ba6353209021e180932d8271bea0ed19dee260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
