@@ -14,7 +14,7 @@ function finalize_sdk_rel() {
 
     # adb keys
     $m adb
-    LOGNAME=android-eng HOSTNAME=google.com adb keygen "$DEV_SRC_DIR/vendor/google/security/adb/${PLATFORM_VERSION}.adb_key"
+    LOGNAME=android-eng HOSTNAME=google.com "$DEV_SRC_DIR/out/host/linux-x86/bin/adb" keygen "$DEV_SRC_DIR/vendor/google/security/adb/${PLATFORM_VERSION}.adb_key"
 
     # build/make/core/version_defaults.mk
     sed -i -e "s/PLATFORM_VERSION_CODENAME.${BUILD_PREFIX} := .*/PLATFORM_VERSION_CODENAME.${BUILD_PREFIX} := REL/g" "$DEV_SRC_DIR/build/make/core/version_defaults.mk"
