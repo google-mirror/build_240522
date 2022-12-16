@@ -16,6 +16,24 @@
       "message": "Is there a test that should catch this?",
       "revId": "e4ba6353209021e180932d8271bea0ed19dee260",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa136d00_b331739b",
+        "filename": "tools/compliance/policy_walk.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-12-16T23:47:09Z",
+      "side": 1,
+      "message": "That was a very good question, which led to \"Why don\u0027t I just write a regression test that fails?\" http://aosp/2362902\n\nWhich then led to \"Why can\u0027t I write a test that fails?\" http://aosp/2362901\n\nTurns out when I changed the code to stop tracking origin due to scaling/prohibitive cost, my laziness wrt. changing all the test data ended up with test utilities that passed because they couldn\u0027t fail instead of passing because the code was correct.",
+      "parentUuid": "7b421703_080c0d71",
+      "revId": "e4ba6353209021e180932d8271bea0ed19dee260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
