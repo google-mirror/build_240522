@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0f0e850_00d7c80e",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2022-12-19T16:17:57Z",
+      "side": 1,
+      "message": "Can you add a comment here that the split is needed because platform jars counter-intuitively use `platform:` prefix not `system`? It\u0027s kind of obvious from the code but only after staring at it for some time. :)",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "9814f196c06169f7f3966c83ecaebff202e42e69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
