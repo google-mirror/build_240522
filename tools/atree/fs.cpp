@@ -178,6 +178,7 @@ strip_file(const string& path)
             // Split the arguments if more than 1
             char* cmd = strdup(strip_cmd);
             const char** args = (const char**) malloc(sizeof(const char*) * (num_args + 2));
+            args[0] = cmd;
 
             const char** curr = args;
             char* s = cmd;
