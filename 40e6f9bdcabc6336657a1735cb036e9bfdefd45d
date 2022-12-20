@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e6ad967_29a77b87",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-12-20T13:45:49Z",
+      "side": 1,
+      "message": "Please follow this format:\n\nhttps://cbea.ms/git-commit/\n\n(i.e. title line, then blank line, then more context)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "40e6f9bdcabc6336657a1735cb036e9bfdefd45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45cf69f1_f5f9b46b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-12-20T13:45:49Z",
+      "side": 1,
+      "message": "Please also test the following, in tm-mainline-prod:\n\n```\nbanchan com.android.sdkext\nm apps_only dist\n```\n\n(and make sure U_B_S_F_S is _not_ set locally when doing so). Thanks!",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 189
+      },
+      "revId": "40e6f9bdcabc6336657a1735cb036e9bfdefd45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
