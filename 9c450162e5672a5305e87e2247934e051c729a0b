@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf488a88_bcbd5dff",
+        "filename": "tools/atree/fs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-12-20T23:39:41Z",
+      "side": 1,
+      "message": "I think this would only be uninitialized if cmd was empty?  This whole mess should probably be rewritten to use c++ string functions.  Maybe replacing malloc with calloc or a zeroed c++ allocation would be clearer?",
+      "revId": "9c450162e5672a5305e87e2247934e051c729a0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
