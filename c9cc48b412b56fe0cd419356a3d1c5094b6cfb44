@@ -16,6 +16,24 @@
       "message": "Same for /system?",
       "revId": "c9cc48b412b56fe0cd419356a3d1c5094b6cfb44",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "327895f2_f1b5e32d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-12-20T00:03:16Z",
+      "side": 1,
+      "message": "For now, vintf fragments from system partition are not supported. Once we decide to support it, then we can do the same for system/.",
+      "parentUuid": "6601f72e_eff42814",
+      "revId": "c9cc48b412b56fe0cd419356a3d1c5094b6cfb44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
