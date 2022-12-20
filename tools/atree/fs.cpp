@@ -194,6 +194,7 @@ strip_file(const string& path)
                 }
             }
 
+            args[0] = cmd;
             args[num_args] = path.c_str();
             args[num_args + 1] = NULL;
 
