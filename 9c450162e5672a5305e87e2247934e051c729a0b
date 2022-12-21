@@ -16,6 +16,24 @@
       "message": "I think this would only be uninitialized if cmd was empty?  This whole mess should probably be rewritten to use c++ string functions.  Maybe replacing malloc with calloc or a zeroed c++ allocation would be clearer?",
       "revId": "9c450162e5672a5305e87e2247934e051c729a0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a2f2f1_e7f12fdb",
+        "filename": "tools/atree/fs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2022-12-21T00:12:38Z",
+      "side": 1,
+      "message": "You are right. It\u0027s also confusing that this code is not applied when num_args\u003d\u003d1.\nIf no owner or user care to rewrite this part, could we just suppress the warning for now?",
+      "parentUuid": "bf488a88_bcbd5dff",
+      "revId": "9c450162e5672a5305e87e2247934e051c729a0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
