@@ -52,6 +52,24 @@
       "parentUuid": "70a2f2f1_e7f12fdb",
       "revId": "9c450162e5672a5305e87e2247934e051c729a0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be372abd_f9c616db",
+        "filename": "tools/atree/fs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2022-12-21T00:53:41Z",
+      "side": 1,
+      "message": "Okay, replaced malloc with calloc. That also suppressed the warning.",
+      "parentUuid": "c9cd9680_8b2e8cd1",
+      "revId": "9c450162e5672a5305e87e2247934e051c729a0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
