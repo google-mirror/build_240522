@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "096646b2_ac25d8e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1863710
+      },
+      "writtenOn": "2022-12-21T16:02:02Z",
+      "side": 1,
+      "message": "PTAL. It looks like the move to an utils script for xTS is working now.",
+      "revId": "1a4a1716f1472069d0e151414d3016454490cd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
