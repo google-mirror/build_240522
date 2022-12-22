@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48b27009_7d55272c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2022-12-22T01:00:08Z",
+      "side": 1,
+      "message": "Could you please add this bug below in the description?\n\nBUG: 253827893",
+      "revId": "0df753c75d3048d20c0356aa4efba0620bc2b1ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
