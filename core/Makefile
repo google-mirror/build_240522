@@ -889,16 +889,22 @@ COMPRESSION_COMMAND := $(MINIGZIP)
 RAMDISK_EXT := .gz
 endif
 
+RAMDISK_NODE_LIST := $(PRODUCT_OUT)/ramdisk_node_list
+$(RAMDISK_NODE_LIST):
+	echo "dir dev 0755 0 0" > $(RAMDISK_NODE_LIST)
+	echo "nod dev/null 0600 0 0 c 1 5" >> $(RAMDISK_NODE_LIST)
+	echo "nod dev/console 0600 0 0 c 5 1" >> $(RAMDISK_NODE_LIST)
+
 # We just build this directly to the install location.
 INSTALLED_RAMDISK_TARGET := $(BUILT_RAMDISK_TARGET)
 $(INSTALLED_RAMDISK_TARGET): PRIVATE_DIRS := debug_ramdisk dev metadata mnt proc second_stage_resources sys
-$(INSTALLED_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_RAMDISK_FILES) $(INSTALLED_FILES_FILE_RAMDISK) | $(COMPRESSION_COMMAND_DEPS)
+$(INSTALLED_RAMDISK_TARGET): $(MKBOOTFS) $(RAMDISK_NODE_LIST) $(INTERNAL_RAMDISK_FILES) $(INSTALLED_FILES_FILE_RAMDISK) | $(COMPRESSION_COMMAND_DEPS)
 	$(call pretty,"Target ramdisk: $@")
 	$(hide) mkdir -p $(addprefix $(TARGET_RAMDISK_OUT)/,$(PRIVATE_DIRS))
 ifeq (true,$(BOARD_USES_GENERIC_KERNEL_IMAGE))
 	$(hide) mkdir -p $(addprefix $(TARGET_RAMDISK_OUT)/first_stage_ramdisk/,$(PRIVATE_DIRS))
 endif
-	$(hide) $(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RAMDISK_OUT) | $(COMPRESSION_COMMAND) > $@
+	$(hide) $(MKBOOTFS) -d $(TARGET_OUT) -c $(RAMDISK_NODE_LIST) $(TARGET_RAMDISK_OUT) | $(COMPRESSION_COMMAND) > $@
 
 $(call declare-1p-container,$(INSTALLED_RAMDISK_TARGET),)
 $(call declare-container-license-deps,$(INSTALLED_RAMDISK_TARGET),$(INTERNAL_RAMDISK_FILE),$(PRODUCT_OUT)/:/)
