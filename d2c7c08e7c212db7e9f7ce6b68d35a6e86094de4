@@ -16,6 +16,102 @@
       "message": "PTAL",
       "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7a86bcc_637ed1db",
+        "filename": "tools/droiddoc/LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1947971
+      },
+      "writtenOn": "2022-12-28T11:13:26Z",
+      "side": 1,
+      "message": "\u003e Third-party license (GPL) disallowed in repository platform/build:\n\u003e Licensed under the GPL\n\u003e \n\nPlease fix.",
+      "parentUuid": "6b5da18a_f1694c02",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b5a34fe_b12362f0",
+        "filename": "tools/droiddoc/LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1947971
+      },
+      "writtenOn": "2022-12-28T11:13:26Z",
+      "side": 1,
+      "message": "\u003e Third-party license (GPL3) disallowed in repository platform/build:\n\u003e GNU GENERAL PUBLIC LICENSE Version 3,\n\u003e \n\nPlease fix.",
+      "parentUuid": "ccd858e8_521979d7",
+      "range": {
+        "startLine": 16,
+        "startChar": 21,
+        "endLine": 17,
+        "endChar": 34
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08a0c659_76c41c0d",
+        "filename": "tools/droiddoc/LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1947971
+      },
+      "writtenOn": "2022-12-28T11:13:26Z",
+      "side": 1,
+      "message": "\u003e Third-party license (GPL) disallowed in repository platform/build:\n\u003e This License\" refers to version 3 of the GNU General Public License.\n\u003e \n\nPlease fix.",
+      "parentUuid": "733dc30a_81b894e6",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 72
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6192727b_ca5d9a2a",
+        "filename": "tools/droiddoc/LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 1947971
+      },
+      "writtenOn": "2022-12-28T11:13:26Z",
+      "side": 1,
+      "message": "\u003e Unrecognized license :\n\u003e Released under the MIT, BSD, and GPL Licenses.\n\u003e \n\nPlease fix.",
+      "parentUuid": "38b47ac6_2dc44068",
+      "range": {
+        "startLine": 1069,
+        "startChar": 23,
+        "endLine": 1069,
+        "endChar": 49
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
