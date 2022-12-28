@@ -1,6 +1,30 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dad9d86_6bb63945",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1947971
+      },
+      "writtenOn": "2022-12-28T11:18:35Z",
+      "side": 1,
+      "message": "\u003e Unrecognized finding :\n\u003e licenses\n\u003e \n\nPlease fix.",
+      "parentUuid": "541ed745_067649e3",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "d2c7c08e7c212db7e9f7ce6b68d35a6e86094de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a1fd26dc_7aa5cd9b",
