@@ -45,6 +45,30 @@
       },
       "revId": "40e6f9bdcabc6336657a1735cb036e9bfdefd45d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce1423ac_f02cc6a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1483218
+      },
+      "writtenOn": "2022-12-29T22:11:42Z",
+      "side": 1,
+      "message": "it was successfully built, but the flag should set to true. when I do `banchan com.android.sdkext` I got the following,\n\n```\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nPLATFORM_VERSION_CODENAME\u003dREL\nPLATFORM_VERSION\u003d13\nTARGET_PRODUCT\u003dmodule_arm64\nTARGET_BUILD_VARIANT\u003deng\nTARGET_BUILD_TYPE\u003drelease\nTARGET_BUILD_APPS\u003dcom.android.sdkext\nTARGET_BUILD_UNBUNDLED\u003dtrue\nTARGET_ARCH\u003darm64\nTARGET_ARCH_VARIANT\u003darmv8-a\nTARGET_CPU_VARIANT\u003dgeneric\nTARGET_2ND_ARCH\u003darm\nTARGET_2ND_ARCH_VARIANT\u003darmv8-a\nTARGET_2ND_CPU_VARIANT\u003dgeneric\nHOST_ARCH\u003dx86_64\nHOST_2ND_ARCH\u003dx86\nHOST_OS\u003dlinux\nHOST_OS_EXTRA\u003dLinux-5.19.11-1rodete1-amd64-x86_64-Debian-GNU/Linux-rodete\nHOST_CROSS_OS\u003dwindows\nHOST_CROSS_ARCH\u003dx86\nHOST_CROSS_2ND_ARCH\u003dx86_64\nHOST_BUILD_TYPE\u003drelease\nBUILD_ID\u003dM_2022_07\nOUT_DIR\u003dout\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n``` \n\n`TARGET_PRODUCT` is set to module_arm64 by default which will call module_common.mk since tm-mainline-prod is not a slim branch now, the flag is set. Are we expecting the flag is not set?",
+      "parentUuid": "45cf69f1_f5f9b46b",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 189
+      },
+      "revId": "40e6f9bdcabc6336657a1735cb036e9bfdefd45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
