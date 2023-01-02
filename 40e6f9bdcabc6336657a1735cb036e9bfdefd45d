@@ -69,6 +69,30 @@
       },
       "revId": "40e6f9bdcabc6336657a1735cb036e9bfdefd45d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e890f1c3_93654c96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-01-02T11:46:22Z",
+      "side": 1,
+      "message": "I meant to make sure you don\u0027t have the environment variable set, as you\u0027re replacing it with a make variable now.",
+      "parentUuid": "ce1423ac_f02cc6a1",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 189
+      },
+      "revId": "40e6f9bdcabc6336657a1735cb036e9bfdefd45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
