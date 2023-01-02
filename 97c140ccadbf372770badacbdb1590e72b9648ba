@@ -16,6 +16,23 @@
       "message": "Can I get an ORV for this CL?",
       "revId": "97c140ccadbf372770badacbdb1590e72b9648ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "983f5e13_6af62403",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-01-02T07:14:27Z",
+      "side": 1,
+      "message": "Revert created as this workaround is no longer needed: aosp/2373468",
+      "revId": "97c140ccadbf372770badacbdb1590e72b9648ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
