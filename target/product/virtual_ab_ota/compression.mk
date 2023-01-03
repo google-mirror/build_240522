@@ -19,6 +19,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_ven
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.enabled=true
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.userspace.snapshots.enabled=true
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.io_uring.enabled=true
+PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.batch_writes=true
+
+# Setting this to true, will improve OTA install time
+PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.threads=false
+
 PRODUCT_VIRTUAL_AB_COMPRESSION := true
 PRODUCT_PACKAGES += \
     snapuserd.vendor_ramdisk \

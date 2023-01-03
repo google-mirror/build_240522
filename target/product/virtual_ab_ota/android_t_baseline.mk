@@ -18,9 +18,10 @@
 # This .mk file also removes snapuserd from vendor ramdisk,
 # as T launching devices will have init_boot which has snapuserd
 # in generic ramdisk.
-# T launching devices should include this .mk file, and configure
+#
+# T and U launching devices should include this .mk file, and configure
 # compression algorithm by setting
-# PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD to gz or brotli. Complete
+# PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD to lz4, gz or brotli. Complete
 # set of supported algorithms can be found in
 # system/core/fs_mgr/libsnapshot/cow_writer.cpp
 
@@ -32,6 +33,10 @@ PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.enabled=true
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.userspace.snapshots.enabled=true
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.io_uring.enabled=true
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.xor.enabled=true
+PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.batch_writes=true
+
+# Setting this to true, will improve OTA install time
+PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.threads=false
 
 PRODUCT_VIRTUAL_AB_COMPRESSION := true
 PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD ?= none
