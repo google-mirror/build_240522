@@ -2019,6 +2019,45 @@ endif
 # missing dependency errors.
 $(call build-license-metadata)
 
+
+# Generate SBOM in SPDX format
+installed_files := $(sort $(filter $(PRODUCT_OUT)/%,$(modules_to_install)))
+# Remove the sbom-metadata.csv whenever makefile is evaluated
+$(shell rm $(PRODUCT_OUT)/sbom-metadata.csv)
+$(PRODUCT_OUT)/sbom-metadata.csv: $(installed_files)
+	rm -f $@
+	@echo installed_file$(comma)module_path$(comma)soong_module_type$(comma)is_prebuilt_make_module$(comma)product_copy_files$(comma)kernel_module_copy_files$(comma)is_platform_generated >> $@
+	$(foreach f,$(installed_files),\
+	  $(eval _module_name := $(ALL_INSTALLED_FILES.$f)) \
+	  $(eval _path_on_device := $(patsubst $(PRODUCT_OUT)/%,%,$f)) \
+	  $(eval _module_path := $(strip $(sort $(ALL_MODULES.$(_module_name).PATH)))) \
+	  $(eval _soong_module_type := $(strip $(sort $(ALL_MODULES.$(_module_name).SOONG_MODULE_TYPE)))) \
+	  $(eval _is_prebuilt_make_module := $(ALL_MODULES.$(_module_name).IS_PREBUILT_MAKE_MODULE)) \
+	  $(eval _post_installed_dexpreopt_zip := $(DEXPREOPT.$(_module_name).POST_INSTALLED_DEXPREOPT_ZIP)) \
+	  $(eval _product_copy_files_without_owner := $(foreach pcf,$(PRODUCT_COPY_FILES),$(call word-colon,1,$(pcf)):$(call word-colon,2,$(pcf)))) \
+	  $(eval _product_copy_files := $(sort $(filter %:$(_path_on_device),$(_product_copy_files_without_owner)))) \
+	  $(eval _kernel_module_copy_files := $(sort $(filter %$(_path_on_device),$(KERNEL_MODULE_COPY_FILES)))) \
+	  $(eval _is_build_prop := $(call is-build-prop,$f)) \
+	  $(eval _is_notice_file := $(call is-notice-file,$f)) \
+	  $(eval _is_dexpreopt_image_profile := $(if $(filter %:/$(_path_on_device),$(DEXPREOPT_IMAGE_PROFILE_BUILT_INSTALLED)),Y)) \
+	  $(eval _is_product_system_other_avbkey := $(if $(findstring $f,$(INSTALLED_PRODUCT_SYSTEM_OTHER_AVBKEY_TARGET)),Y)) \
+	  $(eval _is_event_log_tags_file := $(if $(findstring $f,$(event_log_tags_file)),Y)) \
+	  $(eval _is_system_other_odex_marker := $(if $(findstring $f,$(INSTALLED_SYSTEM_OTHER_ODEX_MARKER)),Y)) \
+	  $(eval _is_kernel_modules_blocklist := $(if $(findstring $f,$(ALL_KERNEL_MODULES_BLOCKLIST)),Y)) \
+	  $(eval _is_fsverity_build_manifest_apk := $(if $(findstring $f,$(ALL_FSVERITY_BUILD_MANIFEST_APK)),Y)) \
+	  $(eval _is_platform_generated := $(_is_build_prop)$(_is_notice_file)$(_is_dexpreopt_image_profile)$(_is_product_system_other_avbkey)$(_is_event_log_tags_file)$(_is_system_other_odex_marker)$(_is_kernel_modules_blocklist)$(_is_fsverity_build_manifest_apk)) \
+	  @echo /$(_path_on_device)$(comma)$(_module_path)$(comma)$(_soong_module_type)$(comma)$(_is_prebuilt_make_module)$(comma)$(_product_copy_files)$(comma)$(_kernel_module_copy_files)$(comma)$(_is_platform_generated) >> $@ $(newline) \
+	  $(if $(_post_installed_dexpreopt_zip), \
+	  for i in $$(zipinfo -1 $(_post_installed_dexpreopt_zip)); do echo /$$i$(comma)$(_module_path)$(comma)$(_soong_module_type)$(comma)$(_is_prebuilt_make_module)$(comma)$(_product_copy_files)$(comma)$(_kernel_module_copy_files)$(comma)$(_is_platform_generated) >> $@ ; done $(newline) \
+	  ) \
+	)
+
+.PHONY: sbom
+sbom: $(PRODUCT_OUT)/sbom.spdx
+$(PRODUCT_OUT)/sbom.spdx: $(PRODUCT_OUT)/sbom-metadata.csv $(GEN_SBOM)
+	rm -rf $@
+	$(GEN_SBOM) --output_file $@ --metadata $(PRODUCT_OUT)/sbom-metadata.csv --product_out_dir=$(PRODUCT_OUT) --build_version $(BUILD_FINGERPRINT_FROM_FILE)  --product_mfr=$(PRODUCT_MANUFACTURER)
+
 $(call dist-write-file,$(KATI_PACKAGE_MK_DIR)/dist.mk)
 
 $(info [$(call inc_and_print,subdir_makefiles_inc)/$(subdir_makefiles_total)] writing build rules ...)
