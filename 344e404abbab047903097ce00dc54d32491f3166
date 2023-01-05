@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ad1c3e0_fcdb9f94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-01-05T20:10:00Z",
+      "side": 1,
+      "message": "Test failures are known issue which has been fixed.",
+      "revId": "344e404abbab047903097ce00dc54d32491f3166",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
