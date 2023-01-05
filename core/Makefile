@@ -473,7 +473,10 @@ $(if $(strip $(BOARD_$(1)_KERNEL_MODULES$(_sep)$(_kver))$(BOARD_$(1)_KERNEL_MODU
     $(eval BOARD_$(1)_KERNEL_MODULES_LOAD$(_sep)$(_kver) := $(BOARD_$(1)_KERNEL_MODULES$(_sep)$(_kver)))) \
   $(if $(filter false,$(BOARD_$(1)_KERNEL_MODULES_LOAD$(_sep)$(_kver))),\
     $(eval BOARD_$(1)_KERNEL_MODULES_LOAD$(_sep)$(_kver) :=),) \
-  $(call copy-many-files,$(call build-image-kernel-modules,$(BOARD_$(1)_KERNEL_MODULES$(_sep)$(_kver)),$(2),$(3),$(call intermediates-dir-for,PACKAGING,depmod_$(1)$(_sep)$(_kver)),$(BOARD_$(1)_KERNEL_MODULES_LOAD$(_sep)$(_kver)),$(4),$(BOARD_$(1)_KERNEL_MODULES_ARCHIVE$(_sep)$(_kver)),$(_stripped_staging_dir),$(_kver),$(7),$(8)))) \
+  $(eval _files := $(call build-image-kernel-modules,$(BOARD_$(1)_KERNEL_MODULES$(_sep)$(_kver)),$(2),$(3),$(call intermediates-dir-for,PACKAGING,depmod_$(1)$(_sep)$(_kver)),$(BOARD_$(1)_KERNEL_MODULES_LOAD$(_sep)$(_kver)),$(4),$(BOARD_$(1)_KERNEL_MODULES_ARCHIVE$(_sep)$(_kver)),$(_stripped_staging_dir),$(_kver),$(7),$(8))) \
+  $(call copy-many-files,$(_files)) \
+  $(eval _modules := $(BOARD_$(1)_KERNEL_MODULES$(_sep)$(_kver)) ANDROID-GEN ANDROID-GEN ANDROID-GEN ANDROID-GEN) \
+  $(eval KERNEL_MODULE_COPY_FILES += $(join $(addsuffix :,$(_modules)),$(_files)))) \
 $(if $(_kver), \
   $(eval _dir := $(_kver)/), \
   $(eval _dir :=)) \
@@ -1620,6 +1623,21 @@ installed_odm_dlkm_notice_xml_gz := $(TARGET_OUT_ODM_DLKM)/etc/NOTICE.xml.gz
 target_system_dlkm_notice_file_txt := $(TARGET_OUT_INTERMEDIATES)/NOTICE_SYSTEM_DLKM.txt
 target_system_dlkm_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE_SYSTEM_DLKM.xml.gz
 installed_system_dlkm_notice_xml_gz := $(TARGET_OUT_SYSTEM_DLKM)/etc/NOTICE.xml.gz
+
+ALL_INSTALLED_NOTICE_FILES := \
+  $(installed_notice_html_or_xml_gz) \
+  $(installed_vendor_notice_xml_gz) \
+  $(installed_product_notice_xml_gz) \
+  $(installed_system_ext_notice_xml_gz) \
+  $(installed_odm_notice_xml_gz) \
+  $(installed_vendor_dlkm_notice_xml_gz) \
+  $(installed_odm_dlkm_notice_xml_gz) \
+  $(installed_system_dlkm_notice_xml_gz) \
+
+# $1 installed file path, e.g.
+define is-notice-file
+$(if $(findstring $1,$(ALL_INSTALLED_NOTICE_FILES)),Y)
+endef
 
 # Notice files are copied to TARGET_OUT_NOTICE_FILES as a side-effect of their module
 # being built. A notice xml file must depend on all modules that could potentially
