@@ -2019,6 +2019,25 @@ endif
 # missing dependency errors.
 $(call build-license-metadata)
 
+
+# Generate SBOM in SPDX format
+installed_files := $(sort $(filter $(PRODUCT_OUT)/%,$(modules_to_install)))
+# Remove the sbom-metadata.csv whenever makefile is evaluated
+$(shell rm $(PRODUCT_OUT)/sbom-metadata.csv)
+$(PRODUCT_OUT)/sbom-metadata.csv: $(installed_files)
+	rm -f $@
+	@echo installed_file$(comma)module_path$(comma)product_copy_files$(comma)kernel_module_copy_files >> $@
+	$(foreach f,$(installed_files),\
+	  $(eval _path_on_device := $(patsubst $(PRODUCT_OUT)/%,%,$f)) \
+	  @echo /$(_path_on_device)$(comma)$(strip $(sort $(ALL_MODULES.$(ALL_INSTALLED_FILES.$f).PATH)))$(comma)$(sort $(filter %$(_path_on_device),$(PRODUCT_COPY_FILES)))$(comma)$(sort $(filter %$(_path_on_device),$(KERNEL_MODULE_COPY_FILES))) >> $@ $(newline) \
+	)
+
+.PHONY: sbom
+sbom: $(PRODUCT_OUT)/sbom.spdx
+$(PRODUCT_OUT)/sbom.spdx: $(PRODUCT_OUT)/sbom-metadata.csv $(GEN_SBOM)
+	rm -rf $@
+	$(GEN_SBOM) --output_file $@ --metadata $(PRODUCT_OUT)/sbom-metadata.csv --product_out_dir=$(PRODUCT_OUT) --build_version $(BUILD_FINGERPRINT_FROM_FILE)  --product_mfr=$(PRODUCT_MANUFACTURER)
+
 $(call dist-write-file,$(KATI_PACKAGE_MK_DIR)/dist.mk)
 
 $(info [$(call inc_and_print,subdir_makefiles_inc)/$(subdir_makefiles_total)] writing build rules ...)
