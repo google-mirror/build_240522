@@ -126,6 +126,21 @@ SOONG_ALREADY_CONV :=
 # ALL_DEPS.*.ALL_DEPS keys
 ALL_DEPS.MODULES :=
 
+# Generated BuildManifest<partition>.apk files
+ALL_FSVERITY_BUILD_MANIFEST_APK :=
+
+# Generated loadable kernel modules .blocklist files
+ALL_KERNEL_MODULES_BLOCKLIST :=
+
+# All installed loadable kernel modules, in format: <src path>:<dest:path>
+KERNEL_MODULE_COPY_FILES :=
+
+# All installed NOTICE.xml.gz files for each partition
+ALL_INSTALLED_NOTICE_FILES :=
+
+# All installed build.prop files of partitions, see sysprop.mk.
+ALL_INSTALLED_BUILD_PROP_FILES :=
+
 ###########################################################
 ## Debugging; prints a variable list to stdout
 ###########################################################
