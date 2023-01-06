@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (89a9f5 Merge "Pull common methods into shell_utils.sh, which can be)
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=TQ1A.230105.002
+>>>>>>> BRANCH (24484a Version bump to TQ1A.230105.002 [core/build_id.mk])
