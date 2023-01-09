@@ -3492,6 +3492,18 @@ ifdef BOARD_USES_VENDOR_DLKMIMAGE
   INTERNAL_VENDORIMAGE_FILES += $(call create-partition-compat-symlink,$(TARGET_OUT_VENDOR)/lib/modules,/vendor_dlkm/lib/modules,vendor_dlkm.img)
 endif
 
+# Install vendor/etc/linker.config.pb when PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS is set
+ifneq ($(strip $(PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS)),)
+  VENDOR_LINKER_CONFIG := $(TARGET_OUT_VENDOR)/etc/linker.config.pb
+  $(VENDOR_LINKER_CONFIG): PRIVATE_LINKER_CONFIG_FRAGMENTS := $(PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS)
+  $(VENDOR_LINKER_CONFIG): $(PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS) | $(HOST_OUT_EXECUTABLES)/conv_linker_config
+	  $(HOST_OUT_EXECUTABLES)/conv_linker_config proto \
+	    --source $(call normalize-path-list,$(PRIVATE_LINKER_CONFIG_FRAGMENTS)) \
+      --output $@
+  $(call define declare-0p-target,$(VENDOR_LINKER_CONFIG),)
+  INTERNAL_VENDORIMAGE_FILES += $(VENDOR_LINKER_CONFIG)
+endif
+
 INSTALLED_FILES_FILE_VENDOR := $(PRODUCT_OUT)/installed-files-vendor.txt
 INSTALLED_FILES_JSON_VENDOR := $(INSTALLED_FILES_FILE_VENDOR:.txt=.json)
 $(INSTALLED_FILES_FILE_VENDOR): .KATI_IMPLICIT_OUTPUTS := $(INSTALLED_FILES_JSON_VENDOR)
