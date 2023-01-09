@@ -5777,8 +5777,8 @@ else ifdef INSTALLED_BUILD_PROP_TARGET
 	@# Copy the system build.prop even if not building a system image
 	@# because add_img_to_target_files may need it to build other partition
 	@# images.
-	$(hide) mkdir -p "$(zip_root)/SYSTEM"
-	$(hide) cp "$(INSTALLED_BUILD_PROP_TARGET)" "$(patsubst $(TARGET_OUT)/%,$(zip_root)/SYSTEM/%,$(INSTALLED_BUILD_PROP_TARGET))"
+	$(hide) mkdir -p $(zip_root)/SYSTEM
+	$(hide) cp "$(INSTALLED_BUILD_PROP_TARGET)" $(patsubst $(TARGET_OUT)/%,$(zip_root)/SYSTEM/%,$(INSTALLED_BUILD_PROP_TARGET))
 endif
 ifdef BUILDING_USERDATA_IMAGE
 	@# Contents of the data image
