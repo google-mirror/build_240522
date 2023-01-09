@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f786617f_caa1790f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-01-09T08:46:42Z",
+      "side": 1,
+      "message": "Sorry, neither the linked bug nor the change helped me understand why we need a new variable. Is this fixing a build semantic that is not possible to be done today?",
+      "revId": "bae78aec0cd572da36dc861190c73c21fe73c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78400524_cbdff677",
         "filename": "core/Makefile",
         "patchSetId": 2
