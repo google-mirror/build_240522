@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e9f839_d3be99a3",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5781,
+      "author": {
+        "id": 1903985
+      },
+      "writtenOn": "2023-01-09T15:25:16Z",
+      "side": 1,
+      "message": "won\u0027t these changes affect paths with spaces though?",
+      "revId": "48368f4ccef8d9073d2ee902fc68422ac2330664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
