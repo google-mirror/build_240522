@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78400524_cbdff677",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3495,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-01-09T08:32:18Z",
+      "side": 1,
+      "message": "There are some partners who generated vendor/etc/linker.config.pb from Soong. Is there any way to cover existing definitions?",
+      "range": {
+        "startLine": 3495,
+        "startChar": 43,
+        "endLine": 3495,
+        "endChar": 81
+      },
+      "revId": "bae78aec0cd572da36dc861190c73c21fe73c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
