@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49b3b9a6_74dd7bb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-01-09T09:02:06Z",
+      "side": 1,
+      "message": "For now, for /vendor/etc/linker.config.pb, we need a single copy of .json file which declares linker configuration of the vendor partition.\n\nBut in most cases, vendor modules are distributed in many different locations and provide its own .mk files so that the top device.mk can include them as needed.\n\nWhen there\u0027s two vendor modules which has its own linker configuration requirements it\u0027s not convenient to prepare the vendor linker configuration with the current \"single .json\" approach.\n\nFor example, path/to/foo/device.mk might want to add an entry like `provideLibs: [\"libfoo.so\"]` to /vendor/etc/linker.config.pb and path/to/bar/device.mk might want to add another entry like `requireLibs: [\"libbar.so\"]` to /vendor/etc/linker.config.pb.\n\nWhen there\u0027s three different targets:\n- target_A: include both .mk files\n- target_B: include path/to/foo/device.mk\n- target_C: include path/to/bar/device.mk\nwe need three combinations of linker.config.json.\n\nWith the new variable introduced in this change, each .mk file can add its own linker configuration fragment.\n\nThat being said, it\u0027s not possible as of today, but quite difficult to maintain combinations of linker configuration.",
+      "parentUuid": "f786617f_caa1790f",
+      "revId": "bae78aec0cd572da36dc861190c73c21fe73c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78400524_cbdff677",
         "filename": "core/Makefile",
         "patchSetId": 2
