@@ -16,6 +16,23 @@
       "message": "This changes relies on aosp/2363823",
       "revId": "51996d34ce97df492e2dfbdf18e1d220d5241735",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "126e7269_0f594a3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-09T18:36:32Z",
+      "side": 1,
+      "message": "mkbootfs has been merged!",
+      "revId": "51996d34ce97df492e2dfbdf18e1d220d5241735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
