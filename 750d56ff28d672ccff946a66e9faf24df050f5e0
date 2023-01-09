@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b151b6_eecd3746",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2023-01-09T06:04:19Z",
+      "side": 1,
+      "message": "use space-indent, not tab-indent. (tab has special semantics in makefile)",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 1
+      },
+      "revId": "750d56ff28d672ccff946a66e9faf24df050f5e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
