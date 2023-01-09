@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a376b10c_3e90e53e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2023-01-09T06:02:51Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "a2efc2c2_acd4047b",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 3
+      },
+      "revId": "b55d1393570f38c4516a71d5b881366c9ffeb126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0130a619_12fc1f0e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-09T05:47:02Z",
       "side": 1,
       "message": "indent these",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 61
+      },
+      "revId": "b55d1393570f38c4516a71d5b881366c9ffeb126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c04ef70f_b6f3a091",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2023-01-09T06:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0130a619_12fc1f0e",
       "range": {
         "startLine": 130,
         "startChar": 0,
