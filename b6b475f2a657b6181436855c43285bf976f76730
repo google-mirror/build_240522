@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04acfbaf_7a16f87e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-01-10T05:09:41Z",
+      "side": 1,
+      "message": "Is there any scenario where a T upgrading device would not want this property set?",
+      "revId": "b6b475f2a657b6181436855c43285bf976f76730",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
