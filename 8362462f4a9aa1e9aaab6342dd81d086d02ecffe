@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "035229be_7700e9d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2023-01-10T18:42:58Z",
+      "side": 1,
+      "message": "I did a quick experiment with disabled dexpreopting, and I found that odrefresh doesn\u0027t do anything:\n\n```\n01-10 12:17:48.998   739   739 E odrefresh: Compilation of BCP failed: Missing boot image profile\n01-10 12:17:48.998   739   739 E odrefresh: Compilation of minimal BCP failed: Missing boot image profile\n```\n\nCould the problem here be that master branches don\u0027t have any boot image profile? WDYT about falling back to `speed` in this case (which I suppose is what the dexpreopting does)?\n\n(The reason I got interested in this is partly b/262844955, and partly to move towards getting rid of dexpreopt.)",
+      "range": {
+        "startLine": 14,
+        "startChar": 63,
+        "endLine": 15,
+        "endChar": 30
+      },
+      "revId": "8362462f4a9aa1e9aaab6342dd81d086d02ecffe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
