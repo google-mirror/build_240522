@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2504dca0_ca8ca510",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2023-01-10T02:13:15Z",
+      "side": 1,
+      "message": "failed presubmit tests are unrelated",
+      "revId": "1a1f90e49ac3f63626c405550642e1c3cb564f31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
