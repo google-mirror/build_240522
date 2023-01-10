@@ -16,6 +16,29 @@
       "message": "@yixiaoluo@google.com and @quxiangfang@google.com is this right? Or should we be adding the AIDL CAS service to all devices like we used to do with the HIDL version?",
       "revId": "616c36ba84e55076ea91a52cfc8e1bc84a09c6f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78f8289f_f5d3a571",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-01-10T22:48:24Z",
+      "side": 1,
+      "message": "should it be in one of these?",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 38
+      },
+      "revId": "616c36ba84e55076ea91a52cfc8e1bc84a09c6f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
