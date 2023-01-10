@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd777ed2_fead1c96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-01-10T02:58:41Z",
+      "side": 1,
+      "message": "Yes you\u0027re right. And your concern seems to be valid point. It would be nice if we could leave some clues in the build-time-flattened artifacts (e.g. pointers to the input fragments). Not sure it\u0027s possible.\n\nThis is kind of a trade-off, but IMO \"manually flattening\" tends to make maintenance worse (e.g. out of sync, dangling entries...)",
+      "parentUuid": "2810f44d_61a7b3fb",
+      "revId": "bae78aec0cd572da36dc861190c73c21fe73c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78400524_cbdff677",
         "filename": "core/Makefile",
         "patchSetId": 2
@@ -142,6 +160,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "358ce057_4df69915",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3497,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-01-10T02:58:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "958c0ea4_cf55c42b",
+      "range": {
+        "startLine": 3497,
+        "startChar": 0,
+        "endLine": 3497,
+        "endChar": 20
+      },
+      "revId": "bae78aec0cd572da36dc861190c73c21fe73c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b07b5d2_3ff59f93",
@@ -165,6 +207,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1963bd4e_e3bf40e1",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3498,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-01-10T02:58:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b07b5d2_3ff59f93",
+      "range": {
+        "startLine": 3498,
+        "startChar": 25,
+        "endLine": 3498,
+        "endChar": 56
+      },
+      "revId": "bae78aec0cd572da36dc861190c73c21fe73c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd865eda_a21d1c93",
@@ -178,6 +244,30 @@
       "writtenOn": "2023-01-09T12:02:51Z",
       "side": 1,
       "message": "nit: consider using \"PRODUCT_VENDOR_LINKER_CONFIG_CONTRIBUTION\" instead of \"FRAGMENT\"",
+      "range": {
+        "startLine": 377,
+        "startChar": 22,
+        "endLine": 377,
+        "endChar": 60
+      },
+      "revId": "bae78aec0cd572da36dc861190c73c21fe73c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94751fb4_d8836ec0",
+        "filename": "core/product.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-01-10T02:58:41Z",
+      "side": 1,
+      "message": "\"fragments\" might be familiar via \"VINTF fragments\"",
+      "parentUuid": "bd865eda_a21d1c93",
       "range": {
         "startLine": 377,
         "startChar": 22,
