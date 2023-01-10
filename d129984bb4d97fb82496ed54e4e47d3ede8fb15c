@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "761e8390_5352a11a",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-01-10T18:39:53Z",
+      "side": 1,
+      "message": "I don\u0027t think these should be hardcoded in the build files, how about putting them in a file in system/core/rootdir?",
+      "revId": "d129984bb4d97fb82496ed54e4e47d3ede8fb15c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
