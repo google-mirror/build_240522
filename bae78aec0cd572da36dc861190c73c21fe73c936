@@ -205,6 +205,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7126543c_252348e8",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3495,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-01-11T07:55:19Z",
+      "side": 1,
+      "message": "It\u0027s similar to /system/etc/linker.config.pb. I\u0027m thinking to add more steps here to handle \"stubs\" from /vendor/lib just like we do with /system/etc/linker.config.pb.",
+      "parentUuid": "81cccaf4_affb7620",
+      "range": {
+        "startLine": 3495,
+        "startChar": 43,
+        "endLine": 3495,
+        "endChar": 81
+      },
+      "revId": "bae78aec0cd572da36dc861190c73c21fe73c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "958c0ea4_cf55c42b",
         "filename": "core/Makefile",
         "patchSetId": 2
