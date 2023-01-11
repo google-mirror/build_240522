@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df6c351_46af8a05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-01-11T23:18:37Z",
+      "side": 1,
+      "message": "@quxiangfang@google.com said they would like the AIDL service installed by default instead of dropping it entirely here. It turns out this is needed on all devices.",
+      "parentUuid": "000e28e8_022c3483",
+      "revId": "616c36ba84e55076ea91a52cfc8e1bc84a09c6f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78f8289f_f5d3a571",
