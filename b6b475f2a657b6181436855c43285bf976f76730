@@ -16,6 +16,24 @@
       "message": "Is there any scenario where a T upgrading device would not want this property set?",
       "revId": "b6b475f2a657b6181436855c43285bf976f76730",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cfbba1b_217ebb03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2023-01-11T21:31:38Z",
+      "side": 1,
+      "message": "We will have an SAC document clearly specifying what each of these flags do; I have created a new vabc_features.mk. This should have all the feature flags going down the lane. If there are any mandatory flags, we should have a VTS test. If the flags are not mandatory, then one can disable it while including it in the device specific make files.",
+      "parentUuid": "04acfbaf_7a16f87e",
+      "revId": "b6b475f2a657b6181436855c43285bf976f76730",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
