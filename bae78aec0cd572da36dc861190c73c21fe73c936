@@ -227,6 +227,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c22f1ad_b0e5dc4d",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3495,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-01-11T08:07:10Z",
+      "side": 1,
+      "message": "Discussed offline. Let\u0027s go with Makefile as all package installation variables are handled from the Makefile.",
+      "parentUuid": "7126543c_252348e8",
+      "range": {
+        "startLine": 3495,
+        "startChar": 43,
+        "endLine": 3495,
+        "endChar": 81
+      },
+      "revId": "bae78aec0cd572da36dc861190c73c21fe73c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "958c0ea4_cf55c42b",
