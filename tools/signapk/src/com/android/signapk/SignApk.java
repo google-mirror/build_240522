@@ -687,7 +687,7 @@ class SignApk {
         if (entryName.endsWith(".so")) {
             // Align .so contents to memory page boundary to enable memory-mapped
             // execution.
-            return 16384;
+            return 4096;
         } else {
             return defaultAlignment;
         }
