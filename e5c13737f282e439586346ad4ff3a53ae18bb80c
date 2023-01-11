@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f05d60c2_84f0f407",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-01-11T20:22:45Z",
+      "side": 1,
+      "message": "Creating an array and populating it to get the count and then discarding all that work to repeat it below will not improve performance much.",
+      "range": {
+        "startLine": 277,
+        "startChar": 45,
+        "endLine": 277,
+        "endChar": 67
+      },
+      "revId": "e5c13737f282e439586346ad4ff3a53ae18bb80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8024331e_8ea00651",
+        "filename": "tools/compliance/graph.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-01-11T20:22:45Z",
+      "side": 1,
+      "message": "for target :\u003d range lg.targets {\n\ttargets \u003d append(targets, target)\n}",
+      "range": {
+        "startLine": 93,
+        "startChar": 46,
+        "endLine": 96,
+        "endChar": 2
+      },
+      "revId": "e5c13737f282e439586346ad4ff3a53ae18bb80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
