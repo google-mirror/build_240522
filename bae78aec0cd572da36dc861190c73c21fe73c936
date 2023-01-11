@@ -295,6 +295,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5937516b_c6baf0fc",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3495,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-01-11T10:54:15Z",
+      "side": 1,
+      "message": "linker_config module is to convert a raw json file to .pb. We could do the same thing with module names in the list. In that case, we need to retrieve \"output\"(.pb) from modules and then merge them like we do in this change.\n\n* .json files -\u003e (convert each) .pb files -\u003e(merge) .pb file\n* .json files -\u003e (convert and merge) .pb file\n\nI took the latter way just for convenience. Schema validation might be the job of `conv_linker_config`, which is used in this change as well.",
+      "parentUuid": "e862bd57_e0691e15",
+      "range": {
+        "startLine": 3495,
+        "startChar": 43,
+        "endLine": 3495,
+        "endChar": 81
+      },
+      "revId": "bae78aec0cd572da36dc861190c73c21fe73c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "958c0ea4_cf55c42b",
         "filename": "core/Makefile",
         "patchSetId": 2
