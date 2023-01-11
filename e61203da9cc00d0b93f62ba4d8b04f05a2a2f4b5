@@ -16,6 +16,24 @@
       "message": "Is there a reason to move where these variables are declared?",
       "revId": "e61203da9cc00d0b93f62ba4d8b04f05a2a2f4b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34caae79_dbe0eaff",
+        "filename": "tools/zipalign/ZipEntry.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-01-11T00:58:30Z",
+      "side": 0,
+      "message": "because (as you can see from the mistakes!) it\u0027s hard enough to see you\u0027ve got this many changes right when the things are declared where they can be initialized, let alone when they\u0027re declared several pages higher up... :-(\n\n(i\u0027d have done more if there weren\u0027t so many `goto bail`s, but maybe i\u0027ll come back with a separate std::unique_ptr cleanup...)",
+      "parentUuid": "967584c4_5617b2e6",
+      "revId": "e61203da9cc00d0b93f62ba4d8b04f05a2a2f4b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

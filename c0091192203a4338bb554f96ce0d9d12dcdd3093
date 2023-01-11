@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54318d2a_69d65df0",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-01-11T00:58:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e15d1f53_d4a1417b",
+      "revId": "c0091192203a4338bb554f96ce0d9d12dcdd3093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53819e95_0c522ff7",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-11T00:13:48Z",
       "side": 1,
       "message": "Should endPosn be an off_t?",
+      "revId": "c0091192203a4338bb554f96ce0d9d12dcdd3093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "502acdb8_a294022b",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-01-11T00:58:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53819e95_0c522ff7",
       "revId": "c0091192203a4338bb554f96ce0d9d12dcdd3093",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
