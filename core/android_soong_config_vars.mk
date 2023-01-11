@@ -91,6 +91,11 @@ else
 ifdef KEEP_APEX_INHERIT
 $(call add_soong_config_var_value,ANDROID,library_linking_strategy,prefer_static)
 endif
+ifdef TRIMMED_APEX_BUILD
+$(call add_soong_config_var_value,ANDROID,build_trimmed_variant,true)
+else
+$(call add_soong_config_var_value,ANDROID,build_trimmed_variant,false)
+endif
 endif
 
 ifeq (true,$(MODULE_BUILD_FROM_SOURCE))
