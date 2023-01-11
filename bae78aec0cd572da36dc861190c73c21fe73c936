@@ -108,6 +108,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f340ae04_a8cfb69e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-01-11T10:43:05Z",
+      "side": 1,
+      "message": "Ack, thanks.",
+      "parentUuid": "8f0de115_d56f95d7",
+      "revId": "bae78aec0cd572da36dc861190c73c21fe73c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78400524_cbdff677",
@@ -241,6 +259,30 @@
       "side": 1,
       "message": "Discussed offline. Let\u0027s go with Makefile as all package installation variables are handled from the Makefile.",
       "parentUuid": "7126543c_252348e8",
+      "range": {
+        "startLine": 3495,
+        "startChar": 43,
+        "endLine": 3495,
+        "endChar": 81
+      },
+      "revId": "bae78aec0cd572da36dc861190c73c21fe73c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e862bd57_e0691e15",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3495,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-01-11T10:43:05Z",
+      "side": 1,
+      "message": "A design question: why use paths instead of module names? In your example, you can retain the linker_config module (with `vendor: true` prop, too) and set `PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS +\u003d vendor.linker.config`. Doing it with path now lets you reference any json arbitrarily.",
+      "parentUuid": "8c22f1ad_b0e5dc4d",
       "range": {
         "startLine": 3495,
         "startChar": 43,
