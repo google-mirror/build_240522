@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e15d1f53_d4a1417b",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1977450
+      },
+      "writtenOn": "2023-01-11T00:13:48Z",
+      "side": 1,
+      "message": "Should startPosn be an off_t?",
+      "revId": "c0091192203a4338bb554f96ce0d9d12dcdd3093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53819e95_0c522ff7",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1977450
+      },
+      "writtenOn": "2023-01-11T00:13:48Z",
+      "side": 1,
+      "message": "Should endPosn be an off_t?",
+      "revId": "c0091192203a4338bb554f96ce0d9d12dcdd3093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

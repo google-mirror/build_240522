@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "967584c4_5617b2e6",
+        "filename": "tools/zipalign/ZipEntry.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1977450
+      },
+      "writtenOn": "2023-01-11T00:13:48Z",
+      "side": 0,
+      "message": "Is there a reason to move where these variables are declared?",
+      "revId": "e61203da9cc00d0b93f62ba4d8b04f05a2a2f4b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
