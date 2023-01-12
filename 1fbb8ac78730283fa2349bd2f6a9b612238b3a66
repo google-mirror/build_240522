@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b0b43a5_6d3eaba9",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-01-12T22:57:55Z",
+      "side": 1,
+      "message": "%jd is for intmax_t, is there a guarantee that off_t is the same size as intmax_t?",
+      "revId": "1fbb8ac78730283fa2349bd2f6a9b612238b3a66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d479d43e_37e373cf",
+        "filename": "tools/ziptime/ZipFile.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-01-12T22:57:55Z",
+      "side": 1,
+      "message": "%jd here and below for consistency?",
+      "revId": "1fbb8ac78730283fa2349bd2f6a9b612238b3a66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7839817_d9f1f450",
+        "filename": "tools/ziptime/ZipFile.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-01-12T22:57:55Z",
+      "side": 1,
+      "message": "size_t",
+      "range": {
+        "startLine": 91,
+        "startChar": 21,
+        "endLine": 91,
+        "endChar": 27
+      },
+      "revId": "1fbb8ac78730283fa2349bd2f6a9b612238b3a66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
