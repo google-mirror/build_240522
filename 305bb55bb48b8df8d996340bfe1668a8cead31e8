@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "730a9598_774004de",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-01-12T20:13:51Z",
+      "side": 1,
+      "message": "readAmount is never going to be \u003e2GB, but it still seems strange to mix 32-bit and 64-bit sizes here.  You could drop a few casts and use %zu for the printfs if readAmount was a size_t.",
+      "revId": "305bb55bb48b8df8d996340bfe1668a8cead31e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1add1c2_6e92453c",
+        "filename": "tools/ziptime/ZipFile.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-01-12T20:13:51Z",
+      "side": 1,
+      "message": "readAmount is already size_t",
+      "range": {
+        "startLine": 100,
+        "startChar": 45,
+        "endLine": 100,
+        "endChar": 53
+      },
+      "revId": "305bb55bb48b8df8d996340bfe1668a8cead31e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec94ddac_cea6c91f",
+        "filename": "tools/ziptime/ZipFile.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-01-12T20:13:51Z",
+      "side": 1,
+      "message": "%zu or cast",
+      "range": {
+        "startLine": 122,
+        "startChar": 29,
+        "endLine": 122,
+        "endChar": 32
+      },
+      "revId": "305bb55bb48b8df8d996340bfe1668a8cead31e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
