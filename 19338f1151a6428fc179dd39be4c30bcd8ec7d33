@@ -16,6 +16,23 @@
       "message": "presubmit failures look unrelated to me. Rerunning before digging in deeper.",
       "revId": "19338f1151a6428fc179dd39be4c30bcd8ec7d33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "715a0e02_a77b7814",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1443524
+      },
+      "writtenOn": "2023-01-12T18:08:04Z",
+      "side": 1,
+      "message": "cas isn\u0027t omx related.",
+      "revId": "19338f1151a6428fc179dd39be4c30bcd8ec7d33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
