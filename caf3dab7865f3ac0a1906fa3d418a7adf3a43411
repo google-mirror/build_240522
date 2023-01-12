@@ -16,6 +16,24 @@
       "message": "LGTM. Can we file a separate bug for this though? It\u0027s not really related to the referenced bug (except that I noticed it while looking at that bug).\n\nAlso, thank you for the quick fix!",
       "revId": "caf3dab7865f3ac0a1906fa3d418a7adf3a43411",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32dd4e3d_003f2c24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-01-12T20:28:19Z",
+      "side": 1,
+      "message": "Done, filed a new bug.\n\n\u003e Also, thank you for the quick fix!\n\nThe fix was pretty simple in this case ;)",
+      "parentUuid": "0fb819d8_5a20b494",
+      "revId": "caf3dab7865f3ac0a1906fa3d418a7adf3a43411",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
