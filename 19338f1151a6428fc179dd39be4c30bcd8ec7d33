@@ -33,6 +33,24 @@
       "message": "cas isn\u0027t omx related.",
       "revId": "19338f1151a6428fc179dd39be4c30bcd8ec7d33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43757a51_f665c13f",
+        "filename": "target/product/base_vendor.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-01-12T19:57:23Z",
+      "side": 1,
+      "message": "Nice catch! Done.",
+      "parentUuid": "715a0e02_a77b7814",
+      "revId": "19338f1151a6428fc179dd39be4c30bcd8ec7d33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
