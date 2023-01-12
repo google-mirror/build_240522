@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb819d8_5a20b494",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1160213
+      },
+      "writtenOn": "2023-01-12T20:26:18Z",
+      "side": 1,
+      "message": "LGTM. Can we file a separate bug for this though? It\u0027s not really related to the referenced bug (except that I noticed it while looking at that bug).\n\nAlso, thank you for the quick fix!",
+      "revId": "caf3dab7865f3ac0a1906fa3d418a7adf3a43411",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
