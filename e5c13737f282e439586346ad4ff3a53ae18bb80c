@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4523c9e_3e6ea94f",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-01-12T18:06:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f05d60c2_84f0f407",
+      "range": {
+        "startLine": 277,
+        "startChar": 45,
+        "endLine": 277,
+        "endChar": 67
+      },
+      "revId": "e5c13737f282e439586346ad4ff3a53ae18bb80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8024331e_8ea00651",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-11T20:22:45Z",
       "side": 1,
       "message": "for target :\u003d range lg.targets {\n\ttargets \u003d append(targets, target)\n}",
+      "range": {
+        "startLine": 93,
+        "startChar": 46,
+        "endLine": 96,
+        "endChar": 2
+      },
+      "revId": "e5c13737f282e439586346ad4ff3a53ae18bb80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a59df31c_7e8465d5",
+        "filename": "tools/compliance/graph.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-01-12T18:06:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8024331e_8ea00651",
       "range": {
         "startLine": 93,
         "startChar": 46,
