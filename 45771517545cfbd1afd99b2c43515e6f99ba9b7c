@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdc8ccc8_6291481f",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-01-12T18:15:47Z",
+      "side": 1,
+      "message": "files \u003d append(files, targets...)",
+      "revId": "45771517545cfbd1afd99b2c43515e6f99ba9b7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
