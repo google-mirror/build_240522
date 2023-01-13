@@ -22,6 +22,30 @@
       },
       "revId": "62224b0b213065f5e520e123b341047232cac2bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84d4c8a3_5f1ebcdd",
+        "filename": "target/product/generic_ramdisk.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-01-13T18:32:47Z",
+      "side": 1,
+      "message": "Yes, on eos-uerdebug, generic ramdisk files are being installed to this location, and we are getting build failures due to generic_ramdisk.mk producing files outside allowed paths.",
+      "parentUuid": "d3b6d928_4264693a",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 63
+      },
+      "revId": "62224b0b213065f5e520e123b341047232cac2bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
