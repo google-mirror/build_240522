@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c068251_8cbfae14",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-01-13T22:24:56Z",
+      "side": 1,
+      "message": "can you describe what the error is and what this does to fix it?",
+      "revId": "1a281597ccaa9150cee0c0f7b25a7ef517369e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b126fb0_ad4849a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-01-13T22:24:56Z",
+      "side": 1,
+      "message": "Do we have a bug available for this with the error we are seeing?",
+      "revId": "1a281597ccaa9150cee0c0f7b25a7ef517369e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6881401_f99f03cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-01-13T22:24:56Z",
+      "side": 1,
+      "message": "@yochiang@google.com are you familiar with how the generic ramdisk is treated for a device with a standalone ramdisk partition?",
+      "revId": "1a281597ccaa9150cee0c0f7b25a7ef517369e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
