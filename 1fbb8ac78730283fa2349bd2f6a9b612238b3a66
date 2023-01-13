@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd42443b_23f483b7",
+        "filename": "tools/zipalign/ZipFile.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-01-13T00:46:49Z",
+      "side": 1,
+      "message": "depends what you mean ... nothing in POSIX, no, but true for us because of `_FILE_OFFSET_BITS\u003d64`.\n\nbut this is in the build tools package, right, so we\u0027ll need it for macOS. a quick test there shows it\u0027s _not_ true for macOS. so i\u0027ll go with a `(long long)` cast instead. stupid C.",
+      "parentUuid": "6b0b43a5_6d3eaba9",
+      "revId": "1fbb8ac78730283fa2349bd2f6a9b612238b3a66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d479d43e_37e373cf",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3734523b_1b944389",
+        "filename": "tools/ziptime/ZipFile.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-01-13T00:46:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d479d43e_37e373cf",
+      "revId": "1fbb8ac78730283fa2349bd2f6a9b612238b3a66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7839817_d9f1f450",
@@ -48,6 +84,30 @@
       "writtenOn": "2023-01-12T22:57:55Z",
       "side": 1,
       "message": "size_t",
+      "range": {
+        "startLine": 91,
+        "startChar": 21,
+        "endLine": 91,
+        "endChar": 27
+      },
+      "revId": "1fbb8ac78730283fa2349bd2f6a9b612238b3a66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27c33d40_b19256df",
+        "filename": "tools/ziptime/ZipFile.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-01-13T00:46:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7839817_d9f1f450",
       "range": {
         "startLine": 91,
         "startChar": 21,
