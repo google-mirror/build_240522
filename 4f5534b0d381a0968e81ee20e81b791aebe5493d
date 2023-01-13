@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6cc25e0_b3584255",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-01-13T20:26:11Z",
+      "side": 1,
+      "message": "https://b.corp.google.com/issues/262450123 was closed saying it\u0027s no longer blocking presubmit...",
+      "revId": "4f5534b0d381a0968e81ee20e81b791aebe5493d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
