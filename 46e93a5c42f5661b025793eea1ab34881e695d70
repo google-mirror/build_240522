@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75ebc378_5449facd",
+        "filename": "target/product/generic_ramdisk.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-13T18:02:13Z",
+      "side": 1,
+      "message": "The combination of tabs, and comments interrupting the line wrapping are causing a bunch of treehugger failures. If you want a comment, I\u0027d suggest a separate section for it:\n\n```\n\u003cblank line\u003e\n# comment\n_my_paths +\u003d ...\n```\n\n(Unfortunately, if you hadn\u0027t used tabs, I believe this would have failed silently, so I\u0027d definitely suggest more testing than just treehugger)",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 43
+      },
+      "revId": "46e93a5c42f5661b025793eea1ab34881e695d70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
