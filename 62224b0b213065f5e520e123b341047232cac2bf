@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3b6d928_4264693a",
+        "filename": "target/product/generic_ramdisk.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-01-13T18:23:35Z",
+      "side": 1,
+      "message": "From what I can tell, this isn\u0027t the same as the ramdisk as the generic ramdisk in init_boot.\nIs this intentional?\n\nAre you sure this is gathering the expected files into the correct location?",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 63
+      },
+      "revId": "62224b0b213065f5e520e123b341047232cac2bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
