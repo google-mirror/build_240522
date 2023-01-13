@@ -22,6 +22,30 @@
       },
       "revId": "46e93a5c42f5661b025793eea1ab34881e695d70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "724bae97_f428b997",
+        "filename": "target/product/generic_ramdisk.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-01-13T18:08:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75ebc378_5449facd",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 43
+      },
+      "revId": "46e93a5c42f5661b025793eea1ab34881e695d70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
