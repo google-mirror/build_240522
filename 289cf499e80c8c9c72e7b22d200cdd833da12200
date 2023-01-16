@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "503e990e_8c236076",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2023-01-16T08:34:11Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be the opposite, \"install to $OUT/recovery if **without** dedicated recovery partition\", at least that\u0027s the logic I\u0027m reading here https://cs.android.com/android/platform/superproject/+/master:build/soong/android/paths.go;l\u003d1796\n\nAFAIK, \"RecoveryAsBoot\" means recovery and boot are the same partition, thus dedicated recovery partition cannot mean RecoveryAsBoot.\n\n---\n\nIf RecoveryAsBoot is not active, then non-recovery ramdisk binaries are installed to $OUT/ramdisk and recovery ramdisk binaries are installed to $OUT/recovery.\n\nIf RecoveryAsBoot is active, then non-recovery ramdisk binaries are installed to $OUT/recovery/root/first_stage_ramdisk and recovery ramdisk binaries are installed to $OUT/recovery, which I think is the case you are trying to tackle?\n\n---\n(also please line wrap long commit message)",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 132
+      },
+      "revId": "289cf499e80c8c9c72e7b22d200cdd833da12200",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
