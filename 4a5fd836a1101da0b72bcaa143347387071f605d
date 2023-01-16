@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7db9166b_40e775fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-01-16T21:41:44Z",
+      "side": 1,
+      "message": "Any chance to have a look at aosp/2384454? It needs to be merged before this patch.",
+      "revId": "4a5fd836a1101da0b72bcaa143347387071f605d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
