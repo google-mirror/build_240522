@@ -16,6 +16,24 @@
       "message": "files \u003d append(files, targets...)",
       "revId": "45771517545cfbd1afd99b2c43515e6f99ba9b7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4804078e_f0002667",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-01-16T16:55:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdc8ccc8_6291481f",
+      "revId": "45771517545cfbd1afd99b2c43515e6f99ba9b7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
