@@ -34,6 +34,24 @@
       "parentUuid": "e5f63fbc_fac6e678",
       "revId": "8a9dffb96e82af3f582eddcdc8842cbba7d72d0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6224a161_7f66eb62",
+        "filename": "target/product/virtual_ab_ota/android_t_baseline.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-01-17T23:51:11Z",
+      "side": 0,
+      "message": "I don\u0027t know of any existing problems with symlinks, but product makefiles get parsed by a variety of tools, and have some complicated inheritance mechanisms that are stored by filename.  If you keep android_t_baseline.mk and replace its contents with:\n```\n$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)\n```\n\nyou\u0027ll get the same behavior while avoiding the risky symlink.  You can also leave a helpful comment there to guide device owners on which file to use.",
+      "parentUuid": "3e6954f7_7cdfc712",
+      "revId": "8a9dffb96e82af3f582eddcdc8842cbba7d72d0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
