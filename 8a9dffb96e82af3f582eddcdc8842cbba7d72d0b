@@ -16,6 +16,24 @@
       "message": "Can you document the need for this symlink?  We don\u0027t have many symlinks of Makefiles, maybe it would be better to leave it as a stub makefile with an `$(include)` or `$(call inherit-product)`?",
       "revId": "8a9dffb96e82af3f582eddcdc8842cbba7d72d0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6954f7_7cdfc712",
+        "filename": "target/product/virtual_ab_ota/android_t_baseline.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2023-01-17T21:29:35Z",
+      "side": 0,
+      "message": "Do we foresee any problems with symlinks used in Makefiles ? I wasn\u0027t sure if there are any build issues related to it.\n\nThe main reason to use symlink here is for backward compatibility. All T launch devices have used `android_t_baseline.mk` - Initially, I just made changes to `android_t_baseline.mk` by adding new fields; but the naming is bit confusing as we have to mention using `android_t_baselinke.mk` for all U launch devices. \n\nHence, as a generic name, we prefer to use `vabc_features.mk` for all virtual A/B related. Thus, going further all U+ launch devices can use the `vabc_features.mk` and all older devices which had `android_t_baseline.mk` will continue to build without any build break.",
+      "parentUuid": "e5f63fbc_fac6e678",
+      "revId": "8a9dffb96e82af3f582eddcdc8842cbba7d72d0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
