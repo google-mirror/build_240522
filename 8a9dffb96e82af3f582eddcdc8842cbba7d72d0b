@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5f63fbc_fac6e678",
+        "filename": "target/product/virtual_ab_ota/android_t_baseline.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-01-17T20:27:03Z",
+      "side": 0,
+      "message": "Can you document the need for this symlink?  We don\u0027t have many symlinks of Makefiles, maybe it would be better to leave it as a stub makefile with an `$(include)` or `$(call inherit-product)`?",
+      "revId": "8a9dffb96e82af3f582eddcdc8842cbba7d72d0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
