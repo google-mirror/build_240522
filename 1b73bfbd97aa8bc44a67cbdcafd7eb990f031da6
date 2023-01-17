@@ -16,6 +16,24 @@
       "message": "Also running *checkbuild* at ab/P47937197 .",
       "revId": "1b73bfbd97aa8bc44a67cbdcafd7eb990f031da6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b61acf5_7baf04ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043093
+      },
+      "writtenOn": "2023-01-17T20:17:44Z",
+      "side": 1,
+      "message": "First attempt change 2374652 was reverted because of *checkbuild* failure.",
+      "parentUuid": "da5a5205_17128729",
+      "revId": "1b73bfbd97aa8bc44a67cbdcafd7eb990f031da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
