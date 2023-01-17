@@ -22,6 +22,30 @@
       },
       "revId": "289cf499e80c8c9c72e7b22d200cdd833da12200",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84b6c323_21e5cf6e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-01-17T17:12:56Z",
+      "side": 1,
+      "message": "Wrapped the commit message. Looks like BoardUsesRecoveryAsBoot doesn\u0027t necessarily mean \"dedicated recovery partition\", so, to avoid confusion, I\u0027ve changed the terms to \"BoardUsesRecoveryAsBoot\" . \n\n\u003e If RecoveryAsBoot is active, then non-recovery ramdisk binaries are installed to $OUT/recovery/root/first_stage_ramdisk and recovery ramdisk binaries are installed to $OUT/recovery, which I think is the case you are trying to tackle?\n\n\nCorrect",
+      "parentUuid": "503e990e_8c236076",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 132
+      },
+      "revId": "289cf499e80c8c9c72e7b22d200cdd833da12200",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
