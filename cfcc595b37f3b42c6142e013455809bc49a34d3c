@@ -51,6 +51,23 @@
       "parentUuid": "275e1228_97a35f26",
       "revId": "cfcc595b37f3b42c6142e013455809bc49a34d3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2bc55ee_bebc3d50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-01-18T21:55:01Z",
+      "side": 1,
+      "message": "Presubmit failure should be fixed(b/225297151), but this will conflict with aosp/2380863 so I\u0027ll wait to re-run presubmits,",
+      "revId": "cfcc595b37f3b42c6142e013455809bc49a34d3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
