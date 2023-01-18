@@ -21,6 +21,7 @@ general_tests_tools := \
 
 intermediates_dir := $(call intermediates-dir-for,PACKAGING,general-tests)
 general_tests_zip := $(PRODUCT_OUT)/general-tests.zip
+general_tests_zip_manifest := $(PRODUCT_OUT)/general-tests_manifest.json
 # Create an artifact to include a list of test config files in general-tests.
 general_tests_list_zip := $(PRODUCT_OUT)/general-tests_list.zip
 
@@ -61,7 +62,8 @@ $(general_tests_zip) : $(copy_kselftest_tests)
 $(general_tests_zip) : PRIVATE_KERNEL_LTP_HOST_OUT := $(kernel_ltp_host_out)
 $(general_tests_zip) : PRIVATE_KERNEL_KSELFTEST_HOST_OUT := $(kernel_kselftest_host_out)
 $(general_tests_zip) : PRIVATE_general_tests_list_zip := $(general_tests_list_zip)
-$(general_tests_zip) : .KATI_IMPLICIT_OUTPUTS := $(general_tests_list_zip) $(general_tests_configs_zip) $(general_tests_host_shared_libs_zip)
+$(general_tests_zip) : PRIVATE_general_tests_zip_manifest := $(general_tests_zip_manifest)
+$(general_tests_zip) : .KATI_IMPLICIT_OUTPUTS := $(general_tests_list_zip) $(general_tests_configs_zip) $(general_tests_host_shared_libs_zip) $(general_tests_zip_manifest)
 $(general_tests_zip) : PRIVATE_TOOLS := $(general_tests_tools)
 $(general_tests_zip) : PRIVATE_INTERMEDIATES_DIR := $(intermediates_dir)
 $(general_tests_zip) : PRIVATE_HOST_SHARED_LIBS := $(my_host_shared_lib_for_general_tests)
@@ -87,7 +89,8 @@ $(general_tests_zip) : $(COMPATIBILITY.general-tests.FILES) $(general_tests_tool
 	$(SOONG_ZIP) -d -o $@ \
 	  -P host -C $(PRIVATE_INTERMEDIATES_DIR) -D $(PRIVATE_INTERMEDIATES_DIR)/tools \
 	  -P host -C $(HOST_OUT) -l $(PRIVATE_INTERMEDIATES_DIR)/host.list \
-	  -P target -C $(PRODUCT_OUT) -l $(PRIVATE_INTERMEDIATES_DIR)/target.list
+	  -P target -C $(PRODUCT_OUT) -l $(PRIVATE_INTERMEDIATES_DIR)/target.list \
+	  -sha_manifest $(PRIVATE_general_tests_zip_manifest)
 	$(SOONG_ZIP) -d -o $(PRIVATE_general_tests_configs_zip) \
 	  -P host -C $(HOST_OUT) -l $(PRIVATE_INTERMEDIATES_DIR)/host-test-configs.list \
 	  -P target -C $(PRODUCT_OUT) -l $(PRIVATE_INTERMEDIATES_DIR)/target-test-configs.list
@@ -98,7 +101,7 @@ $(general_tests_zip) : $(COMPATIBILITY.general-tests.FILES) $(general_tests_tool
 	$(SOONG_ZIP) -d -o $(PRIVATE_general_tests_list_zip) -C $(PRIVATE_INTERMEDIATES_DIR) -f $(PRIVATE_INTERMEDIATES_DIR)/general-tests_list
 
 general-tests: $(general_tests_zip)
-$(call dist-for-goals, general-tests, $(general_tests_zip) $(general_tests_list_zip) $(general_tests_configs_zip) $(general_tests_host_shared_libs_zip))
+$(call dist-for-goals, general-tests, $(general_tests_zip) $(general_tests_list_zip) $(general_tests_configs_zip) $(general_tests_host_shared_libs_zip) $(general_tests_zip_manifest))
 
 $(call declare-1p-container,$(general_tests_zip),)
 $(call declare-container-license-deps,$(general_tests_zip),$(COMPATIBILITY.general-tests.FILES) $(general_tests_tools) $(my_host_shared_lib_for_general_tests),$(PRODUCT_OUT)/:/)
@@ -109,3 +112,4 @@ general_tests_zip :=
 general_tests_list_zip :=
 general_tests_configs_zip :=
 general_tests_host_shared_libs_zip :=
+general_tests_zip_manifest :=
