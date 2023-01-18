@@ -52,6 +52,24 @@
       "parentUuid": "3e6954f7_7cdfc712",
       "revId": "8a9dffb96e82af3f582eddcdc8842cbba7d72d0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bb7b9ba_a32e96f9",
+        "filename": "target/product/virtual_ab_ota/android_t_baseline.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2023-01-18T06:23:55Z",
+      "side": 0,
+      "message": "Thanks. Removed symlink.",
+      "parentUuid": "6224a161_7f66eb62",
+      "revId": "8a9dffb96e82af3f582eddcdc8842cbba7d72d0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
