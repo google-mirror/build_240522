@@ -21,6 +21,7 @@
 
 intermediates_dir := $(call intermediates-dir-for,PACKAGING,host-unit-tests)
 host_unit_tests_zip := $(PRODUCT_OUT)/host-unit-tests.zip
+host_unit_tests_zip_manifest := $(PRODUCT_OUT)/host-unit-tests_manifest.json
 # Get the hostside libraries to be packaged in the test zip. Unlike
 # device-tests.mk or general-tests.mk, the files are not copied to the
 # testcases directory.
@@ -29,8 +30,9 @@ my_host_shared_lib_for_host_unit_tests := $(foreach f,$(COMPATIBILITY.host-unit-
     $(eval _cmf_src := $(word 1,$(_cmf_tuple))) \
     $(_cmf_src)))
 
+$(host_unit_tests_zip) : .KATI_IMPLICIT_OUTPUTS := $(host_unit_tests_zip_manifest)
 $(host_unit_tests_zip) : PRIVATE_HOST_SHARED_LIBS := $(my_host_shared_lib_for_host_unit_tests)
-
+$(host_unit_tests_zip) : PRIVATE_HOST_UNIT_TESTS_ZIP_MANIFEST := $(host_unit_tests_zip_manifest)
 $(host_unit_tests_zip) : $(COMPATIBILITY.host-unit-tests.FILES) $(my_host_shared_lib_for_host_unit_tests) $(SOONG_ZIP)
 	echo $(sort $(COMPATIBILITY.host-unit-tests.FILES)) | tr " " "\n" > $@.list
 	grep $(HOST_OUT_TESTCASES) $@.list > $@-host.list || true
@@ -41,11 +43,12 @@ $(host_unit_tests_zip) : $(COMPATIBILITY.host-unit-tests.FILES) $(my_host_shared
 	grep $(TARGET_OUT_TESTCASES) $@.list > $@-target.list || true
 	$(hide) $(SOONG_ZIP) -d -o $@ -P host -C $(HOST_OUT) -l $@-host.list \
 	  -P target -C $(PRODUCT_OUT) -l $@-target.list \
-	  -P host/testcases -C $(HOST_OUT) -l $@-host-libs.list
+	  -P host/testcases -C $(HOST_OUT) -l $@-host-libs.list \
+	  -sha_manifest $(PRIVATE_HOST_UNIT_TESTS_ZIP_MANIFEST)
 	rm -f $@.list $@-host.list $@-target.list $@-host-libs.list
 
 host-unit-tests: $(host_unit_tests_zip)
-$(call dist-for-goals, host-unit-tests, $(host_unit_tests_zip))
+$(call dist-for-goals, host-unit-tests, $(host_unit_tests_zip) $(host_unit_tests_zip_manifest))
 
 $(call declare-1p-container,$(host_unit_tests_zip),)
 $(call declare-container-license-deps,$(host_unit_tests_zip),$(COMPATIBILITY.host-unit-tests.FILES) $(my_host_shared_lib_for_host_unit_tests),$(PRODUCT_OUT)/:/)
