@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "530c89ca_bf52f2b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-19T00:07:38Z",
+      "side": 1,
+      "message": "We\u0027ve already shipped these variables, you\u0027ll either need to obsolete the old names (to make the error obvious), or support both in case they\u0027re been used outside AOSP.\n\nThat being said, it doesn\u0027t look like these variables were configured in the product inheritance system, so they\u0027re probably not working quite right anyways: https://cs.android.com/android/platform/superproject/+/master:build/make/core/product.mk;drc\u003dda2d4a29bf21e0375b40d2654619e529978cf97f;l\u003d28",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "b6f19637fd4091683652a19c246fd302e0939f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
