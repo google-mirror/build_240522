@@ -46,6 +46,30 @@
       },
       "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "227aa71c_deaccfd8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-19T22:01:47Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s what `TRACE_BEGIN_SOONG` is meant to measure, and it\u0027ll actually work in CI builds too, unlike this implementation. (CI does not use envsetup.sh)\n\nSeparately, that time is likely almost entirely in these three compile actions: https://cs.android.com/android/platform/superproject/+/master:build/soong/soong_ui.bash;drc\u003dfa5fc26ce279299ba116cdd968ff207daba201c4;l\u003d29 -- I have no idea why we\u0027re building mk2rbc and rbcrun there instead of doing them in parallel later on if necessary\n\nThe build.trace file used to include the soong_ui microfactory trace build, I don\u0027t know if it\u0027s properly including the other two now.",
+      "parentUuid": "f0a38089_32c0d034",
+      "range": {
+        "startLine": 10,
+        "startChar": 30,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
