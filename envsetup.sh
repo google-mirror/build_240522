@@ -1894,7 +1894,12 @@ function _trigger_build()
     local -r bc="$1"; shift
     local T=$(gettop)
     if [ -n "$T" ]; then
-      _wrap_build "$T/build/soong/soong_ui.bash" --build-mode --${bc} --dir="$(pwd)" "$@"
+      #Darwin friendly timestamps
+      BUILD_STARTED_TIME=`date +%s%3N`
+      if [[ $BUILD_STARTED_TIME == *"N"* ]]; then
+  	BUILD_STARTED_TIME=`prebuilts/build-tools/path/darwin-x86/date +%s%3N`
+      fi
+      _wrap_build "$T/build/soong/soong_ui.bash" --build-mode --${bc} --dir="$(pwd)" "$@" --build-started-time-unix-millis=$BUILD_STARTED_TIME
     else
       >&2 echo "Couldn't locate the top of the tree. Try setting TOP."
       return 1
