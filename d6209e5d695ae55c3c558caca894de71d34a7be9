@@ -22,6 +22,30 @@
       },
       "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0a38089_32c0d034",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-01-19T21:50:37Z",
+      "side": 1,
+      "message": "I\u0027m referencing the `buildStarted` var in soong_ui/main.go\n\nPrevious timing showed that this could different from the shell-script by 5s on a clean build and ~71ms on a null-build.",
+      "parentUuid": "a7d7fb50_0e38609c",
+      "range": {
+        "startLine": 10,
+        "startChar": 30,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
