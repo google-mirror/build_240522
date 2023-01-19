@@ -33,6 +33,47 @@
       "message": "Dan may be a better reviewer given that this solution is based on his advice at https://buganizer.corp.google.com/issues/111535209#comment6",
       "revId": "5f17553b69c91c81dc2c4e3182be234e125b906e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80997522_2a37c694",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-19T21:05:20Z",
+      "side": 1,
+      "message": "Wow, that was a long time ago 🙂, +ccross who may have some more current knowledge here.",
+      "parentUuid": "379bbce9_bf123641",
+      "revId": "5f17553b69c91c81dc2c4e3182be234e125b906e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6a11a16_9612bd1d",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-19T21:05:20Z",
+      "side": 1,
+      "message": "You should also register these as _product_single_value_vars in build/make/core/product.mk",
+      "range": {
+        "startLine": 50,
+        "startChar": 49,
+        "endLine": 50,
+        "endChar": 78
+      },
+      "revId": "5f17553b69c91c81dc2c4e3182be234e125b906e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
