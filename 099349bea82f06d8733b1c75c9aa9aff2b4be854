@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44651f64_019496c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-01-19T19:45:48Z",
+      "side": 1,
+      "message": "I confirmed that an AOSP aosp_cf_x86_64_phone-userdebug build is using remote_local_fallback, failing the remote and passing locally for out/target/common/obj/APPS/OverlayHostTests_UpdateOverlay_intermediates/dex.",
+      "revId": "099349bea82f06d8733b1c75c9aa9aff2b4be854",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
