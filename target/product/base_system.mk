@@ -389,6 +389,7 @@ PRODUCT_PACKAGES_DEBUG := \
     procrank \
     profcollectd \
     profcollectctl \
+    recbinder \
     servicedispatcher \
     showmap \
     sqlite3 \
