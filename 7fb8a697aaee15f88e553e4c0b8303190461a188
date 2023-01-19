@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5198885e_882b042f",
+        "filename": "target/board/BoardConfigEmuCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-01-19T08:39:27Z",
+      "side": 1,
+      "message": "This is meant to be the shared set of defaults that emulators share. If we don\u0027t want the emulators to share partition size, can we remove the property from this mk instead?",
+      "range": {
+        "startLine": 37,
+        "startChar": 29,
+        "endLine": 37,
+        "endChar": 31
+      },
+      "revId": "7fb8a697aaee15f88e553e4c0b8303190461a188",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
