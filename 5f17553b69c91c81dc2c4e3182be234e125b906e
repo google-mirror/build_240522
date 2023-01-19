@@ -16,6 +16,23 @@
       "message": "Vinh, please do an OWNERS review of this change to core/sysprop.mk\n\nThe gist of the change is that on some builds the model/brand/name are changed from the values the device is provisioned with (e.g. AOSP builds). So we\u0027re maintaining the device-provisioned names separately to make ID attestation work on them.",
       "revId": "5f17553b69c91c81dc2c4e3182be234e125b906e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "379bbce9_bf123641",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1078064
+      },
+      "writtenOn": "2023-01-19T20:57:31Z",
+      "side": 1,
+      "message": "Dan may be a better reviewer given that this solution is based on his advice at https://buganizer.corp.google.com/issues/111535209#comment6",
+      "revId": "5f17553b69c91c81dc2c4e3182be234e125b906e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
