@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a24c0e8_c52cee87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2023-01-20T00:59:48Z",
+      "side": 1,
+      "message": "https://android-review.git.corp.google.com/c/platform/build/+/2395612 broken some downstream branches sue to hard coded binary reference.",
+      "revId": "66dbfde74836bc9a61425d322d1f772028594576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
