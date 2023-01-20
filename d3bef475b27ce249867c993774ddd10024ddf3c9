@@ -33,6 +33,24 @@
       "message": "adding @jingwen@google.com since this looks related to packaging and might impact roboleaf?",
       "revId": "d3bef475b27ce249867c993774ddd10024ddf3c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da596f05_0181029d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-01-20T00:54:37Z",
+      "side": 1,
+      "message": "Yeah it will impact Roboleaf, but not in the short or mid term.",
+      "parentUuid": "ab60d9bb_4c8d1de8",
+      "revId": "d3bef475b27ce249867c993774ddd10024ddf3c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
