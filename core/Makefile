@@ -5378,6 +5378,9 @@ endif
 ifeq ($(TARGET_OTA_ALLOW_NON_AB),true)
 	$(hide) echo "allow_non_ab=true" >> $@
 endif
+ifeq ($(BOARD_NON_AB_OTA_DISABLE_IMGDIFF),true)
+	$(hide) echo "disable_imgdiff=true" >> $@
+endif
 ifdef BOARD_PREBUILT_DTBOIMAGE
 	$(hide) echo "has_dtbo=true" >> $@
 ifeq ($(BOARD_AVB_ENABLE),true)

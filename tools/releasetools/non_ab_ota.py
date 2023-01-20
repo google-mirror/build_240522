@@ -54,7 +54,8 @@ def GetBlockDifferences(target_zip, source_zip, target_info, source_info,
     # given file (because they're rounded to be 4K-aligned).
     partition_target_info = target_info["fstab"]["/" + name]
     disable_imgdiff = (partition_source_info.fs_type == "squashfs" or
-                       partition_target_info.fs_type == "squashfs")
+                       partition_target_info.fs_type == "squashfs" or
+                       target_info.get("disable_imgdiff"))
     return common.BlockDifference(name, partition_tgt, partition_src,
                                   check_first_block,
                                   version=blockimgdiff_version,
@@ -409,7 +410,10 @@ else if get_stage("%(bcb_dev)s") != "3/3" then
   if updating_boot:
     boot_type, boot_device_expr = common.GetTypeAndDeviceExpr("/boot",
                                                               source_info)
-    d = common.Difference(target_boot, source_boot)
+    if target_info.get("disable_imgdiff"):
+      d = common.Difference(target_boot, source_boot, "bsdiff")
+    else:
+      d = common.Difference(target_boot, source_boot)
     _, _, d = d.ComputePatch()
     if d is None:
       include_full_boot = True
