@@ -70,6 +70,30 @@
       },
       "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59977245_6698f265",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-01-20T00:19:41Z",
+      "side": 1,
+      "message": "Context: we\u0027re trying to measure how long a typical workflow is for developers. We want an apples-to-apples comparison of b to m. CI isn\u0027t as important for this.\n\nIs there a preferred approach you have?",
+      "parentUuid": "227aa71c_deaccfd8",
+      "range": {
+        "startLine": 10,
+        "startChar": 30,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
