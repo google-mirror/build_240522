@@ -74,6 +74,30 @@
       },
       "revId": "5f17553b69c91c81dc2c4e3182be234e125b906e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aa1d74a_bde0560e",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1896276
+      },
+      "writtenOn": "2023-01-20T15:40:59Z",
+      "side": 1,
+      "message": "Could you please give more info, what is the benefit of adding these properties in product.mk?\nJust wanted to understand because even without adding these properties in product.mk, I could successfully test attestation in AOSP build of raven for now.",
+      "parentUuid": "b6a11a16_9612bd1d",
+      "range": {
+        "startLine": 50,
+        "startChar": 49,
+        "endLine": 50,
+        "endChar": 78
+      },
+      "revId": "5f17553b69c91c81dc2c4e3182be234e125b906e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
