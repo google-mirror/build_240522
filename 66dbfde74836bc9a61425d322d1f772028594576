@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29e76fe5_411e62c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2023-01-20T05:07:41Z",
+      "side": 1,
+      "message": "will work with Dennis on cleaning this up.",
+      "revId": "66dbfde74836bc9a61425d322d1f772028594576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f675a26c_9cdd84f9",
@@ -31,6 +48,24 @@
       "writtenOn": "2023-01-20T03:19:08Z",
       "side": 1,
       "message": "Should we be going the other way and making whatever is expecting `blkid_static` use `blkid` instead?",
+      "revId": "66dbfde74836bc9a61425d322d1f772028594576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c8d682f_03193a91",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2023-01-20T05:07:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f675a26c_9cdd84f9",
       "revId": "66dbfde74836bc9a61425d322d1f772028594576",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
