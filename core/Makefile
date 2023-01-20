@@ -5104,7 +5104,7 @@ INTERNAL_OTATOOLS_MODULES := \
 INTERNAL_OTATOOLS_MODULES += \
   apexer \
   apex_compression_tool \
-  blkid_static \
+  blkid \
   deapexer \
   debugfs_static \
   dump_apex_info \
