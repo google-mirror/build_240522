@@ -22,6 +22,30 @@
       },
       "revId": "b6f19637fd4091683652a19c246fd302e0939f8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c70a2ea_6e435e98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-01-21T00:08:36Z",
+      "side": 1,
+      "message": "I don\u0027t expect these to be used outside of these specific files. They are intended specifically to remove things from the base_* files.",
+      "parentUuid": "530c89ca_bf52f2b7",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "b6f19637fd4091683652a19c246fd302e0939f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
