@@ -232,6 +232,24 @@
       "parentUuid": "73348d19_32025896",
       "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2456ab62_8ab58359",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-01-23T21:42:23Z",
+      "side": 1,
+      "message": "\u003e that seems like an even deeper error, though, if you\u0027re not using a matched pair? (aiui, they don\u0027t have to be stable exactly; they just have to match?)\n\n\nThey don\u0027t have to be the exact same version, just need to produce same output.\n\n\u003e I\u0027ve been hearing that every year for a while now :-) (in fact: i thought it was already deprecated, just not removed?)\n\nCorrect, it\u0027s deprecated in android T, just not removed.\n\n\u003e should we just remove imgdiff as a fully unsupported way to do non-A/B? \n\nThis will increase all non-AB OTA sizes. I was little worried that doing so w/o any head up is going to surprise vendors.\n\n\u003e (ah, you answer that question in https://b.corp.google.com/issues/265895599#comment17 --- so it really is that the folks hitting this just don\u0027t have zlib_stable. cherrypicking those two changes seems like the less bad option until/unless we remove imgdiff completely?)\n\n\nSee https://b.corp.google.com/issues/265895599#comment18 , bug report claim that these two changes are already cherry-picked.",
+      "parentUuid": "a7dccb7c_6f7ecf82",
+      "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
