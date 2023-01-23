@@ -160,6 +160,24 @@
       "parentUuid": "cdfa0ab8_9c1d688b",
       "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0920fa4_c3f0aab8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-01-23T20:31:00Z",
+      "side": 1,
+      "message": "Turns out libz_stable isn\u0027t as stable as we need? Since we are deprecating non-AB(which includes imgdiff) soon, I think it\u0027s better to disable imgdiff when needed rather than digging through zlib to find out what causes tiny output changes.",
+      "parentUuid": "77d0c1c8_0eef3f15",
+      "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
