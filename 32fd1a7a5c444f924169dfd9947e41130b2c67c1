@@ -142,6 +142,24 @@
       "parentUuid": "39ddc0db_4a9ea9ba",
       "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77d0c1c8_0eef3f15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-01-23T20:28:09Z",
+      "side": 1,
+      "message": "but this is why we have a copy of zlib specifically for that... https://source.corp.google.com/android/external/zlib/Android.bp;l\u003d190?q\u003dfile:zlib%20imgdiff\u0026sq\u003dpackage:%5Eandroid$%20-file:prebuilts%2Fvndk%2F%20-file:prebuilts%2Fruntime%2F",
+      "parentUuid": "cdfa0ab8_9c1d688b",
+      "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
