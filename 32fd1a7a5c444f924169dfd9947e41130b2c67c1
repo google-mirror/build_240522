@@ -16,6 +16,24 @@
       "message": "These tools should all be hermetic, and I see various other fixes mentioned in the bug.  Is this necessary?",
       "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63f48d85_f8fe52a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-01-23T19:27:13Z",
+      "side": 1,
+      "message": "The other fixes just disable imgdiff across the whole ecosystem. I didn\u0027t want to make decisions for other OEMs, so I uploaded this CL to give OEMs an option to disable imgdiff. Yes these tools are hermetic, but different OEMs might have different versions of zlib, so they might not see the same issue we are seeing.",
+      "parentUuid": "bfe1c4ce_08bc7720",
+      "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
