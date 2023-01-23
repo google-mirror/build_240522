@@ -70,6 +70,24 @@
       "parentUuid": "ab560967_58706615",
       "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86599258_53854728",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-01-23T19:34:04Z",
+      "side": 1,
+      "message": "Isn\u0027t aosp/1548316 supposed to mitigate that by using the stable libz?",
+      "parentUuid": "1c264c1f_c4f91faf",
+      "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
