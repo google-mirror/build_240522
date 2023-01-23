@@ -88,6 +88,24 @@
       "parentUuid": "1c264c1f_c4f91faf",
       "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b71f6b7_4ea3a38e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-01-23T19:41:29Z",
+      "side": 1,
+      "message": "Yes, we attempted to exclude platform specific assembly source files from stable version of zlib so that zlib would produce identical output across different platforms. According to product owners, that fix is already merged to tm branches. But we are still seeing zlib output mismatch issues. That means there\u0027s probably platform specific code in .c files as well. It would be difficult for us to maintain a \"forked\" version of zlib that always produce same output on host/device. So hence an option to disable imgdiff is the most straightforward solution I can think of.",
+      "parentUuid": "86599258_53854728",
+      "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
