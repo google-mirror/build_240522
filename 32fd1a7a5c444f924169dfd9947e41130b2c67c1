@@ -124,6 +124,24 @@
       "parentUuid": "6b71f6b7_4ea3a38e",
       "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdfa0ab8_9c1d688b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-01-23T20:11:14Z",
+      "side": 1,
+      "message": "Version A of zlib running on host needs to produce identical output as version B of zlib running on device. (Version A is zlib used in ota_from_target_files, version B is zlib used on device\u0027s recovery binary)",
+      "parentUuid": "39ddc0db_4a9ea9ba",
+      "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
