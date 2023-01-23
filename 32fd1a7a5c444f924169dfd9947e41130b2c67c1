@@ -106,6 +106,24 @@
       "parentUuid": "86599258_53854728",
       "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39ddc0db_4a9ea9ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-01-23T19:49:40Z",
+      "side": 1,
+      "message": "What kind of platform differences are you referring to here?\n\nRelying on zlib to be stable sounds like there may be a fundamental design issue with this feature.  Which two zlib outputs are required to be identical?",
+      "parentUuid": "6b71f6b7_4ea3a38e",
+      "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
