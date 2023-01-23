@@ -214,6 +214,24 @@
       "parentUuid": "a59ecb26_7bbde570",
       "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7dccb7c_6f7ecf82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-01-23T21:12:41Z",
+      "side": 1,
+      "message": "(ah, you answer that question in https://b.corp.google.com/issues/265895599#comment17 --- so it really is that the folks hitting this just don\u0027t _have_ zlib_stable. cherrypicking those two changes seems like the less bad option until/unless we remove imgdiff completely?)",
+      "parentUuid": "73348d19_32025896",
+      "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
