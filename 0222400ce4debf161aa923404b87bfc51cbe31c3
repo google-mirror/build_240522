@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9b76bc7_d937d66f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-01-23T16:20:37Z",
+      "side": 1,
+      "message": "Can you add a brief comment in the CL description about why they\u0027re no longer necessary?",
+      "revId": "0222400ce4debf161aa923404b87bfc51cbe31c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44370246_09f77cbf",
+        "filename": "core/proguard_basic_keeps.flags",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-01-23T16:20:37Z",
+      "side": 1,
+      "message": "The main comment above is specific to annotations, probably worth adding a space break between the above rule (for `***android**.annotation*`) and adding a comment specific to the new rules?",
+      "range": {
+        "startLine": 89,
+        "startChar": 10,
+        "endLine": 89,
+        "endChar": 13
+      },
+      "revId": "0222400ce4debf161aa923404b87bfc51cbe31c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
