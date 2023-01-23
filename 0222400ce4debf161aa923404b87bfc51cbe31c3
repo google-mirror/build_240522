@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6138a3c0_bbcb1edd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2023-01-23T17:23:33Z",
+      "side": 1,
+      "message": "Agreed. That would be really helpful. Also, would be useful to have comments for the new",
+      "parentUuid": "d9b76bc7_d937d66f",
+      "revId": "0222400ce4debf161aa923404b87bfc51cbe31c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44370246_09f77cbf",
         "filename": "core/proguard_basic_keeps.flags",
         "patchSetId": 3
