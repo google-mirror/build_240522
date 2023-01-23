@@ -178,6 +178,24 @@
       "parentUuid": "77d0c1c8_0eef3f15",
       "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a59ecb26_7bbde570",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-01-23T20:57:24Z",
+      "side": 1,
+      "message": "\u003e Turns out libz_stable isn\u0027t as stable as we need?\n\nthat seems like an even deeper error, though, if you\u0027re not using a matched pair? (aiui, they don\u0027t have to be _stable_ exactly; they just have to _match_?)\n\n\u003e Since we are deprecating non-AB (which includes imgdiff) soon...\n\ni\u0027ve been hearing that every year for a while now :-) (in fact: i thought it was already _deprecated_, just not removed?)\n\nshould we just _remove_ imgdiff as a fully unsupported way to do non-A/B? (this change, effectively adding another configuration to support, seems worse than either fixing it -- which i don\u0027t think anyone cares enough for -- or removing it -- which this change in effect does for some people anyway?)",
+      "parentUuid": "e0920fa4_c3f0aab8",
+      "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
