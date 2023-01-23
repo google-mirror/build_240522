@@ -46,6 +46,30 @@
       },
       "revId": "b6f19637fd4091683652a19c246fd302e0939f8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70e688aa_b07bd0e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-01-23T16:56:51Z",
+      "side": 1,
+      "message": "+1 I don\u0027t expect or want these to be used outside of these specific files.\n@dwillemsen@google.com is there a better way to create variables for only these base_* files to make sure they aren\u0027t used elsewhere? \nDo we still need to support the old variable names if we don\u0027t expect outside use and the configuration for the product inheritance was never set up?",
+      "parentUuid": "9c70a2ea_6e435e98",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "b6f19637fd4091683652a19c246fd302e0939f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
