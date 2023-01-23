@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf228fc4_970d3709",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-01-23T12:03:09Z",
+      "side": 1,
+      "message": "We don\u0027t have this code in master as it is already reverted with aosp/2373468 because we don\u0027t need the change any more.",
+      "revId": "7dbd199cb36b7f4f3f01efad55eb5d3dab9236bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
