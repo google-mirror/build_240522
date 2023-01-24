@@ -225,6 +225,24 @@
       "parentUuid": "21d28fcf_1d6db5d8",
       "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0966ab21_575ab1f1",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-24T21:35:48Z",
+      "side": 1,
+      "message": "It won\u0027t be in PATH, since we don\u0027t expect user\u0027s shells to be migrated to toybox.",
+      "parentUuid": "3c9ffc50_b835f3b4",
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
