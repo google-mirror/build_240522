@@ -17,21 +17,19 @@
      Documentation at frameworks/base/data/etc/preinstalled-packages-platform.xml
 -->
 <config>
-    <!--  Printer (Does not show on launcher, but shows on the share sheet) TODO(b/259058897) -->
+    <!-- Files (DocumentsUI) TODO(b/258055479) -->
+    <install-in-user-type package="com.android.documentsui">
+        <install-in user-type="SYSTEM" />
+        <install-in user-type="FULL" />
+        <install-in user-type="PROFILE" />
+    </install-in-user-type>
+
+    <!--  Printer (BuiltInPrintService) (Does not show on launcher, but shows on the share sheet) -->
     <install-in-user-type package="com.android.bips">
         <install-in user-type="SYSTEM" />
         <install-in user-type="FULL" />
         <install-in user-type="PROFILE" />
         <do-not-install-in user-type="android.os.usertype.profile.CLONE" />
     </install-in-user-type>
-
-    <!-- Files TODO(b/259058897) -->
-    <install-in-user-type package="com.android.documentsui">
-        <install-in user-type="SYSTEM" />
-        <install-in user-type="FULL" />
-        <install-in user-type="PROFILE" />
-        <do-not-install-in user-type="android.os.usertype.profile.CLONE" />
-    </install-in-user-type>
-
 
 </config>
