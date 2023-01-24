@@ -94,6 +94,23 @@
       },
       "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c921f0_17c53fbb",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 1903985
+      },
+      "writtenOn": "2023-01-24T20:13:53Z",
+      "side": 1,
+      "message": "not sure what \"darwin friendly means here\"\nand the retention of 13 digits is to get rid of microseconds/nanoseconds?",
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
