@@ -189,6 +189,24 @@
       "parentUuid": "c4c5ac3c_abe498ac",
       "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21d28fcf_1d6db5d8",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-24T20:47:07Z",
+      "side": 1,
+      "message": "If it helps, it looks like our toybox date prebuilt does work:\n\n```\n$ prebuilts/build-tools/path/darwin-x86/date +%s%3N\n1674593193570\n```",
+      "parentUuid": "43b35122_06e4e5b4",
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
