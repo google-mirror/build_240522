@@ -207,6 +207,24 @@
       "parentUuid": "43b35122_06e4e5b4",
       "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c9ffc50_b835f3b4",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 1903985
+      },
+      "writtenOn": "2023-01-24T21:29:19Z",
+      "side": 1,
+      "message": "@dacek@google.com\n\nDo we have an existing example of choosing the write binary in envsetup.sh?\n(or is this something already taken care of by putting the write toybox and/or other binaries in PATH)?\n\naprt from envsetyp.sh, does this also work for direct invocation of `soong_ui.bash`?",
+      "parentUuid": "21d28fcf_1d6db5d8",
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
