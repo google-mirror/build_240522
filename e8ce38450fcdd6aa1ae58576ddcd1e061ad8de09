@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7127729_da793784",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-01-24T18:13:13Z",
+      "side": 1,
+      "message": "(yeah, this makes more sense to me... it\u0027s moving us in the direction we\u0027re planning on going anyway, rather than adding yet more config to effectively unmaintained code.)",
+      "revId": "e8ce38450fcdd6aa1ae58576ddcd1e061ad8de09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
