@@ -250,6 +250,24 @@
       "parentUuid": "a7dccb7c_6f7ecf82",
       "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ea9a3a4_a855725a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-01-24T00:30:40Z",
+      "side": 1,
+      "message": "\u003e This will increase all non-AB OTA sizes. I was little worried that doing so w/o any head up is going to surprise vendors.\n\nthis is AOSP master, though. so at worst wait a few weeks and then remove it?\n\n\u003e This will increase all non-AB OTA sizes. I was little worried that doing so w/o any head up is going to surprise vendors.\n\ni thought we were already telling them \"not supported\" when they had non-A/B issues anyway :-P\n\nand/or just do it on the Wear branch directly?\n\n\u003e See https://b.corp.google.com/issues/265895599#comment18 , bug report claim that these two changes are already cherry-picked.\n\nare we sure they\u0027re running the right binary?",
+      "parentUuid": "2456ab62_8ab58359",
+      "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
