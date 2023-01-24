@@ -268,6 +268,24 @@
       "parentUuid": "2456ab62_8ab58359",
       "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "048a6b75_53831a67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-01-24T04:25:14Z",
+      "side": 1,
+      "message": "\u003e this is AOSP master, though. so at worst wait a few weeks and then remove it?\n\u003e i thought we were already telling them \"not supported\" when they had non-A/B issues anyway :-P\n\nGood point, let me just disable it : )",
+      "parentUuid": "3ea9a3a4_a855725a",
+      "revId": "32fd1a7a5c444f924169dfd9947e41130b2c67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
