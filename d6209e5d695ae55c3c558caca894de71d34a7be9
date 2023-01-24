@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74acae3d_8c491802",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-24T20:35:02Z",
+      "side": 1,
+      "message": "My main complaint is that we have two separate ways for this to happen now, both only working in certain circumstances.",
+      "parentUuid": "59977245_6698f265",
+      "range": {
+        "startLine": 10,
+        "startChar": 30,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52c921f0_17c53fbb",
         "filename": "envsetup.sh",
         "patchSetId": 2
@@ -127,6 +151,24 @@
       "side": 1,
       "message": "the other script uses `date +%s%3N` which isn\u0027t Darwin-friendly.\n\nThe cut gives the equivalent format. \nIf nanos is a better approach, we can refactor later but that would be a bigger operation.",
       "parentUuid": "52c921f0_17c53fbb",
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4c5ac3c_abe498ac",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-24T20:35:02Z",
+      "side": 1,
+      "message": "This still isn\u0027t darwin compatible though:\n\n```\n$ date +%s%N | cut -b1-13\n1674592353N\n```",
+      "parentUuid": "fee3f2c1_793bcbe0",
       "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
