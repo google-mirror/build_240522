@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a78ea54a_54c2d0e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2023-01-24T16:53:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6138a3c0_bbcb1edd",
+      "revId": "0222400ce4debf161aa923404b87bfc51cbe31c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44370246_09f77cbf",
@@ -49,6 +67,30 @@
       "writtenOn": "2023-01-23T16:20:37Z",
       "side": 1,
       "message": "The main comment above is specific to annotations, probably worth adding a space break between the above rule (for `***android**.annotation*`) and adding a comment specific to the new rules?",
+      "range": {
+        "startLine": 89,
+        "startChar": 10,
+        "endLine": 89,
+        "endChar": 13
+      },
+      "revId": "0222400ce4debf161aa923404b87bfc51cbe31c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5458ac7_a75060ba",
+        "filename": "core/proguard_basic_keeps.flags",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2023-01-24T16:53:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44370246_09f77cbf",
       "range": {
         "startLine": 89,
         "startChar": 10,
