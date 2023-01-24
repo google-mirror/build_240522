@@ -171,6 +171,24 @@
       "parentUuid": "fee3f2c1_793bcbe0",
       "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43b35122_06e4e5b4",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-01-24T20:37:42Z",
+      "side": 1,
+      "message": "Major oof - thanks for pointing this out.",
+      "parentUuid": "c4c5ac3c_abe498ac",
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
