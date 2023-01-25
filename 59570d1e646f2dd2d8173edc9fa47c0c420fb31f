@@ -22,6 +22,30 @@
       },
       "revId": "59570d1e646f2dd2d8173edc9fa47c0c420fb31f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3609b28_a79989bf",
+        "filename": "core/proguard_basic_keeps.flags",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1127078
+      },
+      "writtenOn": "2023-01-25T19:22:18Z",
+      "side": 1,
+      "message": "yes, these are super hard to actually figure out, e.g., see https://b.corp.google.com/issues/219615928",
+      "parentUuid": "2728dfdb_56f2ec86",
+      "range": {
+        "startLine": 92,
+        "startChar": 30,
+        "endLine": 92,
+        "endChar": 31
+      },
+      "revId": "59570d1e646f2dd2d8173edc9fa47c0c420fb31f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
