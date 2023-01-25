@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5432765c_23076d57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1987651
+      },
+      "writtenOn": "2023-01-25T02:57:58Z",
+      "side": 1,
+      "message": "2201756: Refactor ota_utils to reduce dependency on global OPTIONS | https://android-review.googlesource.com/c/platform/build/+/2201756",
+      "revId": "bf01f8b3f0ce70047840999d95a449bf03b407c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
