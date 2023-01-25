@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2728dfdb_56f2ec86",
+        "filename": "core/proguard_basic_keeps.flags",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-01-25T16:21:27Z",
+      "side": 1,
+      "message": "I\u0027m thinking we probably still need to fix these cases wherever possible? It\u0027s possible these specific instances are benign, but we\u0027ve seen some odd runtime issues when, say, the class gets optimized in the program, but at runtime gets resolved from a library (e.g., the bootclasspath). If you have a list or link to related warnings, I can take a look.\n\n@ricow@google.com FYI.",
+      "range": {
+        "startLine": 92,
+        "startChar": 30,
+        "endLine": 92,
+        "endChar": 31
+      },
+      "revId": "59570d1e646f2dd2d8173edc9fa47c0c420fb31f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
