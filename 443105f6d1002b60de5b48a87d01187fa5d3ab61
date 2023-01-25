@@ -86,6 +86,23 @@
       "message": "Requires a blob change which can not be verified by TreeHugger.",
       "revId": "443105f6d1002b60de5b48a87d01187fa5d3ab61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96c6b620_3b9a5a22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1987711
+      },
+      "writtenOn": "2023-01-25T16:14:51Z",
+      "side": 1,
+      "message": "just delet the data of your android and turn the phone off\u0026on and then it will fixed",
+      "revId": "443105f6d1002b60de5b48a87d01187fa5d3ab61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
