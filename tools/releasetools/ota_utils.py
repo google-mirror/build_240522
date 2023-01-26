@@ -16,12 +16,15 @@ import copy
 import itertools
 import logging
 import os
+import re
 import shutil
 import struct
 import zipfile
 
 import ota_metadata_pb2
 import common
+
+from pathlib import Path
 from common import (ZipDelete, OPTIONS, MakeTempFile,
                     ZipWriteStr, BuildInfo, LoadDictionaryFromFile,
                     SignFile, PARTITIONS_WITH_BUILD_PROP, PartitionBuildProps,
@@ -135,7 +138,8 @@ def FinalizeMetadata(metadata, input_file, output_file, needed_property_files=No
     logger.info(f"Signing disabled for output file {output_file}")
     shutil.copy(prelim_signing, output_file)
   else:
-    logger.info(f"Signing the output file {output_file} with key {package_key}")
+    logger.info(
+        f"Signing the output file {output_file} with key {package_key}")
     SignOutput(prelim_signing, output_file, package_key, pw)
 
   # Reopen the final signed zip to double check the streaming metadata.
@@ -721,6 +725,93 @@ def IsZucchiniCompatible(source_file: str, target_file: str):
   return sourceEntry and targetEntry and sourceEntry == targetEntry
 
 
+def ExtractTargetFiles(path: str | Path):
+  """Extract input target_files.zip into tmpdir
+  Args:
+    path: A path to target_files.zip on disk, or a path to directory of
+    extracted target files
+
+  Returns:
+    Path to directory which contains extracted target files
+  """
+  if not isinstance(path, Path):
+    path = Path(path)
+  assert os.path.exists(path)
+  if os.path.isfile(path):
+    tmpdir = Path(common.MakeTempDir("target_files-"))
+    os.makedirs(tmpdir, exist_ok=True)
+    assert zipfile.is_zipfile(path)
+    common.UnzipToDir(str(path), str(tmpdir),
+                      ["IMAGES/*", "PREBUILT/*", "META/*"])
+    return tmpdir
+  else:
+    assert os.path.isdir(path)
+    return path
+
+
+def LocateImage(target_files_dir: Path | str, part_name: str) -> str:
+  img_path = os.path.join(target_files_dir, "IMAGES", part_name + ".img")
+  if os.path.exists(img_path):
+    return img_path
+  img_path = os.path.join(target_files_dir, "PREBUILT". part_name + ".img")
+  if os.path.exists(img_path):
+    return img_path
+  raise common.ExternalError(
+      "Failed to locate images for {} in target files {}".format(part_name, target_files_dir))
+
+
+def LocateImageMapFile(target_files_dir: Path | str, part_name) -> str:
+  img_path = os.path.join(target_files_dir, "IMAGES", part_name + ".map")
+  if os.path.exists(img_path):
+    return img_path
+  return ""
+
+
+def LoadUpdateEngineConfig(target_files_dir):
+  with open(os.path.join(target_files_dir, "META", "update_engine_config.txt")) as fp:
+    data = fp.read()
+    major_version = re.search(r"PAYLOAD_MAJOR_VERSION=(\d+)", data).group(1)
+    minor_version = re.search(r"PAYLOAD_MINOR_VERSION=(\d+)", data).group(1)
+    return (int(major_version), int(minor_version))
+
+
+def ConstructDeltaGeneratorArgs(extracted_target: Path, extracted_source: Path = None):
+  with open(os.path.join(extracted_target, "META", "ab_partitions.txt"), "r") as fp:
+    ab_partitions = fp.read().strip().split()
+
+  args = []
+  major_version = 2
+  minor_version = 0
+  args.append("--partition_names=" + ":".join(ab_partitions))
+  if extracted_source:
+    args.append("--old_partitions=" + ":".join([LocateImage(part, extracted_source)
+                                                for part in ab_partitions]))
+    args.append("--old_mapfiles=" + ":".join([LocateImageMapFile(part, extracted_source)
+                                              for part in ab_partitions]))
+    major_version, minor_version = LoadUpdateEngineConfig(extracted_source)
+
+  args.append("--new_partitions=" + ":".join([LocateImage(extracted_target, part)
+              for part in ab_partitions]))
+  args.append("--new_mapfiles=" + ":".join([LocateImageMapFile(extracted_target, part)
+              for part in ab_partitions]))
+  args.append("--major_version=" + str(major_version))
+  if minor_version:
+    args.append("--minor_version=" + str(minor_version))
+  postinstall_config = os.path.join(
+      extracted_target, "META", "postinstall_config.txt")
+  if os.path.exists(postinstall_config):
+    args.append("--new_postinstall_config_file=" + postinstall_config)
+  dynamic_partition_info_file = os.path.join(
+      extracted_target, "META", "dynamic_partitions_info.txt")
+  if os.path.exists(dynamic_partition_info_file):
+    args.append("--dynamic_partition_info_file=" +
+                str(dynamic_partition_info_file))
+  apex_info_file = os.path.join(extracted_target, "META", "apex_info.pb")
+  if os.path.exists(apex_info_file):
+    args.append("--apex_info_file=" + apex_info_file)
+  return args
+
+
 class PayloadGenerator(object):
   """Manages the creation and the signing of an A/B OTA Payload."""
 
@@ -729,7 +820,7 @@ class PayloadGenerator(object):
   SECONDARY_PAYLOAD_BIN = 'secondary/payload.bin'
   SECONDARY_PAYLOAD_PROPERTIES_TXT = 'secondary/payload_properties.txt'
 
-  def __init__(self, secondary=False, wipe_user_data=False):
+  def __init__(self, secondary=False, wipe_user_data=False, verbose=None):
     """Initializes a Payload instance.
 
     Args:
@@ -739,12 +830,15 @@ class PayloadGenerator(object):
     self.payload_properties = None
     self.secondary = secondary
     self.wipe_user_data = wipe_user_data
+    if verbose is None:
+      verbose = OPTIONS.verbose
+    self.verbose = verbose
 
-  def _Run(self, cmd):  # pylint: disable=no-self-use
+  def _Run(self, cmd):
     # Don't pipe (buffer) the output if verbose is set. Let
     # brillo_update_payload write to stdout/stderr directly, so its progress can
     # be monitored.
-    if OPTIONS.verbose:
+    if self.verbose:
       common.RunAndCheckOutput(cmd, stdout=None, stderr=None)
     else:
       common.RunAndCheckOutput(cmd)
@@ -763,15 +857,21 @@ class PayloadGenerator(object):
       additional_args = []
 
     payload_file = common.MakeTempFile(prefix="payload-", suffix=".bin")
-    cmd = ["brillo_update_payload", "generate",
-           "--payload", payload_file,
-           "--target_image", target_file]
+    cmd = ["delta_generator", "--out_file=" + payload_file]
+    extracted_target = ExtractTargetFiles(target_file)
+    if source_file:
+      extracted_source = ExtractTargetFiles(source_file)
+      args = ConstructDeltaGeneratorArgs(extracted_target, extracted_source)
+      cmd.extend(args)
+    else:
+      args = ConstructDeltaGeneratorArgs(extracted_target)
+      cmd.extend(args)
+
     if source_file is not None:
-      cmd.extend(["--source_image", source_file])
       if OPTIONS.disable_fec_computation:
-        cmd.extend(["--disable_fec_computation", "true"])
+        cmd.extend(["--disable_fec_computation=true"])
       if OPTIONS.disable_verity_computation:
-        cmd.extend(["--disable_verity_computation", "true"])
+        cmd.extend(["--disable_verity_computation=true"])
     cmd.extend(additional_args)
     self._Run(cmd)
 
