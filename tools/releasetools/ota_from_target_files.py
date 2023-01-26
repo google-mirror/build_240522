@@ -758,7 +758,7 @@ def GeneratePartitionTimestampFlags(partition_state):
   partition_timestamps = [
       part.partition_name + ":" + part.version
       for part in partition_state]
-  return ["--partition_timestamps", ",".join(partition_timestamps)]
+  return ["--partition_timestamps=" + ",".join(partition_timestamps)]
 
 
 def GeneratePartitionTimestampFlagsDowngrade(
@@ -772,7 +772,7 @@ def GeneratePartitionTimestampFlagsDowngrade(
       partition_timestamps[part.partition_name] = \
           max(part.version, partition_timestamps[part.partition_name])
   return [
-      "--partition_timestamps",
+      "--partition_timestamps=" +
       ",".join([key + ":" + val for (key, val)
                 in partition_timestamps.items()])
   ]
@@ -907,7 +907,7 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   elif OPTIONS.partial:
     target_file = GetTargetFilesZipForPartialUpdates(target_file,
                                                      OPTIONS.partial)
-    additional_args += ["--is_partial_update", "true"]
+    additional_args += ["--is_partial_update=true"]
   elif OPTIONS.vabc_compression_param:
     target_file = GetTargetFilesZipForCustomVABCCompression(
         target_file, OPTIONS.vabc_compression_param)
@@ -948,9 +948,9 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   if OPTIONS.security_patch_level is not None:
     security_patch_level = OPTIONS.security_patch_level
 
-  additional_args += ["--security_patch_level", security_patch_level]
+  additional_args += ["--security_patch_level="+ security_patch_level]
 
-  additional_args += ["--enable_zucchini",
+  additional_args += ["--enable_zucchini="+
                       str(OPTIONS.enable_zucchini).lower()]
 
   if not ota_utils.IsLz4diffCompatible(source_file, target_file):
@@ -958,7 +958,7 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
         "Source build doesn't support lz4diff, or source/target don't have compatible lz4diff versions. Disabling lz4diff.")
     OPTIONS.enable_lz4diff = False
 
-  additional_args += ["--enable_lz4diff",
+  additional_args += ["--enable_lz4diff="+
                       str(OPTIONS.enable_lz4diff).lower()]
 
   if source_file and OPTIONS.enable_lz4diff:
@@ -971,22 +971,22 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
     erofs_compression_param = OPTIONS.target_info_dict.get(
         "erofs_default_compressor")
     assert erofs_compression_param is not None, "'erofs_default_compressor' not found in META/misc_info.txt of target build. This is required to enable lz4diff."
-    additional_args += ["--erofs_compression_param", erofs_compression_param]
+    additional_args += ["--erofs_compression_param="+ erofs_compression_param]
 
   if OPTIONS.disable_vabc:
-    additional_args += ["--disable_vabc", "true"]
+    additional_args += ["--disable_vabc=true"]
   if OPTIONS.enable_vabc_xor:
-    additional_args += ["--enable_vabc_xor", "true"]
+    additional_args += ["--enable_vabc_xor=true"]
   if OPTIONS.force_minor_version:
-    additional_args += ["--force_minor_version", OPTIONS.force_minor_version]
+    additional_args += ["--force_minor_version=" + OPTIONS.force_minor_version]
   if OPTIONS.compressor_types:
-    additional_args += ["--compressor_types", OPTIONS.compressor_types]
-  additional_args += ["--max_timestamp", max_timestamp]
+    additional_args += ["--compressor_types=" + OPTIONS.compressor_types]
+  additional_args += ["--max_timestamp=" + max_timestamp]
 
   if SupportsMainlineGkiUpdates(source_file):
     logger.warning(
         "Detected build with mainline GKI, include full boot image.")
-    additional_args.extend(["--full_boot", "true"])
+    additional_args.extend(["--full_boot=true"])
 
   payload.Generate(
       target_file,
