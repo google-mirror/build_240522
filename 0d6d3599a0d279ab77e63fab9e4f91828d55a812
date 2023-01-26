@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "753367cb_0d02b68b",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-26T22:26:56Z",
+      "side": 1,
+      "message": "Maybe replace this with the part of http://b/266688086#comment2 talking about how this should all be using the build system support for python(python_binary_host, etc) instead? Using PYTHONPATH here means that you\u0027re entirely reliant on the host OS to have an appropriate version of python installed, and that there are no globally-installed packages that will conflict with anything in here.\n\nI really question if we should have this general case at all, or just have some wrapper scripts that can set this up for the needs of the individual use cases. That could also pick up our python3 prebuilts instead of relying on the host python. The python build system support would still be a better supported use case, but a wrapper script wouldn\u0027t require a build, as it sounds like that\u0027s a concern still.",
+      "range": {
+        "startLine": 307,
+        "startChar": 6,
+        "endLine": 312,
+        "endChar": 60
+      },
+      "revId": "0d6d3599a0d279ab77e63fab9e4f91828d55a812",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
