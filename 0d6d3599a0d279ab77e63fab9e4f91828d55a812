@@ -22,6 +22,30 @@
       },
       "revId": "0d6d3599a0d279ab77e63fab9e4f91828d55a812",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b9e88ba_ad4bfc18",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2023-01-26T23:29:15Z",
+      "side": 1,
+      "message": "Should it though? That requires a round trip through soon to launch lldbclient, which is _very_ slow for something that\u0027s likely to be done iteratively.\n\nA wrapper script is an option, but that would also require duplicating the fix into each user.\n\nRegardless, this fixes the regression by preserving the long standing behavior. This has served us well enough for close to a decade, and any improvements probably should not block fixing the regression.",
+      "parentUuid": "753367cb_0d02b68b",
+      "range": {
+        "startLine": 307,
+        "startChar": 6,
+        "endLine": 312,
+        "endChar": 60
+      },
+      "revId": "0d6d3599a0d279ab77e63fab9e4f91828d55a812",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
