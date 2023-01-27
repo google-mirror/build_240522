@@ -243,6 +243,24 @@
       "parentUuid": "3c9ffc50_b835f3b4",
       "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1cff666_8f4cddfa",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-01-27T20:35:16Z",
+      "side": 1,
+      "message": "I think we can intuit this from $TOP, no? \n\nDan, how did you test this with Darwin?\nI also feel sort of bad submitting this without at least hearing a differing proposal from you. I get that it seems awfully duplicated - but given that we want to compare like-to-like to see how `b` compares to `m`, I think it\u0027s worthy.",
+      "parentUuid": "0966ab21_575ab1f1",
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
