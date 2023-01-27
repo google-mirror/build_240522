@@ -70,6 +70,30 @@
       },
       "revId": "0d6d3599a0d279ab77e63fab9e4f91828d55a812",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "957ff963_23292f75",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2023-01-27T22:52:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "062d2859_68c31ef8",
+      "range": {
+        "startLine": 307,
+        "startChar": 6,
+        "endLine": 312,
+        "endChar": 60
+      },
+      "revId": "0d6d3599a0d279ab77e63fab9e4f91828d55a812",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
