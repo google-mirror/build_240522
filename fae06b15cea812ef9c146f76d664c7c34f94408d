@@ -33,6 +33,24 @@
       "message": "These presubmit test failures may actually be related, since it looks like some of the tradefed zip code is erroring out:\n\n```\njava.lang.RuntimeException: Failed to find ZIP64 field id(0x0001) from the Central Directory Info for file: android-cts/testcases/CtsProfileFullBackupApp/x86_64/CtsProfileFullBackupApp.apk\n\tat com.android.tradefed.util.zip.CentralDirectoryInfo.\u003cinit\u003e(CentralDirectoryInfo.java:247)\n\tat com.android.tradefed.util.ZipUtil.getZipCentralDirectoryInfos(ZipUtil.java:476)\n\tat com.android.tradefed.util.ZipUtil.getZipCentralDirectoryInfos(ZipUtil.java:408)\n\tat com.android.tradefed.util.RemoteZip.getZipEntries(RemoteZip.java:128)\n```",
       "revId": "fae06b15cea812ef9c146f76d664c7c34f94408d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12edaa21_4e7e64bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-27T17:28:25Z",
+      "side": 1,
+      "message": "It looks like [this code](https://cs.android.com/android/platform/superproject/+/master:tools/tradefederation/core/common_util/com/android/tradefed/util/zip/CentralDirectoryInfo.java;drc\u003dd3b3dca304be049b3bfe72545039210f92a25450;l\u003d245) assumes that the zip64 extra is the first extra in the central directory. I don\u0027t see anything in the spec around a defined order of the extra fields, so it seems like this reader is not following the zip specification.\n\nI did download one of the zip files created here and confirmed that the zip64 extra ended up being the second extra.",
+      "parentUuid": "add19a89_a0c09670",
+      "revId": "fae06b15cea812ef9c146f76d664c7c34f94408d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
