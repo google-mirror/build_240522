@@ -261,6 +261,24 @@
       "parentUuid": "0966ab21_575ab1f1",
       "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae580bd1_45f7044f",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-27T21:25:15Z",
+      "side": 1,
+      "message": "\u003e I think we can intuit this from $TOP, no?\n\nfrom here, you could use `$T` instead of calling gettop again. Any extra calls you make here are only going to be slowing down build startup, so I\u0027d recommend keeping it minimal. On my linux machine, it looks like this implementation takes ~7-8ms, while just `date +%s%3N` takes ~2ms, so it\u0027s not that much, but it can add up -- on my Mac it goes up to ~55ms.\n\n\u003e Dan, how did you test this with Darwin?\n\nYou should have access to a Mac if you\u0027re working on the android build system, or at least someone on your team should. I\u0027m using my laptop for that these days, but when I was working on things more regularly, I used a Mac desktop.\n\n\u003e I also feel sort of bad submitting this without at least hearing a differing proposal from you. I get that it seems awfully duplicated - but given that we want to compare like-to-like to see how b compares to m, I think it\u0027s worthy.\n\nWith this current implementation, there are only a few things that are going to run in between this call and the date call in soong_ui.bash (`pwd`, `if`, `date`, and bash startup), so you\u0027re adding ~7-8ms to `m` in order to measure a ~9ms difference (when I subtract `TRACE_BEGIN_SOONG` from `TIME_UNIX_MILLIS`). In the `b` case, that skips the `if` and the `date`, so I\u0027d expect it to be a net loss.\n\nThere may be an argument to fix soong_ui.bash to use a mac-compatible timestamp, but I\u0027m not sure it\u0027s worth slowing down everyone just to measure the Mac difference (since we\u0027ll have good data on Linux).",
+      "parentUuid": "d1cff666_8f4cddfa",
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
