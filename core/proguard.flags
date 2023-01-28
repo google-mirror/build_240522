@@ -15,8 +15,8 @@
 # for platform testing.
 # TODO(b/239961360): Migrate away from androidx.annotation.VisibleForTesting
 # and com.google.common.annotations.VisibleForTesting use in platform code.
--keep @**.VisibleForTesting class !androidx.**,!com.google.common.**,*
--keepclassmembers class !androidx.**,!com.google.common.**,* {
+-keep @**.VisibleForTesting class !androidx.**,!com.google.common.**,!io.grpc.**,*
+-keepclassmembers class !androidx.**,!com.google.common.**,!io.grpc.**,* {
     @**.VisibleForTesting *;
 }
 
