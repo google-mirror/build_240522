@@ -122,6 +122,30 @@
       },
       "revId": "5f17553b69c91c81dc2c4e3182be234e125b906e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c35f7a8e_06a467cf",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-01-30T16:24:11Z",
+      "side": 1,
+      "message": "Yes, this makes things work as expected when these values may be set in multiple makefiles. Without this, the last makefile read would set the real value. With this, it will follow the inheritance order (so an aosp_raven_foo that inherits from aosp_raven would have the ability to override the value). That\u0027s because the way the inheritance actually works, it will load the inherited makefiles after the original, so we have to preserve known variables to make this work as expected.\n\nBeing in those lists will also turn these values read-only at the appropriate time in the build process.\n\n(_FOR_ATTESTATION is unlikely to change due to product inheritance, but it\u0027s still better to make it work consistently)",
+      "parentUuid": "04e1b423_f5c045d2",
+      "range": {
+        "startLine": 50,
+        "startChar": 49,
+        "endLine": 50,
+        "endChar": 78
+      },
+      "revId": "5f17553b69c91c81dc2c4e3182be234e125b906e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
