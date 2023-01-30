@@ -70,6 +70,30 @@
       },
       "revId": "59570d1e646f2dd2d8173edc9fa47c0c420fb31f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8136f882_fc25648f",
+        "filename": "core/proguard_basic_keeps.flags",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-01-30T22:43:03Z",
+      "side": 1,
+      "message": "Looks like we can\u0027t revert this alone (without reverting aosp/2355025), as the proto issue is present for some of the optimized targets:\n\n```\nError: Library class com.google.protobuf.DescriptorMessageInfoFactory implements program class com.google.protobuf.MessageInfoFactory`\n```\n\nEither way, this is probably hiding some bugs and worth a closer look.",
+      "parentUuid": "47914d5e_5d7fc17b",
+      "range": {
+        "startLine": 92,
+        "startChar": 30,
+        "endLine": 92,
+        "endChar": 31
+      },
+      "revId": "59570d1e646f2dd2d8173edc9fa47c0c420fb31f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
