@@ -98,6 +98,30 @@
       },
       "revId": "5f17553b69c91c81dc2c4e3182be234e125b906e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04e1b423_f5c045d2",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1078064
+      },
+      "writtenOn": "2023-01-30T16:03:11Z",
+      "side": 1,
+      "message": "@patilprashant@google.com I think that is to make sure the value is only set once and is not collected from multiple makefiles.",
+      "parentUuid": "2aa1d74a_bde0560e",
+      "range": {
+        "startLine": 50,
+        "startChar": 49,
+        "endLine": 50,
+        "endChar": 78
+      },
+      "revId": "5f17553b69c91c81dc2c4e3182be234e125b906e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
