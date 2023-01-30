@@ -46,6 +46,30 @@
       },
       "revId": "59570d1e646f2dd2d8173edc9fa47c0c420fb31f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47914d5e_5d7fc17b",
+        "filename": "core/proguard_basic_keeps.flags",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-01-30T22:15:44Z",
+      "side": 1,
+      "message": "I\u0027m also still seeing warnings for all of the annotation packages that were removed in this change. @delmerico@google.com wondering if we should revert this and come up with a narrower fix?",
+      "parentUuid": "b3609b28_a79989bf",
+      "range": {
+        "startLine": 92,
+        "startChar": 30,
+        "endLine": 92,
+        "endChar": 31
+      },
+      "revId": "59570d1e646f2dd2d8173edc9fa47c0c420fb31f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
