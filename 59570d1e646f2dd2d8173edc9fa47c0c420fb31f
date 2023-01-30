@@ -94,6 +94,30 @@
       },
       "revId": "59570d1e646f2dd2d8173edc9fa47c0c420fb31f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39fec92d_50b71ac9",
+        "filename": "core/proguard_basic_keeps.flags",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-01-30T23:37:18Z",
+      "side": 1,
+      "message": "Added a comment on aosp/2355025, this is coming from the injection of ErrorProneClasspath to the R8 invocation, which doesn\u0027t seem right for the standard compilation case.",
+      "parentUuid": "8136f882_fc25648f",
+      "range": {
+        "startLine": 92,
+        "startChar": 30,
+        "endLine": 92,
+        "endChar": 31
+      },
+      "revId": "59570d1e646f2dd2d8173edc9fa47c0c420fb31f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
