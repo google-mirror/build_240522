@@ -118,6 +118,29 @@
       },
       "revId": "59570d1e646f2dd2d8173edc9fa47c0c420fb31f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cc167f4_cf988c65",
+        "filename": "core/proguard_basic_keeps.flags",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-01-31T00:01:56Z",
+      "side": 1,
+      "message": "Looks like this issue is caused by the `androidx.room_room-compiler-plugin.jar` dependency getting sent to `libraryjars`? But that should be a compile-time-only dependency via the `plugins` attribute?",
+      "range": {
+        "startLine": 93,
+        "startChar": 38,
+        "endLine": 93,
+        "endChar": 59
+      },
+      "revId": "59570d1e646f2dd2d8173edc9fa47c0c420fb31f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
