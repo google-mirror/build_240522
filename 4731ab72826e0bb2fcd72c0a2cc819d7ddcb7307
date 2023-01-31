@@ -16,6 +16,24 @@
       "message": "fwiw, I didn\u0027t notice any javax.** warnings when I built locally. It\u0027s possible those were resolved by the other fix, but doing a clean revert is probably best.",
       "revId": "4731ab72826e0bb2fcd72c0a2cc819d7ddcb7307",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06efc0d4_28f52326",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2023-01-31T21:21:21Z",
+      "side": 1,
+      "message": "I saw some running `m` on AOSP (these are all of them):\n```\n[ 50% 784/1553] //packages/modules/Bluetooth/android/app:Bluetooth r8 [common apex33]\nWarning: Missing class com.android.bluetooth.x.android.sysprop.BluetoothProperties$snoop_default_mode_values (referenced from: void com.android.bluetooth.btservice.AdapterService.updateAdapterState(int, int))\nMissing class com.android.bluetooth.x.android.sysprop.BluetoothProperties (referenced from: boolean com.android.bluetooth.a2dp.A2dpService.isEnabled() and 31 other contexts)\n[ 53% 824/1553] //packages/apps/ImsServiceEntitlement:ImsServiceEntitlement r8 [common]\nWarning: Missing class com.google.firebase.annotations.DeferredApi (referenced from: void com.google.firebase.inject.Deferred$DeferredHandler.handle(com.google.firebase.inject.Provider))\n[ 58% 915/1553] //packages/providers/MediaProvider:MediaProvider r8 [common]\nWarning in ./out/soong/.intermediates/packages/providers/MediaProvider/MediaProvider/android_common/withres-withoutdex/MediaProvider.jar:META-INF/services/javax.annotation.processing.Processor:\nUnexpected reference to missing service class: META-INF/services/javax.annotation.processing.Processor.\n[ 69% 979/1400] //packages/providers/MediaProvider:MediaProvider r8 [common apex30]\nWarning in ./out/soong/.intermediates/packages/providers/MediaProvider/MediaProvider/android_common_apex30/withres-withoutdex/MediaProvider.jar:META-INF/services/javax.annotation.processing.Processor:\nUnexpected reference to missing service class: META-INF/services/javax.annotation.processing.Processor.\n```\nBluetooth is due to jarjar (which was discussed on the bug).\n\nI\u0027m looking into the `ImsServiceEntitlement` one.\n\nAnd there was a warning (which I have a tentative fix for) coming from a `static libs` dep from `SettingsLib -\u003e androidx.mediarouter_mediarouter-nodeps`. Apparently, AFAICT `android_library_import` doesn\u0027t repackage `static_libs` like every other Java module does; instead I _think_ (haven\u0027t confirmed yet) that `static_libs` are packaged into the APK at the top level.\n\nI\u0027ll update the bug with this information later too.",
+      "parentUuid": "877ca86f_329bf8e9",
+      "revId": "4731ab72826e0bb2fcd72c0a2cc819d7ddcb7307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
