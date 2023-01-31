@@ -675,6 +675,19 @@ class SignApk {
         }
     }
 
+    private static int getStoredEntryDataAlignmentForSo(String targetProduct) {
+        if (targetProduct == null) {
+            /* TARGET_PRODUCT is not exported */
+            return 4096;
+        }
+        switch (targetProduct) {
+            /* Add more variants and corresponding .so alignment below */
+            case "aosp_oriole_16k_64":
+                return 16384;
+            default:
+               return 4096;
+        }
+    }
     /**
      * Returns the multiple (in bytes) at which the provided {@code STORED} entry's data must start
      * relative to start of file or {@code 0} if alignment of this entry's data is not important.
@@ -687,7 +700,7 @@ class SignApk {
         if (entryName.endsWith(".so")) {
             // Align .so contents to memory page boundary to enable memory-mapped
             // execution.
-            return 16384;
+            return getStoredEntryDataAlignmentForSo(System.getenv("TARGET_PRODUCT"));
         } else {
             return defaultAlignment;
         }
