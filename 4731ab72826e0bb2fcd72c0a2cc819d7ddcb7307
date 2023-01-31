@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "877ca86f_329bf8e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-01-31T20:33:35Z",
+      "side": 1,
+      "message": "fwiw, I didn\u0027t notice any javax.** warnings when I built locally. It\u0027s possible those were resolved by the other fix, but doing a clean revert is probably best.",
+      "revId": "4731ab72826e0bb2fcd72c0a2cc819d7ddcb7307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
