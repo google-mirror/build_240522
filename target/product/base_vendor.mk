@@ -60,6 +60,23 @@ PRODUCT_PACKAGES += \
     libdownmix \
     libdrmclearkeyplugin \
     libdynproc \
+    libaecsw \
+    libagcsw \
+    libbassboostsw \
+    libbundleaidl \
+    libdownmixaidl \
+    libdynamicsprocessingaidl \
+    libenvreverbsw \
+    libequalizersw \
+    libhapticgeneratoraidl \
+    libloudnessenhanceraidl \
+    libnssw \
+    libpresetreverbsw \
+    libreverbaidl \
+    libtinyxml2 \
+    libvirtualizersw \
+    libvisualizeraidl \
+    libvolumesw \
     libeffectproxy \
     libeffects \
     libhapticgenerator \
