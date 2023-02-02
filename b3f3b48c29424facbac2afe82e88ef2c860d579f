@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e2c2d20_61cabb7e",
+        "filename": "tools/signapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-02-02T21:08:25Z",
+      "side": 1,
+      "message": "leave a comment with reference to relevant bugs?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 23
+      },
+      "revId": "b3f3b48c29424facbac2afe82e88ef2c860d579f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
