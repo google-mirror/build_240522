@@ -31,6 +31,8 @@ java_binary_host {
         "conscrypt-unbundled",
     ],
 
+    java_version: "11",
+
     jni_libs: ["libconscrypt_openjdk_jni"],
 
     // The post-build signing tools need signapk.jar (and its shared libraries,
