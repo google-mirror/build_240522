@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7828cfb5_37d4d2d1",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 3907,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-02-02T18:43:09Z",
+      "side": 1,
+      "message": "You can\u0027t use a directory as a dependency, it doesn\u0027t have useful semeantics.  It won\u0027t re-copy files when they are changed, and it won\u0027t detect when files in subdirectories are added or removed.\n\nYou probably need something like `$(call all-files-under $(BOARD_SYSTEM_DLKM_SRC))` or `$(wildcard $(BOARD_SYSTEM_DLKM_SRC)/*)`.",
+      "revId": "1f172717cc556a9ddf02da605c9bf0cbc38cd18c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11b415d3_7bd90528",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 3912,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-02-02T18:43:09Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem like the right place to be copying files, this rule is for creating the list of files.  The copy should take place outside of the rule and be added to `INTERNAL_SYSTEM_DLKMIMAGE_FILES`, although that can be difficult if you don\u0027t know the list of files in `$(BOARD_SYSTEM_DLKM_SRC)/`",
+      "revId": "1f172717cc556a9ddf02da605c9bf0cbc38cd18c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
