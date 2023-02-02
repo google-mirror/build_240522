@@ -22,6 +22,30 @@
       },
       "revId": "a35350d4d72a116a4c254388f56ee9c70d999b63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53ecb8d2_326d3d33",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-02-02T20:38:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2d0962e8_309933ed",
+      "range": {
+        "startLine": 685,
+        "startChar": 18,
+        "endLine": 685,
+        "endChar": 36
+      },
+      "revId": "a35350d4d72a116a4c254388f56ee9c70d999b63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
