@@ -46,6 +46,30 @@
       },
       "revId": "b3f3b48c29424facbac2afe82e88ef2c860d579f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5fa1969_b712ba95",
+        "filename": "tools/signapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-02-03T17:59:12Z",
+      "side": 1,
+      "message": "I know. Leave a comment in code please.",
+      "parentUuid": "c9b5844a_824aa86f",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 23
+      },
+      "revId": "b3f3b48c29424facbac2afe82e88ef2c860d579f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
