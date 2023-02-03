@@ -22,6 +22,30 @@
       },
       "revId": "b3f3b48c29424facbac2afe82e88ef2c860d579f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9b5844a_824aa86f",
+        "filename": "tools/signapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1863710
+      },
+      "writtenOn": "2023-02-03T17:58:42Z",
+      "side": 1,
+      "message": "It avoid b/267608166 when Java 17 is used as default for the Android tree. And also b/267633407. There is no need to use Java 17 for this host side tool at the moment and since it can run in Java 11 environment it\u0027s better to keep it pinned to 11.",
+      "parentUuid": "1e2c2d20_61cabb7e",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 23
+      },
+      "revId": "b3f3b48c29424facbac2afe82e88ef2c860d579f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
