@@ -33,6 +33,23 @@
       "message": "totis",
       "revId": "f80e886273a18131a39bcd2f3fcd653f99c09cc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5a88263_3f61b092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1989340
+      },
+      "writtenOn": "2023-02-04T00:02:03Z",
+      "side": 1,
+      "message": "2397412",
+      "revId": "f80e886273a18131a39bcd2f3fcd653f99c09cc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
