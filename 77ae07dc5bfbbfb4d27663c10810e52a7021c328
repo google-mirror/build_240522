@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d61c71c2_926da301",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-02-06T17:29:01Z",
+      "side": 1,
+      "message": "already handled for the normal use case of building the image on line 1250.",
+      "revId": "77ae07dc5bfbbfb4d27663c10810e52a7021c328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
