@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb62f49d_02c4f028",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-02-07T07:11:40Z",
+      "side": 1,
+      "message": "As discussed offline, it\u0027d be great to check in a working initial version and iterate on smaller changes from there.",
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21d337c7_f7c2b1ac",
+        "filename": "core/config.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-02-07T07:11:40Z",
+      "side": 1,
+      "message": "What does `:\u003d$\u003d` mean?",
+      "range": {
+        "startLine": 235,
+        "startChar": 15,
+        "endLine": 235,
+        "endChar": 19
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6ae7151_ac339472",
+        "filename": "core/main.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 2026,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-02-07T07:11:40Z",
+      "side": 1,
+      "message": "Why is this needed given line 2028?\n\nAlso seems dangerous to call `rm` during the evaluation of a makefile.",
+      "range": {
+        "startLine": 2026,
+        "startChar": 0,
+        "endLine": 2026,
+        "endChar": 44
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b5357eb_e5e326f1",
+        "filename": "core/main.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 2034,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-02-07T07:11:40Z",
+      "side": 1,
+      "message": "downcase into a private var?",
+      "range": {
+        "startLine": 2034,
+        "startChar": 10,
+        "endLine": 2034,
+        "endChar": 42
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de7945a4_2373644a",
+        "filename": "core/main.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 2044,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-02-07T07:11:40Z",
+      "side": 1,
+      "message": "instead of having mutually-exclusive individual columns for different types of non-module installed files, why not create an `non-module-filetype` enum and use a single row?\n\nthen `_is_platform_generated` \u003d\u003d `non-module-filetype`.",
+      "range": {
+        "startLine": 2034,
+        "startChar": 2,
+        "endLine": 2044,
+        "endChar": 107
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a88e9b_acec9fb5",
+        "filename": "core/main.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 2044,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-02-07T07:11:40Z",
+      "side": 1,
+      "message": "nit: consider prefixing these new single-use variables with `SBOM_` for clarity",
+      "range": {
+        "startLine": 2044,
+        "startChar": 68,
+        "endLine": 2044,
+        "endChar": 99
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55934767_d3f2d194",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-02-07T07:11:40Z",
+      "side": 1,
+      "message": "Can we generate this list from Soong? We might be able to filter for prebuilt module types in Soong and pass that as a list to this tool.",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 169,
+        "endChar": 28
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5666cf2_61fcf0c1",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-02-07T07:11:40Z",
+      "side": 1,
+      "message": "Will be great to have some unit tests and a golden csv -\u003e .spdx file diff test, and docstrings throughout.",
+      "range": {
+        "startLine": 358,
+        "startChar": 4,
+        "endLine": 358,
+        "endChar": 8
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
