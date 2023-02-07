@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d79e84df_b77b6089",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1271121
+      },
+      "writtenOn": "2023-02-07T20:39:05Z",
+      "side": 1,
+      "message": "Line #3907 would probably a NO-OP until review comments are addressed. Do not think this is needed as well\n\nLine #3911: Guarding it with BOARD_SYSTEM_KERNEL_MODULES is okay",
+      "revId": "1f172717cc556a9ddf02da605c9bf0cbc38cd18c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7828cfb5_37d4d2d1",
