@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (6698f2 Merge "Pin signapk to Java 11")
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=TQ1A.230205.002
+>>>>>>> BRANCH (390c23 Version bump to TQ1A.230205.002 [core/build_id.mk])
