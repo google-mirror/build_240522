@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24cbe819_0f1593b7",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 3907,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-02-07T18:46:01Z",
+      "side": 1,
+      "message": "This should be drop; as file list is being created after they have been installed and rsync is being used to make sure the files which have been modified under the source are getting copied.",
+      "parentUuid": "7828cfb5_37d4d2d1",
+      "revId": "1f172717cc556a9ddf02da605c9bf0cbc38cd18c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11b415d3_7bd90528",
         "filename": "core/Makefile",
         "patchSetId": 4
@@ -48,6 +66,24 @@
       "writtenOn": "2023-02-02T18:43:09Z",
       "side": 1,
       "message": "This doesn\u0027t seem like the right place to be copying files, this rule is for creating the list of files.  The copy should take place outside of the rule and be added to `INTERNAL_SYSTEM_DLKMIMAGE_FILES`, although that can be difficult if you don\u0027t know the list of files in `$(BOARD_SYSTEM_DLKM_SRC)/`",
+      "revId": "1f172717cc556a9ddf02da605c9bf0cbc38cd18c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad9f5f98_ee6b8aa0",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 3912,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-02-07T18:46:01Z",
+      "side": 1,
+      "message": "File list is being updated after the copying to make sure any changes in the source is updated by rsync. So, it needs to be copied here for the correct list to generated.\n\nThis is basically a partial revert of the http://aosp/2323114 where keep supporting the old variable `BOARD_SYSTEM_DLKM_SRC` which we removed in favor of new one.",
+      "parentUuid": "11b415d3_7bd90528",
       "revId": "1f172717cc556a9ddf02da605c9bf0cbc38cd18c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
