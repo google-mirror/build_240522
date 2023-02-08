@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34fc1a6f_7dfd5bfb",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-02-08T22:08:39Z",
+      "side": 1,
+      "message": "You could wrap that in `$(wildcard)`, which will return empty if the path doesn\u0027t exist. I think that makes more sense in the BoardConfig.mk, since in most cases it will be specific path that should always exist, and if it is missing that is probably a sign of a typo that shouldn\u0027t be silently ignored.",
+      "parentUuid": "d69add77_e262bdd3",
+      "range": {
+        "startLine": 601,
+        "startChar": 25,
+        "endLine": 601,
+        "endChar": 118
+      },
+      "revId": "b8f8ab13bb968931e8e1b602d6139f7ff615eae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23268f44_99ecc644",
         "filename": "core/Makefile",
         "patchSetId": 6
