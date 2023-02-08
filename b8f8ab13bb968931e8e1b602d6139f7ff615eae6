@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19bc6459_b9ce99ae",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-02-08T22:19:16Z",
+      "side": 1,
+      "message": "The old behavior is to gracefully handle non-existence directories(done by shell scripts before rsync) and partners are OK with it. Given the urgency of the request, can we first restore this BOARD_SYSTEM_DLKM_SRC feature to unblock partners, then make quality of life improvements?",
+      "parentUuid": "34fc1a6f_7dfd5bfb",
+      "range": {
+        "startLine": 601,
+        "startChar": 25,
+        "endLine": 601,
+        "endChar": 118
+      },
+      "revId": "b8f8ab13bb968931e8e1b602d6139f7ff615eae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23268f44_99ecc644",
         "filename": "core/Makefile",
         "patchSetId": 6
