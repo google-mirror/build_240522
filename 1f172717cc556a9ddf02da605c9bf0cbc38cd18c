@@ -88,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86235982_b493e6c7",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 3907,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-02-08T05:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deb0b675_4590292b",
+      "revId": "1f172717cc556a9ddf02da605c9bf0cbc38cd18c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11b415d3_7bd90528",
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "Ack, but that implementation had the same issues.  If this is something that is going to stay in it should be implemented in a way that provides accurate incremental builds.",
       "parentUuid": "ad9f5f98_ee6b8aa0",
+      "revId": "1f172717cc556a9ddf02da605c9bf0cbc38cd18c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c93bbd13_dd41c382",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 3912,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-02-08T05:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50f34c39_2e0a66f9",
       "revId": "1f172717cc556a9ddf02da605c9bf0cbc38cd18c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
