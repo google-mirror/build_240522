@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3707313_1fa96a9c",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-02-08T19:09:18Z",
+      "side": 1,
+      "message": "Can you use `$(call find-files-in-subdirs,$(BOARD_SYSTEM_DLKM_SRC),*.ko)` here?That will ensure it is recognized as a find command and optimized by kati.",
+      "range": {
+        "startLine": 601,
+        "startChar": 25,
+        "endLine": 601,
+        "endChar": 118
+      },
+      "revId": "b8f8ab13bb968931e8e1b602d6139f7ff615eae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23268f44_99ecc644",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-02-08T19:09:18Z",
+      "side": 1,
+      "message": "All of the below commands will work fine even if SYSTEM_KERNEL_MODULES is empty, the if check is unnecessary",
+      "revId": "b8f8ab13bb968931e8e1b602d6139f7ff615eae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91912306_f229f44b",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-02-08T19:09:18Z",
+      "side": 1,
+      "message": "2-space indents for readability",
+      "revId": "b8f8ab13bb968931e8e1b602d6139f7ff615eae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
