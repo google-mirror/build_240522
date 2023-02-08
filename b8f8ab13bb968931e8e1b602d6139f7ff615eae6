@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d69add77_e262bdd3",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-02-08T21:59:43Z",
+      "side": 1,
+      "message": "It\u0027s here https://cs.android.com/android/platform/superproject/+/master:device/google/cuttlefish/shared/BoardConfig.mk;l\u003d23\n\nBut the same code path is used by many targets. We would need to perform a directory existence check. Might be easier to do it here?",
+      "parentUuid": "17a8b509_a7d04545",
+      "range": {
+        "startLine": 601,
+        "startChar": 25,
+        "endLine": 601,
+        "endChar": 118
+      },
+      "revId": "b8f8ab13bb968931e8e1b602d6139f7ff615eae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23268f44_99ecc644",
         "filename": "core/Makefile",
         "patchSetId": 6
