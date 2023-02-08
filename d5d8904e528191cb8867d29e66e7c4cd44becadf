@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c6cf2db_bb59b68e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-02-08T13:42:14Z",
+      "side": 1,
+      "message": "I don\u0027t understand the relashionship between TARGET_BUILD_APPS, TARGET_BUILD_UNBUNDLED_IMAGE and TARGET_BUILD_UNBUNDLED to tell if the makefile check can be restructured (e.g. if some of them imply the others) but aside from that LGTM.",
+      "revId": "d5d8904e528191cb8867d29e66e7c4cd44becadf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
