@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e07781af_cca0f3bd",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-02-08T19:19:23Z",
+      "side": 1,
+      "message": "But `find-files-in-subdirs` would not be able to handle non-existent directories. One of the build tests specified an invalid BOARD_SYSTEM_DLKM_SRC so we must handle that gracefully.",
+      "parentUuid": "f3707313_1fa96a9c",
+      "range": {
+        "startLine": 601,
+        "startChar": 25,
+        "endLine": 601,
+        "endChar": 118
+      },
+      "revId": "b8f8ab13bb968931e8e1b602d6139f7ff615eae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23268f44_99ecc644",
         "filename": "core/Makefile",
         "patchSetId": 6
@@ -37,6 +61,24 @@
       "writtenOn": "2023-02-08T19:09:18Z",
       "side": 1,
       "message": "All of the below commands will work fine even if SYSTEM_KERNEL_MODULES is empty, the if check is unnecessary",
+      "revId": "b8f8ab13bb968931e8e1b602d6139f7ff615eae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "646743b8_337539ea",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-02-08T19:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23268f44_99ecc644",
       "revId": "b8f8ab13bb968931e8e1b602d6139f7ff615eae6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +96,24 @@
       "writtenOn": "2023-02-08T19:09:18Z",
       "side": 1,
       "message": "2-space indents for readability",
+      "revId": "b8f8ab13bb968931e8e1b602d6139f7ff615eae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a493d4c_42b49be6",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-02-08T19:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91912306_f229f44b",
       "revId": "b8f8ab13bb968931e8e1b602d6139f7ff615eae6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
