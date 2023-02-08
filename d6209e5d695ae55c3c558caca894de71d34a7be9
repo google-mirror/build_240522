@@ -279,6 +279,24 @@
       "parentUuid": "d1cff666_8f4cddfa",
       "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac0df441_b8f28871",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1897,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-02-08T23:31:49Z",
+      "side": 1,
+      "message": "Whoops, my bad on not-reusing $T. \n\nMeasuring total dev time is important to us. If you\u0027d rather us fix TRACE_BEGIN_SOONG and can make the argument that it would be near-equivalent to this (versus soong_ui/main\u0027s manual time) then I can make the change there.",
+      "parentUuid": "ae580bd1_45f7044f",
+      "revId": "d6209e5d695ae55c3c558caca894de71d34a7be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
