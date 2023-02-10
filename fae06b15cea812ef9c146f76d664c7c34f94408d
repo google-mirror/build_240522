@@ -51,6 +51,24 @@
       "parentUuid": "add19a89_a0c09670",
       "revId": "fae06b15cea812ef9c146f76d664c7c34f94408d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f916bdc8_6d07fe79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933450
+      },
+      "writtenOn": "2023-02-10T06:20:34Z",
+      "side": 1,
+      "message": "Yes, thanks for the guide! Now the bug is fixed and released to TF.",
+      "parentUuid": "12edaa21_4e7e64bd",
+      "revId": "fae06b15cea812ef9c146f76d664c7c34f94408d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
