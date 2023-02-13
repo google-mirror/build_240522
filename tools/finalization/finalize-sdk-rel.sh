@@ -14,7 +14,7 @@ function finalize_sdk_rel() {
     LOGNAME=android-eng HOSTNAME=google.com "$top/out/host/linux-x86/bin/adb" keygen "$top/vendor/google/security/adb/${FINA_PLATFORM_VERSION}.adb_key"
 
     # build/make/core/version_defaults.mk
-    sed -i -e "s/PLATFORM_VERSION_CODENAME.${BUILD_PREFIX} := .*/PLATFORM_VERSION_CODENAME.${BUILD_PREFIX} := REL/g" "$top/build/make/core/version_defaults.mk"
+    sed -i -e "s/PLATFORM_VERSION_CODENAME.${FINA_BUILD_PREFIX} := .*/PLATFORM_VERSION_CODENAME.${FINA_BUILD_PREFIX} := REL/g" "$top/build/make/core/version_defaults.mk"
 
     # cts
     echo "$FINA_PLATFORM_VERSION" > "$top/cts/tests/tests/os/assets/platform_versions.txt"
