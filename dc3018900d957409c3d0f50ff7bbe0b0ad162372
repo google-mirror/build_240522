@@ -22,6 +22,30 @@
       },
       "revId": "dc3018900d957409c3d0f50ff7bbe0b0ad162372",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c74e558_297971e5",
+        "filename": "tools/finalization/finalize-aidl-vndk-sdk-resources.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2023-02-13T23:53:42Z",
+      "side": 1,
+      "message": "Initially FINA prefix was for \"FINAlization\". But I like FINAL as it makes sense on its own.",
+      "parentUuid": "bc769a10_7f6bcb4c",
+      "range": {
+        "startLine": 40,
+        "startChar": 28,
+        "endLine": 40,
+        "endChar": 33
+      },
+      "revId": "dc3018900d957409c3d0f50ff7bbe0b0ad162372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
