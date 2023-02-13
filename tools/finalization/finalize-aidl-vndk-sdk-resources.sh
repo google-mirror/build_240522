@@ -16,7 +16,6 @@ function finalize_aidl_vndk_sdk_resources() {
     # The full process can be found at (INTERNAL) go/android-sdk-finalization.
 
     # Update references in the codebase to new API version (TODO)
-    # ...
 
     # VNDK definitions for new SDK version
     cp "$top/development/vndk/tools/definition-tool/datasets/vndk-lib-extra-list-current.txt" \
@@ -36,6 +35,19 @@ function finalize_aidl_vndk_sdk_resources() {
     echo "DONE: THIS INTENTIONALLY MAY FAIL AND REPAIR ITSELF"
 
     # Finalize SDK
+
+    # bionic
+    if ! grep -q "\__.*$((${FINA_PLATFORM_SDK_VERSION}))" api-level.h ; then
+        local tmpfile=$(mktemp /tmp/finalization.XXXXXX)
+        echo "
+/** Names the \"${FINA_PLATFORM_CODENAME:0:1}\" API level ($FINA_PLATFORM_SDK_VERSION), for comparison against \`__ANDROID_API__\`. */
+#define __ANDROID_API_${FINA_PLATFORM_CODENAME:0:1}__ $FINA_PLATFORM_SDK_VERSION" > "$tmpfile"
+
+        local api_level="$top/bionic/libc/include/android/api-level.h"
+        sed -i -e "/__.*$((${FINA_PLATFORM_SDK_VERSION}-1))/r""$tmpfile" $api_level
+
+        rm "$tmpfile"
+    fi
 
     # build/make
     local version_defaults="$top/build/make/core/version_defaults.mk"
