@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2952a4dc_10550beb",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-02-14T18:19:16Z",
+      "side": 1,
+      "message": "Why do you need `test_config` set?  I don\u0027t see anything outside of the installable module check that reads it.  If you do need it, I think the original version of this whole hunk should move up out of the installable module check.",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 773,
+        "endChar": 0
+      },
+      "revId": "ebdd7c036e572022be69e5dc8ea8d2d666ba4e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
