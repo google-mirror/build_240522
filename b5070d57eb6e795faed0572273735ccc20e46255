@@ -33,6 +33,23 @@
       "message": "bump on this - can\u0027t build these targets in AOSP master currently, or released versions",
       "revId": "b5070d57eb6e795faed0572273735ccc20e46255",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "578b4157_f3808fe7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-02-15T19:56:36Z",
+      "side": 1,
+      "message": "Please have someone familiar with the change +2",
+      "revId": "b5070d57eb6e795faed0572273735ccc20e46255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
