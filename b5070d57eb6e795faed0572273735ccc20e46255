@@ -50,6 +50,24 @@
       "message": "Please have someone familiar with the change +2",
       "revId": "b5070d57eb6e795faed0572273735ccc20e46255",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f01626c_10a0a87e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1112368
+      },
+      "writtenOn": "2023-02-15T20:00:42Z",
+      "side": 1,
+      "message": "would be more than happy to get someone relevant - who do you recommend I add?",
+      "parentUuid": "578b4157_f3808fe7",
+      "revId": "b5070d57eb6e795faed0572273735ccc20e46255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
