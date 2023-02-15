@@ -16,6 +16,23 @@
       "message": "Verified that futility-host is placed in the otatools package for a custom ryu target.",
       "revId": "b5070d57eb6e795faed0572273735ccc20e46255",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c3ba5f4_a9dcdd9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1112368
+      },
+      "writtenOn": "2023-02-15T19:52:13Z",
+      "side": 1,
+      "message": "bump on this - can\u0027t build these targets in AOSP master currently, or released versions",
+      "revId": "b5070d57eb6e795faed0572273735ccc20e46255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
