@@ -21,6 +21,7 @@ LLNDK: libvndksupport.so
 LLNDK: libvulkan.so
 VNDK-SP: android.hardware.common-V2-ndk.so
 VNDK-SP: android.hardware.common.fmq-V1-ndk.so
+VNDK-SP: android.hardware.graphics.allocator-V2-ndk.so
 VNDK-SP: android.hardware.graphics.common-V4-ndk.so
 VNDK-SP: android.hardware.graphics.common@1.0.so
 VNDK-SP: android.hardware.graphics.common@1.1.so
@@ -30,7 +31,6 @@ VNDK-SP: android.hardware.graphics.mapper@2.0.so
 VNDK-SP: android.hardware.graphics.mapper@2.1.so
 VNDK-SP: android.hardware.graphics.mapper@3.0.so
 VNDK-SP: android.hardware.graphics.mapper@4.0.so
-VNDK-SP: android.hardware.graphics.allocator-V2-ndk.so
 VNDK-SP: android.hardware.renderscript@1.0.so
 VNDK-SP: android.hidl.memory.token@1.0.so
 VNDK-SP: android.hidl.memory@1.0-impl.so
@@ -53,7 +53,9 @@ VNDK-SP: libhidlmemory.so
 VNDK-SP: libion.so
 VNDK-SP: libjsoncpp.so
 VNDK-SP: liblzma.so
+VNDK-SP: libmeminfo.so
 VNDK-SP: libprocessgroup.so
+VNDK-SP: libprocinfo.so
 VNDK-SP: libunwindstack.so
 VNDK-SP: libutils.so
 VNDK-SP: libutilscallstack.so
@@ -115,7 +117,6 @@ VNDK-core: libpcre2.so
 VNDK-core: libpiex.so
 VNDK-core: libpng.so
 VNDK-core: libpower.so
-VNDK-core: libprocinfo.so
 VNDK-core: libradio_metadata.so
 VNDK-core: libspeexresampler.so
 VNDK-core: libsqlite.so
