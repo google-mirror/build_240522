@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c91b1d87_f2ed345e",
+        "filename": "tools/finalization/build-step-1.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1414465
+      },
+      "writtenOn": "2023-02-17T20:54:03Z",
+      "side": 1,
+      "message": "I don\u0027t have too much context for the other scripts, but should we extract the build target in case we ever need to change it to something specific?",
+      "range": {
+        "startLine": 9,
+        "startChar": 71,
+        "endLine": 9,
+        "endChar": 81
+      },
+      "revId": "32ce1381ca8b5f9a8a51d18aa132c25adf524d51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
