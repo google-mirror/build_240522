@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d85e4b6e_861af412",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1078064
+      },
+      "writtenOn": "2023-02-18T22:08:56Z",
+      "side": 1,
+      "message": "Nit: Reword comment to:\n\"Write values in vendor file because these variables persist even after flashing a GSI image\"",
+      "range": {
+        "startLine": 50,
+        "startChar": 84,
+        "endLine": 51,
+        "endChar": 85
+      },
+      "revId": "6ada6df1f6ac48a4d7465c773cc5b79f6af7128c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
