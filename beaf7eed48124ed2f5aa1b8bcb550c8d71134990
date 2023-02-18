@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53bdae40_57b53e51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-02-18T07:40:55Z",
+      "side": 1,
+      "message": "Baligh, please help review the newly added metadata_file.proto, in which I added a new message for including external external SBOM reference in product SBOM.",
+      "revId": "beaf7eed48124ed2f5aa1b8bcb550c8d71134990",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
