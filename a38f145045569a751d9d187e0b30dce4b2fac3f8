@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6efeb86_33814c15",
+        "filename": "core/config.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-02-18T07:36:47Z",
+      "side": 1,
+      "message": "See https://android.googlesource.com/platform/build/kati/+/ce812f58fb5e52a5847c8010b7f7b4ef1bdc51a5",
+      "parentUuid": "21d337c7_f7c2b1ac",
+      "range": {
+        "startLine": 235,
+        "startChar": 15,
+        "endLine": 235,
+        "endChar": 19
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6ae7151_ac339472",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70c5d019_25e16820",
+        "filename": "core/main.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 2026,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-02-18T07:36:47Z",
+      "side": 1,
+      "message": "Deleted this, which is not needed any more.",
+      "parentUuid": "d6ae7151_ac339472",
+      "range": {
+        "startLine": 2026,
+        "startChar": 0,
+        "endLine": 2026,
+        "endChar": 44
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b5357eb_e5e326f1",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-02-07T07:11:40Z",
       "side": 1,
       "message": "downcase into a private var?",
+      "range": {
+        "startLine": 2034,
+        "startChar": 10,
+        "endLine": 2034,
+        "endChar": 42
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c561c0c2_d6003180",
+        "filename": "core/main.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 2034,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-02-18T07:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b5357eb_e5e326f1",
       "range": {
         "startLine": 2034,
         "startChar": 10,
@@ -133,6 +205,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "271edef0_f02052ca",
+        "filename": "core/main.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 2044,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-02-18T07:36:47Z",
+      "side": 1,
+      "message": "I planned to have them defined in definitions.mk actually. They are similar to other ALL_ variables in definitions.mk but was not tracked properly in make, so they are not for SBOM only but some global metadata in make. So I think they might not need a SBOM prefix and just need to follow the naming convention of other variables in definitions.mk.",
+      "parentUuid": "f7a88e9b_acec9fb5",
+      "range": {
+        "startLine": 2044,
+        "startChar": 68,
+        "endLine": 2044,
+        "endChar": 99
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de1b45f2_24f9b420",
+        "filename": "core/main.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 2044,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-02-18T07:36:47Z",
+      "side": 1,
+      "message": "I try not to aggregate data in make and leave it for the generate-sbom.py script. The job done in Make is to collect all raw data for later process in generate-sbom.py, also keeping raw data in the .csv file is helpful in development, which can be easily analyzed in a spreadsheet app.",
+      "parentUuid": "de7945a4_2373644a",
+      "range": {
+        "startLine": 2034,
+        "startChar": 2,
+        "endLine": 2044,
+        "endChar": 107
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55934767_d3f2d194",
@@ -156,6 +276,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b1add33_80a48344",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-02-18T07:36:47Z",
+      "side": 1,
+      "message": "I think Soong doesn\u0027t needs to know how \"prebuilt\" is defined in the context of SBOM, instead it provides the metadata for other programs to process according to their own logic.",
+      "parentUuid": "55934767_d3f2d194",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 169,
+        "endChar": 28
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5666cf2_61fcf0c1",
@@ -169,6 +313,30 @@
       "writtenOn": "2023-02-07T07:11:40Z",
       "side": 1,
       "message": "Will be great to have some unit tests and a golden csv -\u003e .spdx file diff test, and docstrings throughout.",
+      "range": {
+        "startLine": 358,
+        "startChar": 4,
+        "endLine": 358,
+        "endChar": 8
+      },
+      "revId": "a38f145045569a751d9d187e0b30dce4b2fac3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd84f0b0_01a97705",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-02-18T07:36:47Z",
+      "side": 1,
+      "message": "An integration test is added to verify the installed files from .img files and the generated SBOM.",
+      "parentUuid": "f5666cf2_61fcf0c1",
       "range": {
         "startLine": 358,
         "startChar": 4,
