@@ -16,6 +16,24 @@
       "message": "Baligh, please help review the newly added metadata_file.proto, in which I added a new message for including external external SBOM reference in product SBOM.",
       "revId": "beaf7eed48124ed2f5aa1b8bcb550c8d71134990",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba9ae446_1ddd3751",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-02-18T07:46:11Z",
+      "side": 1,
+      "message": "To correct some typo, the newly added message SBOMRef is for including external SBOM reference in METADATA files of prebuilt packages, and finally they will be added to the product SBOM as external SBOM references.",
+      "parentUuid": "53bdae40_57b53e51",
+      "revId": "beaf7eed48124ed2f5aa1b8bcb550c8d71134990",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
