@@ -26,7 +26,8 @@ function finalize_step_2_main() {
     source $top/build/make/tools/finalization/finalize-sdk-rel.sh
 
     # Update prebuilts.
-    "$top/prebuilts/build-tools/path/linux-x86/python3" "$top/packages/modules/common/tools/finalize_sdk.py" -b ${FINAL_BUG_ID} -f ${FINAL_MAINLINE_EXTENSION} -r "${FINAL_MAINLINE_SDK_COMMIT_MESSAGE}" ${FINAL_MAINLINE_SDK_BUILD_ID}
+    #"$top/prebuilts/build-tools/path/linux-x86/python3" "$top/packages/modules/common/tools/finalize_sdk.py" -b ${FINAL_BUG_ID} -f ${FINAL_MAINLINE_EXTENSION} -r "${FINAL_MAINLINE_SDK_COMMIT_MESSAGE}" ${FINAL_SDK_BUILD_ID}
+    "$top/prebuilts/build-tools/path/linux-x86/python3" "$top/prebuilts/sdk/update_prebuilts.py" -f ${FINAL_PLATFORM_SDK_VERSION} -e ${FINAL_MAINLINE_EXTENSION} --bug ${FINAL_BUG_ID} ${FINAL_SDK_BUILD_ID}
 
     # build to confirm everything is OK
     AIDL_FROZEN_REL=true $m
