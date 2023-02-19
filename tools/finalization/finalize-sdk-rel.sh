@@ -18,6 +18,9 @@ function finalize_sdk_rel() {
 
     # cts
     echo "$FINAL_PLATFORM_VERSION" > "$top/cts/tests/tests/os/assets/platform_versions.txt"
+    if [ "$FINAL_PLATFORM_CODENAME" != "$CURRENT_PLATFORM_CODENAME" ]; then
+        echo "$CURRENT_PLATFORM_CODENAME" >> "./cts/tests/tests/os/assets/platform_versions.txt"
+    fi
     git -C "$top/cts" mv hostsidetests/theme/assets/${FINAL_PLATFORM_CODENAME} hostsidetests/theme/assets/${FINAL_PLATFORM_SDK_VERSION}
 
     # system/sepolicy
@@ -29,7 +32,7 @@ function finalize_sdk_rel() {
     mv "$top/prebuilts/abi-dumps/ndk/current" "$top/prebuilts/abi-dumps/ndk/$FINAL_PLATFORM_SDK_VERSION"
 
     # prebuilts/abi-dumps/vndk
-    mv "$top/prebuilts/abi-dumps/vndk/$FINAL_PLATFORM_CODENAME" "$top/prebuilts/abi-dumps/vndk/$FINAL_PLATFORM_SDK_VERSION"
+    mv "$top/prebuilts/abi-dumps/vndk/$CURRENT_PLATFORM_CODENAME" "$top/prebuilts/abi-dumps/vndk/$FINAL_PLATFORM_SDK_VERSION"
 
     # prebuilts/abi-dumps/platform
     mv "$top/prebuilts/abi-dumps/platform/current" "$top/prebuilts/abi-dumps/platform/$FINAL_PLATFORM_SDK_VERSION"
