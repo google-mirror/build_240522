@@ -24,3 +24,30 @@ PRODUCT_PACKAGES += \
     product_compatibility_matrix.xml \
     product_manifest.xml \
     selinux_policy_product \
+
+PRODUCT_SOURCE_ROOT_DIRS += \
+    art \
+    bionic \
+    bootable \
+    build \
+    cts \
+    dalvik \
+    developers \
+    development \
+    device \
+    external \
+    frameworks \
+    hardware \
+    kernel \
+    libcore \
+    libnativehelper \
+    packages \
+    pdk \
+    platform_testing \
+    prebuilts \
+    sdk \
+    system \
+    test \
+    toolchain \
+    tools \
+    vendor \
