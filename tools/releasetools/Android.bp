@@ -41,6 +41,7 @@ python_defaults {
     ],
     required: [
         "care_map_generator",
+        "zip2zip",
     ],
 }
 
@@ -174,6 +175,7 @@ python_defaults {
         "toybox",
         "unpack_bootimg",
         "deapexer",
+        "zip2zip",
     ],
     target: {
         darwin: {
@@ -505,6 +507,9 @@ python_binary_host {
     libs: [
         "releasetools_apex_utils",
         "releasetools_common",
+    ],
+    required: [
+        "zip2zip",
     ],
 }
 
