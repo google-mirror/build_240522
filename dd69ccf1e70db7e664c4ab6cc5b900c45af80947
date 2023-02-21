@@ -16,6 +16,148 @@
       "message": "`time build/make/tools/write_branch_info.py` shows that this takes under .1s\n\nWe can discuss here or offline what the file should actually look like. Lamont mentioned JSON?",
       "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ec41694_06f50639",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-02-21T20:58:12Z",
+      "side": 1,
+      "message": "Looks good. Just minor nits.",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f94fba4c_73942180",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-02-21T20:58:12Z",
+      "side": 1,
+      "message": "2023 now.",
+      "range": {
+        "startLine": 3,
+        "startChar": 16,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46448c94_79db95e6",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-02-21T20:58:12Z",
+      "side": 1,
+      "message": "To support the Git Native Submodules UX better, add this ahead of line 45.\n```\nif os.path.exists(os.path.join(build_top, \u0027.git\u0027)):\n  return os.path.join(build_top, \u0027.git\u0027)\n```",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29502ab3_f3e2622d",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-02-21T20:58:12Z",
+      "side": 1,
+      "message": "Use `os.makedirs`",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b04419f_962d137d",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-02-21T20:58:12Z",
+      "side": 1,
+      "message": "For python3, the preferred syntax is\n```\nwith open(filepath, \"w\") as f:\n  f.write(...)\n  f.close() # optionally\n```",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e657833_8cdb9b9d",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-02-21T20:58:12Z",
+      "side": 1,
+      "message": "docstring",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f008733c_ee076626",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-02-21T20:58:12Z",
+      "side": 1,
+      "message": "Use the return from _get_default_output_file() directly in the help text, probably with a format string.  (That way if the default changes, you don\u0027t have to change it in two places.)\n\nMaybe wrap this in () and drop the +, as in 92-93.",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38cbf1f4_00172f0d",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-02-21T20:58:12Z",
+      "side": 1,
+      "message": "format string here, too.",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
