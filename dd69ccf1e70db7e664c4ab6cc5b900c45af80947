@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71775242_d72030fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-02-21T16:18:01Z",
+      "side": 1,
+      "message": "`time build/make/tools/write_branch_info.py` shows that this takes under .1s\n\nWe can discuss here or offline what the file should actually look like. Lamont mentioned JSON?",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
