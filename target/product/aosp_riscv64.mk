@@ -30,8 +30,7 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # GSI for system/product & support 64-bit apps only
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system.mk)
-TARGET_FLATTEN_APEX := false
+$(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system.mk)
 
 #
 # All components inherited here go to system_ext image
@@ -58,6 +57,8 @@ ifeq (aosp_riscv64,$(TARGET_PRODUCT))
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_release.mk)
 endif
 
+<<<<<<< PATCH SET (0f84f3 Build the whole platform for aosp_riscv64)
+=======
 # TODO: this list should come via mainline_system.mk, but for now list
 # just the modules that work for riscv64.
 PRODUCT_PACKAGES := \
@@ -76,6 +77,7 @@ PRODUCT_PACKAGES := \
 $(call inherit-product, $(SRC_TARGET_DIR)/product/default_art_config.mk)
 PRODUCT_USES_DEFAULT_ART_CONFIG := false
 
+>>>>>>> BASE      (a1d610 Disable riscv64 dependency on bcc and ld.mc)
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     root/init.zygote64.rc
 
