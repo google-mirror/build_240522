@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ed52cc0_1f28ae6b",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-02-21T22:18:28Z",
+      "side": 1,
+      "message": "thanks!",
+      "parentUuid": "f94fba4c_73942180",
+      "range": {
+        "startLine": 3,
+        "startChar": 16,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46448c94_79db95e6",
@@ -71,6 +95,24 @@
       "writtenOn": "2023-02-21T20:58:12Z",
       "side": 1,
       "message": "To support the Git Native Submodules UX better, add this ahead of line 45.\n```\nif os.path.exists(os.path.join(build_top, \u0027.git\u0027)):\n  return os.path.join(build_top, \u0027.git\u0027)\n```",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a804ec70_6478d620",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-02-21T22:18:28Z",
+      "side": 1,
+      "message": "The intention was for the script that calls this to check whether that folder existed and, if so, to call this with git_dir set to that. Is this an acceptable course for you. That said, your way seems _much_ cleaner.",
+      "parentUuid": "46448c94_79db95e6",
       "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -92,6 +134,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45af9959_ba7623b0",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-02-21T22:18:28Z",
+      "side": 1,
+      "message": "thanks!",
+      "parentUuid": "29502ab3_f3e2622d",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b04419f_962d137d",
@@ -109,6 +169,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43272492_8d7c572a",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-02-21T22:18:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b04419f_962d137d",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e657833_8cdb9b9d",
@@ -122,6 +200,24 @@
       "writtenOn": "2023-02-21T20:58:12Z",
       "side": 1,
       "message": "docstring",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89a7205d_d72862c1",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-02-21T22:18:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e657833_8cdb9b9d",
       "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -145,6 +241,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "937d4096_2d8abcee",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-02-21T22:18:28Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like this gets saved so I added it outside.",
+      "parentUuid": "f008733c_ee076626",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "38cbf1f4_00172f0d",
         "filename": "tools/write_branch_info.py",
         "patchSetId": 3
@@ -156,6 +270,24 @@
       "writtenOn": "2023-02-21T20:58:12Z",
       "side": 1,
       "message": "format string here, too.",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b1fe867_6b1f2690",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-02-21T22:18:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38cbf1f4_00172f0d",
       "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
