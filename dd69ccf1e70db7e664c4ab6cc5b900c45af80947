@@ -257,6 +257,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bd78d59_bfd90d47",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-02-22T17:04:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "937d4096_2d8abcee",
+      "revId": "dd69ccf1e70db7e664c4ab6cc5b900c45af80947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38cbf1f4_00172f0d",
