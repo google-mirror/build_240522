@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfab7006_f8645160",
+        "filename": "tools/write_branch_info.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1903985
+      },
+      "writtenOn": "2023-02-23T02:17:43Z",
+      "side": 1,
+      "message": "yes. But thus this mean the script will fail when we use soong_ui.bash directly (as we do in all our CI runs). I assume we indeed do not care about this mode of getting the branch name for CI runs?",
+      "parentUuid": "6253f7b9_57f79f23",
+      "revId": "552c43541a2e7262ab07e9949787bf51f5fc6313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d636230_a6d16a69",
         "filename": "tools/write_branch_info.py",
         "patchSetId": 5
