@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3abc9440_8120002d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-02-24T14:11:37Z",
+      "side": 1,
+      "message": "Colin: I squashed your change aosp/2448667 into mine because it makes more sense to keep them as one change.",
+      "revId": "e325f61525ccf56ef4e4ae60b56d9626de88f5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
