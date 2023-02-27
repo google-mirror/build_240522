@@ -32,6 +32,12 @@ ifeq (sdk_phone_x86_64,$(TARGET_PRODUCT))
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
 endif
 
+x := $(shell python build/make/target/product/verify_python2.py)
+
+ifneq ($(.SHELLSTATUS),0)
+  $(error failed)
+endif
+
 #
 # All components inherited here go to system_ext image
 #
