@@ -182,8 +182,12 @@ endif
 # HOST_ARCH
 ifneq (,$(findstring x86_64,$(UNAME)))
   HOST_ARCH := x86_64
-  HOST_2ND_ARCH := x86
   HOST_IS_64_BIT := true
+ifeq ($(ART_USE_SIMULATOR),true)
+  HOST_2ND_ARCH :=
+else
+  HOST_2ND_ARCH := x86
+endif
 else
 ifneq (,$(findstring i686,$(UNAME))$(findstring x86,$(UNAME)))
 $(error Building on a 32-bit x86 host is not supported: $(UNAME)!)
