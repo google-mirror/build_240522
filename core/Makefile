@@ -995,12 +995,13 @@ $(INSTALLED_FILES_FILE_RAMDISK) : $(INTERNAL_RAMDISK_FILES) $(FILESLIST) $(FILES
 	rm -f $@
 	$(FILESLIST) $(TARGET_RAMDISK_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+	# Check for possible binary file duplicates in the ramdisk image.
+	./build/make/core/dupcheck.sh $(PRODUCT_OUT) ramdisk
 
 $(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_RAMDISK)))
 $(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON_RAMDISK)))
 
 BUILT_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk.img
-
 
 ifneq ($(BOARD_KERNEL_MODULES_16K),)
 
@@ -1459,6 +1460,8 @@ $(INSTALLED_FILES_FILE_VENDOR_RAMDISK): $(INTERNAL_VENDOR_RAMDISK_FILES) $(FILES
 	rm -f $@
 	$(FILESLIST) $(TARGET_VENDOR_RAMDISK_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+	# Check for possible binary file duplicates in the vendor_ramdisk image.
+	./build/make/core/dupcheck.sh $(PRODUCT_OUT) vendor_ramdisk
 
 $(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_VENDOR_RAMDISK)))
 $(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON_VENDOR_RAMDISK)))
@@ -3296,6 +3299,8 @@ $(INSTALLED_FILES_FILE): $(FULL_SYSTEMIMAGE_DEPS) $(FILESLIST) $(FILESLIST_UTIL)
 	rm -f $@
 	$(FILESLIST) $(TARGET_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+	# Check for possible binary file duplicates in the system image.
+	./build/make/core/dupcheck.sh $(PRODUCT_OUT) system
 
 $(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE)))
 $(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON)))
@@ -3569,6 +3574,8 @@ $(INSTALLED_FILES_FILE_SYSTEMOTHER) : $(INTERNAL_SYSTEMOTHERIMAGE_FILES) $(FILES
 	rm -f $@
 	$(FILESLIST) $(TARGET_OUT_SYSTEM_OTHER) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+	# Check for possible binary file duplicates in the system_other image.
+	./build/make/core/dupcheck.sh $(PRODUCT_OUT) system_other
 
 $(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_SYSTEMOTHER)))
 $(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON_SYSTEMOTHER)))
@@ -3748,6 +3755,8 @@ $(INSTALLED_FILES_FILE_PRODUCT) : $(INTERNAL_PRODUCTIMAGE_FILES) $(FILESLIST) $(
 	rm -f $@
 	$(FILESLIST) $(TARGET_OUT_PRODUCT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+	# Check for possible .so file duplicates in the product image.
+	./build/make/core/dupcheck.sh $(PRODUCT_OUT) product
 
 $(call declare-0p-target,$(INSTALLED_FILES_FILE_PRODUCT))
 $(call declare-0p-target,$(INSTALLED_FILES_JSON_PRODUCT))
@@ -3809,6 +3818,8 @@ $(INSTALLED_FILES_FILE_SYSTEM_EXT) : $(INTERNAL_SYSTEM_EXTIMAGE_FILES) $(FILESLI
 	rm -f $@
 	$(FILESLIST) $(TARGET_OUT_SYSTEM_EXT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
+	# Check for possible binary file duplicates in the system_ext image.
+	./build/make/core/dupcheck.sh $(PRODUCT_OUT) system_ext
 
 $(call declare-0p-target,$(INSTALLED_FILES_FILE_SYSTEM_EXT))
 $(call declare-0p-target,$(INSTALLED_FILES_JSON_SYSTEM_EXT))
