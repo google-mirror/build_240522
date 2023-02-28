@@ -3230,6 +3230,10 @@ $(INSTALLED_SYSTEMIMAGE_TARGET): $(BUILT_SYSTEMIMAGE)
 	@echo "Install system fs image: $@"
 	$(copy-file-to-target)
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
+	@echo "Check for possible shared library duplication in $(PRODUCT_OUT)"
+	./build/make/core/dupcheck.sh $(PRODUCT_OUT)
+	@echo "MD5 duplicates in $(PRODUCT_OUT)/duplicate-libs-md5.txt"
+	@echo "Possible duplicates by file size in $(PRODUCT_OUT)/duplicate-libs-size.txt"
 
 $(call declare-1p-container,$(INSTALLED_SYSTEMIMAGE_TARGET),)
 $(call declare-container-license-deps,$(INSTALLED_SYSTEMIMAGE_TARGET),$(BUILT_SYSTEMIMAGE),$(BUILT_SYSTEMIMAGE):/)
