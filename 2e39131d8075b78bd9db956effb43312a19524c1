@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c3af445_eae3d374",
+        "filename": "target/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-03-01T09:05:31Z",
+      "side": 0,
+      "message": "Just FYI, I\u0027m still in the soong OWNERS file which is included here so if the intention is to remove me completely that one needs updating as well.\n\n(if not, thanks for removing me from here: it\u0027s probably the reason people keep adding me to every change of the product/board configs, as I\u0027ve got ${LAST_RESORT_SUGGESTION} next to my name in the other OWNERS file.)",
+      "revId": "2e39131d8075b78bd9db956effb43312a19524c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
