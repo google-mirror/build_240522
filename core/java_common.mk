@@ -296,13 +296,25 @@ ifndef LOCAL_IS_HOST_MODULE
       # Note: the lib naming scheme must be kept in sync with build/soong/java/sdk_library.go.
       sdk_lib_suffix = $(call pretty-error,sdk_lib_suffix was not set correctly)
       ifeq (current,$(LOCAL_SDK_VERSION))
-        sdk_module := android_stubs_current
+        ifeq ($(BUILD_FROM_TEXT_STUB),true)
+          sdk_module := android-java-public-api-stubs
+        else
+          sdk_module := android_stubs_current
+        endif
         sdk_lib_suffix := .stubs
       else ifeq (system_current,$(LOCAL_SDK_VERSION))
-        sdk_module := android_system_stubs_current
+        ifeq ($(BUILD_FROM_TEXT_STUB),true)
+          sdk_module := android-java-system-api-stubs
+        else
+          sdk_module := android_system_stubs_current
+        endif
         sdk_lib_suffix := .stubs.system
       else ifeq (test_current,$(LOCAL_SDK_VERSION))
-        sdk_module := android_test_stubs_current
+        ifeq ($(BUILD_FROM_TEXT_STUB),true)
+          sdk_module := android-java-test-api-stubs
+        else
+          sdk_module := android_test_stubs_current
+        endif
         sdk_lib_suffix := .stubs.test
       else ifeq (core_current,$(LOCAL_SDK_VERSION))
         sdk_module := core.current.stubs
@@ -312,6 +324,8 @@ ifndef LOCAL_IS_HOST_MODULE
     endif
     full_java_bootclasspath_libs := $(call java-lib-header-files,$(sdk_module))
   endif # LOCAL_SDK_VERSION
+
+  # $(info full_java_bootclasspath_libs is $(full_java_bootclasspath_libs))
 
   ifneq ($(LOCAL_NO_STANDARD_LIBRARIES),true)
     ifneq ($(LOCAL_MODULE),jacocoagent)
@@ -338,6 +352,7 @@ ifndef LOCAL_IS_HOST_MODULE
   endif
   full_shared_java_libs := $(call java-lib-files,$(LOCAL_JAVA_LIBRARIES) $(sdk_libs),$(LOCAL_IS_HOST_MODULE))
   full_shared_java_header_libs := $(call java-lib-header-files,$(LOCAL_JAVA_LIBRARIES) $(sdk_libs),$(LOCAL_IS_HOST_MODULE))
+  # $(info full_shared_java_header_libs is $(full_shared_java_header_libs))
   sdk_libs :=
 
   # Files that contains the names of SDK libraries exported from dependencies. These will be re-exported.
