@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "229e2671_b911d61f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-03-02T01:48:22Z",
+      "side": 1,
+      "message": "+2 rubber stamping since Hongguang has +1\u0027ed.",
+      "revId": "10e0dec4631d568868651f0beb3b6c28f444c72c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
