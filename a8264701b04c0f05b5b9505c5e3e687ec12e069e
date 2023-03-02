@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c48f463_f3abcd6c",
+        "filename": "core/java_common.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-03-02T18:41:30Z",
+      "side": 1,
+      "message": "nit: use snake_case instead of kebab-case for consistency with `android_stubs_current`.\n\nAlso, WDYT about calling this `android_fromtxt_stubs_current` to differentiate it from the existing one. Both are java stubs, so using java as a prefix might be confusing.",
+      "range": {
+        "startLine": 300,
+        "startChar": 24,
+        "endLine": 300,
+        "endChar": 53
+      },
+      "revId": "a8264701b04c0f05b5b9505c5e3e687ec12e069e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
