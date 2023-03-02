@@ -296,13 +296,25 @@ ifndef LOCAL_IS_HOST_MODULE
       # Note: the lib naming scheme must be kept in sync with build/soong/java/sdk_library.go.
       sdk_lib_suffix = $(call pretty-error,sdk_lib_suffix was not set correctly)
       ifeq (current,$(LOCAL_SDK_VERSION))
-        sdk_module := android_stubs_current
+        ifeq ($(BUILD_FROM_TEXT_STUB),true)
+          sdk_module := android-java-public-api-stubs
+        else
+          sdk_module := android_stubs_current
+        endif
         sdk_lib_suffix := .stubs
       else ifeq (system_current,$(LOCAL_SDK_VERSION))
-        sdk_module := android_system_stubs_current
+        ifeq ($(BUILD_FROM_TEXT_STUB),true)
+          sdk_module := android-java-system-api-stubs
+        else
+          sdk_module := android_system_stubs_current
+        endif
         sdk_lib_suffix := .stubs.system
       else ifeq (test_current,$(LOCAL_SDK_VERSION))
-        sdk_module := android_test_stubs_current
+        ifeq ($(BUILD_FROM_TEXT_STUB),true)
+          sdk_module := android-java-test-api-stubs
+        else
+          sdk_module := android_test_stubs_current
+        endif
         sdk_lib_suffix := .stubs.test
       else ifeq (core_current,$(LOCAL_SDK_VERSION))
         sdk_module := core.current.stubs
