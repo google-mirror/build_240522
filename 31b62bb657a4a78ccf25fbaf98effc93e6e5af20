@@ -16,6 +16,24 @@
       "message": "My understanding via our offline discussion is that we\u0027re going to be doing this in Go (in the uploader) -- is this correct? Or are we still planning on calling this python script from Go?",
       "revId": "31b62bb657a4a78ccf25fbaf98effc93e6e5af20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0b1d1c4_8733dee1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-03-06T18:36:28Z",
+      "side": 1,
+      "message": "That\u0027s correct - I will keep this CL around a bit to reference code, but feel free to remove yourself from the attention set.",
+      "parentUuid": "71cdb62d_4aae872c",
+      "revId": "31b62bb657a4a78ccf25fbaf98effc93e6e5af20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
