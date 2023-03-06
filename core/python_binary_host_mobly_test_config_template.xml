@@ -1,0 +1,23 @@
+<configuration description="Config for {MODULE} mobly test">
+    <option name="test-suite-tag" value="cts" />
+    <option name="config-descriptor:metadata" key="parameter" value="not_instant_app" />
+    <option name="config-descriptor:metadata" key="parameter" value="not_multi_abi" />
+    <option name="config-descriptor:metadata" key="parameter" value="not_secondary_user" />
+
+    {EXTRA_CONFIGS}
+
+    <device name="device1">
+      <target_preparer class="com.android.tradefed.targetprep.PythonVirtualenvPreparer">
+        <option name="requirements-file" value="requirements.txt" />
+      </target_preparer>
+    </device>
+    <device name="device2"></device>
+
+    <test class="com.android.tradefed.testtype.mobly.MoblyBinaryHostTest">
+      <!-- The mobly-par-file-name should match the module name -->
+      <option name="mobly-par-file-name" value="{MODULE}" />
+      <!-- Timeout limit in milliseconds for all test cases of the python binary -->
+      <option name="mobly-test-timeout" value="180000" />
+    </test>
+</configuration>
+
