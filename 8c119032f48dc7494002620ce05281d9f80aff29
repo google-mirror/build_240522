@@ -16,6 +16,29 @@
       "message": "Cole \u0026 Spandan FYI",
       "revId": "8c119032f48dc7494002620ce05281d9f80aff29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e4de372_6bbdd295",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3524,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-06T00:38:39Z",
+      "side": 1,
+      "message": "nit: Probably we should change argument name of \u0027system\u0027 into something else as this example is for vendor instead of system in the future.",
+      "range": {
+        "startLine": 3523,
+        "startChar": 44,
+        "endLine": 3524,
+        "endChar": 50
+      },
+      "revId": "8c119032f48dc7494002620ce05281d9f80aff29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
