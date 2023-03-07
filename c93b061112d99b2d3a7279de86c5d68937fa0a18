@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b6b709_e4f60223",
+        "filename": "core/main.mk",
+        "patchSetId": 26
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-03-07T19:49:12Z",
+      "side": 1,
+      "message": "Would it be better to have one big list like ALL_INSTALLED_COPY_FILES, and have all of the individual rules append to that list, rather than listing it separately?  That might be more maintainable when people add new ones to Makefile (which still does occasionally happen)?\n\nIt would be nice for a lot of reasons if we could have some kind of variable at the Makefile that actually listed all of the files that were going to be installed, and it looks like this is going through and re-creating that list.\n\nAlso, do you know why it\u0027s okay that these not also in the licensing rules?\n\nAll of this comment for a followup in a later CL.",
+      "range": {
+        "startLine": 2040,
+        "startChar": 0,
+        "endLine": 2043,
+        "endChar": 107
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02fe957a_d4d89273",
+        "filename": "core/main.mk",
+        "patchSetId": 26
+      },
+      "lineNbr": 2056,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-03-07T19:49:12Z",
+      "side": 1,
+      "message": "Can you put a comment (up above the rule ~line 2029 is probably fine, otherwise you have to do $(eval # blah) which is silly), that says what these fields are for, the other ones are self-evident, but when looking at just this code it\u0027s hard to tell why they\u0027re needed for SBOMs.",
+      "range": {
+        "startLine": 2056,
+        "startChar": 133,
+        "endLine": 2056,
+        "endChar": 259
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b97da8e_9796adee",
+        "filename": "core/sbom.mk",
+        "patchSetId": 26
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-03-07T19:49:12Z",
+      "side": 1,
+      "message": "Could this have gone in base_rules.mk instead?",
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18bed9ae_d788cdec",
+        "filename": "core/sbom.mk",
+        "patchSetId": 26
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-03-07T19:49:12Z",
+      "side": 1,
+      "message": "It\u0027d be nice to have some kind of check that verified that this was filled in for every single file that actually appears in the staging directories.  Maybe that\u0027s part of generate-sbom.py?",
+      "range": {
+        "startLine": 6,
+        "startChar": 6,
+        "endLine": 6,
+        "endChar": 74
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed9e64aa_c5e4ce2c",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-03-07T19:49:12Z",
+      "side": 1,
+      "message": "You can use the new python f-strings to do this slightly more tersely:\n\nreturn f\u0027SPDXRef-{type}-{encode_for_spdxid(package_name)}\u0027",
+      "range": {
+        "startLine": 166,
+        "startChar": 2,
+        "endLine": 166,
+        "endChar": 70
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b48da3de_df98038b",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-03-07T19:49:12Z",
+      "side": 1,
+      "message": "Can you format this list better? (At least wrap to 100 columns or maybe make it a constant)",
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a36ef1fe_c249f458",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-03-07T19:49:12Z",
+      "side": 1,
+      "message": "I think this check should be based on the METADATA, not on the path of the file. We want an extra check somewhere that everything in external has METADATA.",
+      "range": {
+        "startLine": 227,
+        "startChar": 9,
+        "endLine": 227,
+        "endChar": 44
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e5e3af5_85d7bd6e",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-03-07T19:49:12Z",
+      "side": 1,
+      "message": "Same here. It should be based on METADATA, maybe with something else to check that it\u0027s within policy.",
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5bd08ae_8df3db04",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-03-07T19:49:12Z",
+      "side": 1,
+      "message": "I think this searching for the METADATA file should be done in soong (or make for make-based modules), and every module should have a path to that.  That will also let us get the dependencies for this tool invocation correct, which it isn\u0027t if script is searching for the files itself.",
+      "range": {
+        "startLine": 279,
+        "startChar": 4,
+        "endLine": 279,
+        "endChar": 26
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ae28aaa_59b94219",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-03-07T19:49:12Z",
+      "side": 1,
+      "message": "I feel like it would be better if you wrote a small library that had a data model for SPDX, and then write_json and write_tagvalue. That would just make the code more readable than a bunch of dicts, but maybe in a followup CL.",
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
