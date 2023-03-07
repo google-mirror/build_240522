@@ -34,6 +34,29 @@
       "parentUuid": "53bdae40_57b53e51",
       "revId": "beaf7eed48124ed2f5aa1b8bcb550c8d71134990",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d661ada7_eed0f737",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2023-03-07T17:54:53Z",
+      "side": 1,
+      "message": "Please also see: https://b.corp.google.com/issues/269625763",
+      "range": {
+        "startLine": 20,
+        "startChar": 69,
+        "endLine": 20,
+        "endChar": 73
+      },
+      "revId": "beaf7eed48124ed2f5aa1b8bcb550c8d71134990",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
