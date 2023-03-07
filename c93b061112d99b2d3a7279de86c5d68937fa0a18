@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "952a5571_a9947c92",
+        "filename": "core/definitions.mk",
+        "patchSetId": 26
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-03-07T19:50:59Z",
+      "side": 1,
+      "message": "These are only ever set in Makefile or later, so I don\u0027t think they need to be pre-declared here. Putting them here would be useful if someone were appending to them as Android.mk files are processed.",
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b4b6b709_e4f60223",
