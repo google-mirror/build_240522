@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f03f9661_c374e464",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-07T18:39:10Z",
+      "side": 1,
+      "message": "This needs a tracking bug.",
+      "revId": "d46535af238ecf58d846a29147f63d79af893c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8657c6e4_85b04e95",
+        "filename": "core/python_binary_host_mobly_test_config_template.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-07T18:39:10Z",
+      "side": 1,
+      "message": "What are these for?",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 5,
+        "endChar": 36
+      },
+      "revId": "d46535af238ecf58d846a29147f63d79af893c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41969bb5_b920e886",
+        "filename": "core/python_binary_host_mobly_test_config_template.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-07T18:39:10Z",
+      "side": 1,
+      "message": "The default tradefed runner has a timeout of 5 minutes, should we make this match?",
+      "revId": "d46535af238ecf58d846a29147f63d79af893c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
