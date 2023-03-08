@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e467adc_b1466ffa",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5143,
+      "author": {
+        "id": 1745246
+      },
+      "writtenOn": "2023-03-08T20:49:26Z",
+      "side": 1,
+      "message": "This whitespace seems incorrect?",
+      "range": {
+        "startLine": 5143,
+        "startChar": 0,
+        "endLine": 5143,
+        "endChar": 1
+      },
+      "revId": "da981f8f0d4f760d8ddfe368a461deff831c2cc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
