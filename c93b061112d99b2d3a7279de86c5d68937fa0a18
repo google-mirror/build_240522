@@ -407,6 +407,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2cf7357b_9a11262c",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-08T22:45:04Z",
+      "side": 1,
+      "message": "I will take a look at finder.go. Complete list of METADATA file is not needed, only the METADATA files of installed files\u0027 packages are needed.",
+      "parentUuid": "f0c87412_afa9ec26",
+      "range": {
+        "startLine": 279,
+        "startChar": 4,
+        "endLine": 279,
+        "endChar": 26
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4ae28aaa_59b94219",
         "filename": "tools/generate-sbom.py",
         "patchSetId": 26
@@ -454,6 +478,24 @@
       "side": 1,
       "message": "Could you file TODO bugs to track these?",
       "parentUuid": "a8fa12c1_19bd8fd9",
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7916b6ca_9cf0a687",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-08T22:45:04Z",
+      "side": 1,
+      "message": "Yes, I will create some bugs to track the followup changes.",
+      "parentUuid": "bfd5d0f2_0e68968a",
       "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
