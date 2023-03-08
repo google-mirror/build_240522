@@ -3518,6 +3518,7 @@ vendor_linker_config_file := $(TARGET_OUT_VENDOR)/etc/linker.config.pb
 $(vendor_linker_config_file): private_linker_config_fragments := $(PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS)
 $(vendor_linker_config_file): $(INTERNAL_VENDORIMAGE_FILES) $(PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS) | $(HOST_OUT_EXECUTABLES)/conv_linker_config
 	$(HOST_OUT_EXECUTABLES)/conv_linker_config proto \
+		--append
 		--source $(call normalize-path-list,$(private_linker_config_fragments)) \
 		--output $@
 	$(HOST_OUT_EXECUTABLES)/conv_linker_config systemprovide --source $@ \
