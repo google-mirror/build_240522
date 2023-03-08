@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "feba0905_41934b9b",
+        "filename": "core/definitions.mk",
+        "patchSetId": 26
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-08T01:57:14Z",
+      "side": 1,
+      "message": "Done. Keep these variables in Makefile only.",
+      "parentUuid": "952a5571_a9947c92",
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b4b6b709_e4f60223",
         "filename": "core/main.mk",
         "patchSetId": 26
@@ -31,6 +49,30 @@
       "writtenOn": "2023-03-07T19:49:12Z",
       "side": 1,
       "message": "Would it be better to have one big list like ALL_INSTALLED_COPY_FILES, and have all of the individual rules append to that list, rather than listing it separately?  That might be more maintainable when people add new ones to Makefile (which still does occasionally happen)?\n\nIt would be nice for a lot of reasons if we could have some kind of variable at the Makefile that actually listed all of the files that were going to be installed, and it looks like this is going through and re-creating that list.\n\nAlso, do you know why it\u0027s okay that these not also in the licensing rules?\n\nAll of this comment for a followup in a later CL.",
+      "range": {
+        "startLine": 2040,
+        "startChar": 0,
+        "endLine": 2043,
+        "endChar": 107
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ea53c5_b5269cc0",
+        "filename": "core/main.mk",
+        "patchSetId": 26
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-08T01:57:14Z",
+      "side": 1,
+      "message": "If I am not wrong, PRODUCT_COPY_FILES is already handled in licensing rules, see macro declare-1p-copy-file. \n\ndexpreopt.zip is handled in POST_INSTALL_COMMAND in dex_preopt_odex_install.mk, it might be missing in licensing rules. \n\nKERNEL_MODULE_COPY_FILES is for kernel loadable modules, not sure if they are missing in licensing.",
+      "parentUuid": "b4b6b709_e4f60223",
       "range": {
         "startLine": 2040,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70bf0ec7_4011fadd",
+        "filename": "core/main.mk",
+        "patchSetId": 26
+      },
+      "lineNbr": 2056,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-08T01:57:14Z",
+      "side": 1,
+      "message": "Done. \n\nThere are column headers on line 2033, but the detailed comments should be more helpful.",
+      "parentUuid": "02fe957a_d4d89273",
+      "range": {
+        "startLine": 2056,
+        "startChar": 133,
+        "endLine": 2056,
+        "endChar": 259
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b97da8e_9796adee",
@@ -81,6 +147,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "839fde6f_5cb3efd8",
+        "filename": "core/sbom.mk",
+        "patchSetId": 26
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-08T01:57:14Z",
+      "side": 1,
+      "message": "So far no, because sometimes it has to be imported twice because after base_rules.mk is imported some rules change the installed files. One example in this CL is app_prebuilt_internal.mk.",
+      "parentUuid": "9b97da8e_9796adee",
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18bed9ae_d788cdec",
@@ -94,6 +178,30 @@
       "writtenOn": "2023-03-07T19:49:12Z",
       "side": 1,
       "message": "It\u0027d be nice to have some kind of check that verified that this was filled in for every single file that actually appears in the staging directories.  Maybe that\u0027s part of generate-sbom.py?",
+      "range": {
+        "startLine": 6,
+        "startChar": 6,
+        "endLine": 6,
+        "endChar": 74
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87d4f3bb_0fb1368c",
+        "filename": "core/sbom.mk",
+        "patchSetId": 26
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-08T01:57:14Z",
+      "side": 1,
+      "message": "Yes, generate-sbom.py verifies and checksums these files. And here is like a inverted index from installed files to the module they belong to.",
+      "parentUuid": "18bed9ae_d788cdec",
       "range": {
         "startLine": 6,
         "startChar": 6,
@@ -167,6 +275,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fe35aeb_d7b52e83",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-08T01:57:14Z",
+      "side": 1,
+      "message": "Thanks for pointing out this, will change this in another CL.\n\nThe rules will be:\n1) a package is prebuilt if one of its module is reported as prebuilt module in soong/make\n2) a package is source forked if 1) is false and the package has METADATA file\n3) platform package by default",
+      "parentUuid": "a36ef1fe_c249f458",
+      "range": {
+        "startLine": 227,
+        "startChar": 9,
+        "endLine": 227,
+        "endChar": 44
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e5e3af5_85d7bd6e",
@@ -180,6 +312,24 @@
       "writtenOn": "2023-03-07T19:49:12Z",
       "side": 1,
       "message": "Same here. It should be based on METADATA, maybe with something else to check that it\u0027s within policy.",
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4488dc3_75c91636",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-08T01:57:14Z",
+      "side": 1,
+      "message": "Will have this in another CL.",
+      "parentUuid": "2e5e3af5_85d7bd6e",
       "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -209,6 +359,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4f6014fe_d11338e4",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-08T01:57:14Z",
+      "side": 1,
+      "message": "Yes, I am working on searching for METADATA files in Make. So far I am still looking at how to do this, some ideas:\n1) search METADATA files completely in Make for mk/bp modules + PRODUCT_COPY_FILES + other special cases, similar to the logic in generate-sbom.py.\n2) mk modules and soong modules report their METADATA files, then they are collected in Make and merged with METADATA files found for PRODUCT_COPY_FILES and other special cases in Make. \n\nSo far I preferred 1) because: a) the code change will be in Make only; b) METADATA files are needed information of modules in source forked package and prebuilt packages, for most platform modules we don\u0027t have METADATA file.",
+      "parentUuid": "b5bd08ae_8df3db04",
+      "range": {
+        "startLine": 279,
+        "startChar": 4,
+        "endLine": 279,
+        "endChar": 26
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4ae28aaa_59b94219",
         "filename": "tools/generate-sbom.py",
         "patchSetId": 26
@@ -220,6 +394,24 @@
       "writtenOn": "2023-03-07T19:49:12Z",
       "side": 1,
       "message": "I feel like it would be better if you wrote a small library that had a data model for SPDX, and then write_json and write_tagvalue. That would just make the code more readable than a bunch of dicts, but maybe in a followup CL.",
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8fa12c1_19bd8fd9",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-08T01:57:14Z",
+      "side": 1,
+      "message": "Yes, I thought of moving this out to a lib, will do that later.",
+      "parentUuid": "4ae28aaa_59b94219",
       "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
