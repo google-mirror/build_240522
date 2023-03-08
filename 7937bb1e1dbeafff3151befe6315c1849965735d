@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f242f53_011b9b2c",
+        "filename": "core/main.mk",
+        "patchSetId": 30
+      },
+      "lineNbr": 2050,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-08T12:55:53Z",
+      "side": 1,
+      "message": "Can you add a TODO to better track the real dependencies of the SBOM csv so we don\u0027t do this? I find running deletion side effects as part of Make evaluation really concerning.\n\nOr a better way to mark `m sbom` as always dirty? (my makefile-fu is not quite there..)",
+      "range": {
+        "startLine": 2050,
+        "startChar": 0,
+        "endLine": 2050,
+        "endChar": 60
+      },
+      "revId": "7937bb1e1dbeafff3151befe6315c1849965735d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72325209_19056912",
+        "filename": "core/sbom.mk",
+        "patchSetId": 30
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-08T12:55:53Z",
+      "side": 1,
+      "message": "can you elaborate this comment on when in particular one would include this file?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "7937bb1e1dbeafff3151befe6315c1849965735d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61b5cac0_c73ab09e",
+        "filename": "core/sbom.mk",
+        "patchSetId": 30
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-08T12:55:53Z",
+      "side": 1,
+      "message": "should this error if my_register_name is not defined?",
+      "range": {
+        "startLine": 3,
+        "startChar": 6,
+        "endLine": 3,
+        "endChar": 22
+      },
+      "revId": "7937bb1e1dbeafff3151befe6315c1849965735d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073e0d90_c9f9858f",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 30
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-08T12:55:53Z",
+      "side": 1,
+      "message": "typo in generate",
+      "range": {
+        "startLine": 557,
+        "startChar": 4,
+        "endLine": 557,
+        "endChar": 23
+      },
+      "revId": "7937bb1e1dbeafff3151befe6315c1849965735d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9a0a15e_f8f9a583",
+        "filename": "tools/protos/metadata_file.proto",
+        "patchSetId": 30
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-08T12:55:53Z",
+      "side": 1,
+      "message": "Would this file have to be kept in sync with its source of truth? Can you add some docs on how this meant to be updated?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 53
+      },
+      "revId": "7937bb1e1dbeafff3151befe6315c1849965735d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

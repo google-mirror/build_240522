@@ -381,6 +381,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0c87412_afa9ec26",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-08T12:55:53Z",
+      "side": 1,
+      "message": "Why not use finder.go to get METADATA.list?",
+      "parentUuid": "4f6014fe_d11338e4",
+      "range": {
+        "startLine": 279,
+        "startChar": 4,
+        "endLine": 279,
+        "endChar": 26
+      },
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4ae28aaa_59b94219",
@@ -412,6 +436,24 @@
       "side": 1,
       "message": "Yes, I thought of moving this out to a lib, will do that later.",
       "parentUuid": "4ae28aaa_59b94219",
+      "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd5d0f2_0e68968a",
+        "filename": "tools/generate-sbom.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-08T12:55:53Z",
+      "side": 1,
+      "message": "Could you file TODO bugs to track these?",
+      "parentUuid": "a8fa12c1_19bd8fd9",
       "revId": "c93b061112d99b2d3a7279de86c5d68937fa0a18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
