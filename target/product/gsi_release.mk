@@ -70,6 +70,9 @@ PRODUCT_EXTRA_VNDK_VERSIONS := \
     31 \
     32 \
 
+# pvmfw interfaces are tied to GSI; only needed on AVF-compatible devices.
+PRODUCT_BUILD_PVMFW_IMAGE := true
+
 # Do not build non-GSI partition images.
 PRODUCT_BUILD_CACHE_IMAGE := false
 PRODUCT_BUILD_DEBUG_BOOT_IMAGE := false
