@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1d03a23_8ab0b085",
+        "filename": "core/tasks/art-host-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-03-09T00:09:44Z",
+      "side": 1,
+      "message": "nit: typo",
+      "range": {
+        "startLine": 31,
+        "startChar": 43,
+        "endLine": 31,
+        "endChar": 51
+      },
+      "revId": "1fbd17b5b285857595fb5645507986c654743e68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
