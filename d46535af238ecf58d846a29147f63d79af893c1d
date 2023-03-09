@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f15c18c_4a08bcde",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1900900
+      },
+      "writtenOn": "2023-03-09T00:34:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f03f9661_c374e464",
+      "revId": "d46535af238ecf58d846a29147f63d79af893c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8657c6e4_85b04e95",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe36a0fe_b9bdebee",
+        "filename": "core/python_binary_host_mobly_test_config_template.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1900900
+      },
+      "writtenOn": "2023-03-09T00:34:37Z",
+      "side": 1,
+      "message": "Specify two devices for mobly tests. Existing Mobly tests only need 2 devices and tradefed only support 2-device tests now. So hard code devices in the template temporarily.",
+      "parentUuid": "8657c6e4_85b04e95",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 5,
+        "endChar": 36
+      },
+      "revId": "d46535af238ecf58d846a29147f63d79af893c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41969bb5_b920e886",
@@ -54,6 +96,24 @@
       "writtenOn": "2023-03-07T18:39:10Z",
       "side": 1,
       "message": "The default tradefed runner has a timeout of 5 minutes, should we make this match?",
+      "revId": "d46535af238ecf58d846a29147f63d79af893c1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07169283_a661798f",
+        "filename": "core/python_binary_host_mobly_test_config_template.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1900900
+      },
+      "writtenOn": "2023-03-09T00:34:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41969bb5_b920e886",
       "revId": "d46535af238ecf58d846a29147f63d79af893c1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
