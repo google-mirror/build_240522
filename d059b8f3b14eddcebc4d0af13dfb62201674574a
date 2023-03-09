@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4d917d6_86b5763a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-03-09T03:05:55Z",
+      "side": 1,
+      "message": "nit: Rename this to a variation of `BUILD_BROKEN_USES_SOONG_PYTHON2_MODULES` to indicate that this is a bool. The current name could be misinterpreted as a list (atleast to me)",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "d059b8f3b14eddcebc4d0af13dfb62201674574a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ecdad14_68fe50bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-03-09T03:05:55Z",
+      "side": 1,
+      "message": "nit: Maybe we should add this to Changes.md as well?",
+      "range": {
+        "startLine": 9,
+        "startChar": 36,
+        "endLine": 9,
+        "endChar": 43
+      },
+      "revId": "d059b8f3b14eddcebc4d0af13dfb62201674574a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
