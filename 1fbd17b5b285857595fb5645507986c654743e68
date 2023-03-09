@@ -22,6 +22,30 @@
       },
       "revId": "1fbd17b5b285857595fb5645507986c654743e68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85f0765a_b7c064c3",
+        "filename": "core/tasks/art-host-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2023-03-09T00:17:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1d03a23_8ab0b085",
+      "range": {
+        "startLine": 31,
+        "startChar": 43,
+        "endLine": 31,
+        "endChar": 51
+      },
+      "revId": "1fbd17b5b285857595fb5645507986c654743e68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
