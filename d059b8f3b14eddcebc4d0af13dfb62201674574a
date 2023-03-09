@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8bb7e72_3d17a738",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-09T17:59:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4d917d6_86b5763a",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "d059b8f3b14eddcebc4d0af13dfb62201674574a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ecdad14_68fe50bc",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-09T03:05:55Z",
       "side": 1,
       "message": "nit: Maybe we should add this to Changes.md as well?",
+      "range": {
+        "startLine": 9,
+        "startChar": 36,
+        "endLine": 9,
+        "endChar": 43
+      },
+      "revId": "d059b8f3b14eddcebc4d0af13dfb62201674574a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d2026d_a044da4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-09T17:59:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ecdad14_68fe50bc",
       "range": {
         "startLine": 9,
         "startChar": 36,
