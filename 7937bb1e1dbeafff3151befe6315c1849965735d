@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8091a372_d8bf6466",
+        "filename": "core/main.mk",
+        "patchSetId": 30
+      },
+      "lineNbr": 2050,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-09T08:17:35Z",
+      "side": 1,
+      "message": "I\u0027m not concerned about regular shell commands, I\u0027m concerned about unconditionally-ran _shell rm_ commands: https://cs.android.com/search?q\u003df:mk%20%22$(shell%20rm%22\n \nI think it\u0027s not safe to have destructive shell behavior during the evaluation of a make _file_, especially given this is `main.mk`. It\u0027s fine if it\u0027s part of an intentionally run make _rule_.\n\nPlease add the TODO into the code after creating the bug.",
+      "parentUuid": "97059ba4_10c2dc95",
+      "range": {
+        "startLine": 2050,
+        "startChar": 0,
+        "endLine": 2050,
+        "endChar": 60
+      },
+      "revId": "7937bb1e1dbeafff3151befe6315c1849965735d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72325209_19056912",
         "filename": "core/sbom.mk",
         "patchSetId": 30
