@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dee35d25_4cfcbc62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-10T21:20:40Z",
+      "side": 1,
+      "message": "This is a resubmission of aosp/2462473, which was reverted due to the other cl in it\u0027s topic causing breakages. I\u0027m going to submit this independently first so that if the other cl gets reverted again we\u0027ll at least have this part.",
+      "revId": "a5511ea91aea719316fa5f1f19e1cbbe20529438",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
