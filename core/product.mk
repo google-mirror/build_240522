@@ -391,6 +391,9 @@ _product_list_vars += PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS
 #   supports it
 _product_single_value_vars += PRODUCT_ENABLE_UFFD_GC
 
+_product_list_vars += PRODUCT_DOWNLOADABLE_PATHS PRODUCT_EXCLUDE_DOWNLOADABLE_PATHS
+_product_single_value_vars += PRODUCT_DOWNLOADABLE_CONTEXT_GEN_SCRIPT PRODUCT_DOWNLOADABLE_DOWNLOAD_ARTIFACTS_SCRIPT
+
 .KATI_READONLY := _product_single_value_vars _product_list_vars
 _product_var_list :=$= $(_product_single_value_vars) $(_product_list_vars)
 

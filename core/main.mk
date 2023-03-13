@@ -148,8 +148,7 @@ ifeq ($(BUILD_WITH_PARTIAL_ARTIFACT),true)
 CONTEXT_FILE := $(OUT_DIR)/context
 
 $(CONTEXT_FILE):
-	$(GENERATE_CONTEXT_SCRIPT_FILE) --output $(CONTEXT_FILE)
-
+	build/make/tools/generate_context.sh --output $(CONTEXT_FILE)
 endif
 
 #

@@ -17,7 +17,9 @@ LOCAL_CHECKED_MODULE := $(LOCAL_PREBUILT_MODULE_FILE)
 include $(BUILD_SYSTEM)/base_rules.mk
 #######################################
 
+ifneq (true,$(my_use_partial_artifact))
 $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
+endif
 
 PACKAGES.$(LOCAL_MODULE).OVERRIDES := $(strip $(LOCAL_OVERRIDES_PACKAGES))
 

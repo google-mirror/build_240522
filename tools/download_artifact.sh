@@ -18,7 +18,7 @@
 
 ARG_SHORT=c:,t:,h
 ARG_LONG=context:,target:,help
-OPTS=$(getopt -n generate_context --options $ARG_SHORT --longoptions $ARG_LONG -- "$@")
+OPTS=$(getopt -n download_artifact --options $ARG_SHORT --longoptions $ARG_LONG -- "$@")
 
 eval set -- "$OPTS"
 
@@ -66,12 +66,13 @@ if [ -z $TARGET_OUT_PATH ] ; then
   exit 2
 fi
 
-if [[ "$TARGET_PATH" == *"/system/"* ]] ; then
-  SRC_PATH=$TARGET_OUT_PATH$(sed 's/.*\/system\//\/SYSTEM\//g' <<< $TARGET_PATH)
+if [[ "$TARGET_PATH" == "system/"* ]] ; then
+  SRC_PATH=$TARGET_OUT_PATH$(sed 's/^system\//\/SYSTEM\//g' <<< $TARGET_PATH)
 fi
 
-if [[ "$TARGET_PATH" == *"/system_ext/"* ]] ; then
-  SRC_PATH=$TARGET_OUT_PATH$(sed 's/.*\/system_ext\//\/SYSTEM_EXT\//g' <<< $TARGET_PATH)
+if [[ "$TARGET_PATH" == "system_ext/"* ]] ; then
+  SRC_PATH=$TARGET_OUT_PATH$(sed 's/^system_ext\//\/SYSTEM_EXT\//g' <<< $TARGET_PATH)
 fi
 
-cp $SRC_PATH $TARGET_OUT_PATH
+mkdir -p $(dirname $TARGET_OUT_PATH/$TARGET_PATH)
+cp -f $SRC_PATH $OUT_DIR/artifact/$TARGET_PATH
