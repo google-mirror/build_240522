@@ -80,6 +80,8 @@ endif
 endif
 endif
 
+ifneq (true,$(my_use_partial_artifact))
+
 ifeq ($(module_run_appcompat),true)
   $(LOCAL_BUILT_MODULE): $(appcompat-files)
   $(LOCAL_BUILT_MODULE): PRIVATE_INSTALLED_MODULE := $(LOCAL_INSTALLED_MODULE)
@@ -90,6 +92,8 @@ ifeq ($(module_run_appcompat),true)
 	$(run-appcompat)
 else
   $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
+endif
+
 endif
 
 ifdef LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR
@@ -155,9 +159,11 @@ $(call create-suite-dependencies)
 endif
 
 # install symbol files of JNI libraries
+ifneq (true,$(my_use_partial_artifact))
 my_jni_lib_symbols_copy_files := $(foreach f,$(LOCAL_SOONG_JNI_LIBS_SYMBOLS),\
   $(call word-colon,1,$(f)):$(patsubst $(PRODUCT_OUT)/%,$(TARGET_OUT_UNSTRIPPED)/%,$(call word-colon,2,$(f))))
 $(LOCAL_BUILT_MODULE): | $(call copy-many-files, $(my_jni_lib_symbols_copy_files))
+endif
 
 # embedded JNI will already have been handled by soong
 my_embed_jni :=

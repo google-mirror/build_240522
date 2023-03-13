@@ -149,7 +149,6 @@ CONTEXT_FILE := $(OUT_DIR)/context
 
 $(CONTEXT_FILE):
 	build/make/tools/generate_context.sh --output $(CONTEXT_FILE)
-
 endif
 
 #

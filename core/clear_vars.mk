@@ -519,3 +519,5 @@ module_license_metadata :=
 # Leave the current makefile to make sure we don't break anything
 # that expects to be able to find the name of the current makefile.
 MAKEFILE_LIST := $(lastword $(MAKEFILE_LIST))
+
+my_use_partial_artifact :=
