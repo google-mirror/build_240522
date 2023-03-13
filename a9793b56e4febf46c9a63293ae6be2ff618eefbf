@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f5c4b21_2090179b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-13T11:55:39Z",
+      "side": 1,
+      "message": "Can you elaborate on the actual fixes in and how you verified them in the `Test: ` fields? ABTD runs, for example?",
+      "range": {
+        "startLine": 9,
+        "startChar": 64,
+        "endLine": 9,
+        "endChar": 83
+      },
+      "revId": "a9793b56e4febf46c9a63293ae6be2ff618eefbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
