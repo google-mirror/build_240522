@@ -22,6 +22,30 @@
       },
       "revId": "a9793b56e4febf46c9a63293ae6be2ff618eefbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2837048_7a3415e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-13T17:43:32Z",
+      "side": 1,
+      "message": "Added \"Test: on aosp, lunch aosp_bluejay-userdebug \u0026\u0026 m dist\", which uses a Pixel product that has some dependency files included in PRODUCT_COPY_FILES but exist in internal master only.",
+      "parentUuid": "0f5c4b21_2090179b",
+      "range": {
+        "startLine": 9,
+        "startChar": 64,
+        "endLine": 9,
+        "endChar": 83
+      },
+      "revId": "a9793b56e4febf46c9a63293ae6be2ff618eefbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
