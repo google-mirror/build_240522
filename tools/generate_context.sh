@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Use pre-defined location for the artifact
-ARTIFACT_PATH=out/prebuilt_cached/artifacts/csi
+ARTIFACT_PATH=$OUT_DIR/prebuilt_cached/artifacts/csi
 
 ARG_SHORT=o:,h
 ARG_LONG=output:,help
@@ -52,7 +52,7 @@ if [ -z OUT_PATH ] ; then
   print_usage
 fi
 
-TARGET_ARCHIVE_FILE=$(find $ARTIFACT_PATH -type f -iname '*target_files*' 2>/dev/null)
+TARGET_ARCHIVE_FILE=$(find $ARTIFACT_PATH -iname '*target_files*' 2>/dev/null)
 
 if [ "$?" -ne "0" ] ; then
   echo "Cannot find target_files archive file from $ARTIFACT_PATH"
