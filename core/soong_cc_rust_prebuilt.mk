@@ -170,6 +170,8 @@ endif
 # to preserve symlinks to the source trees. They can then run directly from the
 # prebuilt directories where the linker can load their dependencies using
 # relative RUNPATHs.
+
+ifneq (true,$(my_use_partial_artifact))
 $(LOCAL_BUILT_MODULE): $(LOCAL_PREBUILT_MODULE_FILE)
 ifeq ($(LOCAL_IS_HOST_MODULE) $(if $(filter EXECUTABLES SHARED_LIBRARIES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),true,),true true)
 	$(copy-or-link-prebuilt-to-target)
@@ -182,23 +184,25 @@ else
 	$(hide) chmod +x $@
   endif
 endif
+endif
 
 ifndef LOCAL_IS_HOST_MODULE
   ifdef LOCAL_SOONG_UNSTRIPPED_BINARY
     ifneq ($(LOCAL_UNINSTALLABLE_MODULE),true)
-      my_symbol_path := $(if $(LOCAL_SOONG_SYMBOL_PATH),$(LOCAL_SOONG_SYMBOL_PATH),$(my_module_path))
-      # Store a copy with symbols for symbolic debugging
-      my_unstripped_path := $(TARGET_OUT_UNSTRIPPED)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_symbol_path))
-      # drop /root as /root is mounted as /
-      my_unstripped_path := $(patsubst $(TARGET_OUT_UNSTRIPPED)/root/%,$(TARGET_OUT_UNSTRIPPED)/%, $(my_unstripped_path))
-      symbolic_output := $(my_unstripped_path)/$(my_installed_module_stem)
-      $(eval $(call copy-unstripped-elf-file-with-mapping,$(LOCAL_SOONG_UNSTRIPPED_BINARY),$(symbolic_output)))
-      $(LOCAL_BUILT_MODULE): | $(symbolic_output)
+      ifneq (true,$(my_use_partial_artifact))
+        my_symbol_path := $(if $(LOCAL_SOONG_SYMBOL_PATH),$(LOCAL_SOONG_SYMBOL_PATH),$(my_module_path))
+        # Store a copy with symbols for symbolic debugging
+        my_unstripped_path := $(TARGET_OUT_UNSTRIPPED)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_symbol_path))
+        # drop /root as /root is mounted as /
+        my_unstripped_path := $(patsubst $(TARGET_OUT_UNSTRIPPED)/root/%,$(TARGET_OUT_UNSTRIPPED)/%, $(my_unstripped_path))
+        symbolic_output := $(my_unstripped_path)/$(my_installed_module_stem)
+        $(eval $(call copy-unstripped-elf-file-with-mapping,$(LOCAL_SOONG_UNSTRIPPED_BINARY),$(symbolic_output)))
+        $(LOCAL_BUILT_MODULE): | $(symbolic_output)
 
-      ifeq ($(BREAKPAD_GENERATE_SYMBOLS),true)
-        my_breakpad_path := $(TARGET_OUT_BREAKPAD)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_symbol_path))
-        breakpad_output := $(my_breakpad_path)/$(my_installed_module_stem).sym
-        $(breakpad_output) : $(LOCAL_SOONG_UNSTRIPPED_BINARY) | $(BREAKPAD_DUMP_SYMS) $(PRIVATE_READELF)
+        ifeq ($(BREAKPAD_GENERATE_SYMBOLS),true)
+          my_breakpad_path := $(TARGET_OUT_BREAKPAD)/$(patsubst $(PRODUCT_OUT)/%,%,$(my_symbol_path))
+          breakpad_output := $(my_breakpad_path)/$(my_installed_module_stem).sym
+          $(breakpad_output) : $(LOCAL_SOONG_UNSTRIPPED_BINARY) | $(BREAKPAD_DUMP_SYMS) $(PRIVATE_READELF)
 	@echo "target breakpad: $(PRIVATE_MODULE) ($@)"
 	@mkdir -p $(dir $@)
 	$(hide) if $(PRIVATE_READELF) -S $< > /dev/null 2>&1 ; then \
@@ -207,11 +211,12 @@ ifndef LOCAL_IS_HOST_MODULE
 	  echo "skipped for non-elf file."; \
 	  touch $@; \
 	fi
-        $(call add-dependency,$(LOCAL_BUILT_MODULE),$(breakpad_output))
-      endif
-    endif
-  endif
-endif
+          $(call add-dependency,$(LOCAL_BUILT_MODULE),$(breakpad_output))
+        endif
+      endif # my_use_partial_artifact
+    endif # LOAL_UNINSTALLABLE_MODULE
+  endif # LOCAL_SOONG_UNSTRIPPED_BINARY
+endif # LOCAL_IS_HOST_MODULE
 
 ifeq ($(NATIVE_COVERAGE),true)
   ifneq (,$(strip $(LOCAL_PREBUILT_COVERAGE_ARCHIVE)))
