@@ -80,6 +80,8 @@ endif
 endif
 endif
 
+ifneq (true,$(my_use_partial_artifact))
+
 ifeq ($(module_run_appcompat),true)
   $(LOCAL_BUILT_MODULE): $(appcompat-files)
   $(LOCAL_BUILT_MODULE): PRIVATE_INSTALLED_MODULE := $(LOCAL_INSTALLED_MODULE)
@@ -90,6 +92,8 @@ ifeq ($(module_run_appcompat),true)
 	$(run-appcompat)
 else
   $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
+endif
+
 endif
 
 ifdef LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR

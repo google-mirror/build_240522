@@ -211,9 +211,10 @@ endif
 endif
 endif
 
+ifneq (true,$(my_use_partial_artifact))
 $(built_module) : $(my_prebuilt_src_file)
 	$(transform-prebuilt-to-target)
 ifneq ($(filter EXECUTABLES NATIVE_TESTS,$(LOCAL_MODULE_CLASS)),)
 	$(hide) chmod +x $@
 endif
-
+endif

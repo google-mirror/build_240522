@@ -469,11 +469,26 @@ $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_2ND_ARCH_VAR_PREFIX := $(LOCAL_2ND_ARCH_
 # Tell the module and all of its sub-modules who it is.
 $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_MODULE:= $(my_register_name)
 
+my_use_partial_artifact :=
+
+ifeq (true,$(BUILD_WITH_PARTIAL_ARTIFACT))
+ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
+ifneq (,$(LOCAL_SOONG_INSTALLED_MODULE))
+my_use_partial_artifact := $(if $(filter-out $(addprefix $(PRODUCT_OUT)/,$(PRODUCT_EXCLUDE_DOWNLOADABLE_PATHS)),\
+  $(filter $(addprefix $(PRODUCT_OUT)/,$(PRODUCT_DOWNLOADABLE_PATHS)),$(LOCAL_INSTALLED_MODULE))),true)
+endif  # LOCAL_SOONG_INSTALLED_MODULE
+endif  # LOCAL_UNINSTALLABLE_MODULE
+endif  # BUILD_WITH_PARTIAL_ARTIFACT
+
 # Provide a short-hand for building this module.
 # We name both BUILT and INSTALLED in case
 # LOCAL_UNINSTALLABLE_MODULE is set.
 .PHONY: $(my_all_targets)
-$(my_all_targets): $(LOCAL_BUILT_MODULE) $(LOCAL_INSTALLED_MODULE) $(LOCAL_ADDITIONAL_CHECKED_MODULE)
+$(my_all_targets): $(LOCAL_INSTALLED_MODULE) $(LOCAL_ADDITIONAL_CHECKED_MODULE)
+
+ifneq ($(my_use_partial_artifact),true)
+$(my_all_targets): $(LOCAL_BUILT_MODULE)
+endif
 
 .PHONY: $(my_register_name)
 $(my_register_name): $(my_all_targets)
@@ -523,10 +538,16 @@ my_path_comp :=
 my_installed_symlinks :=
 
 ifneq (,$(LOCAL_SOONG_INSTALLED_MODULE))
+  ifeq ($(my_use_partial_artifact),true)
+  # To prevent unnecessary build actions, use the partial artifact also for LOCAL_BUILT_MODULE
+  $(LOCAL_BUILT_MODULE): $(OUT_DIR)/artifact/$(patsubst $(PRODUCT_OUT)/%,%,$(LOCAL_SOONG_INSTALLED_MODULE))
+	$(copy-file-to-new-target)
+  else
   # Soong already generated the copy rule, but make the installed location depend on the Make
   # copy of the intermediates for now, as some rules that collect intermediates may expect
   # them to exist.
   $(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
+  endif
 
   $(foreach symlink, $(LOCAL_SOONG_INSTALL_SYMLINKS), \
     $(call declare-0p-target,$(symlink)))

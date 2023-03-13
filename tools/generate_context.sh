@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Use pre-defined location for the artifact
-ARTIFACT_PATH=out/prebuilt_cached/artifacts/csi
+ARTIFACT_PATH=$OUT_DIR/prebuilt_cached/artifacts/csi
 
 ARG_SHORT=o:,h
 ARG_LONG=output:,help
