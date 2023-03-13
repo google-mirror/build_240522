@@ -148,7 +148,6 @@ CONTEXT_FILE := $(OUT_DIR)/context
 # TODO(b/2848379) Handle context file and other outputs from generate_context.sh for incremental build.
 $(CONTEXT_FILE):
 	build/make/tools/generate_context.sh --output $(CONTEXT_FILE)
-
 endif
 
 #

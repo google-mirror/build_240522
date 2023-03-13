@@ -52,7 +52,10 @@ ifdef LOCAL_SOONG_CLASSES_JAR
   endif # TURBINE_ENABLED != false
 endif
 
+
+ifneq (true,$(my_use_partial_artifact))
 $(eval $(call copy-one-file,$(LOCAL_PREBUILT_MODULE_FILE),$(LOCAL_BUILT_MODULE)))
+endif
 
 ifdef LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR
   $(eval $(call copy-one-file,$(LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR),\

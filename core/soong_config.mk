@@ -309,6 +309,10 @@ $(call add_json_bool, IgnorePrefer32OnDevice, $(filter true,$(IGNORE_PREFER32_ON
 $(call add_json_list, IncludeTags,                $(PRODUCT_INCLUDE_TAGS))
 $(call add_json_list, SourceRootDirs,             $(PRODUCT_SOURCE_ROOT_DIRS))
 
+$(call add_json_bool, BuildWithPartialArtifact, $(BUILD_WITH_PARTIAL_ARTIFACT))
+$(call add_json_list, ImportablePaths,        $(PRODUCT_IMPORTABLE_PATHS))
+$(call add_json_list, ExcludeImportablePaths, $(PRODUCT_EXCLUDE_IMPORTABLE_PATHS))
+
 $(call json_end)
 
 $(file >$(SOONG_VARIABLES).tmp,$(json_contents))
