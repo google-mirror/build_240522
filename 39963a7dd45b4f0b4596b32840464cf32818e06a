@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46aaed16_c9b9f23d",
+        "filename": "tools/generate-ninja-priority-list",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-14T13:50:30Z",
+      "side": 1,
+      "message": "Do you want to show an example line (and the corresponding output line as well) as a documentation?\n\nI wish the output file format is also documented somewhere in ninja.",
+      "revId": "39963a7dd45b4f0b4596b32840464cf32818e06a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
