@@ -16,6 +16,24 @@
       "message": "Do you want to show an example line (and the corresponding output line as well) as a documentation?\n\nI wish the output file format is also documented somewhere in ninja.",
       "revId": "39963a7dd45b4f0b4596b32840464cf32818e06a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "badb1f9d_87b30da9",
+        "filename": "tools/generate-ninja-priority-list",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-03-14T14:09:27Z",
+      "side": 1,
+      "message": "Yeah, there should be an example line. I added it in the comment of this. And will add the design doc which I\u0027ll write down soon.\n\nBTW, I documented the format in ninja as well in the latest patchset of aosp/2483775",
+      "parentUuid": "46aaed16_c9b9f23d",
+      "revId": "39963a7dd45b4f0b4596b32840464cf32818e06a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
