@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d2e91e0_3015e7f8",
+        "filename": "tools/releasetools/create_brick_ota.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2023-03-14T23:52:30Z",
+      "side": 1,
+      "message": "will this script provide a mechanism to pass in helper functions.  Release keys dont live on disk, they are in the ether.  Unless the usage of common.SignFile accomodates that.",
+      "range": {
+        "startLine": 66,
+        "startChar": 25,
+        "endLine": 66,
+        "endChar": 36
+      },
+      "revId": "4ff6cdd97dbd97dbe1d1a517b0088213da78bdb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
