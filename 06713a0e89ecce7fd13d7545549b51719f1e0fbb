@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5c45013_2de39518",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-03-14T23:07:04Z",
+      "side": 1,
+      "message": "+srhines because he\u0027d led me to believe that RS shouldn\u0027t start unless/until someone tries to _use_ it anyway, so the fact you need this is probably a bad sign even for non-riscv64 systems?",
+      "revId": "06713a0e89ecce7fd13d7545549b51719f1e0fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
