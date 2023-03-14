@@ -1,0 +1,7 @@
+#!/bin/bash
+# It reads a ninja log file, and print tsv-format content to stdout.
+# The schema is <path>\t<priority>
+# For example,
+#   out/lib/foo.so  2
+#   out/bin/bar     5
+awk -v OFS='\t' '{ if (NR!=1) print $4, $2-$1+1 }' $1
