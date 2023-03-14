@@ -22,6 +22,30 @@
       },
       "revId": "4ff6cdd97dbd97dbe1d1a517b0088213da78bdb2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc580ad9_73701a2a",
+        "filename": "tools/releasetools/create_brick_ota.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-03-14T23:57:14Z",
+      "side": 1,
+      "message": "By default, generated packages are not signed. Caller can use any RPC signer to sign the brick package after this tool finishes running. The --package_key flag is rather for dev-keys devices.",
+      "parentUuid": "5d2e91e0_3015e7f8",
+      "range": {
+        "startLine": 66,
+        "startChar": 25,
+        "endLine": 66,
+        "endChar": 36
+      },
+      "revId": "4ff6cdd97dbd97dbe1d1a517b0088213da78bdb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
