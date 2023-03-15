@@ -52,6 +52,24 @@
       "parentUuid": "bfa554be_3a7cdffe",
       "revId": "06713a0e89ecce7fd13d7545549b51719f1e0fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aa37c30_94612be8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2023-03-15T00:23:11Z",
+      "side": 1,
+      "message": "There is a small LLVM dependency on some tiny static libraries for decoding the RenderScript bitcode files. https://android.googlesource.com/platform/frameworks/compile/libbcc/+/refs/heads/master/bcinfo/Android.bp#99 is where that is specified (which comes in via libRS being dependent on libbcinfo for simple decoding of some RS bitcode metadata).",
+      "parentUuid": "036451a0_7c3300ec",
+      "revId": "06713a0e89ecce7fd13d7545549b51719f1e0fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
