@@ -97,6 +97,21 @@ ifdef LOCAL_SOONG_JACOCO_REPORT_CLASSES_JAR
     $(call local-packaging-dir,jacoco)/jacoco-report-classes.jar))
   $(call add-dependency,$(LOCAL_BUILT_MODULE),\
     $(call local-packaging-dir,jacoco)/jacoco-report-classes.jar)
+
+  jacoco_zip := $(intermediates.COMMON)/jacoco_jars.zip
+
+  # Dist a zip file containing just the jacoco jar file at the appropriate path,
+  # for consumption in build_unbundled_coverage_mainline_modules.sh. The path
+  # that the jar is placed at is to maintain backwards compatibility with
+  # JACOCO_REPORT_CLASSES_ALL.
+  $(jacoco_zip): PRIVATE_SOONG_JACOCO_REPORT_CLASSES_JAR := $(call local-packaging-dir,jacoco)/jacoco-report-classes.jar
+  $(jacoco_zip): PRIVATE_MODULE_CLASS := $(LOCAL_MODULE_CLASS)
+  $(jacoco_zip): PRIVATE_MODULE := $(LOCAL_MODULE)
+  $(jacoco_zip): $(call local-packaging-dir,jacoco)/jacoco-report-classes.jar $(SOONG_ZIP)
+	$(SOONG_ZIP) -o $@ -L 0 -P out/target/common/obj/$(PRIVATE_MODULE_CLASS)/$(PRIVATE_MODULE)_intermediates/ -C $$(dirname $(PRIVATE_SOONG_JACOCO_REPORT_CLASSES_JAR)) -f $(PRIVATE_SOONG_JACOCO_REPORT_CLASSES_JAR)
+
+  ALL_MODULES.$(my_register_name).JACOCO_ZIP := $(jacoco_zip)
+  jacoco_zip :=
 endif
 
 ifdef LOCAL_SOONG_PROGUARD_DICT

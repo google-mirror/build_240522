@@ -1717,6 +1717,11 @@ else ifneq ($(TARGET_BUILD_APPS),)
     $(if $(ALL_MODULES.$(m).BUNDLE),$(ALL_MODULES.$(m).BUNDLE):$(m)-base.zip))
   $(call dist-for-goals,apps_only, $(apps_only_bundle_files))
 
+  # Dist the jacoco zip files if they exist.
+  apps_only_jacoco_files := $(foreach m,$(unbundled_build_modules),\
+    $(if $(ALL_MODULES.$(m).JACOCO_ZIP),$(ALL_MODULES.$(m).JACOCO_ZIP):$(m)-jacoco-jars.zip))
+  $(call dist-for-goals,apps_only, $(apps_only_jacoco_files))
+
   # Dist the lint reports if they exist.
   apps_only_lint_report_files := $(foreach m,$(unbundled_build_modules),\
     $(foreach report,$(ALL_MODULES.$(m).LINT_REPORTS),\
