@@ -70,8 +70,24 @@ def GetDiskUsage(path):
   """
   cmd = ["du", "-b", "-k", "-s", path]
   output = common.RunAndCheckOutput(cmd, verbose=False)
-  return int(output.split()[0]) * 1024
-
+  du_total = int(output.split()[0]) * 1024
+  if os.path.isfile(path):
+    return du_total
+  def GetDiskUsageByPython(in_dir):
+    total = 1024 * 4  # Add metadata size for each folder
+    for p in os.listdir(in_dir):
+      full_path = os.path.join(in_dir, p)
+      if os.path.islink(full_path):
+        pass
+      elif os.path.isfile(full_path):
+        total += os.path.getsize(full_path)
+      elif os.path.isdir(full_path):
+        total += GetDiskUsageByPython(full_path)
+    return total
+  py_total = GetDiskUsageByPython(path)
+  logger.info("Disk usage calculated: py_total=%d (du_total=%d diff=%d)",
+              py_total, du_total, du_total - py_total)
+  return py_total
 
 def GetInodeUsage(path):
   """Returns the number of inodes that "path" occupies on host.
