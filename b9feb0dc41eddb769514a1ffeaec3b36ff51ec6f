@@ -16,6 +16,24 @@
       "message": "Could you please run a full set of ABTD builds on all aosp-master and internal master builds against this CL?\n\nLet\u0027s reduce the chances of yet another revert.",
       "revId": "b9feb0dc41eddb769514a1ffeaec3b36ff51ec6f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eb93757_1291fb2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-15T01:29:27Z",
+      "side": 1,
+      "message": "aosp: https://android-build.googleplex.com/builds/abtd/run/L60900000959129500\n\nintenal: https://android-build.googleplex.com/builds/abtd/run/L07900000959131477\n\nthe failed one already failed on internal master.",
+      "parentUuid": "b7c91402_fbf579e1",
+      "revId": "b9feb0dc41eddb769514a1ffeaec3b36ff51ec6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
