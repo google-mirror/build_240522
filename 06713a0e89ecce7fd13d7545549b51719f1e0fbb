@@ -34,6 +34,24 @@
       "parentUuid": "f5c45013_2de39518",
       "revId": "06713a0e89ecce7fd13d7545549b51719f1e0fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "036451a0_7c3300ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-03-15T00:09:21Z",
+      "side": 1,
+      "message": "ah, that was the bit i\u0027d got mixed up --- i didn\u0027t realize it was _just_ LLVM. makes sense, thanks!\n\nbut that seems to imply that libRS _shouldn\u0027t_ have an llvm dependency, right? so we should be able to build libRS for rv64 in that case? prashanthsw: what\u0027s the failure if you try to build it?",
+      "parentUuid": "bfa554be_3a7cdffe",
+      "revId": "06713a0e89ecce7fd13d7545549b51719f1e0fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
