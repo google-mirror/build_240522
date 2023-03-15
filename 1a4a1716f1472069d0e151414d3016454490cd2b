@@ -56,6 +56,30 @@
       },
       "revId": "1a4a1716f1472069d0e151414d3016454490cd2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d69591b_c13949fb",
+        "filename": "core/tasks/tools/compatibility.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1863710
+      },
+      "writtenOn": "2023-03-15T18:12:12Z",
+      "side": 1,
+      "message": "I\u0027m not 100% sure. I don\u0027t know how to access it via the install rule. I experimented with it a bit and this was the only way I could get it to work.",
+      "parentUuid": "5d96e124_6cb5cfb9",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 14
+      },
+      "revId": "1a4a1716f1472069d0e151414d3016454490cd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
