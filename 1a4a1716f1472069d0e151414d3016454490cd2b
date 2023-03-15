@@ -33,6 +33,29 @@
       "message": "Be Authentic, Benin City, 320001",
       "revId": "1a4a1716f1472069d0e151414d3016454490cd2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d96e124_6cb5cfb9",
+        "filename": "core/tasks/tools/compatibility.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1121894
+      },
+      "writtenOn": "2023-03-15T18:09:09Z",
+      "side": 1,
+      "message": "Are you sure that\u0027s the proper way to refer a file in another project?\n\nShouldn\u0027t we access it via an install rule ?",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 14
+      },
+      "revId": "1a4a1716f1472069d0e151414d3016454490cd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
