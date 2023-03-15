@@ -16,6 +16,24 @@
       "message": "+srhines because he\u0027d led me to believe that RS shouldn\u0027t start unless/until someone tries to _use_ it anyway, so the fact you need this is probably a bad sign even for non-riscv64 systems?",
       "revId": "06713a0e89ecce7fd13d7545549b51719f1e0fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfa554be_3a7cdffe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2023-03-15T00:02:17Z",
+      "side": 1,
+      "message": "RenderScript doesn\u0027t load the LLVM libraries, but the intrinsics that use the basic libRS do seem to still be in use. The vast majority of RenderScript\u0027s memory use was always in the LLVM side of things, so we separated that out many years before it was even deprecated.",
+      "parentUuid": "f5c45013_2de39518",
+      "revId": "06713a0e89ecce7fd13d7545549b51719f1e0fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
