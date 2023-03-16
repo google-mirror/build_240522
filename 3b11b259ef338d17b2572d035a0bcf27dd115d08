@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "197f7006_229c8729",
+        "filename": "target/product/fullmte.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-03-16T15:52:51Z",
+      "side": 1,
+      "message": "Sorry for being picky.  Could you add some more details about what this is.  Maybe a link with information on what it is, how to use it, who would use it, etc. Ideally that would not be an internal google link, since this is open source code.\n\nThere isn\u0027t enough information here for someone to know what to do with this configuration, or even if it\u0027s not ever usable anymore and could be deleted.",
+      "range": {
+        "startLine": 17,
+        "startChar": 59,
+        "endLine": 17,
+        "endChar": 73
+      },
+      "revId": "3b11b259ef338d17b2572d035a0bcf27dd115d08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
