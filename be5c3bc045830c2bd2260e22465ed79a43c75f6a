@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6286f601_dfda1b0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-03-16T04:46:53Z",
+      "side": 1,
+      "message": "This isn\u0027t ready until the CtsShim prebuilts are resolved (aosp/2406218, aosp/2406412)",
+      "revId": "be5c3bc045830c2bd2260e22465ed79a43c75f6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
