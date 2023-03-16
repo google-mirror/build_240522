@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cb9d50d_ece7165e",
+        "filename": "tools/rbcrun/rbcrun/rbcrun.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-03-16T03:10:53Z",
+      "side": 1,
+      "message": "This was one way this could be fixed, but if rbcrun/rbcrun/rbcrun.go feels confusing, we could fix it in a different way. In build/soong, we have subfolders under cmd, so one choice could be:\n\nrbcrun/cmd/rbcrun/rbcrun.go\n\nI\u0027ve also used something like rbcrun/cmd/rbcrun/main.go, but that gets confusing anywhere that just gives you the file basename (like IDE tabs).",
+      "revId": "ec5e3b8d28df4b683633095c3f3bdc8551e59b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
