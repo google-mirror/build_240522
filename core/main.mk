@@ -142,6 +142,16 @@ _additional_prop_var_names :=
 
 $(KATI_obsolete_var ADDITIONAL_BUILD_PROPERTIES, Please use ADDITIONAL_SYSTEM_PROPERTIES)
 
+
+# Define build rule for the context file
+ifeq ($(BUILD_WITH_PARTIAL_ARTIFACT),true)
+CONTEXT_FILE := $(OUT_DIR)/context
+
+$(CONTEXT_FILE):
+	$(GENERATE_CONTEXT_SCRIPT_FILE) --output $(CONTEXT_FILE)
+
+endif
+
 #
 # -----------------------------------------------------------------
 # Add the product-defined properties to the build properties.
