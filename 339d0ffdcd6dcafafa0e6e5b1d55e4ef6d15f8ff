@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21e12eda_de2ab346",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-03-17T02:43:21Z",
+      "side": 1,
+      "message": "We used to have something very similar to this as the [partial source] PDK, and removed it because it complicated a lot of things, did not work with Soong, and was quite slow due to needing to look through the full zip file at analysis time. Based on the current logic here, why aren\u0027t you just disabling building the system[_ext] images and specifying prebuilts for those images instead?",
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91e32e10_d4060b4c",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-03-17T02:43:21Z",
+      "side": 1,
+      "message": "This is missing all the inputs used by the script (including all the directories it looks through to find the target_files zip). It\u0027s also missing the list of all the files that will be written (which should be in .KATI_IMPLICIT_OUTPUTS).",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 16
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
