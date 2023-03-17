@@ -140,6 +140,19 @@ _additional_prop_var_names :=
 
 $(KATI_obsolete_var ADDITIONAL_BUILD_PROPERTIES, Please use ADDITIONAL_SYSTEM_PROPERTIES)
 
+
+# Define build rule for the context file
+ifeq ($(BUILD_WITH_PARTIAL_ARTIFACT),true)
+CONTEXT_FILE := $(OUT_DIR)/stt_context
+ARTIFACT_PATH=$(wildcard $(OUT_DIR)/prebuilt_cached/artifacts/ssi/*target_files*.zip)
+GENERATE_CONTEXT_SCRIPT=build/make/tools/source_tree_treble/generate_context.sh
+
+# TODO(b/276154637) Handle context file and other outputs from generate_context.sh for incremental build.
+$(CONTEXT_FILE): $(ARTIFACT_PATH) $(GENERATE_CONTEXT_SCRIPT)
+	$(GENERATE_CONTEXT_SCRIPT) --artifact $(ARTIFACT_PATH) --output $(CONTEXT_FILE)
+
+endif
+
 #
 # -----------------------------------------------------------------
 # Add the product-defined properties to the build properties.
