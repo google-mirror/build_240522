@@ -140,6 +140,17 @@ _additional_prop_var_names :=
 
 $(KATI_obsolete_var ADDITIONAL_BUILD_PROPERTIES, Please use ADDITIONAL_SYSTEM_PROPERTIES)
 
+
+# Define build rule for the context file
+ifeq ($(BUILD_WITH_PARTIAL_ARTIFACT),true)
+CONTEXT_FILE := $(OUT_DIR)/context
+
+# TODO(b/2848379) Handle context file and other outputs from generate_context.sh for incremental build.
+$(CONTEXT_FILE):
+	build/make/tools/generate_context.sh --output $(CONTEXT_FILE)
+
+endif
+
 #
 # -----------------------------------------------------------------
 # Add the product-defined properties to the build properties.
