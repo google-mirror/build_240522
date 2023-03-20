@@ -16,6 +16,24 @@
       "message": "`ANDROID_SYSTEM_SERVER_STUBS`, per this [CL](https://android-review.git.corp.google.com/c/platform/build/soong/+/2498215/2/android/sdk_version.go)?",
       "revId": "7fc3d286003cfa673ff382bdd1783d50c7bb420a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5c859ab_5568095f",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1905,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-03-20T22:01:52Z",
+      "side": 1,
+      "message": "Yikes, thanks for catching this. This has been fixed now.\n\nAs an additional check, I have verified that there is no change in out/build-\u003clunch_product\u003e.ninja files before and after this change.",
+      "parentUuid": "4b13eb14_08869a0f",
+      "revId": "7fc3d286003cfa673ff382bdd1783d50c7bb420a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
