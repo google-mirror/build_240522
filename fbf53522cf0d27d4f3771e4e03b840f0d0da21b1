@@ -22,6 +22,30 @@
       },
       "revId": "fbf53522cf0d27d4f3771e4e03b840f0d0da21b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9594d6e8_893b7a82",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2023-03-20T17:51:54Z",
+      "side": 1,
+      "message": "I like indentations! I was following the style of the previous `ifeq` in this file. I can send another CL to clean up the indentations of this file.",
+      "parentUuid": "5af95f63_7baf25a7",
+      "range": {
+        "startLine": 622,
+        "startChar": 0,
+        "endLine": 622,
+        "endChar": 17
+      },
+      "revId": "fbf53522cf0d27d4f3771e4e03b840f0d0da21b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
