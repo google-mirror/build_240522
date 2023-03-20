@@ -4,17 +4,17 @@
 # are not specific to what is being built.
 
 ifndef KATI
-$(warning Directly using config.mk from make is no longer supported.)
-$(warning )
-$(warning If you are just attempting to build, you probably need to re-source envsetup.sh:)
-$(warning )
-$(warning $$ source build/envsetup.sh)
-$(warning )
-$(warning If you are attempting to emulate get_build_var, use one of the following:)
-$(warning $$ build/soong/soong_ui.bash --dumpvar-mode)
-$(warning $$ build/soong/soong_ui.bash --dumpvars-mode)
-$(warning )
-$(error done)
+  $(warning Directly using config.mk from make is no longer supported.)
+  $(warning )
+  $(warning If you are just attempting to build, you probably need to re-source envsetup.sh:)
+  $(warning )
+  $(warning $$ source build/envsetup.sh)
+  $(warning )
+  $(warning If you are attempting to emulate get_build_var, use one of the following:)
+  $(warning $$ build/soong/soong_ui.bash --dumpvar-mode)
+  $(warning $$ build/soong/soong_ui.bash --dumpvars-mode)
+  $(warning )
+  $(error done)
 endif
 
 BUILD_SYSTEM :=$= build/make/core
@@ -249,7 +249,7 @@ NORMALIZE_PATH := build/make/tools/normalize_path.py
 
 # $(1): the paths to be normalized
 define normalize-paths
-$(if $(1),$(shell $(NORMALIZE_PATH) $(1)))
+  $(if $(1),$(shell $(NORMALIZE_PATH) $(1)))
 endef
 
 # ###############################################################
@@ -269,8 +269,8 @@ SOONG_CONFIG_NAMESPACES :=
 # Ex: $(call add_soong_config_namespace,acme)
 
 define add_soong_config_namespace
-$(eval SOONG_CONFIG_NAMESPACES += $1) \
-$(eval SOONG_CONFIG_$(strip $1) :=)
+  $(eval SOONG_CONFIG_NAMESPACES += $1) \
+  $(eval SOONG_CONFIG_$(strip $1) :=)
 endef
 
 # The add_soong_config_var function adds a a list of soong config variables to
@@ -279,8 +279,8 @@ endef
 # $1 is the namespace. $2 is the list of variables.
 # Ex: $(call add_soong_config_var,acme,COOL_FEATURE_A COOL_FEATURE_B)
 define add_soong_config_var
-$(eval SOONG_CONFIG_$(strip $1) += $2) \
-$(foreach v,$(strip $2),$(eval SOONG_CONFIG_$(strip $1)_$v := $($v)))
+  $(eval SOONG_CONFIG_$(strip $1) += $2) \
+  $(foreach v,$(strip $2),$(eval SOONG_CONFIG_$(strip $1)_$v := $($v)))
 endef
 
 # The add_soong_config_var_value function defines a make variable and also adds
@@ -289,16 +289,16 @@ endef
 # Ex: $(call add_soong_config_var_value,acme,COOL_FEATURE,true)
 
 define add_soong_config_var_value
-$(eval $2 := $3) \
-$(call add_soong_config_var,$1,$2)
+  $(eval $2 := $3) \
+  $(call add_soong_config_var,$1,$2)
 endef
 
 # Soong config namespace variables manipulation.
 #
 # internal utility to define a namespace and a variable in it.
 define soong_config_define_internal
-$(if $(filter $1,$(SOONG_CONFIG_NAMESPACES)),,$(eval SOONG_CONFIG_NAMESPACES:=$(SOONG_CONFIG_NAMESPACES) $1)) \
-$(if $(filter $2,$(SOONG_CONFIG_$(strip $1))),,$(eval SOONG_CONFIG_$(strip $1):=$(SOONG_CONFIG_$(strip $1)) $2))
+  $(if $(filter $1,$(SOONG_CONFIG_NAMESPACES)),,$(eval SOONG_CONFIG_NAMESPACES:=$(SOONG_CONFIG_NAMESPACES) $1)) \
+  $(if $(filter $2,$(SOONG_CONFIG_$(strip $1))),,$(eval SOONG_CONFIG_$(strip $1):=$(SOONG_CONFIG_$(strip $1)) $2))
 endef
 
 # soong_config_set defines the variable in the given Soong config namespace
@@ -306,8 +306,8 @@ endef
 # $1 is the namespace. $2 is the variable name. $3 is the variable value.
 # Ex: $(call soong_config_set,acme,COOL_FEATURE,true)
 define soong_config_set
-$(call soong_config_define_internal,$1,$2) \
-$(eval SOONG_CONFIG_$(strip $1)_$(strip $2):=$3)
+  $(call soong_config_define_internal,$1,$2) \
+  $(eval SOONG_CONFIG_$(strip $1)_$(strip $2):=$3)
 endef
 
 # soong_config_append appends to the value of the variable in the given Soong
@@ -315,8 +315,8 @@ endef
 # namespace does not  exist, it will be defined.
 # $1 is the namespace, $2 is the variable name, $3 is the value
 define soong_config_append
-$(call soong_config_define_internal,$1,$2) \
-$(eval SOONG_CONFIG_$(strip $1)_$(strip $2):=$(SOONG_CONFIG_$(strip $1)_$(strip $2)) $3)
+  $(call soong_config_define_internal,$1,$2) \
+  $(eval SOONG_CONFIG_$(strip $1)_$(strip $2):=$(SOONG_CONFIG_$(strip $1)_$(strip $2)) $3)
 endef
 
 # soong_config_append gets to the value of the variable in the given Soong
@@ -324,7 +324,7 @@ endef
 # empty string will be returned.
 # $1 is the namespace, $2 is the variable name
 define soong_config_get
-$(SOONG_CONFIG_$(strip $1)_$(strip $2))
+  $(SOONG_CONFIG_$(strip $1)_$(strip $2))
 endef
 
 # Set the extensions used for various packages
@@ -333,9 +333,9 @@ COMMON_JAVA_PACKAGE_SUFFIX := .jar
 COMMON_ANDROID_PACKAGE_SUFFIX := .apk
 
 ifdef TMPDIR
-JAVA_TMPDIR_ARG := -Djava.io.tmpdir=$(TMPDIR)
+  JAVA_TMPDIR_ARG := -Djava.io.tmpdir=$(TMPDIR)
 else
-JAVA_TMPDIR_ARG :=
+  JAVA_TMPDIR_ARG :=
 endif
 
 # ###############################################################
@@ -348,7 +348,7 @@ endif
 # be used, and if that doesn't work, then the default is an
 # arm build
 ifndef ANDROID_BUILDSPEC
-ANDROID_BUILDSPEC := $(TOPDIR)buildspec.mk
+  ANDROID_BUILDSPEC := $(TOPDIR)buildspec.mk
 endif
 -include $(ANDROID_BUILDSPEC)
 
@@ -401,9 +401,9 @@ FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(SCAN_EXCLUDE_DIRS) .repo .git)
 TARGET_DEVICE_KERNEL_HEADERS := $(strip $(wildcard $(TARGET_DEVICE_DIR)/kernel-headers))
 
 define validate-kernel-headers
-$(if $(firstword $(foreach hdr_dir,$(1),\
-         $(filter-out kernel-headers,$(notdir $(hdr_dir))))),\
-     $(error Kernel header dirs must be end in kernel-headers: $(1)))
+  $(if $(firstword $(foreach hdr_dir,$(1),\
+           $(filter-out kernel-headers,$(notdir $(hdr_dir))))),\
+       $(error Kernel header dirs must be end in kernel-headers: $(1)))
 endef
 # also allow the board config to provide additional directories since
 # there could be device/oem/base_hw and device/oem/derived_hw
@@ -422,29 +422,29 @@ $(call validate-kernel-headers,$(TARGET_PRODUCT_KERNEL_HEADERS))
 
 # Commands to generate .toc file common to ELF .so files.
 define _gen_toc_command_for_elf
-$(hide) ($($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)READELF) -d $(1) | grep SONAME || echo "No SONAME for $1") > $(2)
-$(hide) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)READELF) --dyn-syms $(1) | awk '{$$2=""; $$3=""; print}' >> $(2)
+  $(hide) ($($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)READELF) -d $(1) | grep SONAME || echo "No SONAME for $1") > $(2)
+  $(hide) $($(PRIVATE_2ND_ARCH_VAR_PREFIX)$(PRIVATE_PREFIX)READELF) --dyn-syms $(1) | awk '{$$2=""; $$3=""; print}' >> $(2)
 endef
 
 # Commands to generate .toc file from Darwin dynamic library.
 define _gen_toc_command_for_macho
-$(hide) $(HOST_OTOOL) -l $(1) | grep LC_ID_DYLIB -A 5 > $(2)
-$(hide) $(HOST_NM) -gP $(1) | cut -f1-2 -d" " | (grep -v U$$ >> $(2) || true)
+  $(hide) $(HOST_OTOOL) -l $(1) | grep LC_ID_DYLIB -A 5 > $(2)
+  $(hide) $(HOST_NM) -gP $(1) | cut -f1-2 -d" " | (grep -v U$$ >> $(2) || true)
 endef
 
 # Pick a Java compiler.
 include $(BUILD_SYSTEM)/combo/javac.mk
 
 ifeq ($(CALLED_FROM_SETUP),true)
-include $(BUILD_SYSTEM)/ccache.mk
-include $(BUILD_SYSTEM)/goma.mk
-include $(BUILD_SYSTEM)/rbe.mk
+  include $(BUILD_SYSTEM)/ccache.mk
+  include $(BUILD_SYSTEM)/goma.mk
+  include $(BUILD_SYSTEM)/rbe.mk
 endif
 
 # GCC version selection
 TARGET_GCC_VERSION := 4.9
 ifdef TARGET_2ND_ARCH
-2ND_TARGET_GCC_VERSION := 4.9
+  2ND_TARGET_GCC_VERSION := 4.9
 endif
 
 # Normalize WITH_STATIC_ANALYZER
@@ -466,14 +466,14 @@ endif
 ifeq (,$(strip $(CALLED_FROM_SETUP)))
 ifneq (,$(strip $(BUILD_ENV_SEQUENCE_NUMBER)))
 ifneq ($(BUILD_ENV_SEQUENCE_NUMBER),$(CORRECT_BUILD_ENV_SEQUENCE_NUMBER))
-$(warning BUILD_ENV_SEQUENCE_NUMBER is set incorrectly.)
-$(info *** If you use envsetup/lunch/choosecombo:)
-$(info ***   - Re-execute envsetup (". envsetup.sh"))
-$(info ***   - Re-run lunch or choosecombo)
-$(info *** If you use buildspec.mk:)
-$(info ***   - Look at buildspec.mk.default to see what has changed)
-$(info ***   - Update BUILD_ENV_SEQUENCE_NUMBER to "$(CORRECT_BUILD_ENV_SEQUENCE_NUMBER)")
-$(error bailing..)
+  $(warning BUILD_ENV_SEQUENCE_NUMBER is set incorrectly.)
+  $(info *** If you use envsetup/lunch/choosecombo:)
+  $(info ***   - Re-execute envsetup (". envsetup.sh"))
+  $(info ***   - Re-run lunch or choosecombo)
+  $(info *** If you use buildspec.mk:)
+  $(info ***   - Look at buildspec.mk.default to see what has changed)
+  $(info ***   - Update BUILD_ENV_SEQUENCE_NUMBER to "$(CORRECT_BUILD_ENV_SEQUENCE_NUMBER)")
+  $(error bailing..)
 endif
 endif
 endif
@@ -482,13 +482,13 @@ endif
 # Whether we can expect a full build graph
 ALLOW_MISSING_DEPENDENCIES := $(filter true,$(ALLOW_MISSING_DEPENDENCIES))
 ifneq ($(TARGET_BUILD_APPS),)
-ALLOW_MISSING_DEPENDENCIES := true
+  ALLOW_MISSING_DEPENDENCIES := true
 endif
 ifeq ($(TARGET_BUILD_UNBUNDLED_IMAGE),true)
-ALLOW_MISSING_DEPENDENCIES := true
+  ALLOW_MISSING_DEPENDENCIES := true
 endif
 ifneq ($(filter true,$(SOONG_ALLOW_MISSING_DEPENDENCIES)),)
-ALLOW_MISSING_DEPENDENCIES := true
+  ALLOW_MISSING_DEPENDENCIES := true
 endif
 # Mac builds default to ALLOW_MISSING_DEPENDENCIES, at least until the host
 # tools aren't enabled by default for Mac.
@@ -520,9 +520,9 @@ prebuilt_build_tools_wrappers := prebuilts/build-tools/common/bin
 prebuilt_build_tools_jars := prebuilts/build-tools/common/framework
 prebuilt_build_tools_bin_noasan := $(prebuilt_build_tools)/$(HOST_PREBUILT_TAG)/bin
 ifeq ($(filter address,$(SANITIZE_HOST)),)
-prebuilt_build_tools_bin := $(prebuilt_build_tools_bin_noasan)
+  prebuilt_build_tools_bin := $(prebuilt_build_tools_bin_noasan)
 else
-prebuilt_build_tools_bin := $(prebuilt_build_tools)/$(HOST_PREBUILT_TAG)/asan/bin
+   prebuilt_build_tools_bin := $(prebuilt_build_tools)/$(HOST_PREBUILT_TAG)/asan/bin
 endif
 
 USE_PREBUILT_SDK_TOOLS_IN_PLACE := true
@@ -575,10 +575,10 @@ YASM := prebuilts/misc/$(BUILD_OS)-$(HOST_PREBUILT_ARCH)/yasm/yasm
 
 DOXYGEN:= doxygen
 ifeq ($(HOST_OS),linux)
-BREAKPAD_DUMP_SYMS := $(HOST_OUT_EXECUTABLES)/dump_syms
+  BREAKPAD_DUMP_SYMS := $(HOST_OUT_EXECUTABLES)/dump_syms
 else
-# For non-supported hosts, do not generate breakpad symbols.
-BREAKPAD_GENERATE_SYMBOLS := false
+  # For non-supported hosts, do not generate breakpad symbols.
+  BREAKPAD_GENERATE_SYMBOLS := false
 endif
 PROTOC := $(HOST_OUT_EXECUTABLES)/aprotoc$(HOST_EXECUTABLE_SUFFIX)
 NANOPB_SRCS := $(HOST_OUT_EXECUTABLES)/protoc-gen-nanopb
@@ -587,19 +587,19 @@ MINIGZIP := $(HOST_OUT_EXECUTABLES)/minigzip$(HOST_EXECUTABLE_SUFFIX)
 LZ4 := $(HOST_OUT_EXECUTABLES)/lz4$(HOST_EXECUTABLE_SUFFIX)
 GENERATE_GKI_CERTIFICATE := $(HOST_OUT_EXECUTABLES)/generate_gki_certificate$(HOST_EXECUTABLE_SUFFIX)
 ifeq (,$(strip $(BOARD_CUSTOM_MKBOOTIMG)))
-MKBOOTIMG := $(HOST_OUT_EXECUTABLES)/mkbootimg$(HOST_EXECUTABLE_SUFFIX)
+  MKBOOTIMG := $(HOST_OUT_EXECUTABLES)/mkbootimg$(HOST_EXECUTABLE_SUFFIX)
 else
-MKBOOTIMG := $(BOARD_CUSTOM_MKBOOTIMG)
+  MKBOOTIMG := $(BOARD_CUSTOM_MKBOOTIMG)
 endif
 ifeq (,$(strip $(BOARD_CUSTOM_BPTTOOL)))
-BPTTOOL := $(HOST_OUT_EXECUTABLES)/bpttool$(HOST_EXECUTABLE_SUFFIX)
+  BPTTOOL := $(HOST_OUT_EXECUTABLES)/bpttool$(HOST_EXECUTABLE_SUFFIX)
 else
-BPTTOOL := $(BOARD_CUSTOM_BPTTOOL)
+  BPTTOOL := $(BOARD_CUSTOM_BPTTOOL)
 endif
 ifeq (,$(strip $(BOARD_CUSTOM_AVBTOOL)))
-AVBTOOL := $(HOST_OUT_EXECUTABLES)/avbtool$(HOST_EXECUTABLE_SUFFIX)
+  AVBTOOL := $(HOST_OUT_EXECUTABLES)/avbtool$(HOST_EXECUTABLE_SUFFIX)
 else
-AVBTOOL := $(BOARD_CUSTOM_AVBTOOL)
+  AVBTOOL := $(BOARD_CUSTOM_AVBTOOL)
 endif
 APICHECK := $(HOST_OUT_JAVA_LIBRARIES)/metalava$(COMMON_JAVA_PACKAGE_SUFFIX)
 FS_GET_STATS := $(HOST_OUT_EXECUTABLES)/fs_get_stats$(HOST_EXECUTABLE_SUFFIX)
@@ -619,9 +619,9 @@ LPMAKE := $(HOST_OUT_EXECUTABLES)/lpmake$(HOST_EXECUTABLE_SUFFIX)
 ADD_IMG_TO_TARGET_FILES := $(HOST_OUT_EXECUTABLES)/add_img_to_target_files$(HOST_EXECUTABLE_SUFFIX)
 BUILD_IMAGE := $(HOST_OUT_EXECUTABLES)/build_image$(HOST_EXECUTABLE_SUFFIX)
 ifeq (,$(strip $(BOARD_CUSTOM_BUILD_SUPER_IMAGE)))
-BUILD_SUPER_IMAGE := $(HOST_OUT_EXECUTABLES)/build_super_image$(HOST_EXECUTABLE_SUFFIX)
+  BUILD_SUPER_IMAGE := $(HOST_OUT_EXECUTABLES)/build_super_image$(HOST_EXECUTABLE_SUFFIX)
 else
-BUILD_SUPER_IMAGE := $(BOARD_CUSTOM_BUILD_SUPER_IMAGE)
+  BUILD_SUPER_IMAGE := $(BOARD_CUSTOM_BUILD_SUPER_IMAGE)
 endif
 IMG_FROM_TARGET_FILES := $(HOST_OUT_EXECUTABLES)/img_from_target_files$(HOST_EXECUTABLE_SUFFIX)
 MAKE_RECOVERY_PATCH := $(HOST_OUT_EXECUTABLES)/make_recovery_patch$(HOST_EXECUTABLE_SUFFIX)
@@ -681,7 +681,7 @@ endif
 # TODO(b/69865032): Make PRODUCT_NOTICE_SPLIT the default behavior and remove
 #    references to it here and below.
 ifdef PRODUCT_NOTICE_SPLIT_OVERRIDE
-   $(error PRODUCT_NOTICE_SPLIT_OVERRIDE cannot be set.)
+ $(error PRODUCT_NOTICE_SPLIT_OVERRIDE cannot be set.)
 endif
 
 requirements := \
@@ -702,11 +702,11 @@ PRODUCT_FULL_TREBLE_OVERRIDE ?=
 $(foreach req,$(requirements),$(eval $(req)_OVERRIDE ?=))
 
 ifneq ($(PRODUCT_SEPOLICY_SPLIT),true)
-# WARNING: DO NOT CHANGE: if you are downstream of AOSP, and you change this, without
-# letting upstream know it's important to you, we may do cleanup which breaks this
-# significantly. Please let us know if you are changing this.
-# TODO(b/257176017) - unsplit sepolicy is no longer supported
-PRODUCT_SEPOLICY_SPLIT := true
+  # WARNING: DO NOT CHANGE: if you are downstream of AOSP, and you change this, without
+  # letting upstream know it's important to you, we may do cleanup which breaks this
+  # significantly. Please let us know if you are changing this.
+  # TODO(b/257176017) - unsplit sepolicy is no longer supported
+  PRODUCT_SEPOLICY_SPLIT := true
 endif
 
 # TODO(b/114488870): disallow PRODUCT_FULL_TREBLE_OVERRIDE from being used.
@@ -734,9 +734,9 @@ endif
 # letting upstream know it's important to you, we may do cleanup which breaks this
 # significantly. Please let us know if you are changing this.
 ifndef BOARD_VNDK_VERSION
-# READ WARNING - DO NOT CHANGE
-BOARD_VNDK_VERSION := current
-# READ WARNING - DO NOT CHANGE
+  # READ WARNING - DO NOT CHANGE
+  BOARD_VNDK_VERSION := current
+  # READ WARNING - DO NOT CHANGE
 endif
 
 ifdef PRODUCT_PRODUCT_VNDK_VERSION
@@ -831,14 +831,14 @@ sepolicy_major_vers := 33
 sepolicy_minor_vers := 0
 
 ifneq ($(sepolicy_major_vers), $(PLATFORM_SDK_VERSION))
-$(error sepolicy_major_version does not match PLATFORM_SDK_VERSION, please update.)
+  $(error sepolicy_major_version does not match PLATFORM_SDK_VERSION, please update.)
 endif
 
 TOT_SEPOLICY_VERSION := 10000.0
 ifneq (REL,$(PLATFORM_VERSION_CODENAME))
-    PLATFORM_SEPOLICY_VERSION := $(TOT_SEPOLICY_VERSION)
+  PLATFORM_SEPOLICY_VERSION := $(TOT_SEPOLICY_VERSION)
 else
-    PLATFORM_SEPOLICY_VERSION := $(join $(addsuffix .,$(sepolicy_major_vers)), $(sepolicy_minor_vers))
+  PLATFORM_SEPOLICY_VERSION := $(join $(addsuffix .,$(sepolicy_major_vers)), $(sepolicy_minor_vers))
 endif
 sepolicy_major_vers :=
 sepolicy_minor_vers :=
@@ -848,14 +848,14 @@ sepolicy_minor_vers :=
 # policy is to be based. If unspecified, this will build against the current
 # public platform policy in tree
 ifndef BOARD_SEPOLICY_VERS
-# The default platform policy version.
-BOARD_SEPOLICY_VERS := $(PLATFORM_SEPOLICY_VERSION)
+  # The default platform policy version.
+  BOARD_SEPOLICY_VERS := $(PLATFORM_SEPOLICY_VERSION)
 endif
 
 ifeq ($(BOARD_SEPOLICY_VERS),$(PLATFORM_SEPOLICY_VERSION))
-IS_TARGET_MIXED_SEPOLICY :=
+  IS_TARGET_MIXED_SEPOLICY :=
 else
-IS_TARGET_MIXED_SEPOLICY := true
+  IS_TARGET_MIXED_SEPOLICY := true
 endif
 
 .KATI_READONLY := IS_TARGET_MIXED_SEPOLICY
@@ -888,15 +888,15 @@ ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
 endif
 
 ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
-    ifneq ($(PRODUCT_USE_DYNAMIC_PARTITION_SIZE),true)
-        $(error PRODUCT_USE_DYNAMIC_PARTITION_SIZE must be true for devices with dynamic partitions)
-    endif
+  ifneq ($(PRODUCT_USE_DYNAMIC_PARTITION_SIZE),true)
+    $(error PRODUCT_USE_DYNAMIC_PARTITION_SIZE must be true for devices with dynamic partitions)
+  endif
 endif
 
 ifeq ($(PRODUCT_BUILD_SUPER_PARTITION),true)
-    ifneq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
-        $(error Can only build super partition for devices with dynamic partitions)
-    endif
+  ifneq ($(PRODUCT_USE_DYNAMIC_PARTITIONS),true)
+    $(error Can only build super partition for devices with dynamic partitions)
+  endif
 endif
 
 
@@ -904,57 +904,57 @@ ifeq ($(PRODUCT_USE_DYNAMIC_PARTITION_SIZE),true)
 
 ifneq ($(BOARD_SYSTEMIMAGE_PARTITION_SIZE),)
 ifneq ($(BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE),)
-$(error Should not define BOARD_SYSTEMIMAGE_PARTITION_SIZE and \
-    BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE together)
+  $(error Should not define BOARD_SYSTEMIMAGE_PARTITION_SIZE and \
+      BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE together)
 endif
 endif
 
 ifneq ($(BOARD_VENDORIMAGE_PARTITION_SIZE),)
 ifneq ($(BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE),)
-$(error Should not define BOARD_VENDORIMAGE_PARTITION_SIZE and \
-    BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE together)
+  $(error Should not define BOARD_VENDORIMAGE_PARTITION_SIZE and \
+      BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE together)
 endif
 endif
 
 ifneq ($(BOARD_ODMIMAGE_PARTITION_SIZE),)
 ifneq ($(BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE),)
-$(error Should not define BOARD_ODMIMAGE_PARTITION_SIZE and \
-    BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE together)
+  $(error Should not define BOARD_ODMIMAGE_PARTITION_SIZE and \
+      BOARD_ODMIMAGE_PARTITION_RESERVED_SIZE together)
 endif
 endif
 
 ifneq ($(BOARD_VENDOR_DLKMIMAGE_PARTITION_SIZE),)
 ifneq ($(BOARD_VENDOR_DLKMIMAGE_PARTITION_RESERVED_SIZE),)
-$(error Should not define BOARD_VENDOR_DLKMIMAGE_PARTITION_SIZE and \
-    BOARD_VENDOR_DLKMIMAGE_PARTITION_RESERVED_SIZE together)
+  $(error Should not define BOARD_VENDOR_DLKMIMAGE_PARTITION_SIZE and \
+      BOARD_VENDOR_DLKMIMAGE_PARTITION_RESERVED_SIZE together)
 endif
 endif
 
 ifneq ($(BOARD_ODM_DLKMIMAGE_PARTITION_SIZE),)
 ifneq ($(BOARD_ODM_DLKMIMAGE_PARTITION_RESERVED_SIZE),)
-$(error Should not define BOARD_ODM_DLKMIMAGE_PARTITION_SIZE and \
-    BOARD_ODM_DLKMIMAGE_PARTITION_RESERVED_SIZE together)
+  $(error Should not define BOARD_ODM_DLKMIMAGE_PARTITION_SIZE and \
+      BOARD_ODM_DLKMIMAGE_PARTITION_RESERVED_SIZE together)
 endif
 endif
 
 ifneq ($(BOARD_SYSTEM_DLKMIMAGE_PARTITION_SIZE),)
 ifneq ($(BOARD_SYSTEM_DLKMIMAGE_PARTITION_RESERVED_SIZE),)
-$(error Should not define BOARD_SYSTEM_DLKMIMAGE_PARTITION_SIZE and \
-    BOARD_SYSTEM_DLKMIMAGE_PARTITION_RESERVED_SIZE together)
+  $(error Should not define BOARD_SYSTEM_DLKMIMAGE_PARTITION_SIZE and \
+      BOARD_SYSTEM_DLKMIMAGE_PARTITION_RESERVED_SIZE together)
 endif
 endif
 
 ifneq ($(BOARD_PRODUCTIMAGE_PARTITION_SIZE),)
 ifneq ($(BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE),)
-$(error Should not define BOARD_PRODUCTIMAGE_PARTITION_SIZE and \
-    BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE together)
+  $(error Should not define BOARD_PRODUCTIMAGE_PARTITION_SIZE and \
+      BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE together)
 endif
 endif
 
 ifneq ($(BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE),)
 ifneq ($(BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE),)
-$(error Should not define BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE and \
-    BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE together)
+  $(error Should not define BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE and \
+      BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE together)
 endif
 endif
 
@@ -980,8 +980,8 @@ $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)), \
 
 # Define BOARD_SUPER_PARTITION_PARTITION_LIST, the sum of all BOARD_*_PARTITION_LIST
 ifdef BOARD_SUPER_PARTITION_PARTITION_LIST
-$(error BOARD_SUPER_PARTITION_PARTITION_LIST should not be defined, but computed from \
-    BOARD_SUPER_PARTITION_GROUPS and BOARD_*_PARTITION_LIST)
+  $(error BOARD_SUPER_PARTITION_PARTITION_LIST should not be defined, but computed from \
+      BOARD_SUPER_PARTITION_GROUPS and BOARD_*_PARTITION_LIST)
 endif
 BOARD_SUPER_PARTITION_PARTITION_LIST := \
     $(foreach group,$(call to-upper,$(BOARD_SUPER_PARTITION_GROUPS)),$(BOARD_$(group)_PARTITION_LIST))
@@ -992,17 +992,17 @@ ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
 
 # The metadata device must be specified manually for retrofitting.
 ifeq ($(BOARD_SUPER_PARTITION_METADATA_DEVICE),)
-$(error Must specify BOARD_SUPER_PARTITION_METADATA_DEVICE if PRODUCT_RETROFIT_DYNAMIC_PARTITIONS=true.)
+  $(error Must specify BOARD_SUPER_PARTITION_METADATA_DEVICE if PRODUCT_RETROFIT_DYNAMIC_PARTITIONS=true.)
 endif
 
 # The super partition block device list must be specified manually for retrofitting.
 ifeq ($(BOARD_SUPER_PARTITION_BLOCK_DEVICES),)
-$(error Must specify BOARD_SUPER_PARTITION_BLOCK_DEVICES if PRODUCT_RETROFIT_DYNAMIC_PARTITIONS=true.)
+  $(error Must specify BOARD_SUPER_PARTITION_BLOCK_DEVICES if PRODUCT_RETROFIT_DYNAMIC_PARTITIONS=true.)
 endif
 
 # The metadata device must be included in the super partition block device list.
 ifeq (,$(filter $(BOARD_SUPER_PARTITION_METADATA_DEVICE),$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)))
-$(error BOARD_SUPER_PARTITION_METADATA_DEVICE is not listed in BOARD_SUPER_PARTITION_BLOCK_DEVICES.)
+  $(error BOARD_SUPER_PARTITION_METADATA_DEVICE is not listed in BOARD_SUPER_PARTITION_BLOCK_DEVICES.)
 endif
 
 # The metadata device must be supplied to init via the kernel command-line.
@@ -1016,7 +1016,7 @@ BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE := true
 ifneq (,$(filter vendor,$(BOARD_SUPER_PARTITION_PARTITION_LIST)))
 ifndef BUILDING_VENDOR_IMAGE
 ifndef BOARD_PREBUILT_VENDORIMAGE
-BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE :=
+  BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE :=
 endif # BOARD_PREBUILT_VENDORIMAGE
 endif # BUILDING_VENDOR_IMAGE
 endif # BOARD_SUPER_PARTITION_PARTITION_LIST
@@ -1026,21 +1026,21 @@ else # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS
 # For normal devices, we populate BOARD_SUPER_PARTITION_BLOCK_DEVICES so the
 # build can handle both cases consistently.
 ifeq ($(BOARD_SUPER_PARTITION_METADATA_DEVICE),)
-BOARD_SUPER_PARTITION_METADATA_DEVICE := super
+  BOARD_SUPER_PARTITION_METADATA_DEVICE := super
 endif
 
 ifeq ($(BOARD_SUPER_PARTITION_BLOCK_DEVICES),)
-BOARD_SUPER_PARTITION_BLOCK_DEVICES := $(BOARD_SUPER_PARTITION_METADATA_DEVICE)
+  BOARD_SUPER_PARTITION_BLOCK_DEVICES := $(BOARD_SUPER_PARTITION_METADATA_DEVICE)
 endif
 
 # If only one super block device, default to super partition size.
 ifeq ($(word 2,$(BOARD_SUPER_PARTITION_BLOCK_DEVICES)),)
-BOARD_SUPER_PARTITION_$(call to-upper,$(strip $(BOARD_SUPER_PARTITION_BLOCK_DEVICES)))_DEVICE_SIZE ?= \
-    $(BOARD_SUPER_PARTITION_SIZE)
+  BOARD_SUPER_PARTITION_$(call to-upper,$(strip $(BOARD_SUPER_PARTITION_BLOCK_DEVICES)))_DEVICE_SIZE ?= \
+      $(BOARD_SUPER_PARTITION_SIZE)
 endif
 
 ifneq ($(BOARD_SUPER_PARTITION_METADATA_DEVICE),super)
-INTERNAL_KERNEL_CMDLINE += androidboot.super_partition=$(BOARD_SUPER_PARTITION_METADATA_DEVICE)
+  INTERNAL_KERNEL_CMDLINE += androidboot.super_partition=$(BOARD_SUPER_PARTITION_METADATA_DEVICE)
 endif
 BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE :=
 
@@ -1077,9 +1077,9 @@ BOARD_PREBUILT_HIDDENAPI_DIR ?=
 # directories will create the same output.
 # /proc doesn't exist on Darwin.
 ifeq ($(HOST_OS),linux)
-RELATIVE_PWD := PWD=/proc/self/cwd
+  RELATIVE_PWD := PWD=/proc/self/cwd
 else
-RELATIVE_PWD :=
+  RELATIVE_PWD :=
 endif
 
 # Flags for DEX2OAT
@@ -1090,10 +1090,10 @@ DEX2OAT_TARGET_CPU_VARIANT_RUNTIME := $(call first_non_empty_of_three,$(TARGET_C
 DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES := default
 
 ifdef TARGET_2ND_ARCH
-$(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_ARCH := $(TARGET_2ND_ARCH)
-$(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_CPU_VARIANT := $(call first_non_empty_of_three,$(TARGET_2ND_CPU_VARIANT),$(TARGET_2ND_ARCH_VARIANT),default)
-$(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_CPU_VARIANT_RUNTIME := $(call first_non_empty_of_three,$(TARGET_2ND_CPU_VARIANT_RUNTIME),$(TARGET_2ND_ARCH_VARIANT),default)
-$(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES := default
+  $(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_ARCH := $(TARGET_2ND_ARCH)
+  $(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_CPU_VARIANT := $(call first_non_empty_of_three,$(TARGET_2ND_CPU_VARIANT),$(TARGET_2ND_ARCH_VARIANT),default)
+  $(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_CPU_VARIANT_RUNTIME := $(call first_non_empty_of_three,$(TARGET_2ND_CPU_VARIANT_RUNTIME),$(TARGET_2ND_ARCH_VARIANT),default)
+  $(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES := default
 endif
 
 # ###############################################################
@@ -1106,9 +1106,9 @@ HISTORICAL_NDK_VERSIONS_ROOT := $(TOPDIR)prebuilts/ndk
 
 # The path where app can reference the support library resources.
 ifdef TARGET_BUILD_USE_PREBUILT_SDKS
-SUPPORT_LIBRARY_ROOT := $(HISTORICAL_SDK_VERSIONS_ROOT)/current/support
+  SUPPORT_LIBRARY_ROOT := $(HISTORICAL_SDK_VERSIONS_ROOT)/current/support
 else
-SUPPORT_LIBRARY_ROOT := frameworks/support
+  SUPPORT_LIBRARY_ROOT := frameworks/support
 endif
 
 get-sdk-version = $(if $(findstring _,$(1)),$(subst core_,,$(subst system_,,$(subst test_,,$(1)))),$(1))
@@ -1176,7 +1176,7 @@ INTERNAL_PLATFORM_MISSING_USES_LIBRARIES := \
 # objects. E.g., prebuilt/$(TARGET_PREBUILT_TAG)/libc.so
 TARGET_PREBUILT_TAG := android-$(TARGET_ARCH)
 ifdef TARGET_2ND_ARCH
-TARGET_2ND_PREBUILT_TAG := android-$(TARGET_2ND_ARCH)
+  TARGET_2ND_PREBUILT_TAG := android-$(TARGET_2ND_ARCH)
 endif
 
 # Set up RS prebuilt variables for compatibility library
@@ -1190,18 +1190,18 @@ RSCOMPAT_NO_USAGEIO_API_LEVELS := 8 9 10 11 12 13
 
 # Add BUILD_NUMBER to apps default version name if it's unbundled build.
 ifdef TARGET_BUILD_APPS
-TARGET_BUILD_WITH_APPS_VERSION_NAME := true
+  TARGET_BUILD_WITH_APPS_VERSION_NAME := true
 endif
 
 ifdef TARGET_BUILD_WITH_APPS_VERSION_NAME
-APPS_DEFAULT_VERSION_NAME := $(PLATFORM_VERSION)-$(BUILD_NUMBER_FROM_FILE)
+  APPS_DEFAULT_VERSION_NAME := $(PLATFORM_VERSION)-$(BUILD_NUMBER_FROM_FILE)
 else
-APPS_DEFAULT_VERSION_NAME := $(PLATFORM_VERSION)
+  APPS_DEFAULT_VERSION_NAME := $(PLATFORM_VERSION)
 endif
 
 # ANDROID_WARNING_ALLOWED_PROJECTS is generated by build/soong.
 define find_warning_allowed_projects
-    $(filter $(ANDROID_WARNING_ALLOWED_PROJECTS),$(1)/)
+  $(filter $(ANDROID_WARNING_ALLOWED_PROJECTS),$(1)/)
 endef
 
 GOMA_POOL :=
@@ -1246,8 +1246,8 @@ dont_bother_goals := out product-graph
 include $(BUILD_SYSTEM)/android_soong_config_vars.mk
 
 ifeq ($(CALLED_FROM_SETUP),true)
-include $(BUILD_SYSTEM)/ninja_config.mk
-include $(BUILD_SYSTEM)/soong_config.mk
+  include $(BUILD_SYSTEM)/ninja_config.mk
+  include $(BUILD_SYSTEM)/soong_config.mk
 endif
 
 -include external/linux-kselftest/android/kselftest_test_list.mk
