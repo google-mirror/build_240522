@@ -16,6 +16,24 @@
       "message": "Can you add the product variable to opt-in to flattened APEXes in the commit description?",
       "revId": "18899a4425eb3a67ee8f780d6ce849fc48da0c50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "936cc919_43744890",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-20T18:39:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9921b24_d1f85860",
+      "revId": "18899a4425eb3a67ee8f780d6ce849fc48da0c50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
