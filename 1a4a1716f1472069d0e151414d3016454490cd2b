@@ -80,6 +80,30 @@
       },
       "revId": "1a4a1716f1472069d0e151414d3016454490cd2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f91491a_45e73525",
+        "filename": "core/tasks/tools/compatibility.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-03-20T17:46:58Z",
+      "side": 1,
+      "message": "Does `$(HOST_OUT_EXECUTABLES)/test-utils-script` not work?  Referencing the source file is also fine, for example `$(test_suite_readme)` is also a path to a file in the source tree.  The rest use install locations because those are files built, not taken directly from the source tree.",
+      "parentUuid": "2d69591b_c13949fb",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 14
+      },
+      "revId": "1a4a1716f1472069d0e151414d3016454490cd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
