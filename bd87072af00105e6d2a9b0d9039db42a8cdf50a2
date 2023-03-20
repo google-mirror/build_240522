@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf662c11_15eed9df",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2023-03-20T12:40:47Z",
+      "side": 1,
+      "message": "Haven\u0027t double-checked what the rules are regarding whitespace treatment here, but in any case the convention is to not have any in if(n)eq\u0027s.",
+      "range": {
+        "startLine": 96,
+        "startChar": 38,
+        "endLine": 96,
+        "endChar": 39
+      },
+      "revId": "bd87072af00105e6d2a9b0d9039db42a8cdf50a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5f906ea_c79035bf",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2023-03-20T12:40:47Z",
+      "side": 1,
+      "message": "We shouldn\u0027t do the below when _any_ module is built from prebuilts, so this should check `MODULE_BUILD_FROM_SOURCE` as well.",
+      "range": {
+        "startLine": 96,
+        "startChar": 8,
+        "endLine": 96,
+        "endChar": 36
+      },
+      "revId": "bd87072af00105e6d2a9b0d9039db42a8cdf50a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
