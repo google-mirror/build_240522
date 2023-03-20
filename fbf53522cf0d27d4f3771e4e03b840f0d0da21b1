@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5af95f63_7baf25a7",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1948227
+      },
+      "writtenOn": "2023-03-20T17:15:15Z",
+      "side": 1,
+      "message": "nit - shouldn\u0027t this and l624 be indented?",
+      "range": {
+        "startLine": 622,
+        "startChar": 0,
+        "endLine": 622,
+        "endChar": 17
+      },
+      "revId": "fbf53522cf0d27d4f3771e4e03b840f0d0da21b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
