@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9921b24_d1f85860",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-20T07:42:24Z",
+      "side": 1,
+      "message": "Can you add the product variable to opt-in to flattened APEXes in the commit description?",
+      "revId": "18899a4425eb3a67ee8f780d6ce849fc48da0c50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
