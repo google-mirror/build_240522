@@ -74,6 +74,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4812a05_ec107b2b",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-03-20T08:03:02Z",
+      "side": 1,
+      "message": "Also, it must check if `GENERATE_CONTEXT_SCRIPT_FILE` is defined.",
+      "range": {
+        "startLine": 147,
+        "startChar": 5,
+        "endLine": 147,
+        "endChar": 42
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91e32e10_d4060b4c",
         "filename": "core/main.mk",
         "patchSetId": 2
@@ -162,6 +185,76 @@
         "startChar": 0,
         "endLine": 150,
         "endChar": 16
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63103211_54f5864e",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-03-20T08:03:02Z",
+      "side": 1,
+      "message": "I think, it is missing a dependency to `$(GENERATE_CONTEXT_SCRIPT_FILE)`. Which may change from the target configuration.\nAlso, what triggers this build? Once the `context` file is generated, it will never called again until the file is removed.",
+      "parentUuid": "40b1ad9f_70d27218",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 16
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0e84672_81559dc5",
+        "filename": "tools/download_artifact.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-03-20T08:03:02Z",
+      "side": 1,
+      "message": "download_artfact",
+      "range": {
+        "startLine": 21,
+        "startChar": 17,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7533f6c8_060eb55f",
+        "filename": "tools/download_artifact.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-03-20T08:03:02Z",
+      "side": 1,
+      "message": "Can\u0027t we just `mv` this?",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 2
       },
       "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
