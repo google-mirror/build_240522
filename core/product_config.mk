@@ -518,7 +518,8 @@ ifdef OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE
     PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := $(OVERRIDE_PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE)
   endif
 else ifeq ($(PRODUCT_SHIPPING_API_LEVEL),)
-  # No shipping level defined
+  # No shipping level defined. Enforce the product interface by default.
+  PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
 else ifeq ($(call math_gt,$(PRODUCT_SHIPPING_API_LEVEL),29),true)
   # Enforce product interface if PRODUCT_SHIPPING_API_LEVEL is greater than 29.
   PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
