@@ -262,6 +262,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f8b9253_3c3d1a5a",
+        "filename": "tools/download_artifact.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-03-21T08:46:39Z",
+      "side": 1,
+      "message": "To support other partitions as well, how about this?\n\n1) `TARGET_PATH` contains a path under `$PRODUCT_OUT` (e.g. `system/bin/toybox`, `system_ext/apex/com.google.android.compos.apex`\n2) Make the first directory uppercase (maybe with `sed`?)",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 2
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7533f6c8_060eb55f",
         "filename": "tools/download_artifact.sh",
         "patchSetId": 2
