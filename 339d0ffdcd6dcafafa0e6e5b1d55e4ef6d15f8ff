@@ -216,6 +216,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf30145f_5ae99187",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-03-21T03:31:16Z",
+      "side": 1,
+      "message": "This rule not only generates the context, but also unzip target_files.zip which isn\u0027t a part of inputs as a side effect.",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 16
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0e84672_81559dc5",
         "filename": "tools/download_artifact.sh",
         "patchSetId": 2
@@ -255,6 +278,29 @@
         "startChar": 0,
         "endLine": 77,
         "endChar": 2
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c896c158_57335c29",
+        "filename": "tools/generate_context.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-03-21T03:31:16Z",
+      "side": 1,
+      "message": "it\u0027s actually \u0027input\u0027, not a part of \u0027out\u0027, isn\u0027t it?",
+      "range": {
+        "startLine": 18,
+        "startChar": 14,
+        "endLine": 18,
+        "endChar": 47
       },
       "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
