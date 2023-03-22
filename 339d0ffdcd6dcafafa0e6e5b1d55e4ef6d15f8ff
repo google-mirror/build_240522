@@ -330,6 +330,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37bfa7ac_7623a46d",
+        "filename": "tools/download_artifact.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-03-22T04:28:07Z",
+      "side": 1,
+      "message": "IIUC, the files in `$SRC_PATH` is copied only if the `context` is updated. That means the `$SRC_PATH` is updated by fetching the new target files. So I thought the `$SRC_PATH` would never be read afterward.\nOTOH, as the build system must not change the source tree and the fetched files as sources must stay as it was. In that sense, `cp` must be the proper way.",
+      "parentUuid": "1eab5855_1e01b69b",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 2
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c896c158_57335c29",
