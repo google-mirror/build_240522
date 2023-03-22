@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "b02bed98_3d13f555",
         "filename": "target/product/aosp_arm.mk",
@@ -20,8 +21,31 @@
         "endChar": 66
       },
       "revId": "c73db784b96a180a6a3f509abdfc003a4ac9edf7",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bddce37_63dbf02d",
+        "filename": "target/product/aosp_arm.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2023-03-22T06:02:15Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "b02bed98_3d13f555",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 66
+      },
+      "revId": "c73db784b96a180a6a3f509abdfc003a4ac9edf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
