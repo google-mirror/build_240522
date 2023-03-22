@@ -296,11 +296,11 @@ PRODUCT_PACKAGES += \
     system_manifest.xml \
     system_compatibility_matrix.xml \
 
-# HWASAN runtime for SANITIZE_TARGET=hwaddress builds
-ifneq (,$(filter hwaddress,$(SANITIZE_TARGET)))
-  PRODUCT_PACKAGES += \
-   libclang_rt.hwasan.bootstrap
-endif
+# These are only available on ARM64; on other architectures they are simply
+# ignored.
+PRODUCT_PACKAGES_ARM64 := libclang_rt.hwasan \
+ libclang_rt.hwasan.bootstrap \
+ libc_hwasan \
 
 # Jacoco agent JARS to be built and installed, if any.
 ifeq ($(EMMA_INSTRUMENT),true)
