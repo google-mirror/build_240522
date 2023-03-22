@@ -384,6 +384,7 @@ PRODUCT_PACKAGES_DEBUG := \
     iperf3 \
     iw \
     libclang_rt.ubsan_standalone \
+    libclang_rt.hwasan \
     logpersist.start \
     logtagd.rc \
     procrank \
