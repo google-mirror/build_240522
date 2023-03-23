@@ -16,6 +16,24 @@
       "message": "This is still WIP, but PTAL.",
       "revId": "487faffa04ea0753da6422ac854fe746cca274e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59d43a20_12c21e0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-03-23T10:18:21Z",
+      "side": 1,
+      "message": "Ready to review. PTAL",
+      "parentUuid": "1f3508c4_0a21c57b",
+      "revId": "487faffa04ea0753da6422ac854fe746cca274e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
