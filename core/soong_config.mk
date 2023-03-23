@@ -60,7 +60,7 @@ $(call add_json_str,  DeviceSecondaryArchVariant,        $(TARGET_2ND_ARCH_VARIA
 $(call add_json_str,  DeviceSecondaryCpuVariant,         $(TARGET_2ND_CPU_VARIANT))
 $(call add_json_list, DeviceSecondaryAbi,                $(TARGET_2ND_CPU_ABI) $(TARGET_2ND_CPU_ABI2))
 
-$(call add_json_bool, Aml_abis,                          $(if $(filter mainline_sdk,$(TARGET_ARCH_SUITE)),true))
+$(call add_json_bool, Aml_abis,                          $(if $(filter mainline_sdk mainline_modules,$(TARGET_ARCH_SUITE)),true))
 $(call add_json_bool, Ndk_abis,                          $(if $(filter ndk,         $(TARGET_ARCH_SUITE)),true))
 
 $(call add_json_str,  NativeBridgeArch,                  $(TARGET_NATIVE_BRIDGE_ARCH))
