@@ -22,6 +22,23 @@
       },
       "revId": "4bbb9744dbf5333aaae81b8ce22a2285da02b6f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb1f2e60_604f3d91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2023-03-24T10:26:11Z",
+      "side": 1,
+      "message": "PTAL. I think this fixes the issue so I\u0027d rather submit this soon, instead of the presubmit disabling in cl/518861761.",
+      "revId": "4bbb9744dbf5333aaae81b8ce22a2285da02b6f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
