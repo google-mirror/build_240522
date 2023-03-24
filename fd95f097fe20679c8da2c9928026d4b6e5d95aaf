@@ -34,6 +34,24 @@
       "parentUuid": "6b9254de_ea5a8afa",
       "revId": "fd95f097fe20679c8da2c9928026d4b6e5d95aaf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f86af744_cebde0a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2023-03-24T23:59:21Z",
+      "side": 1,
+      "message": "Yes, I was using kleaf to build the kernel.\n\nI had a symlink pointing from my Android tree into my kleaf dist directory and set an environment variable to tell the Android build system to use the kernel in that directory, but in aosp/2506193 Dan mentioned that symlinks pointing out of the Android source tree aren\u0027t supported. However, I think the other two solutions that were mentioned (custom DIST_DIR and bind mounts) would have the same problem.",
+      "parentUuid": "6b9254de_ea5a8afa",
+      "revId": "fd95f097fe20679c8da2c9928026d4b6e5d95aaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
