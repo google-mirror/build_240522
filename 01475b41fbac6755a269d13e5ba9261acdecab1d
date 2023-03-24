@@ -16,6 +16,24 @@
       "message": "Do we need this line?",
       "revId": "01475b41fbac6755a269d13e5ba9261acdecab1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf1a5c2c_1862c1c3",
+        "filename": "core/tasks/test_mapping.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-03-24T15:53:40Z",
+      "side": 1,
+      "message": "Yes, this line writes the list of test mapping files that were zipped into the .d file, which is used by ninja to track dynamic dependencies.  Its what makes the zip file regenerate if one of the test mapping files is modified, since there is no longer a dependency on the test mapping files.",
+      "parentUuid": "4ca86481_ee49d86a",
+      "revId": "01475b41fbac6755a269d13e5ba9261acdecab1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
