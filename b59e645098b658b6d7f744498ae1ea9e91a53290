@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5faf500_7a11c52b",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3987,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-24T23:21:39Z",
+      "side": 1,
+      "message": "why is this one executable when the others are writable?",
+      "revId": "b59e645098b658b6d7f744498ae1ea9e91a53290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
