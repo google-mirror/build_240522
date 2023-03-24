@@ -16,6 +16,24 @@
       "message": "why is this one executable when the others are writable?",
       "revId": "b59e645098b658b6d7f744498ae1ea9e91a53290",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "775a61b7_24135ccc",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 3987,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2023-03-24T23:29:42Z",
+      "side": 1,
+      "message": "That was a typo. I\u0027ll fix it.",
+      "parentUuid": "c5faf500_7a11c52b",
+      "revId": "b59e645098b658b6d7f744498ae1ea9e91a53290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
