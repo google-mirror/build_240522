@@ -22,6 +22,30 @@
       },
       "revId": "1c117c5faba9dc1a7e23ec1a5e6b3b742e478782",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa98ef3f_4d6858bb",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2023-03-24T20:25:24Z",
+      "side": 0,
+      "message": "\u003e If you\u0027re just interested in chmod +w here, do that\n\nI considered it, but I was concerned about interrupting the build at the wrong time and leaving a read-only file. But according to a quick test I did, that isn\u0027t a problem with ninja because it will delete the file regardless of permissions. So I\u0027ll switch to doing that.\n\n(test:\n```\nrule foo\n  command \u003d touch $out; chmod -w $out; sleep 1; chmod +w $out\n\nbuild bar: foo\n```\n)\n\n\u003e (though unless I\u0027m missing something, that should probably be done when you\u0027re moving the kernel prebuilts into the android source tree too)\n\nI symlink my kernel build tree into the Android source tree, so that won\u0027t work. +elsk for whether the files in the dist directory should be +w.",
+      "parentUuid": "20ce0349_3c1f17c7",
+      "range": {
+        "startLine": 1220,
+        "startChar": 1,
+        "endLine": 1220,
+        "endChar": 3
+      },
+      "revId": "1c117c5faba9dc1a7e23ec1a5e6b3b742e478782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
