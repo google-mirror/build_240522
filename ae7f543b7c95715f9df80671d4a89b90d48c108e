@@ -16,6 +16,29 @@
       "message": "This is the same as the reverted aosp/2450642, right?\n\nThen I expect it to fail in the same way: b/270958097. I have not been trying to investigate and fix that error as I am working on a different approach: to enable dex2oat and dexpreopt but use compiler filter \"verify\" (essentially not compiling anything, generating .oat files with only a header but no compiled code). \n\nPrashanth Swaminathan disabled dexpreopt for the slim manifest temporarily to unblock further progress, but he\u0027s also using unconventional ART settings (no default ART config, a custom patch to disable JIT) that should be reverted later. He was also looking at the b/270958097 but AFAIK without any conclusion.\n\nI don\u0027t mind relanding aosp/2450642 or this patch if b/270958097 is fixed, but I will revert it later when my proper fix is ready.",
       "revId": "ae7f543b7c95715f9df80671d4a89b90d48c108e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bedf4696_2b2c6ec2",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-03-24T11:26:48Z",
+      "side": 1,
+      "message": "I see now that this is different from aosp/2450642. I\u0027m not sure if it changes things wrt. b/270958097 though.",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 7
+      },
+      "revId": "ae7f543b7c95715f9df80671d4a89b90d48c108e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
