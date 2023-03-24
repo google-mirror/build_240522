@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20ce0349_3c1f17c7",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-03-24T20:02:14Z",
+      "side": 0,
+      "message": "cp has the capacity of being far more efficient that cat, due to the use of copy_file_range keeping the contents out of userspace. (Or even better with reflink support to not copy bytes at all, but that\u0027s very uncommonly implemented in linux filesystems, and used by default in even fewer cp implementations)\n\nIf you\u0027re just interested in `chmod +w` here, do that (though unless I\u0027m missing something, that should probably be done when you\u0027re moving the kernel prebuilts into the android source tree too)",
+      "range": {
+        "startLine": 1220,
+        "startChar": 1,
+        "endLine": 1220,
+        "endChar": 3
+      },
+      "revId": "1c117c5faba9dc1a7e23ec1a5e6b3b742e478782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
