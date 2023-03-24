@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b9254de_ea5a8afa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-24T23:52:10Z",
+      "side": 1,
+      "message": "Out of curiosity, how are you getting these bazel-built artifacts? I assume it\u0027s not through roboleaf because we don\u0027t produce these image files with bazel yet. Is this part of kleaf?\n\nIf so, how does kleaf get the files to be part of the android build?",
+      "revId": "fd95f097fe20679c8da2c9928026d4b6e5d95aaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
