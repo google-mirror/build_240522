@@ -52,6 +52,24 @@
       "parentUuid": "80178ecf_8f010c84",
       "revId": "3cdcac35dccdb6a7ce8fccdfc427034dc8c27de3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa438362_ddc587a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2023-03-24T23:24:27Z",
+      "side": 1,
+      "message": "Got it, I\u0027ll start looking at alternatives.\n\nSo if symlinks aren\u0027t supported here, perhaps we should fail the build outright if the source directory is a symlink, rather than silently producing an empty string and continuing. The silent failure here cost me a few hours of debugging time.",
+      "parentUuid": "13bd5b5e_d83e709d",
+      "revId": "3cdcac35dccdb6a7ce8fccdfc427034dc8c27de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
