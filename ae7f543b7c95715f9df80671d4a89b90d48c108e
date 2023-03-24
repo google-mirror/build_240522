@@ -39,6 +39,30 @@
       },
       "revId": "ae7f543b7c95715f9df80671d4a89b90d48c108e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01b5c6f3_715e11f6",
+        "filename": "core/board_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-03-24T15:43:08Z",
+      "side": 1,
+      "message": "I assume the problem was something old setting WITH_DEXPREOPT to false that was no longer being overridden here.  I made this override more specific, and the tests that failed in b/270958097 passed with this CL in https://android-build.googleplex.com/builds/tests/view?invocationId\u003dI05400010143570461.",
+      "parentUuid": "bedf4696_2b2c6ec2",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 7
+      },
+      "revId": "ae7f543b7c95715f9df80671d4a89b90d48c108e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
