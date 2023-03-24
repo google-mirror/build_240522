@@ -34,6 +34,24 @@
       "parentUuid": "2d9e0646_d470a473",
       "revId": "3cdcac35dccdb6a7ce8fccdfc427034dc8c27de3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13bd5b5e_d83e709d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-03-24T23:14:48Z",
+      "side": 1,
+      "message": "Dist directories can be set with DIST_DIR (that\u0027s how it works on CI), so you could move that into your Android tree.\n\nAnother option would be to set up a bind mount so that it looks like it\u0027s in the Android tree, that should work fine (we use them in a number of situations)",
+      "parentUuid": "80178ecf_8f010c84",
+      "revId": "3cdcac35dccdb6a7ce8fccdfc427034dc8c27de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
