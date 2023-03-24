@@ -16,6 +16,24 @@
       "message": "We very intentionally do not walk symlinks, especially if they lead outside of the source tree. Why do you need this?\n\nThis is also optimized by a find emulator in ckati that doesn\u0027t support -H, which would push all of this to a much slower path.",
       "revId": "3cdcac35dccdb6a7ce8fccdfc427034dc8c27de3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80178ecf_8f010c84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2023-03-24T23:08:27Z",
+      "side": 1,
+      "message": "My kernel dist directory is outside of my Android source directory, so I\u0027m symlinking it in so that I can build an Android image with a custom kernel. The target that I\u0027m building uses find-copy-subdir-files to find files in the kernel dist directory.\n\nIf you don\u0027t support symlinks pointing outside of the source tree, I think that would be very unfortunate, because I use them for various local development scenarios.",
+      "parentUuid": "2d9e0646_d470a473",
+      "revId": "3cdcac35dccdb6a7ce8fccdfc427034dc8c27de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
