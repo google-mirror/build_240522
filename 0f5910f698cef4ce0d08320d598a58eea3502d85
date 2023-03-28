@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ec060b7_1d813ddb",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 5292,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2023-03-28T21:34:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84db8b16_a4d1578c",
+      "revId": "0f5910f698cef4ce0d08320d598a58eea3502d85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d22f7cf_65d298ff",
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "Just the \"cache\" line should be in this conditional.\n\nuserdata is fine unconditionally.\n\nmetadata should be (I think):\n\n    ifeq ($(BOARD_USES_METADATA_PARTITION),true)",
       "parentUuid": "6d22f7cf_65d298ff",
+      "revId": "0f5910f698cef4ce0d08320d598a58eea3502d85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14a7a9c6_49798e5f",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 5298,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2023-03-28T21:34:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6e3bed7_15796667",
       "revId": "0f5910f698cef4ce0d08320d598a58eea3502d85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
