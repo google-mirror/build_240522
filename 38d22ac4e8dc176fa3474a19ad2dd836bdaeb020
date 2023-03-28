@@ -16,6 +16,24 @@
       "message": "This affects `ro.build.version.known_codenames` on the device.  I\u0027m not entirely sure what that is used for, but it may cause the device to consider itself V, which we don\u0027t want yet.",
       "revId": "38d22ac4e8dc176fa3474a19ad2dd836bdaeb020",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a702bf07_93debdb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2023-03-28T23:26:13Z",
+      "side": 1,
+      "message": "It seems I didn\u0027t need that anyway. Dropped.",
+      "parentUuid": "cee7e968_2133ff1a",
+      "revId": "38d22ac4e8dc176fa3474a19ad2dd836bdaeb020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
