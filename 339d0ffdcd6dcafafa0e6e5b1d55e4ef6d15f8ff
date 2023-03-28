@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f29763a6_96a3ba1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-03-28T07:53:22Z",
+      "side": 1,
+      "message": "\u003e For now, our initial target is to build within the same build id, so expect files to be identical.\n\nIt would be a very good idea to have some sort of verification of this, otherwise this just becomes an assumption that\u0027s easy to break.\n\n\u003e Yes there are blockers with licensing, debug symbol and other stuffs. Anyway, we\u0027d like to first check how much we can save with this idea from the build, and move on if it worth. Our current target is to clarify if this idea can save some time from the CI, and how much if so.\n\nKeeping this open, since these problems should be answered before submission to master due to their wide-ranging impact.",
+      "parentUuid": "6826d952_0063ebeb",
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4812a05_ec107b2b",
         "filename": "core/main.mk",
         "patchSetId": 2
@@ -341,6 +359,30 @@
       "side": 1,
       "message": "Mark as resolved.",
       "parentUuid": "eaf85add_a31caa42",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 16
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9df2278e_21d74ce9",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-03-28T07:53:22Z",
+      "side": 1,
+      "message": "Incremental builds are supported in the android build system, you can\u0027t just ignore them.",
+      "parentUuid": "cea4e3dc_c20e97b5",
       "range": {
         "startLine": 150,
         "startChar": 0,
