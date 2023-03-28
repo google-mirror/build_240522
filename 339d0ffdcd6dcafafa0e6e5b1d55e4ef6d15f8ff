@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1b3dc25_852f1f62",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-28T01:59:26Z",
+      "side": 1,
+      "message": "The variable is removed for now. Let\u0027s revisit to make this variable from next step.",
+      "parentUuid": "d4812a05_ec107b2b",
+      "range": {
+        "startLine": 147,
+        "startChar": 5,
+        "endLine": 147,
+        "endChar": 42
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91e32e10_d4060b4c",
@@ -239,6 +263,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eaf85add_a31caa42",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-28T01:59:26Z",
+      "side": 1,
+      "message": "This is because we don\u0027t expect same input from the generate_context.sh all the time. If we want to specify all valid input, then we should separate mk file per target environment.",
+      "parentUuid": "bf30145f_5ae99187",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 16
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0e84672_81559dc5",
         "filename": "tools/download_artifact.sh",
         "patchSetId": 2
@@ -250,6 +298,30 @@
       "writtenOn": "2023-03-20T08:03:02Z",
       "side": 1,
       "message": "download_artfact",
+      "range": {
+        "startLine": 21,
+        "startChar": 17,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c7a6d67_5aa5200f",
+        "filename": "tools/download_artifact.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-28T01:59:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0e84672_81559dc5",
       "range": {
         "startLine": 21,
         "startChar": 17,
@@ -414,6 +486,30 @@
       "writtenOn": "2023-03-21T08:29:34Z",
       "side": 1,
       "message": "$OUT_DIR",
+      "range": {
+        "startLine": 18,
+        "startChar": 14,
+        "endLine": 18,
+        "endChar": 17
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2608961_2a3fcc72",
+        "filename": "tools/generate_context.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-28T01:59:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c5f4797_9a4cb9c2",
       "range": {
         "startLine": 18,
         "startChar": 14,
