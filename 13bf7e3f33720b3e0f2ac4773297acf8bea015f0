@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "803cbd0d_816fe44c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-03-28T15:38:13Z",
+      "side": 1,
+      "message": "just FYI, we\u0027ve been trying to use the terminology \n- \"modules\" to refer to the modularization effort\n- \"mainline\" to refer to the google program that pushes modules\n\nas such we also try to keep the \"mainline\" term out of AOSP. As you can see there are a few counter examples, though.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "13bf7e3f33720b3e0f2ac4773297acf8bea015f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
