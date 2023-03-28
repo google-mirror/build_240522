@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03afacb8_62275b06",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 5292,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-03-28T20:10:55Z",
+      "side": 1,
+      "message": "obsolete?",
+      "revId": "0f5910f698cef4ce0d08320d598a58eea3502d85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d22f7cf_65d298ff",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 5298,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-03-28T20:10:55Z",
+      "side": 1,
+      "message": "this should be conditional if BUILDING_CACHE_IMAGE",
+      "revId": "0f5910f698cef4ce0d08320d598a58eea3502d85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
