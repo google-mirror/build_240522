@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c84fa4a_2e3af06b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2023-03-28T19:39:12Z",
+      "side": 1,
+      "message": "@ccross@android.com and @joeo@google.com, can you comment on whether this is a reasonable place to put this script, or if we should decouple it from the build elsewhere? I can help with reviewing the rest of the code, as a few things were pointed out that might make assumptions about how the build is being run.",
+      "revId": "70242e058bf5509bd724a1173a50c8758967140c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
