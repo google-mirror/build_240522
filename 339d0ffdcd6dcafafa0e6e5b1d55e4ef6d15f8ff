@@ -146,6 +146,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "467a40ff_67a5d8a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-28T08:37:03Z",
+      "side": 1,
+      "message": "\u003e That\u0027s not my point. We need to confirm that this came from the same source tree somehow, if that\u0027s our prerequisite for it to function properly.\n\nYes, I agree. For now we will limit this to be triggered from the CI which confirms it is from the same source tree if they have same build id.\n\n\u003e If it\u0027s running in CI, users need to be able to run it locally in order to reproduce issues, and then it becomes much more likely to have skew.\n\nThe command itself is quite simple to reproduce same build from local if needed.\n\n\u003e Without licensing set up, this probably shouldn\u0027t go on any branch where the outputs get published outside of Google. And I\u0027d be worried about this further complicating the SBOM work that is likely higher priority (Wei\u0027s working through all the different ways we switch source/prebuilts already... it\u0027s a lot).\n\nI agree on that this implementation is not ready to be used from the production, but I don\u0027t think we cannot put any change until it is ready for the production. I understand your concerns and those targets are our to-do list, and we can move forward once we verify this approach is useful.",
+      "parentUuid": "2e8eee26_1d230009",
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4812a05_ec107b2b",
         "filename": "core/main.mk",
         "patchSetId": 2
