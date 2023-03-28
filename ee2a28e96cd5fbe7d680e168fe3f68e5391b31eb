@@ -22,6 +22,30 @@
       },
       "revId": "ee2a28e96cd5fbe7d680e168fe3f68e5391b31eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44f48439_ab3624a2",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-03-28T07:51:48Z",
+      "side": 1,
+      "message": "This is defined as an output in build/soong/android/makevars.go. Could you take a look at aosp/2501256 ?",
+      "parentUuid": "cee471b0_bbfbd9d8",
+      "range": {
+        "startLine": 545,
+        "startChar": 25,
+        "endLine": 545,
+        "endChar": 107
+      },
+      "revId": "ee2a28e96cd5fbe7d680e168fe3f68e5391b31eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
