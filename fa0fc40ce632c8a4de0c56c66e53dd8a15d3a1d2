@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95390782_0887356f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-03-28T00:01:59Z",
+      "side": 1,
+      "message": "This should be added to the obsolete var list near the top of build/make/core/config.mk so that there\u0027s a higher likelihood of downstream users seeing an error instead of a false value.",
+      "revId": "fa0fc40ce632c8a4de0c56c66e53dd8a15d3a1d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
