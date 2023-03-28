@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6826d952_0063ebeb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-28T06:17:12Z",
+      "side": 1,
+      "message": "For now, this feature is a very optional feature to be tested from specific environment only with certain flag. Marking this comment resolved for now, but feel free to let me know if you have any concern. Thanks.",
+      "parentUuid": "6c3907e3_b2ce85bf",
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4812a05_ec107b2b",
@@ -285,6 +303,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cea4e3dc_c20e97b5",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-28T06:17:12Z",
+      "side": 1,
+      "message": "From new version, $(GENERATE_CONTEXT_SCRIPT_FILE) is removed for now.\n\nAlso, there is no file I\u0027d like to keep from the incremental build, so I did not add anything from KATI_IMPLICIT_OUTPUTS. Please correct me if I\u0027m wrong.",
+      "parentUuid": "63103211_54f5864e",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 16
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "364fee54_a030e6eb",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-28T06:17:12Z",
+      "side": 1,
+      "message": "Mark as resolved.",
+      "parentUuid": "eaf85add_a31caa42",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 16
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0e84672_81559dc5",
@@ -345,6 +411,30 @@
       "writtenOn": "2023-03-21T08:46:39Z",
       "side": 1,
       "message": "To support other partitions as well, how about this?\n\n1) `TARGET_PATH` contains a path under `$PRODUCT_OUT` (e.g. `system/bin/toybox`, `system_ext/apex/com.google.android.compos.apex`\n2) Make the first directory uppercase (maybe with `sed`?)",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 2
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad49a14_54dcea49",
+        "filename": "tools/download_artifact.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-28T06:17:12Z",
+      "side": 1,
+      "message": "It is good to have, but not required for now. Let\u0027s revisit this from the next version if required.",
+      "parentUuid": "2f8b9253_3c3d1a5a",
       "range": {
         "startLine": 68,
         "startChar": 0,
@@ -515,6 +605,30 @@
         "startChar": 14,
         "endLine": 18,
         "endChar": 17
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eb17205_18874b37",
+        "filename": "tools/generate_context.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-28T06:17:12Z",
+      "side": 1,
+      "message": "Mark as done.",
+      "parentUuid": "a47213ef_1ab34a6c",
+      "range": {
+        "startLine": 18,
+        "startChar": 14,
+        "endLine": 18,
+        "endChar": 47
       },
       "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
