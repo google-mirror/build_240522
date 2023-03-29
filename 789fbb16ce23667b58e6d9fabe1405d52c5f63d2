@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d558eea1_c7a229e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-29T19:08:38Z",
+      "side": 1,
+      "message": "Hi Dan, could you please review this? \n\nI went through partition images defined in board_config.mk and have these major partitions processed here first, so with this CL the SBOM can be built by default when running \"m dist\". I will add other debug or metadata partition images later.",
+      "revId": "789fbb16ce23667b58e6d9fabe1405d52c5f63d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
