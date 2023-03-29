@@ -22,6 +22,30 @@
       },
       "revId": "13bf7e3f33720b3e0f2ac4773297acf8bea015f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e38bedc2_05bc0886",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-29T06:02:06Z",
+      "side": 1,
+      "message": "good to know, thanks! \n\nthis CL is more or less throwaway code for now, but will keep that in mind.",
+      "parentUuid": "803cbd0d_816fe44c",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "13bf7e3f33720b3e0f2ac4773297acf8bea015f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
