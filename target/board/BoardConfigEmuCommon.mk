@@ -19,6 +19,10 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 BUILD_EMULATOR_OPENGL := true
 BUILD_QEMU_IMAGES := true
 
+PRODUCT_SOONG_NAMESPACES += \
+    device/generic/goldfish \
+    device/generic/goldfish-opengl
+
 # Build and enable the OpenGL ES View renderer. When running on the emulator,
 # the GLES renderer disables itself if host GL acceleration isn't available.
 USE_OPENGL_RENDERER := true
