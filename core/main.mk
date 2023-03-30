@@ -1944,6 +1944,11 @@ else ifeq ($(TARGET_BUILD_UNBUNDLED),$(TARGET_BUILD_UNBUNDLED_IMAGE))
 
 endif # TARGET_BUILD_UNBUNDLED == TARGET_BUILD_UNBUNDLED_IMAGE
 
+.PHONY: otatools-dist
+$(call dist-for-goals, otatools-dist, \
+  $(BUILT_OTATOOLS_PACKAGE) \
+)
+
 .PHONY: docs
 docs: $(ALL_DOCS)
 
