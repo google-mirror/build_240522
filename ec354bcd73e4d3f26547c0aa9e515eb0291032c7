@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a37b254_d4e45b98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-30T21:21:23Z",
+      "side": 1,
+      "message": "I think we should consider giving this feature a better name, \"partial artifacts\" doesn\u0027t explain much to the user.\n\nI\u0027m struggling to come up with a good explanatory name that isn\u0027t just a really long sentence, so how about we give it a codename like \"triplum\", (\"The term treble derives from the Latin triplum\" - Wikipedia) and then document the feature explicitly in an md file?\n\nSome renames:\n - BUILD_WITH_PARTIAL_ARTIFACT -\u003e USE_TRIPLUM\n - PRODUCT_IMPORTABLE_PATHS -\u003e PRODUCT_TRIPLUM_PATHS\n - PRODUCT_EXCLUDE_IMPORTABLE_PATHS -\u003e PRODUCT_TRIPLUM_EXCLUDE_PATHS\n - my_use_partial_artifact -\u003e my_use_triplum\n - CONTEXT_FILE -\u003e TRIPLUM_CONTEXT_FILE\n - context -\u003e triplum_context\n - artifacts -\u003e triplum_artifacts\n - generate_context.sh -\u003e extract_triplum_artifacts.sh\n - import_artifact.sh (if we don\u0027t remove it like I suggested) -\u003e  import_triplum_artifact.sh",
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a7b479_2acc83b9",
+        "filename": "core/main.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-30T21:21:23Z",
+      "side": 1,
+      "message": "This bug looks incorrect. Also, I\u0027m not sure I understand the comment, do you mean something like \"Declare unzipped files with .KATI_IMPLICIT_OUTPUTS\"?",
+      "range": {
+        "startLine": 148,
+        "startChar": 9,
+        "endLine": 148,
+        "endChar": 16
+      },
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4521d66f_06381ca8",
+        "filename": "core/main.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-30T21:21:23Z",
+      "side": 1,
+      "message": "The context file should depend on the zipfile. And the generate_context.sh script should probably accept the path to the zipfile as an argument so it\u0027s managed in one place.",
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa469f9_84d60602",
+        "filename": "tools/generate_context.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-30T21:21:23Z",
+      "side": 1,
+      "message": "Is there a script to generate the zip file? I\u0027d like to try this feature out locally.",
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c87fc8a3_2460f48f",
+        "filename": "tools/generate_context.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-30T21:21:23Z",
+      "side": 1,
+      "message": "Please move these scripts to a \"triplum\" (or whatever we name this feature) folder to indicate that they\u0027re related and to associate them with the feature overall. Right now it\u0027s not clear what these scripts are for when you look at just them.\n\nPlease also add an md file documenting the feature as a whole there.",
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d5351f7_928f9bd6",
+        "filename": "tools/import_artifact.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-30T21:21:23Z",
+      "side": 1,
+      "message": "`$TARGET_OUT_PATH` is `$OUT_DIR/artifact`, why are you using both here?\n\nI think in general across these cls we don\u0027t need to load the path to the artifact folder from the context file. The context file is really just a stamp file to ensure the zip file gets unzipped, so I would also consider renaming it to be something related to \"stamp\" instead of \"context\".",
+      "range": {
+        "startLine": 78,
+        "startChar": 16,
+        "endLine": 78,
+        "endChar": 33
+      },
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
