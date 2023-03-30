@@ -70,6 +70,30 @@
       },
       "revId": "9409a568661b09eff0279bc0d97a3c15d2e71a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99c4f221_e076f279",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1947,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-03-30T18:40:55Z",
+      "side": 1,
+      "message": "changed to otatools-package.",
+      "parentUuid": "2283c237_03d10e02",
+      "range": {
+        "startLine": 1947,
+        "startChar": 8,
+        "endLine": 1947,
+        "endChar": 21
+      },
+      "revId": "9409a568661b09eff0279bc0d97a3c15d2e71a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
