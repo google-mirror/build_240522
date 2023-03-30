@@ -85,3 +85,8 @@ python_binary_host {
         "libprotobuf-python",
     ],
 }
+
+python_binary_host {
+  name: "list_xts_files",
+  srcs: ["list_xts_files.py"],
+}
