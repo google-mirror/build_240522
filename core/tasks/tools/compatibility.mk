@@ -104,6 +104,8 @@ compatibility_zip_resources += $(test_suite_notice_txt)
 
 compatibility_tests_list_zip := $(out_dir)-tests_list.zip
 
+list_xts_files_tool := $(HOST_OUT_EXECUTABLES)/list_xts_files$(HOST_EXECUTABLE_SUFFIX)
+
 compatibility_zip := $(out_dir).zip
 $(compatibility_zip) : .KATI_IMPLICIT_OUTPUTS := $(compatibility_tests_list_zip)
 $(compatibility_zip): PRIVATE_OUT_DIR := $(out_dir)
@@ -112,9 +114,10 @@ $(compatibility_zip): PRIVATE_SUITE_NAME := $(test_suite_name)
 $(compatibility_zip): PRIVATE_DYNAMIC_CONFIG := $(test_suite_dynamic_config)
 $(compatibility_zip): PRIVATE_RESOURCES := $(compatibility_zip_resources)
 $(compatibility_zip): PRIVATE_JDK := $(test_suite_jdk)
+$(compatibility_zip): PRIVATE_xts_files_tool:= $(list_xts_files_tool)
 $(compatibility_zip): PRIVATE_tests_list := $(out_dir)-tests_list
 $(compatibility_zip): PRIVATE_tests_list_zip := $(compatibility_tests_list_zip)
-$(compatibility_zip): $(compatibility_zip_deps) | $(ADB) $(ACP)
+$(compatibility_zip): $(compatibility_zip_deps) $(list_xts_files_tool) | $(ADB) $(ACP)
 # Make dir structure
 	mkdir -p $(PRIVATE_OUT_DIR)/tools $(PRIVATE_OUT_DIR)/testcases
 	rm -f $@ $@.tmp $@.jdk
@@ -122,7 +125,7 @@ $(compatibility_zip): $(compatibility_zip_deps) | $(ADB) $(ACP)
 # Copy tools
 	cp $(PRIVATE_TOOLS) $(PRIVATE_OUT_DIR)/tools
 	$(if $(PRIVATE_DYNAMIC_CONFIG),$(hide) cp $(PRIVATE_DYNAMIC_CONFIG) $(PRIVATE_OUT_DIR)/testcases/$(PRIVATE_SUITE_NAME).dynamic)
-	find $(PRIVATE_RESOURCES) | sort >$@.list
+	$(PRIVATE_xts_files_tool) --xts-test-dir $(PRIVATE_OUT_DIR) --test-suite-name $(PRIVATE_SUITE_NAME) --output $@.list
 	$(SOONG_ZIP) -d -o $@.tmp -C $(dir $@) -l $@.list -sha256
 	$(MERGE_ZIPS) $@ $@.tmp $(PRIVATE_JDK)
 	rm -f $@.tmp
