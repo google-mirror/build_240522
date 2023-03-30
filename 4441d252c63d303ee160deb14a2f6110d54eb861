@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f81933d_7b8f79d1",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-30T21:22:06Z",
+      "side": 1,
+      "message": "This should depend on the context file to ensure it\u0027s unzipped.\n\nHow does this work currently? I don\u0027t see anything that depends on the context file.",
+      "revId": "4441d252c63d303ee160deb14a2f6110d54eb861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "141c5094_3e9e8597",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-30T21:22:06Z",
+      "side": 1,
+      "message": "Out of curiosity: how do you guarantee that this file actually was present in the zip file? Maybe add a comment explaining the answer.",
+      "revId": "4441d252c63d303ee160deb14a2f6110d54eb861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fcd4d77_b101a0db",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-30T21:22:06Z",
+      "side": 1,
+      "message": "Is this the make equivalent of the code in `makevars.go` in soong? If so, why does it not need to check the `PRODUCT_IMPORTABLE_PATHS` variable? And would this logic happen twice for soong build modules? (once in soong, and then again in make)",
+      "revId": "4441d252c63d303ee160deb14a2f6110d54eb861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f48d1119_8fb7f5ae",
+        "filename": "core/soong_cc_rust_prebuilt.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-30T21:22:06Z",
+      "side": 1,
+      "message": "nit: Typo",
+      "revId": "4441d252c63d303ee160deb14a2f6110d54eb861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
