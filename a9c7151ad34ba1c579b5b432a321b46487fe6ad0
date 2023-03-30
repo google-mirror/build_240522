@@ -16,6 +16,24 @@
       "message": "Put this in `build/make/core/Makefile` right next to otatools-package.",
       "revId": "a9c7151ad34ba1c579b5b432a321b46487fe6ad0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9963765e_27f91b64",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1947,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-03-30T19:10:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e2de5d0_d1e04615",
+      "revId": "a9c7151ad34ba1c579b5b432a321b46487fe6ad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
