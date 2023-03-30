@@ -16,6 +16,24 @@
       "message": "Is there a reason you removed the bulk of your test cases?",
       "revId": "afb2495f6fb1915446865282528f7a850fd86ee9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b50b70a7_446189f5",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-03-30T15:52:27Z",
+      "side": 0,
+      "message": "Added the missing test cases",
+      "parentUuid": "24354d88_a8dd6bcf",
+      "revId": "afb2495f6fb1915446865282528f7a850fd86ee9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

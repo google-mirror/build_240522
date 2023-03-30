@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d89ee219_1ea09720",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-03-30T15:52:27Z",
+      "side": 1,
+      "message": "q.",
+      "revId": "8e3b3c0a2b31502746650e244de3d853b2c31a40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d3c353a_4568f2af",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-03-22T15:12:24Z",
       "side": 1,
       "message": "Errorf(\n\nHere and anywhere else the message uses % formatting.",
+      "range": {
+        "startLine": 568,
+        "startChar": 8,
+        "endLine": 568,
+        "endChar": 10
+      },
+      "revId": "8e3b3c0a2b31502746650e244de3d853b2c31a40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68698b5e_f2d34c30",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-03-30T15:52:27Z",
+      "side": 1,
+      "message": "Errorf",
+      "parentUuid": "3d3c353a_4568f2af",
       "range": {
         "startLine": 568,
         "startChar": 8,
@@ -41,6 +82,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b4a8dd_da80ef64",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-03-30T15:52:27Z",
+      "side": 1,
+      "message": "Add description",
+      "parentUuid": "edd726af_c8a8ae36",
+      "revId": "8e3b3c0a2b31502746650e244de3d853b2c31a40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79690dac_38a5c7ad",
@@ -54,6 +113,30 @@
       "writtenOn": "2023-03-22T15:12:24Z",
       "side": 1,
       "message": "Errorf(\n\nHere and anywhere else the message uses % formatting.",
+      "range": {
+        "startLine": 587,
+        "startChar": 8,
+        "endLine": 587,
+        "endChar": 11
+      },
+      "revId": "8e3b3c0a2b31502746650e244de3d853b2c31a40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb03089_1b52591e",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-03-30T15:52:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79690dac_38a5c7ad",
       "range": {
         "startLine": 587,
         "startChar": 8,
