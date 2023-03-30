@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d519c62f_2442f21f",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2023-03-30T15:29:29Z",
+      "side": 1,
+      "message": "AFAIK this has nothing to do with `master-art`. This is needed for those branches that want to build from ART prebuilts.",
+      "parentUuid": "0ed22233_78fffb95",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 5
+      },
+      "revId": "92345a1cdb9cb559c4efd669826332a33446f1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f996988f_224abb14",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-03-30T12:21:12Z",
       "side": 1,
       "message": "Tracking bugs please?",
+      "range": {
+        "startLine": 63,
+        "startChar": 55,
+        "endLine": 64,
+        "endChar": 33
+      },
+      "revId": "92345a1cdb9cb559c4efd669826332a33446f1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa371c9_b12803a2",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2023-03-30T15:29:29Z",
+      "side": 1,
+      "message": "I will try and track one down and update this file in a follow up change.",
+      "parentUuid": "f996988f_224abb14",
       "range": {
         "startLine": 63,
         "startChar": 55,
