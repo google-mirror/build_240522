@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b64ee0a6_5e57ff84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-30T12:21:12Z",
+      "side": 1,
+      "message": "Liz should take a look as well.",
+      "revId": "92345a1cdb9cb559c4efd669826332a33446f1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ed22233_78fffb95",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-30T12:21:12Z",
+      "side": 1,
+      "message": "Would these issues go away if master-art returns to master/trunk?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 5
+      },
+      "revId": "92345a1cdb9cb559c4efd669826332a33446f1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f996988f_224abb14",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-30T12:21:12Z",
+      "side": 1,
+      "message": "Tracking bugs please?",
+      "range": {
+        "startLine": 63,
+        "startChar": 55,
+        "endLine": 64,
+        "endChar": 33
+      },
+      "revId": "92345a1cdb9cb559c4efd669826332a33446f1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
