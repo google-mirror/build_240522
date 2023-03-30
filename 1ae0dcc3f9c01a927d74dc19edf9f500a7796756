@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdce4f69_f12daacc",
+        "filename": "tools/list_xts_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1933062
+      },
+      "writtenOn": "2023-03-30T12:52:20Z",
+      "side": 1,
+      "message": "are all filtered?",
+      "range": {
+        "startLine": 18,
+        "startChar": 16,
+        "endLine": 18,
+        "endChar": 26
+      },
+      "revId": "1ae0dcc3f9c01a927d74dc19edf9f500a7796756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b1f5449_dcd9baba",
+        "filename": "tools/list_xts_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1933062
+      },
+      "writtenOn": "2023-03-30T12:52:20Z",
+      "side": 1,
+      "message": "Is this the suggested practice or should we use os.path.getsize instead?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "1ae0dcc3f9c01a927d74dc19edf9f500a7796756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50bd0b37_c70fd83b",
+        "filename": "tools/list_xts_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1933062
+      },
+      "writtenOn": "2023-03-30T12:52:20Z",
+      "side": 1,
+      "message": "Will a file under {test_cases_dir} has the same name as a module_name?",
+      "range": {
+        "startLine": 120,
+        "startChar": 26,
+        "endLine": 120,
+        "endChar": 86
+      },
+      "revId": "1ae0dcc3f9c01a927d74dc19edf9f500a7796756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
