@@ -162,6 +162,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed796bc5_c73bb363",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-30T06:58:45Z",
+      "side": 1,
+      "message": "As I keep mentioned, this feature is now well-blocked with specific flag, and also we\u0027d like to check how this would affect build time, and how much our additional work would change it, in an automated way. For any future requirements, I\u0027d like to suggest further over document / issue tracker if possible, and we can revert this change if our idea is not feasible at any time without affecting any other builds.",
+      "parentUuid": "467a40ff_67a5d8a7",
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4812a05_ec107b2b",
@@ -485,6 +503,30 @@
       "side": 1,
       "message": "https://cs.android.com/android/platform/superproject/+/master:build/soong/docs/best_practices.md;drc\u003dd42609e15c63e4384efe68f3ae0819161f6a020d;l\u003d109\n\ntl;dr: Put one file in the outputs, like you have today, and put all the other outputs in .KATI_IMPLICIT_OUTPUTS. Put all the inputs in the input list. Where inputs/outputs are any file you read/write (except temporary files you\u0027ve written that are removed before you exit)",
       "parentUuid": "a3b877f8_c7e83733",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 16
+      },
+      "revId": "339d0ffdcd6dcafafa0e6e5b1d55e4ef6d15f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3530e2c3_27fdbaee",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-30T06:58:45Z",
+      "side": 1,
+      "message": "We are trying to test this feature from non incremental build for now, so I commented TODO about this issue. For now this part triggered only from the specific build(s), so let\u0027s revisit this with better improvements while we check about new feature\u0027s impact.",
+      "parentUuid": "ba15cd1f_8f7ac6ce",
       "range": {
         "startLine": 150,
         "startChar": 0,
