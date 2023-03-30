@@ -46,6 +46,30 @@
       },
       "revId": "9409a568661b09eff0279bc0d97a3c15d2e71a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2283c237_03d10e02",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1947,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-30T16:57:15Z",
+      "side": 1,
+      "message": "I would +1 Jin\u0027s comment and just say to reuse otatools-package. It\u0027s less confusing for users if they don\u0027t have two different ways to build otatools: `m otatools-package` vs `m otatools-dist dist`",
+      "parentUuid": "7ae20b0f_43846444",
+      "range": {
+        "startLine": 1947,
+        "startChar": 8,
+        "endLine": 1947,
+        "endChar": 21
+      },
+      "revId": "9409a568661b09eff0279bc0d97a3c15d2e71a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
