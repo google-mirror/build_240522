@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70f51fd4_0d6a3224",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1947,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-03-30T12:57:17Z",
+      "side": 1,
+      "message": "Why not reuse the `otatools-package` phony?\n\nhttps://cs.android.com/android/platform/superproject/+/master:build/make/core/Makefile;l\u003d5247;drc\u003d15187b6f1a7da56f8140274af071631e62f46f0e",
+      "range": {
+        "startLine": 1947,
+        "startChar": 8,
+        "endLine": 1947,
+        "endChar": 21
+      },
+      "revId": "9409a568661b09eff0279bc0d97a3c15d2e71a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
