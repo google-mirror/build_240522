@@ -22,6 +22,30 @@
       },
       "revId": "9409a568661b09eff0279bc0d97a3c15d2e71a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ae20b0f_43846444",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1947,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-03-30T15:35:28Z",
+      "side": 1,
+      "message": "otatools-package does not dist by itself, not sure about the impact if we make it dist universally. play it safe here to add otatools-dist.",
+      "parentUuid": "70f51fd4_0d6a3224",
+      "range": {
+        "startLine": 1947,
+        "startChar": 8,
+        "endLine": 1947,
+        "endChar": 21
+      },
+      "revId": "9409a568661b09eff0279bc0d97a3c15d2e71a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
