@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dce73a9c_48fce561",
+        "filename": "tools/compliance/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-03-30T23:35:20Z",
+      "side": 1,
+      "message": "Compliance team is using v2_2 for their validation tools so we are trying to be consistent.",
+      "parentUuid": "dcff705c_c12e45aa",
+      "range": {
+        "startLine": 141,
+        "startChar": 9,
+        "endLine": 141,
+        "endChar": 28
+      },
+      "revId": "f7f7f31b48b4790976c053d95e27e26aab6f6cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e377f0b1_1f169a8e",
         "filename": "tools/compliance/cmd/sbom/sbom.go",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-30T19:34:41Z",
       "side": 1,
       "message": "add some help message?",
+      "range": {
+        "startLine": 44,
+        "startChar": 58,
+        "endLine": 44,
+        "endChar": 60
+      },
+      "revId": "f7f7f31b48b4790976c053d95e27e26aab6f6cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fe5d73e_8053b85d",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-03-30T23:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e377f0b1_1f169a8e",
       "range": {
         "startLine": 44,
         "startChar": 58,
@@ -60,6 +108,30 @@
       "writtenOn": "2023-03-30T19:34:41Z",
       "side": 1,
       "message": "os.Exit(1) after this line?",
+      "range": {
+        "startLine": 174,
+        "startChar": 2,
+        "endLine": 174,
+        "endChar": 80
+      },
+      "revId": "f7f7f31b48b4790976c053d95e27e26aab6f6cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb25fd1d_e38add45",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-03-30T23:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37281e1d_c469583e",
       "range": {
         "startLine": 174,
         "startChar": 2,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78d5863c_904e32a7",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-03-30T23:35:20Z",
+      "side": 1,
+      "message": "Added a constant for NOASSERTION. As for the relation types, we are only using them once, do we still need to define constants for them?",
+      "parentUuid": "5d71cdf3_b011e7fb",
+      "range": {
+        "startLine": 372,
+        "startChar": 20,
+        "endLine": 372,
+        "endChar": 29
+      },
+      "revId": "f7f7f31b48b4790976c053d95e27e26aab6f6cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f61ff1e_49e510c7",
         "filename": "tools/compliance/cmd/sbom/sbom.go",
         "patchSetId": 3
@@ -106,6 +202,30 @@
       "writtenOn": "2023-03-30T19:34:41Z",
       "side": 1,
       "message": "typo?",
+      "range": {
+        "startLine": 418,
+        "startChar": 6,
+        "endLine": 418,
+        "endChar": 13
+      },
+      "revId": "f7f7f31b48b4790976c053d95e27e26aab6f6cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b312e9b1_c7705f68",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-03-30T23:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f61ff1e_49e510c7",
       "range": {
         "startLine": 418,
         "startChar": 6,
@@ -129,6 +249,30 @@
       "writtenOn": "2023-03-30T19:34:41Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 2155,
+        "startChar": 0,
+        "endLine": 2155,
+        "endChar": 3
+      },
+      "revId": "f7f7f31b48b4790976c053d95e27e26aab6f6cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01dc862c_0fa975e2",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 2155,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-03-30T23:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bde9d6d_bb6dfeeb",
       "range": {
         "startLine": 2155,
         "startChar": 0,
