@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97f20e6d_e372653d",
+        "filename": "tools/list_xts_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1897543
+      },
+      "writtenOn": "2023-03-31T07:54:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdce4f69_f12daacc",
+      "range": {
+        "startLine": 18,
+        "startChar": 16,
+        "endLine": 18,
+        "endChar": 26
+      },
+      "revId": "1ae0dcc3f9c01a927d74dc19edf9f500a7796756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b1f5449_dcd9baba",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad16b239_2981847a",
+        "filename": "tools/list_xts_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1897543
+      },
+      "writtenOn": "2023-03-31T07:54:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b1f5449_dcd9baba",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "1ae0dcc3f9c01a927d74dc19edf9f500a7796756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50bd0b37_c70fd83b",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-03-30T12:52:20Z",
       "side": 1,
       "message": "Will a file under {test_cases_dir} has the same name as a module_name?",
+      "range": {
+        "startLine": 120,
+        "startChar": 26,
+        "endLine": 120,
+        "endChar": 86
+      },
+      "revId": "1ae0dcc3f9c01a927d74dc19edf9f500a7796756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fa6249b_cfb9758c",
+        "filename": "tools/list_xts_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1897543
+      },
+      "writtenOn": "2023-03-31T07:54:28Z",
+      "side": 1,
+      "message": "No single file under {test_cases_dir} now.\n\nIf there is one, this file will not be removed if the extracted module_name belongs to a CTS test module (safe)\n\nIf the extracted module_name not belongs to a CTS test module, that means it is a duplicate file, then remove it is safe.",
+      "parentUuid": "50bd0b37_c70fd83b",
       "range": {
         "startLine": 120,
         "startChar": 26,
