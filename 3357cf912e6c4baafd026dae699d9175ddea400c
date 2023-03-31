@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "862d1133_76043c31",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-03-31T18:18:57Z",
+      "side": 1,
+      "message": "This is less used than other find commands under core/definitions.mk, but when we make changes to find commands in make, we need to make sure we\u0027re not breaking out of kati\u0027s find emulator. That can make things even slower, especially on fuse filesystems.\n\nIn this case, I\u0027m pretty sure we\u0027ve already broken out of the find emulator due to the sed call, so it\u0027s likely not a problem.\n\nTransforming that logic out of sed and into make is another potential way to fix this. I don\u0027t remember the state of ensuring that all find results are sorted coming out of the find emulator -- I had looked into that a long time ago for reproducible builds.",
+      "revId": "3357cf912e6c4baafd026dae699d9175ddea400c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
