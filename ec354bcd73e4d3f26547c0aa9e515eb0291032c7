@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3da038d_8a45ae89",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-31T02:50:52Z",
+      "side": 1,
+      "message": "For now, I\u0027d like to keep the term `Source tree treble` if possible. I cannot rename all of them for now, but I renamed some of them based on the suggestion. Thx.",
+      "parentUuid": "4a37b254_d4e45b98",
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51a7b479_2acc83b9",
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39a28a86_24643289",
+        "filename": "core/main.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-31T02:50:52Z",
+      "side": 1,
+      "message": "Thanks. I updated bug number. The bug is to make intermediate files more visible from the Makefile (or ninja) dependency. It can be solved by just using .KATI_IMPLICIT_OUTPUTS, or re-define dependency structure to generate intermediate files target from the Makefile.",
+      "parentUuid": "51a7b479_2acc83b9",
+      "range": {
+        "startLine": 148,
+        "startChar": 9,
+        "endLine": 148,
+        "endChar": 16
+      },
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4521d66f_06381ca8",
         "filename": "core/main.mk",
         "patchSetId": 5
@@ -54,6 +96,24 @@
       "writtenOn": "2023-03-30T21:21:23Z",
       "side": 1,
       "message": "The context file should depend on the zipfile. And the generate_context.sh script should probably accept the path to the zipfile as an argument so it\u0027s managed in one place.",
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9612925_398e21f5",
+        "filename": "core/main.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-31T02:50:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4521d66f_06381ca8",
       "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -94,6 +154,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a07de8b6_0ee5e839",
+        "filename": "tools/generate_context.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-31T02:50:52Z",
+      "side": 1,
+      "message": "I moved scripts to subdir `source_tree_treble` which locates under the `tool` directory.",
+      "parentUuid": "c87fc8a3_2460f48f",
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e06280a_525370df",
+        "filename": "tools/generate_context.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-31T02:50:52Z",
+      "side": 1,
+      "message": "You can just download target files file and locate it under `out/prebuilt_cached/artifacts/ssi` directory",
+      "parentUuid": "1fa469f9_84d60602",
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d5351f7_928f9bd6",
         "filename": "tools/import_artifact.sh",
         "patchSetId": 5
@@ -105,6 +201,30 @@
       "writtenOn": "2023-03-30T21:21:23Z",
       "side": 1,
       "message": "`$TARGET_OUT_PATH` is `$OUT_DIR/artifact`, why are you using both here?\n\nI think in general across these cls we don\u0027t need to load the path to the artifact folder from the context file. The context file is really just a stamp file to ensure the zip file gets unzipped, so I would also consider renaming it to be something related to \"stamp\" instead of \"context\".",
+      "range": {
+        "startLine": 78,
+        "startChar": 16,
+        "endLine": 78,
+        "endChar": 33
+      },
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a663c019_b13dddd2",
+        "filename": "tools/import_artifact.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-31T02:50:52Z",
+      "side": 1,
+      "message": "Logic updated.",
+      "parentUuid": "3d5351f7_928f9bd6",
       "range": {
         "startLine": 78,
         "startChar": 16,
