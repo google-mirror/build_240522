@@ -16,6 +16,24 @@
       "message": "There will be a long tail of reduced manifest branches that need updating.  Off the top of my head, at least aosp-build-tools, aosp-clang-tools, aosp-llvm-toolchain, aosp-rust-toolchain.  Looks like you may have already handled master-art and master-art-host, but there may be other internal unbundled branches affected too.",
       "revId": "928ee9d9f7ca091054a14c7dcffb2cc406eda2b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac2a3c6_63473eec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-03-31T15:53:18Z",
+      "side": 1,
+      "message": "Correction, aosp-llvm-toolchain and aosp-rust-toolchain don\u0027t use Soong so they won\u0027t need the new project.",
+      "parentUuid": "7711b2a1_db789231",
+      "revId": "928ee9d9f7ca091054a14c7dcffb2cc406eda2b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
