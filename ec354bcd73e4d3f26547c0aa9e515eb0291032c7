@@ -83,6 +83,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fc661ba_a8a78a70",
+        "filename": "core/main.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-31T07:02:03Z",
+      "side": 1,
+      "message": "Marking this comment as resolved.",
+      "parentUuid": "39a28a86_24643289",
+      "range": {
+        "startLine": 148,
+        "startChar": 9,
+        "endLine": 148,
+        "endChar": 16
+      },
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4521d66f_06381ca8",
@@ -184,6 +208,42 @@
       "side": 1,
       "message": "You can just download target files file and locate it under `out/prebuilt_cached/artifacts/ssi` directory",
       "parentUuid": "1fa469f9_84d60602",
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c25b5427_27753f89",
+        "filename": "tools/generate_context.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-31T07:02:03Z",
+      "side": 1,
+      "message": "Marking this comment as resolved.",
+      "parentUuid": "7e06280a_525370df",
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98dbbb0b_ca848c97",
+        "filename": "tools/generate_context.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-03-31T07:02:03Z",
+      "side": 1,
+      "message": "Marking this comment as resolved.",
+      "parentUuid": "a07de8b6_0ee5e839",
       "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
