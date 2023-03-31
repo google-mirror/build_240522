@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed7d504_a6ee738c",
+        "filename": "tools/compliance/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-31T00:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dce73a9c_48fce561",
+      "range": {
+        "startLine": 141,
+        "startChar": 9,
+        "endLine": 141,
+        "endChar": 28
+      },
+      "revId": "f7f7f31b48b4790976c053d95e27e26aab6f6cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e377f0b1_1f169a8e",
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "Added a constant for NOASSERTION. As for the relation types, we are only using them once, do we still need to define constants for them?",
       "parentUuid": "5d71cdf3_b011e7fb",
+      "range": {
+        "startLine": 372,
+        "startChar": 20,
+        "endLine": 372,
+        "endChar": 29
+      },
+      "revId": "f7f7f31b48b4790976c053d95e27e26aab6f6cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17fc03c3_1caa0c70",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-03-31T00:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78d5863c_904e32a7",
       "range": {
         "startLine": 372,
         "startChar": 20,
