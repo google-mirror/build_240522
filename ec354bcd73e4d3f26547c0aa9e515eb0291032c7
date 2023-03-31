@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c1dcfa1_269532cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-31T20:42:45Z",
+      "side": 1,
+      "message": "\"Source tree treble\" / \"stt\" is a good name. Please do the rest of the renames though, particularly the \"artifacts\" dir, the product config variables, `CONTEXT_FILE`, `ARTIFACT_PATH`, `GENERATE_CONTEXT_SCRIPT`, and `my_use_partial_artifact`.\n\nRenaming is easy and quick, going through another round of cross-timezone reviews takes longer.",
+      "parentUuid": "d3da038d_8a45ae89",
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51a7b479_2acc83b9",
         "filename": "core/main.mk",
         "patchSetId": 5
@@ -97,6 +115,30 @@
       "side": 1,
       "message": "Marking this comment as resolved.",
       "parentUuid": "39a28a86_24643289",
+      "range": {
+        "startLine": 148,
+        "startChar": 9,
+        "endLine": 148,
+        "endChar": 16
+      },
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4141cff9_9370a829",
+        "filename": "core/main.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-31T20:42:45Z",
+      "side": 1,
+      "message": "Please update the comment with this information. \"handle stuff for incremental build\" is not useful to readers.",
+      "parentUuid": "6fc661ba_a8a78a70",
       "range": {
         "startLine": 148,
         "startChar": 9,
@@ -244,6 +286,24 @@
       "side": 1,
       "message": "Marking this comment as resolved.",
       "parentUuid": "a07de8b6_0ee5e839",
+      "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8e76632_bd550b44",
+        "filename": "tools/generate_context.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-31T20:42:45Z",
+      "side": 1,
+      "message": "Please also add a md file documenting the feature.",
+      "parentUuid": "98dbbb0b_ca848c97",
       "revId": "ec354bcd73e4d3f26547c0aa9e515eb0291032c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a8f8aa9_4cb55b9e",
+        "filename": "core/main.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-31T20:42:45Z",
+      "side": 1,
+      "message": "nit: explicitly mention \"source tree treble\" here.",
+      "revId": "c46a5c56f0e79b4d1cc6b2756ba8165ba6401b32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d995dfe_174ded7a",
+        "filename": "core/main.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-31T20:42:45Z",
+      "side": 1,
+      "message": "Use simple expansion (`:\u003d`) so that the wildcard isn\u0027t run multiple times.",
+      "range": {
+        "startLine": 147,
+        "startChar": 13,
+        "endLine": 147,
+        "endChar": 14
+      },
+      "revId": "c46a5c56f0e79b4d1cc6b2756ba8165ba6401b32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23f48550_e4aa1816",
+        "filename": "core/main.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-31T20:42:45Z",
+      "side": 1,
+      "message": "You should assert that exactly 1 zip file was found.",
+      "revId": "c46a5c56f0e79b4d1cc6b2756ba8165ba6401b32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "461430b6_29b4f9dd",
+        "filename": "tools/source_tree_treble/generate_context.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-03-31T20:42:45Z",
+      "side": 1,
+      "message": "Do the renaming from SYSTEM to system in this unzipping script, and then you don\u0027t need import_artifact.sh anymore because it will just be a trivial copy.",
+      "revId": "c46a5c56f0e79b4d1cc6b2756ba8165ba6401b32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
