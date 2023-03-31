@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fb30a08_fe3443f5",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-03-31T18:22:22Z",
+      "side": 1,
+      "message": "For incremental builds to be reliable, this rule now needs to depend on `build/make/tools/source_tree_treble/import_artifact.sh` and anything it reads during its execution.",
+      "range": {
+        "startLine": 548,
+        "startChar": 21,
+        "endLine": 548,
+        "endChar": 75
+      },
+      "revId": "084e4b1c7f11ed40050179077f64cd658912ba6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
