@@ -41,6 +41,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d34d5a7_16345951",
+        "filename": "tools/list_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-03-31T04:59:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7954d76_b53ce8f8",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 57
+      },
+      "revId": "61c02cc16b355215aaab1e33153ce719fd759d1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5023861b_72297fa5",
+        "filename": "tools/list_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-03-31T04:59:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7954d76_b53ce8f8",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 57
+      },
+      "revId": "61c02cc16b355215aaab1e33153ce719fd759d1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7d299a7_ef6507bb",
@@ -54,6 +102,30 @@
       "writtenOn": "2023-03-31T00:04:53Z",
       "side": 1,
       "message": "\"/\" is host specific (wont work on windows). Consider using os.path.join. It also has the advantage that you no longer need to check existence of any trailing \"/\"",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 23
+      },
+      "revId": "61c02cc16b355215aaab1e33153ce719fd759d1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c11961e_061fc4da",
+        "filename": "tools/list_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-03-31T04:59:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7d299a7_ef6507bb",
       "range": {
         "startLine": 53,
         "startChar": 8,
@@ -100,6 +172,54 @@
       "writtenOn": "2023-03-31T00:04:53Z",
       "side": 1,
       "message": "Since you are amending here, running `list` twice will create two records for every single file",
+      "range": {
+        "startLine": 78,
+        "startChar": 23,
+        "endLine": 78,
+        "endChar": 26
+      },
+      "revId": "61c02cc16b355215aaab1e33153ce719fd759d1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b11cc23a_153e11a1",
+        "filename": "tools/list_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-03-31T04:59:19Z",
+      "side": 1,
+      "message": "This is a file. Renamed variable to `out_file`.",
+      "parentUuid": "9fa95dc5_271f9e21",
+      "range": {
+        "startLine": 78,
+        "startChar": 14,
+        "endLine": 78,
+        "endChar": 21
+      },
+      "revId": "61c02cc16b355215aaab1e33153ce719fd759d1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "495fcc4f_3bd6ff49",
+        "filename": "tools/list_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-03-31T04:59:19Z",
+      "side": 1,
+      "message": "Modified `list()` so that multiple calls do not lead to writing duplicate entries.",
+      "parentUuid": "36c164de_7f90546e",
       "range": {
         "startLine": 78,
         "startChar": 23,
