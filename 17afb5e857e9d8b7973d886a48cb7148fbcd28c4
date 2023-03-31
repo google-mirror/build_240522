@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16f402c4_0c1541ad",
+        "filename": "tools/list_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-03-31T15:18:25Z",
+      "side": 1,
+      "message": "nit: [e if e.startswith(\".\") else \".\" + e for e in args.extensions]",
+      "range": {
+        "startLine": 29,
+        "startChar": 27,
+        "endLine": 31,
+        "endChar": 75
+      },
+      "revId": "17afb5e857e9d8b7973d886a48cb7148fbcd28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8de43e99_9ada1138",
+        "filename": "tools/list_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-03-31T15:18:25Z",
+      "side": 1,
+      "message": "nit: why not use a for loop instead of reversing and pop-ing?",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 40
+      },
+      "revId": "17afb5e857e9d8b7973d886a48cb7148fbcd28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "612fc8ee_cfd38b09",
+        "filename": "tools/list_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-03-31T15:18:25Z",
+      "side": 1,
+      "message": "Consider using `writelines` instead so that the file does not need to be opened in append mode (and possibly contain data from a previous run)",
+      "range": {
+        "startLine": 77,
+        "startChar": 24,
+        "endLine": 77,
+        "endChar": 27
+      },
+      "revId": "17afb5e857e9d8b7973d886a48cb7148fbcd28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdef5e1c_b0207eb7",
+        "filename": "tools/list_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-03-31T15:18:25Z",
+      "side": 1,
+      "message": "instead of opening the file for every line, can we open the file once and use the inbuilt `writelines`?",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 17
+      },
+      "revId": "17afb5e857e9d8b7973d886a48cb7148fbcd28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58277a1b_2dec7110",
+        "filename": "tools/list_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-03-31T15:18:25Z",
+      "side": 1,
+      "message": "This is no longer needed since `out_file` is not a directory",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 19
+      },
+      "revId": "17afb5e857e9d8b7973d886a48cb7148fbcd28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "385425c8_aab268ec",
+        "filename": "tools/list_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-03-31T15:18:25Z",
+      "side": 1,
+      "message": "nit: make this an internal function that gets called in `list`. Reduces one additional function call",
+      "range": {
+        "startLine": 98,
+        "startChar": 16,
+        "endLine": 98,
+        "endChar": 25
+      },
+      "revId": "17afb5e857e9d8b7973d886a48cb7148fbcd28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
