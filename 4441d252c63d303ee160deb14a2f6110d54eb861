@@ -52,6 +52,60 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e19694a_7ca73e66",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-03-31T06:56:52Z",
+      "side": 1,
+      "message": "It\u0027s checked when assigning my_use_partial_artifact to true. And yes, this happens twice for Soong built modules, but we should do twice (because Soong only knows Soong output, and Makefile only knows Makefile output)",
+      "parentUuid": "6fcd4d77_b101a0db",
+      "revId": "4441d252c63d303ee160deb14a2f6110d54eb861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33629e5c_be9fab24",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-03-31T06:56:52Z",
+      "side": 1,
+      "message": "Replaced this with script call",
+      "parentUuid": "141c5094_3e9e8597",
+      "revId": "4441d252c63d303ee160deb14a2f6110d54eb861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adad7e40_56f2c6ca",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-03-31T06:56:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f81933d_7b8f79d1",
+      "revId": "4441d252c63d303ee160deb14a2f6110d54eb861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f48d1119_8fb7f5ae",
