@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ec7a9b3_f1b83eca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-04-01T02:15:16Z",
+      "side": 1,
+      "message": "Reflected comments and additional functionality: `--base` and `--rel-path`.",
+      "revId": "17afb5e857e9d8b7973d886a48cb7148fbcd28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16f402c4_0c1541ad",
@@ -24,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e489ba1_203c9137",
+        "filename": "tools/list_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-04-01T02:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16f402c4_0c1541ad",
+      "range": {
+        "startLine": 29,
+        "startChar": 27,
+        "endLine": 31,
+        "endChar": 75
+      },
+      "revId": "17afb5e857e9d8b7973d886a48cb7148fbcd28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8de43e99_9ada1138",
@@ -37,6 +78,30 @@
       "writtenOn": "2023-03-31T15:18:25Z",
       "side": 1,
       "message": "nit: why not use a for loop instead of reversing and pop-ing?",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 40
+      },
+      "revId": "17afb5e857e9d8b7973d886a48cb7148fbcd28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af5922f1_e68e54c0",
+        "filename": "tools/list_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-04-01T02:15:16Z",
+      "side": 1,
+      "message": "I have moved to this implementation because in this way, `files_list` is emptied out after a `list()` call, so that multiple `list()` calls do not lead to writing duplicate entries.\n\nHowever, as you have suggested calling `get_files()` inside `list()`, there is no benefit of doing so. Thus I will revert to original implementation.",
+      "parentUuid": "8de43e99_9ada1138",
       "range": {
         "startLine": 58,
         "startChar": 0,
@@ -93,6 +158,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e9b00a0_6424635c",
+        "filename": "tools/list_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-04-01T02:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdef5e1c_b0207eb7",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 17
+      },
+      "revId": "17afb5e857e9d8b7973d886a48cb7148fbcd28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58277a1b_2dec7110",
@@ -116,6 +205,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a754860c_34da7317",
+        "filename": "tools/list_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-04-01T02:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58277a1b_2dec7110",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 19
+      },
+      "revId": "17afb5e857e9d8b7973d886a48cb7148fbcd28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "385425c8_aab268ec",
@@ -129,6 +242,30 @@
       "writtenOn": "2023-03-31T15:18:25Z",
       "side": 1,
       "message": "nit: make this an internal function that gets called in `list`. Reduces one additional function call",
+      "range": {
+        "startLine": 98,
+        "startChar": 16,
+        "endLine": 98,
+        "endChar": 25
+      },
+      "revId": "17afb5e857e9d8b7973d886a48cb7148fbcd28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ede122c_cf8d6bde",
+        "filename": "tools/list_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-04-01T02:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "385425c8_aab268ec",
       "range": {
         "startLine": 98,
         "startChar": 16,
