@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f179e17_9fceb4c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2000685
+      },
+      "writtenOn": "2023-04-01T18:55:32Z",
+      "side": 1,
+      "message": "hello",
+      "revId": "633c85c720d941e4301fdd5aad007417576299ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1931678_a66293fd",
@@ -31,6 +48,24 @@
       "writtenOn": "2023-04-01T15:50:06Z",
       "side": 1,
       "message": "For testability, flags get communicated to the implementation via the context.",
+      "revId": "633c85c720d941e4301fdd5aad007417576299ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6926e1bb_e8b33da1",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2000685
+      },
+      "writtenOn": "2023-04-01T18:55:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1931678_a66293fd",
       "revId": "633c85c720d941e4301fdd5aad007417576299ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
