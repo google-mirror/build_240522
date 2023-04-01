@@ -85,6 +85,24 @@
       "message": "I find it very strange to clobber flags. I suggest using a local variable initialized via the context.",
       "revId": "633c85c720d941e4301fdd5aad007417576299ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0da35c9_edfd87ae",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-04-01T21:25:39Z",
+      "side": 1,
+      "message": "I made mainPkgName a local variable to temporary store the main package name. There seem to be no need for using a flag or passing it through the context as its only used once to build the first relationship (describe).",
+      "parentUuid": "a054981c_84ce734e",
+      "revId": "633c85c720d941e4301fdd5aad007417576299ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
