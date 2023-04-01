@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1931678_a66293fd",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-04-01T15:50:06Z",
+      "side": 1,
+      "message": "For testability, flags get communicated to the implementation via the context.",
+      "revId": "633c85c720d941e4301fdd5aad007417576299ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a054981c_84ce734e",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-04-01T15:50:06Z",
+      "side": 1,
+      "message": "I find it very strange to clobber flags. I suggest using a local variable initialized via the context.",
+      "revId": "633c85c720d941e4301fdd5aad007417576299ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
