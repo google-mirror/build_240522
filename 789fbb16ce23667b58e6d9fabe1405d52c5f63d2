@@ -33,6 +33,24 @@
       "message": "This makes sense to me, but.. could you find a way to ensure that we don\u0027t regress to the previous behavior? Is that what the sbom integration test will do here?",
       "revId": "789fbb16ce23667b58e6d9fabe1405d52c5f63d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75731da7_0cbdca0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-03T14:44:53Z",
+      "side": 1,
+      "message": "If so, we should also run the sbom integration test on aosp-master and git_master, which I don\u0027t believe is happening right now.",
+      "parentUuid": "ca2cdf57_a2274cb0",
+      "revId": "789fbb16ce23667b58e6d9fabe1405d52c5f63d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
