@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de2ac16e_eb0df019",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-03T23:27:38Z",
+      "side": 1,
+      "message": "This should be SPDXRef-DOCUMENT, see https://spdx.github.io/spdx-spec/v2.3/document-creation-information/#63-spdx-identifier-field",
+      "range": {
+        "startLine": 484,
+        "startChar": 22,
+        "endLine": 484,
+        "endChar": 30
+      },
+      "revId": "7dd11ebb2fac88c2429023495f05c73e9de43e37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3c12687_7e3b1401",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-03T23:27:38Z",
+      "side": 1,
+      "message": "This doesn\u0027t look like a good document namespace, it should be able to identify a SBOM document uniquely. See https://spdx.github.io/spdx-spec/v2.3/document-creation-information/#65-spdx-document-namespace-field/",
+      "range": {
+        "startLine": 486,
+        "startChar": 22,
+        "endLine": 486,
+        "endChar": 29
+      },
+      "revId": "7dd11ebb2fac88c2429023495f05c73e9de43e37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ed1c914_ae3eb0c3",
         "filename": "tools/compliance/cmd/sbom/sbom_test.go",
         "patchSetId": 2
