@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bef94d6_ca9b90f6",
+        "filename": "tools/list_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-04-03T18:21:28Z",
+      "side": 1,
+      "message": "Ah my apologies, I believe the confusion came from the misleading flag name. The \"root\" flag provides output with alternative root dir. To do so, the relative file path from the original root dir has to be extracted first, and then the alternative root must be appended. Thus I believe that this line is neccessary.",
+      "parentUuid": "f7bf3454_80ddf3d6",
+      "range": {
+        "startLine": 57,
+        "startChar": 19,
+        "endLine": 57,
+        "endChar": 31
+      },
+      "revId": "b87972bff77e8d6d01fd21ea441fb8f01542e51e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6b92422_3e0f08b2",
         "filename": "tools/list_files.py",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-01T03:03:22Z",
       "side": 1,
       "message": "nit: I think `close` is not necessary since you are using `with`",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 17
+      },
+      "revId": "b87972bff77e8d6d01fd21ea441fb8f01542e51e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d6ac593_36425beb",
+        "filename": "tools/list_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-04-03T18:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6b92422_3e0f08b2",
       "range": {
         "startLine": 88,
         "startChar": 8,
@@ -60,6 +108,30 @@
       "writtenOn": "2023-04-01T03:03:22Z",
       "side": 1,
       "message": "Is there a use case for this? I couldnt find it in aosp/2485976.\n\nIf so, consider removing it altogether",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 117
+      },
+      "revId": "b87972bff77e8d6d01fd21ea441fb8f01542e51e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0783926e_359b30de",
+        "filename": "tools/list_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-04-03T18:21:28Z",
+      "side": 1,
+      "message": "Yes, there currently is no use case of this, but I thought it may be useful for debugging purposes in the future. If you do not believe so, I will go ahead and remove this flag.",
+      "parentUuid": "eb484ae0_b9339430",
       "range": {
         "startLine": 102,
         "startChar": 4,
