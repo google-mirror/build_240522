@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70e68bc2_f511daa5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-03T08:40:27Z",
+      "side": 1,
+      "message": "I am not familiar with the contents or runtime deps of the *ts zips. What causes the duplication of files? Is that something that we can fix much earlier on in the build?\n\nI see that you\u0027re deduplicating the files by checksum. Would there be any potential filepath-based errors at runtime, say missing file at the expected location?",
+      "revId": "ac35c0c647b937ab01f5839c9f2d18bc0d13246a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
