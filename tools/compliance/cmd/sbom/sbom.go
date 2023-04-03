@@ -325,8 +325,8 @@ func sbomGenerator(ctx *context, files ...string) (*spdx.Document, []string, err
 	// creating the license section
 	otherLicenses := []*spdx.OtherLicense{}
 
-        // main package name
-        var mainPkgName string
+	// main package name
+	var mainPkgName string
 
 	// implementing the licenses references for the packages
 	licenses := make(map[string]string)
@@ -479,10 +479,14 @@ func sbomGenerator(ctx *context, files ...string) (*spdx.Document, []string, err
 	}
 
 	return &spdx.Document{
-		SPDXIdentifier: "DOCUMENT",
-		CreationInfo:   ci,
-		Packages:       pkgs,
-		Relationships:  relationships,
-		OtherLicenses:  otherLicenses,
+		SPDXVersion:       "SPDX-2.2",
+		DataLicense:       "CC0-1.0",
+		SPDXIdentifier:    "DOCUMENT",
+		DocumentName:      *mainPkgName,
+		DocumentNamespace: "Android",
+		CreationInfo:      ci,
+		Packages:          pkgs,
+		Relationships:     relationships,
+		OtherLicenses:     otherLicenses,
 	}, deps, nil
 }
