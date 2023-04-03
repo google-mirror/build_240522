@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f49cdf8d_d3fe8fdb",
+        "filename": "tools/finalization/localonly-finalize-mainline-sdk.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-04-03T10:09:50Z",
+      "side": 1,
+      "message": "not clear why this is in the `mainline_sdk` part of finalization?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 152
+      },
+      "revId": "5dfdbe12bc8a9ac13361a6f6bb3e63e314444bda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
