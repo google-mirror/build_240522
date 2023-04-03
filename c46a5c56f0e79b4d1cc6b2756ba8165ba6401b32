@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29147988_6bc1e607",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-04-03T03:42:38Z",
+      "side": 1,
+      "message": "Thanks everyone for the review.\n\nThis change will stay in WIP while we are re-design direction of the STT.",
+      "revId": "c46a5c56f0e79b4d1cc6b2756ba8165ba6401b32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a8f8aa9_4cb55b9e",
