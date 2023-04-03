@@ -22,6 +22,30 @@
       },
       "revId": "e805e414204e67faad14ba3769236e4846d5a9a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa0e4cb3_8fb8b701",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-04-03T20:52:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba6f87ac_d3cd2b21",
+      "range": {
+        "startLine": 485,
+        "startChar": 21,
+        "endLine": 485,
+        "endChar": 22
+      },
+      "revId": "e805e414204e67faad14ba3769236e4846d5a9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
