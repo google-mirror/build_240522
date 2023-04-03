@@ -51,6 +51,24 @@
       "parentUuid": "ca2cdf57_a2274cb0",
       "revId": "789fbb16ce23667b58e6d9fabe1405d52c5f63d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "725473cc_4d003cc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-03T20:21:21Z",
+      "side": 1,
+      "message": "Yes, we should add sbom integration test on aosp-master and git_master after it can be built by default with m dist. I tested this CL in go/forrest-ui, with it we should be able to enable sbom generation with m dist. Created b/276778945 for this. Thanks!",
+      "parentUuid": "75731da7_0cbdca0c",
+      "revId": "789fbb16ce23667b58e6d9fabe1405d52c5f63d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
