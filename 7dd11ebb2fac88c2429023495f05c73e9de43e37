@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c09bb9_e3c57224",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-04-04T18:06:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96a8b451_96942a98",
+      "range": {
+        "startLine": 484,
+        "startChar": 22,
+        "endLine": 484,
+        "endChar": 30
+      },
+      "revId": "7dd11ebb2fac88c2429023495f05c73e9de43e37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3c12687_7e3b1401",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Added a function to generate a unique SPDX Document Namespace using a SHA1 checksum and the creation date.",
       "parentUuid": "f3c12687_7e3b1401",
+      "range": {
+        "startLine": 486,
+        "startChar": 22,
+        "endLine": 486,
+        "endChar": 29
+      },
+      "revId": "7dd11ebb2fac88c2429023495f05c73e9de43e37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "177bec51_2e34d1eb",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-04-04T18:06:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35d508e0_4564d5f8",
       "range": {
         "startLine": 486,
         "startChar": 22,
