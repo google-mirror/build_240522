@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96a8b451_96942a98",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-04-04T17:59:04Z",
+      "side": 1,
+      "message": "This is only for building the SPDX doc. Once the doc is created, the SPDXID becomes \"SPDXRef-DOCUMENT\". In this case, we are just comparing the content of the spdx doc before writing the spdx doc.\n\nSee example of output here: https://paste.googleplex.com/6069008750084096",
+      "parentUuid": "de2ac16e_eb0df019",
+      "range": {
+        "startLine": 484,
+        "startChar": 22,
+        "endLine": 484,
+        "endChar": 30
+      },
+      "revId": "7dd11ebb2fac88c2429023495f05c73e9de43e37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3c12687_7e3b1401",
         "filename": "tools/compliance/cmd/sbom/sbom.go",
         "patchSetId": 2
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35d508e0_4564d5f8",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-04-04T17:59:04Z",
+      "side": 1,
+      "message": "Added a function to generate a unique SPDX Document Namespace using a SHA1 checksum and the creation date.",
+      "parentUuid": "f3c12687_7e3b1401",
+      "range": {
+        "startLine": 486,
+        "startChar": 22,
+        "endLine": 486,
+        "endChar": 29
+      },
+      "revId": "7dd11ebb2fac88c2429023495f05c73e9de43e37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ed1c914_ae3eb0c3",
         "filename": "tools/compliance/cmd/sbom/sbom_test.go",
         "patchSetId": 2
@@ -60,6 +108,24 @@
       "writtenOn": "2023-04-03T21:06:41Z",
       "side": 1,
       "message": "That\u0027s not really the best name.",
+      "revId": "7dd11ebb2fac88c2429023495f05c73e9de43e37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26489149_2c0af4ae",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-04-04T17:59:04Z",
+      "side": 1,
+      "message": "Added a function to strip removes the outdir prefix and meta_lic suffix from a target Name when the module name is empty.",
+      "parentUuid": "4ed1c914_ae3eb0c3",
       "revId": "7dd11ebb2fac88c2429023495f05c73e9de43e37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
