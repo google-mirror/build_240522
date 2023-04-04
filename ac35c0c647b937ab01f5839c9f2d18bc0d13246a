@@ -16,6 +16,24 @@
       "message": "I am not familiar with the contents or runtime deps of the *ts zips. What causes the duplication of files? Is that something that we can fix much earlier on in the build?\n\nI see that you\u0027re deduplicating the files by checksum. Would there be any potential filepath-based errors at runtime, say missing file at the expected location?",
       "revId": "ac35c0c647b937ab01f5839c9f2d18bc0d13246a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4db79cbf_528287df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897543
+      },
+      "writtenOn": "2023-04-04T01:33:02Z",
+      "side": 1,
+      "message": "A (CTS module) depends on B (CTS data), in today\u0027s CTS, there will be a folder called A, and for example, A.apk and B.apk will be put into the A folder. However, if B is also tagged as \u0027cts\u0027 in the test_suites field, then there will be another folder, called B, and B.apk will also be put into the B folder. In the cases, B occurs two times!\n\nTo fix it earlier in the build, one solution could be that remove unnecessary cts tags, but it takes time to roll out. We want to reduce the size in U, so the very short term solution is to remove duplicate files when zipping which is more safe.\n\nWe have done experiment and no such failures (file not found) have been found.",
+      "parentUuid": "70e68bc2_f511daa5",
+      "revId": "ac35c0c647b937ab01f5839c9f2d18bc0d13246a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
