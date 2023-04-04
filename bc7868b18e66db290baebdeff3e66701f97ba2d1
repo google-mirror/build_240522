@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e40f805_d2a347e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-04T03:29:22Z",
+      "side": 1,
+      "message": "aosp-master-bazel: go/forrest-ui/run/L30000000959602620\ngit_master-bazel: go/forrest-ui/run/L62300000959615437\naosp-master: go/forrest-ui/run/L23600000959601096\ngit_master: go/forrest-ui/run/L86400000959597184",
+      "revId": "bc7868b18e66db290baebdeff3e66701f97ba2d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
