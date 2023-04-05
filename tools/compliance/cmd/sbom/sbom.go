@@ -38,6 +38,7 @@ import (
 	"github.com/spdx/tools-golang/json"
 	"github.com/spdx/tools-golang/spdx/common"
 	spdx "github.com/spdx/tools-golang/spdx/v2_2"
+	"github.com/spdx/tools-golang/spdxlib"
 )
 
 var (
@@ -173,6 +174,13 @@ Options:
 		os.Exit(1)
 	}
 
+	// validating the spdx Doc created
+	if err := spdxlib.ValidateDocument2_2(spdxDoc); err != nil {
+		fmt.Fprintf(os.Stderr, "failed to validate document: %v", err.Error())
+		os.Exit(1)
+	}
+
+	// writing the spdx Doc created
 	if err := spdx_json.Save2_2(spdxDoc, ofile); err != nil {
 		fmt.Fprintf(os.Stderr, "failed to write document to %v: %v", *outputFile, err)
 		os.Exit(1)
