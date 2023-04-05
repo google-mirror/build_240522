@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efb27b01_8bd4405b",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-04-05T22:56:07Z",
+      "side": 1,
+      "message": "Tests for failures of this call?",
+      "revId": "0eb24147087f0e857b8cc3989f52b22934299536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71c17fea_08f5e7e3",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-04-05T22:56:07Z",
+      "side": 1,
+      "message": "The style for golang tests is \"context: got..., want...\"\n\nIn this case, you could use \"SPDXVersion: got nothing, want version\"\n\nHere and elsewhere.",
+      "range": {
+        "startLine": 2276,
+        "startChar": 21,
+        "endLine": 2276,
+        "endChar": 57
+      },
+      "revId": "0eb24147087f0e857b8cc3989f52b22934299536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23c2aaf4_592badb5",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 2288,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-04-05T22:56:07Z",
+      "side": 1,
+      "message": "The style for go tests is got followed by want.",
+      "range": {
+        "startLine": 2288,
+        "startChar": 42,
+        "endLine": 2288,
+        "endChar": 56
+      },
+      "revId": "0eb24147087f0e857b8cc3989f52b22934299536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b72c5f_5ec19bd3",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 2292,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-04-05T22:56:07Z",
+      "side": 1,
+      "message": "\"Invalid time spec: %q: got error %q, want no error\", doc.CreationInfo.Created, err",
+      "range": {
+        "startLine": 2292,
+        "startChar": 21,
+        "endLine": 2292,
+        "endChar": 69
+      },
+      "revId": "0eb24147087f0e857b8cc3989f52b22934299536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68ce5ec7_8bfccd0b",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 2297,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-04-05T22:56:07Z",
+      "side": 1,
+      "message": "\"license file: %q: got nothing, want license text\", license.licenseName",
+      "range": {
+        "startLine": 2297,
+        "startChar": 22,
+        "endLine": 2297,
+        "endChar": 71
+      },
+      "revId": "0eb24147087f0e857b8cc3989f52b22934299536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
