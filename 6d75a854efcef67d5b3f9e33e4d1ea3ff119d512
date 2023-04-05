@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "411647ce_0a9825cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1972780
+      },
+      "writtenOn": "2023-04-05T11:11:41Z",
+      "side": 1,
+      "message": "Thanks a lot for review. Could you please submit the patch, I don\u0027t have enough permissions?\n\n@zhangkelvin@google.com\n@melisacz@google.com",
+      "revId": "6d75a854efcef67d5b3f9e33e4d1ea3ff119d512",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
