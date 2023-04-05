@@ -79,22 +79,10 @@ function finalize_aidl_vndk_sdk_resources() {
     # bionic/NDK
     finalize_bionic_ndk
 
-    # VNDK definitions for new SDK version
-    cp "$top/development/vndk/tools/definition-tool/datasets/vndk-lib-extra-list-current.txt" \
-       "$top/development/vndk/tools/definition-tool/datasets/vndk-lib-extra-list-$FINAL_PLATFORM_SDK_VERSION.txt"
-
     AIDL_TRANSITIVE_FREEZE=true $m aidl-freeze-api create_reference_dumps
 
-    # Generate ABI dumps
-    ANDROID_BUILD_TOP="$top" \
-        out/host/linux-x86/bin/create_reference_dumps \
-        -p aosp_arm64 --build-variant user
-
-    echo "NOTE: THIS INTENTIONALLY MAY FAIL AND REPAIR ITSELF (until 'DONE')"
-    # Update new versions of files. See update-vndk-list.sh (which requires envsetup.sh)
-    $m check-vndk-list || \
-        { cp $top/out/soong/vndk/vndk.libraries.txt $top/build/make/target/product/gsi/current.txt; }
-    echo "DONE: THIS INTENTIONALLY MAY FAIL AND REPAIR ITSELF"
+    # b/276672785 - finalization of VNDK for PGO builds is not automated currently, so
+    # VNDK changes moved to a later phase for now, but they should go here.
 
     # Finalize SDK
 
