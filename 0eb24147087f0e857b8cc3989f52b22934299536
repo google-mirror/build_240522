@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc26483f_a91f0e60",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 2288,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-04-05T22:58:50Z",
+      "side": 1,
+      "message": "http://go/go-test-examples",
+      "parentUuid": "23c2aaf4_592badb5",
+      "range": {
+        "startLine": 2288,
+        "startChar": 42,
+        "endLine": 2288,
+        "endChar": 56
+      },
+      "revId": "0eb24147087f0e857b8cc3989f52b22934299536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93b72c5f_5ec19bd3",
         "filename": "tools/compliance/cmd/sbom/sbom_test.go",
         "patchSetId": 2
