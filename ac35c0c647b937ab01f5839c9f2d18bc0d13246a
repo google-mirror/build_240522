@@ -34,6 +34,70 @@
       "parentUuid": "70e68bc2_f511daa5",
       "revId": "ac35c0c647b937ab01f5839c9f2d18bc0d13246a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0527ecb_d5ea5097",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-05T05:35:24Z",
+      "side": 1,
+      "message": "Thank you for the explanation.\n\nOne thing I don\u0027t quite understand is if you deduplicate B by removing A/B.apk, why doesn\u0027t that cause A to fail? If it doesn\u0027t fail, doesn\u0027t it mean that A doesn\u0027t need B?\n\nWouldn\u0027t the more principled fix is to fix the Android.bp dependencies instead of doing this potentially unsafe optimization by removing test runfiles at the end of the build?",
+      "parentUuid": "4db79cbf_528287df",
+      "revId": "ac35c0c647b937ab01f5839c9f2d18bc0d13246a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9db1ff99_37a2798f",
+        "filename": "tools/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-05T05:35:24Z",
+      "side": 1,
+      "message": "Can you add tests? (don\u0027t do this yet, until we resolve the safety/correctness discussion)",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 18
+      },
+      "revId": "ac35c0c647b937ab01f5839c9f2d18bc0d13246a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52ea106a_d096ff45",
+        "filename": "tools/list_xts_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-05T05:35:24Z",
+      "side": 1,
+      "message": "I recommend calling this \"deduplicate_test_runfiles.py\". It doesn\u0027t just list files, which is a side-effect-free action.",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 15
+      },
+      "revId": "ac35c0c647b937ab01f5839c9f2d18bc0d13246a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
