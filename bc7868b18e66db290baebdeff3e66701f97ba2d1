@@ -34,6 +34,24 @@
       "parentUuid": "4e40f805_d2a347e9",
       "revId": "bc7868b18e66db290baebdeff3e66701f97ba2d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8c7dda3_02e1ca28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-05T05:59:53Z",
+      "side": 1,
+      "message": "Some reruns \n\ngit_master-bazel: go/forrest-ui/run/L90700000959609482, already failied in ab/git_master-bazel. It looks build_test3 failed in running product configuration caused by a nonexist .mk file which should not be related to SBOM. \n\ngit_master: go/forrest-ui/run/L46500000959605952, build_test4 failed in forrest-ui but succeeded in presubmit.\n\naosp-master: go/forrest-ui/run/L40100000959599093, green\naosp-master-bazel: go/forrest-ui/run/L30000000959602620, green\n\nThe results look ok to me, and I will submit this CL.",
+      "parentUuid": "422641ba_b25400d5",
+      "revId": "bc7868b18e66db290baebdeff3e66701f97ba2d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
