@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6758def6_5c5ca91b",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-04-05T19:12:11Z",
+      "side": 1,
+      "message": "Why are there 2 variables? Can we just use `PRODUCT_HWASAN_INCLUDE_PATHS`?\n\n`PRODUCT_HWASAN_INCLUDE_PATHS` should also be listed in _product_list_vars.",
+      "revId": "c2bfae4d63eef24d3338cde878554c1aa3b4582c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
