@@ -14,9 +14,33 @@ function apply_prerelease_sdk_hack() {
     fi
 }
 
+function finalize_vndk() {
+    local m="$top/build/soong/soong_ui.bash --make-mode TARGET_PRODUCT=aosp_arm64 TARGET_BUILD_VARIANT=userdebug DIST_DIR=out/dist"
+
+    # VNDK definitions for new SDK version
+    cp "$top/development/vndk/tools/definition-tool/datasets/vndk-lib-extra-list-current.txt" \
+       "$top/development/vndk/tools/definition-tool/datasets/vndk-lib-extra-list-$FINAL_PLATFORM_SDK_VERSION.txt"
+
+    $m create_reference_dumps
+
+    # Generate ABI dumps
+    ANDROID_BUILD_TOP="$top" \
+        out/host/linux-x86/bin/create_reference_dumps \
+        -p aosp_arm64 --build-variant user
+
+    echo "NOTE: THIS INTENTIONALLY MAY FAIL AND REPAIR ITSELF (until 'DONE')"
+    # Update new versions of files. See update-vndk-list.sh (which requires envsetup.sh)
+    $m check-vndk-list || \
+        { cp $top/out/soong/vndk/vndk.libraries.txt $top/build/make/target/product/gsi/current.txt; }
+    echo "DONE: THIS INTENTIONALLY MAY FAIL AND REPAIR ITSELF"
+}
+
 function finalize_sdk_rel() {
     local top="$(dirname "$0")"/../../../..
     source $top/build/make/tools/finalization/environment.sh
+
+    # VNDK finalization
+    finalize_vndk
 
     # revert droidstubs hack now we are switching to REL
     revert_droidstubs_hack
