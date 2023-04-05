@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff82bb55_ed5bed46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121894
+      },
+      "writtenOn": "2023-04-05T23:53:45Z",
+      "side": 1,
+      "message": "+1 I think there is a miscommunication. \n\nIt\u0027s very much intended for each test module to have its own data/dependencies, even if there is duplicates (as Hadrien mentioned, if there is a concern about size, we could chat about that).",
+      "parentUuid": "6eeb7109_b49ce052",
+      "revId": "ac35c0c647b937ab01f5839c9f2d18bc0d13246a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9db1ff99_37a2798f",
         "filename": "tools/Android.bp",
         "patchSetId": 5
