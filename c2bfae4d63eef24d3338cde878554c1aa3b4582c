@@ -16,6 +16,24 @@
       "message": "Why are there 2 variables? Can we just use `PRODUCT_HWASAN_INCLUDE_PATHS`?\n\n`PRODUCT_HWASAN_INCLUDE_PATHS` should also be listed in _product_list_vars.",
       "revId": "c2bfae4d63eef24d3338cde878554c1aa3b4582c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c30a56f_cb26fddb",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2023-04-05T19:29:10Z",
+      "side": 1,
+      "message": "(1) because everything else uses two variables: cfi, intoverflow, memtag",
+      "parentUuid": "6758def6_5c5ca91b",
+      "revId": "c2bfae4d63eef24d3338cde878554c1aa3b4582c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
