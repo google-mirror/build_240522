@@ -56,6 +56,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6eeb7109_b49ce052",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2023-04-05T22:40:33Z",
+      "side": 1,
+      "message": "Could you explain why you\u0027re making this change? I checked the bug and didn\u0027t find any information.\n\nIs it an optimization? If so, why? Could you please list a few of these duplicate files to sanity check the result? What\u0027s the impact on the zip/build/etc of removing these duplicates?\n\nIIUC, the duplicate files are there to ensure that every test module has its dependencies. This allows us to run a single module without having to download the entire zip.\n\nInternally, we don\u0027t have much of an issue downloading the files because we do so with CAS.\n\nThat being said, the size of the zip can be trimmed by changing the format to list file blobs and referencing them. Alternatively the zip symlink feature might be useful. Again, it might be overkill for the problem you\u0027re solving.",
+      "revId": "ac35c0c647b937ab01f5839c9f2d18bc0d13246a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9db1ff99_37a2798f",
         "filename": "tools/Android.bp",
         "patchSetId": 5
