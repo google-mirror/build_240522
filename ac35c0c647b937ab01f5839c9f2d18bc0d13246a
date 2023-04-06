@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "167998f6_96e9f451",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897543
+      },
+      "writtenOn": "2023-04-06T02:10:03Z",
+      "side": 1,
+      "message": "But currently directly removing these folders are unsafe, for example: https://source.corp.google.com/android/cts/hostsidetests/appcompat/compatchanges/src/com/android/cts/appcompat/CompatChangesOverrideOnReleaseBuildTest.java;rcl\u003d42b4d60ba088ac96488990258de9ae602bf29da9;l\u003d56, this package is not a dependency of the CTS test module and the test uses it with its name. \n\nYes, in the future, if this case is not allowed and the backfill is done, then adding it to the CommonConfigLoadingTest is a good idea!",
+      "parentUuid": "4dfe12d5_f4ad3ba9",
+      "revId": "ac35c0c647b937ab01f5839c9f2d18bc0d13246a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9db1ff99_37a2798f",
         "filename": "tools/Android.bp",
         "patchSetId": 5
