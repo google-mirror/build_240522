@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c6de11_6c227475",
+        "filename": "tools/finalization/finalize-sdk-rel.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2023-04-06T15:00:20Z",
+      "side": 1,
+      "message": "Does this still need to be mv?",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "ebce0d95014b64a4e78623c97b4b429eb1a25bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
