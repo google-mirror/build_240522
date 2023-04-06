@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54bbfa71_1f0e3fc8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-04-06T23:22:05Z",
+      "side": 1,
+      "message": "Partners, especially for keystone, want to test the latest VSR requirements before release by setting ro.board.first_api_level, but this test does not allow setting the property before release.\nWe already have similar configuration for cuttlefish for the testing purpose. (https://cs.android.com/android/platform/superproject/+/master:device/google/cuttlefish/shared/device.mk;drc\u003d19a3e3f5d96c27f1aa2ec9b8a907ad328770a0ec;l\u003d40)",
+      "parentUuid": "dbb6dde4_45cefeef",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "9fca0d0bd34fc7a89b632bc5ad99e69412e7557d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5947e0cf_824d7aba",
         "filename": "tools/post_process_props.py",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-06T09:21:17Z",
       "side": 1,
       "message": "This is problematic. Although we have been increasing the number by 1, there\u0027s nothing preventing us from changing rule.",
+      "range": {
+        "startLine": 58,
+        "startChar": 16,
+        "endLine": 58,
+        "endChar": 20
+      },
+      "revId": "9fca0d0bd34fc7a89b632bc5ad99e69412e7557d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12701d79_5907bb30",
+        "filename": "tools/post_process_props.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-04-06T23:22:05Z",
+      "side": 1,
+      "message": "I don\u0027t want to change the rule, but this is only for the dev stage.",
+      "parentUuid": "5947e0cf_824d7aba",
       "range": {
         "startLine": 58,
         "startChar": 16,
