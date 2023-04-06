@@ -422,3 +422,10 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
     frameworks/base/config/dirty-image-objects:system/etc/dirty-image-objects)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/runtime_libart.mk)
+
+# Set up the system for updatable apexes unless a lower-level product config makefile
+# requested flattened apexes. If TARGET_FLATTEN_APEX is not set and updatable_apex.mk is not
+# inherited, the system will fail to boot.
+ifneq ($(TARGET_FLATTEN_APEX),true)
+    $(call inherit-product,$(SRC_TARGET_DIR)/product/updatable_apex.mk)
+endif

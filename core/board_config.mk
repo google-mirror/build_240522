@@ -999,6 +999,16 @@ ifdef OVERRIDE_TARGET_FLATTEN_APEX
   TARGET_FLATTEN_APEX := $(OVERRIDE_TARGET_FLATTEN_APEX)
 endif
 
+ifeq (true,$(TARGET_FLATTEN_APEX))
+  ifneq (,$(filter ro.apex.updatable=true,$(PRODUCT_VENDOR_PROPERTIES)))
+    $(error You must not inherit updatable_apex.mk and set TARGET_FLATTEN_APEX := true at the same time)
+  endif
+else
+  ifeq (,$(filter ro.apex.updatable=true,$(PRODUCT_VENDOR_PROPERTIES)))
+    $(error You must either inherit from updatable_apex.mk and set TARGET_FLATTEN_APEX := true)
+  endif
+endif
+
 ifeq (,$(TARGET_BUILD_UNBUNDLED))
 ifdef PRODUCT_EXTRA_VNDK_VERSIONS
   $(foreach v,$(PRODUCT_EXTRA_VNDK_VERSIONS),$(call check_vndk_version,$(v)))
