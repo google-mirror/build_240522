@@ -1,0 +1,25 @@
+# Finalization tools
+This folder contains automation and CI scripts for [finalizing](https://go/android-finalization) Android before release.
+
+## Automation:
+[Environment setup](./environment.sh). Set values for varios finalization constants.
+
+[Finalize SDK](./finalize-aidl-vndk-sdk-resources.sh). Prepare the branch for SDK release. SDK contains Android Java APIs and other stable APIs. Commonly referred as a 1st step.
+[Finalize Android](./finalize-sdk-rel.sh). Mark branch as "REL", i.e. prepares for Android release. Any signed build containing these changes will be considered an official Android Release. Referred as a 2nd finalization step.
+
+[Finalize SDK and submit](./step-1.sh). Do [Finalize SDK](./finalize-aidl-vndk-sdk-resources.sh) step, create CLs, organize them into topic and send to Gerrit.
+[Finalize Android and submit](./step-2.sh). Do [Finalize Android](./finalize-sdk-rel.sh) step, create  CLs, organize them into topic and send to Gerrit.
+
+## CI:
+Performed in build targets in Finalization branches.
+
+[Finalization Step 1 for Main, git_main-fina-1-release](https://android-build.googleplex.com/builds/branches/git_main-fina-1-release/grid). Test [1st step/Finalize SDK](./finalize-aidl-vndk-sdk-resources.sh).
+[Finalization Step 1 for UDC, git_udc-fina-1-release](https://android-build.googleplex.com/builds/branches/git_udc-fina-1-release/grid). Same but for udc-dev.
+
+[Finalization Step 2 for Main, git_main-fina-2-release](https://android-build.googleplex.com/builds/branches/git_main-fina-2-release/grid). Test [1st step/Finalize SDK](./finalize-aidl-vndk-sdk-resources.sh) and [2nd step/Finalize Android](./finalize-sdk-rel.sh). Use [local finalization](./localonly-steps.sh) to build and copy presubmits.
+[Finalization Step 2 for UDC, git_udc-fina-2-release](https://android-build.googleplex.com/builds/branches/git_udc-fina-2-release/grid). Same but for udc-dev.
+
+[Local finalization steps](./localonly-steps.sh) are done only during local testing or in the CI lab. Normally these steps use artifacts from other builds.
+
+## Utility:
+[Full cleanup](./cleanup.sh). Remove all local changes and switch each project into head-less state. This is the best state to sync/rebase/finalize the branch.
