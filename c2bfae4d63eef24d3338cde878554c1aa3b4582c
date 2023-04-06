@@ -34,6 +34,24 @@
       "parentUuid": "6758def6_5c5ca91b",
       "revId": "c2bfae4d63eef24d3338cde878554c1aa3b4582c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c57ba2ad_c35ee6da",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1868486
+      },
+      "writtenOn": "2023-04-06T06:33:48Z",
+      "side": 1,
+      "message": "Thank you both. Updated the patchset(added `PRODUCT_HWASAN_INCLUDE_PATHS` in `_product_list_vars`).\nBTW, memtag related product variable don\u0027t seem to be added in `_product_list_vars` either(e.g. `PRODUCT_MEMTAG_HEAP_EXCLUDE_PATHS`).",
+      "parentUuid": "6c30a56f_cb26fddb",
+      "revId": "c2bfae4d63eef24d3338cde878554c1aa3b4582c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
