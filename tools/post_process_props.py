@@ -39,7 +39,7 @@ def mangle_build_prop(prop_list):
         val = val + ",adb"
       prop_list.put("persist.sys.usb.config", val)
 
-def validate_grf_props(prop_list, sdk_version):
+def validate_grf_props(prop_list, current_sdk_version):
   """Validate GRF properties if exist.
 
   If ro.board.first_api_level is defined, check if its value is valid for the
@@ -51,6 +51,11 @@ def validate_grf_props(prop_list, sdk_version):
   """
   grf_api_level = prop_list.get_value("ro.board.first_api_level")
   board_api_level = prop_list.get_value("ro.board.api_level")
+  platform_version_codename = prop_list.get_value("ro.build.version.codename")
+
+  sdk_version = current_sdk_version
+  if platform_version_codename != "REL":
+    sdk_version += 1
 
   if not grf_api_level:
     if board_api_level:
