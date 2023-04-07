@@ -46,6 +46,30 @@
       },
       "revId": "0c53a8ea98886c73afc0f1ea4bb9e2d571310a5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff638413_cac6329d",
+        "filename": "tools/finalization/finalize-aidl-vndk-sdk-resources.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2023-04-07T05:39:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0289d4df_30c67d36",
+      "range": {
+        "startLine": 84,
+        "startChar": 56,
+        "endLine": 84,
+        "endChar": 82
+      },
+      "revId": "0c53a8ea98886c73afc0f1ea4bb9e2d571310a5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
