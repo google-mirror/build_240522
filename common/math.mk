@@ -17,13 +17,21 @@
 ###########################################################
 # Basic math functions for non-negative integers <= 100
 #
+# 10000 is also added, because it is commonly used as a SDK API version number.
+# Yes.. this is super error prone, but it's done this way to be efficient in
+# make. If this code is still around and causing problems, the below code could
+# be re-written in the make language to throw a hard error if any number on either
+# side of the operation is not in this list (or delegate by spinning up another
+# process), but it isn't currently done.
+#
 # (SDK versions for example)
 ###########################################################
 __MATH_POS_NUMBERS :=  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 \
                       21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 \
                       41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 \
                       61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 \
-                      81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100
+                      81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 \
+                      10000
 __MATH_NUMBERS := 0 $(__MATH_POS_NUMBERS)
 
 math-error = $(call pretty-error,$(1))
