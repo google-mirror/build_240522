@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1633c2a4_1757542f",
+        "filename": "tools/finalization/finalize-aidl-vndk-sdk-resources.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2023-04-07T13:46:10Z",
+      "side": 1,
+      "message": "looks like this line needs to be moved as well\nhttps://android-build.googleplex.com/builds/pending/P54148386/panther-userdebug/latest/view/logs/build_error.log",
+      "range": {
+        "startLine": 82,
+        "startChar": 51,
+        "endLine": 82,
+        "endChar": 73
+      },
+      "revId": "6bd6f7be16493d820e69e26315671a3ba44c3c26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74f4eef6_9c3777c9",
+        "filename": "tools/finalization/finalize-sdk-rel.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2023-04-07T13:46:10Z",
+      "side": 1,
+      "message": "copied it here for now ptal\n\nhttps://android-build.googleplex.com/builds/abtd/run/L33100000959738268",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 73
+      },
+      "revId": "6bd6f7be16493d820e69e26315671a3ba44c3c26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
