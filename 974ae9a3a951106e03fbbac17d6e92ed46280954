@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30dacb45_e4d86ba5",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 2228,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-04-07T23:17:48Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 2228,
+        "startChar": 0,
+        "endLine": 2228,
+        "endChar": 3
+      },
+      "revId": "974ae9a3a951106e03fbbac17d6e92ed46280954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
