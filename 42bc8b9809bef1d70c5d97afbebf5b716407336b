@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b009e1b_e674de35",
+        "filename": "tools/finalization/finalize-aidl-vndk-sdk-resources.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-04-07T15:04:59Z",
+      "side": 0,
+      "message": "these were on the same line before to reduce the total number of builds",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 73
+      },
+      "revId": "42bc8b9809bef1d70c5d97afbebf5b716407336b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
