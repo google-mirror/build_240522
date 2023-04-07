@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "177fb0a7_4e5cbdff",
+        "filename": "tools/finalization/finalize-aidl-vndk-sdk-resources.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-04-07T14:58:53Z",
+      "side": 1,
+      "message": "thanks",
+      "parentUuid": "1633c2a4_1757542f",
+      "range": {
+        "startLine": 82,
+        "startChar": 51,
+        "endLine": 82,
+        "endChar": 73
+      },
+      "revId": "6bd6f7be16493d820e69e26315671a3ba44c3c26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74f4eef6_9c3777c9",
         "filename": "tools/finalization/finalize-sdk-rel.sh",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-07T13:46:10Z",
       "side": 1,
       "message": "copied it here for now ptal\n\nhttps://android-build.googleplex.com/builds/abtd/run/L33100000959738268",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 73
+      },
+      "revId": "6bd6f7be16493d820e69e26315671a3ba44c3c26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f294da_7acb5327",
+        "filename": "tools/finalization/finalize-sdk-rel.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-04-07T14:58:53Z",
+      "side": 1,
+      "message": "This line mixes AIDL and VNDK. Have to split it back.",
+      "parentUuid": "74f4eef6_9c3777c9",
       "range": {
         "startLine": 24,
         "startChar": 4,
