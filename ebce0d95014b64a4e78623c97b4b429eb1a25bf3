@@ -22,6 +22,30 @@
       },
       "revId": "ebce0d95014b64a4e78623c97b4b429eb1a25bf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b61a38b_47db022e",
+        "filename": "tools/finalization/finalize-sdk-rel.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2023-04-07T03:25:09Z",
+      "side": 1,
+      "message": "Yes.\nVNDK isn\u0027t compatible across versions. It has different ABI check rules.",
+      "parentUuid": "e7c6de11_6c227475",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "ebce0d95014b64a4e78623c97b4b429eb1a25bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
