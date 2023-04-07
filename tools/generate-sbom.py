@@ -87,6 +87,7 @@ ISSUE_NO_METADATA = 'No metadata generated in Make for installed files:'
 ISSUE_NO_METADATA_FILE = 'No METADATA file found for installed file:'
 ISSUE_METADATA_FILE_INCOMPLETE = 'METADATA file incomplete:'
 ISSUE_UNKNOWN_SECURITY_TAG_TYPE = 'Unknown security tag type:'
+ISSUE_INSTALLED_FILE_NOT_EXIST = 'Non-exist installed files:'
 INFO_METADATA_FOUND_FOR_PACKAGE = 'METADATA file found for packages:'
 
 
@@ -112,23 +113,23 @@ def log(*info):
 
 def new_doc_header(doc_id):
   return {
-      SPDX_VERSION: 'SPDX-2.3',
-      DATA_LICENSE: 'CC0-1.0',
-      SPDXID: doc_id,
-      DOCUMENT_NAME: args.build_version,
-      DOCUMENT_NAMESPACE: f'https://www.google.com/sbom/spdx/android/{args.build_version}',
-      CREATOR: 'Organization: Google, LLC',
-      CREATED: '<timestamp>',
-      EXTERNAL_DOCUMENT_REF: [],
+    SPDX_VERSION: 'SPDX-2.3',
+    DATA_LICENSE: 'CC0-1.0',
+    SPDXID: doc_id,
+    DOCUMENT_NAME: args.build_version,
+    DOCUMENT_NAMESPACE: f'https://www.google.com/sbom/spdx/android/{args.build_version}',
+    CREATOR: 'Organization: Google, LLC',
+    CREATED: '<timestamp>',
+    EXTERNAL_DOCUMENT_REF: [],
   }
 
 
 def new_package_record(id, name, version, supplier, download_location=None, files_analyzed='false', external_refs=[]):
   package = {
-      PACKAGE_NAME: name,
-      SPDXID: id,
-      PACKAGE_DOWNLOAD_LOCATION: download_location if download_location else 'NONE',
-      FILES_ANALYZED: files_analyzed,
+    PACKAGE_NAME: name,
+    SPDXID: id,
+    PACKAGE_DOWNLOAD_LOCATION: download_location if download_location else 'NONE',
+    FILES_ANALYZED: files_analyzed,
   }
   if version:
     package[PACKAGE_VERSION] = version
@@ -142,9 +143,9 @@ def new_package_record(id, name, version, supplier, download_location=None, file
 
 def new_file_record(id, name, checksum):
   return {
-      FILE_NAME: name,
-      SPDXID: id,
-      FILE_CHECKSUM: checksum
+    FILE_NAME: name,
+    SPDXID: id,
+    FILE_CHECKSUM: checksum
   }
 
 
@@ -192,33 +193,33 @@ def checksum(file_path):
 
 def is_soong_prebuilt_module(file_metadata):
   return file_metadata['soong_module_type'] and file_metadata['soong_module_type'] in [
-      'android_app_import', 'android_library_import', 'cc_prebuilt_binary', 'cc_prebuilt_library',
-      'cc_prebuilt_library_headers', 'cc_prebuilt_library_shared', 'cc_prebuilt_library_static', 'cc_prebuilt_object',
-      'dex_import', 'java_import', 'java_sdk_library_import', 'java_system_modules_import',
-      'libclang_rt_prebuilt_library_static', 'libclang_rt_prebuilt_library_shared', 'llvm_prebuilt_library_static',
-      'ndk_prebuilt_object', 'ndk_prebuilt_shared_stl', 'nkd_prebuilt_static_stl', 'prebuilt_apex',
-      'prebuilt_bootclasspath_fragment', 'prebuilt_dsp', 'prebuilt_firmware', 'prebuilt_kernel_modules',
-      'prebuilt_rfsa', 'prebuilt_root', 'rust_prebuilt_dylib', 'rust_prebuilt_library', 'rust_prebuilt_rlib',
-      'vndk_prebuilt_shared',
+    'android_app_import', 'android_library_import', 'cc_prebuilt_binary', 'cc_prebuilt_library',
+    'cc_prebuilt_library_headers', 'cc_prebuilt_library_shared', 'cc_prebuilt_library_static', 'cc_prebuilt_object',
+    'dex_import', 'java_import', 'java_sdk_library_import', 'java_system_modules_import',
+    'libclang_rt_prebuilt_library_static', 'libclang_rt_prebuilt_library_shared', 'llvm_prebuilt_library_static',
+    'ndk_prebuilt_object', 'ndk_prebuilt_shared_stl', 'nkd_prebuilt_static_stl', 'prebuilt_apex',
+    'prebuilt_bootclasspath_fragment', 'prebuilt_dsp', 'prebuilt_firmware', 'prebuilt_kernel_modules',
+    'prebuilt_rfsa', 'prebuilt_root', 'rust_prebuilt_dylib', 'rust_prebuilt_library', 'rust_prebuilt_rlib',
+    'vndk_prebuilt_shared',
 
-      # 'android_test_import',
-      # 'cc_prebuilt_test_library_shared',
-      # 'java_import_host',
-      # 'java_test_import',
-      # 'llvm_host_prebuilt_library_shared',
-      # 'prebuilt_apis',
-      # 'prebuilt_build_tool',
-      # 'prebuilt_defaults',
-      # 'prebuilt_etc',
-      # 'prebuilt_etc_host',
-      # 'prebuilt_etc_xml',
-      # 'prebuilt_font',
-      # 'prebuilt_hidl_interfaces',
-      # 'prebuilt_platform_compat_config',
-      # 'prebuilt_stubs_sources',
-      # 'prebuilt_usr_share',
-      # 'prebuilt_usr_share_host',
-      # 'soong_config_module_type_import',
+    # 'android_test_import',
+    # 'cc_prebuilt_test_library_shared',
+    # 'java_import_host',
+    # 'java_test_import',
+    # 'llvm_host_prebuilt_library_shared',
+    # 'prebuilt_apis',
+    # 'prebuilt_build_tool',
+    # 'prebuilt_defaults',
+    # 'prebuilt_etc',
+    # 'prebuilt_etc_host',
+    # 'prebuilt_etc_xml',
+    # 'prebuilt_font',
+    # 'prebuilt_hidl_interfaces',
+    # 'prebuilt_platform_compat_config',
+    # 'prebuilt_stubs_sources',
+    # 'prebuilt_usr_share',
+    # 'prebuilt_usr_share_host',
+    # 'soong_config_module_type_import',
   ]
 
 
@@ -360,7 +361,7 @@ def get_sbom_fragments(installed_file_metadata, metadata_file_path):
         if sbom_url and sbom_checksum and upstream_element_id:
           external_doc_ref, doc_ref_id = new_external_doc_ref(name, sbom_url, sbom_checksum)
           relationships.append(
-              new_relationship_record(prebuilt_package_id, REL_VARIANT_OF, doc_ref_id + ':' + upstream_element_id))
+            new_relationship_record(prebuilt_package_id, REL_VARIANT_OF, doc_ref_id + ':' + upstream_element_id))
 
   return external_doc_ref, packages, relationships
 
@@ -404,20 +405,20 @@ def write_json_sbom(all_records, product_package_id):
         doc['name'] = r[DOCUMENT_NAME]
         doc['documentNamespace'] = r[DOCUMENT_NAMESPACE]
         doc['creationInfo'] = {
-            'creators': [r[CREATOR]],
-            'created': r[CREATED],
+          'creators': [r[CREATOR]],
+          'created': r[CREATED],
         }
         doc['externalDocumentRefs'] = []
         for ref in r[EXTERNAL_DOCUMENT_REF]:
           # ref is 'ExternalDocumentRef: <doc id> <doc url> SHA1: xxxxx'
           fields = ref.split(' ')
           doc_ref = {
-              'externalDocumentId': fields[1],
-              'spdxDocument': fields[2],
-              'checksum': {
-                  'algorithm': fields[3][:-1],
-                  'checksumValue': fields[4]
-              }
+            'externalDocumentId': fields[1],
+            'spdxDocument': fields[2],
+            'checksum': {
+              'algorithm': fields[3][:-1],
+              'checksumValue': fields[4]
+            }
           }
           doc['externalDocumentRefs'].append(doc_ref)
         doc['documentDescribes'] = []
@@ -427,10 +428,10 @@ def write_json_sbom(all_records, product_package_id):
 
       elif PACKAGE_NAME in r:  # packages
         package = {
-            'name': r[PACKAGE_NAME],
-            SPDXID: r[SPDXID],
-            'downloadLocation': r[PACKAGE_DOWNLOAD_LOCATION],
-            'filesAnalyzed': r[FILES_ANALYZED] == "true"
+          'name': r[PACKAGE_NAME],
+          SPDXID: r[SPDXID],
+          'downloadLocation': r[PACKAGE_DOWNLOAD_LOCATION],
+          'filesAnalyzed': r[FILES_ANALYZED] == "true"
         }
         if PACKAGE_VERSION in r:
           package['versionInfo'] = r[PACKAGE_VERSION]
@@ -438,7 +439,7 @@ def write_json_sbom(all_records, product_package_id):
           package['supplier'] = r[PACKAGE_SUPPLIER]
         if PACKAGE_VERIFICATION_CODE in r:
           package['packageVerificationCode'] = {
-              'packageVerificationCodeValue': r[PACKAGE_VERIFICATION_CODE]
+            'packageVerificationCodeValue': r[PACKAGE_VERIFICATION_CODE]
           }
         if PACKAGE_EXTERNAL_REF in r:
           package['externalRefs'] = []
@@ -446,9 +447,9 @@ def write_json_sbom(all_records, product_package_id):
             # ref is 'ExternalRef: SECURITY cpe22Type cpe:/a:jsoncpp_project:jsoncpp:1.9.4'
             fields = ref.split(' ')
             ext_ref = {
-                'referenceCategory': fields[1],
-                'referenceType': fields[2],
-                'referenceLocator': fields[3],
+              'referenceCategory': fields[1],
+              'referenceType': fields[2],
+              'referenceLocator': fields[3],
             }
             package['externalRefs'].append(ext_ref)
 
@@ -459,13 +460,13 @@ def write_json_sbom(all_records, product_package_id):
 
       elif FILE_NAME in r:  # files
         file = {
-            'fileName': r[FILE_NAME],
-            SPDXID: r[SPDXID]
+          'fileName': r[FILE_NAME],
+          SPDXID: r[SPDXID]
         }
         checksum = r[FILE_CHECKSUM].split(': ')
         file['checksums'] = [{
-            'algorithm': checksum[0],
-            'checksumValue': checksum[1],
+          'algorithm': checksum[0],
+          'checksumValue': checksum[1],
         }]
         doc['files'].append(file)
         product_package['hasFiles'].append(r[SPDXID])
@@ -475,9 +476,9 @@ def write_json_sbom(all_records, product_package_id):
         # r is 'Relationship: <spdxid> <relationship> <spdxid>'
         fields = r.split(' ')
         rel = {
-            'spdxElementId': fields[1],
-            'relatedSpdxElement': fields[3],
-            'relationshipType': fields[2],
+          'spdxElementId': fields[1],
+          'relatedSpdxElement': fields[3],
+          'relationshipType': fields[2],
         }
         if fields[2] == REL_DESCRIBES:
           doc['documentDescribes'].append(fields[3])
@@ -526,10 +527,10 @@ def installed_file_has_metadata(installed_file_metadata, report):
 def report_metadata_file(metadata_file_path, installed_file_metadata, report):
   if metadata_file_path:
     report[INFO_METADATA_FOUND_FOR_PACKAGE].append(
-        'installed_file: {}, module_path: {}, METADATA file: {}'.format(
-            installed_file_metadata['installed_file'],
-            installed_file_metadata['module_path'],
-            metadata_file_path + '/METADATA'))
+      'installed_file: {}, module_path: {}, METADATA file: {}'.format(
+        installed_file_metadata['installed_file'],
+        installed_file_metadata['module_path'],
+        metadata_file_path + '/METADATA'))
 
     package_metadata = metadata_file_pb2.Metadata()
     with open(metadata_file_path + '/METADATA', 'rt') as f:
@@ -542,16 +543,16 @@ def report_metadata_file(metadata_file_path, installed_file_metadata, report):
 
       if not package_metadata.third_party.version:
         report[ISSUE_METADATA_FILE_INCOMPLETE].append(
-            f'{metadata_file_path}/METADATA does not has "third_party.version"')
+          f'{metadata_file_path}/METADATA does not has "third_party.version"')
 
       for tag in package_metadata.third_party.security.tag:
         if not tag.startswith(NVD_CPE23):
           report[ISSUE_UNKNOWN_SECURITY_TAG_TYPE].append(
-              f'Unknown security tag type: {tag} in {metadata_file_path}/METADATA')
+            f'Unknown security tag type: {tag} in {metadata_file_path}/METADATA')
   else:
     report[ISSUE_NO_METADATA_FILE].append(
-        "installed_file: {}, module_path: {}".format(
-            installed_file_metadata['installed_file'], installed_file_metadata['module_path']))
+      "installed_file: {}, module_path: {}".format(
+        installed_file_metadata['installed_file'], installed_file_metadata['module_path']))
 
 
 def generate_fragment():
@@ -597,11 +598,12 @@ def main():
 
   # Report on some issues and information
   report = {
-      ISSUE_NO_METADATA: [],
-      ISSUE_NO_METADATA_FILE: [],
-      ISSUE_METADATA_FILE_INCOMPLETE: [],
-      ISSUE_UNKNOWN_SECURITY_TAG_TYPE: [],
-      INFO_METADATA_FOUND_FOR_PACKAGE: []
+    ISSUE_NO_METADATA: [],
+    ISSUE_NO_METADATA_FILE: [],
+    ISSUE_METADATA_FILE_INCOMPLETE: [],
+    ISSUE_UNKNOWN_SECURITY_TAG_TYPE: [],
+    ISSUE_INSTALLED_FILE_NOT_EXIST: [],
+    INFO_METADATA_FOUND_FOR_PACKAGE: [],
   }
 
   # Scan the metadata in CSV file and create the corresponding package and file records in SPDX
@@ -618,6 +620,10 @@ def main():
       kernel_module_copy_files = installed_file_metadata['kernel_module_copy_files']
 
       if not installed_file_has_metadata(installed_file_metadata, report):
+        continue
+      file_path = args.product_out_dir + '/' + installed_file
+      if not (os.path.islink(file_path) or os.path.isfile(file_path)):
+        report[ISSUE_INSTALLED_FILE_NOT_EXIST].append(installed_file)
         continue
 
       file_id = new_file_id(installed_file)
@@ -661,9 +667,9 @@ def main():
   product_package[PACKAGE_VERIFICATION_CODE] = generate_package_verification_code(product_files)
 
   all_records = [
-      doc_header,
-      product_package,
-      new_relationship_record(doc_id, REL_DESCRIBES, product_package_id),
+    doc_header,
+    product_package,
+    new_relationship_record(doc_id, REL_DESCRIBES, product_package_id),
   ]
   all_records += product_files
   all_records.append(platform_package)
