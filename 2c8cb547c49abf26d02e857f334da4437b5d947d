@@ -16,6 +16,24 @@
       "message": "Where are the tests for failures of this validation function?",
       "revId": "2c8cb547c49abf26d02e857f334da4437b5d947d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a28962bc_209ade65",
+        "filename": "tools/compliance/cmd/sbom/sbom.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1954600
+      },
+      "writtenOn": "2023-04-08T20:17:13Z",
+      "side": 1,
+      "message": "ValidateDocument2_2 has been already tested for failure in the spdx-tools library. See: https://android.googlesource.com/platform/external/spdx-tools/+/refs/heads/master/spdxlib/documents_test.go#148",
+      "parentUuid": "1fbc0041_754ae40a",
+      "revId": "2c8cb547c49abf26d02e857f334da4437b5d947d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
