@@ -291,6 +291,7 @@ endif
 ifdef BOARD_SHIPPING_API_LEVEL
 ADDITIONAL_VENDOR_PROPERTIES += \
     ro.board.first_api_level=$(BOARD_SHIPPING_API_LEVEL)
+endif
 
 # To manually set the vendor API level of the vendor modules, BOARD_API_LEVEL can be used.
 # The values of the GRF properties will be verified by post_process_props.py
