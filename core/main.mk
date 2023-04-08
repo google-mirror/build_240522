@@ -289,15 +289,24 @@ endif
 # Vendors with GRF must define BOARD_SHIPPING_API_LEVEL for the vendor API level.
 # This must not be defined for the non-GRF devices.
 ifdef BOARD_SHIPPING_API_LEVEL
-ADDITIONAL_VENDOR_PROPERTIES += \
-    ro.board.first_api_level=$(BOARD_SHIPPING_API_LEVEL)
+  ADDITIONAL_VENDOR_PROPERTIES += \
+      ro.board.first_api_level=$(BOARD_SHIPPING_API_LEVEL)
 
-# To manually set the vendor API level of the vendor modules, BOARD_API_LEVEL can be used.
-# The values of the GRF properties will be verified by post_process_props.py
-ifdef BOARD_API_LEVEL
-ADDITIONAL_VENDOR_PROPERTIES += \
-    ro.board.api_level=$(BOARD_API_LEVEL)
-endif
+  # The binary alignment for the userspace will be 16384 when
+  # BOARD_SHIPPING_API_LEVEL >= 33.
+  ifeq ($(call math_gt_or_eq,$(BOARD_SHIPPING_API_LEVEL),33),true)
+    ifndef PRODUCT_MAX_PAGE_SIZE_SUPPORTED
+      PRODUCT_MAX_PAGE_SIZE_SUPPORTED := 16386
+    endif
+  endif
+
+  # To manually set the vendor API level of the vendor modules, BOARD_API_LEVEL can be used.
+  # The values of the GRF properties will be verified by post_process_props.py
+  ifdef BOARD_API_LEVEL
+    ADDITIONAL_VENDOR_PROPERTIES += \
+        ro.board.api_level=$(BOARD_API_LEVEL)
+  endif
+
 endif
 
 # Set build prop. This prop is read by ota_from_target_files when generating OTA,
