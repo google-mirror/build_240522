@@ -358,6 +358,23 @@ endif
 # are specific to the user's build configuration.
 include $(BUILD_SYSTEM)/envsetup.mk
 
+# Set TARGET_MAX_PAGE_SIZE_SUPPORTED.
+ifdef PRODUCT_MAX_PAGE_SIZE_SUPPORTED
+  TARGET_MAX_PAGE_SIZE_SUPPORTED := $(PRODUCT_MAX_PAGE_SIZE_SUPPORTED)
+else
+  # The default alignment for userspace is 4096.
+  TARGET_MAX_PAGE_SIZE_SUPPORTED := 4096
+
+  # Vendors with GRF must define BOARD_SHIPPING_API_LEVEL for the vendor API level.
+  ifdef BOARD_SHIPPING_API_LEVEL
+    # When BOARD_SHIPPING_API_LEVEL >= 34, binary alignment will be 16384.
+    ifeq ($(call math_gt_or_eq,$(BOARD_SHIPPING_API_LEVEL),34),true)
+      TARGET_MAX_PAGE_SIZE_SUPPORTED := 16386
+    endif
+  endif
+endif
+.KATI_READONLY := TARGET_MAX_PAGE_SIZE_SUPPORTED
+
 # Pruned directory options used when using findleaves.py
 # See envsetup.mk for a description of SCAN_EXCLUDE_DIRS
 FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(SCAN_EXCLUDE_DIRS) .repo .git)
