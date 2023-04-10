@@ -34,6 +34,24 @@
       "parentUuid": "e7d04eb0_9b94347e",
       "revId": "a77dc8e0923859d04c2b433047c1ef20679c4c63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f983c04_358596ce",
+        "filename": "core/main.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 1255,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2023-04-10T22:09:28Z",
+      "side": 1,
+      "message": "I also tried PRODUCT_ENFORCE_PACKAGES_EXIST_ALLOW_LIST back then, but product files do not seem to be allowed to set that: https://cs.android.com/android/platform/superproject/+/master:build/make/core/product.mk;l\u003d525;drc\u003d2b2f6685abf7ec082d54071f8478885620efab07",
+      "parentUuid": "912d50ba_e3801006",
+      "revId": "a77dc8e0923859d04c2b433047c1ef20679c4c63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
