@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbddc15e_12b14579",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-04-10T06:33:04Z",
+      "side": 1,
+      "message": "Resolving.",
+      "parentUuid": "54bbfa71_1f0e3fc8",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "9fca0d0bd34fc7a89b632bc5ad99e69412e7557d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5947e0cf_824d7aba",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "I agree. Let me skip the comparison with sdk_version for non-REL devices.",
       "parentUuid": "9c9a58e5_0c052f72",
+      "range": {
+        "startLine": 58,
+        "startChar": 16,
+        "endLine": 58,
+        "endChar": 20
+      },
+      "revId": "9fca0d0bd34fc7a89b632bc5ad99e69412e7557d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40e0d151_c339df8c",
+        "filename": "tools/post_process_props.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-04-10T06:33:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d279af94_88891d7d",
       "range": {
         "startLine": 58,
         "startChar": 16,
