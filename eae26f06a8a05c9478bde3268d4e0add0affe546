@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88c8ca3a_8bac2a24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-10T06:36:00Z",
+      "side": 1,
+      "message": "+2 should come from the owners",
+      "revId": "eae26f06a8a05c9478bde3268d4e0add0affe546",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc523530_93218c00",
+        "filename": "tools/post_process_props.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-10T06:36:00Z",
+      "side": 1,
+      "message": "nit: equal",
+      "range": {
+        "startLine": 86,
+        "startChar": 24,
+        "endLine": 86,
+        "endChar": 29
+      },
+      "revId": "eae26f06a8a05c9478bde3268d4e0add0affe546",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
