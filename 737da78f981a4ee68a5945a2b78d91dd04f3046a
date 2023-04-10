@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bd26ae8_750c670b",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-04-10T17:04:46Z",
+      "side": 1,
+      "message": "this should be opt-in, not opt-out... (at least for U, which this change would end up in if submitted now.)",
+      "revId": "737da78f981a4ee68a5945a2b78d91dd04f3046a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
