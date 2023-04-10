@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba2a6d5_d59ee5d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-10T18:46:01Z",
+      "side": 1,
+      "message": "More branches in abtd:\n\naosp-master-with-phones: go/abtd/run/L49800000959785297\ngit_master-tv-dev: go/abtd/run/L48900000959786826\naosp-master: go/abtd/run/L69800000959787643\naosp-master-bazel: go/abtd/run/L29400000959779678\ngit_master: go/abtd/run/L72800000959780530\ngit_master-bazel: go/abtd/run/L41200000959765539",
+      "revId": "35b56af9ec1d90bd7bc4acc4893eedb723bd4c3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
