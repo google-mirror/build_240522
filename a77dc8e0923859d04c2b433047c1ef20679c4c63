@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7d04eb0_9b94347e",
+        "filename": "core/main.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 1255,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-04-10T21:48:15Z",
+      "side": 1,
+      "message": "We shouldn\u0027t have this, it would be better if we could express this by only adding to PRODUCT_PACKAGES on arm64 products. I see you want to do it globally though which makes it harder, as we don\u0027t have a `base_system_arm64.mk` file. \n\nIf creating a `base_system_arm64.mk` is too difficult, could we try disabling the modules in soong if they\u0027re not on arm64? I think you could do this easily for libclangrt, but I\u0027m not sure if there\u0027s a way to express that only the hwasan variant of libc should be disabled.",
+      "revId": "a77dc8e0923859d04c2b433047c1ef20679c4c63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
