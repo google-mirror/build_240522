@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71aa289d_2234a0d8",
+        "filename": "tools/releasetools/merge/merge_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-11T13:16:28Z",
+      "side": 1,
+      "message": "shouldn\u0027t pvmfw be added here?",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 21
+      },
+      "revId": "0e3d05eec47a61878bbd0bf215214c242a390ec6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
