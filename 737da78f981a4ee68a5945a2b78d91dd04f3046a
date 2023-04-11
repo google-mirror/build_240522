@@ -33,6 +33,24 @@
       "message": "this should be opt-in, not opt-out... (at least for U, which this change would end up in if submitted now.)",
       "revId": "737da78f981a4ee68a5945a2b78d91dd04f3046a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c1528bb_10bfefec",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-04-11T23:50:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bd26ae8_750c670b",
+      "revId": "737da78f981a4ee68a5945a2b78d91dd04f3046a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
