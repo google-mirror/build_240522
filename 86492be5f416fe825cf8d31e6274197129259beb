@@ -16,6 +16,24 @@
       "message": "Can you please update the comment here?",
       "revId": "86492be5f416fe825cf8d31e6274197129259beb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc40c38d_021182b7",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-04-11T20:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3dd3ee3_f1706fe2",
+      "revId": "86492be5f416fe825cf8d31e6274197129259beb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
