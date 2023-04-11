@@ -16,6 +16,23 @@
       "message": "Blocked on https://android-review.git.corp.google.com/c/platform/prebuilts/build-tools/+/2527585",
       "revId": "35d6ad93caf07c45faee1465622f750551bcb0f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddd88f06_63a80faf",
+        "filename": "tools/compliance/cmd/htmlnotice/BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-04-11T19:25:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure what this is going to be used for, but wouldn\u0027t it be better to just use the prebuilts label directly, rather than pretend it\u0027s a source-built module?\n\nOur apex toolchain currently references some prebuilt files directly, so there\u0027s precedent.",
+      "revId": "35d6ad93caf07c45faee1465622f750551bcb0f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
