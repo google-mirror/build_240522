@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c2fa4d5_a4727f87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-04-11T00:03:15Z",
+      "side": 1,
+      "message": "In case the -2 gets resolved in a way that retains the opt-out behavior.  I think there are some internal targets discussed in a thread where we want to land the opt-out changes prior to landing this CL.  Leaving this comment unresolved for that.",
+      "revId": "737da78f981a4ee68a5945a2b78d91dd04f3046a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6bd26ae8_750c670b",
         "filename": "core/product_config.mk",
         "patchSetId": 2
