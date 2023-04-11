@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b2e6c7_40a359fd",
+        "filename": "tools/releasetools/test_common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-04-11T23:09:20Z",
+      "side": 1,
+      "message": "ok thanks for clarifying.",
+      "parentUuid": "78d2155e_429d1365",
+      "revId": "ea84d421999fcc33a7b903d6194b8087bf77440a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12fd6ae1_84b5e9b1",
