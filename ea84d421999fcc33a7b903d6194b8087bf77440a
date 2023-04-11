@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baf75b30_d752cb81",
+        "filename": "tools/releasetools/test_common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-04-11T23:04:24Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be other way around? \n1. Get expected_stat\n2. Modify atime,mtime or sleep 5 sec // This is your change\n3. common.ZipWrite()\n4. Check current and expected_stat are equal in _verify()\n\nCan you please explain?",
+      "revId": "ea84d421999fcc33a7b903d6194b8087bf77440a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12fd6ae1_84b5e9b1",
+        "filename": "tools/releasetools/test_common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-04-11T23:04:24Z",
+      "side": 1,
+      "message": "Same comment as before.",
+      "revId": "ea84d421999fcc33a7b903d6194b8087bf77440a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
