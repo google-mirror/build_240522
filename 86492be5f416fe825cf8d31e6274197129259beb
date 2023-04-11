@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3dd3ee3_f1706fe2",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-04-11T20:12:04Z",
+      "side": 1,
+      "message": "Can you please update the comment here?",
+      "revId": "86492be5f416fe825cf8d31e6274197129259beb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
