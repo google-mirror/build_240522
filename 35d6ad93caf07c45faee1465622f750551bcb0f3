@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "146e56b5_4e9853de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-11T19:21:43Z",
+      "side": 1,
+      "message": "Blocked on https://android-review.git.corp.google.com/c/platform/prebuilts/build-tools/+/2527585",
+      "revId": "35d6ad93caf07c45faee1465622f750551bcb0f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
