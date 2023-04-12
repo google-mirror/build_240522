@@ -22,6 +22,53 @@
       },
       "revId": "0e3d05eec47a61878bbd0bf215214c242a390ec6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "830121db_adf04c63",
+        "filename": "tools/releasetools/merge/merge_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1999985
+      },
+      "writtenOn": "2023-04-12T00:34:29Z",
+      "side": 1,
+      "message": "Is there anybody using the default list here? Usually root and system_dlkm are considered as vendor partition.",
+      "parentUuid": "71aa289d_2234a0d8",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 21
+      },
+      "revId": "0e3d05eec47a61878bbd0bf215214c242a390ec6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a53e6bf8_cf545130",
+        "filename": "tools/releasetools/merge/merge_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1999985
+      },
+      "writtenOn": "2023-04-12T00:34:29Z",
+      "side": 1,
+      "message": "If pvmfw is added into _FRAMEWORK_PARTITIONS, this line should be modified as well:\nif partition \u003d\u003d \u0027images\u0027 or partition \u003d\u003d \u0027prebuilt_images\u0027:",
+      "range": {
+        "startLine": 205,
+        "startChar": 4,
+        "endLine": 205,
+        "endChar": 28
+      },
+      "revId": "0e3d05eec47a61878bbd0bf215214c242a390ec6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
