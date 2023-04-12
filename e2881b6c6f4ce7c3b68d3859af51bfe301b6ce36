@@ -16,6 +16,24 @@
       "message": "Sorry, but we can\u0027t take this. While I agree that it\u0027s better, this is how it has always worked. There are too many configs that depend on this ordering, and we can\u0027t take on a project to fix all of them across the entire ecosystem.",
       "revId": "e2881b6c6f4ce7c3b68d3859af51bfe301b6ce36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bb232ee_129dc950",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2001312
+      },
+      "writtenOn": "2023-04-12T17:32:41Z",
+      "side": 1,
+      "message": "If I change this to make this behavior opt-in per product similar to STARLARK_OPT_IN_PRODUCTS would that be something you might accept? The current behavior makes single-value product variable very unstable and subtle so if there\u0027s any way to upstream such a change it would be great.",
+      "parentUuid": "60ec2a6d_1cc3fb72",
+      "revId": "e2881b6c6f4ce7c3b68d3859af51bfe301b6ce36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
