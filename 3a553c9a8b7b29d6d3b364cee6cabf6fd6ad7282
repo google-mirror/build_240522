@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "620d6eb1_945f51a2",
+        "filename": "tools/sbom/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-12T15:30:23Z",
+      "side": 1,
+      "message": "ultra nit: Android.bp uses 4 spaces for indents.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 2
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5c7f339_ca6432e8",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-12T15:30:23Z",
+      "side": 1,
+      "message": "Bring this out to a top level constant to avoid creating this list every time the function is called.",
+      "range": {
+        "startLine": 109,
+        "startChar": 86,
+        "endLine": 137,
+        "endChar": 3
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab41a02b_ae95dd35",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-12T15:30:23Z",
+      "side": 1,
+      "message": "Can you add docstrings on these `get_*` functions?",
+      "range": {
+        "startLine": 159,
+        "startChar": 4,
+        "endLine": 159,
+        "endChar": 27
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4148c141_b7b205b2",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-12T15:30:23Z",
+      "side": 1,
+      "message": "Would a change in any METADATA file cause a rebuild of the sbom?",
+      "range": {
+        "startLine": 348,
+        "startChar": 37,
+        "endLine": 348,
+        "endChar": 45
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a9a7f33_8a12e24b",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-12T15:30:23Z",
+      "side": 1,
+      "message": "consider calling this by the full \u0027product_manufacturer\u0027.",
+      "range": {
+        "startLine": 375,
+        "startChar": 71,
+        "endLine": 375,
+        "endChar": 74
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bc3ceb0_d07e04d6",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-12T15:30:23Z",
+      "side": 1,
+      "message": "What\u0027s this meant to do?",
+      "range": {
+        "startLine": 378,
+        "startChar": 6,
+        "endLine": 379,
+        "endChar": 16
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba3390df_46e4a603",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-12T15:30:23Z",
+      "side": 1,
+      "message": "These references will move. Use a cs.android.com link with a pinned commit.",
+      "range": {
+        "startLine": 493,
+        "startChar": 14,
+        "endLine": 493,
+        "endChar": 43
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1299f21_89c187c6",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-04-12T15:30:23Z",
+      "side": 1,
+      "message": "Lines 445 to 502 could be in its own function.",
+      "range": {
+        "startLine": 445,
+        "startChar": 6,
+        "endLine": 502,
+        "endChar": 83
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
