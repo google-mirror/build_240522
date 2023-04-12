@@ -96,6 +96,22 @@ $(strip \
   $(1)))
 endef
 
+#
+# Removes duplicate words in a list leaving only the first occurrence
+# but unlike the sort function doesn't change the order of the words.
+#
+# $(1): list of words with possible duplicates
+#
+define uniq-words
+$(strip \
+  $(eval _words_seen :=) \
+  $(foreach w,$(1), \
+    $(if $(filter $(w),$(_words_seen)),, \
+      $(w) \
+      $(eval _words_seen += $(w))) \
+ ))
+endef
+
 INHERIT_TAG := @inherit:
 
 #
@@ -141,7 +157,7 @@ define _expand-inherited-values
     $(eval _eiv_tv := $(1).$(2).$(v)) \
     $(eval ### "Get the list of nodes that this variable inherits") \
     $(eval _eiv_i := \
-        $(sort \
+        $(call uniq-words, \
             $(patsubst $(INHERIT_TAG)%,%, \
                 $(filter $(INHERIT_TAG)%, $($(_eiv_tv)) \
      )))) \

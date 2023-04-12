@@ -128,7 +128,8 @@ DUMPCONFIG_SKIP_VARS := \
 	_included \
 	_include_stack \
 	_in \
-	_nic.%
+	_nic.% \
+	_words_seen
 
 # Args:
 #   $(1): Makefile that was included
