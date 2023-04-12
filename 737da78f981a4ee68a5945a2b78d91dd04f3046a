@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c65a4e_004a23f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-04-12T15:16:10Z",
+      "side": 1,
+      "message": "With this opt-in now, there\u0027s no blocker on changing other targets.  Resolving this comment.",
+      "parentUuid": "5c2fa4d5_a4727f87",
+      "revId": "737da78f981a4ee68a5945a2b78d91dd04f3046a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bd26ae8_750c670b",
