@@ -2202,6 +2202,9 @@ $(apps_only_sbom_files): $(PRODUCT_OUT)/sbom-metadata.csv $(GEN_SBOM)
 	$(GEN_SBOM) --output_file $@ --metadata $(PRODUCT_OUT)/sbom-metadata.csv --product_out_dir=$(PRODUCT_OUT) --build_version $(BUILD_FINGERPRINT_FROM_FILE) --product_mfr="$(PRODUCT_MANUFACTURER)" --unbundled
 
 sbom: $(apps_only_sbom_files)
+
+_dist_sbom_files := $(addprefix :sbom/,$(notdir $(apps_only_sbom_files)))
+$(call dist-for-goals,apps_only,$(join $(apps_only_sbom_files),$(_dist_sbom_files)))
 endif
 
 $(call dist-write-file,$(KATI_PACKAGE_MK_DIR)/dist.mk)
