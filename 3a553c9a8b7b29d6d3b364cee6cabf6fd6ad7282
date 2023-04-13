@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed49b298_8ec7e73b",
+        "filename": "tools/sbom/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-13T18:13:35Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "620d6eb1_945f51a2",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 2
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5c7f339_ca6432e8",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-04-12T15:30:23Z",
       "side": 1,
       "message": "Bring this out to a top level constant to avoid creating this list every time the function is called.",
+      "range": {
+        "startLine": 109,
+        "startChar": 86,
+        "endLine": 137,
+        "endChar": 3
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f226e60_54a346aa",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-13T18:13:35Z",
+      "side": 1,
+      "message": "Yes, will do that in another CL. b/272356622 was created before to track this.",
+      "parentUuid": "d5c7f339_ca6432e8",
       "range": {
         "startLine": 109,
         "startChar": 86,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c3d9bdf_59efaac8",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-13T18:13:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab41a02b_ae95dd35",
+      "range": {
+        "startLine": 159,
+        "startChar": 4,
+        "endLine": 159,
+        "endChar": 27
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4148c141_b7b205b2",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-04-12T15:30:23Z",
       "side": 1,
       "message": "Would a change in any METADATA file cause a rebuild of the sbom?",
+      "range": {
+        "startLine": 348,
+        "startChar": 37,
+        "endLine": 348,
+        "endChar": 45
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97d88019_a690e119",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-13T18:13:35Z",
+      "side": 1,
+      "message": "Ideally, yes, but it is WIP so far. I am working on collecting all related METADATA files as dependencies of sbom file in make, it is part of the changes for b/272358583. That is one of the reasons that sbom-metadata.csv has to be removed in $(shell) in make for now.",
+      "parentUuid": "4148c141_b7b205b2",
       "range": {
         "startLine": 348,
         "startChar": 37,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fd1d3f7_f988b4b0",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-13T18:13:35Z",
+      "side": 1,
+      "message": "will change this later with other cleanup.",
+      "parentUuid": "3a9a7f33_8a12e24b",
+      "range": {
+        "startLine": 375,
+        "startChar": 71,
+        "endLine": 375,
+        "endChar": 74
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bc3ceb0_d07e04d6",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-04-12T15:30:23Z",
       "side": 1,
       "message": "What\u0027s this meant to do?",
+      "range": {
+        "startLine": 378,
+        "startChar": 6,
+        "endLine": 379,
+        "endChar": 16
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fdcfd84_c0caf8c2",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-13T18:13:35Z",
+      "side": 1,
+      "message": "For example we build multiple unbundled APKs, sbom-metadata.csv contains all these .apk files but this script generates only one APK\u0027s sbom which is specified in args.output_file, so this line just filters out all other .apk files. See https://source.corp.google.com/android/build/make/core/main.mk;rcl\u003da577ced0d43676a6419ddafdc667bb2b1e21433d;l\u003d2200 about how make rule is defined for each apk\u0027s sbom file.\n\nThis logic of generating sbom of unbundled artifacts is still WIP and I will change this later probably.",
+      "parentUuid": "6bc3ceb0_d07e04d6",
       "range": {
         "startLine": 378,
         "startChar": 6,
@@ -179,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "810b57e1_e5c05d57",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-13T18:13:35Z",
+      "side": 1,
+      "message": "Yes, will clean up this file too later.",
+      "parentUuid": "ba3390df_46e4a603",
+      "range": {
+        "startLine": 493,
+        "startChar": 14,
+        "endLine": 493,
+        "endChar": 43
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1299f21_89c187c6",
@@ -192,6 +360,30 @@
       "writtenOn": "2023-04-12T15:30:23Z",
       "side": 1,
       "message": "Lines 445 to 502 could be in its own function.",
+      "range": {
+        "startLine": 445,
+        "startChar": 6,
+        "endLine": 502,
+        "endChar": 83
+      },
+      "revId": "3a553c9a8b7b29d6d3b364cee6cabf6fd6ad7282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10a88d41_9fbd8813",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-13T18:13:35Z",
+      "side": 1,
+      "message": "I will need to revise this part later when changing the logic of identifying source/prebuilt/platform packages, b/272356272.",
+      "parentUuid": "c1299f21_89c187c6",
       "range": {
         "startLine": 445,
         "startChar": 6,
