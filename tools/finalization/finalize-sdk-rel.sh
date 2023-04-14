@@ -43,12 +43,12 @@ function finalize_sdk_rel() {
     mkdir -p "$top/prebuilts/abi-dumps/ndk/$FINAL_PLATFORM_SDK_VERSION"
     cp -r "$top/prebuilts/abi-dumps/ndk/current/64/" "$top/prebuilts/abi-dumps/ndk/$FINAL_PLATFORM_SDK_VERSION/"
 
-    # prebuilts/abi-dumps/vndk
-    mv "$top/prebuilts/abi-dumps/vndk/$CURRENT_PLATFORM_CODENAME" "$top/prebuilts/abi-dumps/vndk/$FINAL_PLATFORM_SDK_VERSION"
-
     # prebuilts/abi-dumps/platform
     mkdir -p "$top/prebuilts/abi-dumps/platform/$FINAL_PLATFORM_SDK_VERSION"
     cp -r "$top/prebuilts/abi-dumps/platform/current/64/" "$top/prebuilts/abi-dumps/platform/$FINAL_PLATFORM_SDK_VERSION/"
+
+    # prebuilts/abi-dumps/vndk
+    mv "$top/prebuilts/abi-dumps/vndk/$CURRENT_PLATFORM_CODENAME" "$top/prebuilts/abi-dumps/vndk/$FINAL_PLATFORM_SDK_VERSION"
 }
 
 finalize_sdk_rel
