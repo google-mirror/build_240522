@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8af3d70_5df5932e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2023-04-14T03:14:43Z",
+      "side": 1,
+      "message": "I would prefer to solve b/278133178 by a forward fix",
+      "revId": "3ec9be2c3d4d120db668655bb84468fd3930bdb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
