@@ -594,3 +594,5 @@ $(foreach image, \
 product-build-image-config :=
 
 $(call readonly-product-vars)
+
+include $(BUILD_SYSTEM)/product-graph.mk

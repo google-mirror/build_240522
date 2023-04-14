@@ -14,6 +14,10 @@
 # limitations under the License.
 #
 
+# To execute this, run build/make/tools/product-graph
+
+ifneq ($(WRITE_PRODUCT_GRAPH),)
+
 # the sort also acts as a strip to remove the single space entries that creep in because of the evals
 define gather-all-makefiles-for-current-product
 $(eval _all_products_visited := )\
@@ -35,7 +39,7 @@ node_color_common := beige
 node_color_vendor := lavenderblush
 node_color_default := white
 define node-color
-$(if $(filter $(1),$(PRIVATE_TOP_LEVEL_MAKEFILE)),\
+$(if $(filter $(1),$(INTERNAL_PRODUCT)),\
   $(node_color_target),\
   $(if $(filter build/make/target/product/%,$(1)),\
     $(node_color_common),\
@@ -51,29 +55,30 @@ close_parenthesis := )
 # $(1) the product
 # $(2) the output file
 define emit-product-node-props
-$(hide) echo \"$(1)\" [ \
-label=\"$(dir $(1))\\n$(notdir $(1))$(if $(filter $(1),$(PRIVATE_TOP_LEVEL_MAKEFILE)),$(subst $(open_parethesis),,$(subst $(close_parenthesis),,\\n\\n$(PRODUCT_MODEL)\\n$(PRODUCT_DEVICE))))\" \
-style=\"filled\" fillcolor=\"$(strip $(call node-color,$(1)))\" \
-colorscheme=\"svg\" fontcolor=\"darkblue\" \
-] >> $(2)
+"$(1)" [ \
+label="$(dir $(1))\n$(notdir $(1))$(if $(filter $(1),$(INTERNAL_PRODUCT)),$(subst $(open_parethesis),,$(subst $(close_parenthesis),,\n\n$(PRODUCT_MODEL)\n$(PRODUCT_DEVICE))))" \
+style="filled" fillcolor="$(strip $(call node-color,$(1)))" \
+colorscheme="svg" fontcolor="darkblue" \
+]
 
 endef
 
 products_graph := $(OUT_DIR)/products.dot
 
-$(products_graph): PRIVATE_ALL_MAKEFILES_FOR_THIS_PRODUCT := $(call gather-all-makefiles-for-current-product)
-$(products_graph): PRIVATE_TOP_LEVEL_MAKEFILE := $(INTERNAL_PRODUCT)
-$(products_graph):
-	@echo Product graph DOT: $@ for $(PRIVATE_TOP_LEVEL_MAKEFILE)
-	$(hide) echo 'digraph {' > $@
-	$(hide) echo 'graph [ ratio=.5 ];' >> $@
-	$(hide) $(foreach p,$(PRIVATE_ALL_MAKEFILES_FOR_THIS_PRODUCT), \
-	  $(foreach d,$(PRODUCTS.$(strip $(p)).INHERITS_FROM), echo \"$(d)\" -\> \"$(p)\" >> $@;))
-	$(foreach p,$(PRIVATE_ALL_MAKEFILES_FOR_THIS_PRODUCT),$(call emit-product-node-props,$(p),$@))
-	$(hide) echo '}' >> $@
+_all_product_makefiles_for_this_product := $(call gather-all-makefiles-for-current-product)
+
+$(file >$(products_graph),digraph {)
+$(file >>$(products_graph),graph [ ratio=.5 ];)
+$(foreach p,$(_all_product_makefiles_for_this_product), \
+  $(foreach d,$(PRODUCTS.$(strip $(p)).INHERITS_FROM), $(eval $(file >>$(products_graph),"$(d)" -> "$(p)"))))
+$(foreach p,$(_all_product_makefiles_for_this_product),$(eval $(file >>$(products_graph),$(call emit-product-node-props,$(p),$@))))
+$(file >>$(products_graph),})
+
+#	@echo Command to convert to svg: dot -Tsvg -Nshape=box -o $(OUT_DIR)/products.svg $(products_graph)
+
+endif # WRITE_PRODUCT_GRAPH
 
 .PHONY: product-graph
-product-graph: $(products_graph)
-	@echo Product graph .dot file: $(products_graph)
-	@echo Command to convert to pdf: dot -Tpdf -Nshape=box -o $(OUT_DIR)/products.pdf $(products_graph)
-	@echo Command to convert to svg: dot -Tsvg -Nshape=box -o $(OUT_DIR)/products.svg $(products_graph)
+product-graph:
+	@echo The product-graph target has been removed. Run build/make/tools/product-graph instead.
+

@@ -7115,8 +7115,6 @@ include $(sort $(wildcard platform_testing/build/tasks/*.mk))
 include $(sort $(wildcard test/vts/tools/build/tasks/*.mk))
 endif
 
-include $(BUILD_SYSTEM)/product-graph.mk
-
 # -----------------------------------------------------------------
 # Create SDK repository packages. Must be done after tasks/* since
 # we need the addon rules defined.
