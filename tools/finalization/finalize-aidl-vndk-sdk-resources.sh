@@ -133,9 +133,12 @@ function finalize_aidl_vndk_sdk_resources() {
     sed -i -e "/=.*$((${FINAL_PLATFORM_SDK_VERSION}-1)),/a \\  SDK_${FINAL_PLATFORM_CODENAME_JAVA} = ${FINAL_PLATFORM_SDK_VERSION}," "$top/frameworks/base/tools/aapt2/SdkConstants.h"
 
     # Bump Mainline SDK extension version.
-    set +e
+    local SDKEXT="packages/modules/SdkExtensions/"
     "$top/packages/modules/SdkExtensions/gen_sdk/bump_sdk.sh" ${FINAL_MAINLINE_EXTENSION}
-    set -e
+    # Leave the last commit as a set of modified files.
+    # The code to create a finalization topic will pick it up later.
+    git -C ${SDKEXT} reset HEAD~1
+
     local version_defaults="$top/build/make/core/version_defaults.mk"
     sed -i -e "s/PLATFORM_SDK_EXTENSION_VERSION := .*/PLATFORM_SDK_EXTENSION_VERSION := ${FINAL_MAINLINE_EXTENSION}/g" $version_defaults
 
