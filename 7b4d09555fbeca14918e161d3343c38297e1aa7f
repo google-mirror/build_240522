@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8953b34_a9e14bd8",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1993695
+      },
+      "writtenOn": "2023-04-14T04:17:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c585a2b6_0ebf7326",
+      "range": {
+        "startLine": 1372,
+        "startChar": 6,
+        "endLine": 1372,
+        "endChar": 21
+      },
+      "revId": "7b4d09555fbeca14918e161d3343c38297e1aa7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "473e5df1_1ae3af9c",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-13T16:51:08Z",
       "side": 1,
       "message": "consider raising an error if the `path` could not be resolved(search path is empty but also `os.path.exists(path)` returns false)",
+      "range": {
+        "startLine": 1374,
+        "startChar": 13,
+        "endLine": 1374,
+        "endChar": 17
+      },
+      "revId": "7b4d09555fbeca14918e161d3343c38297e1aa7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7be5bfeb_0a787751",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 1993695
+      },
+      "writtenOn": "2023-04-14T04:17:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "473e5df1_1ae3af9c",
       "range": {
         "startLine": 1374,
         "startChar": 13,
