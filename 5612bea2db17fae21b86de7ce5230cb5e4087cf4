@@ -16,6 +16,24 @@
       "message": "I think this will always be defined here because product_config.mk will be included first.  You probably can\u0027t set the default in product_config.mk because BOARD_SHIPPING_API_LEVEL may not be defined yet, I think both the 16384 and 4096 defaults will need to go in config.mk after envsetup.mk (which includes product_config.mk and board_config.mk) has been included.",
       "revId": "5612bea2db17fae21b86de7ce5230cb5e4087cf4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "899563c6_1074844d",
+        "filename": "core/main.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-04-15T03:16:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b978aec1_6e4ca109",
+      "revId": "5612bea2db17fae21b86de7ce5230cb5e4087cf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
