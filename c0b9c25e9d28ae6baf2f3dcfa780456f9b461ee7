@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7de864c_1dfa2b9a",
+        "filename": "tools/sbom/sbom_writers_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2023-04-15T02:04:07Z",
+      "side": 1,
+      "message": "I think we talked about this being a param, since an OEM can take this tool and it will show supplier as Google.",
+      "range": {
+        "startLine": 119,
+        "startChar": 59,
+        "endLine": 119,
+        "endChar": 74
+      },
+      "revId": "c0b9c25e9d28ae6baf2f3dcfa780456f9b461ee7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
