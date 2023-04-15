@@ -22,6 +22,30 @@
       },
       "revId": "c0b9c25e9d28ae6baf2f3dcfa780456f9b461ee7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29427dbd_840fe9da",
+        "filename": "tools/sbom/sbom_writers_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-15T02:10:22Z",
+      "side": 1,
+      "message": "This is the test case which doesn\u0027t take command line parameter, so the hardcoded value is used. you might want to look at generate-sbom.py line 439 in the CL.",
+      "parentUuid": "b7de864c_1dfa2b9a",
+      "range": {
+        "startLine": 119,
+        "startChar": 59,
+        "endLine": 119,
+        "endChar": 74
+      },
+      "revId": "c0b9c25e9d28ae6baf2f3dcfa780456f9b461ee7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
