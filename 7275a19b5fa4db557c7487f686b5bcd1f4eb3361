@@ -52,6 +52,24 @@
       "parentUuid": "574a2628_b5c09456",
       "revId": "7275a19b5fa4db557c7487f686b5bcd1f4eb3361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae22238e_dbc762be",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-04-17T23:40:53Z",
+      "side": 1,
+      "message": "yes, it\u0027s supposed to do everything including the reboot (but only if necessary).",
+      "parentUuid": "3e94d98b_403c1325",
+      "revId": "7275a19b5fa4db557c7487f686b5bcd1f4eb3361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
