@@ -88,8 +88,12 @@ PRODUCT_BUILD_SUPER_EMPTY_IMAGE := false
 PRODUCT_BUILD_SYSTEM_DLKM_IMAGE := false
 PRODUCT_EXPORT_BOOT_IMAGE_TO_DIST := true
 
-# Always build modules from source
-MODULE_BUILD_FROM_SOURCE := true
+# Always build modules from source only if the 
+# MODULE_BUILD_FROM_SOURCE config has not been set
+ifneq (,$(MODULE_BUILD_FROM_SOURCE))
+    MODULE_BUILD_FROM_SOURCE := true
+endif
+
 
 # Additional settings used in all GSI builds
 PRODUCT_PRODUCT_PROPERTIES += \
