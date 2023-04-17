@@ -16,6 +16,24 @@
       "message": "i\u0027ve never seen this function before; is there a reason it\u0027s not using `adb remount --reboot`?",
       "revId": "7275a19b5fa4db557c7487f686b5bcd1f4eb3361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "574a2628_b5c09456",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-04-17T20:47:46Z",
+      "side": 1,
+      "message": "hmmm - is that new? I wrote this function back in 2016, so it\u0027s quite possible it\u0027s missing some things.",
+      "parentUuid": "99deef4e_6445bcee",
+      "revId": "7275a19b5fa4db557c7487f686b5bcd1f4eb3361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
