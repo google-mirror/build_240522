@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302a35a2_0bf244d4",
+        "filename": "core/product-graph.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-04-17T18:59:39Z",
+      "side": 1,
+      "message": "This no longer has an output file. Remove this comment, and where the output file is still passed below.",
+      "revId": "6b53089ae31620fd193b4bbb80193b3ded972adf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a1433b2_a676b754",
+        "filename": "core/product-graph.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-04-17T18:59:39Z",
+      "side": 1,
+      "message": "Add an `exit 1` or something so it\u0027s a build failure. I have scripts that rely on product-graph and it would be helpful for the script to fail after this change instead of get old results or something.",
+      "revId": "6b53089ae31620fd193b4bbb80193b3ded972adf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22461a49_b8018e28",
+        "filename": "tools/product-graph",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-04-17T18:59:39Z",
+      "side": 1,
+      "message": "Optional: This script would be a good candidate for putting in a `bin` folder that\u0027s added to your path by envsetup.",
+      "revId": "6b53089ae31620fd193b4bbb80193b3ded972adf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3e41379_bbff800d",
+        "filename": "tools/product-graph",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-04-17T18:59:39Z",
+      "side": 1,
+      "message": "Please make this script fail with an informative message if you haven\u0027t lunched already",
+      "revId": "6b53089ae31620fd193b4bbb80193b3ded972adf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ffef14_4c345d82",
+        "filename": "tools/product-graph",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-04-17T18:59:39Z",
+      "side": 1,
+      "message": "Is this not equivalent to `source $(dirname $BASH_SOURCE)/../shell_utils.sh`?",
+      "revId": "6b53089ae31620fd193b4bbb80193b3ded972adf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
