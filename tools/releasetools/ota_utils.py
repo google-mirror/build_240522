@@ -22,7 +22,7 @@ import zipfile
 
 import ota_metadata_pb2
 import common
-from common import (ZipDelete, ZipClose, OPTIONS, MakeTempFile,
+from common import (ZipDelete, DoesInputFileContain, ReadBytesFromInputFile, OPTIONS, MakeTempFile,
                     ZipWriteStr, BuildInfo, LoadDictionaryFromFile,
                     SignFile, PARTITIONS_WITH_BUILD_PROP, PartitionBuildProps,
                     GetRamdiskFormat, ParseUpdateEngineConfig)
@@ -626,12 +626,10 @@ def ConstructOtaApexInfo(target_zip, source_file=None):
   """If applicable, add the source version to the apex info."""
 
   def _ReadApexInfo(input_zip):
-    if "META/apex_info.pb" not in input_zip.namelist():
+    if not DoesInputFileContain(input_zip, "META/apex_info.pb"):
       logger.warning("target_file doesn't contain apex_info.pb %s", input_zip)
       return None
-
-    with input_zip.open("META/apex_info.pb", "r") as zfp:
-      return zfp.read()
+    return ReadBytesFromInputFile(input_zip, "META/apex_info.pb")
 
   target_apex_string = _ReadApexInfo(target_zip)
   # Return early if the target apex info doesn't exist or is empty.
