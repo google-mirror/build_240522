@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t this use TARGET_MAX_PAGE_SIZE_SUPPORTED so it has the right value when it comes from the default?",
       "revId": "099d6c605135928a1a4c1b1bbffe162efe5a68b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abead5bc_e7147bba",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-04-18T23:13:43Z",
+      "side": 1,
+      "message": "The test currently knows the default to use when it\u0027s empty. I will update it in the next version to use this instead.",
+      "parentUuid": "c760b936_e270d08e",
+      "revId": "099d6c605135928a1a4c1b1bbffe162efe5a68b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
