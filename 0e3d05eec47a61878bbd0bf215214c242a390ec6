@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "125db84d_632608bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-18T11:20:42Z",
+      "side": 1,
+      "message": "Hi Po,\n\nI am terribly sorry for this late response. I somehow missed your last comment.",
+      "revId": "0e3d05eec47a61878bbd0bf215214c242a390ec6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71aa289d_2234a0d8",
@@ -50,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0fbe415_fa251248",
+        "filename": "tools/releasetools/merge/merge_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-18T11:20:42Z",
+      "side": 1,
+      "message": "I know that. It\u0027s probably because the choice of kernel (ex: version) is a vendor-specific decision. But pvmfw isn\u0027t. It\u0027s a part of the generic platform. It has to be upgraded along with the platform.",
+      "parentUuid": "830121db_adf04c63",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 21
+      },
+      "revId": "0e3d05eec47a61878bbd0bf215214c242a390ec6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a53e6bf8_cf545130",
         "filename": "tools/releasetools/merge/merge_utils.py",
         "patchSetId": 2
@@ -61,6 +102,30 @@
       "writtenOn": "2023-04-12T00:34:29Z",
       "side": 1,
       "message": "If pvmfw is added into _FRAMEWORK_PARTITIONS, this line should be modified as well:\nif partition \u003d\u003d \u0027images\u0027 or partition \u003d\u003d \u0027prebuilt_images\u0027:",
+      "range": {
+        "startLine": 205,
+        "startChar": 4,
+        "endLine": 205,
+        "endChar": 28
+      },
+      "revId": "0e3d05eec47a61878bbd0bf215214c242a390ec6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beca8a6c_05094ced",
+        "filename": "tools/releasetools/merge/merge_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-18T11:20:42Z",
+      "side": 1,
+      "message": "I think this has to be done regardless of whether _FRAMEWORK_PARTITIONS has pvmfw.img or not. In the future (or even perhaps today), there could be a vendor partition under `prebuilt_images`.",
+      "parentUuid": "a53e6bf8_cf545130",
       "range": {
         "startLine": 205,
         "startChar": 4,
