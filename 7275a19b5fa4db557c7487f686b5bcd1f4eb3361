@@ -124,6 +124,24 @@
       "parentUuid": "2b555f83_04b6a7fa",
       "revId": "7275a19b5fa4db557c7487f686b5bcd1f4eb3361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22f95b81_09546dfa",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-04-18T18:39:35Z",
+      "side": 1,
+      "message": "i know i\u0027m probably famous for saying variants of \"stop trying to cram your personal shell aliases into adb\", but this dance (that keeps getting more complicated as the years go by) is something _every_ platform developer needs on a daily basis, so seems like the opposite argument applies? \"don\u0027t make every single user[1] re-invent the same wheel\".\n\n_____\n1. (in one of the three classes: app developer, os developer, test lab maintainer)",
+      "parentUuid": "8e995dae_f4f0f456",
+      "revId": "7275a19b5fa4db557c7487f686b5bcd1f4eb3361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
