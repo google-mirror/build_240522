@@ -330,6 +330,13 @@ ADDITIONAL_VENDOR_PROPERTIES += \
     ro.build.ab_update=$(AB_OTA_UPDATER)
 endif
 
+# Set this property for VTS to skip large page size tests on
+# unsupported devices.
+ifdef PRODUCT_MAX_PAGE_SIZE_SUPPORTED
+ADDITIONAL_VENDOR_PROPERTIES += \
+    ro.product.max_page_size_supported=$(PRODUCT_MAX_PAGE_SIZE_SUPPORTED)
+endif
+
 # Set ro.product.vndk.version to know the VNDK version required by product
 # modules. It uses the version in PRODUCT_PRODUCT_VNDK_VERSION. If the value
 # is "current", use PLATFORM_VNDK_VERSION.
