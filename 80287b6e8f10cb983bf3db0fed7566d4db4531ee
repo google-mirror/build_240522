@@ -45,6 +45,30 @@
       },
       "revId": "80287b6e8f10cb983bf3db0fed7566d4db4531ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31563a87_a551f013",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1451833
+      },
+      "writtenOn": "2023-04-18T06:02:31Z",
+      "side": 1,
+      "message": "similar to https://cs.android.com/android/platform/superproject/+/master:build/make/core/android_soong_config_vars.mk;l\u003d75\n\nMODULE_BUILD_FROM_SOURCE ?\u003d true does not seem to work because ?\u003d is a lazy evaluation\n\nifeq (,$(MODULE_BUILD_FROM_SOURCE)) seems to force set the module to true even if it has been lazy set to false previously\n\nGiven all the different options to set it, ifneq (,$(MODULE_BUILD_FROM_SOURCE)) seems to be the most \u0027reliable\u0027",
+      "parentUuid": "d42fc117_4a1b4c7a",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 5
+      },
+      "revId": "80287b6e8f10cb983bf3db0fed7566d4db4531ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
