@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d0a8ab8_f20cccfb",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2023-04-18T03:32:15Z",
+      "side": 1,
+      "message": "Please remove.",
+      "range": {
+        "startLine": 91,
+        "startChar": 46,
+        "endLine": 91,
+        "endChar": 47
+      },
+      "revId": "80287b6e8f10cb983bf3db0fed7566d4db4531ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d42fc117_4a1b4c7a",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2023-04-18T03:32:15Z",
+      "side": 1,
+      "message": "I thought you want to code\n\n```\nifeq (,$(MODULE_BUILD_FROM_SOURCE))\n^^^^\n    MODULE_BUILD_FROM_SOURCE :\u003d true\nendif\n```\n\nor just:\n\n```\nMODULE_BUILD_FROM_SOURCE ?\u003d true\n```",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 5
+      },
+      "revId": "80287b6e8f10cb983bf3db0fed7566d4db4531ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
