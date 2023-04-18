@@ -70,6 +70,24 @@
       "parentUuid": "3e94d98b_403c1325",
       "revId": "7275a19b5fa4db557c7487f686b5bcd1f4eb3361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9220fbf8_a633887c",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-04-18T16:54:32Z",
+      "side": 1,
+      "message": "and re-rooting after the reboot?",
+      "parentUuid": "ae22238e_dbc762be",
+      "revId": "7275a19b5fa4db557c7487f686b5bcd1f4eb3361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
