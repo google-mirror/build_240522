@@ -88,6 +88,24 @@
       "parentUuid": "ae22238e_dbc762be",
       "revId": "7275a19b5fa4db557c7487f686b5bcd1f4eb3361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b555f83_04b6a7fa",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-04-18T18:31:45Z",
+      "side": 1,
+      "message": "although as a developer i might like \"root\" to be persistent, i can understand why security disagrees :-)\n\n(given the ubiquity of this problem, i do wonder why we\u0027ve never grown a `adb remount --force` that just does the whole thing...)",
+      "parentUuid": "9220fbf8_a633887c",
+      "revId": "7275a19b5fa4db557c7487f686b5bcd1f4eb3361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
