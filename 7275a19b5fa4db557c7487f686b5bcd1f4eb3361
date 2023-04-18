@@ -106,6 +106,24 @@
       "parentUuid": "9220fbf8_a633887c",
       "revId": "7275a19b5fa4db557c7487f686b5bcd1f4eb3361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e995dae_f4f0f456",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-04-18T18:35:58Z",
+      "side": 1,
+      "message": "well, that\u0027s what this script is supposed to do, but it seems it can be greatly simplified\n\n- if you are okay with a \u0027force\u0027 though - I could move the logic there and deprecate this function",
+      "parentUuid": "2b555f83_04b6a7fa",
+      "revId": "7275a19b5fa4db557c7487f686b5bcd1f4eb3361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
