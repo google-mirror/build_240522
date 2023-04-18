@@ -117,6 +117,30 @@
       },
       "revId": "80287b6e8f10cb983bf3db0fed7566d4db4531ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "327dabfb_b7197f54",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1451833
+      },
+      "writtenOn": "2023-04-18T17:23:55Z",
+      "side": 1,
+      "message": "Hmmm I\u0027ve been spending some time looking into this and you\u0027re right the correct approach is to use ifeq ($(MODULE_BUILD_FROM_SOURCE),), however the issue is that in some of the partner mainline configs, we use MODULE_BUILD_FROM_SOURCE ?\u003d false and essentially all this is leading to lazy evaluation of the config. Long story short, with all the lazy evaluation, MODULE_BUILD_FROM_SOURCE always ends up being true which is what I am trying to avoid.\n\nI do feel that may be the better approach as the generic GSI release config should not really decide if modules should be built from source or not.\n\nI have instead been testing removing this line completely and instead relying on the logic in to decide if the modules need to be built from source or not https://cs.android.com/android/platform/superproject/+/master:build/make/core/android_soong_config_vars.mk;l\u003d75\n\nI have checked this against the GSI target as well as some other internal targets that use gsi_release.mk to see if this works and so far it seems to be doing the right thing. Do you have any concerns if I remove `MODULE_BUILD_FROM_SOURCE :\u003d true` from here completely?",
+      "parentUuid": "e437bd0d_4139411e",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 5
+      },
+      "revId": "80287b6e8f10cb983bf3db0fed7566d4db4531ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
