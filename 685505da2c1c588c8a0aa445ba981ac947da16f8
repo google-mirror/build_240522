@@ -46,6 +46,30 @@
       },
       "revId": "685505da2c1c588c8a0aa445ba981ac947da16f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e6ba7e4_7271dff0",
+        "filename": "core/config.mk",
+        "patchSetId": 14
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-04-19T23:58:09Z",
+      "side": 1,
+      "message": "Added the validation.",
+      "parentUuid": "16d6944f_f3458f21",
+      "range": {
+        "startLine": 372,
+        "startChar": 6,
+        "endLine": 372,
+        "endChar": 36
+      },
+      "revId": "685505da2c1c588c8a0aa445ba981ac947da16f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
