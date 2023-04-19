@@ -5178,6 +5178,8 @@ INTERNAL_OTATOOLS_MODULES := \
   zipalign \
   zucchini \
   zip2zip \
+  create_brick_ota \
+
 
 
 # Additional tools to unpack and repack the apex file.
