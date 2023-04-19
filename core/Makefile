@@ -5122,6 +5122,7 @@ INTERNAL_OTATOOLS_MODULES := \
   check_target_files_signatures \
   check_target_files_vintf \
   checkvintf \
+  create_brick_ota \
   delta_generator \
   e2fsck \
   e2fsdroid \
@@ -5178,6 +5179,7 @@ INTERNAL_OTATOOLS_MODULES := \
   zipalign \
   zucchini \
   zip2zip \
+
 
 
 # Additional tools to unpack and repack the apex file.
