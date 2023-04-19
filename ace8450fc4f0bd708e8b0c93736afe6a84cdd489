@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df0610da_bead0850",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1451833
+      },
+      "writtenOn": "2023-04-19T18:15:24Z",
+      "side": 1,
+      "message": "Updated AOSP targets based on comment in aosp/2546313",
+      "revId": "ace8450fc4f0bd708e8b0c93736afe6a84cdd489",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
