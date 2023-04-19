@@ -22,6 +22,30 @@
       },
       "revId": "685505da2c1c588c8a0aa445ba981ac947da16f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16d6944f_f3458f21",
+        "filename": "core/config.mk",
+        "patchSetId": 14
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-04-19T01:44:51Z",
+      "side": 1,
+      "message": "For SoCs release in Android U, they will have to opt out. For older SoCs (released previous to Android U), the default will be 4096.\n\nhttps://cs.android.com/android/platform/superproject/+/master:build/make/target/product/go_defaults_common.mk;l\u003d21?q\u003dro.config.low_ram\u0026ss\u003dandroid%2Fplatform%2Fsuperproject:build%2F",
+      "parentUuid": "4cc021f0_fde7ae0c",
+      "range": {
+        "startLine": 372,
+        "startChar": 6,
+        "endLine": 372,
+        "endChar": 36
+      },
+      "revId": "685505da2c1c588c8a0aa445ba981ac947da16f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
