@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aff3ad65_e30ddb95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2023-04-19T05:39:52Z",
+      "side": 1,
+      "message": "LTGM, hold a second for the update in aosp/2546313.",
+      "revId": "61de9383cca096e415a05e31792eec80b624197a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
