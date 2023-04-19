@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b0d581c_651d7a6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-19T05:33:58Z",
+      "side": 1,
+      "message": "git_master-tv-dev: go/abtd/run/L71800000960036985\naosp-master-with-phones: go/abtd/run/L31900000960013121\naosp-master: go/abtd/run/L77100000960018277\naosp-master-bazel: go/abtd/run/L22900000960023216, two already broken errors\ngit_master: go/abtd/run/L69200000960023215\ngit_master-bazel: go/abtd/run/L27800000960023419, errors are not related",
+      "revId": "49af939a23c37558c022792355a66c7f57b58108",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
