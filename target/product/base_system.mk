@@ -298,7 +298,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES_ARM64 := libclang_rt.hwasan \
  libclang_rt.hwasan.bootstrap \
- libc_hwasan \
+ libc_hwasan.bootstrap \
 
 # Jacoco agent JARS to be built and installed, if any.
 ifeq ($(EMMA_INSTRUMENT),true)
