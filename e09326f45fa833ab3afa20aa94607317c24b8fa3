@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f321fea_89cbcc40",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 5184,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-04-20T02:14:31Z",
+      "side": 1,
+      "message": "Nit: unnecessary whitespace change.",
+      "revId": "e09326f45fa833ab3afa20aa94607317c24b8fa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
