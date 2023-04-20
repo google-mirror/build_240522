@@ -22,6 +22,30 @@
       },
       "revId": "01e66f1d4617a3a354120ae463c13774eb6e88f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b87ef706_3b758982",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-04-20T21:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ded3fc54_b38c7f99",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 27
+      },
+      "revId": "01e66f1d4617a3a354120ae463c13774eb6e88f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
