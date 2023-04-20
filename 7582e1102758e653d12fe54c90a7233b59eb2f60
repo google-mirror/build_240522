@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e8f190d_cb6ce28a",
+        "filename": "tools/compliance/cmd/sbom/sbom_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-04-20T17:39:51Z",
+      "side": 1,
+      "message": "Please delete all of the return lines. They are not necessary and only serve to make developers go through needless change+build+test cycles to fix all the errors when there are more than one.",
+      "revId": "7582e1102758e653d12fe54c90a7233b59eb2f60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
