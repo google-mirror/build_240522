@@ -50,6 +50,23 @@
       "message": "No objection from me, but wouldn\u0027t be surprised if there are problems discovered after submission",
       "revId": "ace8450fc4f0bd708e8b0c93736afe6a84cdd489",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab0363c9_3f8b35f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1451833
+      },
+      "writtenOn": "2023-04-20T19:22:34Z",
+      "side": 1,
+      "message": "Bypassing pre-submit because the pre-submit failure is outside of my change. This is being tracked in b/279019964",
+      "revId": "ace8450fc4f0bd708e8b0c93736afe6a84cdd489",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
