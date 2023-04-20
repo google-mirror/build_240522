@@ -33,6 +33,23 @@
       "message": "Adding Anton for Mainline product config expertise.",
       "revId": "ace8450fc4f0bd708e8b0c93736afe6a84cdd489",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f88289db_a7b6e42e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-04-20T09:51:52Z",
+      "side": 1,
+      "message": "No objection from me, but wouldn\u0027t be surprised if there are problems discovered after submission",
+      "revId": "ace8450fc4f0bd708e8b0c93736afe6a84cdd489",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
