@@ -16,6 +16,24 @@
       "message": "Nit: unnecessary whitespace change.",
       "revId": "e09326f45fa833ab3afa20aa94607317c24b8fa3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "332d71b9_21ebb354",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 5184,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-04-20T02:15:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f321fea_89cbcc40",
+      "revId": "e09326f45fa833ab3afa20aa94607317c24b8fa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
