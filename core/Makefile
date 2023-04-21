@@ -1523,6 +1523,76 @@ endif
 endif # BUILDING_VENDOR_KERNEL_BOOT_IMAGE
 
 # -----------------------------------------------------------------
+# Wear APK Capabilities
+#
+ifneq (,$(PRODUCT_INCLUDE_WEAR_APK_CAPABILITIES))
+
+extract_cap_tool := build/make/tools/wear_capabilities/extract_wear_capabilities_per_apk.sh
+merge_cap_tool := build/make/tools/wear_capabilities/merge_wear_capabilities.sh
+
+# Add an extraction rule for an apk
+# $(1) - extracted fragment
+# $(2) - apk
+define extract-apk-capabilities
+$(strip $(1)): PRIVATE_TOOL := $(extract_cap_tool)
+$(strip $(1)): $(strip $(2)) $(extract_cap_tool) $(AAPT2)
+	mkdir -p $(dir $(strip $(1)))
+	$$(PRIVATE_TOOL) $$@ $$< $(AAPT2)
+endef
+
+# Combined the extracted fragments
+# $(1) - merged file
+# $(2) - extracted fragments
+define merge-apk-capabilities
+$(strip $(1)): PRIVATE_TOOL := $(merge_cap_tool)
+$(strip $(1)): PRIVATE_INPUTS := $(2)
+$(strip $(1)): $(2) $(merge_cap_tool)
+	mkdir -p $(dir $(strip $(1)))
+	$$(PRIVATE_TOOL) $$@ $$(PRIVATE_INPUTS)
+endef
+
+# Define the wear apk capabilities extraction rules for a partition
+# $(1) - partition
+# Returns - The file that will be installed
+define wear-apk-capabilities-for-partition
+$(strip \
+	$(eval ### Extract the data from the APKs into fragments) \
+	$(eval partition_apk_cap_fragments :=) \
+	$(eval $(foreach module, $(product_MODULES), \
+		$(if $(filter APPS, $(ALL_MODULES.$(module).CLASS)), \
+			$(eval # This won't work if someone changes LOCAL_MODULE_STEM for an apk.) \
+			$(foreach apk, $(filter $(PRODUCT_OUT)/$(strip $(1))/%.apk, $(ALL_MODULES.$(module).INSTALLED)), \
+				$(eval extracted := $(PRODUCT_OUT)/obj/wear_apk_capabilities/$(strip $(1))/$(module).xml) \
+				$(eval $(call extract-apk-capabilities,$(extracted),$(ALL_MODULES.$(module).BUILT))) \
+				$(eval partition_apk_cap_fragments += $(extracted)) \
+				$(eval extracted := ) \
+			) \
+		) \
+	)) \
+	$(eval ### Merge the fragments) \
+	$(eval merged := $(PRODUCT_OUT)/obj/wear_apk_capabilities/$(strip $(1))-merged.xml) \
+	$(eval $(call merge-apk-capabilities,$(merged),$(sort $(partition_apk_cap_fragments)))) \
+	$(eval ### Install the merged file (this allows us to skip the merge after installclean)) \
+	$(eval installed := $(PRODUCT_OUT)/$(strip $(1))/etc/static_wear_capabilities.xml) \
+	$(eval $(call copy-one-file,$(merged),$(installed))) \
+	$(installed) \
+	$(eval merged := ) \
+	$(eval installed := ) \
+)
+endef
+
+# One for each relevant partition
+ALL_DEFAULT_INSTALLED_MODULES += $(call wear-apk-capabilities-for-partition, system)
+ALL_DEFAULT_INSTALLED_MODULES += $(call wear-apk-capabilities-for-partition, vendor)
+ALL_DEFAULT_INSTALLED_MODULES += $(call wear-apk-capabilities-for-partition, product)
+ALL_DEFAULT_INSTALLED_MODULES += $(call wear-apk-capabilities-for-partition, system_ext)
+
+extract_cap_tool:=
+merge_cap_tool:=
+
+endif
+
+# -----------------------------------------------------------------
 # NOTICE files
 #
 # We are required to publish the licenses for all code under BSD, GPL and
