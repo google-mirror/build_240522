@@ -16,6 +16,23 @@
       "message": "Adding owners for the vote.",
       "revId": "81c3f4a884a8491a2d0d480e219cb68c9986562d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70a1c518_fd7e0c7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-24T14:16:55Z",
+      "side": 1,
+      "message": "PS+1 expired",
+      "revId": "81c3f4a884a8491a2d0d480e219cb68c9986562d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
