@@ -169,7 +169,7 @@ endif
 # Copy dexpreopt.config files from Soong libraries to the location where Make
 # modules can find them.
 ifdef LOCAL_SOONG_DEXPREOPT_CONFIG
-  $(eval $(call copy-one-file,$(LOCAL_SOONG_DEXPREOPT_CONFIG), $(call local-intermediates-dir,)/dexpreopt.config))
+  $(eval $(call copy-one-file,$(LOCAL_SOONG_DEXPREOPT_CONFIG), $(intermediates.COMMON)/dexpreopt.config))
   my_dexpreopt_config := $(PRODUCT_OUT)/dexpreopt_config/$(LOCAL_MODULE)_dexpreopt.config
   $(eval $(call copy-one-file,$(LOCAL_SOONG_DEXPREOPT_CONFIG), $(my_dexpreopt_config)))
   $(LOCAL_BUILT_MODULE): $(my_dexpreopt_config)
