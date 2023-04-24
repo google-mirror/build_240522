@@ -158,7 +158,7 @@ my_dexpreopt_libs := \
 # dependencies between dexpreopt.config files.
 my_dexpreopt_dep_configs := $(foreach lib, \
   $(filter-out $(my_dexpreopt_libs_compat),$(LOCAL_USES_LIBRARIES) $(my_filtered_optional_uses_libraries)), \
-  $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,)/dexpreopt.config)
+  $(call intermediates-dir-for,JAVA_LIBRARIES,$(lib),,COMMON)/dexpreopt.config)
 
 # 1: SDK version
 # 2: list of libraries
@@ -408,7 +408,7 @@ ifeq ($(my_create_dexpreopt_config), true)
 
   $(call json_end)
 
-  my_dexpreopt_config := $(intermediates)/dexpreopt.config
+  my_dexpreopt_config := $(intermediates.COMMON)/dexpreopt.config
   my_dexpreopt_config_for_postprocessing := $(PRODUCT_OUT)/dexpreopt_config/$(LOCAL_MODULE)_dexpreopt.config
   my_dexpreopt_config_merger := $(BUILD_SYSTEM)/dex_preopt_config_merger.py
 
@@ -446,8 +446,8 @@ ifdef LOCAL_DEX_PREOPT
 	  @cp $(PRIVATE_BUILT_MODULE) $@
   endif
 
-  my_dexpreopt_script := $(intermediates)/dexpreopt.sh
-  my_dexpreopt_zip := $(intermediates)/dexpreopt.zip
+  my_dexpreopt_script := $(intermediates.COMMON)/dexpreopt.sh
+  my_dexpreopt_zip := $(intermediates.COMMON)/dexpreopt.zip
   DEXPREOPT.$(LOCAL_MODULE).POST_INSTALLED_DEXPREOPT_ZIP := $(my_dexpreopt_zip)
   .KATI_RESTAT: $(my_dexpreopt_script)
   $(my_dexpreopt_script): PRIVATE_MODULE := $(LOCAL_MODULE)
