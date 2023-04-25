@@ -33,6 +33,23 @@
       "message": "I need more investigation on dexpreopt.config file. With the bootclasspath list included in the config file, this must be product specific instead of common.",
       "revId": "d503ac9cb37b7e68412f01032d9500ef22b56d28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a52ecd7_e7569535",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-25T09:13:35Z",
+      "side": 1,
+      "message": "As a short-term solution, we can move enforce_uses_library.status to intermediate dir from common intermediate dir.",
+      "revId": "d503ac9cb37b7e68412f01032d9500ef22b56d28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
