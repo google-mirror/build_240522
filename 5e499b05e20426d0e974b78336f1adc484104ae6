@@ -46,6 +46,30 @@
       },
       "revId": "5e499b05e20426d0e974b78336f1adc484104ae6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1818bb53_68fc158e",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1941946
+      },
+      "writtenOn": "2023-04-25T18:12:00Z",
+      "side": 1,
+      "message": "Thank you Dan. I have moved the property to the vendor partition.",
+      "parentUuid": "1213d58e_4e3322f4",
+      "range": {
+        "startLine": 350,
+        "startChar": 59,
+        "endLine": 350,
+        "endChar": 79
+      },
+      "revId": "5e499b05e20426d0e974b78336f1adc484104ae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
