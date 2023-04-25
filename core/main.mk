@@ -347,6 +347,10 @@ ifeq ($(AB_OTA_UPDATER),true)
 ADDITIONAL_PRODUCT_PROPERTIES += ro.product.ab_ota_partitions=$(subst $(space),$(comma),$(sort $(AB_OTA_PARTITIONS)))
 endif
 
+# Set ro.gfx.angle.supported based on if ANGLE is installed in vendor partition
+ADDITIONAL_PRODUCT_PROPERTIES += \
+    ro.gfx.angle.supported=$(USE_ANGLE)
+
 # -----------------------------------------------------------------
 ###
 ### In this section we set up the things that are different
