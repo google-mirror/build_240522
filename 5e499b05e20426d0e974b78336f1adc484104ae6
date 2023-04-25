@@ -22,6 +22,30 @@
       },
       "revId": "5e499b05e20426d0e974b78336f1adc484104ae6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1213d58e_4e3322f4",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-04-25T17:56:37Z",
+      "side": 1,
+      "message": "ah, thanks for pointing this out. Didn\u0027t realize vendor partition can be replaced at runtime. We should change back to use vendor",
+      "parentUuid": "556a243d_8b174bfc",
+      "range": {
+        "startLine": 350,
+        "startChar": 59,
+        "endLine": 350,
+        "endChar": 79
+      },
+      "revId": "5e499b05e20426d0e974b78336f1adc484104ae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
