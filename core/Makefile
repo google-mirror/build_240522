@@ -143,7 +143,7 @@ $(pcf_ignored_file): PRIVATE_IGNORED := $(sort $(product_copy_files_ignored))
 $(pcf_ignored_file):
 	echo "$(PRIVATE_IGNORED)" | tr " " "\n" >$@
 
-$(call declare-0p-target,$(pcf_ignored_file))
+$(call declare-1p-target,$(pcf_ignored_file))
 
 $(call dist-for-goals,droidcore-unbundled,$(pcf_ignored_file):logs/$(notdir $(pcf_ignored_file)))
 
@@ -277,7 +277,7 @@ $(INSTALLED_SDK_BUILD_PROP_TARGET): $(INSTALLED_BUILD_PROP_TARGET)
 	            echo "$$x"generic >> $@.tmp; done
 	$(hide) mv $@.tmp $@
 
-$(call declare-0p-target,$(INSTALLED_SDK_BUILD_PROP_TARGET))
+$(call declare-1p-target,$(INSTALLED_SDK_BUILD_PROP_TARGET))
 
 # -----------------------------------------------------------------
 # declare recovery ramdisk files
@@ -738,7 +738,7 @@ $(APKCERTS_FILE):
 	# In case value of PACKAGES is empty.
 	$(hide) touch $@
 
-$(call declare-0p-target,$(APKCERTS_FILE))
+$(call declare-1p-target,$(APKCERTS_FILE))
 
 .PHONY: apkcerts-list
 apkcerts-list: $(APKCERTS_FILE)
@@ -831,7 +831,7 @@ $(WALL_WERROR):
 	echo "# Modules that allow warnings" >> $@
 	for m in $(sort $(SOONG_MODULES_WARNINGS_ALLOWED) $(MODULES_WARNINGS_ALLOWED)); do echo $$m >> $@; done
 
-$(call declare-0p-target,$(WALL_WERROR))
+$(call declare-1p-target,$(WALL_WERROR))
 
 $(call dist-for-goals,droidcore-unbundled,$(WALL_WERROR))
 
@@ -843,7 +843,7 @@ $(PGO_PROFILE_MISSING):
 	echo "# Modules missing PGO profile files" >> $@
 	for m in $(SOONG_MODULES_MISSING_PGO_PROFILE_FILE); do echo $$m >> $@; done
 
-$(call declare-0p-target,$(PGO_PROFILE_MISSING))
+$(call declare-1p-target,$(PGO_PROFILE_MISSING))
 
 $(call dist-for-goals,droidcore,$(PGO_PROFILE_MISSING))
 
@@ -851,7 +851,7 @@ CERTIFICATE_VIOLATION_MODULES_FILENAME := $(PRODUCT_OUT)/certificate_violation_m
 $(CERTIFICATE_VIOLATION_MODULES_FILENAME):
 	rm -f $@
 	$(foreach m,$(sort $(CERTIFICATE_VIOLATION_MODULES)), echo $(m) >> $@;)
-$(call declare-0p-target,$(CERTIFICATE_VIOLATION_MODULES_FILENAME))
+$(call declare-1p-target,$(CERTIFICATE_VIOLATION_MODULES_FILENAME))
 $(call dist-for-goals,droidcore,$(CERTIFICATE_VIOLATION_MODULES_FILENAME))
 
 # -----------------------------------------------------------------
@@ -888,7 +888,7 @@ $(all_event_log_tags_file): $(all_event_log_tags_src) $(MERGETAGS) build/make/to
 	$(hide) mkdir -p $(dir $@)
 	$(hide) $(MERGETAGS) -o $@ $(PRIVATE_SRC_FILES)
 
-$(call declare-0p-target,$(all_event_log_tags_file))
+$(call declare-1p-target,$(all_event_log_tags_file))
 
 # Include tags from all packages included in this product, plus all
 # tags that are part of the system (ie, not in a vendor/ or device/
@@ -906,7 +906,7 @@ $(event_log_tags_file): $(event_log_tags_src) $(all_event_log_tags_file) $(MERGE
 	$(hide) mkdir -p $(dir $@)
 	$(hide) $(MERGETAGS) -o $@ -m $(PRIVATE_MERGED_FILE) $(PRIVATE_SRC_FILES)
 
-$(eval $(call declare-0p-target,$(event_log_tags_file)))
+$(eval $(call declare-1p-target,$(event_log_tags_file)))
 
 event-log-tags: $(event_log_tags_file)
 
@@ -967,8 +967,8 @@ $(INSTALLED_FILES_FILE_ROOT) : $(INTERNAL_ROOT_FILES) $(FILESLIST) $(FILESLIST_U
 	$(FILESLIST) $(TARGET_ROOT_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(call declare-0p-target,$(INSTALLED_FILES_FILE_ROOT))
-$(call declare-0p-target,$(INSTALLED_FILES_JSON_ROOT))
+$(call declare-1p-target,$(INSTALLED_FILES_FILE_ROOT))
+$(call declare-1p-target,$(INSTALLED_FILES_JSON_ROOT))
 
 #------------------------------------------------------------------
 # dtb
@@ -998,8 +998,8 @@ $(INSTALLED_FILES_FILE_RAMDISK) : $(INTERNAL_RAMDISK_FILES) $(FILESLIST) $(FILES
 	$(FILESLIST) $(TARGET_RAMDISK_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_RAMDISK)))
-$(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON_RAMDISK)))
+$(eval $(call declare-1p-target,$(INSTALLED_FILES_FILE_RAMDISK)))
+$(eval $(call declare-1p-target,$(INSTALLED_FILES_JSON_RAMDISK)))
 
 BUILT_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk.img
 
@@ -1462,8 +1462,8 @@ $(INSTALLED_FILES_FILE_VENDOR_RAMDISK): $(INTERNAL_VENDOR_RAMDISK_FILES) $(FILES
 	$(FILESLIST) $(TARGET_VENDOR_RAMDISK_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_VENDOR_RAMDISK)))
-$(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON_VENDOR_RAMDISK)))
+$(eval $(call declare-1p-target,$(INSTALLED_FILES_FILE_VENDOR_RAMDISK)))
+$(eval $(call declare-1p-target,$(INSTALLED_FILES_JSON_VENDOR_RAMDISK)))
 
 ifdef BOARD_INCLUDE_DTB_IN_BOOTIMG
   ifneq ($(BUILDING_VENDOR_KERNEL_BOOT_IMAGE),true)
@@ -1584,8 +1584,8 @@ $(INSTALLED_FILES_FILE_VENDOR_KERNEL_RAMDISK): $(INTERNAL_VENDOR_KERNEL_RAMDISK_
 	$(FILESLIST) $(TARGET_VENDOR_KERNEL_RAMDISK_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(call declare-0p-target,$(INSTALLED_FILES_FILE_VENDOR_KERNEL_RAMDISK))
-$(call declare-0p-target,$(INSTALLED_FILES_JSON_VENDOR_KERNEL_RAMDISK))
+$(call declare-1p-target,$(INSTALLED_FILES_FILE_VENDOR_KERNEL_RAMDISK))
+$(call declare-1p-target,$(INSTALLED_FILES_JSON_VENDOR_KERNEL_RAMDISK))
 
 INTERNAL_VENDOR_KERNEL_BOOTIMAGE_ARGS := --vendor_ramdisk $(INTERNAL_VENDOR_KERNEL_RAMDISK_TARGET)
 INSTALLED_VENDOR_KERNEL_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/vendor_kernel_boot.img
@@ -1710,8 +1710,8 @@ ifneq ($(PRODUCT_NOTICE_SPLIT),true)
 target_notice_file_html_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE.html.gz
 installed_notice_html_or_xml_gz := $(TARGET_OUT)/etc/NOTICE.html.gz
 
-$(call declare-0p-target,$(target_notice_file_html_gz))
-$(call declare-0p-target,$(installed_notice_html_or_xml_gz))
+$(call declare-1p-target,$(target_notice_file_html_gz))
+$(call declare-1p-target,$(installed_notice_html_or_xml_gz))
 else
 # target_notice_file_xml := $(TARGET_OUT_INTERMEDIATES)/NOTICE.xml
 target_notice_file_xml_gz := $(TARGET_OUT_INTERMEDIATES)/NOTICE.xml.gz
@@ -2250,8 +2250,8 @@ $(INSTALLED_FILES_FILE_RECOVERY): $(INTERNAL_RECOVERYIMAGE_FILES) $(FILESLIST) $
 	$(FILESLIST) $(TARGET_RECOVERY_ROOT_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_RECOVERY)))
-$(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON_RECOVERY)))
+$(eval $(call declare-1p-target,$(INSTALLED_FILES_FILE_RECOVERY)))
+$(eval $(call declare-1p-target,$(INSTALLED_FILES_JSON_RECOVERY)))
 
 recovery_sepolicy := \
     $(TARGET_RECOVERY_ROOT_OUT)/sepolicy \
@@ -2730,8 +2730,8 @@ $(INSTALLED_FILES_FILE_DEBUG_RAMDISK): $(FILESLIST) $(FILESLIST_UTIL)
 	$(FILESLIST) $(INTERNAL_DEBUG_RAMDISK_SRC_DIRS) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_DEBUG_RAMDISK)))
-$(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON_DEBUG_RAMDISK)))
+$(eval $(call declare-1p-target,$(INSTALLED_FILES_FILE_DEBUG_RAMDISK)))
+$(eval $(call declare-1p-target,$(INSTALLED_FILES_JSON_DEBUG_RAMDISK)))
 
 ifdef BUILDING_DEBUG_BOOT_IMAGE
 
@@ -2865,8 +2865,8 @@ $(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK): $(FILESLIST) $(FILESLIST_UTIL)
 	$(FILESLIST) $(INTERNAL_DEBUG_VENDOR_RAMDISK_SRC_DIRS) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(call declare-0p-target,$(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK))
-$(call declare-0p-target,$(INSTALLED_FILES_JSON_VENDOR_DEBUG_RAMDISK))
+$(call declare-1p-target,$(INSTALLED_FILES_FILE_VENDOR_DEBUG_RAMDISK))
+$(call declare-1p-target,$(INSTALLED_FILES_JSON_VENDOR_DEBUG_RAMDISK))
 
 INTERNAL_VENDOR_DEBUG_RAMDISK_TARGET := $(call intermediates-dir-for,PACKAGING,vendor_boot-debug)/vendor_ramdisk-debug.cpio$(RAMDISK_EXT)
 
@@ -3299,8 +3299,8 @@ $(INSTALLED_FILES_FILE): $(FULL_SYSTEMIMAGE_DEPS) $(FILESLIST) $(FILESLIST_UTIL)
 	$(FILESLIST) $(TARGET_OUT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE)))
-$(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON)))
+$(eval $(call declare-1p-target,$(INSTALLED_FILES_FILE)))
+$(eval $(call declare-1p-target,$(INSTALLED_FILES_JSON)))
 
 .PHONY: installed-file-list
 installed-file-list: $(INSTALLED_FILES_FILE)
@@ -3552,7 +3552,7 @@ ALL_DEFAULT_INSTALLED_MODULES += $(INSTALLED_SYSTEM_OTHER_ODEX_MARKER)
 $(INSTALLED_SYSTEM_OTHER_ODEX_MARKER):
 	$(hide) touch $@
 
-$(call declare-0p-target,$(INSTALLED_SYSTEM_OTHER_ODEX_MARKER))
+$(call declare-1p-target,$(INSTALLED_SYSTEM_OTHER_ODEX_MARKER))
 endif
 
 INTERNAL_SYSTEMOTHERIMAGE_FILES := \
@@ -3572,8 +3572,8 @@ $(INSTALLED_FILES_FILE_SYSTEMOTHER) : $(INTERNAL_SYSTEMOTHERIMAGE_FILES) $(FILES
 	$(FILESLIST) $(TARGET_OUT_SYSTEM_OTHER) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(eval $(call declare-0p-target,$(INSTALLED_FILES_FILE_SYSTEMOTHER)))
-$(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON_SYSTEMOTHER)))
+$(eval $(call declare-1p-target,$(INSTALLED_FILES_FILE_SYSTEMOTHER)))
+$(eval $(call declare-1p-target,$(INSTALLED_FILES_JSON_SYSTEMOTHER)))
 
 # Determines partition size for system_other.img.
 ifeq ($(PRODUCT_RETROFIT_DYNAMIC_PARTITIONS),true)
@@ -3671,7 +3671,7 @@ $(vendor_linker_config_file): $(INTERNAL_VENDORIMAGE_FILES) $(PRODUCT_VENDOR_LIN
 		--output $@
 	$(HOST_OUT_EXECUTABLES)/conv_linker_config systemprovide --source $@ \
 		--output $@ --value "$(STUB_LIBRARIES)" --system "$(TARGET_OUT_VENDOR)"
-$(call define declare-0p-target,$(vendor_linker_config_file),)
+$(call define declare-1p-target,$(vendor_linker_config_file),)
 INTERNAL_VENDORIMAGE_FILES += $(vendor_linker_config_file)
 ALL_DEFAULT_INSTALLED_MODULES += $(vendor_linker_config_file)
 
@@ -3685,8 +3685,8 @@ $(INSTALLED_FILES_FILE_VENDOR) : $(INTERNAL_VENDORIMAGE_FILES) $(FILESLIST) $(FI
 	$(FILESLIST) $(TARGET_OUT_VENDOR) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(call declare-0p-target,$(INSTALLED_FILES_FILE_VENDOR))
-$(call declare-0p-target,$(INSTALLED_FILES_JSON_VENDOR))
+$(call declare-1p-target,$(INSTALLED_FILES_FILE_VENDOR))
+$(call declare-1p-target,$(INSTALLED_FILES_JSON_VENDOR))
 
 vendorimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,vendor)
@@ -3751,8 +3751,8 @@ $(INSTALLED_FILES_FILE_PRODUCT) : $(INTERNAL_PRODUCTIMAGE_FILES) $(FILESLIST) $(
 	$(FILESLIST) $(TARGET_OUT_PRODUCT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(call declare-0p-target,$(INSTALLED_FILES_FILE_PRODUCT))
-$(call declare-0p-target,$(INSTALLED_FILES_JSON_PRODUCT))
+$(call declare-1p-target,$(INSTALLED_FILES_FILE_PRODUCT))
+$(call declare-1p-target,$(INSTALLED_FILES_JSON_PRODUCT))
 
 productimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,product)
@@ -3812,8 +3812,8 @@ $(INSTALLED_FILES_FILE_SYSTEM_EXT) : $(INTERNAL_SYSTEM_EXTIMAGE_FILES) $(FILESLI
 	$(FILESLIST) $(TARGET_OUT_SYSTEM_EXT) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(call declare-0p-target,$(INSTALLED_FILES_FILE_SYSTEM_EXT))
-$(call declare-0p-target,$(INSTALLED_FILES_JSON_SYSTEM_EXT))
+$(call declare-1p-target,$(INSTALLED_FILES_FILE_SYSTEM_EXT))
+$(call declare-1p-target,$(INSTALLED_FILES_JSON_SYSTEM_EXT))
 
 system_extimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,system_ext)
@@ -3895,8 +3895,8 @@ $(INSTALLED_FILES_FILE_ODM) : $(INTERNAL_ODMIMAGE_FILES) $(FILESLIST) $(FILESLIS
 	$(FILESLIST) $(TARGET_OUT_ODM) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(call declare-0p-target,$(INSTALLED_FILES_FILE_ODM))
-$(call declare-0p-target,$(INSTALLED_FILES_JSON_ODM))
+$(call declare-1p-target,$(INSTALLED_FILES_FILE_ODM))
+$(call declare-1p-target,$(INSTALLED_FILES_JSON_ODM))
 
 odmimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,odm)
@@ -3957,8 +3957,8 @@ $(INSTALLED_FILES_FILE_VENDOR_DLKM) : $(INTERNAL_VENDOR_DLKMIMAGE_FILES) $(FILES
 	$(FILESLIST) $(TARGET_OUT_VENDOR_DLKM) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(call declare-0p-target,$(INSTALLED_FILES_FILE_VENDOR_DLKM))
-$(call declare-0p-target,$(INSTALLED_FILES_JSON_VENDOR_DLKM))
+$(call declare-1p-target,$(INSTALLED_FILES_FILE_VENDOR_DLKM))
+$(call declare-1p-target,$(INSTALLED_FILES_JSON_VENDOR_DLKM))
 
 vendor_dlkmimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,vendor_dlkm)
@@ -4019,8 +4019,8 @@ $(INSTALLED_FILES_FILE_ODM_DLKM) : $(INTERNAL_ODM_DLKMIMAGE_FILES) $(FILESLIST) 
 	$(FILESLIST) $(TARGET_OUT_ODM_DLKM) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(call declare-0p-target,$(INSTALLED_FILES_FILE_ODM_DLKM))
-$(call declare-0p-target,$(INSTALLED_FILES_JSON_ODM_DLKM))
+$(call declare-1p-target,$(INSTALLED_FILES_FILE_ODM_DLKM))
+$(call declare-1p-target,$(INSTALLED_FILES_JSON_ODM_DLKM))
 
 odm_dlkmimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,odm_dlkm)
@@ -4083,8 +4083,8 @@ $(INSTALLED_FILES_FILE_SYSTEM_DLKM): $(INTERNAL_SYSTEM_DLKMIMAGE_FILES) $(FILESL
 	$(FILESLIST) $(TARGET_OUT_SYSTEM_DLKM) > $(@:.txt=.json)
 	$(FILESLIST_UTIL) -c $(@:.txt=.json) > $@
 
-$(call declare-0p-target,$(INSTALLED_FILES_FILE_SYSTEM_DLKM))
-$(call declare-0p-target,$(INSTALLED_FILES_JSON_SYSTEM_DLKM))
+$(call declare-1p-target,$(INSTALLED_FILES_FILE_SYSTEM_DLKM))
+$(call declare-1p-target,$(INSTALLED_FILES_JSON_SYSTEM_DLKM))
 
 system_dlkmimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,system_dlkm)
@@ -4260,7 +4260,7 @@ $(INSTALLED_PRODUCT_SYSTEM_OTHER_AVBKEY_TARGET): $(AVBTOOL) $(BOARD_AVB_SYSTEM_O
 	@mkdir -p $(dir $@)
 	$(AVBTOOL) extract_public_key --key $(BOARD_AVB_SYSTEM_OTHER_KEY_PATH) --output $@
 
-$(eval $(call declare-0p-target,$(INSTALLED_PRODUCT_SYSTEM_OTHER_AVBKEY_TARGET),))
+$(eval $(call declare-1p-target,$(INSTALLED_PRODUCT_SYSTEM_OTHER_AVBKEY_TARGET),))
 
 ifndef BOARD_AVB_SYSTEM_OTHER_ROLLBACK_INDEX
 BOARD_AVB_SYSTEM_OTHER_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
@@ -5694,14 +5694,14 @@ ifeq ($(TARGET_FLATTEN_APEX),false)
 	$(hide) echo "target_flatten_apex=false" >> $@
 endif
 
-$(call declare-0p-target,$(INSTALLED_FASTBOOT_INFO_TARGET))
+$(call declare-1p-target,$(INSTALLED_FASTBOOT_INFO_TARGET))
 
 .PHONY: fastboot_info
 fastboot_info: $(INSTALLED_FASTBOOT_INFO_TARGET)
 
 droidcore-unbundled: $(INSTALLED_FASTBOOT_INFO_TARGET)
 
-$(call declare-0p-target,$(INSTALLED_MISC_INFO_TARGET))
+$(call declare-1p-target,$(INSTALLED_MISC_INFO_TARGET))
 
 .PHONY: misc_info
 misc_info: $(INSTALLED_MISC_INFO_TARGET)
@@ -6578,7 +6578,7 @@ name := $(product_name)-ota
 INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 INTERNAL_OTA_METADATA := $(PRODUCT_OUT)/ota_metadata
 
-$(call declare-0p-target,$(INTERNAL_OTA_METADATA))
+$(call declare-1p-target,$(INTERNAL_OTA_METADATA))
 
 $(INTERNAL_OTA_PACKAGE_TARGET): KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
 $(INTERNAL_OTA_PACKAGE_TARGET): .KATI_IMPLICIT_OUTPUTS := $(INTERNAL_OTA_METADATA)
@@ -7038,7 +7038,7 @@ $(INSTALLED_SUPERIMAGE_EMPTY_TARGET): $(LPMAKE) $(BUILD_SUPER_IMAGE)
 
 $(call dist-for-goals,dist_files,$(INSTALLED_SUPERIMAGE_EMPTY_TARGET))
 
-$(call declare-0p-target,$(INSTALLED_SUPERIMAGE_EMPTY_TARGET))
+$(call declare-1p-target,$(INSTALLED_SUPERIMAGE_EMPTY_TARGET))
 
 endif # BUILDING_SUPER_EMPTY_IMAGE
 

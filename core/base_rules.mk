@@ -517,7 +517,7 @@ ifneq (,$(LOCAL_SOONG_INSTALLED_MODULE))
   $(LOCAL_INSTALLED_MODULE): $(LOCAL_BUILT_MODULE)
 
   $(foreach symlink, $(LOCAL_SOONG_INSTALL_SYMLINKS), \
-    $(call declare-0p-target,$(symlink)))
+    $(call declare-1p-target,$(symlink)))
   $(my_all_targets) : | $(LOCAL_SOONG_INSTALL_SYMLINKS)
 else ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
   $(LOCAL_INSTALLED_MODULE): PRIVATE_POST_INSTALL_CMD := $(LOCAL_POST_INSTALL_CMD)
@@ -534,7 +534,7 @@ else ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
   my_installed_symlinks := $(addprefix $(my_module_path)/,$(LOCAL_MODULE_SYMLINKS) $(LOCAL_MODULE_SYMLINKS_$(my_32_64_bit_suffix)))
   $(foreach symlink,$(my_installed_symlinks),\
       $(call symlink-file,$(LOCAL_INSTALLED_MODULE),$(my_installed_module_stem),$(symlink))\
-      $(call declare-0p-target,$(symlink)))
+      $(call declare-1p-target,$(symlink)))
 
   $(my_all_targets) : | $(my_installed_symlinks)
 

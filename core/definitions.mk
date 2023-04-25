@@ -840,24 +840,17 @@ endef
 ###########################################################
 ## Declare that non-module target $(1) is a non-copyrightable file.
 ##
-## e.g. an information-only file merely listing other files.
+## e.g. an information-only file with no original expression.
+##
+## Currently, only approved for hash files where the hash function
+## is irreversible and results in inert data like a big number.
+## Note: compression and encryption are reversible, and compiled
+## binaries are copyrightable derivative works.
 ###########################################################
 define declare-0p-target
 $(strip \
   $(eval _tgt := $(subst //,/,$(strip $(1)))) \
   $(eval ALL_0P_TARGETS += $(_tgt)) \
-)
-endef
-
-###########################################################
-## Declare that non-module targets copied from project $(1) and
-## optionally ending in $(2) are non-copyrightable files.
-##
-## e.g. an information-only file merely listing other files.
-###########################################################
-define declare-0p-copy-files
-$(strip \
-  $(foreach _pair,$(filter $(1)%$(2),$(PRODUCT_COPY_FILES)),$(eval $(call declare-0p-target,$(PRODUCT_OUT)/$(call word-colon,2,$(_pair))))) \
 )
 endef
 

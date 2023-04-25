@@ -33,7 +33,7 @@ else
 	$(hide) echo "" > $@
 endif
 
-$(call declare-0p-target,$(INSTALLED_ANDROID_INFO_TXT_TARGET))
+$(call declare-1p-target,$(INSTALLED_ANDROID_INFO_TXT_TARGET))
 
 # Copy compatibility metadata to the device.
 
