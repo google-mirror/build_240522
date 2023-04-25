@@ -16,6 +16,23 @@
       "message": "Uploaded PS3 that reverts dexpreopt script and zip files to product intermediate directory. I found that the script includes the target product name in it. So it must be copied to the product intermediate directory.",
       "revId": "d503ac9cb37b7e68412f01032d9500ef22b56d28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cedaf01e_54a52e63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-04-25T09:10:25Z",
+      "side": 1,
+      "message": "I need more investigation on dexpreopt.config file. With the bootclasspath list included in the config file, this must be product specific instead of common.",
+      "revId": "d503ac9cb37b7e68412f01032d9500ef22b56d28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
