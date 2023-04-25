@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "556a243d_8b174bfc",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-25T17:51:06Z",
+      "side": 1,
+      "message": "The vendor partition may be being built in a different build, or replaced at runtime -- why would this property be safe in the system partition?",
+      "range": {
+        "startLine": 350,
+        "startChar": 59,
+        "endLine": 350,
+        "endChar": 79
+      },
+      "revId": "5e499b05e20426d0e974b78336f1adc484104ae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
