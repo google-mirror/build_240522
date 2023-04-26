@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c9c977e_0046cce8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2023-04-26T17:33:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a43e08f_3b08038e",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "7ca3b50dfc4efbf62596a2e985b70ad02a80451d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14c07fe9_5b648a66",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-26T17:26:50Z",
       "side": 1,
       "message": "AB OTA, as we already have a flag for non-AB",
+      "range": {
+        "startLine": 253,
+        "startChar": 60,
+        "endLine": 253,
+        "endChar": 63
+      },
+      "revId": "7ca3b50dfc4efbf62596a2e985b70ad02a80451d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b733cdf_8c64cb09",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2023-04-26T17:33:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14c07fe9_5b648a66",
       "range": {
         "startLine": 253,
         "startChar": 60,
