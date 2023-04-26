@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a01a789_297f3249",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-04-26T10:48:06Z",
+      "side": 1,
+      "message": "Uploaded an opposite solution to make enforce_uses_libraries.status as product specific instead of making dexpreopt.config common.",
+      "revId": "762614fd4af4ef0029e710b4a97bc74ad8534c04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
