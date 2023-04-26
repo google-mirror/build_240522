@@ -178,6 +178,18 @@ def include_meta_in_list(item_list):
   return list(item_list) + ['META/*']
 
 
+def include_system_item_in_list(item_list):
+  """Include `SYSTEM/build.prop` files in the item list.
+
+  To ensure that `AddImagesToTargetFiles` for GRF vendor images, can still
+  access SYSTEM/build.prop to pass GetPartitionFingerprint check in BuildInfo
+  constructor.
+  """
+  if not item_list:
+    return None
+  return list(item_list) + ['SYSTEM/build.prop']
+
+
 def create_merged_package(temp_dir):
   """Merges two target files packages into one target files structure.
 
@@ -289,7 +301,7 @@ def rebuild_image_with_sepolicy(target_files_dir):
   merge_utils.CollectTargetFiles(
       input_zipfile_or_dir=OPTIONS.vendor_target_files,
       output_dir=vendor_target_files_dir,
-      item_list=include_meta_in_list(OPTIONS.vendor_item_list))
+      item_list=include_system_item_in_list(include_meta_in_list(OPTIONS.vendor_item_list)))
 
   # Copy the partition contents from the merged target-files archive to the
   # vendor target-files archive.
