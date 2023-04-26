@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d922ce8_1949c359",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2023-04-26T09:30:04Z",
+      "side": 1,
+      "message": "This change will make some impacts:\n1. The command will take much longer time.\n2. Once finalization phase 1 starts, developers have to update dumps for all architectures.\n3. The build variant is changed from user to userdebug. Steven, do you still need the script to ensure no ABI difference between user and userdebug?",
+      "revId": "139cc54d817fcbe57b1662b618e25bb1d30543b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
