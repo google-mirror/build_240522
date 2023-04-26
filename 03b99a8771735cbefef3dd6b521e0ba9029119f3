@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320c82b8_356122c3",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-04-26T21:14:49Z",
+      "side": 1,
+      "message": "PRODUCT_PACKAGES should be set in product makefiles, not here.\n\nI wonder if you should rework this to be an inherited product makefile instead of a flag.  Add build/make/target/product/angle.mk, and inside that put:\n```\nPRODUCT_PACKAGES :\u003d \\\n    libEGL_angle \\\n    libGLESv1_CM_angle \\\n    libGLESv2_angle\n\nPRODUCT_VENDOR_PROPERTIES :\u003d ro.gfx.angle.supported\u003dtrue\n```\n\nThen everywhere you currently use `USE_ANGLE :\u003d true` replace it with `$(call inherit-product, $(SRC_TARGET_DIR)/product/angle.mk)`",
+      "revId": "03b99a8771735cbefef3dd6b521e0ba9029119f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
