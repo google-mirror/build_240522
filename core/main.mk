@@ -40,31 +40,20 @@ include $(BUILD_SYSTEM)/clang/config.mk
 # Write the build number to a file so it can be read back in
 # without changing the command line every time.  Avoids rebuilds
 # when using ninja.
-$(shell mkdir -p $(SOONG_OUT_DIR) && \
-    echo -n $(BUILD_NUMBER) > $(SOONG_OUT_DIR)/build_number.tmp; \
-    if ! cmp -s $(SOONG_OUT_DIR)/build_number.tmp $(SOONG_OUT_DIR)/build_number.txt; then \
-        mv $(SOONG_OUT_DIR)/build_number.tmp $(SOONG_OUT_DIR)/build_number.txt; \
-    else \
-        rm $(SOONG_OUT_DIR)/build_number.tmp; \
-    fi)
 BUILD_NUMBER_FILE := $(SOONG_OUT_DIR)/build_number.txt
-.KATI_READONLY := BUILD_NUMBER_FILE
 $(KATI_obsolete_var BUILD_NUMBER,See https://android.googlesource.com/platform/build/+/master/Changes.md#BUILD_NUMBER)
+BUILD_HOSTNAME_FILE := $(SOONG_OUT_DIR)/build_hostname.txt
+$(KATI_obsolete_var BUILD_HOSTNAME,Use BUILD_HOSTNAME_FROM_FILE instead)
+
 $(BUILD_NUMBER_FILE):
-	touch $@
+	$(hide) touch -a $@
+
+$(BUILD_HOSTNAME_FILE):
+	$(hide) touch -a $@
 
 DATE_FROM_FILE := date -d @$(BUILD_DATETIME_FROM_FILE)
 .KATI_READONLY := DATE_FROM_FILE
 
-# Pick a reasonable string to use to identify files.
-ifeq ($(strip $(HAS_BUILD_NUMBER)),false)
-  # BUILD_NUMBER has a timestamp in it, which means that
-  # it will change every time.  Pick a stable value.
-  FILE_NAME_TAG := eng.$(BUILD_USERNAME)
-else
-  FILE_NAME_TAG := $(file <$(BUILD_NUMBER_FILE))
-endif
-.KATI_READONLY := FILE_NAME_TAG
 
 # Make an empty directory, which can be used to make empty jars
 EMPTY_DIRECTORY := $(OUT_DIR)/empty
