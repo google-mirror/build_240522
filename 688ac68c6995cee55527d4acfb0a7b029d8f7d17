@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "129c7394_38d1f48c",
+        "filename": "tools/releasetools/merge/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2023-04-26T06:51:37Z",
+      "side": 1,
+      "message": "Do we need to remove ab_partitions.txt for all targets?",
+      "range": {
+        "startLine": 309,
+        "startChar": 2,
+        "endLine": 311,
+        "endChar": 73
+      },
+      "revId": "688ac68c6995cee55527d4acfb0a7b029d8f7d17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
