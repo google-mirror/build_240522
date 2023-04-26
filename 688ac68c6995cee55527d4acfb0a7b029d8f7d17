@@ -22,6 +22,30 @@
       },
       "revId": "688ac68c6995cee55527d4acfb0a7b029d8f7d17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e4ba40_cffc86f1",
+        "filename": "tools/releasetools/merge/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1999985
+      },
+      "writtenOn": "2023-04-26T07:42:39Z",
+      "side": 1,
+      "message": "In my opinion, it is a waste of time running CheckAbOtaImages twice along with add_img_to_target_files.\nFurthermore, someone may disable system.img/product.img from rebuilding in this step to reduce time. But the missing images will violate CheckAbOtaImages.\nSo I\u0027d like to remove it for all targets.",
+      "parentUuid": "129c7394_38d1f48c",
+      "range": {
+        "startLine": 309,
+        "startChar": 2,
+        "endLine": 311,
+        "endChar": 73
+      },
+      "revId": "688ac68c6995cee55527d4acfb0a7b029d8f7d17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
