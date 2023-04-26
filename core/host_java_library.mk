@@ -93,13 +93,10 @@ $(full_classes_compiled_jar): \
 javac-check : $(full_classes_compiled_jar)
 javac-check-$(LOCAL_MODULE) : $(full_classes_compiled_jar)
 .PHONY: javac-check-$(LOCAL_MODULE)
-
 $(full_classes_combined_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
 $(full_classes_combined_jar): $(full_classes_compiled_jar) \
                               $(jar_manifest_file) \
                               $(full_static_java_libs) | $(MERGE_ZIPS)
-	$(if $(PRIVATE_JAR_MANIFEST), $(hide) sed -e "s/%BUILD_NUMBER%/$(BUILD_NUMBER_FROM_FILE)/" \
-            $(PRIVATE_JAR_MANIFEST) > $(dir $@)/manifest.mf)
 	$(MERGE_ZIPS) -j --ignore-duplicates $(if $(PRIVATE_JAR_MANIFEST),-m $(dir $@)/manifest.mf) \
             $(if $(PRIVATE_DONT_DELETE_JAR_META_INF),,-stripDir META-INF -zipToNotStrip $<) \
             $@ $< $(PRIVATE_STATIC_JAVA_LIBRARIES)
