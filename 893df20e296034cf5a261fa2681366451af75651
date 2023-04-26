@@ -51,6 +51,24 @@
       "parentUuid": "81b545c6_4a453ab7",
       "revId": "893df20e296034cf5a261fa2681366451af75651",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff7318b_0a064ff3",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-04-26T19:21:14Z",
+      "side": 1,
+      "message": "Obsoleting an old variable is useful when the OEM needs to make a change to continue getting the behavior they already had.  Maybe KATI_deprecated_var instead, which will make it a warning?",
+      "parentUuid": "1c3c7a69_a26d4769",
+      "revId": "893df20e296034cf5a261fa2681366451af75651",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
