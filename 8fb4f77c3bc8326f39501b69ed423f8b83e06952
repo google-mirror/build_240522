@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27ede850_aa5a8856",
+        "filename": "tools/finalization/environment.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-04-26T11:44:46Z",
+      "side": 1,
+      "message": "Can you make this something other than 35 to avoid folks assuming it will be 35? I think there\u0027s a fair chance it won\u0027t be -- maybe setting it to 99 or something?",
+      "revId": "8fb4f77c3bc8326f39501b69ed423f8b83e06952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "822f0d28_6586fea7",
+        "filename": "tools/finalization/environment.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-04-26T11:44:46Z",
+      "side": 1,
+      "message": "This is going to be old fairly soon. Is there a reason it needs to be set to 8 here? Can we set it to a much higher number than we\u0027ll probably need?",
+      "revId": "8fb4f77c3bc8326f39501b69ed423f8b83e06952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
