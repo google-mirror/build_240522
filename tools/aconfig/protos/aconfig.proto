@@ -12,12 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License
 
-// Placeholder proto file. Will be replaced by actual contents.
+// This is the schema definition for of Aconfig files. Modifications need to be
+// either backwards compatible, or include updates to all Aconfig files in the
+// Android tree.
 
 syntax = "proto3";
 
 package android.aconfig;
 
-message Placeholder {
-  string name = 1;
-}
+message flag {
+  string id = 1;
+  string description = 2;
+  bool value = 3;
+};
+
+message flags {
+  repeated flag flag = 1;
+};
