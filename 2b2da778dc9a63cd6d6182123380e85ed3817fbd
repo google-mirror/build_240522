@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bea3c9a_b4a896b9",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-04-26T17:48:32Z",
+      "side": 1,
+      "message": "check if OPTIONS.max_thread is specified first",
+      "range": {
+        "startLine": 987,
+        "startChar": 47,
+        "endLine": 987,
+        "endChar": 58
+      },
+      "revId": "2b2da778dc9a63cd6d6182123380e85ed3817fbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
