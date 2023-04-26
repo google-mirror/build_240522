@@ -1,0 +1,291 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e82dd8b_f6898ec4",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "This is used outside of `dist-for-goals`, then we just name it `apkcerts.txt` for dist. Let\u0027s just remove this instead and name it `apkcerts.txt` everywhere.",
+      "range": {
+        "startLine": 648,
+        "startChar": 25,
+        "endLine": 648,
+        "endChar": 38
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3e5ab57_b6caef1e",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 5539,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "Similar here, but we are passing this directly into dist-for-goals. I\u0027d lean towards just setting `name` to `$(TARGET_PRODUCT)-target_files`, and add the FILE_NAME_TAG as a rename in the dist-for-goals line.",
+      "range": {
+        "startLine": 5539,
+        "startChar": 28,
+        "endLine": 5539,
+        "endChar": 42
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78eb7520_a4f06ffc",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6330,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "Here too (though I don\u0027t even see the dist-for-goals call?)",
+      "range": {
+        "startLine": 6330,
+        "startChar": 28,
+        "endLine": 6330,
+        "endChar": 41
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49912072_81395798",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6350,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "and here",
+      "range": {
+        "startLine": 6350,
+        "startChar": 37,
+        "endLine": 6350,
+        "endChar": 50
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "354ac0da_eb5ac804",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6371,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "Same here",
+      "range": {
+        "startLine": 6371,
+        "startChar": 36,
+        "endLine": 6371,
+        "endChar": 49
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2bb74e5_be1d9b44",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6473,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "Sam here",
+      "range": {
+        "startLine": 6471,
+        "startChar": 0,
+        "endLine": 6473,
+        "endChar": 81
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f119fcb3_526fb77e",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6548,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "Same here",
+      "range": {
+        "startLine": 6548,
+        "startChar": 21,
+        "endLine": 6548,
+        "endChar": 34
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f8ab29_38e63b8b",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6601,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "Same here (and it goes on, I\u0027m going to stop commenting in this file)",
+      "range": {
+        "startLine": 6599,
+        "startChar": 0,
+        "endLine": 6601,
+        "endChar": 103
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61127c0c_9e94bf7a",
+        "filename": "core/host_java_library.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "I don\u0027t see this functionality being used anymore, should we remove it instead?",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 60
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c79223db_f3658048",
+        "filename": "core/java.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "Same here",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 60
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53d7628_6647de53",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "`touch -a` really isn\u0027t doing anything here (effectively just creates the file if it doesn\u0027t exist, but it really ought to exist). I wonder if marking these as .KATI_RESTAT would make more sense -- at least then we\u0027re telling ninja that we may not update these files. At the end of the day I guess it doesn\u0027t really matter, since we\u0027ll only run these once to get them into the ninja_log, then never again.\n\nnit: $(hide) is a no-op and unnecessary",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 49,
+        "endChar": 20
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b864183_6401d0b2",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "We should be marking FILE_NAME_TAG as obsolete here too",
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e50a070_1846d0b7",
+        "filename": "core/tasks/sdk-addon.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-26T14:23:50Z",
+      "side": 1,
+      "message": "This is used in a bunch of non-dist locations. From a brief glance that seems fine, but it\u0027s not clear whether it\u0027s being embedded somewhere too (some of the SDK outputs have embedded version-like numbers in the compressed directory trees, but that\u0027s usually API number IIRC)",
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
