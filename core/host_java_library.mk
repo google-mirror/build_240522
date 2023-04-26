@@ -93,7 +93,9 @@ $(full_classes_compiled_jar): \
 javac-check : $(full_classes_compiled_jar)
 javac-check-$(LOCAL_MODULE) : $(full_classes_compiled_jar)
 .PHONY: javac-check-$(LOCAL_MODULE)
-
+ifeq ($(strip $(HAS_BUILD_NUMBER)),true)
+$(full_classes_combined_jar): $(BUILD_NUMBER_FILE)
+endif
 $(full_classes_combined_jar): PRIVATE_DONT_DELETE_JAR_META_INF := $(LOCAL_DONT_DELETE_JAR_META_INF)
 $(full_classes_combined_jar): $(full_classes_compiled_jar) \
                               $(jar_manifest_file) \
