@@ -20,7 +20,7 @@ ifeq ($(TARGET_BUILD_TYPE),debug)
 	name := $(name)_debug
 endif
 
-name := $(name)-flashable-$(FILE_NAME_TAG)-with-license
+name := $(name)-flashable-FILE_NAME_TAG-with-license
 
 with_license_intermediates := \
 	$(call intermediates-dir-for,PACKAGING,with_license)
