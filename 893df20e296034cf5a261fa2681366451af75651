@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2eb8423_d86651ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-04-26T17:20:34Z",
+      "side": 1,
+      "message": "a",
+      "revId": "893df20e296034cf5a261fa2681366451af75651",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81b545c6_4a453ab7",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-04-26T16:59:47Z",
       "side": 1,
       "message": "This is going to cause a lot of churn for OEMs and doesn\u0027t seem necessary, maybe leave this out?",
+      "revId": "893df20e296034cf5a261fa2681366451af75651",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c3c7a69_a26d4769",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-04-26T17:20:34Z",
+      "side": 1,
+      "message": "gkaiser@ was asking why the changes were needed internally, I said:\n\n\u003e standard practice to make configs an error when you remove them. otherwise, there is no clear signal to device owners, old configs add noise, people might waste time trying to set them in order to fix issues, etc..\n\nAre you sure? I could change this text to just say \"remove the line setting this\"? Anyway, I thought you wanted it. If you don\u0027t care about this, I can save some hassle, yeah",
+      "parentUuid": "81b545c6_4a453ab7",
       "revId": "893df20e296034cf5a261fa2681366451af75651",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
