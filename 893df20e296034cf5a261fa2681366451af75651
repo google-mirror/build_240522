@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b545c6_4a453ab7",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-04-26T16:59:47Z",
+      "side": 1,
+      "message": "This is going to cause a lot of churn for OEMs and doesn\u0027t seem necessary, maybe leave this out?",
+      "revId": "893df20e296034cf5a261fa2681366451af75651",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
