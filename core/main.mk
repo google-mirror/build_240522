@@ -320,6 +320,16 @@ ADDITIONAL_VENDOR_PROPERTIES += \
     ro.board.platform=$(TARGET_BOARD_PLATFORM) \
     ro.hwui.use_vulkan=$(TARGET_USES_VULKAN)
 
+# by default, USE_ANGLE is false
+USE_ANGLE ?= false
+
+ifeq ($(USE_ANGLE),true)
+PRODUCT_PACKAGES += \
+    libEGL_angle \
+    libGLESv1_CM_angle \
+    libGLESv2_angle
+endif
+
 ifdef TARGET_SCREEN_DENSITY
 ADDITIONAL_VENDOR_PROPERTIES += \
     ro.sf.lcd_density=$(TARGET_SCREEN_DENSITY)
