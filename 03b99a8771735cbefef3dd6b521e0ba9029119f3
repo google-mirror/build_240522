@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a87a7f3d_13b172d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941946
+      },
+      "writtenOn": "2023-04-26T21:40:08Z",
+      "side": 1,
+      "message": "In the CL that introduced `USE_ANGLE` in selected device: http://ag/17969286, we also add `BOARD_USE_ANGLE` in `BoardConfig-common.mk`. Shall we add `BOARD_USE_ANGLE` in `build/core/board_config.mk`, too?\n\nShall we remove the `USE_ANGLE` definitions in these device.mk files to avoid duplicated definitions?\nhttp://cs/udc-dev/device/google/gs101/device.mk?l\u003d192\nhttp://cs/udc-dev/device/google/gs201/device.mk?l\u003d214",
+      "revId": "03b99a8771735cbefef3dd6b521e0ba9029119f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "320c82b8_356122c3",
         "filename": "core/main.mk",
         "patchSetId": 3
