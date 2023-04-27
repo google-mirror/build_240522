@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ea55e9f_a0b0d2b1",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e82dd8b_f6898ec4",
+      "range": {
+        "startLine": 648,
+        "startChar": 25,
+        "endLine": 648,
+        "endChar": 38
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3e5ab57_b6caef1e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-26T14:23:50Z",
       "side": 1,
       "message": "Similar here, but we are passing this directly into dist-for-goals. I\u0027d lean towards just setting `name` to `$(TARGET_PRODUCT)-target_files`, and add the FILE_NAME_TAG as a rename in the dist-for-goals line.",
+      "range": {
+        "startLine": 5539,
+        "startChar": 28,
+        "endLine": 5539,
+        "endChar": 42
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0caa76eb_892131c7",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 5539,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3e5ab57_b6caef1e",
       "range": {
         "startLine": 5539,
         "startChar": 28,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e202684c_67937253",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6330,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:30:40Z",
+      "side": 1,
+      "message": "core/main.mk has it. done.",
+      "parentUuid": "78eb7520_a4f06ffc",
+      "range": {
+        "startLine": 6330,
+        "startChar": 28,
+        "endLine": 6330,
+        "endChar": 41
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49912072_81395798",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-04-26T14:23:50Z",
       "side": 1,
       "message": "and here",
+      "range": {
+        "startLine": 6350,
+        "startChar": 37,
+        "endLine": 6350,
+        "endChar": 50
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03c6efb4_a0b29543",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6350,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49912072_81395798",
       "range": {
         "startLine": 6350,
         "startChar": 37,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7cffb50_0fc12eee",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6371,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "354ac0da_eb5ac804",
+      "range": {
+        "startLine": 6371,
+        "startChar": 36,
+        "endLine": 6371,
+        "endChar": 49
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2bb74e5_be1d9b44",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-04-26T14:23:50Z",
       "side": 1,
       "message": "Sam here",
+      "range": {
+        "startLine": 6471,
+        "startChar": 0,
+        "endLine": 6473,
+        "endChar": 81
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40395d5f_85bf0a15",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6473,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2bb74e5_be1d9b44",
       "range": {
         "startLine": 6471,
         "startChar": 0,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a35a453_14e9df3d",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6548,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f119fcb3_526fb77e",
+      "range": {
+        "startLine": 6548,
+        "startChar": 21,
+        "endLine": 6548,
+        "endChar": 34
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1f8ab29_38e63b8b",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-04-26T14:23:50Z",
       "side": 1,
       "message": "Same here (and it goes on, I\u0027m going to stop commenting in this file)",
+      "range": {
+        "startLine": 6599,
+        "startChar": 0,
+        "endLine": 6601,
+        "endChar": 103
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd7dbf0d_6a6fc3d0",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6601,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1f8ab29_38e63b8b",
       "range": {
         "startLine": 6599,
         "startChar": 0,
@@ -210,6 +402,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6448cf10_74ef7cc5",
+        "filename": "core/host_java_library.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:30:40Z",
+      "side": 1,
+      "message": "I found the only use-case: https://cs.android.com/android/platform/superproject/+/master:cts/tools/release-parser/MANIFEST.mf;l\u003d3?q\u003d%25BUILD_NUMBER%25\u0026sq\u003d\u0026ss\u003dandroid%2Fplatform%2Fsuperproject",
+      "parentUuid": "61127c0c_9e94bf7a",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 60
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c79223db_f3658048",
         "filename": "core/java.mk",
         "patchSetId": 2
@@ -221,6 +437,30 @@
       "writtenOn": "2023-04-26T14:23:50Z",
       "side": 1,
       "message": "Same here",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 60
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd55d8c_db7f3b70",
+        "filename": "core/java.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:30:40Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "c79223db_f3658048",
       "range": {
         "startLine": 302,
         "startChar": 0,
@@ -254,6 +494,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5e4da04_e3ecf096",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c53d7628_6647de53",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 49,
+        "endChar": 20
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b864183_6401d0b2",
@@ -267,6 +531,24 @@
       "writtenOn": "2023-04-26T14:23:50Z",
       "side": 1,
       "message": "We should be marking FILE_NAME_TAG as obsolete here too",
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d14a400c_eadbfc68",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:30:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b864183_6401d0b2",
       "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
