@@ -15,10 +15,11 @@
  */
 
 use anyhow::{anyhow, Error, Result};
+use serde::{Deserialize, Serialize};
 
 use crate::protos::{ProtoFlag, ProtoFlags, ProtoOverride, ProtoOverrides};
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Flag {
     pub id: String,
     pub description: String,
@@ -26,6 +27,7 @@ pub struct Flag {
 }
 
 impl Flag {
+    #[allow(dead_code)] // only used in unit tests
     pub fn try_from_text_proto(text_proto: &str) -> Result<Flag> {
         let proto_flag: ProtoFlag = crate::protos::try_from_text_proto(text_proto)?;
         proto_flag.try_into()
@@ -51,13 +53,14 @@ impl TryFrom<ProtoFlag> for Flag {
     }
 }
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Override {
     pub id: String,
     pub value: bool,
 }
 
 impl Override {
+    #[allow(dead_code)] // only used in unit tests
     pub fn try_from_text_proto(text_proto: &str) -> Result<Override> {
         let proto_flag: ProtoOverride = crate::protos::try_from_text_proto(text_proto)?;
         proto_flag.try_into()
