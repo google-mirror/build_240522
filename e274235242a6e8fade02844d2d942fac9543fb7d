@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc7eb2fb_6e7e9d38",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 5289,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2023-04-27T17:50:07Z",
+      "side": 1,
+      "message": "are all these partitions in the format of vbmeta_{partition} ?",
+      "parentUuid": "54d39668_fa450981",
+      "range": {
+        "startLine": 5289,
+        "startChar": 0,
+        "endLine": 5289,
+        "endChar": 44
+      },
+      "revId": "e274235242a6e8fade02844d2d942fac9543fb7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e4894eb_4c39b444",
         "filename": "core/Makefile",
         "patchSetId": 9
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-27T17:16:38Z",
       "side": 1,
       "message": "Anyway we can take advantage of direct super super flashing feature in fastboot?",
+      "range": {
+        "startLine": 5292,
+        "startChar": 0,
+        "endLine": 5295,
+        "endChar": 36
+      },
+      "revId": "e274235242a6e8fade02844d2d942fac9543fb7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "895b21b8_41d8413a",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 5295,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2023-04-27T17:50:07Z",
+      "side": 1,
+      "message": "when parsing, we attempt to consolidate the update-super and dynamic partitions into an optimized_flash_super task, so this is taken care of in the code. I think David said he didn\u0027t want optimize_flash_super to be something we can directly invoke.",
+      "parentUuid": "2e4894eb_4c39b444",
       "range": {
         "startLine": 5292,
         "startChar": 0,
