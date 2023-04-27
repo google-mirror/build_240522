@@ -426,6 +426,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "701ff0f8_4761041a",
+        "filename": "core/host_java_library.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-27T00:43:29Z",
+      "side": 1,
+      "message": "That\u0027s using an Android.bp now, so I don\u0027t think it\u0027ll use this code anymore?",
+      "parentUuid": "6448cf10_74ef7cc5",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 60
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c79223db_f3658048",
         "filename": "core/java.mk",
         "patchSetId": 2
@@ -461,6 +485,30 @@
       "side": 1,
       "message": "ditto",
       "parentUuid": "c79223db_f3658048",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 60
+      },
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3351476_5f90071f",
+        "filename": "core/java.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-27T00:43:29Z",
+      "side": 1,
+      "message": "That only user was host-only, which this is for device code. (in addition to not in Make anymore that I mentioned in the other comment)",
+      "parentUuid": "afd55d8c_db7f3b70",
       "range": {
         "startLine": 302,
         "startChar": 0,
