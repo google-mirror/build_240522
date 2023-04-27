@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c526274_e135ab1f",
+        "filename": "core/config.mk",
+        "patchSetId": 20
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-04-27T19:21:59Z",
+      "side": 1,
+      "message": "I\u0027m not sure PRODUCT_SHIPPING_API_LEVEL is guaranteed to be defined. Maybe something like:\n\n```\nvsr_vendor_api_level :\u003d $(board_api_level)\nifdef PRODUCT_SHIPPING_API_LEVEL\nvsr_vendor_api_level :\u003d $(call math_min,$(PRODUCT_SHIPPING_API_LEVEL),$(board_api_level))\nendif\n```",
+      "range": {
+        "startLine": 384,
+        "startChar": 42,
+        "endLine": 384,
+        "endChar": 68
+      },
+      "revId": "3ac9cc1dc3cdfc3843bc52c0d191fd1b7b5fd0ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
