@@ -94,6 +94,30 @@
       },
       "revId": "688ac68c6995cee55527d4acfb0a7b029d8f7d17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ebca07b_8c095833",
+        "filename": "tools/releasetools/merge/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2023-04-27T02:31:57Z",
+      "side": 1,
+      "message": "I got it. But I think we should not skip `CheckAbOtaImages` by removing `ab_partitions.txt` since this makes `merge_target_files.py` and `add_img_to_target_files.py` depends on each other\u0027s implementation. A better way to do this might be adding an option `--skip_ab_ota_images_check` for `add_img_to_target_files.py`.",
+      "parentUuid": "41f4ccbf_1b23f088",
+      "range": {
+        "startLine": 309,
+        "startChar": 2,
+        "endLine": 311,
+        "endChar": 73
+      },
+      "revId": "688ac68c6995cee55527d4acfb0a7b029d8f7d17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
