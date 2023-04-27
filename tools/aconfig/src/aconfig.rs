@@ -16,7 +16,7 @@
 
 use anyhow::{anyhow, Error, Result};
 
-use crate::protos::{ProtoFlag, ProtoFlags};
+use crate::protos::{ProtoFlag, ProtoFlags, ProtoOverride, ProtoOverrides};
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct Flag {
@@ -51,12 +51,41 @@ impl TryFrom<ProtoFlag> for Flag {
     }
 }
 
+#[derive(Debug, PartialEq, Eq)]
+pub struct Override {
+    pub id: String,
+    pub value: bool,
+}
+
+impl Override {
+    pub fn try_from_text_proto(text_proto: &str) -> Result<Override> {
+        let proto_flag: ProtoOverride = crate::protos::try_from_text_proto(text_proto)?;
+        proto_flag.try_into()
+    }
+
+    pub fn try_from_text_proto_list(text_proto: &str) -> Result<Vec<Override>> {
+        let proto: ProtoOverrides = crate::protos::try_from_text_proto(text_proto)?;
+        proto.override_.into_iter().map(|proto_flag| proto_flag.try_into()).collect()
+    }
+}
+
+impl TryFrom<ProtoOverride> for Override {
+    type Error = Error;
+
+    fn try_from(proto: ProtoOverride) -> Result<Self, Self::Error> {
+        if proto.id == String::default() {
+            return Err(anyhow!("missing 'id' field"));
+        }
+        Ok(Override { id: proto.id, value: proto.value })
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn test_try_from_text_proto() {
+    fn test_flag_try_from_text_proto() {
         let expected = Flag {
             id: "1234".to_owned(),
             description: "Description of the flag".to_owned(),
@@ -74,7 +103,7 @@ mod tests {
     }
 
     #[test]
-    fn test_try_from_text_proto_missing_field() {
+    fn test_flag_try_from_text_proto_missing_field() {
         let s = r#"
         description: "Description of the flag"
         value: true
@@ -84,7 +113,7 @@ mod tests {
     }
 
     #[test]
-    fn test_try_from_text_proto_list() {
+    fn test_flag_try_from_text_proto_list() {
         let expected = vec![
             Flag { id: "a".to_owned(), description: "A".to_owned(), value: true },
             Flag { id: "b".to_owned(), description: "B".to_owned(), value: false },
@@ -103,6 +132,19 @@ mod tests {
         }
         "#;
         let actual = Flag::try_from_text_proto_list(s).unwrap();
+
+        assert_eq!(expected, actual);
+    }
+
+    #[test]
+    fn test_override_try_from_text_proto_list() {
+        let expected = Override { id: "1234".to_owned(), value: true };
+
+        let s = r#"
+        id: "1234"
+        value: true
+        "#;
+        let actual = Override::try_from_text_proto(s).unwrap();
 
         assert_eq!(expected, actual);
     }

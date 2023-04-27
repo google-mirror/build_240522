@@ -21,7 +21,7 @@ use anyhow::Result;
 mod aconfig;
 mod protos;
 
-use aconfig::Flag;
+use aconfig::{Flag, Override};
 
 fn main() -> Result<()> {
     let flag = Flag::try_from_text_proto(r#"id: "a" description: "description of a" value: true"#)?;
@@ -30,5 +30,9 @@ fn main() -> Result<()> {
         r#"flag { id: "a" description: "description of a" value: true }"#,
     )?;
     println!("{:?}", flags);
+    let override_ = Override::try_from_text_proto(r#"id: "foo" value: true"#)?;
+    println!("{:?}", override_);
+    let overrides = Override::try_from_text_proto_list(r#"override { id: "foo" value: true }"#)?;
+    println!("{:?}", overrides);
     Ok(())
 }

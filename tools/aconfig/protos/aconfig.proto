@@ -29,3 +29,12 @@ message flag {
 message flags {
   repeated flag flag = 1;
 };
+
+message override {
+  string id = 1;
+  bool value = 2;
+};
+
+message overrides {
+  repeated override override = 1;
+};
