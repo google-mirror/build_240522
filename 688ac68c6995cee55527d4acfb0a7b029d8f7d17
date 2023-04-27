@@ -142,6 +142,30 @@
       },
       "revId": "688ac68c6995cee55527d4acfb0a7b029d8f7d17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "321d8c04_2811079d",
+        "filename": "tools/releasetools/merge/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2023-04-27T17:00:01Z",
+      "side": 1,
+      "message": "Yeah maybe it\u0027s not working for GRF devices, but new devices can benefit from the improvement.",
+      "parentUuid": "28d36b2e_b05b4d72",
+      "range": {
+        "startLine": 309,
+        "startChar": 2,
+        "endLine": 311,
+        "endChar": 73
+      },
+      "revId": "688ac68c6995cee55527d4acfb0a7b029d8f7d17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
