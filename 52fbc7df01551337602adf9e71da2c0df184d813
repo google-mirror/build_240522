@@ -33,6 +33,23 @@
       "message": "(they are missing the parent CL in automerger)",
       "revId": "52fbc7df01551337602adf9e71da2c0df184d813",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "268d850b_21709e51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-04-27T23:24:52Z",
+      "side": 1,
+      "message": "(this is STILL stuck in automerger ..)",
+      "revId": "52fbc7df01551337602adf9e71da2c0df184d813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
