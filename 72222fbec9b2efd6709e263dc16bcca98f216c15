@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86a5a41b_2dbeba74",
+        "filename": "core/main.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-04-27T21:41:09Z",
+      "side": 1,
+      "message": "should it be: \"executables and shared libraries alignment tests\"",
+      "range": {
+        "startLine": 350,
+        "startChar": 36,
+        "endLine": 350,
+        "endChar": 51
+      },
+      "revId": "72222fbec9b2efd6709e263dc16bcca98f216c15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
