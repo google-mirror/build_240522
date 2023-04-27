@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54d39668_fa450981",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 5289,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-04-27T17:16:38Z",
+      "side": 1,
+      "message": "These partitions are also vbmeta partitions, do we need the --apply-vbmeta flag? Also, these are custom vbmeta partitions so need the vbmeta_ prefix.\n\nFor example, if we define\n```\nBOARD_AVB_VBMETA_CUSTOM_PARTITIONS :\u003d vendor_dlkm\n```\n\nThen the build system would generate output image with name `vbmeta_vendor_dlkm.img` , so make sure you manually add the vbmeta_ prefix.",
+      "range": {
+        "startLine": 5289,
+        "startChar": 0,
+        "endLine": 5289,
+        "endChar": 44
+      },
+      "revId": "e274235242a6e8fade02844d2d942fac9543fb7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e4894eb_4c39b444",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 5295,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-04-27T17:16:38Z",
+      "side": 1,
+      "message": "Anyway we can take advantage of direct super super flashing feature in fastboot?",
+      "range": {
+        "startLine": 5292,
+        "startChar": 0,
+        "endLine": 5295,
+        "endChar": 36
+      },
+      "revId": "e274235242a6e8fade02844d2d942fac9543fb7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
