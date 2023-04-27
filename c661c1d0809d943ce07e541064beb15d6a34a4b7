@@ -568,6 +568,24 @@
       "message": "This is used in a bunch of non-dist locations. From a brief glance that seems fine, but it\u0027s not clear whether it\u0027s being embedded somewhere too (some of the SDK outputs have embedded version-like numbers in the compressed directory trees, but that\u0027s usually API number IIRC)",
       "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d1f3ac9_de183aed",
+        "filename": "core/tasks/sdk-addon.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-04-27T00:33:13Z",
+      "side": 1,
+      "message": "I think it is handled in https://android-review.git.corp.google.com/c/platform/development/+/2567130",
+      "parentUuid": "2e50a070_1846d0b7",
+      "revId": "c661c1d0809d943ce07e541064beb15d6a34a4b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
