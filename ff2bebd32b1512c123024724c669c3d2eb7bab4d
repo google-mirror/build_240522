@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01e7a9cc_f3a825d0",
+        "filename": "Changes.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-27T10:29:20Z",
+      "side": 1,
+      "message": "Ok. This is clearer. Thanks.",
+      "parentUuid": "c9b210eb_9f7f4ae6",
+      "range": {
+        "startLine": 502,
+        "startChar": 0,
+        "endLine": 502,
+        "endChar": 51
+      },
+      "revId": "ff2bebd32b1512c123024724c669c3d2eb7bab4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d18dd95_4acaac65",
