@@ -118,6 +118,30 @@
       },
       "revId": "688ac68c6995cee55527d4acfb0a7b029d8f7d17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d36b2e_b05b4d72",
+        "filename": "tools/releasetools/merge/merge_target_files.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1999985
+      },
+      "writtenOn": "2023-04-27T03:01:57Z",
+      "side": 1,
+      "message": "OK. Let\u0027s handle CheckAbOtaImages in another CL.\nBut I don\u0027t think we can change add_img_to_target_files.py because the one used by rebuild_image_with_sepolicy is fronzed.",
+      "parentUuid": "6ebca07b_8c095833",
+      "range": {
+        "startLine": 309,
+        "startChar": 2,
+        "endLine": 311,
+        "endChar": 73
+      },
+      "revId": "688ac68c6995cee55527d4acfb0a7b029d8f7d17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
