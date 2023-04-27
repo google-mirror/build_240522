@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "095e9896_6a71e28b",
+        "filename": "Changes.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-27T05:31:15Z",
+      "side": 1,
+      "message": "This is the same as \n\n```\n$(call dist-for-goals,foo,bar.zip:bar-FILE_NAME_TAG.zip)\n```\n\nright?\n\nThen why do we need the below line?",
+      "range": {
+        "startLine": 502,
+        "startChar": 0,
+        "endLine": 502,
+        "endChar": 51
+      },
+      "revId": "ff2bebd32b1512c123024724c669c3d2eb7bab4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d18dd95_4acaac65",
+        "filename": "packaging/distdir.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-27T05:31:15Z",
+      "side": 1,
+      "message": "Ok, this is where the magic happens. Can this be something like `FILE_NAME_TAG_PLACEHOLDER` to explicitly say that the placeholder string will be replaced with a real string?\n\nAlso, I wonder how will you make sure that `$(FILE_NAME_TAG)` is not used in the path. Do we need to have something like in main.mk?\n\n````\nFILE_NAME_TAG \u003d $(error some error message)\n```\n\nNote that it\u0027s not defined using `:\u003d`, but `\u003d`",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 90
+      },
+      "revId": "ff2bebd32b1512c123024724c669c3d2eb7bab4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
