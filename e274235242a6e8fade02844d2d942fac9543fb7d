@@ -93,6 +93,30 @@
       },
       "revId": "e274235242a6e8fade02844d2d942fac9543fb7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b891fc0_88fb534a",
+        "filename": "core/Makefile",
+        "patchSetId": 9
+      },
+      "lineNbr": 5295,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-04-27T18:03:16Z",
+      "side": 1,
+      "message": "Yeah, the host tool optimizes this at its discretion.",
+      "parentUuid": "895b21b8_41d8413a",
+      "range": {
+        "startLine": 5292,
+        "startChar": 0,
+        "endLine": 5295,
+        "endChar": 36
+      },
+      "revId": "e274235242a6e8fade02844d2d942fac9543fb7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
