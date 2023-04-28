@@ -34,6 +34,24 @@
       "parentUuid": "e4e3ef49_5429d1c6",
       "revId": "b8e194babbe443ada93e803a6ab4321fa399c5ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27f5fd75_9661330b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-04-28T18:39:43Z",
+      "side": 1,
+      "message": "So my understanding is:\n1. These find commands should end up in the find-emulator. If they aren\u0027t using the find emulator but rather using /usr/bin/find, that\u0027s a bug we have to fix separately.\n2. If the find emulator is being used, but the outputs are not in sorted order, we can fix the emulator to return sorted results for these find patterns.\n\nApart from these two points, what is the purpose of the already existing sort command in `$(sort $(shell ...))` ? it seems like that `sort` doesn\u0027t help us today anyway since kati seems to be invalidating when the inner `$(shell ...)` results change.\n\nAnd separately - wouldn\u0027t it be more readable to put the `sort` command in the command line to make it explicit that the results are being sorted?",
+      "parentUuid": "c1b0e93f_0312d69d",
+      "revId": "b8e194babbe443ada93e803a6ab4321fa399c5ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
