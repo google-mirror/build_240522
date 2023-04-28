@@ -16,6 +16,24 @@
       "message": "Like I mentioned in that other change, I\u0027d expect for this to push these find commands out of the find emulator (https://github.com/google/kati/blob/master/src/find.cc). Unless they were already not ending up there, which is a bug, though maybe not a high priority one.\n\nAn alternative would either be forcing sorts in the find emulator (we do this for wildcards and findleaves, but not normal commands IIRC), or teaching the find emulator about one or both of these patterns. Either one of those would likely help other cases in vendor code too.",
       "revId": "b8e194babbe443ada93e803a6ab4321fa399c5ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b0e93f_0312d69d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156110
+      },
+      "writtenOn": "2023-04-28T17:02:02Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with find vs the find emulator.  Is there a straightforward way to determine if find is getting used instead of the emulator?",
+      "parentUuid": "e4e3ef49_5429d1c6",
+      "revId": "b8e194babbe443ada93e803a6ab4321fa399c5ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
