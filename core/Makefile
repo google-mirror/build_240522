@@ -3743,7 +3743,8 @@ $(call declare-container-license-deps,$(INSTALLED_SYSTEM_EXTIMAGE_TARGET),$(INTE
 systemextimage-nodeps senod: | $(INTERNAL_USERIMAGES_DEPS)
 	$(build-system_extimage-target)
 
-sync: $(INTERNAL_SYSTEM_EXTIMAGE_FILES)
+.PHONY: syncext
+sync syncext: $(INTERNAL_SYSTEM_EXTIMAGE_FILES)
 
 else ifdef BOARD_PREBUILT_SYSTEM_EXTIMAGE
 INSTALLED_SYSTEM_EXTIMAGE_TARGET := $(PRODUCT_OUT)/system_ext.img
