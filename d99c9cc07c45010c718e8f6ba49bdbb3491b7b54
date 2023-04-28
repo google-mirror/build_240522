@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "163de67e_0d21bf46",
+        "filename": "target/product/angle.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-28T18:30:37Z",
+      "side": 1,
+      "message": "`:\u003d` and `+\u003d` are identical if this file is used like this, the only time they\u0027re different is if `include` is used instead (in which case `PRODUCT_VENDOR_PROPERTIES` would also need `+\u003d`, and the makefile using include needs to be careful to append as well)",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 61
+      },
+      "revId": "d99c9cc07c45010c718e8f6ba49bdbb3491b7b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
