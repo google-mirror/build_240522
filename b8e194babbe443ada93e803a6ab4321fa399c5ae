@@ -52,6 +52,24 @@
       "parentUuid": "c1b0e93f_0312d69d",
       "revId": "b8e194babbe443ada93e803a6ab4321fa399c5ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a04efd3_94fd816a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-04-28T18:54:31Z",
+      "side": 1,
+      "message": "\u003e I\u0027m not familiar with find vs the find emulator. Is there a straightforward way to determine if find is getting used instead of the emulator?\n\nNot a great one -- if it shows up in out/verbose.log.gz as a top time spent, the find emulator isn\u0027t being used, but we only print out the top 5 by default. There is a kati tool that you can build (it\u0027s a test, and I think we build it in aosp-build-tools) that lets you pass in a command line to run with the emulator, but IIRC it can be kinda tricky to quote things properly.\n\nhttps://github.com/google/kati/blob/master/src/find_test.cc (the find emulator is in `find.cc` next to that)\n\n\u003e it seems like that sort doesn\u0027t help us today anyway since kati seems to be invalidating when the inner $(shell ...) results change.\n\nMost filesystems will only change the order if you\u0027ve made significant changes to the directory, so it is effectively stable under no changes. The sort is there to provide more reproducible builds between machines and after large changes.\n\n\u003e And separately - wouldn\u0027t it be more readable to put the sort command in the command line to make it explicit that the results are being sorted?\n\nAFAIK, we never implemented support for parsing pipes and other tools in the find emulator, so it\u0027s a hard block on the find emulator. Readability: 🤷‍♂️ it\u0027s a bit of a wash, there\u0027s a lot of both make and shell going on in these files (probably more make). Technically make\u0027s `$(sort` is closer to `sort -u` too, but that shouldn\u0027t matter in most `find` cases.",
+      "parentUuid": "27f5fd75_9661330b",
+      "revId": "b8e194babbe443ada93e803a6ab4321fa399c5ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
