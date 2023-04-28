@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a72894c_7c0046e6",
+        "filename": "tools/aconfig/src/cache.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-04-28T12:21:43Z",
+      "side": 1,
+      "message": "Working with serde is so much cleaner than protobuf. Should we just switch to json or xml for the aconfig and override files?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 33
+      },
+      "revId": "b94a996e7bf1398a038dcc970d9d26f64e18c4c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
