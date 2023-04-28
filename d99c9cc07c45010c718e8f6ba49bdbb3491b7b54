@@ -22,6 +22,30 @@
       },
       "revId": "d99c9cc07c45010c718e8f6ba49bdbb3491b7b54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7098bb34_f6e5f78a",
+        "filename": "target/product/angle.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-04-28T18:35:33Z",
+      "side": 1,
+      "message": "Thanks for pointing out. I have fixed both locations!",
+      "parentUuid": "163de67e_0d21bf46",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 61
+      },
+      "revId": "d99c9cc07c45010c718e8f6ba49bdbb3491b7b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
