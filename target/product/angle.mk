@@ -17,7 +17,7 @@
 # To include ANGLE drivers into the build, add
 # $(call inherit-product, $(SRC_TARGET_DIR)/product/angle.mk) to the Makefile.
 
-PRODUCT_PACKAGES := \
+PRODUCT_PACKAGES += \
     libEGL_angle \
     libGLESv1_CM_angle \
     libGLESv2_angle
