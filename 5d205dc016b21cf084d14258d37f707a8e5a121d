@@ -16,6 +16,24 @@
       "message": "Seems good to me that the script is surfacing issues of this sort. Maybe you should use a random int for the value 😊",
       "revId": "5d205dc016b21cf084d14258d37f707a8e5a121d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cca2f09_837dbe56",
+        "filename": "tools/finalization/environment.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2023-04-29T00:11:55Z",
+      "side": 1,
+      "message": "Yeah, that was my thinking as well.\nThe way shell works, it\u0027s hard to both make it random, and share across multiple scripts.\nIdeas are welcome.",
+      "parentUuid": "507eccb8_a178183a",
+      "revId": "5d205dc016b21cf084d14258d37f707a8e5a121d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
