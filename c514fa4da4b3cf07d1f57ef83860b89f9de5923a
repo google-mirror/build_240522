@@ -70,6 +70,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9afe716f_04704af6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-05-02T16:34:05Z",
+      "side": 1,
+      "message": "gentle ping for review",
+      "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02d80673_abbbe55c",
@@ -83,6 +100,24 @@
       "writtenOn": "2023-05-02T16:32:30Z",
       "side": 1,
       "message": "should we use be the team email here?",
+      "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa580638_0b3ab02c",
+        "filename": "target/product/OWNERS",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-05-02T16:34:05Z",
+      "side": 1,
+      "message": "probably shouldn\u0027t, we should avoid giving ownership to folks with no necessary context.",
+      "parentUuid": "02d80673_abbbe55c",
       "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
