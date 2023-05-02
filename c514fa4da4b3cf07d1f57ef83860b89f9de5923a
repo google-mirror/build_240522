@@ -190,6 +190,24 @@
       "parentUuid": "afa713f6_495298fe",
       "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1749d40_1f2ee97b",
+        "filename": "target/product/angle.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-05-02T16:57:44Z",
+      "side": 1,
+      "message": "Yes.  If you always want the ANGLE binaries included they can go in base_vendor.mk, and then this makefile can be used to enable ANGLE.  If you only want it on some products then use angle_supported.mk and angle_enabled.mk.",
+      "parentUuid": "478d6c50_b38bfc2f",
+      "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
