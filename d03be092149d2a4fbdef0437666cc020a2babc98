@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ed59a3_6f0eb4b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-05-02T10:28:43Z",
+      "side": 1,
+      "message": "Do you have some examples? The attached bug isn\u0027t really relevant",
+      "revId": "d03be092149d2a4fbdef0437666cc020a2babc98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
