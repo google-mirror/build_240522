@@ -46,6 +46,30 @@
       },
       "revId": "d99c9cc07c45010c718e8f6ba49bdbb3491b7b54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3481e22d_5a5a5c2a",
+        "filename": "target/product/angle.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-05-02T20:21:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7098bb34_f6e5f78a",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 61
+      },
+      "revId": "d99c9cc07c45010c718e8f6ba49bdbb3491b7b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

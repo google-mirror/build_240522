@@ -159,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6b6844a_aa655ec3",
+        "filename": "target/product/OWNERS",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-05-02T20:21:55Z",
+      "side": 1,
+      "message": "I think it makes sense to have the churn on this patch given that this is the first time we are trying to define such file. If we make larger changes we should act as good citizens to ask for review from the build team.\n\nBut if we only need to make minor fix, e.g. change `:\u003d` to `+\u003d`, updating the OWNERS file would allow us to do so quickly and improve our engineering velocity.",
+      "parentUuid": "04e1f3d6_501c55eb",
+      "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afa713f6_495298fe",
         "filename": "target/product/angle.mk",
         "patchSetId": 5
@@ -206,6 +224,24 @@
       "side": 1,
       "message": "Yes.  If you always want the ANGLE binaries included they can go in base_vendor.mk, and then this makefile can be used to enable ANGLE.  If you only want it on some products then use angle_supported.mk and angle_enabled.mk.",
       "parentUuid": "478d6c50_b38bfc2f",
+      "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c96108ff_4f8517fb",
+        "filename": "target/product/angle.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-05-02T20:21:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1749d40_1f2ee97b",
       "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
