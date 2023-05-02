@@ -154,6 +154,24 @@
       "message": "What\u0027s the point of combining this method with `USE_ANGLE`?  Anywhere that was setting `USE_ANGLE` should just inherit from this product makefile.  If you want to separate \"angle supported\" from \"angle enabled\" then have two makefiles, angle_supported.mk and angle_enabled.mk.",
       "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "478d6c50_b38bfc2f",
+        "filename": "target/product/angle.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-05-02T16:55:56Z",
+      "side": 1,
+      "message": "so we would like to make sure that ANGLE binaries can be built into the image when this makefile is inherited, but we want them to be used by default as GLES drivers when `USE_ANGLE` is true, sounds like we can achieve that by doing two makefile as you suggested, do I understand correctly?",
+      "parentUuid": "afa713f6_495298fe",
+      "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
