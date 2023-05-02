@@ -16,6 +16,24 @@
       "message": "Do you have some examples? The attached bug isn\u0027t really relevant",
       "revId": "d03be092149d2a4fbdef0437666cc020a2babc98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e7ab21d_bd791ddb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2023-05-02T15:35:53Z",
+      "side": 1,
+      "message": "Automation script:\nhttps://source.corp.google.com/android-internal/build/make/tools/finalization/finalize-aidl-vndk-sdk-resources.sh;l\u003d146-147\n\nResources:\nhttps://source.corp.google.com/android-internal/frameworks/base/core/java/android/os/Build.java;l\u003d496?q\u003dRESOURCES_SDK_INT",
+      "parentUuid": "73ed59a3_6f0eb4b4",
+      "revId": "d03be092149d2a4fbdef0437666cc020a2babc98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
