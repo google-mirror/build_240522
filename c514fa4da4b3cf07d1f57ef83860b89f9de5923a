@@ -141,6 +141,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04e1f3d6_501c55eb",
+        "filename": "target/product/OWNERS",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-05-02T16:57:03Z",
+      "side": 1,
+      "message": "Given the churn on this CL and the fragility of product config, I think it would be better to keep asking for review.",
+      "parentUuid": "fa580638_0b3ab02c",
+      "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afa713f6_495298fe",
         "filename": "target/product/angle.mk",
         "patchSetId": 5
