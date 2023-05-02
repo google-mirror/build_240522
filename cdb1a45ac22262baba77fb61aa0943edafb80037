@@ -16,6 +16,23 @@
       "message": "Thanks",
       "revId": "cdb1a45ac22262baba77fb61aa0943edafb80037",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f027424_d1c2ca6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2023-05-02T17:42:52Z",
+      "side": 1,
+      "message": "Running the finalization scripts locally with this change. Once successful, will +2",
+      "revId": "cdb1a45ac22262baba77fb61aa0943edafb80037",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
