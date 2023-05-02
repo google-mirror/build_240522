@@ -87,6 +87,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "903162c5_c9e0f2b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-05-02T16:52:35Z",
+      "side": 1,
+      "message": "+joeo for adding a new OWNERS file.",
+      "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02d80673_abbbe55c",
@@ -118,6 +135,23 @@
       "side": 1,
       "message": "probably shouldn\u0027t, we should avoid giving ownership to folks with no necessary context.",
       "parentUuid": "02d80673_abbbe55c",
+      "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afa713f6_495298fe",
+        "filename": "target/product/angle.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-05-02T16:52:35Z",
+      "side": 1,
+      "message": "What\u0027s the point of combining this method with `USE_ANGLE`?  Anywhere that was setting `USE_ANGLE` should just inherit from this product makefile.  If you want to separate \"angle supported\" from \"angle enabled\" then have two makefiles, angle_supported.mk and angle_enabled.mk.",
       "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
