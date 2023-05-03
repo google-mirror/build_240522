@@ -175,6 +175,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc3a7e03_9b80a589",
+        "filename": "target/product/OWNERS",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-05-03T16:30:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f6b6844a_aa655ec3",
+      "revId": "c514fa4da4b3cf07d1f57ef83860b89f9de5923a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afa713f6_495298fe",
