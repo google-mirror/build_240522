@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63d0b754_4e1428ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-03T17:23:02Z",
+      "side": 1,
+      "message": "I have a quick question. This is a prototype or something we will push to aosp?",
+      "revId": "53f3661773657d5159a371ffd36576262eaafa5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23a27853_7b2b7875",
+        "filename": "tools/aconfig/src/cache.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-03T17:23:02Z",
+      "side": 1,
+      "message": "Not sure whether this is common is rust, it seems to me like a mutual `use`. I know it could work since we only import the `Source` here. But just curious.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "53f3661773657d5159a371ffd36576262eaafa5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fb2d2b1_61199f0c",
+        "filename": "tools/aconfig/src/cache.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-03T17:23:02Z",
+      "side": 1,
+      "message": "My understanding here is one Item is identified by the `id`. The `id` here seems to be the namespace of the flag (the namespace is a little confusing, let\u0027s say something could map to the final certain flag in the code). The value here is all kinds of possible value of this flag, let\u0027s say, the original default, the override, etc.. It seems to me that the concept of `min_version` is missing here",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 27
+      },
+      "revId": "53f3661773657d5159a371ffd36576262eaafa5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fd59219_467b3929",
+        "filename": "tools/aconfig/src/cache.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-03T17:23:02Z",
+      "side": 1,
+      "message": "Could I know the benefit of Vec over Map?",
+      "range": {
+        "startLine": 39,
+        "startChar": 11,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "53f3661773657d5159a371ffd36576262eaafa5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
