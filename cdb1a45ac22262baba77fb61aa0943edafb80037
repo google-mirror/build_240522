@@ -33,6 +33,24 @@
       "message": "Running the finalization scripts locally with this change. Once successful, will +2",
       "revId": "cdb1a45ac22262baba77fb61aa0943edafb80037",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e69b5b9c_09a16536",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2023-05-03T17:24:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f027424_d1c2ca6b",
+      "revId": "cdb1a45ac22262baba77fb61aa0943edafb80037",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
