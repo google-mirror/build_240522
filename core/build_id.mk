@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (f50711 Merge "Remove emulator dependencies on non emulator targets )
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=TQ2A.230505.002
+>>>>>>> BRANCH (0f5596 Version bump to TQ2A.230505.002 [core/build_id.mk])
