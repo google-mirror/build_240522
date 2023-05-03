@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2dc852d_1166ebea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-05-03T16:28:00Z",
+      "side": 1,
+      "message": "Removed OWNERS file addition per offline discussion",
+      "revId": "a3e0e960f0a58795e1920c5db7e9df073ba36b7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
