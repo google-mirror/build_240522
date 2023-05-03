@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f679f81b_b430436a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-03T19:51:08Z",
+      "side": 1,
+      "message": "This is the real deal, but I expect the code to undergo several iterations.",
+      "parentUuid": "63d0b754_4e1428ed",
+      "revId": "53f3661773657d5159a371ffd36576262eaafa5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23a27853_7b2b7875",
         "filename": "tools/aconfig/src/cache.rs",
         "patchSetId": 6
@@ -31,6 +49,30 @@
       "writtenOn": "2023-05-03T17:23:02Z",
       "side": 1,
       "message": "Not sure whether this is common is rust, it seems to me like a mutual `use`. I know it could work since we only import the `Source` here. But just curious.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "53f3661773657d5159a371ffd36576262eaafa5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20f85b2c_a3d15ffe",
+        "filename": "tools/aconfig/src/cache.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-03T19:51:08Z",
+      "side": 1,
+      "message": "I don\u0027t fully understand what your concern is. Can you rephrase the question please?",
+      "parentUuid": "23a27853_7b2b7875",
       "range": {
         "startLine": 22,
         "startChar": 0,
@@ -66,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f880ab0d_e17e5cb9",
+        "filename": "tools/aconfig/src/cache.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-03T19:51:08Z",
+      "side": 1,
+      "message": "You\u0027re right that the code is missing a few fields.\n\nWe should add the namespace field either to Cache (because aconfig works with a single namespace most of the time), or to each Item (using std::borrow::Cow). I need to think a bit about how things should work when we create the file of all flags that should go onto device, and if we should reuse the same file when a developer wants to print the value of all flags.\n\nmin_version: not implemented yet, I will add it in the next CL.",
+      "parentUuid": "1fb2d2b1_61199f0c",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 27
+      },
+      "revId": "53f3661773657d5159a371ffd36576262eaafa5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9fd59219_467b3929",
         "filename": "tools/aconfig/src/cache.rs",
         "patchSetId": 6
@@ -77,6 +143,30 @@
       "writtenOn": "2023-05-03T17:23:02Z",
       "side": 1,
       "message": "Could I know the benefit of Vec over Map?",
+      "range": {
+        "startLine": 39,
+        "startChar": 11,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "53f3661773657d5159a371ffd36576262eaafa5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b144f674_08cc9362",
+        "filename": "tools/aconfig/src/cache.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-03T19:51:08Z",
+      "side": 1,
+      "message": "I want the rest of the code to interact with cache objects by getting an iterator of its items, and rely on all the operations you can do with iterators instead of implementing them by hand for cache.\n\nFor this reason, Map was replaced by Vec. I initially thought of going with Set to highlight that you shouldn\u0027t rely on any order but was put of by the assumption that we\u0027d pay an unnecessary cost for the insert operations. WDYT?\n\nThe interface towards the rest of the code is an iterator over the items; the underlying type of container is an implementation detail of Cache.",
+      "parentUuid": "9fd59219_467b3929",
       "range": {
         "startLine": 39,
         "startChar": 11,
