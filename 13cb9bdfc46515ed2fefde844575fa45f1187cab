@@ -16,6 +16,24 @@
       "message": "\"enabled\" vs \"supported\" sounds ambiguous to me.  Do you consider \"as_option\" vs \"as_default\"?",
       "revId": "13cb9bdfc46515ed2fefde844575fa45f1187cab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eef7942c_b0110e08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-05-03T16:18:24Z",
+      "side": 1,
+      "message": "I think we can do \"_default\" and \"_builtin\" or \"_default\" and \"_supported\"",
+      "parentUuid": "73db0fee_67219c57",
+      "revId": "13cb9bdfc46515ed2fefde844575fa45f1187cab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
