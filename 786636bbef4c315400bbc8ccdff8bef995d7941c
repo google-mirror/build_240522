@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2c14af0_41a24177",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-05-04T16:30:27Z",
+      "side": 1,
+      "message": "This is a temporary variable, and if we did expose it, it would cause excessive soong regenerations on the build servers.",
+      "range": {
+        "startLine": 320,
+        "startChar": 52,
+        "endLine": 320,
+        "endChar": 67
+      },
+      "revId": "786636bbef4c315400bbc8ccdff8bef995d7941c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
