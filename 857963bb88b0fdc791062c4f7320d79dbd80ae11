@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f87043b_93493150",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-05-04T22:45:56Z",
+      "side": 1,
+      "message": "Add the variable to `_product_single_value_vars` and document it",
+      "revId": "857963bb88b0fdc791062c4f7320d79dbd80ae11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
