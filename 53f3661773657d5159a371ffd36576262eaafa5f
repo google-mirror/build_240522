@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8c3471f_d1919fdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-04T17:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f679f81b_b430436a",
+      "revId": "53f3661773657d5159a371ffd36576262eaafa5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23a27853_7b2b7875",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "I don\u0027t fully understand what your concern is. Can you rephrase the question please?",
       "parentUuid": "23a27853_7b2b7875",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "53f3661773657d5159a371ffd36576262eaafa5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "034339f7_e5d357e5",
+        "filename": "tools/aconfig/src/cache.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-04T17:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20f85b2c_a3d15ffe",
       "range": {
         "startLine": 22,
         "startChar": 0,
@@ -130,6 +172,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c9cd238_a39b70d4",
+        "filename": "tools/aconfig/src/cache.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-04T17:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f880ab0d_e17e5cb9",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 27
+      },
+      "revId": "53f3661773657d5159a371ffd36576262eaafa5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fd59219_467b3929",
@@ -167,6 +233,30 @@
       "side": 1,
       "message": "I want the rest of the code to interact with cache objects by getting an iterator of its items, and rely on all the operations you can do with iterators instead of implementing them by hand for cache.\n\nFor this reason, Map was replaced by Vec. I initially thought of going with Set to highlight that you shouldn\u0027t rely on any order but was put of by the assumption that we\u0027d pay an unnecessary cost for the insert operations. WDYT?\n\nThe interface towards the rest of the code is an iterator over the items; the underlying type of container is an implementation detail of Cache.",
       "parentUuid": "9fd59219_467b3929",
+      "range": {
+        "startLine": 39,
+        "startChar": 11,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "53f3661773657d5159a371ffd36576262eaafa5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b91ae60_f835c9bc",
+        "filename": "tools/aconfig/src/cache.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-04T17:11:52Z",
+      "side": 1,
+      "message": "Yea, sure. The reason I brought up map is I saw the current most usage is about lookup, so I thought map might be better.  But as the user of the cache might be it only requires the iter? Yea, we can keep in this way now, and make any change later if needed.",
+      "parentUuid": "b144f674_08cc9362",
       "range": {
         "startLine": 39,
         "startChar": 11,
