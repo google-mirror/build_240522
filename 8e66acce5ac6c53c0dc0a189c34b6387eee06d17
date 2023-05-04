@@ -22,6 +22,30 @@
       },
       "revId": "8e66acce5ac6c53c0dc0a189c34b6387eee06d17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c36ab4f_ee3caa77",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-04T20:35:43Z",
+      "side": 1,
+      "message": "min_version isn\u0027t supported in this CL; support is added in aosp/2578416",
+      "parentUuid": "d4109430_224561eb",
+      "range": {
+        "startLine": 24,
+        "startChar": 9,
+        "endLine": 24,
+        "endChar": 11
+      },
+      "revId": "8e66acce5ac6c53c0dc0a189c34b6387eee06d17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
