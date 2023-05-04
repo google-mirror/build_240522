@@ -315,6 +315,12 @@ $(call add_json_list, SourceRootDirs,             $(PRODUCT_SOURCE_ROOT_DIRS))
 
 $(call add_json_list, AfdoProfiles,                $(ALL_AFDO_PROFILES))
 
+$(call add_json_str, ProductManufacturer,         $(PRODUCT_MANUFACTURER))
+$(call add_json_str, ProductBrand,                $(PRODUCT_BRAND))
+$(call add_json_str, BuildFingerprintBuildNumber, $(BF_BUILD_NUMBER))
+$(call add_json_str, TargetBuildVariant,          $(TARGET_BUILD_VARIANT))
+$(call add_json_str, BuildVersionTags,            $(BUILD_VERSION_TAGS))
+
 $(call json_end)
 
 $(file >$(SOONG_VARIABLES).tmp,$(json_contents))
