@@ -49,9 +49,6 @@ $(call add_json_list, Unbundled_build_apps,              $(TARGET_BUILD_APPS))
 $(call add_json_bool, Unbundled_build_image,             $(TARGET_BUILD_UNBUNDLED_IMAGE))
 $(call add_json_bool, Always_use_prebuilt_sdks,          $(TARGET_BUILD_USE_PREBUILT_SDKS))
 
-$(call add_json_bool, Debuggable,                        $(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
-$(call add_json_bool, Eng,                               $(filter eng,$(TARGET_BUILD_VARIANT)))
-
 $(call add_json_str,  DeviceName,                        $(TARGET_DEVICE))
 $(call add_json_str,  DeviceProduct,                     $(TARGET_PRODUCT))
 $(call add_json_str,  DeviceArch,                        $(TARGET_ARCH))
@@ -314,6 +311,11 @@ $(call add_json_list, IncludeTags,                $(PRODUCT_INCLUDE_TAGS))
 $(call add_json_list, SourceRootDirs,             $(PRODUCT_SOURCE_ROOT_DIRS))
 
 $(call add_json_list, AfdoProfiles,                $(ALL_AFDO_PROFILES))
+
+$(call add_json_str,  ProductManufacturer, $(PRODUCT_MANUFACTURER))
+$(call add_json_str,  ProductBrand,        $(PRODUCT_BRAND))
+$(call add_json_str,  TargetBuildVariant,  $(TARGET_BUILD_VARIANT))
+$(call add_json_list, BuildVersionTags,    $(BUILD_VERSION_TAGS))
 
 $(call json_end)
 
