@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28b345ad_3eed9906",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-05-04T22:44:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9218cf4b_ea177300",
+      "range": {
+        "startLine": 320,
+        "startChar": 52,
+        "endLine": 320,
+        "endChar": 67
+      },
+      "revId": "786636bbef4c315400bbc8ccdff8bef995d7941c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da4f6392_20caaafc",
@@ -61,6 +85,24 @@
       "writtenOn": "2023-05-04T16:33:34Z",
       "side": 1,
       "message": "This is already exported above as Debuggable/Eng.",
+      "revId": "786636bbef4c315400bbc8ccdff8bef995d7941c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acb5ed37_4d8b09cd",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-05-04T22:44:29Z",
+      "side": 1,
+      "message": "Added TargetBuildVariant and removed Debuggable/Eng.",
+      "parentUuid": "da4f6392_20caaafc",
       "revId": "786636bbef4c315400bbc8ccdff8bef995d7941c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
