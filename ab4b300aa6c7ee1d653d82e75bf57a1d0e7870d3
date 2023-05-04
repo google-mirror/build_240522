@@ -70,6 +70,30 @@
       },
       "revId": "ab4b300aa6c7ee1d653d82e75bf57a1d0e7870d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aa2101a_bb04e62b",
+        "filename": "core/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 3892,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-05-04T18:01:04Z",
+      "side": 1,
+      "message": "It\u0027s inconsistent, I\u0027d suggest underscores since that\u0027s what the partition names usually use.",
+      "parentUuid": "afa6b9fb_c58774fe",
+      "range": {
+        "startLine": 3892,
+        "startChar": 8,
+        "endLine": 3892,
+        "endChar": 24
+      },
+      "revId": "ab4b300aa6c7ee1d653d82e75bf57a1d0e7870d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
