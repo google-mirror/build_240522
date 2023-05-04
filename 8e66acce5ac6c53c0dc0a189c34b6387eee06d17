@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4109430_224561eb",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-04T17:12:15Z",
+      "side": 1,
+      "message": "do we still have the min_version info or the ID is the min_version info in the doc? If the id is the min_version info, then could I know where could we record the information of namespace?",
+      "range": {
+        "startLine": 24,
+        "startChar": 9,
+        "endLine": 24,
+        "endChar": 11
+      },
+      "revId": "8e66acce5ac6c53c0dc0a189c34b6387eee06d17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
