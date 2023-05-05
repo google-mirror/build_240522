@@ -16,6 +16,24 @@
       "message": "Add the variable to `_product_single_value_vars` and document it",
       "revId": "857963bb88b0fdc791062c4f7320d79dbd80ae11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "431ebd5a_17086a8c",
+        "filename": "core/product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2023-05-05T18:03:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f87043b_93493150",
+      "revId": "857963bb88b0fdc791062c4f7320d79dbd80ae11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
