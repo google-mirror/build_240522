@@ -7,6 +7,11 @@ ANDROID_PREBUILTS := prebuilt/$(HOST_PREBUILT_TAG)
 ANDROID_GCC_PREBUILTS := prebuilts/gcc/$(HOST_PREBUILT_TAG)
 ANDROID_CLANG_PREBUILTS := prebuilts/clang/host/$(HOST_PREBUILT_TAG)
 
+# TODO: get_build_var TARGET_RELEASE got added to envsetup.sh, but we
+# don't allow it.  So strip it out for now.  Give people a chance to
+# re-source envsetup.sh organically, then remove this line.
+DUMP_MANY_VARS:=$(filter-out TARGET_RELEASE, $(DUMP_MANY_VARS))
+
 # Dump mulitple variables to "<var>=<value>" pairs, one per line.
 # The output may be executed as bash script.
 # Input variables:
@@ -21,6 +26,7 @@ dump-many-vars :
 	  $(foreach part, $(wordlist 2, $(words $($(v))), $($(v))),\
 	    printf " %s" '$(part)'$(newline))\
 	  printf "'\n";)
+	@echo -n
 
 endif # CALLED_FROM_SETUP
 
