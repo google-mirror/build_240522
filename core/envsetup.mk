@@ -24,6 +24,14 @@ endef
 #$(warning $(call find_and_earlier,A B C,C))
 #$(warning $(call find_and_earlier,A B C,D))
 
+
+# ---------------------------------------------------------------
+# Release config
+include $(BUILD_SYSTEM)/release_config.mk
+
+
+# ---------------------------------------------------------------
+
 define version-list
 $(1)P1A $(1)P1B $(1)P2A $(1)P2B $(1)D1A $(1)D1B $(1)D2A $(1)D2B $(1)Q1A $(1)Q1B $(1)Q2A $(1)Q2B $(1)Q3A $(1)Q3B
 endef
@@ -553,6 +561,8 @@ TARGET_OUT_ETC := $(TARGET_OUT)/etc
 TARGET_OUT_NOTICE_FILES := $(TARGET_OUT_INTERMEDIATES)/NOTICE_FILES
 TARGET_OUT_FAKE := $(PRODUCT_OUT)/fake_packages
 TARGET_OUT_TESTCASES := $(PRODUCT_OUT)/testcases
+TARGET_OUT_FLAGS := $(TARGET_OUT_INTERMEDIATES)/FLAGS
+
 .KATI_READONLY := \
   TARGET_OUT_EXECUTABLES \
   TARGET_OUT_OPTIONAL_EXECUTABLES \
@@ -566,7 +576,8 @@ TARGET_OUT_TESTCASES := $(PRODUCT_OUT)/testcases
   TARGET_OUT_ETC \
   TARGET_OUT_NOTICE_FILES \
   TARGET_OUT_FAKE \
-  TARGET_OUT_TESTCASES
+  TARGET_OUT_TESTCASES \
+  TARGET_OUT_FLAGS
 
 ifeq ($(SANITIZE_LITE),true)
 # When using SANITIZE_LITE, APKs must not be packaged with sanitized libraries, as they will not
