@@ -1,0 +1,16 @@
+// This file, and the files in this directory will eventually be managed by Gantry
+
+device_config_override {
+    name: "aconfig_demo_1-com.android.services.core",
+    namespace: "com.android.services.core",
+    srcs: [
+        "com.android.services.core.aconfig",
+    ]
+}
+
+device_config_override_set {
+    name: "aconfig_demo_1",
+    overrides: [
+        "aconfig_demo_1-com.android.services.core",
+    ]
+}

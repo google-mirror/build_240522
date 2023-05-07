@@ -16,8 +16,7 @@
 # release configuration.  If at all possible, use aconfig flags instead.
 # This is for things that must be decided at compile time.
 
-# Flag names should be alphabetical by flag name. 
+# Entries should be alphabetical by flag name.
 
-$(call declare-build-flag, system, RELEASE_THE_FIRST_FLAG, true)
-$(call declare-build-flag, system, RELEASE_THE_SECOND_FLAG, true)
+$(call declare-build-flag, all, RELEASE_DEVICE_CONFIG_OVERRIDES,)
 
