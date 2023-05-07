@@ -12,5 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# AOSP doesn't define any release configs yet.
+# This is just a demo
+$(call declare-release-config, flagdemo, build/make/release/flagdemo.mk)
 
