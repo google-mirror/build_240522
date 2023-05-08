@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "28ff8d2f_cc91a615",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2023-05-08T17:12:40Z",
+      "side": 1,
+      "message": "Yeah, that support is not used in practice anymore and isn\u0027t documented anywhere I can find. I was worried the build servers may rely on that, but checked with the build team and they confirmed the build servers don\u0027t run lunch, so this won\u0027t impact the CI systems.",
+      "parentUuid": "75683966_1c317265",
+      "range": {
+        "startLine": 9,
+        "startChar": 30,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "a02c7474491f0b082e0c72f38d492e1ae680c168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f62b41c3_9dbce990",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
