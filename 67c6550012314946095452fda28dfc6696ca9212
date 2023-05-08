@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "188225aa_1255aa10",
+        "filename": "core/release_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-05-08T20:18:04Z",
+      "side": 1,
+      "message": "`$(KATI_obsolete_var TARGET_RELEASE, TARGET_RELEASE may not be accessed directly. Use individual flags.)` may produce a better error",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 32
+      },
+      "revId": "67c6550012314946095452fda28dfc6696ca9212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a8e0368_b5ad8a6c",
         "filename": "core/release_config.mk",
         "patchSetId": 3
