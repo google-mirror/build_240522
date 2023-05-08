@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d54681b_0bd853d2",
+        "filename": "core/release_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-05-08T23:59:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cf249fe_f9966288",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "67c6550012314946095452fda28dfc6696ca9212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "188225aa_1255aa10",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75c71baa_f8165d8b",
+        "filename": "core/release_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-05-08T23:59:31Z",
+      "side": 1,
+      "message": "I think the obsolete part is sort of confusing. It\u0027s not really obsolete, because it\u0027s new.\n\n\nbuild/make/core/release_config.mk:91: error: TARGET_RELEASE is obsolete.  TARGET_RELEASE may not be accessed directly. Use individual flags.\n\nvs\n\n\"ifeq ($(TARGET_RELEASE),)\" causes\n\nbuild/make/core/release_config.mk:91: error: TARGET_RELEASE may not be accessed directly. Use individual flags..\n\nand\n\n\"TARGET_RELEASE :\u003d foo\" causes\n\nbuild/make/core/release_config.mk:91: error: cannot assign to readonly variable: TARGET_RELEASE",
+      "parentUuid": "188225aa_1255aa10",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 32
+      },
+      "revId": "67c6550012314946095452fda28dfc6696ca9212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a8e0368_b5ad8a6c",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-05-08T03:38:42Z",
       "side": 1,
       "message": "_all_release_configs",
+      "range": {
+        "startLine": 91,
+        "startChar": 20,
+        "endLine": 91,
+        "endChar": 39
+      },
+      "revId": "67c6550012314946095452fda28dfc6696ca9212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2e01b9d_93b43fee",
+        "filename": "core/release_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-05-08T23:59:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a8e0368_b5ad8a6c",
       "range": {
         "startLine": 91,
         "startChar": 20,
