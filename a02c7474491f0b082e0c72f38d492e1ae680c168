@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75683966_1c317265",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-08T06:51:03Z",
+      "side": 1,
+      "message": "build/make/core/version_util.mk and a few other mk files still refer to TARGET_PLATFORM_VERSION, but it looks like it will be assigned a default value if not set as part of `lunch`.",
+      "range": {
+        "startLine": 9,
+        "startChar": 30,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "a02c7474491f0b082e0c72f38d492e1ae680c168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f62b41c3_9dbce990",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-08T06:51:03Z",
+      "side": 1,
+      "message": "Assuming presubmit doesn\u0027t report any errors, I assume the change to TARGET_PLATFORM_VERSION doesn\u0027t break anything.",
+      "revId": "a02c7474491f0b082e0c72f38d492e1ae680c168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
