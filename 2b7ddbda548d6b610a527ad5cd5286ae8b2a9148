@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b1a0cb_e42ffa20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-05-08T18:54:04Z",
+      "side": 1,
+      "message": "+2 for consistency, but FYI `$(hide)` is no longer relevant and can be removed.  Kati doesn\u0027t print command lines and doesn\u0027t require the `@` from `$(hide)` to hide them.",
+      "revId": "2b7ddbda548d6b610a527ad5cd5286ae8b2a9148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
