@@ -46,6 +46,52 @@
       },
       "revId": "4d1f9158d3261e52d8f280619fecffb58e6cfb95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b56a624c_1d0972c3",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2023-05-09T19:58:19Z",
+      "side": 1,
+      "message": "add docs on this one. Is it a path? relative to $TOP?",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "revId": "4d1f9158d3261e52d8f280619fecffb58e6cfb95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5707d9d2_ff21e768",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2023-05-09T19:58:19Z",
+      "side": 1,
+      "message": "namespace will need to added here too",
+      "range": {
+        "startLine": 72,
+        "startChar": 2,
+        "endLine": 72,
+        "endChar": 25
+      },
+      "revId": "4d1f9158d3261e52d8f280619fecffb58e6cfb95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
