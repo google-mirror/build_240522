@@ -22,6 +22,30 @@
       },
       "revId": "4d1f9158d3261e52d8f280619fecffb58e6cfb95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04bdd787_08518a62",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2023-05-09T19:55:37Z",
+      "side": 1,
+      "message": "I think flag_definitions should be namespace and flag_definition should be just flag. Less typing, and solidifies the concept of namespace in there. The namespace field could be shorted to just name",
+      "parentUuid": "8d6939ee_e2217396",
+      "range": {
+        "startLine": 50,
+        "startChar": 27,
+        "endLine": 50,
+        "endChar": 42
+      },
+      "revId": "4d1f9158d3261e52d8f280619fecffb58e6cfb95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
