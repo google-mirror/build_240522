@@ -22,7 +22,7 @@ use crate::aconfig::{Flag, FlagState, Override, Permission};
 use crate::commands::Source;
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct TracePoint {
+pub struct Tracepoint {
     pub source: Source,
     pub state: FlagState,
     pub permission: Permission,
@@ -34,7 +34,7 @@ pub struct Item {
     pub description: String,
     pub state: FlagState,
     pub permission: Permission,
-    pub trace: Vec<TracePoint>,
+    pub trace: Vec<Tracepoint>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -70,7 +70,7 @@ impl Cache {
             description: flag.description,
             state,
             permission,
-            trace: vec![TracePoint { source, state, permission }],
+            trace: vec![Tracepoint { source, state, permission }],
         });
         Ok(())
     }
@@ -81,7 +81,7 @@ impl Cache {
         };
         existing_item.state = override_.state;
         existing_item.permission = override_.permission;
-        existing_item.trace.push(TracePoint {
+        existing_item.trace.push(Tracepoint {
             source,
             state: override_.state,
             permission: override_.permission,

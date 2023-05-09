@@ -23,7 +23,7 @@ use std::io::Read;
 
 use crate::aconfig::{Flag, Override};
 use crate::cache::Cache;
-use crate::protos::ProtoDump;
+use crate::protos::ProtoParsedFlags;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum Source {
@@ -96,9 +96,9 @@ pub fn dump_cache(cache: Cache, format: Format) -> Result<Vec<u8>> {
             Ok(lines.concat().into())
         }
         Format::Protobuf => {
-            let dump: ProtoDump = cache.into();
+            let parsed_flags: ProtoParsedFlags = cache.into();
             let mut output = vec![];
-            dump.write_to_vec(&mut output)?;
+            parsed_flags.write_to_vec(&mut output)?;
             Ok(output)
         }
     }
@@ -111,7 +111,7 @@ mod tests {
 
     fn create_test_cache() -> Cache {
         let s = r#"
-        flag {
+        flag_definition {
             id: "a"
             description: "Description of a"
             value {
@@ -119,7 +119,7 @@ mod tests {
                 permission: READ_WRITE
             }
         }
-        flag {
+        flag_definition {
             id: "b"
             description: "Description of b"
             value {
@@ -130,7 +130,7 @@ mod tests {
         "#;
         let aconfigs = vec![Input { source: Source::Memory, reader: Box::new(s.as_bytes()) }];
         let o = r#"
-        override {
+        flag_override {
             id: "a"
             state: DISABLED
             permission: READ_ONLY
@@ -162,11 +162,11 @@ mod tests {
 
         let cache = create_test_cache();
         let bytes = dump_cache(cache, Format::Protobuf).unwrap();
-        let actual = ProtoDump::parse_from_bytes(&bytes).unwrap();
+        let actual = ProtoParsedFlags::parse_from_bytes(&bytes).unwrap();
 
         assert_eq!(
             vec!["a".to_string(), "b".to_string()],
-            actual.item.iter().map(|item| item.id.clone().unwrap()).collect::<Vec<_>>()
+            actual.parsed_flag.iter().map(|item| item.id.clone().unwrap()).collect::<Vec<_>>()
         );
     }
 }

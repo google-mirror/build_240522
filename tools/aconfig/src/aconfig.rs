@@ -18,10 +18,11 @@ use anyhow::{anyhow, Context, Error, Result};
 use protobuf::{Enum, EnumOrUnknown};
 use serde::{Deserialize, Serialize};
 
-use crate::cache::{Cache, Item, TracePoint};
+use crate::cache::{Cache, Item, Tracepoint};
 use crate::protos::{
-    ProtoAndroidConfig, ProtoDump, ProtoDumpItem, ProtoDumpTracePoint, ProtoFlag, ProtoFlagState,
-    ProtoOverride, ProtoOverrideConfig, ProtoPermission, ProtoValue,
+    ProtoFlagDefinition, ProtoFlagDefinitionValue, ProtoFlagDefinitions, ProtoFlagOverride,
+    ProtoFlagOverrides, ProtoFlagPermission, ProtoFlagState, ProtoParsedFlag, ProtoParsedFlags,
+    ProtoTracepoint,
 };
 
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize, Clone, Copy)]
@@ -57,23 +58,23 @@ pub enum Permission {
     ReadWrite,
 }
 
-impl TryFrom<EnumOrUnknown<ProtoPermission>> for Permission {
+impl TryFrom<EnumOrUnknown<ProtoFlagPermission>> for Permission {
     type Error = Error;
 
-    fn try_from(proto: EnumOrUnknown<ProtoPermission>) -> Result<Self, Self::Error> {
-        match ProtoPermission::from_i32(proto.value()) {
-            Some(ProtoPermission::READ_ONLY) => Ok(Permission::ReadOnly),
-            Some(ProtoPermission::READ_WRITE) => Ok(Permission::ReadWrite),
+    fn try_from(proto: EnumOrUnknown<ProtoFlagPermission>) -> Result<Self, Self::Error> {
+        match ProtoFlagPermission::from_i32(proto.value()) {
+            Some(ProtoFlagPermission::READ_ONLY) => Ok(Permission::ReadOnly),
+            Some(ProtoFlagPermission::READ_WRITE) => Ok(Permission::ReadWrite),
             None => Err(anyhow!("unknown permission enum value {}", proto.value())),
         }
     }
 }
 
-impl From<Permission> for ProtoPermission {
+impl From<Permission> for ProtoFlagPermission {
     fn from(permission: Permission) -> Self {
         match permission {
-            Permission::ReadOnly => ProtoPermission::READ_ONLY,
-            Permission::ReadWrite => ProtoPermission::READ_WRITE,
+            Permission::ReadOnly => ProtoFlagPermission::READ_ONLY,
+            Permission::ReadWrite => ProtoFlagPermission::READ_WRITE,
         }
     }
 }
@@ -96,10 +97,10 @@ impl Value {
     }
 }
 
-impl TryFrom<ProtoValue> for Value {
+impl TryFrom<ProtoFlagDefinitionValue> for Value {
     type Error = Error;
 
-    fn try_from(proto: ProtoValue) -> Result<Self, Self::Error> {
+    fn try_from(proto: ProtoFlagDefinitionValue) -> Result<Self, Self::Error> {
         let Some(proto_state) = proto.state else {
             return Err(anyhow!("missing 'state' field"));
         };
@@ -125,15 +126,15 @@ pub struct Flag {
 impl Flag {
     #[allow(dead_code)] // only used in unit tests
     pub fn try_from_text_proto(text_proto: &str) -> Result<Flag> {
-        let proto: ProtoFlag = crate::protos::try_from_text_proto(text_proto)
+        let proto: ProtoFlagDefinition = crate::protos::try_from_text_proto(text_proto)
             .with_context(|| text_proto.to_owned())?;
         proto.try_into()
     }
 
     pub fn try_from_text_proto_list(text_proto: &str) -> Result<Vec<Flag>> {
-        let proto: ProtoAndroidConfig = crate::protos::try_from_text_proto(text_proto)
+        let proto: ProtoFlagDefinitions = crate::protos::try_from_text_proto(text_proto)
             .with_context(|| text_proto.to_owned())?;
-        proto.flag.into_iter().map(|proto_flag| proto_flag.try_into()).collect()
+        proto.flag_definition.into_iter().map(|proto_flag| proto_flag.try_into()).collect()
     }
 
     pub fn resolve(&self, build_id: u32) -> (FlagState, Permission) {
@@ -150,10 +151,10 @@ impl Flag {
     }
 }
 
-impl TryFrom<ProtoFlag> for Flag {
+impl TryFrom<ProtoFlagDefinition> for Flag {
     type Error = Error;
 
-    fn try_from(proto: ProtoFlag) -> Result<Self, Self::Error> {
+    fn try_from(proto: ProtoFlagDefinition) -> Result<Self, Self::Error> {
         let Some(id) = proto.id else {
             return Err(anyhow!("missing 'id' field"));
         };
@@ -192,20 +193,20 @@ pub struct Override {
 impl Override {
     #[allow(dead_code)] // only used in unit tests
     pub fn try_from_text_proto(text_proto: &str) -> Result<Override> {
-        let proto: ProtoOverride = crate::protos::try_from_text_proto(text_proto)?;
+        let proto: ProtoFlagOverride = crate::protos::try_from_text_proto(text_proto)?;
         proto.try_into()
     }
 
     pub fn try_from_text_proto_list(text_proto: &str) -> Result<Vec<Override>> {
-        let proto: ProtoOverrideConfig = crate::protos::try_from_text_proto(text_proto)?;
-        proto.override_.into_iter().map(|proto_flag| proto_flag.try_into()).collect()
+        let proto: ProtoFlagOverrides = crate::protos::try_from_text_proto(text_proto)?;
+        proto.flag_override.into_iter().map(|proto_flag| proto_flag.try_into()).collect()
     }
 }
 
-impl TryFrom<ProtoOverride> for Override {
+impl TryFrom<ProtoFlagOverride> for Override {
     type Error = Error;
 
-    fn try_from(proto: ProtoOverride) -> Result<Self, Self::Error> {
+    fn try_from(proto: ProtoFlagOverride) -> Result<Self, Self::Error> {
         let Some(id) = proto.id else {
             return Err(anyhow!("missing 'id' field"));
         };
@@ -221,37 +222,37 @@ impl TryFrom<ProtoOverride> for Override {
     }
 }
 
-impl From<Cache> for ProtoDump {
+impl From<Cache> for ProtoParsedFlags {
     fn from(cache: Cache) -> Self {
-        let mut dump = ProtoDump::new();
+        let mut proto = ProtoParsedFlags::new();
         for item in cache.into_iter() {
-            dump.item.push(item.into());
+            proto.parsed_flag.push(item.into());
         }
-        dump
+        proto
     }
 }
 
-impl From<Item> for ProtoDumpItem {
+impl From<Item> for ProtoParsedFlag {
     fn from(item: Item) -> Self {
-        let mut dump_item = crate::protos::ProtoDumpItem::new();
-        dump_item.set_id(item.id.clone());
-        dump_item.set_description(item.description.clone());
-        dump_item.set_state(item.state.into());
-        dump_item.set_permission(item.permission.into());
+        let mut proto = crate::protos::ProtoParsedFlag::new();
+        proto.set_id(item.id.clone());
+        proto.set_description(item.description.clone());
+        proto.set_state(item.state.into());
+        proto.set_permission(item.permission.into());
         for trace in item.trace.into_iter() {
-            dump_item.trace.push(trace.into());
+            proto.trace.push(trace.into());
         }
-        dump_item
+        proto
     }
 }
 
-impl From<TracePoint> for ProtoDumpTracePoint {
-    fn from(tracepoint: TracePoint) -> Self {
-        let mut dump_tracepoint = ProtoDumpTracePoint::new();
-        dump_tracepoint.set_source(format!("{}", tracepoint.source));
-        dump_tracepoint.set_state(tracepoint.state.into());
-        dump_tracepoint.set_permission(tracepoint.permission.into());
-        dump_tracepoint
+impl From<Tracepoint> for ProtoTracepoint {
+    fn from(tracepoint: Tracepoint) -> Self {
+        let mut proto = ProtoTracepoint::new();
+        proto.set_source(format!("{}", tracepoint.source));
+        proto.set_state(tracepoint.state.into());
+        proto.set_permission(tracepoint.permission.into());
+        proto
     }
 }
 
@@ -339,7 +340,7 @@ mod tests {
         ];
 
         let s = r#"
-        flag {
+        flag_definition {
             id: "a"
             description: "A"
             value {
@@ -347,7 +348,7 @@ mod tests {
                 permission: READ_ONLY
             }
         }
-        flag {
+        flag_definition {
             id: "b"
             description: "B"
             value {
