@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d6939ee_e2217396",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-09T14:37:58Z",
+      "side": 1,
+      "message": "Is `flag_definition` too verbose? As a dev I would probably expect to write\n\n```\nflag {\n  id: ...\n  value: ...\n}\n```\n\ninstead of\n\n```\nflag_definition {\n  id: ...\n  value: ...\n}\n```\n\nCf `flag_override`.\n\nAlso, what we settle on here should work when we add a top-level namespace field:\n\n```\nflag_definitions {\n  namespace: \"...\"\n  flag {\n    id: ...\n    value: ...\n  }\n  flag {\n    id: ...\n    value: ...\n  }\n```\n\nand\n\n```\nflag_overrides {\n  namespace: \"...\"\n  flag_override { ... }\n  flag_override { ... }\n}\n```\n\nThoughts?",
+      "range": {
+        "startLine": 50,
+        "startChar": 27,
+        "endLine": 50,
+        "endChar": 42
+      },
+      "revId": "4d1f9158d3261e52d8f280619fecffb58e6cfb95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
