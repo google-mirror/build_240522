@@ -16,8 +16,17 @@
 # release configuration.  If at all possible, use aconfig flags instead.
 # This is for things that must be decided at compile time.
 
-# Flag names should be alphabetical by flag name.
+# Flags should be alphabetical by flag name.
 
-$(call declare-build-flag, system, RELEASE_THE_FIRST_FLAG, true)
-$(call declare-build-flag, system, RELEASE_THE_SECOND_FLAG, true)
-
+flags = [
+    struct(
+        name = "RELEASE_THE_FIRST_FLAG",
+        partitions = ["system"],
+        default = True,
+    ),
+    struct(
+        name = "RELEASE_THE_SECOND_FLAG",
+        partitions = ["system"],
+        default = True,
+    ),
+]

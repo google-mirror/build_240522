@@ -13,4 +13,4 @@
 # limitations under the License.
 
 # AOSP doesn't define any release configs yet.
-
+config_maps = {}
