@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12f92713_85db2a06",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-10T15:58:04Z",
+      "side": 1,
+      "message": "I don\u0027t understand why we generate multiple files? Why not\n\n```\npublic class SomeNamespace {\n    public method boolean someFlagA() { ... }\n    public method boolean someFlagB() { ... }\n    public method boolean someFlagC() { ... }\n}\n```\n\n?",
+      "range": {
+        "startLine": 24,
+        "startChar": 44,
+        "endLine": 24,
+        "endChar": 62
+      },
+      "revId": "02d35071411721bce7e77951da2ccaf5d703c934",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2920cb4_48460d97",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-10T15:58:04Z",
+      "side": 1,
+      "message": "FYI: support for namespaces are coming in aosp/2584571",
+      "range": {
+        "startLine": 30,
+        "startChar": 24,
+        "endLine": 30,
+        "endChar": 53
+      },
+      "revId": "02d35071411721bce7e77951da2ccaf5d703c934",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e2eb4b2_a4c8c5cd",
+        "filename": "tools/aconfig/templates/java_runtime.template",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-10T15:58:04Z",
+      "side": 1,
+      "message": "Nice, this makes the code more consistent.",
+      "range": {
+        "startLine": 6,
+        "startChar": 1,
+        "endLine": 8,
+        "endChar": 6
+      },
+      "revId": "02d35071411721bce7e77951da2ccaf5d703c934",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
