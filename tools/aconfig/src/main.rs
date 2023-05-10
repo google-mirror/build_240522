@@ -22,6 +22,7 @@ use std::fs;
 
 mod aconfig;
 mod cache;
+mod codegen_java;
 mod commands;
 mod protos;
 
@@ -42,6 +43,11 @@ fn cli() -> Command {
                 .arg(Arg::new("aconfig").long("aconfig").action(ArgAction::Append))
                 .arg(Arg::new("override").long("override").action(ArgAction::Append))
                 .arg(Arg::new("cache").long("cache").required(true)),
+        )
+        .subcommand(
+            Command::new("generate-java-lib")
+                .arg(Arg::new("cache").long("cache").required(true))
+                .arg(Arg::new("out").long("out").required(true)),
         )
         .subcommand(
             Command::new("dump").arg(Arg::new("cache").long("cache").required(true)).arg(
@@ -73,6 +79,16 @@ fn main() -> Result<()> {
             let path = sub_matches.get_one::<String>("cache").unwrap();
             let file = fs::File::create(path)?;
             cache.write_to_writer(file)?;
+        }
+        Some(("generate-java-lib", sub_matches)) => {
+            let path = sub_matches.get_one::<String>("cache").unwrap();
+            let file = fs::File::open(path)?;
+            let cache = Cache::read_from_reader(file)?;
+            let out = sub_matches.get_one::<String>("out").unwrap();
+            let generated_files = commands::generate_code(cache);
+            for file in generated_files {
+                fs::write(format!("{}/{}", out, file.file_name), file.file_content)?;
+            }
         }
         Some(("dump", sub_matches)) => {
             let path = sub_matches.get_one::<String>("cache").unwrap();

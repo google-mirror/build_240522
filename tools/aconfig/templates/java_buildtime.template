@@ -1,0 +1,7 @@
+package com.android.aconfig.{flag_name};
+
+public final class {class_name} {{
+    public static boolean {method_name}() {{
+        return {default_value};
+    }}
+}}
