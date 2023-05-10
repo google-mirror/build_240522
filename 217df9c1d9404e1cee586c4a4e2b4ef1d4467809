@@ -16,6 +16,23 @@
       "message": "Here, instead of writing `return files;`, you can simply write the expression `files`, which is usually preferred in Rust.",
       "revId": "217df9c1d9404e1cee586c4a4e2b4ef1d4467809",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e5c0d07_652468ad",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-05-10T15:12:06Z",
+      "side": 1,
+      "message": "Unless there\u0027s a good reason, you might want to take a `\u0026Cache` instead of a `Cache` here, that lets this API be a little more flexible. Otherwise, once you call `generate_code` with a `Cache` passed in, you can\u0027t use that `Cache` again without `clone`ing it.",
+      "revId": "217df9c1d9404e1cee586c4a4e2b4ef1d4467809",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
