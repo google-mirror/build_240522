@@ -34,6 +34,24 @@
       "parentUuid": "c1700e19_240b5f27",
       "revId": "c74a4011e2815f2ffc3815176c958a0fdabbd621",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a8d5877_c67236c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-05-10T13:36:54Z",
+      "side": 1,
+      "message": "Sure, thanks for pointing out the Soong variable.",
+      "parentUuid": "e56c8d86_b9dc8b05",
+      "revId": "c74a4011e2815f2ffc3815176c958a0fdabbd621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
