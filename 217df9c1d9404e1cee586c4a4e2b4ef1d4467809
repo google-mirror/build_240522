@@ -69,6 +69,24 @@
       "parentUuid": "9e5c0d07_652468ad",
       "revId": "217df9c1d9404e1cee586c4a4e2b4ef1d4467809",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "243aabd9_c6bd2e45",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-10T15:43:49Z",
+      "side": 1,
+      "message": "A word on how ownership is used in aconfig: main calls various methods in commands.rs; these all take parameters by value, and take ownership, the idea being that the commands are free to do what they want with the data and main should explicitly not use it once the command returns.\n\nBut the commands.rs layer is a bit special and for the rest of the code I think it makes sense to be as restrictive as possible, i.e. read-only where write access is not needed. So yeah, generated_code should take \u0026Cache as input.",
+      "parentUuid": "9e5c0d07_652468ad",
+      "revId": "217df9c1d9404e1cee586c4a4e2b4ef1d4467809",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

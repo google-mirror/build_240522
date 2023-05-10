@@ -731,6 +731,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "739ca21f_1efa29e6",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-10T15:43:49Z",
+      "side": 1,
+      "message": "I see each language as a separate component. They all generate code but there\u0027s no overlap between the languages except for iterating over the cache\u0027s items, which is trivial.\n\nPlease change the command to \"generate-java-lib\" and remove the \"library-type\" argument.",
+      "parentUuid": "60356f8a_6f7b8d8b",
+      "range": {
+        "startLine": 48,
+        "startChar": 12,
+        "endLine": 49,
+        "endChar": 82
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6db2a87c_85f3a710",
         "filename": "tools/aconfig/src/template/java.tmpl",
         "patchSetId": 2
