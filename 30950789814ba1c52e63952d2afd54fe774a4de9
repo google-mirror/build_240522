@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e68b680_cf72a46c",
+        "filename": "tools/aconfig/src/aconfig.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-05-10T15:59:13Z",
+      "side": 1,
+      "message": "bikeshedding, but could write as:\n\n```\nlet msg \u003d v\n  .since\n  .map_or_else(\n    || format!(\"flag {}: multiple default values\"),\n    |s| format!(\"flag {}: multiple values for since\u003d{}\", name, s));\n```",
+      "revId": "30950789814ba1c52e63952d2afd54fe774a4de9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
