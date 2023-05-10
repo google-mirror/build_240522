@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1700e19_240b5f27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-05-10T13:19:19Z",
+      "side": 1,
+      "message": "I\u0027m slightly worried about the overlap of this and other existing variables with related meaning, like WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY, but otherwise LGTM.",
+      "revId": "c74a4011e2815f2ffc3815176c958a0fdabbd621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
