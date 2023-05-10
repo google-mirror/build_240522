@@ -22,6 +22,7 @@ use std::io::Read;
 
 use crate::aconfig::{Flag, Override};
 use crate::cache::Cache;
+use crate::codegen_java::{generate_java_code, GeneratedFile};
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum Source {
@@ -68,6 +69,10 @@ pub fn create_cache(build_id: u32, aconfigs: Vec<Input>, overrides: Vec<Input>) 
     }
 
     Ok(cache)
+}
+
+pub fn generate_code(cache: &Cache) -> Vec<GeneratedFile> {
+    generate_java_code(&cache)
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, ValueEnum)]
