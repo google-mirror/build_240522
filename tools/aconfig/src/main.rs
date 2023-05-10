@@ -22,6 +22,7 @@ use std::fs;
 
 mod aconfig;
 mod cache;
+mod codegen;
 mod commands;
 mod protos;
 
@@ -42,6 +43,12 @@ fn cli() -> Command {
                 .arg(Arg::new("aconfig").long("aconfig").action(ArgAction::Append))
                 .arg(Arg::new("override").long("override").action(ArgAction::Append))
                 .arg(Arg::new("cache").long("cache").required(true)),
+        )
+        .subcommand(
+            Command::new("generate-code")
+                .arg(Arg::new("library-type").long("library-type").required(true))
+                .arg(Arg::new("cache").long("cache").required(true))
+                .arg(Arg::new("out").long("out").required(true)),
         )
         .subcommand(
             Command::new("dump").arg(Arg::new("cache").long("cache").required(true)).arg(
@@ -73,6 +80,14 @@ fn main() -> Result<()> {
             let path = sub_matches.get_one::<String>("cache").unwrap();
             let file = fs::File::create(path)?;
             cache.write_to_writer(file)?;
+        }
+        Some(("generate-code", sub_matches)) => {
+            let path = sub_matches.get_one::<String>("cache").unwrap();
+            let file = fs::File::open(path)?;
+            let cache = Cache::read_from_reader(file)?;
+            let library_type = sub_matches.get_one::<String>("library-type").unwrap();
+            let out = sub_matches.get_one::<String>("out").unwrap();
+            commands::generate_code(cache, library_type, out)?;
         }
         Some(("dump", sub_matches)) => {
             let path = sub_matches.get_one::<String>("cache").unwrap();
