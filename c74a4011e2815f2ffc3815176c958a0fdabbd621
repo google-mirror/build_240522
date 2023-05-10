@@ -16,6 +16,24 @@
       "message": "I\u0027m slightly worried about the overlap of this and other existing variables with related meaning, like WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY, but otherwise LGTM.",
       "revId": "c74a4011e2815f2ffc3815176c958a0fdabbd621",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e56c8d86_b9dc8b05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-05-10T13:32:31Z",
+      "side": 1,
+      "message": "Thanks for raising this. I\u0027m only adding a Make variable that corresponds to an existing Soong variable (`DISABLE_PREOPT_BOOT_IMAGES` -\u003e `DisablePreoptBootImages`). As long as those variables already exist in Soong, they can work with each other. I admit the variables are a bit messy, but we can clean them up later. Right now the first priority is to get b/280440941 resolved because ZBB-P1 is in a few days.",
+      "parentUuid": "c1700e19_240b5f27",
+      "revId": "c74a4011e2815f2ffc3815176c958a0fdabbd621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
