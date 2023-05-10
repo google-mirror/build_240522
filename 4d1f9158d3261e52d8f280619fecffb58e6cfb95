@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e529450_215700d7",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-10T15:28:51Z",
+      "side": 1,
+      "message": "Because you don\u0027t name the containing type in text protobuf, I\u0027ll call the field `namespace`. Expected input:\n\n```\nnamespace \u003d \"...\"\nflag { ... }\nflag { ... }\n```",
+      "parentUuid": "04bdd787_08518a62",
+      "range": {
+        "startLine": 50,
+        "startChar": 27,
+        "endLine": 50,
+        "endChar": 42
+      },
+      "revId": "4d1f9158d3261e52d8f280619fecffb58e6cfb95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b56a624c_1d0972c3",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc9942e7_96db20f8",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-10T15:28:51Z",
+      "side": 1,
+      "message": "It will be relative to the cwd the build system invokes aconfig from, but AFAIK that is always $TOP, so I\u0027ll say that in the comment.",
+      "parentUuid": "b56a624c_1d0972c3",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "revId": "4d1f9158d3261e52d8f280619fecffb58e6cfb95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5707d9d2_ff21e768",
@@ -84,6 +132,30 @@
       "writtenOn": "2023-05-09T19:58:19Z",
       "side": 1,
       "message": "namespace will need to added here too",
+      "range": {
+        "startLine": 72,
+        "startChar": 2,
+        "endLine": 72,
+        "endChar": 25
+      },
+      "revId": "4d1f9158d3261e52d8f280619fecffb58e6cfb95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b33eef02_874dba07",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-10T15:28:51Z",
+      "side": 1,
+      "message": "As discussed offline, overrides and parsed_flags will use a \"flattened view\" as this will make it easier to concat those files. Any tool that reads parsed_flag can filter on namespace if needed.",
+      "parentUuid": "5707d9d2_ff21e768",
       "range": {
         "startLine": 72,
         "startChar": 2,
