@@ -30,16 +30,25 @@ endef
 # In order to avoid running starlark every time the stamp file is checked, we use
 # $(KATI_shell_no_rerun). Then, to make sure that we actually do rerun kati when
 # modifying the starlark files, we add the starlark files to the kati stamp file with
-# $(KATI_extra_file_deps).
+# $(KATI_extra_file_deps). This behavior can be modified by passing a list of starlark files
+# to exclude from the dependency list as $(2)
 define run-starlark
 $(eval _starlark_results := $(OUT_DIR)/starlark_results/$(subst /,_,$(1)).mk)
 $(KATI_shell_no_rerun mkdir -p $(OUT_DIR)/starlark_results && $(OUT_DIR)/rbcrun --mode=make $(1) >$(_starlark_results) && touch -t 200001010000 $(_starlark_results))
 $(if $(filter-out 0,$(.SHELLSTATUS)),$(error Starlark failed to run))
 $(eval include $(_starlark_results))
-$(KATI_extra_file_deps $(LOADED_STARLARK_FILES))
+$(KATI_extra_file_deps $(filter-out $(2),$(LOADED_STARLARK_FILES)))
 $(eval LOADED_STARLARK_FILES :=)
 $(eval _starlark_results :=)
 endef
+
+
+# ---------------------------------------------------------------
+# Release config
+include $(BUILD_SYSTEM)/release_config.mk
+
+
+# ---------------------------------------------------------------
 
 # defines ALL_VERSIONS
 $(call run-starlark,build/make/core/all_versions.bzl)
@@ -564,6 +573,7 @@ TARGET_OUT_ETC := $(TARGET_OUT)/etc
 TARGET_OUT_NOTICE_FILES := $(TARGET_OUT_INTERMEDIATES)/NOTICE_FILES
 TARGET_OUT_FAKE := $(PRODUCT_OUT)/fake_packages
 TARGET_OUT_TESTCASES := $(PRODUCT_OUT)/testcases
+TARGET_OUT_FLAGS := $(TARGET_OUT_INTERMEDIATES)/FLAGS
 .KATI_READONLY := \
   TARGET_OUT_EXECUTABLES \
   TARGET_OUT_OPTIONAL_EXECUTABLES \
@@ -577,7 +587,8 @@ TARGET_OUT_TESTCASES := $(PRODUCT_OUT)/testcases
   TARGET_OUT_ETC \
   TARGET_OUT_NOTICE_FILES \
   TARGET_OUT_FAKE \
-  TARGET_OUT_TESTCASES
+  TARGET_OUT_TESTCASES \
+  TARGET_OUT_FLAGS
 
 ifeq ($(SANITIZE_LITE),true)
 # When using SANITIZE_LITE, APKs must not be packaged with sanitized libraries, as they will not
