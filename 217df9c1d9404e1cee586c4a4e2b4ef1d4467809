@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa85c0b1_7d73a1a7",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-05-10T15:07:40Z",
+      "side": 1,
+      "message": "Here, instead of writing `return files;`, you can simply write the expression `files`, which is usually preferred in Rust.",
+      "revId": "217df9c1d9404e1cee586c4a4e2b4ef1d4467809",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
