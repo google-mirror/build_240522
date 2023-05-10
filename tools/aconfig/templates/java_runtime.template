@@ -1,0 +1,9 @@
+package com.android.aconfig.{flag_name};
+
+import android.provider.DeviceConfig;
+
+public final class {class_name} {{
+    public static boolean {method_name}() {{
+        return DeviceConfig.getBoolean("{namespace}", "{feature_name}__{flag_name}", {default_value});
+    }}
+}}
