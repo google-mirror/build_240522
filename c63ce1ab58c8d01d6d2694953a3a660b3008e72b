@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d856c499_4caaeff9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-05-10T22:33:29Z",
+      "side": 1,
+      "message": "Some questions:\n1) I didn\u0027t find any use of mode\u003dmake, do we still need it?\n2) It looks rbc functions rely on startark go engine, would you like to update it to the latest version since its last update is in 2021? It looks there are some commits after our last update, not sure they are helpful for rbc.",
+      "revId": "c63ce1ab58c8d01d6d2694953a3a660b3008e72b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
