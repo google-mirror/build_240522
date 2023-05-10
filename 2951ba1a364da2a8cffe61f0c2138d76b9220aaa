@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "25b350cb_1814ba6b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8249808d_ee0e5a81",
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dfb643da_393d50fe",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8291c277_a2b78e47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "Oh you mean like for one build, like\u0027s say the build it huge, it is for building the image. So we only generate one large Java file which include all flags for different components in the image?\n\nIf So, I can see where you come from now. So in your vision, there will be one large Flag file for all. This is different as I thought before. so that is the reason that I made all the classes things, but we definitely need to discuss how this output will work.\n\n\nIf it is just one large file, then how each component consumes it? For example, Wifi Jar need its flags, Tethering Jar needs it flags, the flags lib need to build into the Jar. If just one large Flag file, which means all Jars will have a copy of that?",
+      "parentUuid": "dfb643da_393d50fe",
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "556282a1_4087cde9",
         "filename": "tools/aconfig/src/codegen.rs",
         "patchSetId": 2
@@ -48,6 +84,30 @@
       "writtenOn": "2023-05-10T08:07:14Z",
       "side": 1,
       "message": "Let\u0027s rename this \"codegen-java.rs\" or similar, and keep the other languages in their own files. I don\u0027t foresee much overlap between them.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3c300bc_18475bed",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "556282a1_4087cde9",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -81,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fea88e4_f2313c45",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c389a0ff_5a1da79c",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78c62326_b23dbc17",
@@ -104,6 +188,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ef0fb88_1fe9ee35",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78c62326_b23dbc17",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 41,
+        "endChar": 0
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53384e75_54ba529b",
@@ -117,6 +225,30 @@
       "writtenOn": "2023-05-10T08:07:14Z",
       "side": 1,
       "message": "let return_value \u003d if item.permission \u003d\u003d Permission::ReadWrite { ... } else { default_value.to_string() };",
+      "range": {
+        "startLine": 42,
+        "startChar": 12,
+        "endLine": 42,
+        "endChar": 57
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a9aa1a5_9cb45e11",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53384e75_54ba529b",
       "range": {
         "startLine": 42,
         "startChar": 12,
@@ -244,6 +376,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd51b1ac_851aaaca",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "Forgot to add in template.. Added",
+      "parentUuid": "767fddae_5861913c",
+      "range": {
+        "startLine": 45,
+        "startChar": 21,
+        "endLine": 45,
+        "endChar": 33
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4e0d22d_e965ee32",
@@ -257,6 +413,30 @@
       "writtenOn": "2023-05-10T08:07:14Z",
       "side": 1,
       "message": "Tip: `todo!()` is usually used to denote something that isn\u0027t implemented but is expected to be. `unimplemented!()` means this is not implemented, and won\u0027t be.",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 21
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5e7efea_097a8f4f",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4e0d22d_e965ee32",
       "range": {
         "startLine": 67,
         "startChar": 8,
@@ -290,6 +470,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b0a63f5_388b69be",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90ef8e8a_71b8fb2f",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 43
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73a1e870_e21c9ea0",
@@ -303,6 +507,30 @@
       "writtenOn": "2023-05-10T08:07:14Z",
       "side": 1,
       "message": "```suggestion\n      s.chars().enumerate().map(|(index, ch)| {\n          if index \u003d\u003d 0 {\n              ch.to_ascii_uppercase()\n          } else {\n              ch\n          }\n      }).collect()\n```\n\nWDYT?",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 5
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea8ae9e1_c2ba663f",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73a1e870_e21c9ea0",
       "range": {
         "startLine": 91,
         "startChar": 0,
@@ -336,6 +564,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5135753_1e18000e",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62c91616_79c28638",
+      "range": {
+        "startLine": 151,
+        "startChar": 42,
+        "endLine": 151,
+        "endChar": 71
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90bdd64d_a452a095",
@@ -349,6 +601,30 @@
       "writtenOn": "2023-05-10T08:07:14Z",
       "side": 1,
       "message": "If there\u0027s an error in the template this test won\u0027t catch it. Can we make the test more explicit by simply spelling out the expected contents as a hard-coded string?",
+      "range": {
+        "startLine": 153,
+        "startChar": 1,
+        "endLine": 157,
+        "endChar": 33
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eced4335_5ee1ebfb",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "I thought about it. Current the code is simple, so we can do it. But it might be very complicated in the future, and generate several files. It is hard to do the hard-coded thing. \n\nOne argument is then why do we need to test the whole generated files? We just need to test the functionality of the code, which is it can expected output based on input. However, if so, what is the difference from using the template? \n\nAnother thing is how can we guarantee that whatever hardcoded in the test is not wrong? In the end, they are same manual type as the thing in the template.\n\nI agree we should verify the generated template should be testable, but it is more like a functional test of the code.",
+      "parentUuid": "90bdd64d_a452a095",
       "range": {
         "startLine": 153,
         "startChar": 1,
@@ -382,6 +658,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65756980_5e35d7fd",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f943d75_74c98f92",
+      "range": {
+        "startLine": 195,
+        "startChar": 51,
+        "endLine": 195,
+        "endChar": 69
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f64f052c_2bec4a15",
@@ -405,6 +705,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60356f8a_6f7b8d8b",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "I have renamed. \n\nBut I have another thoughts. I view the codegen to be one entity or one program or one component. The codegen is the part deal with filling template, and assemble the libraries. So currently this cl is simple just a function to write some file, but it is missing lots of other parts. So for now it makes sense to separate them, but in the future, I can see they will merge in some way.\n\nBut I modify it for now.",
+      "parentUuid": "f64f052c_2bec4a15",
+      "range": {
+        "startLine": 48,
+        "startChar": 12,
+        "endLine": 49,
+        "endChar": 82
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6db2a87c_85f3a710",
@@ -418,6 +742,24 @@
       "writtenOn": "2023-05-10T08:07:14Z",
       "side": 1,
       "message": "nit: I would prefer if we moved this to `tools/aconfig/src/templates/java.template`. (Same level as `protos`, templates with and s)",
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f570b38e_606a0708",
+        "filename": "tools/aconfig/src/template/java.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:01:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6db2a87c_85f3a710",
       "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
