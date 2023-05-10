@@ -129,6 +129,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98f1a712_6b3fb9f1",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-10T10:54:20Z",
+      "side": 1,
+      "message": "Can any Java process on Android access the DeviceConfig system service or are there  SELinux rules that prevent this?",
+      "range": {
+        "startLine": 45,
+        "startChar": 21,
+        "endLine": 45,
+        "endChar": 33
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "767fddae_5861913c",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-10T10:54:20Z",
+      "side": 1,
+      "message": "Fully qualify the class, e.g. `android.provider.DeviceConfig` or compilation will fail.\n\n(Alternatively include an import statement. Metalava uses the fully qualified names for its generated jar stubs so I recommend we follow that pattern.)",
+      "range": {
+        "startLine": 45,
+        "startChar": 21,
+        "endLine": 45,
+        "endChar": 33
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b9f2011_97c5f911",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-10T10:54:20Z",
+      "side": 1,
+      "message": "DeviceConfig is a @SystemApi(client \u003d PRIVILEGED_APPS). What\u0027s the plan for non-priv-apps\u0027 access to DeviceConfig?",
+      "range": {
+        "startLine": 45,
+        "startChar": 21,
+        "endLine": 45,
+        "endChar": 33
+      },
+      "revId": "2951ba1a364da2a8cffe61f0c2138d76b9220aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4e0d22d_e965ee32",
         "filename": "tools/aconfig/src/codegen.rs",
         "patchSetId": 2
