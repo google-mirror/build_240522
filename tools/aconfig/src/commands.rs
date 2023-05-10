@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-use anyhow::{Context, Result};
+use anyhow::{anyhow, Context, Result};
 use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
 use std::fmt;
@@ -22,6 +22,7 @@ use std::io::Read;
 
 use crate::aconfig::{Flag, Override};
 use crate::cache::Cache;
+use crate::codegen::{CodeGenerator, DevWriter};
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum Source {
@@ -68,6 +69,18 @@ pub fn create_cache(build_id: u32, aconfigs: Vec<Input>, overrides: Vec<Input>) 
     }
 
     Ok(cache)
+}
+
+pub fn generate_code(cache: Cache, library_type: &str, out: &str) -> Result<()> {
+    let code_generator = CodeGenerator::new(cache, Box::new(DevWriter));
+    match library_type {
+        "java" => code_generator.generate_java_code(out),
+        "c" | "c++" => code_generator.generate_c_code(),
+        "rust" => code_generator.generate_rust_code(),
+        _ => Err(anyhow!("Cannot generate code for {}", library_type)),
+    }?;
+
+    Ok(())
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, ValueEnum)]
