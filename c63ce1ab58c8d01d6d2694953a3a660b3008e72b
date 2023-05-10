@@ -16,6 +16,24 @@
       "message": "Some questions:\n1) I didn\u0027t find any use of mode\u003dmake, do we still need it?\n2) It looks rbc functions rely on startark go engine, would you like to update it to the latest version since its last update is in 2021? It looks there are some commits after our last update, not sure they are helpful for rbc.",
       "revId": "c63ce1ab58c8d01d6d2694953a3a660b3008e72b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1bc1301_e06aedcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-05-10T22:39:00Z",
+      "side": 1,
+      "message": "`--mode\u003dmake` is used in the `run-starlark` function in `envsetup.mk`. The main point of this cl is to add `--mode\u003dmake`.\n\nInteresting, I haven\u0027t really looked at the latest updates to starlark-go. But I don\u0027t think there\u0027s any pressing need to update it, we have all the features we need at the moment.",
+      "parentUuid": "d856c499_4caaeff9",
+      "revId": "c63ce1ab58c8d01d6d2694953a3a660b3008e72b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
