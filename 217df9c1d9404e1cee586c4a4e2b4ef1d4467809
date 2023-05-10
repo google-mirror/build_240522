@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b13f0c_01e9b10c",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa85c0b1_7d73a1a7",
+      "revId": "217df9c1d9404e1cee586c4a4e2b4ef1d4467809",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e5c0d07_652468ad",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-10T15:12:06Z",
       "side": 1,
       "message": "Unless there\u0027s a good reason, you might want to take a `\u0026Cache` instead of a `Cache` here, that lets this API be a little more flexible. Otherwise, once you call `generate_code` with a `Cache` passed in, you can\u0027t use that `Cache` again without `clone`ing it.",
+      "revId": "217df9c1d9404e1cee586c4a4e2b4ef1d4467809",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5785e5d4_4e92dc45",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-10T15:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e5c0d07_652468ad",
       "revId": "217df9c1d9404e1cee586c4a4e2b4ef1d4467809",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
