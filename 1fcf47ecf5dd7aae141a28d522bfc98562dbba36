@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "628af5cf_7716b040",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-05-10T22:23:12Z",
+      "side": 1,
+      "message": "starlark version: aosp/2585846",
+      "revId": "1fcf47ecf5dd7aae141a28d522bfc98562dbba36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
