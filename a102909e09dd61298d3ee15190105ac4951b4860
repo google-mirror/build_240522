@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "256dcc65_42e04002",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-05-10T16:08:04Z",
+      "side": 1,
+      "message": "more total bikeshedding, but could use `map` here instead of the mutation/loop",
+      "revId": "a102909e09dd61298d3ee15190105ac4951b4860",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
