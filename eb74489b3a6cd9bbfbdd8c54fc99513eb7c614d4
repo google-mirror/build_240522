@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e0a3830_f067e3a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-11T07:50:33Z",
+      "side": 1,
+      "message": "Verified relevant tests (atest aconfig.test) locally. The presubmit tests failures are unrelated to this CL.",
+      "revId": "eb74489b3a6cd9bbfbdd8c54fc99513eb7c614d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
