@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfc55687_45d7ec69",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-11T01:39:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12f92713_85db2a06",
+      "range": {
+        "startLine": 24,
+        "startChar": 44,
+        "endLine": 24,
+        "endChar": 62
+      },
+      "revId": "02d35071411721bce7e77951da2ccaf5d703c934",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2920cb4_48460d97",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46931452_817e23f2",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-11T01:39:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2920cb4_48460d97",
+      "range": {
+        "startLine": 30,
+        "startChar": 24,
+        "endLine": 30,
+        "endChar": 53
+      },
+      "revId": "02d35071411721bce7e77951da2ccaf5d703c934",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e2eb4b2_a4c8c5cd",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-05-10T15:58:04Z",
       "side": 1,
       "message": "Nice, this makes the code more consistent.",
+      "range": {
+        "startLine": 6,
+        "startChar": 1,
+        "endLine": 8,
+        "endChar": 6
+      },
+      "revId": "02d35071411721bce7e77951da2ccaf5d703c934",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91db181d_9f691927",
+        "filename": "tools/aconfig/templates/java_runtime.template",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-11T01:39:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e2eb4b2_a4c8c5cd",
       "range": {
         "startLine": 6,
         "startChar": 1,

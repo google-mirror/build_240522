@@ -16,6 +16,24 @@
       "message": "This use of tiny template here is really nice!",
       "revId": "423197d7fcf00d44511655433acd871e94bea886",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2144e82_41b40b72",
+        "filename": "tools/aconfig/templates/java.template",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-11T01:39:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0edbdee_0e00303f",
+      "revId": "423197d7fcf00d44511655433acd871e94bea886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
