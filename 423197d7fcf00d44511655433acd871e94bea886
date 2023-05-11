@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0edbdee_0e00303f",
+        "filename": "tools/aconfig/templates/java.template",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-11T00:38:49Z",
+      "side": 1,
+      "message": "This use of tiny template here is really nice!",
+      "revId": "423197d7fcf00d44511655433acd871e94bea886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
