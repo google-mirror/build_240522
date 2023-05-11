@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9934eb29_95677b4f",
+        "filename": "core/envsetup.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-05-11T17:04:13Z",
+      "side": 1,
+      "message": "I left that decision up to the starlark code, not the calling make side. Because sometimes the list of variables to define is unbounded, and not knowable until the starlark code is run, like in the following cl for trunk stable.",
+      "parentUuid": "c7c19878_1cc39756",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 53
+      },
+      "revId": "c63ce1ab58c8d01d6d2694953a3a660b3008e72b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb5ffd28_fd314073",
@@ -72,6 +96,30 @@
       "writtenOn": "2023-05-11T06:15:43Z",
       "side": 1,
       "message": "Why c identifiers and not make identifiers?",
+      "range": {
+        "startLine": 129,
+        "startChar": 75,
+        "endLine": 129,
+        "endChar": 94
+      },
+      "revId": "c63ce1ab58c8d01d6d2694953a3a660b3008e72b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69be5c6_bf9339a5",
+        "filename": "tools/rbcrun/rbcrun/rbcrun.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-05-11T17:04:13Z",
+      "side": 1,
+      "message": "I wanted to restrict it to the c identifier subset just in case. Because if later these variables become more starlark code, we wouldn\u0027t be able to allow all the things make allows (like dashes).",
+      "parentUuid": "fb5ffd28_fd314073",
       "range": {
         "startLine": 129,
         "startChar": 75,
