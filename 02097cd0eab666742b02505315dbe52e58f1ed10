@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20379b2a_5b8440de",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1087,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-05-11T23:37:12Z",
+      "side": 1,
+      "message": "Don\u0027t we need with-as here for the executor?",
+      "range": {
+        "startLine": 1087,
+        "startChar": 2,
+        "endLine": 1087,
+        "endChar": 69
+      },
+      "revId": "02097cd0eab666742b02505315dbe52e58f1ed10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
