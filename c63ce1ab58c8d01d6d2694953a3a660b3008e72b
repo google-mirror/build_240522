@@ -34,6 +34,52 @@
       "parentUuid": "d856c499_4caaeff9",
       "revId": "c63ce1ab58c8d01d6d2694953a3a660b3008e72b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c19878_1cc39756",
+        "filename": "core/envsetup.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-05-11T06:15:43Z",
+      "side": 1,
+      "message": "Should we explicit say we want ALL_VERSIONS instead of loading everything?\n\ni.e. `load(\"build/make/core/all_versions.bzl\", \"ALL_VERSIONS\")` equivalent.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 53
+      },
+      "revId": "c63ce1ab58c8d01d6d2694953a3a660b3008e72b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb5ffd28_fd314073",
+        "filename": "tools/rbcrun/rbcrun/rbcrun.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-05-11T06:15:43Z",
+      "side": 1,
+      "message": "Why c identifiers and not make identifiers?",
+      "range": {
+        "startLine": 129,
+        "startChar": 75,
+        "endLine": 129,
+        "endChar": 94
+      },
+      "revId": "c63ce1ab58c8d01d6d2694953a3a660b3008e72b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
