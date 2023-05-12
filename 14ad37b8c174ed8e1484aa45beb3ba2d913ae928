@@ -22,6 +22,30 @@
       },
       "revId": "14ad37b8c174ed8e1484aa45beb3ba2d913ae928",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce467b5a_54979c13",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-05-12T06:15:58Z",
+      "side": 1,
+      "message": "Sure!",
+      "parentUuid": "c317536c_49c27101",
+      "range": {
+        "startLine": 1086,
+        "startChar": 5,
+        "endLine": 1086,
+        "endChar": 15
+      },
+      "revId": "14ad37b8c174ed8e1484aa45beb3ba2d913ae928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
