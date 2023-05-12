@@ -23,7 +23,9 @@ use std::io::Read;
 
 use crate::aconfig::{Namespace, Override};
 use crate::cache::Cache;
-use crate::codegen_java::{generate_java_code, GeneratedFile};
+use crate::codegen_context::GeneratedFile;
+use crate::codegen_cpp::generate_cpp_code;
+use crate::codegen_java::generate_java_code;
 use crate::protos::ProtoParsedFlags;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -85,8 +87,12 @@ pub fn create_cache(
     Ok(cache)
 }
 
-pub fn generate_code(cache: &Cache) -> Result<GeneratedFile> {
+pub fn create_java_lib(cache: &Cache) -> Result<GeneratedFile> {
     generate_java_code(cache)
+}
+
+pub fn create_cpp_lib(cache: &Cache) -> Result<GeneratedFile> {
+    generate_cpp_code(cache)
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, ValueEnum)]
