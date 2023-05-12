@@ -16,6 +16,24 @@
       "message": "Please don\u0027t do this. Although each partition image can be constructed independently, the final step of any `Add*` call is writing to the output zip, which isn\u0027t thread safe. Parallelizing this part without proper synchronization will corrupt the output file.",
       "revId": "03d014a03fcdb695f3fdd79493f6443355c8b07d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48efe1fb_ebe103cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-05-12T05:30:23Z",
+      "side": 1,
+      "message": "I thought this script writes files in IMAGES dir, and compressing happens in the next step from your fix, am I missing something?",
+      "parentUuid": "2ec8245e_e374a2e9",
+      "revId": "03d014a03fcdb695f3fdd79493f6443355c8b07d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
