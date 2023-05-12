@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af3b517a_182afeb2",
+        "filename": "tools/aconfig/src/codegen_context.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-05-12T13:21:00Z",
+      "side": 1,
+      "message": "Prefer to avoid `unwrap()` calls if possible, returning a `Result` instead.",
+      "revId": "8ebe7361a25bd64ee7681fcde2ce7af1a6d5fff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
