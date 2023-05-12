@@ -52,6 +52,24 @@
       "parentUuid": "48efe1fb_ebe103cf",
       "revId": "03d014a03fcdb695f3fdd79493f6443355c8b07d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6226c43_18e680bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-05-12T05:45:18Z",
+      "side": 1,
+      "message": "can we enable this only if output_zip is None?\n\nhttps://android-review.git.corp.google.com/c/platform/build/+/2584696\n\nIn CI, it looks like it is main use-case, I think.",
+      "parentUuid": "9c0160d7_0c32d8f9",
+      "revId": "03d014a03fcdb695f3fdd79493f6443355c8b07d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
