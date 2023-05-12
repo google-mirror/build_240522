@@ -34,6 +34,24 @@
       "parentUuid": "2ec8245e_e374a2e9",
       "revId": "03d014a03fcdb695f3fdd79493f6443355c8b07d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c0160d7_0c32d8f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-05-12T05:32:03Z",
+      "side": 1,
+      "message": "It will first write to IMAGES dir, and if an input zip file is specified, it will add the image to zip file as well. This CL works if invoked on a directory, but breaks if invoked on a dir. We should maybe re-structure the computations such that writing to zip happens after all images are constructed.",
+      "parentUuid": "48efe1fb_ebe103cf",
+      "revId": "03d014a03fcdb695f3fdd79493f6443355c8b07d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
