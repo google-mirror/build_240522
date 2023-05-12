@@ -15,76 +15,31 @@
  */
 
 use anyhow::Result;
-use serde::Serialize;
 use tinytemplate::TinyTemplate;
 
-use crate::aconfig::{FlagState, Permission};
-use crate::cache::{Cache, Item};
+use crate::cache::Cache;
+use crate::codegen_context::generate_codegen_context;
 use crate::commands::OutputFile;
 
 pub fn generate_java_code(cache: &Cache) -> Result<OutputFile> {
-    let class_elements: Vec<ClassElement> = cache.iter().map(create_class_element).collect();
-    let readwrite = class_elements.iter().any(|item| item.readwrite);
-    let namespace = uppercase_first_letter(
-        cache.iter().find(|item| !item.namespace.is_empty()).unwrap().namespace.as_str(),
-    );
-    let context = Context { namespace: namespace.clone(), readwrite, class_elements };
+    let mut context = generate_codegen_context(cache);
+    context.namespace = uppercase_first_letter(&context.namespace);
     let mut template = TinyTemplate::new();
     template.add_template("java_code_gen", include_str!("../templates/java.template"))?;
     let contents = template.render("java_code_gen", &context)?;
-    let path = ["com", "android", "internal", "aconfig", &(namespace + ".java")].iter().collect();
+    let path = ["com", "android", "internal", "aconfig",
+                &(context.namespace + ".java")].iter().collect();
     Ok(OutputFile { contents: contents.into(), path })
 }
 
-#[derive(Serialize)]
-struct Context {
-    pub namespace: String,
-    pub readwrite: bool,
-    pub class_elements: Vec<ClassElement>,
-}
-
-#[derive(Serialize)]
-struct ClassElement {
-    pub method_name: String,
-    pub readwrite: bool,
-    pub default_value: String,
-    pub feature_name: String,
-    pub flag_name: String,
-}
-
-fn create_class_element(item: &Item) -> ClassElement {
-    ClassElement {
-        method_name: item.name.clone(),
-        readwrite: item.permission == Permission::ReadWrite,
-        default_value: if item.state == FlagState::Enabled {
-            "true".to_string()
-        } else {
-            "false".to_string()
-        },
-        feature_name: item.name.clone(),
-        flag_name: item.name.clone(),
-    }
-}
-
 fn uppercase_first_letter(s: &str) -> String {
-    s.chars()
-        .enumerate()
-        .map(
-            |(index, ch)| {
-                if index == 0 {
-                    ch.to_ascii_uppercase()
-                } else {
-                    ch.to_ascii_lowercase()
-                }
-            },
-        )
-        .collect()
+    s[0..1].to_uppercase() + &s[1..]
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::aconfig::{FlagDeclaration, FlagValue};
+    use crate::aconfig::{FlagDeclaration, FlagValue, FlagState, Permission};
     use crate::commands::Source;
 
     #[test]
