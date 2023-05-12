@@ -15,79 +15,28 @@
  */
 
 use anyhow::Result;
-use serde::Serialize;
 use tinytemplate::TinyTemplate;
 
-use crate::aconfig::{FlagState, Permission};
-use crate::cache::{Cache, Item};
-
-pub struct GeneratedFile {
-    pub file_content: String,
-    pub file_name: String,
-}
+use crate::cache::Cache;
+use crate::codegen_context::{GeneratedFile, generate_codegen_context};
 
 pub fn generate_java_code(cache: &Cache) -> Result<GeneratedFile> {
-    let class_elements: Vec<ClassElement> = cache.iter().map(create_class_element).collect();
-    let readwrite = class_elements.iter().any(|item| item.readwrite);
-    let namespace = uppercase_first_letter(
-        cache.iter().find(|item| !item.namespace.is_empty()).unwrap().namespace.as_str(),
-    );
-    let context = Context { namespace: namespace.clone(), readwrite, class_elements };
+    let mut context = generate_codegen_context(cache);
+    context.namespace = uppercase_first_letter(&context.namespace);
     let mut template = TinyTemplate::new();
     template.add_template("java_code_gen", include_str!("../templates/java.template"))?;
     let file_content = template.render("java_code_gen", &context)?;
-    Ok(GeneratedFile { file_content, file_name: format!("{}.java", namespace) })
-}
-
-#[derive(Serialize)]
-struct Context {
-    pub namespace: String,
-    pub readwrite: bool,
-    pub class_elements: Vec<ClassElement>,
-}
-
-#[derive(Serialize)]
-struct ClassElement {
-    pub method_name: String,
-    pub readwrite: bool,
-    pub default_value: String,
-    pub feature_name: String,
-    pub flag_name: String,
-}
-
-fn create_class_element(item: &Item) -> ClassElement {
-    ClassElement {
-        method_name: item.name.clone(),
-        readwrite: item.permission == Permission::ReadWrite,
-        default_value: if item.state == FlagState::Enabled {
-            "true".to_string()
-        } else {
-            "false".to_string()
-        },
-        feature_name: item.name.clone(),
-        flag_name: item.name.clone(),
-    }
+    Ok(GeneratedFile { file_content, file_name: format!("{}.java", context.namespace) })
 }
 
 fn uppercase_first_letter(s: &str) -> String {
-    s.chars()
-        .enumerate()
-        .map(
-            |(index, ch)| {
-                if index == 0 {
-                    ch.to_ascii_uppercase()
-                } else {
-                    ch.to_ascii_lowercase()
-                }
-            },
-        )
-        .collect()
+    s[0..1].to_uppercase() + &s[1..]
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::aconfig::{Flag, Value};
+    use crate::aconfig::{Flag, Value, FlagState, Permission};
     use crate::commands::Source;
 
     #[test]
@@ -134,7 +83,7 @@ mod tests {
 
         }
         ";
-        let expected_file_name = format!("{}.java", uppercase_first_letter(namespace));
+        let expected_file_name = String::from("Testflag.java");
         let generated_file = generate_java_code(&cache).unwrap();
         assert_eq!(expected_file_name, generated_file.file_name);
         assert_eq!(expect_content.replace(' ', ""), generated_file.file_content.replace(' ', ""));
