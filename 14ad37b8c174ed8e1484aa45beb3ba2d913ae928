@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c317536c_49c27101",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-05-12T06:13:00Z",
+      "side": 1,
+      "message": "Can you add a comment about the reason?",
+      "range": {
+        "startLine": 1086,
+        "startChar": 5,
+        "endLine": 1086,
+        "endChar": 15
+      },
+      "revId": "14ad37b8c174ed8e1484aa45beb3ba2d913ae928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
