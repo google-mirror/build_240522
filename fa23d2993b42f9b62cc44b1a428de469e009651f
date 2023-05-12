@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2794688_88d98186",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-12T11:32:01Z",
+      "side": 1,
+      "message": "Could I know how a flag_declaration will know which value it will take? I assume `name` is the primary key here. So the building system will provide the namespace from somewhere for the first time create cache from declaration?",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 24
+      },
+      "revId": "fa23d2993b42f9b62cc44b1a428de469e009651f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
