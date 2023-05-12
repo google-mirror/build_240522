@@ -24,6 +24,8 @@ use std::io::Write;
 
 mod aconfig;
 mod cache;
+mod codegen_context;
+mod codegen_cpp;
 mod codegen_java;
 mod commands;
 mod protos;
@@ -48,9 +50,10 @@ fn cli() -> Command {
                 .arg(Arg::new("cache").long("cache").required(true)),
         )
         .subcommand(
-            Command::new("create-java-lib")
+            Command::new("create-flag-library")
                 .arg(Arg::new("cache").long("cache").required(true))
-                .arg(Arg::new("out").long("out").required(true)),
+                .arg(Arg::new("out").long("out").required(true))
+                .arg(Arg::new("lang").long("language").required(true)),
         )
         .subcommand(
             Command::new("dump")
@@ -87,12 +90,13 @@ fn main() -> Result<()> {
             let file = fs::File::create(path)?;
             cache.write_to_writer(file)?;
         }
-        Some(("create-java-lib", sub_matches)) => {
+        Some(("create-flag-library", sub_matches)) => {
             let path = sub_matches.get_one::<String>("cache").unwrap();
             let file = fs::File::open(path)?;
             let cache = Cache::read_from_reader(file)?;
             let out = sub_matches.get_one::<String>("out").unwrap();
-            let generated_file = commands::generate_code(&cache).unwrap();
+            let lang = sub_matches.get_one::<String>("lang").unwrap();
+            let generated_file = commands::generate_code(&cache, lang).unwrap();
             fs::write(
                 format!("{}/{}", out, generated_file.file_name),
                 generated_file.file_content,
