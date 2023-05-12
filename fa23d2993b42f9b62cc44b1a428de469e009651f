@@ -22,6 +22,30 @@
       },
       "revId": "fa23d2993b42f9b62cc44b1a428de469e009651f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10f2e6a2_ddaf1b70",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T11:47:08Z",
+      "side": 1,
+      "message": "flag_declaration only exists as part of a flag_declarations (note the -s) message, and those messages are what devs will write and aconfig will consume. An example is\n\n```\nnamespace \u003d \"...\"\nflag {\n    name \u003d \"...\"\n    description \u003d \"...\"\n}\nflag {\n    name \u003d \"...\"\n    description \u003d \"...\"\n}\n```\n\nin other words, when parsing a flag_declaration we know which namespace it belongs to. This nested syntax was chosen to enforce that a single flag declarations file only refers to a single namespace, and the reason for this is that it is better for the build: touch a declarations file and the build only has to rebuild parts that depend on a single namespace.\n\nFor flag_values and parsed_flags we don\u0027t enforce this because everything is easier as a flattened view instead of a nested view. This doesn\u0027t *prevent* a 1:1 mapping between namespace and flag value files and the build will use this strategy. The only place where we expect multiple namespaces in the same flag value file is the local override file (and we can teach the build system to handle this).",
+      "parentUuid": "e2794688_88d98186",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 24
+      },
+      "revId": "fa23d2993b42f9b62cc44b1a428de469e009651f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
