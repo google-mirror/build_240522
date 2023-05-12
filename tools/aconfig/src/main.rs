@@ -25,6 +25,7 @@ use std::path::{Path, PathBuf};
 
 mod aconfig;
 mod cache;
+mod codegen_cpp;
 mod codegen_java;
 mod commands;
 mod protos;
@@ -45,7 +46,12 @@ fn cli() -> Command {
         .subcommand(
             Command::new("create-java-lib")
                 .arg(Arg::new("cache").long("cache").required(true))
-                .arg(Arg::new("out").long("out").required(true)),
+                .arg(Arg::new("out").long("out").required(true))
+        )
+        .subcommand(
+            Command::new("create-cpp-lib")
+                .arg(Arg::new("cache").long("cache").required(true))
+                .arg(Arg::new("out").long("out").required(true))
         )
         .subcommand(
             Command::new("dump")
@@ -102,7 +108,15 @@ fn main() -> Result<()> {
             let file = fs::File::open(path)?;
             let cache = Cache::read_from_reader(file)?;
             let dir = PathBuf::from(sub_matches.get_one::<String>("out").unwrap());
-            let generated_file = commands::generate_code(&cache).unwrap();
+            let generated_file = commands::create_java_lib(&cache).unwrap();
+            write_output_file_realtive_to_dir(&dir, &generated_file)?;
+        }
+        Some(("create-cpp-lib", sub_matches)) => {
+            let path = sub_matches.get_one::<String>("cache").unwrap();
+            let file = fs::File::open(path)?;
+            let cache = Cache::read_from_reader(file)?;
+            let dir = PathBuf::from(sub_matches.get_one::<String>("out").unwrap());
+            let generated_file = commands::create_cpp_lib(&cache)?;
             write_output_file_realtive_to_dir(&dir, &generated_file)?;
         }
         Some(("dump", sub_matches)) => {
