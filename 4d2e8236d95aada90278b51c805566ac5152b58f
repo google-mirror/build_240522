@@ -1,0 +1,251 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12c2bf78_f9d6ee0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T11:57:42Z",
+      "side": 1,
+      "message": "nit: please prefix all commits in aconfig with\n\n```\naconfig: \u003crest of commit message subject\u003e\n```\n\nI find it helps sort through commits in gerrit.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84116157_e3c2adf8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T11:57:42Z",
+      "side": 1,
+      "message": "I\u0027m not sure how I feel about tinytemplate. I was hoping we could move towards getting rid of the serde dependency by using the same cache serialization format as `dump --format\u003dprotobuf`. Integrating tinytemplate tighter than today is a step in the opposite direction. On the other hand, it may not matter in practice.\n\nRegardless of what dependencies we end up with, I\u0027m curious about the performance implications of tinytemplate vs something hand-crafted. It\u0027s not possible to say anything before we have real world input available. Because of that I\u0027m OK with keeping tinytemplate for now, and comparing its performance at a later date.",
+      "range": {
+        "startLine": 9,
+        "startChar": 51,
+        "endLine": 9,
+        "endChar": 64
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc9d713d_14a3ea9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T11:57:42Z",
+      "side": 1,
+      "message": "We should consider moving all codegen to its own submodule (src/codegen/{mod.rs,java.rs,cpp.rs}). Not in this CL though.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 72
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cc32864_3df1ca15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T11:57:42Z",
+      "side": 1,
+      "message": "Please change to `atest aconfig.test` or similar that is supported by Android. Cargo is the unofficial build system for local development and while `cargo t` should always be green I don\u0027t think it should be mentioned in the commit msg.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 29
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f656059_9d5eb196",
+        "filename": "tools/aconfig/src/codegen_context.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T11:57:42Z",
+      "side": 1,
+      "message": "Note: replaced by OutputFile in aosp/2584221.",
+      "range": {
+        "startLine": 22,
+        "startChar": 11,
+        "endLine": 22,
+        "endChar": 24
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "610e0def_75fef62b",
+        "filename": "tools/aconfig/src/codegen_context.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T11:57:42Z",
+      "side": 1,
+      "message": "Is this common function needed? It may be a good fit for for Java and C++, but maybe not for Rust.\n\nReusing the same structs across multiple languages carries a risk that someone will extend them with something that only makes sense / is used in one of the languages, and the code starts to rot.\n\nWDYT?",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 31
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "347ba8c7_1e6f3b1e",
+        "filename": "tools/aconfig/src/codegen_context.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T11:57:42Z",
+      "side": 1,
+      "message": "This relies on the implicit fact that a cache only operates on a single namespace at a time. We should have some helper function in cache to embed this info. Not needed for this CL.\n\n(Should command.rs filter the Items based on namespace and call generate_... repeatedly? Also not something that should be part of this CL, if we should even add it...)",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 60
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "871dfe64_69b329c4",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T11:57:42Z",
+      "side": 1,
+      "message": "Use `r#\"...\"` for a literal string where you don\u0027t need to escape \". See https://android-review.git.corp.google.com/c/platform/build/+/2584221/1/tools/aconfig/src/codegen_java.rs#123 for an example.",
+      "range": {
+        "startLine": 61,
+        "startChar": 29,
+        "endLine": 61,
+        "endChar": 30
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f2377e7_b1d39b60",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T11:57:42Z",
+      "side": 1,
+      "message": "See comment in main.rs.",
+      "range": {
+        "startLine": 90,
+        "startChar": 36,
+        "endLine": 90,
+        "endChar": 40
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51000b5d_6fde8032",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T11:57:42Z",
+      "side": 1,
+      "message": "Please create a new `create-cpp-lib` argument and command. I explicitly don\u0027t want to mix the parameters for the different languages, as they may be different, e.g. `--out \u003cdir\u003e` for Java and `--out-header \u003cfile\u003e --out-impl \u003cfile\u003e` for C++. Separate commands prevent weird questions like \"what does `--out-header` mean when compiling Java, and the intended usage is easier to understand when doing `aconfig --help`.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 71
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e4757ca_be7bc0fe",
+        "filename": "tools/aconfig/templates/cpp.template",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T11:57:42Z",
+      "side": 1,
+      "message": "Add `#ifndef MY_HEADER` include guards.",
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
