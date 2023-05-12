@@ -84,7 +84,7 @@ fn uppercase_first_letter(s: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::aconfig::{FlagDeclaration, FlagValue};
+    use crate::aconfig::{FlagDeclaration, FlagValue, FlagState, Permission};
     use crate::commands::Source;
 
     #[test]
