@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca8ac27c_621c1397",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-12T12:20:35Z",
+      "side": 1,
+      "message": "Presubmit error unrelated to aconfig.",
+      "revId": "fa23d2993b42f9b62cc44b1a428de469e009651f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2794688_88d98186",
