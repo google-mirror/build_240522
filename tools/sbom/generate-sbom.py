@@ -299,11 +299,12 @@ def get_sbom_fragments(installed_file_metadata, metadata_file_path):
   elif is_prebuilt_package(installed_file_metadata):
     # Prebuilt fork packages
     name = get_prebuilt_package_name(installed_file_metadata, metadata_file_path)
+    version = get_package_version(metadata_file_path)
     prebuilt_package_id = new_package_id(name, PKG_PREBUILT)
     prebuilt_package = sbom_data.Package(id=prebuilt_package_id,
                                          name=name,
                                          download_location=sbom_data.VALUE_NONE,
-                                         version=args.build_version,
+                                         version=version if version else args.build_version,
                                          supplier='Organization: ' + args.product_mfr)
     packages.append(prebuilt_package)
 
