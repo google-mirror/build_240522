@@ -16,6 +16,24 @@
       "message": "Prefer to avoid `unwrap()` calls if possible, returning a `Result` instead.",
       "revId": "8ebe7361a25bd64ee7681fcde2ce7af1a6d5fff8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f067e95_ca7526d9",
+        "filename": "tools/aconfig/src/codegen_context.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-15T20:51:27Z",
+      "side": 1,
+      "message": "thanks for the review, removed this file in favor of individual context generation for each language codegen.",
+      "parentUuid": "af3b517a_182afeb2",
+      "revId": "8ebe7361a25bd64ee7681fcde2ce7af1a6d5fff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
