@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78318be3_d4250723",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-15T13:52:11Z",
+      "side": 1,
+      "message": "Presubmit tests fail for reasons other than aconfig; atest aconfig verified locally; bypassing presubmit.",
+      "revId": "e66b89f635ca12cec893d5c4fcdd38ce92cb93ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
