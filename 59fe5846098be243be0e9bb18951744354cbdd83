@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ee10a06_4b424f3e",
+        "filename": "tools/releasetools/merge_ota.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-05-15T17:17:57Z",
+      "side": 1,
+      "message": "move this inside main function to avoid side effects when importing this module",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 59
+      },
+      "revId": "59fe5846098be243be0e9bb18951744354cbdd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9bb418c_edd85beb",
+        "filename": "tools/releasetools/merge_ota.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-05-15T17:17:57Z",
+      "side": 1,
+      "message": "It\u0027s better to turn these into parameters and stop relying on global OPTIONS. We are actively trying not to add any new usage of the global OPTIONS object. How about adding `payload_signer_args` and `payload_signer_maximum_signature_size` to constructor of PayloadSigner, and pass in these parameters via L275?",
+      "range": {
+        "startLine": 247,
+        "startChar": 19,
+        "endLine": 247,
+        "endChar": 56
+      },
+      "revId": "59fe5846098be243be0e9bb18951744354cbdd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
