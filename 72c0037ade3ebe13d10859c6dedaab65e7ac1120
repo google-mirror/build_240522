@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5209c392_f3659714",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-16T14:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e61c082_0254d6df",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 15,
+        "endChar": 2
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc596613_313faba5",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab244700_02b70811",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-16T14:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc596613_313faba5",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 4
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fa2a2ef_cb6465d8",
@@ -60,6 +108,24 @@
       "writtenOn": "2023-05-16T09:00:02Z",
       "side": 1,
       "message": "Remove blank line",
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c041bf94_22377822",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-16T14:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fa2a2ef_cb6465d8",
       "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -104,6 +170,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43a2557a_6cfc7695",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-16T14:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55c7f84c_e937098b",
+      "range": {
+        "startLine": 29,
+        "startChar": 61,
+        "endLine": 29,
+        "endChar": 67
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "115e675a_a7172166",
@@ -127,6 +217,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b451e66_4bf4adef",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-16T14:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "115e675a_a7172166",
+      "range": {
+        "startLine": 34,
+        "startChar": 17,
+        "endLine": 34,
+        "endChar": 56
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd842d89_598495d7",
@@ -140,6 +254,30 @@
       "writtenOn": "2023-05-16T07:38:33Z",
       "side": 1,
       "message": "My initial thought was that commands.rs would include unit tests to simulate what it would look like to call the command from main, and files like codegen_cpp.rs would include more fine grained tests. WDYT?",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 1
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89a23f28_1b2ddcad",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-16T14:58:39Z",
+      "side": 1,
+      "message": "I agree. At one point, I was thinking if I thinking of remove this wrapper in commands.rs and just have main.rs call generate_cpp_code, but I think we should have a central place we know all commands are routed.\n\nFor testing though, given it is a wrapper, I think testing of create_cpp_lib would be effectively testing generate_cpp_code.",
+      "parentUuid": "fd842d89_598495d7",
       "range": {
         "startLine": 99,
         "startChar": 0,
@@ -196,6 +334,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c3c690c_4db68fb3",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-16T14:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7fb41f8_65f781b8",
+      "range": {
+        "startLine": 119,
+        "startChar": 65,
+        "endLine": 119,
+        "endChar": 75
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4440cc5_9135fab2",
@@ -219,6 +381,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c63189f_8c2d0847",
+        "filename": "tools/aconfig/templates/cpp.template",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-16T14:58:39Z",
+      "side": 1,
+      "message": "yes, it needs to depend on this cc_library target \"server_configurable_flags\" as static libs in the cpp lib.",
+      "parentUuid": "f4440cc5_9135fab2",
+      "range": {
+        "startLine": 5,
+        "startChar": 10,
+        "endLine": 5,
+        "endChar": 35
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98b4a907_72579569",
@@ -232,6 +418,30 @@
       "writtenOn": "2023-05-16T07:38:33Z",
       "side": 1,
       "message": "Missing semi-colon\n\n```suggestion\nusing namespace server_configurable_flags;\n```",
+      "range": {
+        "startLine": 6,
+        "startChar": 16,
+        "endLine": 6,
+        "endChar": 41
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b3ae0a5_911fb130",
+        "filename": "tools/aconfig/templates/cpp.template",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-16T14:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98b4a907_72579569",
       "range": {
         "startLine": 6,
         "startChar": 16,
