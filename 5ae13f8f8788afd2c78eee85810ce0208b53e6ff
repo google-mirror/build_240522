@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace9c6f3_a23b0f2d",
+        "filename": "tools/aconfig/templates/java.template",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-16T18:52:05Z",
+      "side": 1,
+      "message": "Here we may have a problem when mapping to Mendel. Previously, we thought we will directly use the namespace as the Mendel namespace. But if we do in this way. We cannot directly use it.",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "5ae13f8f8788afd2c78eee85810ce0208b53e6ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
