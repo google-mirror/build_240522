@@ -33,6 +33,24 @@
       "message": "this line should not be changed.",
       "revId": "1f93ce20c5a5f3e7c2f6b5e1f9fdc4d2572220cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff956a67_7fc420f5",
+        "filename": "tools/releasetools/merge_ota.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-05-16T16:54:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b119464c_eaaf32fd",
+      "revId": "1f93ce20c5a5f3e7c2f6b5e1f9fdc4d2572220cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
