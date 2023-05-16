@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2f5ae4_dc0c3b90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-16T07:38:33Z",
+      "side": 1,
+      "message": "Please run `cargo fmt`. Otherwise, LGTM. I assume we\u0027ll see more iterations on the C++ code once we have decided how it connects to the build system, changing read-write flags in unit tests, etc.",
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55c7f84c_e937098b",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-16T07:38:33Z",
+      "side": 1,
+      "message": "While we should avoid `unwrap()` outside tests, in this case it should be ok just like the unwraps in main.rs for required clap arguments -- the invariant should be checked before we get to the unwrap. In case of the command line arguments, clap does that. In case of an empty namespace, cache.rs doesn\u0027t, but it should! I\u0027ll fix that in another CL.\n\nThat said, unwraps should really be `expect(msg)` instead -- that way you can rely on an invariant, but also spell it out in case future changes break that invariant.\n\nSo tl;dr: please change unwrap to expect. I will do the same with the ones in main.rs.",
+      "range": {
+        "startLine": 29,
+        "startChar": 61,
+        "endLine": 29,
+        "endChar": 67
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "115e675a_a7172166",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-16T07:38:33Z",
+      "side": 1,
+      "message": "Instead of `com/android/internal/aconfig/\u003cnamespace\u003e.h` isn\u0027t the expected output just `aconfig/\u003cnamespace\u003e.h`? Also cf the discussions with joeo on the Java package names for the Java codegen.",
+      "range": {
+        "startLine": 34,
+        "startChar": 17,
+        "endLine": 34,
+        "endChar": 56
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd842d89_598495d7",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-16T07:38:33Z",
+      "side": 1,
+      "message": "My initial thought was that commands.rs would include unit tests to simulate what it would look like to call the command from main, and files like codegen_cpp.rs would include more fine grained tests. WDYT?",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 1
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace9bfe5_a425e463",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-16T07:38:33Z",
+      "side": 1,
+      "message": "FYI: lots of similar looking patterns; I intend to clean this up at some point.",
+      "range": {
+        "startLine": 115,
+        "startChar": 11,
+        "endLine": 119,
+        "endChar": 75
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4440cc5_9135fab2",
+        "filename": "tools/aconfig/templates/cpp.template",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-16T07:38:33Z",
+      "side": 1,
+      "message": "Note to self: we need to sync with the build team that the generated code depends on server_configurable_flags.",
+      "range": {
+        "startLine": 5,
+        "startChar": 10,
+        "endLine": 5,
+        "endChar": 35
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b4a907_72579569",
+        "filename": "tools/aconfig/templates/cpp.template",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-16T07:38:33Z",
+      "side": 1,
+      "message": "Missing semi-colon\n\n```suggestion\nusing namespace server_configurable_flags;\n```",
+      "range": {
+        "startLine": 6,
+        "startChar": 16,
+        "endLine": 6,
+        "endChar": 41
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
