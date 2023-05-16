@@ -22,6 +22,30 @@
       },
       "revId": "5ae13f8f8788afd2c78eee85810ce0208b53e6ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c73f644c_5ab9c83e",
+        "filename": "tools/aconfig/templates/java.template",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-05-16T21:27:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ace9c6f3_a23b0f2d",
+      "range": {
+        "startLine": 10,
+        "startChar": 14,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "5ae13f8f8788afd2c78eee85810ce0208b53e6ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
