@@ -16,6 +16,23 @@
       "message": "It might be desirable to add some additional tests for this as well, any guidance would be appreciated.\n\nResigning an OTA with the same keys as used by ota_from_target_files should produce an identical zip file. Is this possible to achieve in a good way, or do we need to check in a full OTA-package in testdata-folder?\nIf OTA structure is updated, a  checked in file might need to be updated. So being able to generate file dynamically might be desired.",
       "revId": "1f93ce20c5a5f3e7c2f6b5e1f9fdc4d2572220cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b119464c_eaaf32fd",
+        "filename": "tools/releasetools/merge_ota.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2023-05-16T11:51:30Z",
+      "side": 1,
+      "message": "this line should not be changed.",
+      "revId": "1f93ce20c5a5f3e7c2f6b5e1f9fdc4d2572220cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
