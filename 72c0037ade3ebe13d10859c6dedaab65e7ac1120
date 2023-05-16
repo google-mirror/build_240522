@@ -112,6 +112,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7fb41f8_65f781b8",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-16T08:30:03Z",
+      "side": 1,
+      "message": "No need for unwrap here, use ?\n\n```suggestion\n            let generated_file \u003d commands::create_cpp_lib(\u0026cache)?;\n```\n\n(The same issue is present in the java code gen but I\u0027m fixing that in a separate CL.)",
+      "range": {
+        "startLine": 119,
+        "startChar": 65,
+        "endLine": 119,
+        "endChar": 75
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4440cc5_9135fab2",
         "filename": "tools/aconfig/templates/cpp.template",
         "patchSetId": 9
