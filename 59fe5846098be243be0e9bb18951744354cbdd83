@@ -45,6 +45,30 @@
       },
       "revId": "59fe5846098be243be0e9bb18951744354cbdd83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a71b8f7c_35a23245",
+        "filename": "tools/releasetools/merge_ota.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2023-05-16T11:29:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9bb418c_edd85beb",
+      "range": {
+        "startLine": 247,
+        "startChar": 19,
+        "endLine": 247,
+        "endChar": 56
+      },
+      "revId": "59fe5846098be243be0e9bb18951744354cbdd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
