@@ -309,7 +309,7 @@ endef
 # Ex: $(call soong_config_set,acme,COOL_FEATURE,true)
 define soong_config_set
 $(call soong_config_define_internal,$1,$2) \
-$(eval SOONG_CONFIG_$(strip $1)_$(strip $2):=$3)
+$(eval SOONG_CONFIG_$(strip $1)_$(strip $2):=$(strip $3))
 endef
 
 # soong_config_append appends to the value of the variable in the given Soong
