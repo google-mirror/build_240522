@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5ba8003_15c02325",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-05-16T19:32:34Z",
+      "side": 1,
+      "message": "I rather have the tests added in a separate CL because this CL only introduces a tiny change. If we want to add test it should be included in the same commit which merge_ota.py is added. Since we can\u0027t do that anymore, let\u0027s just add tests in a dedicated CL.",
+      "parentUuid": "e92baa23_d83d34e5",
+      "revId": "1f93ce20c5a5f3e7c2f6b5e1f9fdc4d2572220cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b119464c_eaaf32fd",
