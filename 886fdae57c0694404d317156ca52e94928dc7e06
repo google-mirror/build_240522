@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c083dddb_1ed44ada",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-05-17T22:26:49Z",
+      "side": 1,
+      "message": "If I want to see the actual modules that include the libraries and not just the executable that end up depending on them. Or only print what the --module explicitly includes.\n\nWith the default, we don\u0027t need to pass in `--recursive`, just need to pass in `--no-recursive` if we don\u0027t want the default.",
+      "parentUuid": "d126850b_17fe8467",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 3
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "936b425b_f92e2c2d",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "012ffadf_8eb0ed48",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-05-17T22:26:49Z",
+      "side": 1,
+      "message": "\u003e you could force these lists to be sets if you wanted,\nYeah it makes things a bit clearer here.  Done.\n\n\u003e it\u0027s not clear why we have \u0027shared\u0027 variable above if we use module[\"shared_libs\"] here.\n\nThis loop modifies `module[\"shared_libs\"]` in place and adds things to it while looping through it. Labeled it as a snapshot so it\u0027s more clear.",
+      "parentUuid": "936b425b_f92e2c2d",
+      "range": {
+        "startLine": 138,
+        "startChar": 13,
+        "endLine": 138,
+        "endChar": 25
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dbbe7e3_cf0837bf",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-05-17T21:01:34Z",
       "side": 1,
       "message": "nit: consider de-duplicating this with the above shared case\n\n    for lib_class in [\"shared_libs\", \"static_libs\"]:\n        for lib in module[lib_class]:\n            if not lib or lib not in module_info:\n            ...\n\nIf \u0027Libs\u0027 is also replaced with a set(), you could use lib_class as a key in visited as well.",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 152,
+        "endChar": 59
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3635bc67_e9115378",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-05-17T22:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dbbe7e3_cf0837bf",
       "range": {
         "startLine": 144,
         "startChar": 4,
@@ -95,6 +167,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "780c93cd_6fe40e99",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-05-17T22:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de287449_34053d7c",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 13
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9289ea99_cc6c929f",
         "filename": "tools/find_static_candidates.py",
         "patchSetId": 7
@@ -106,6 +202,30 @@
       "writtenOn": "2023-05-17T21:01:34Z",
       "side": 1,
       "message": "honestly, why does anyone use named tuple? this is so much better.",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 26
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a6cd177_bbd11a0e",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-05-17T22:26:49Z",
+      "side": 1,
+      "message": "I didn\u0027t know about named tuples 😊 Not sure how they work with defaultdict() either, but no longer needed!",
+      "parentUuid": "9289ea99_cc6c929f",
       "range": {
         "startLine": 168,
         "startChar": 0,
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bea6a8e7_97d7d790",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-05-17T22:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4df51b11_a5399ff2",
+      "range": {
+        "startLine": 180,
+        "startChar": 24,
+        "endLine": 180,
+        "endChar": 27
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9096055_480dc599",
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5286f5bd_315ba843",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-05-17T22:26:49Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "d9096055_480dc599",
+      "range": {
+        "startLine": 182,
+        "startChar": 6,
+        "endLine": 182,
+        "endChar": 12
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4777760b_9c098311",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-05-17T21:01:34Z",
       "side": 1,
       "message": "why can there be repeated parents? so that len(parents) !\u003d count?\n\nSince the Android build system has unique names, even if we see a parent twice here, should we still count it as one?",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 45
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "668e7949_5426f223",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-05-17T22:26:49Z",
+      "side": 1,
+      "message": "There aren\u0027t repeated parents. Cleaned this up.",
+      "parentUuid": "4777760b_9c098311",
       "range": {
         "startLine": 193,
         "startChar": 0,
