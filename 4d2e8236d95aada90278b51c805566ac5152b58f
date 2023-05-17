@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79b8102c_c710e02c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-17T07:18:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84116157_e3c2adf8",
+      "range": {
+        "startLine": 9,
+        "startChar": 51,
+        "endLine": 9,
+        "endChar": 64
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc9d713d_14a3ea9f",
@@ -84,6 +108,30 @@
       "writtenOn": "2023-05-12T11:57:42Z",
       "side": 1,
       "message": "We should consider moving all codegen to its own submodule (src/codegen/{mod.rs,java.rs,cpp.rs}). Not in this CL though.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 72
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35f8fee3_2041b41e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-17T07:18:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc9d713d_14a3ea9f",
       "range": {
         "startLine": 10,
         "startChar": 0,
@@ -296,6 +344,30 @@
       "writtenOn": "2023-05-12T11:57:42Z",
       "side": 1,
       "message": "This relies on the implicit fact that a cache only operates on a single namespace at a time. We should have some helper function in cache to embed this info. Not needed for this CL.\n\n(Should command.rs filter the Items based on namespace and call generate_... repeatedly? Also not something that should be part of this CL, if we should even add it...)",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 60
+      },
+      "revId": "4d2e8236d95aada90278b51c805566ac5152b58f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca96206c_c8e725a6",
+        "filename": "tools/aconfig/src/codegen_context.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-17T07:18:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "347ba8c7_1e6f3b1e",
       "range": {
         "startLine": 30,
         "startChar": 0,

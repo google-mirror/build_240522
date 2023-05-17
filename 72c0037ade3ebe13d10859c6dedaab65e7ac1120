@@ -196,6 +196,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8375f75_1684ea3b",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-17T07:18:36Z",
+      "side": 1,
+      "message": "Cache now has .namespace() to get a guaranteed non-empty namespace, so `let namespace \u003d cache.namespace()`.",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 95
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "115e675a_a7172166",
         "filename": "tools/aconfig/src/codegen_cpp.rs",
         "patchSetId": 9
@@ -351,6 +374,30 @@
       "range": {
         "startLine": 119,
         "startChar": 65,
+        "endLine": 119,
+        "endChar": 75
+      },
+      "revId": "72c0037ade3ebe13d10859c6dedaab65e7ac1120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3abbbca6_89697edc",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-17T07:18:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ace9bfe5_a425e463",
+      "range": {
+        "startLine": 115,
+        "startChar": 11,
         "endLine": 119,
         "endChar": 75
       },
