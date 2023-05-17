@@ -22,6 +22,30 @@
       },
       "revId": "fd7e6517d345d3b8d4af12dae345434d968b83b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fe6fb07_dd7ef7bd",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-05-17T19:15:57Z",
+      "side": 1,
+      "message": "stem might not be accurate in this case since this variable\u0027s value looks like a/b/c/d.spdx.json, and stem usually is \"d\" in the example. I didn\u0027t find a naming convention for this component and simply named it \"prefix\" from the perspective of stings.",
+      "parentUuid": "bdcd8724_c0732475",
+      "range": {
+        "startLine": 547,
+        "startChar": 2,
+        "endLine": 547,
+        "endChar": 8
+      },
+      "revId": "fd7e6517d345d3b8d4af12dae345434d968b83b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
