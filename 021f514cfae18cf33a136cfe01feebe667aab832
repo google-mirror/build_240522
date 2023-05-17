@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de10898_08cb35d1",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-17T14:58:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53816bb2_27a22d20",
+      "revId": "021f514cfae18cf33a136cfe01feebe667aab832",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c95a5ae9_ebe239d1",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-05-17T07:18:36Z",
       "side": 1,
       "message": "```suggestion\n            let path \u003d get_required_arg::\u003cString\u003e(sub_matches, \"cache\")?;\n```",
+      "range": {
+        "startLine": 125,
+        "startChar": 22,
+        "endLine": 125,
+        "endChar": 71
+      },
+      "revId": "021f514cfae18cf33a136cfe01feebe667aab832",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8546f14_1774d32b",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-17T14:58:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c95a5ae9_ebe239d1",
       "range": {
         "startLine": 125,
         "startChar": 22,
