@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d126850b_17fe8467",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-05-17T21:01:34Z",
+      "side": 1,
+      "message": "when would you not want to use this argument?",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 3
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "936b425b_f92e2c2d",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-05-17T21:01:34Z",
+      "side": 1,
+      "message": "nit: you could force these lists to be sets if you wanted, it\u0027s a bit hard to read how these structures are updated in place, e.g. the first argument is being modified here. Also, it\u0027s not clear why we have \u0027shared\u0027 variable above if we use module[\"shared_libs\"] here.",
+      "range": {
+        "startLine": 138,
+        "startChar": 13,
+        "endLine": 138,
+        "endChar": 25
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dbbe7e3_cf0837bf",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-05-17T21:01:34Z",
+      "side": 1,
+      "message": "nit: consider de-duplicating this with the above shared case\n\n    for lib_class in [\"shared_libs\", \"static_libs\"]:\n        for lib in module[lib_class]:\n            if not lib or lib not in module_info:\n            ...\n\nIf \u0027Libs\u0027 is also replaced with a set(), you could use lib_class as a key in visited as well.",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 152,
+        "endChar": 59
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de287449_34053d7c",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-05-17T21:01:34Z",
+      "side": 1,
+      "message": "unneeded?",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 13
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9289ea99_cc6c929f",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-05-17T21:01:34Z",
+      "side": 1,
+      "message": "honestly, why does anyone use named tuple? this is so much better.",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 26
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4df51b11_a5399ff2",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-05-17T21:01:34Z",
+      "side": 1,
+      "message": "nit: `\"EXECUTABLES\" not in module[\"class\"]`",
+      "range": {
+        "startLine": 180,
+        "startChar": 24,
+        "endLine": 180,
+        "endChar": 27
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9096055_480dc599",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-05-17T21:01:34Z",
+      "side": 1,
+      "message": "nit: this method is updating this object in-place?",
+      "range": {
+        "startLine": 182,
+        "startChar": 6,
+        "endLine": 182,
+        "endChar": 12
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4777760b_9c098311",
+        "filename": "tools/find_static_candidates.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-05-17T21:01:34Z",
+      "side": 1,
+      "message": "why can there be repeated parents? so that len(parents) !\u003d count?\n\nSince the Android build system has unique names, even if we see a parent twice here, should we still count it as one?",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 45
+      },
+      "revId": "886fdae57c0694404d317156ca52e94928dc7e06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
