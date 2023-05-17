@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53816bb2_27a22d20",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-05-17T14:37:29Z",
+      "side": 1,
+      "message": "`expect` will cause this function to panic, can you turn this into a result instead and use the `?` operator?",
+      "revId": "021f514cfae18cf33a136cfe01feebe667aab832",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c95a5ae9_ebe239d1",
         "filename": "tools/aconfig/src/main.rs",
         "patchSetId": 12
