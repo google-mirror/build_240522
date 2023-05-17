@@ -55,6 +55,7 @@ PRODUCT_PACKAGES += \
     com.android.btservices \
     com.android.conscrypt \
     com.android.extservices \
+    com.android.fw_oxidize.demo \
     com.android.i18n \
     com.android.ipsec \
     com.android.location.provider \
