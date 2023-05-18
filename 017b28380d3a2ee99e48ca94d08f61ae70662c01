@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ed569d0_c707318a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-05-18T20:04:06Z",
+      "side": 1,
+      "message": "should it be `BOARD_KERNEL_MODULES_16K` instead?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "017b28380d3a2ee99e48ca94d08f61ae70662c01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
