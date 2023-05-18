@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce196fb1_4badd998",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-05-18T18:19:33Z",
+      "side": 1,
+      "message": "copy-many-files ends up in copy-file-to-target, which already has mkdir -p: https://cs.android.com/android/platform/superproject/+/master:build/make/core/definitions.mk;l\u003d3261;drc\u003d2191b9db82f49a40b7eee805b8ac6a6e41d0da50",
+      "parentUuid": "e8dcd2c3_7d7a205b",
+      "revId": "b14c019c2b5b1f8d013ca9706230330dac983110",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55d14734_dc058708",
         "filename": "core/Makefile",
         "patchSetId": 1
