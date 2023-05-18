@@ -22,6 +22,30 @@
       },
       "revId": "c113a702219e8b52aa0628875a18c03aef8167e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e832c0db_826b7f2b",
+        "filename": "core/release_config.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-05-18T01:03:10Z",
+      "side": 1,
+      "message": "Fair, I\u0027ll address this when I\u0027m back from vacation.",
+      "parentUuid": "e3dc0305_36f5060c",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 20
+      },
+      "revId": "c113a702219e8b52aa0628875a18c03aef8167e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
