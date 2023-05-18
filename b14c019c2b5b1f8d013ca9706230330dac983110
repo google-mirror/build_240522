@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9222d87c_723c39dd",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-05-18T17:26:20Z",
+      "side": 1,
+      "message": "Dependencies on directories are generally a bad idea, directories don\u0027t have timestamp semantics that work well.  I think this shouldn\u0027t be necessary if you add `mkdir -p` to the rules that copy into or package the directory.",
+      "revId": "b14c019c2b5b1f8d013ca9706230330dac983110",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55d14734_dc058708",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-05-18T17:26:20Z",
+      "side": 1,
+      "message": "Same as above",
+      "revId": "b14c019c2b5b1f8d013ca9706230330dac983110",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
