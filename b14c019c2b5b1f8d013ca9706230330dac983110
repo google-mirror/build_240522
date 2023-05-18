@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8dcd2c3_7d7a205b",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-05-18T18:15:30Z",
+      "side": 1,
+      "message": "directory timestamps get updated when items are added/removed in the directory. If I just want to make sure the directory gets created, but doesn\u0027t care about content in the directory, it should be fine right?",
+      "parentUuid": "a725acff_2294fa36",
+      "revId": "b14c019c2b5b1f8d013ca9706230330dac983110",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55d14734_dc058708",
         "filename": "core/Makefile",
         "patchSetId": 1
