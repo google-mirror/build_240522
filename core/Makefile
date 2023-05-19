@@ -1008,7 +1008,7 @@ TARGET_OUT_RAMDISK_16K := $(PRODUCT_OUT)/ramdisk_16k
 BUILT_RAMDISK_16K_TARGET := $(PRODUCT_OUT)/ramdisk_16k.img
 RAMDISK_16K_STAGING_DIR := $(call intermediates-dir-for,PACKAGING,depmod_ramdisk_16k)
 
-$(BUILT_RAMDISK_16K_TARGET): $(DEPMOD)
+$(BUILT_RAMDISK_16K_TARGET): $(DEPMOD) $(MKBOOTFS)
 $(BUILT_RAMDISK_16K_TARGET): $(call copy-many-files,$(foreach file,$(BOARD_KERNEL_MODULES_16K),$(file):$(RAMDISK_16K_STAGING_DIR)/lib/modules/0.0/$(notdir $(file))))
 	$(DEPMOD) -b $(RAMDISK_16K_STAGING_DIR) 0.0
 	for MODULE in $(BOARD_KERNEL_MODULES_16K); do \
