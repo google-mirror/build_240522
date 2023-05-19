@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b581e1a4_ddd04132",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-05-19T21:54:50Z",
+      "side": 1,
+      "message": "should we move .PHONY before the make rule definition for consistency with the rest of the file?",
+      "range": {
+        "startLine": 1035,
+        "startChar": 0,
+        "endLine": 1035,
+        "endChar": 18
+      },
+      "revId": "d8eac1cb9ab8a6043c252bb692ee8d6ab7601aa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
