@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80edf8b1_431054b0",
+        "filename": "core/main.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-05-20T15:42:35Z",
+      "side": 1,
+      "message": "Update the comment here too to say the build number is in a file, and NOT accessible inside kati directly.",
+      "revId": "b156e6d780ceea98a933d85546df32b511ac4ebb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "984f27bf_b660650e",
+        "filename": "core/main.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-05-20T15:42:35Z",
+      "side": 1,
+      "message": "This file is written by soong now, so why is this necessary? And what\u0027s the access time used for?",
+      "revId": "b156e6d780ceea98a933d85546df32b511ac4ebb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
