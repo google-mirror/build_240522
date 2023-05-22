@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9464c719_060af9c1",
+        "filename": "core/main.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-05-22T04:29:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80edf8b1_431054b0",
+      "revId": "b156e6d780ceea98a933d85546df32b511ac4ebb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "984f27bf_b660650e",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-20T15:42:35Z",
       "side": 1,
       "message": "This file is written by soong now, so why is this necessary? And what\u0027s the access time used for?",
+      "revId": "b156e6d780ceea98a933d85546df32b511ac4ebb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d617003d_ab56c946",
+        "filename": "core/main.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-05-22T04:29:19Z",
+      "side": 1,
+      "message": "I just added -a to make it no-op, but it looks like I can remove these block. removed.",
+      "parentUuid": "984f27bf_b660650e",
       "revId": "b156e6d780ceea98a933d85546df32b511ac4ebb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
