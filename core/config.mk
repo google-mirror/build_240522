@@ -389,6 +389,7 @@ ifdef PRODUCT_SHIPPING_API_LEVEL
 endif
 
 # Set TARGET_MAX_PAGE_SIZE_SUPPORTED.
+# TARGET_MAX_PAGE_SIZE_SUPPORTED indicates the alignment of the ELF segments.
 ifdef PRODUCT_MAX_PAGE_SIZE_SUPPORTED
   TARGET_MAX_PAGE_SIZE_SUPPORTED := $(PRODUCT_MAX_PAGE_SIZE_SUPPORTED)
 else ifeq ($(strip $(call is-low-mem-device)),true)
@@ -403,6 +404,14 @@ else
   endif
 endif
 .KATI_READONLY := TARGET_MAX_PAGE_SIZE_SUPPORTED
+
+# TARGET_KERNEL_PAGE_SIZE indicates the kernel page size configuration.
+ifdef PRODUCT_KERNEL_PAGE_SIZE
+  TARGET_KERNEL_PAGE_SIZE := $(PRODUCT_KERNEL_PAGE_SIZE)
+else
+  TARGET_KERNEL_PAGE_SIZE := 4096
+endif
+.KATI_READONLY := TARGET_KERNEL_PAGE_SIZE
 
 # Pruned directory options used when using findleaves.py
 # See envsetup.mk for a description of SCAN_EXCLUDE_DIRS
