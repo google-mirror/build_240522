@@ -87,6 +87,24 @@
       "parentUuid": "d617003d_ab56c946",
       "revId": "b156e6d780ceea98a933d85546df32b511ac4ebb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f6a94a1_f6b5db5e",
+        "filename": "core/main.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-05-22T18:37:48Z",
+      "side": 1,
+      "message": "You can use an empty rule instead of running touch.  A comment on why the empty rule exists would be helpful.\n\n```\n$(BUILD_NUMBER_FILE):\n\t# empty rule to prevent dangling rule error for a file that is written by soong_ui\n```",
+      "parentUuid": "b950f857_c5298bb7",
+      "revId": "b156e6d780ceea98a933d85546df32b511ac4ebb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
