@@ -33,6 +33,13 @@ _product_single_value_vars += PRODUCT_MODEL_FOR_ATTESTATION
 # 4096, 16384 and 65536.
 _product_single_value_vars += PRODUCT_MAX_PAGE_SIZE_SUPPORTED
 
+# Indicates the kernel page size configuration. The possible values are 4096
+# and 16384.
+# PRODUCT_KERNEL_PAGE_SIZE must be:
+#
+#    PRODUCT_MAX_PAGE_SIZE_SUPPORTED >= PRODUCT_KERNEL_PAGE_SIZE
+_product_single_value_vars += PRODUCT_KERNEL_PAGE_SIZE
+
 # The resource configuration options to use for this product.
 _product_list_vars += PRODUCT_LOCALES
 _product_list_vars += PRODUCT_AAPT_CONFIG
