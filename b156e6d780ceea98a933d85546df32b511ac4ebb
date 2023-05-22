@@ -69,6 +69,24 @@
       "parentUuid": "984f27bf_b660650e",
       "revId": "b156e6d780ceea98a933d85546df32b511ac4ebb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b950f857_c5298bb7",
+        "filename": "core/main.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-05-22T06:52:22Z",
+      "side": 1,
+      "message": "Let me correct the previous comment. it looks like no-op rule is required to avoid dangling rule.",
+      "parentUuid": "d617003d_ab56c946",
+      "revId": "b156e6d780ceea98a933d85546df32b511ac4ebb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
