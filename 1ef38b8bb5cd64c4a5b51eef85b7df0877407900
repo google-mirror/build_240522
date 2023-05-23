@@ -87,6 +87,42 @@
       "parentUuid": "05bbc056_b9680026",
       "revId": "1ef38b8bb5cd64c4a5b51eef85b7df0877407900",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d15d0cb_72d3bb00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-05-23T20:21:21Z",
+      "side": 1,
+      "message": "Thanks! I realized that my initial tests were not run for a partner product that uses the go sdk. I have updated the implementation and verified that the change is compatible with\n- aosp product\n- partner product that uses big android sdk\n- partner product that uses go sdk",
+      "parentUuid": "404f1ac6_2a569a6a",
+      "revId": "1ef38b8bb5cd64c4a5b51eef85b7df0877407900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d003036b_a5062db8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-05-23T20:21:21Z",
+      "side": 1,
+      "message": "You are correct, Pranav also pointed out that `generic_system.mk` is not the right place to put these tags. I could not find a better alternative, so I have moved them to `product_config.mk`.",
+      "parentUuid": "a3a57b48_914b39aa",
+      "revId": "1ef38b8bb5cd64c4a5b51eef85b7df0877407900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
