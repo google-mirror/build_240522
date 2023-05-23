@@ -16,6 +16,24 @@
       "message": "I think generic_system.mk is too generic and ends up getting included in Go targets too. Should we intentionally limit this change to aosp_arm.mk and aosp_arm64.mk?",
       "revId": "1ef38b8bb5cd64c4a5b51eef85b7df0877407900",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92159df6_e8b52f1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-05-23T18:29:22Z",
+      "side": 1,
+      "message": "I think that should be fine because the current implementation of blueprint_package_includes uses a [subset comparison](https://cs.android.com/android/_/android/platform/build/blueprint/+/2259132d9615e3259d8b97b4467a61fe995c5043:context.go;l\u003d4947-4951;drc\u003d12ccb17d4e4d146ee53b1609639474a15863efb7;bpv\u003d1;bpt\u003d0) of tags and not strict equality (But yeah this can be a little confusing for debuggability)\n\nIf we decide to not have this in `generic_system.mk`, would we need it to add to other aosp products as well like `aosp_x86.mk`, `aosp_x86.mk` and all the generic ones in `build/make/target/product/`? Do we have a list of aosp/generic products that need to be buildable in the partner branch?",
+      "parentUuid": "f82c6dca_fc715aff",
+      "revId": "1ef38b8bb5cd64c4a5b51eef85b7df0877407900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
