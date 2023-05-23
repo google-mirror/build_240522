@@ -69,6 +69,24 @@
       "message": "doesn\u0027t this conflict for the go ones then, because now the include tags has both?",
       "revId": "1ef38b8bb5cd64c4a5b51eef85b7df0877407900",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "404f1ac6_2a569a6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1451833
+      },
+      "writtenOn": "2023-05-23T19:40:15Z",
+      "side": 1,
+      "message": "https://cs.android.com/android/platform/superproject/+/master:device/google/cuttlefish/vsoc_x86/go/aosp_cf.mk",
+      "parentUuid": "05bbc056_b9680026",
+      "revId": "1ef38b8bb5cd64c4a5b51eef85b7df0877407900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
