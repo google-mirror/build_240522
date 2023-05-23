@@ -16,6 +16,24 @@
       "message": "What was the error? Can you include it in the commit description?",
       "revId": "b19bd956844f74d5087160310e42ceb1bf1de2ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc9dfd4b_02698a42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-05-23T05:26:28Z",
+      "side": 1,
+      "message": "I elaborated the commit message. aosp/2563995 clean up manifest.mf logic(https://android-review.git.corp.google.com/c/platform/build/+/2563995/comment/61127c0c_9e94bf7a/), but the very next line, merge zip uses the intermediate manifest.mf. So let it use PRIVATE_JAR_MANIFEST directly.",
+      "parentUuid": "a65e8726_becd80ca",
+      "revId": "b19bd956844f74d5087160310e42ceb1bf1de2ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
