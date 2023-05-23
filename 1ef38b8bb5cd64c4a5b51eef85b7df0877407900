@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f82c6dca_fc715aff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1451833
+      },
+      "writtenOn": "2023-05-23T18:13:08Z",
+      "side": 1,
+      "message": "I think generic_system.mk is too generic and ends up getting included in Go targets too. Should we intentionally limit this change to aosp_arm.mk and aosp_arm64.mk?",
+      "revId": "1ef38b8bb5cd64c4a5b51eef85b7df0877407900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
