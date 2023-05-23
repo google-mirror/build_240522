@@ -133,4 +133,11 @@ _my_paths := \
   $(TARGET_COPY_OUT_ROOT)/ \
   $(TARGET_COPY_OUT_SYSTEM)/ \
 
+# PRODUCT_INCLUDE_TAGS to use in soong _analysis_
+# Soong analysis is global: even though a module might not be relevant to a specific product (e.g. build_tools for aosp_arm),
+# we still analyse it.
+# This means that in setups where we two have two prebuilts of module_sdk, we need a "default" to use in analysis
+# This should be a no-op in aosp and internal since no Android.bp file contains blueprint_package_includes
+PRODUCT_INCLUDE_TAGS += com.android.mainline # Use the big android one by default
+
 $(call require-artifacts-in-path, $(_my_paths), $(_my_allowed_list))
