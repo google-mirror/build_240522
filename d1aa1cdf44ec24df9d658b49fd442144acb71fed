@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "551952a0_620ecb5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-24T08:40:27Z",
+      "side": 1,
+      "message": "are build.ninja and soong.variable all we need to rename?",
+      "revId": "d1aa1cdf44ec24df9d658b49fd442144acb71fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
