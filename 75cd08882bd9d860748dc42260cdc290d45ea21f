@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ba4284e_5e342f30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-05-24T19:46:56Z",
+      "side": 1,
+      "message": "How do we forsee someone using the Rust code generated here? It may be worth adding a module type similar to `rust_protobuf` or `rust_bindgen` to automatically produce a crate out of a configuration file.\n\nIf you do this, you may also want to force it to be rlib-only in order to avoid having a whole `.so` just to encode this information.\n\nAs a note, we currently advise against `include!` in 1p source, so if you feel you need to tell users to do that, please let me know and I\u0027ll try to help you figure out how we can avoid that.",
+      "revId": "75cd08882bd9d860748dc42260cdc290d45ea21f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e4ec27e_e1d3963f",
+        "filename": "tools/aconfig/templates/rust.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-05-24T19:46:56Z",
+      "side": 1,
+      "message": "If it weren\u0027t for the C++ and Java codegen already using tinytemplate, I\u0027d suggest that you use `syn` and `quote` for codegen instead - it\u0027d allow you to avoid error classes like accidentally using reserved words as identifiers.",
+      "revId": "75cd08882bd9d860748dc42260cdc290d45ea21f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa41a289_0e6b28d5",
+        "filename": "tools/aconfig/templates/rust.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-05-24T19:46:56Z",
+      "side": 1,
+      "message": "#[inline(always)]",
+      "revId": "75cd08882bd9d860748dc42260cdc290d45ea21f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85c1f21b_5ba761d9",
+        "filename": "tools/aconfig/templates/rust.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-05-24T19:46:56Z",
+      "side": 1,
+      "message": "You may want to use `r#{parsed_flag.fn_name}` in order to avoid situations where fn_name happens to be a rust keyword.",
+      "revId": "75cd08882bd9d860748dc42260cdc290d45ea21f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f90c2932_9aa66fad",
+        "filename": "tools/aconfig/templates/rust.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-05-24T19:46:56Z",
+      "side": 1,
+      "message": "Do we want to make it a const fn if either read_only mode is enabled?\n\nThe advantage of this is that you could change static initializers and similar things based on the flag.\nThe disadvantage would bet that if someone used it in this way, you\u0027d only ever be able to flip the flag between static configurations, you couldn\u0027t use a dynamic configuration.",
+      "revId": "75cd08882bd9d860748dc42260cdc290d45ea21f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
