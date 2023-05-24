@@ -73,3 +73,6 @@ PRODUCT_NAME := aosp_arm64
 PRODUCT_DEVICE := generic_arm64
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := AOSP on ARM64
+
+PRODUCT_CERTIFICATE_OVERRIDES := \
+  com.android.adbd:com.android.oplus.adbd.certificate
