@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f3057bb_6e08d654",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-05-25T17:08:01Z",
+      "side": 1,
+      "message": "The `include_str!` doesn\u0027t bother me - it\u0027s `include!` for code that we\u0027re trying to avoid.\n\nI took a look at go/android-flag-cookbook, and the only major issue I see with the Rust portion suggests Cargo use - we don\u0027t support use of Cargo in android - the tool present in prebuilts is only there for use in bootstrapping the compiler, and may become hidden or removed to avoid misuse in the future. I would highly recommend against any workflows that use cargo.\n\nI also see that your suggestion for how to use the generated code is to add the sources to a library - you *can* still do this in Rust, but only if it is the only source, since Rust starts with exactly one source file.\n\nIt may be worth looking at generating a library from `device_config_definitions` module rather than just source similar to what an `aidl_interface` does - declaring `android.os.permission` would generate a Rust module called `android.os.permissions_aidl-rust` (in addition to other similar languages) rather than just having people manage sources themselves.",
+      "parentUuid": "05987d93_42ec937a",
+      "revId": "75cd08882bd9d860748dc42260cdc290d45ea21f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e4ec27e_e1d3963f",
