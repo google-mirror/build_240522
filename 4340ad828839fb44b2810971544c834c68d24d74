@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f2f451d_98555033",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5889,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-05-26T17:09:58Z",
+      "side": 1,
+      "message": "Define a variable\n\n```\nMAP_FILE_GENERATOR :\u003d $(HOST_OUT_EXECUTABLES)/map_file_generator\n```\n\nAnd make sure all image targets listed `$(MAP_FILE_GENERATOR)` as a dependency, then use `$(MAP_FILE_GENERATOR)` in your shell commands",
+      "range": {
+        "startLine": 5889,
+        "startChar": 12,
+        "endLine": 5889,
+        "endChar": 54
+      },
+      "revId": "4340ad828839fb44b2810971544c834c68d24d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
