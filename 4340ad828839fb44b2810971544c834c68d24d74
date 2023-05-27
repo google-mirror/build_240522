@@ -22,6 +22,30 @@
       },
       "revId": "4340ad828839fb44b2810971544c834c68d24d74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d55dbd7_1453c91d",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5889,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-05-27T01:50:54Z",
+      "side": 1,
+      "message": "`map_file_generator` is listed as a dependency of `$(BUILT_TARGET_FILES_DIR)` (Line# 6044) because it is required to generate the `$(BUILT_TARGET_FILES_DIR)` but not for generating each image files.\n\nThis is used only in the `$(BUILT_TARGET_FILES_DIR)` recipe.",
+      "parentUuid": "1f2f451d_98555033",
+      "range": {
+        "startLine": 5889,
+        "startChar": 12,
+        "endLine": 5889,
+        "endChar": 54
+      },
+      "revId": "4340ad828839fb44b2810971544c834c68d24d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
