@@ -16,6 +16,24 @@
       "message": "are build.ninja and soong.variable all we need to rename?",
       "revId": "d1aa1cdf44ec24df9d658b49fd442144acb71fed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b91776a3_5ca6ac1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-05-28T12:22:11Z",
+      "side": 1,
+      "message": "Yes. Fixing those two + resource definition unblocked re-generating build.ninja issue.",
+      "parentUuid": "551952a0_620ecb5b",
+      "revId": "d1aa1cdf44ec24df9d658b49fd442144acb71fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
