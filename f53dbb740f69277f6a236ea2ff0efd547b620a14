@@ -46,6 +46,30 @@
       },
       "revId": "f53dbb740f69277f6a236ea2ff0efd547b620a14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "312f591b_8488f854",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-05-30T17:13:52Z",
+      "side": 1,
+      "message": "OK, thank you for pointing me to the script. Looks like the logic around dexpreopt was introduced by aosp/1774125. I don\u0027t fully understand what the script is doing, so I\u0027m unable to determine whether it\u0027s doing the right thing or not. You are on your own to make sure it\u0027s working properly.\n\nAnyway, please put the explanation as a comment for future reference.\n\nAlso, please note that our future changes will break you. For example, we just submitted aosp/2594905, which added a new required flag `--product_packages` to `dexpreopt_gen`.",
+      "parentUuid": "62637c6c_c1404b0e",
+      "range": {
+        "startLine": 552,
+        "startChar": 0,
+        "endLine": 554,
+        "endChar": 7
+      },
+      "revId": "f53dbb740f69277f6a236ea2ff0efd547b620a14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
