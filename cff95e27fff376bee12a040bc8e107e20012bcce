@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcff05de_7b09daee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-05-30T20:54:55Z",
+      "side": 1,
+      "message": "also make sure the generated images are identical before/after this change?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 12
+      },
+      "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8ba6acea_b74e0271",
