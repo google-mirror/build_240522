@@ -55,7 +55,7 @@ struct ClassElement {
 
 fn create_class_element(item: &Item) -> ClassElement {
     ClassElement {
-        method_name: item.name.clone(),
+        method_name: item.name.replace('-', "_"),
         readwrite: item.permission == Permission::ReadWrite,
         default_value: if item.state == FlagState::Enabled {
             "true".to_string()
