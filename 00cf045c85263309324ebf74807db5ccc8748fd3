@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7fe1c605_73074fce",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-30T18:49:49Z",
+      "side": 1,
+      "message": "Let\u0027s keep then as lowercase if it doesn\u0027t provide value to have capital case.",
+      "parentUuid": "7fed23e2_fedab89c",
+      "range": {
+        "startLine": 13,
+        "startChar": 40,
+        "endLine": 13,
+        "endChar": 54
+      },
+      "revId": "00cf045c85263309324ebf74807db5ccc8748fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a056a87f_59e573de",
         "filename": "tools/aconfig/src/codegen_java.rs",
         "patchSetId": 1
