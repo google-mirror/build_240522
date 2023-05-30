@@ -40,7 +40,8 @@ message flag_declaration {
 };
 
 message flag_declarations {
-  required string namespace = 1;
+  required string scope = 1; // renamed; previously namespace
+  optional string namespace = 1;
   repeated flag_declaration flag = 2;
 };
 
