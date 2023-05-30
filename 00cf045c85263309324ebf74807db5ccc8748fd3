@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca7b749e_850855db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-30T18:56:12Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7fe1c605_73074fce",
+      "range": {
+        "startLine": 13,
+        "startChar": 40,
+        "endLine": 13,
+        "endChar": 54
+      },
+      "revId": "00cf045c85263309324ebf74807db5ccc8748fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a056a87f_59e573de",
@@ -61,6 +85,30 @@
       "writtenOn": "2023-05-26T15:14:52Z",
       "side": 1,
       "message": "@joeo@google.com: is there an expectation that namespaces will contain dots? I\u0027m not sure that\u0027s the case?\n\nThe namespace to package name thing doesn\u0027t work well for the non-Java languages. I\u0027m suggesting we go with \"aconfig/\u003cnamespace\u003e\" as package name instead. WDYT?",
+      "range": {
+        "startLine": 34,
+        "startChar": 28,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "00cf045c85263309324ebf74807db5ccc8748fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffbae19e_31bc54d5",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-30T18:56:12Z",
+      "side": 1,
+      "message": "From other discussions: the namespace will contains dots. The namespace will also be renamed to \"package\".",
+      "parentUuid": "a056a87f_59e573de",
       "range": {
         "startLine": 34,
         "startChar": 28,
