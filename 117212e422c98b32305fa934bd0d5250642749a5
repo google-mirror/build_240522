@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f16b191_ee8d473a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052644
+      },
+      "writtenOn": "2023-05-30T15:25:08Z",
+      "side": 1,
+      "message": "Lowering my Code-Review vote to give Lokesh a chance to review the change.",
+      "revId": "117212e422c98b32305fa934bd0d5250642749a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
