@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f42d2482_82ad7da4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-30T17:16:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20967220_7dd54cfc",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "d8aef28cbcafa38d34e5b146b47b61d15520eca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06c48fd7_6d763e59",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ef6131d_3c29aa0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-30T17:16:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06c48fd7_6d763e59",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 65
+      },
+      "revId": "d8aef28cbcafa38d34e5b146b47b61d15520eca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4146b99_5a55c0ea",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-05-30T15:12:36Z",
       "side": 1,
       "message": "Please change to \u0027atest android.test\u0027 instead, or some other command that someone unfamiliar with this CL can run to verify if it works. (Imagine you\u0027re upgrading to a new version of Android and need to debug why something broke.)",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 24
+      },
+      "revId": "d8aef28cbcafa38d34e5b146b47b61d15520eca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff20e585_de3ba491",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-05-30T17:16:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4146b99_5a55c0ea",
       "range": {
         "startLine": 16,
         "startChar": 6,
