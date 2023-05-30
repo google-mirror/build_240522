@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "327843c2_6abe5833",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2010956
+      },
+      "writtenOn": "2023-05-30T18:51:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d95a14a_352b7f27",
+      "range": {
+        "startLine": 43,
+        "startChar": 18,
+        "endLine": 43,
+        "endChar": 23
+      },
+      "revId": "0879e837dad835804853c297683f965f6ac6cc29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5fa8be9_2b3f0a32",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-30T18:38:34Z",
       "side": 1,
       "message": "I\u0027d keep namespace as 1, and make package \u003d 3",
+      "range": {
+        "startLine": 44,
+        "startChar": 30,
+        "endLine": 44,
+        "endChar": 31
+      },
+      "revId": "0879e837dad835804853c297683f965f6ac6cc29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "635403ee_96a18d11",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2010956
+      },
+      "writtenOn": "2023-05-30T18:51:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d5fa8be9_2b3f0a32",
       "range": {
         "startLine": 44,
         "startChar": 30,
