@@ -16,6 +16,24 @@
       "message": "Could you add:\n\n```\nBug: 160737021\n```\n\nhere?",
       "revId": "d5fc7b25cc48b82de4ce7512296a4640d08aeb4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eee561b7_21a7dd78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-05-30T15:22:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1427fc2_f3aa942f",
+      "revId": "d5fc7b25cc48b82de4ce7512296a4640d08aeb4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
