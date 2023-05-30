@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20967220_7dd54cfc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-30T15:12:36Z",
+      "side": 1,
+      "message": "nit: \"aconfig: update ...\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "d8aef28cbcafa38d34e5b146b47b61d15520eca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06c48fd7_6d763e59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-30T15:12:36Z",
+      "side": 1,
+      "message": "Not really needed now that the CLs are part of the same topic. Remove?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 65
+      },
+      "revId": "d8aef28cbcafa38d34e5b146b47b61d15520eca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4146b99_5a55c0ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-30T15:12:36Z",
+      "side": 1,
+      "message": "Please change to \u0027atest android.test\u0027 instead, or some other command that someone unfamiliar with this CL can run to verify if it works. (Imagine you\u0027re upgrading to a new version of Android and need to debug why something broke.)",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 24
+      },
+      "revId": "d8aef28cbcafa38d34e5b146b47b61d15520eca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3360cee_136ed9df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-30T15:12:36Z",
+      "side": 1,
+      "message": "Nitpicking about the commit message, but apart from that LGTM. Thanks for uploading!",
+      "revId": "d8aef28cbcafa38d34e5b146b47b61d15520eca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
