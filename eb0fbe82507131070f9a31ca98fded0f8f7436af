@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a89d1c7_c30eeafd",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-30T10:29:37Z",
+      "side": 1,
+      "message": "This change will not be needed when this CL is rebased onto aosp/2607087.",
+      "range": {
+        "startLine": 58,
+        "startChar": 31,
+        "endLine": 58,
+        "endChar": 48
+      },
+      "revId": "eb0fbe82507131070f9a31ca98fded0f8f7436af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d38d114b_c6d1f94d",
         "filename": "tools/aconfig/tests/test.aconfig",
         "patchSetId": 1
