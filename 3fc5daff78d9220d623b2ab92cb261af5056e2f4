@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec9eab11_fb68e480",
+        "filename": "tools/aconfig/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-05-30T12:32:19Z",
+      "side": 1,
+      "message": "I\u0027m guessing modules aren\u0027t supposed to add device_config_value_sets themselves. How can we ensure that aconfig tests always include the :aconfig.test.flag.values files?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 23
+      },
+      "revId": "3fc5daff78d9220d623b2ab92cb261af5056e2f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
