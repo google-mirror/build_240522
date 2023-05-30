@@ -5344,6 +5344,9 @@ endif
 ifdef BOARD_PREBUILT_DTBOIMAGE
 	$(hide) echo "flash dtbo" >> $@
 endif
+ifeq ($(PRODUCT_BUILD_VENDOR_KERNEL_BOOT),true)
+	$(hide) echo "flash vendor_kernel_boot" >> $@
+endif
 ifeq ($(BOARD_USES_PVMFWIMAGE),true)
 	$(hide) echo "flash pvmfw" >> $@
 endif
