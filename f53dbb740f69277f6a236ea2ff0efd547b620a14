@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53299d33_49e6c19c",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-05-30T09:39:09Z",
+      "side": 1,
+      "message": "We don\u0027t expect to dexpreopt anything for unbundled builds. Dexpreopt only makes sense for bundled builds because the outputs depend on many other things in the system image and can\u0027t be used if any of them has changed.\n\nCould you please explain what BUILDING_WITH_VSDK is and why it expects dexpreopt outputs (`out/dex2oat_result/vendor/app/pasrservice/oat/arm64/package.vdex`)? If it\u0027s only for Qualcomm, could you please limit this change to Qualcomm\u0027s own source tree?",
+      "range": {
+        "startLine": 552,
+        "startChar": 0,
+        "endLine": 554,
+        "endChar": 7
+      },
+      "revId": "f53dbb740f69277f6a236ea2ff0efd547b620a14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
