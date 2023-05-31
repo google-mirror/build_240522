@@ -22,6 +22,30 @@
       },
       "revId": "e8c4b1b1a416fabab036d726c2bb9e5f58eeb873",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5470c1ba_b8dc182e",
+        "filename": "tools/aconfig/src/aconfig.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-31T14:42:23Z",
+      "side": 1,
+      "message": "what I meant is the usage of the \"package\" is not settled.",
+      "parentUuid": "81725298_f62378ff",
+      "range": {
+        "startLine": 112,
+        "startChar": 8,
+        "endLine": 112,
+        "endChar": 15
+      },
+      "revId": "e8c4b1b1a416fabab036d726c2bb9e5f58eeb873",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
