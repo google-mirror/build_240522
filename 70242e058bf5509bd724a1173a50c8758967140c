@@ -34,6 +34,24 @@
       "parentUuid": "7c84fa4a_2e3af06b",
       "revId": "70242e058bf5509bd724a1173a50c8758967140c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10ab6520_31b11ce5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2023-05-31T17:21:45Z",
+      "side": 1,
+      "message": "I think that there might have been some internal concerns about this part existing in the Make part of the build, but maybe it\u0027s sufficiently decoupled anyways that it could be moved to Soong/Bazel as needed. If there are no further comments, we should be able to merge this.",
+      "parentUuid": "cd9bf4da_f24f83ac",
+      "revId": "70242e058bf5509bd724a1173a50c8758967140c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
