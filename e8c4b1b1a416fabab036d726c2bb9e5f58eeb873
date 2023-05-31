@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81725298_f62378ff",
+        "filename": "tools/aconfig/src/aconfig.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-05-31T14:01:26Z",
+      "side": 1,
+      "message": "Let\u0027s wait a little bit for this. It is quite confusing how it is used now.",
+      "range": {
+        "startLine": 112,
+        "startChar": 8,
+        "endLine": 112,
+        "endChar": 15
+      },
+      "revId": "e8c4b1b1a416fabab036d726c2bb9e5f58eeb873",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
