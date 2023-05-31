@@ -144,9 +144,9 @@ mod tests {
     use super::*;
     use crate::aconfig::{FlagState, Permission};
 
-    fn create_test_cache_ns1() -> Cache {
+    fn create_test_cache_com_example() -> Cache {
         let s = r#"
-        package: "ns1"
+        package: "com.example"
         flag {
             name: "a"
             description: "Description of a"
@@ -159,19 +159,19 @@ mod tests {
         let declarations = vec![Input { source: Source::Memory, reader: Box::new(s.as_bytes()) }];
         let o = r#"
         flag_value {
-            package: "ns1"
+            package: "com.example"
             name: "a"
             state: DISABLED
             permission: READ_ONLY
         }
         "#;
         let values = vec![Input { source: Source::Memory, reader: Box::new(o.as_bytes()) }];
-        create_cache("ns1", declarations, values).unwrap()
+        create_cache("com.example", declarations, values).unwrap()
     }
 
-    fn create_test_cache_ns2() -> Cache {
+    fn create_test_cache_com_other() -> Cache {
         let s = r#"
-        package: "ns2"
+        package: "com.other"
         flag {
             name: "c"
             description: "Description of c"
@@ -180,19 +180,19 @@ mod tests {
         let declarations = vec![Input { source: Source::Memory, reader: Box::new(s.as_bytes()) }];
         let o = r#"
         flag_value {
-            package: "ns2"
+            package: "com.other"
             name: "c"
             state: DISABLED
             permission: READ_ONLY
         }
         "#;
         let values = vec![Input { source: Source::Memory, reader: Box::new(o.as_bytes()) }];
-        create_cache("ns2", declarations, values).unwrap()
+        create_cache("com.other", declarations, values).unwrap()
     }
 
     #[test]
     fn test_create_cache() {
-        let caches = create_test_cache_ns1(); // calls create_cache
+        let caches = create_test_cache_com_example(); // calls create_cache
         let item = caches.iter().find(|&item| item.name == "a").unwrap();
         assert_eq!(FlagState::Disabled, item.state);
         assert_eq!(Permission::ReadOnly, item.permission);
@@ -200,7 +200,7 @@ mod tests {
 
     #[test]
     fn test_dump_text_format() {
-        let caches = vec![create_test_cache_ns1()];
+        let caches = vec![create_test_cache_com_example()];
         let bytes = dump_cache(caches, DumpFormat::Text).unwrap();
         let text = std::str::from_utf8(&bytes).unwrap();
         assert!(text.contains("a: Disabled"));
@@ -211,7 +211,7 @@ mod tests {
         use crate::protos::{ProtoFlagPermission, ProtoFlagState, ProtoTracepoint};
         use protobuf::Message;
 
-        let caches = vec![create_test_cache_ns1()];
+        let caches = vec![create_test_cache_com_example()];
         let bytes = dump_cache(caches, DumpFormat::Protobuf).unwrap();
         let actual = ProtoParsedFlags::parse_from_bytes(&bytes).unwrap();
 
@@ -222,7 +222,7 @@ mod tests {
 
         let item =
             actual.parsed_flag.iter().find(|item| item.name == Some("b".to_string())).unwrap();
-        assert_eq!(item.package(), "ns1");
+        assert_eq!(item.package(), "com.example");
         assert_eq!(item.name(), "b");
         assert_eq!(item.description(), "Description of b");
         assert_eq!(item.state(), ProtoFlagState::DISABLED);
@@ -236,7 +236,7 @@ mod tests {
 
     #[test]
     fn test_dump_multiple_caches() {
-        let caches = vec![create_test_cache_ns1(), create_test_cache_ns2()];
+        let caches = vec![create_test_cache_com_example(), create_test_cache_com_other()];
         let bytes = dump_cache(caches, DumpFormat::Protobuf).unwrap();
         let dump = ProtoParsedFlags::parse_from_bytes(&bytes).unwrap();
         assert_eq!(
@@ -244,10 +244,14 @@ mod tests {
                 .iter()
                 .map(|parsed_flag| format!("{}/{}", parsed_flag.package(), parsed_flag.name()))
                 .collect::<Vec<_>>(),
-            vec!["ns1/a".to_string(), "ns1/b".to_string(), "ns2/c".to_string()]
+            vec![
+                "com.example/a".to_string(),
+                "com.example/b".to_string(),
+                "com.other/c".to_string()
+            ]
         );
 
-        let caches = vec![create_test_cache_ns2(), create_test_cache_ns1()];
+        let caches = vec![create_test_cache_com_other(), create_test_cache_com_example()];
         let bytes = dump_cache(caches, DumpFormat::Protobuf).unwrap();
         let dump_reversed_input = ProtoParsedFlags::parse_from_bytes(&bytes).unwrap();
         assert_eq!(dump, dump_reversed_input);
