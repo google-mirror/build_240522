@@ -52,6 +52,98 @@
       "parentUuid": "cd9bf4da_f24f83ac",
       "revId": "70242e058bf5509bd724a1173a50c8758967140c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae1890e4_1e797a82",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3233,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-05-31T19:23:02Z",
+      "side": 1,
+      "message": "Remove all three @echo lines",
+      "range": {
+        "startLine": 3233,
+        "startChar": 1,
+        "endLine": 3233,
+        "endChar": 60
+      },
+      "revId": "70242e058bf5509bd724a1173a50c8758967140c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d342566_f033865f",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3234,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-05-31T19:23:02Z",
+      "side": 1,
+      "message": "This is the wrong place to do this. This rule is building system image, but the script is checking all of PRODUCT_OUT. You should split it by filesystem image.",
+      "range": {
+        "startLine": 3234,
+        "startChar": 31,
+        "endLine": 3234,
+        "endChar": 45
+      },
+      "revId": "70242e058bf5509bd724a1173a50c8758967140c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7fc168f_b27d0b6b",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3234,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-05-31T19:23:02Z",
+      "side": 1,
+      "message": "How long does this script take to run?",
+      "range": {
+        "startLine": 3234,
+        "startChar": 1,
+        "endLine": 3234,
+        "endChar": 31
+      },
+      "revId": "70242e058bf5509bd724a1173a50c8758967140c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c78eb530_7f46ffce",
+        "filename": "core/dupcheck.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-05-31T19:23:02Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Inclusive Language: Prefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reaso...\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: inclusive-language-in-code@google.com\n\nPrefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 10
+      },
+      "revId": "70242e058bf5509bd724a1173a50c8758967140c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
