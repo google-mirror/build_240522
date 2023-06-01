@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "785f58de_cdf04714",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-01T14:17:10Z",
+      "side": 1,
+      "message": "Do not submit until we have decided on what should encoded: is it namespace/name? package/name? namespace/package/name? Should we have package at all?",
+      "revId": "40d89195938d781df014401565a541668795bc2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
