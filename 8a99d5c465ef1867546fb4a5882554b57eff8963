@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a9e9e94_f6de09ef",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2023-06-01T20:46:11Z",
+      "side": 1,
+      "message": "This looks like it could work, but I\u0027m hesitant to change the value of the Make variable itself because there are other places where BUILD_FINGERPRINT_FROM_FILE is referenced (e.g., ImageSpec) that work for the Android version of a build_fingerprint that would not be touched/resolved by Android image post-processing during ChromeOS build.",
+      "parentUuid": "9640f73f_ee2c1a46",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 78
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc146c8c_aad62715",
         "filename": "core/sysprop.mk",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-06-01T02:20:16Z",
       "side": 1,
       "message": "IIUC, BUILD_ID can be overridden by having your own build/make/core/build_id.mk file.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 50
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7e58dea_667386e5",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2023-06-01T20:46:11Z",
+      "side": 1,
+      "message": "Thanks for this pointer! It looks like BUILD_ID is used in other Make variables (e.g., thumbprint) that aren\u0027t referenced by ChromeOS build later on but may be relevant to Android build. I am hesitant to change the values of those variables themselves because I don\u0027t know if there are other places where the system may encounter the intermediate form of the variable (e.g., R{envvar:CHROME_BRANCH}-{envvar:CHROMEOS_VERSION_STRING}) while expecting a complete word.",
+      "parentUuid": "fc146c8c_aad62715",
       "range": {
         "startLine": 70,
         "startChar": 0,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a47d7f5_ee6346ab",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2023-06-01T20:46:11Z",
+      "side": 1,
+      "message": "No, unfortunately all user builds have to be release-key signed because we have to run CTS tests on ChromeOS test images (which cannot be release-key signed) on android user images. We cannot run CTS tests on ChromeOS release builds because certain tooling required to test the ARC build (e.g., adb, etc) is only available on ChromeOS test builds. I looked into running a separate signing step over only the Android image during the ChromeOS test build, but since we would not be signing with actual release keys (because it is not technically a release build) and it wouldn\u0027t make sense to create a new set of dev-keys for this specific case, we would effectively be adding significant overhead to each test build in order to do essentially a no-op (aka re-signing the Android build with the same dev keys) and change the tag from \"dev-keys\" to \"release-keys\".\n\nI know this doesn\u0027t seem like the best system, but for ARC builds it is helpful to think about ro.build.tags as not the keys that the whole image is signed, but the keys with which the GMS APK is signed. Since we always use signed a GMS APK Prebuilt in ARC user images, setting the tags to release-key here will always be consistent.",
+      "parentUuid": "07467700_1497ee53",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 62
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15ca4b87_0f90b015",
         "filename": "tools/buildinfo.sh",
         "patchSetId": 1
@@ -83,6 +155,30 @@
       "writtenOn": "2023-06-01T02:20:16Z",
       "side": 1,
       "message": "Why do you have to override this?",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 48
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c41491f7_863f5839",
+        "filename": "tools/buildinfo.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2023-06-01T20:46:11Z",
+      "side": 1,
+      "message": "The build description is set differently in ARC. It has components like the ChromeOS product and device",
+      "parentUuid": "15ca4b87_0f90b015",
       "range": {
         "startLine": 52,
         "startChar": 6,
