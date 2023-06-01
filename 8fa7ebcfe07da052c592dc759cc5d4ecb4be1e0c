@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc3830da_aaec04cd",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-06-01T22:40:11Z",
+      "side": 1,
+      "message": "Using :\u003d should fix the presubmit error.",
+      "range": {
+        "startLine": 302,
+        "startChar": 39,
+        "endLine": 302,
+        "endChar": 41
+      },
+      "revId": "8fa7ebcfe07da052c592dc759cc5d4ecb4be1e0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2408bcb_07df4954",
         "filename": "target/product/base_system.mk",
         "patchSetId": 2
@@ -37,6 +60,30 @@
       "writtenOn": "2023-06-01T00:27:02Z",
       "side": 1,
       "message": "spaces",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 1
+      },
+      "revId": "8fa7ebcfe07da052c592dc759cc5d4ecb4be1e0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2fd3307_4fc1ef84",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-06-01T22:40:11Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "c2408bcb_07df4954",
       "range": {
         "startLine": 303,
         "startChar": 0,
