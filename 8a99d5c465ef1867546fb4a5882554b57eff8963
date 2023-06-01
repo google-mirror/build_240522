@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9640f73f_ee2c1a46",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-01T02:20:16Z",
+      "side": 1,
+      "message": "BUILD_FINGERPRINT can be specified externally. See https://source.corp.google.com/android/build/make/core/sysprop.mk;rcl\u003d68c3a6216304963dc5ecc22faa39f2fc0606dee3;l\u003d173",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 78
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc146c8c_aad62715",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-01T02:20:16Z",
+      "side": 1,
+      "message": "IIUC, BUILD_ID can be overridden by having your own build/make/core/build_id.mk file.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 50
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07467700_1497ee53",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-01T02:20:16Z",
+      "side": 1,
+      "message": "I think this really has to be release-key only when the build is actually is release-key signed.. by the CrOS signing script.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 62
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15ca4b87_0f90b015",
+        "filename": "tools/buildinfo.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-01T02:20:16Z",
+      "side": 1,
+      "message": "Why do you have to override this?",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 48
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
