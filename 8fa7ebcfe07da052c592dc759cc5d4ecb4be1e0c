@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5831beab_17225a9f",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-06-01T00:27:02Z",
+      "side": 1,
+      "message": "should this be 35?",
+      "range": {
+        "startLine": 494,
+        "startChar": 31,
+        "endLine": 495,
+        "endChar": 46
+      },
+      "revId": "8fa7ebcfe07da052c592dc759cc5d4ecb4be1e0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2408bcb_07df4954",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-06-01T00:27:02Z",
+      "side": 1,
+      "message": "spaces",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 1
+      },
+      "revId": "8fa7ebcfe07da052c592dc759cc5d4ecb4be1e0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
