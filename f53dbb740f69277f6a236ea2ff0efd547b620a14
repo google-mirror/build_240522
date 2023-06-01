@@ -94,6 +94,30 @@
       },
       "revId": "f53dbb740f69277f6a236ea2ff0efd547b620a14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "892400c0_19326d07",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-06-01T16:55:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cb5ea795_ef1f7596",
+      "range": {
+        "startLine": 552,
+        "startChar": 0,
+        "endLine": 554,
+        "endChar": 7
+      },
+      "revId": "f53dbb740f69277f6a236ea2ff0efd547b620a14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
