@@ -4,6 +4,9 @@ import android.provider.DeviceConfig;
 {{ endif }}
 public final class Flags \{
     {{ for item in class_elements}}
+    public static final String {item.constant_name} = "{item.flag_name}";
+    {{- endfor }}
+    {{ for item in class_elements}}
     public static boolean {item.method_name}() \{
         {{ if item.readwrite- }}
         return DeviceConfig.getBoolean(
