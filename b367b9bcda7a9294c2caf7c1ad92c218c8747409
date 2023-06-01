@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a381bc82_e4c0ccae",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4792,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-06-01T18:05:20Z",
+      "side": 1,
+      "message": "@elsk@google.com I only see this looking for system_ext and product from https://source.corp.google.com/h/googleplex-android/platform/superproject/+/refs/heads/master:system/libvintf/VintfObject.cpp;drc\u003deeae447b7baf32568765801cb304d72dadfcd739;l\u003d453\n\nShould that code be looking for more (odm/apex?) and should we pass more of these dirmaps here? (this is all I need for my problem)",
+      "range": {
+        "startLine": 4792,
+        "startChar": 26,
+        "endLine": 4792,
+        "endChar": 47
+      },
+      "revId": "b367b9bcda7a9294c2caf7c1ad92c218c8747409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
