@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9a7d1e0_266685ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2023-06-01T20:53:36Z",
+      "side": 1,
+      "message": "To clarify (for both BUILD_ID and BUILD_FINGERPRINT), I wish to only change the values of the system properties but not the corresponding Make variables because doing so ensures that the value for ro.build.id and ro.build.fingerprint will be resolved and consistent wherever they are used, while that same guarantee cannot be made for everywhere that BUILD_ID and BUILD_FINGERPRINT is used (because those places may no longer be accessible/may have already created issues by the time the dependencies in the forward declarations are available).",
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9640f73f_ee2c1a46",
