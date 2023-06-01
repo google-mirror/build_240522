@@ -3,12 +3,16 @@ package aconfig.{namespace};
 import android.provider.DeviceConfig;
 {{ endif }}
 public final class Flags \{
+    public static final String NAMESPACE = "{namespace}";
+    {{- for item in class_elements}}
+    public static final String {item.constant_name} = "{item.constant_value}";
+    {{- endfor }}
     {{ for item in class_elements}}
     public static boolean {item.method_name}() \{
         {{ if item.readwrite- }}
         return DeviceConfig.getBoolean(
-            "{namespace}",
-            "{item.feature_name}__{item.flag_name}",
+            NAMESPACE,
+            {item.constant_name},
             {item.default_value}
         );
         {{ -else- }}

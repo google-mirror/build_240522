@@ -49,8 +49,8 @@ struct ClassElement {
     pub method_name: String,
     pub readwrite: bool,
     pub default_value: String,
-    pub feature_name: String,
-    pub flag_name: String,
+    pub constant_name: String,
+    pub constant_value: String,
 }
 
 fn create_class_element(item: &Item) -> ClassElement {
@@ -62,8 +62,8 @@ fn create_class_element(item: &Item) -> ClassElement {
         } else {
             "false".to_string()
         },
-        feature_name: item.name.clone(),
-        flag_name: item.name.clone(),
+        constant_name: format!("FLAG_{}", item.name.to_uppercase()),
+        constant_value: item.name.clone(), // TODO: add upcoming package field
     }
 }
 
@@ -111,6 +111,9 @@ mod tests {
         import android.provider.DeviceConfig;
 
         public final class Flags {
+            public static final String NAMESPACE = "example";
+            public static final String FLAG_TEST = "test";
+            public static final String FLAG_TEST2 = "test2";
 
             public static boolean test() {
                 return false;
@@ -118,8 +121,8 @@ mod tests {
 
             public static boolean test2() {
                 return DeviceConfig.getBoolean(
-                    "example",
-                    "test2__test2",
+                    NAMESPACE,
+                    FLAG_TEST2,
                     false
                 );
             }
