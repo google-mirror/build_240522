@@ -111,18 +111,7 @@ endif
 # Local module variables and functions used in dexpreopt and manifest_check.
 ################################################################################
 
-my_filtered_optional_uses_libraries := $(filter-out $(INTERNAL_PLATFORM_MISSING_USES_LIBRARIES), \
-  $(LOCAL_OPTIONAL_USES_LIBRARIES))
-
-# TODO(b/132357300): This may filter out too much, as PRODUCT_PACKAGES doesn't
-# include all packages (the full list is unknown until reading all Android.mk
-# makefiles). As a consequence, a library may be present but not included in
-# dexpreopt, which will result in class loader context mismatch and a failure
-# to load dexpreopt code on device. We should fix this, either by deferring
-# dependency computation until the full list of product packages is known, or
-# by adding product-specific lists of missing libraries.
-my_filtered_optional_uses_libraries := $(filter $(PRODUCT_PACKAGES), \
-  $(my_filtered_optional_uses_libraries))
+my_filtered_optional_uses_libraries := $(filter $(ALL_MODULES), $(LOCAL_OPTIONAL_USES_LIBRARIES))
 
 ifeq ($(LOCAL_MODULE_CLASS),APPS)
   # compatibility libraries are added to class loader context of an app only if
