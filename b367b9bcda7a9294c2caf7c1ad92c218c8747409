@@ -22,6 +22,30 @@
       },
       "revId": "b367b9bcda7a9294c2caf7c1ad92c218c8747409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66e25cb8_d41056b8",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4792,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-06-01T18:47:24Z",
+      "side": 1,
+      "message": "I think this should only look at the framework side of the VINTF boundary, because this only checks \"framework manifest\".\n\nsystem + system_ext + product is the framework side. ODM / vendor is the device side.\n\nNot sure about apex though, but assuming that there are framework components in APEXes, they should probably be included too.",
+      "parentUuid": "a381bc82_e4c0ccae",
+      "range": {
+        "startLine": 4792,
+        "startChar": 26,
+        "endLine": 4792,
+        "endChar": 47
+      },
+      "revId": "b367b9bcda7a9294c2caf7c1ad92c218c8747409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
