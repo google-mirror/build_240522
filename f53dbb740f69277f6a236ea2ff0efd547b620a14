@@ -70,6 +70,30 @@
       },
       "revId": "f53dbb740f69277f6a236ea2ff0efd547b620a14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb5ea795_ef1f7596",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1380269
+      },
+      "writtenOn": "2023-06-01T16:39:25Z",
+      "side": 1,
+      "message": "The reason why we apply dexpreopt during the merge step when building with VSDK is to provide the same boot performance as with a regular build. If dexpreopt is not applied during the build, the first boot will take longer, since it has to apply dexpreopt at runtime.",
+      "parentUuid": "312f591b_8488f854",
+      "range": {
+        "startLine": 552,
+        "startChar": 0,
+        "endLine": 554,
+        "endChar": 7
+      },
+      "revId": "f53dbb740f69277f6a236ea2ff0efd547b620a14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
