@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fab69388_41de97d3",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-06-02T19:40:45Z",
+      "side": 1,
+      "message": "Thank you Colin!\nAdding it to _product_list_vars will cause it to be cleared between the files? And we can keep appending instead of assigning anything to it?",
+      "parentUuid": "49044992_7fe2e944",
+      "range": {
+        "startLine": 302,
+        "startChar": 39,
+        "endLine": 302,
+        "endChar": 41
+      },
+      "revId": "8fa7ebcfe07da052c592dc759cc5d4ecb4be1e0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2408bcb_07df4954",
         "filename": "target/product/base_system.mk",
         "patchSetId": 2
