@@ -21,7 +21,7 @@
 
 _board_strip_readonly_list :=
 _board_strip_readonly_list += BOARD_BOOTLOADER_IN_UPDATE_PACKAGE
-_board_strip_readonly_list += BOARD_EGL_CFG
+_board_strip_readonly_list += BBOARD_EGL_CFG
 _board_strip_readonly_list += BOARD_HAVE_BLUETOOTH
 _board_strip_readonly_list += BOARD_INSTALLER_CMDLINE
 _board_strip_readonly_list += BOARD_KERNEL_CMDLINE
@@ -976,18 +976,6 @@ ifdef BOARD_VNDK_VERSION
     $(call check_vndk_version,$(BOARD_VNDK_VERSION))
   endif
   TARGET_VENDOR_TEST_SUFFIX := /vendor
-else
-  TARGET_VENDOR_TEST_SUFFIX :=
-endif
-
-# If PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY is set,
-# BOARD_VNDK_VERSION must be set because PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY
-# is a enforcement of inter-partition dependency, and it doesn't have any meaning
-# when BOARD_VNDK_VERSION isn't set.
-ifeq ($(PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY),true)
-  ifeq ($(BOARD_VNDK_VERSION),)
-    $(error BOARD_VNDK_VERSION must be set when PRODUCT_ENFORCE_INTER_PARTITION_JAVA_SDK_LIBRARY is true)
-  endif
 endif
 
 ###########################################
