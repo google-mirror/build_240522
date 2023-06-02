@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49044992_7fe2e944",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-06-02T19:05:35Z",
+      "side": 1,
+      "message": "The problem is that `PRODUCT_PACKAGES_SHIPPING_API_LEVEL_34` has never been set before.  Make has two styles of assignment, `\u003d` for delayed evaluation and `:\u003d` for immediate evaluation.  `+\u003d` uses whatever style was last used for the variable, defaulting to delayed assignment if this is the first use of the variable.  Delayed assignment means `$(HIDL_SUPPORT_SERVICES)` isn\u0027t evaluated until later when `PRODUCT_PACKAGES_SHIPPING_API_LEVEL_34` is evaluated, when its value has changed.\n\nAll PRODUCT_* variables are supposed to be cleared between each product makefile so that inheritance works correctly, I think the problem is that `PRODUCT_PACKAGES_SHIPPING_API_LEVEL_34` is not listed in `build/make/core/product.mk`.",
+      "parentUuid": "6f4cf7df_0999873c",
+      "range": {
+        "startLine": 302,
+        "startChar": 39,
+        "endLine": 302,
+        "endChar": 41
+      },
+      "revId": "8fa7ebcfe07da052c592dc759cc5d4ecb4be1e0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2408bcb_07df4954",
         "filename": "target/product/base_system.mk",
         "patchSetId": 2
