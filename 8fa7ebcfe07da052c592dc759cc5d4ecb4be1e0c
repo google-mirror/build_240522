@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "111deab8_cfa25787",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-06-02T15:11:43Z",
+      "side": 1,
+      "message": "No, if 34 is greater than or equal to the API level these packages are added.",
+      "parentUuid": "5831beab_17225a9f",
+      "range": {
+        "startLine": 494,
+        "startChar": 31,
+        "endLine": 495,
+        "endChar": 46
+      },
+      "revId": "8fa7ebcfe07da052c592dc759cc5d4ecb4be1e0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc3830da_aaec04cd",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-06-01T22:40:11Z",
       "side": 1,
       "message": "Using :\u003d should fix the presubmit error.",
+      "range": {
+        "startLine": 302,
+        "startChar": 39,
+        "endLine": 302,
+        "endChar": 41
+      },
+      "revId": "8fa7ebcfe07da052c592dc759cc5d4ecb4be1e0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f4cf7df_0999873c",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-06-02T15:11:43Z",
+      "side": 1,
+      "message": "I want to add these packages here, not assign the variable, so we can have more packages added to it elsewhere - before or after this point. How do I handle that?",
+      "parentUuid": "bc3830da_aaec04cd",
       "range": {
         "startLine": 302,
         "startChar": 39,
@@ -84,6 +132,30 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "c2408bcb_07df4954",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 1
+      },
+      "revId": "8fa7ebcfe07da052c592dc759cc5d4ecb4be1e0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83fa2421_c1e8f7f6",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-06-02T15:11:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2fd3307_4fc1ef84",
       "range": {
         "startLine": 303,
         "startChar": 0,
