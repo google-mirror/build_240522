@@ -34,6 +34,24 @@
       "parentUuid": "bfa6ebb6_fef5abaf",
       "revId": "f02734e91586e59048189de3288a1df79b96c2a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb94937d_7d6976db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2023-06-02T16:06:41Z",
+      "side": 1,
+      "message": "It will be installed on device using upcoming build system support.",
+      "tag": "mailMessageId\u003d\u003cCAA6wpa51QOhZK5YFF2C8QTGCo6tBLE-eieidmU-Zh9aOeDLu+g@mail.gmail.com\u003e",
+      "revId": "f02734e91586e59048189de3288a1df79b96c2a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
