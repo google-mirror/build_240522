@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfa6ebb6_fef5abaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-02T15:29:15Z",
+      "side": 1,
+      "message": "How will the generated file be used? Will it be installed on the device so that the DeviceConfig can pick? or through adb?",
+      "revId": "f02734e91586e59048189de3288a1df79b96c2a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
