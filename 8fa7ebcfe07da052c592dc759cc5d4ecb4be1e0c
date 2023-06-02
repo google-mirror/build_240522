@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45109ae9_b1adc12e",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-06-02T20:54:56Z",
+      "side": 1,
+      "message": "Yes, and appending and assigning will have the same semantics.  All of the variables are captured between inheriting each product makefile, and the lists provided by all the product makefiles are appended together. `:\u003d` vs. `+\u003d` only matters if you have multiple assignments in the same product makefile, as obviously a `:\u003d` would overwrite any previous value from that makefile.",
+      "parentUuid": "fab69388_41de97d3",
+      "range": {
+        "startLine": 302,
+        "startChar": 39,
+        "endLine": 302,
+        "endChar": 41
+      },
+      "revId": "8fa7ebcfe07da052c592dc759cc5d4ecb4be1e0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2408bcb_07df4954",
