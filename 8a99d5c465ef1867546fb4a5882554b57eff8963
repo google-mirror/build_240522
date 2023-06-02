@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bba47600_d5235eba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-02T01:55:23Z",
+      "side": 1,
+      "message": "Tiffany, I really appreciate your effort of making ARC to be as close as Android. However, unfortunately, this change seems to be heading towards a wrong direction. \n\nIf my understanding is correct, this change is originated from the fact that you don\u0027t run CTS on a correctly release-key signed ARC build. Shouldn\u0027t we instead work on fixing that?\n\nI wish Joe, Colin and Baligh (I invited him) can talk more.",
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9640f73f_ee2c1a46",
         "filename": "core/sysprop.mk",
         "patchSetId": 1
@@ -55,6 +72,30 @@
       "side": 1,
       "message": "This looks like it could work, but I\u0027m hesitant to change the value of the Make variable itself because there are other places where BUILD_FINGERPRINT_FROM_FILE is referenced (e.g., ImageSpec) that work for the Android version of a build_fingerprint that would not be touched/resolved by Android image post-processing during ChromeOS build.",
       "parentUuid": "9640f73f_ee2c1a46",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 78
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ba8ff81_129f69de",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-02T01:55:23Z",
+      "side": 1,
+      "message": "Are you saying that ARC uses two different fingerprints? ex: for sysprops, you use the chromeos-defined one, while for imagespec you use the android-defined one? That sounds more dangerous.",
+      "parentUuid": "1a9e9e94_f6de09ef",
       "range": {
         "startLine": 69,
         "startChar": 0,
@@ -114,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f98e9c75_fc23983d",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-02T01:55:23Z",
+      "side": 1,
+      "message": "This is same as above. If ARC wants to override BUILD_ID, it should be consistent across the build. Changing only the value ro.build.id while leaving other places sounds very wrong to me.",
+      "parentUuid": "b7e58dea_667386e5",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 50
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07467700_1497ee53",
         "filename": "core/sysprop.mk",
         "patchSetId": 1
@@ -161,6 +226,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04e37305_c1c5f664",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-02T01:55:23Z",
+      "side": 1,
+      "message": "\u003e but since we would not be signing with actual release keys (because it is not technically a release build) \n\nAs I commented in the doc, IMO, this is wrong. CTS has to run on the final software that you deliver to the user; variant\u003duser \u0026\u0026 release-key signed. Just changing the tag sysprop to release-key is not a correct way of signing.",
+      "parentUuid": "1a47d7f5_ee6346ab",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 62
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15ca4b87_0f90b015",
         "filename": "tools/buildinfo.sh",
         "patchSetId": 1
@@ -196,6 +285,30 @@
       "side": 1,
       "message": "The build description is set differently in ARC. It has components like the ChromeOS product and device",
       "parentUuid": "15ca4b87_0f90b015",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 48
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebbda8d1_c32f08b0",
+        "filename": "tools/buildinfo.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-02T01:55:23Z",
+      "side": 1,
+      "message": "This is only for human. Who is supposed to read this? ARC doesn\u0027t have the settings menu, does it?",
+      "parentUuid": "c41491f7_863f5839",
       "range": {
         "startLine": 52,
         "startChar": 6,
