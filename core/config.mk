@@ -789,14 +789,6 @@ BOARD_VNDK_VERSION := current
 # READ WARNING - DO NOT CHANGE
 endif
 
-ifdef PRODUCT_PRODUCT_VNDK_VERSION
-  ifndef BOARD_VNDK_VERSION
-    # VNDK for product partition is not available unless BOARD_VNDK_VERSION
-    # defined.
-    $(error PRODUCT_PRODUCT_VNDK_VERSION cannot be defined without defining BOARD_VNDK_VERSION)
-  endif
-endif
-
 # Set BOARD_SYSTEMSDK_VERSIONS to the latest SystemSDK version starting from P-launching
 # devices if unset.
 ifndef BOARD_SYSTEMSDK_VERSIONS
