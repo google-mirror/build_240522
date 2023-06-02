@@ -16,6 +16,24 @@
       "message": "How will the generated file be used? Will it be installed on the device so that the DeviceConfig can pick? or through adb?",
       "revId": "f02734e91586e59048189de3288a1df79b96c2a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76488767_c462c59a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-02T15:42:47Z",
+      "side": 1,
+      "message": "Check\n\nb/285468565\nb/285261745\nhttps://docs.google.com/document/d/1kwQWQalH7mDyFrOoxcByQuwXQqhf3Ly538QbekNNHbY/edit#heading\u003dh.2g4lpd5rgmvf",
+      "parentUuid": "bfa6ebb6_fef5abaf",
+      "revId": "f02734e91586e59048189de3288a1df79b96c2a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
