@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "792ce755_55d316cb",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-06-05T20:34:08Z",
+      "side": 1,
+      "message": "this is getting hit:\n\n    build/make/core/board_config.mk:975: error: VNDK version  not found.\n\nI guess this file is used by stuff, before core/config.mk runs. Maybe there is a better place I should validate the version?",
+      "range": {
+        "startLine": 975,
+        "startChar": 0,
+        "endLine": 975,
+        "endChar": 50
+      },
+      "revId": "6cce9b81b2c587336a8b5bdabb5bc86149175f08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f472916_3af42624",
         "filename": "core/copy_headers.mk",
         "patchSetId": 1
