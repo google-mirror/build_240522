@@ -16,6 +16,29 @@
       "message": "Thank you.",
       "revId": "6cce9b81b2c587336a8b5bdabb5bc86149175f08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f472916_3af42624",
+        "filename": "core/copy_headers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-06-05T19:01:52Z",
+      "side": 1,
+      "message": "btw story time:\n\nIt was so much fun to actually read all this build code. In ~2017, when dwillemsen@ originally added these restrictions, I didn\u0027t know the build system well enough to understand how the system/vendor variant split was implemented. There were several restrictions like this: certain headers removed from vendor variants of libraries. The idea behind it is that because vendor code is built separately, we need to control the headers it links again. If libraries were build in certain ways, mixing system headers with vendor code could cause UB (in practice, we never tried to add serious vendor/system differences in code).\n\nAnyway, in order to actually turn this mode on, due to these restrictions, there were 100s of dependencies to clean up when a device was built in the split mode. I actually stayed up 28 hours straight trying to get it to work one random Thursday/Friday. Though, I failed to finish everything in time, and the split was cut from the Android O release, and instead we had the Makefile-based rules to copy vndk-sp libs which probably caused more problems than it helped with. In retrospect, we should have dropped the header file dependencies to avoid that. However, today, vendor code is much more hermetic due to these large-scale dependency cleanups.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 0
+      },
+      "revId": "6cce9b81b2c587336a8b5bdabb5bc86149175f08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
