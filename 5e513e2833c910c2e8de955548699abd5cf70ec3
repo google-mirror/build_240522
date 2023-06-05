@@ -16,6 +16,24 @@
       "message": "Can you add more info on why this is useful to the commit message, and measure the size difference in module-info.json after this change?",
       "revId": "5e513e2833c910c2e8de955548699abd5cf70ec3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "292ce330_145a216b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-06-05T20:24:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc50bbaa_552c5c9a",
+      "revId": "5e513e2833c910c2e8de955548699abd5cf70ec3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
