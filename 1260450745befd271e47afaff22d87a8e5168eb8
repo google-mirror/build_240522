@@ -50,6 +50,23 @@
       "message": "Hi, Joe, can you take a look?\nThank you.",
       "revId": "1260450745befd271e47afaff22d87a8e5168eb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19e70f51_97ccaabe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1062848
+      },
+      "writtenOn": "2023-06-06T22:14:38Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "1260450745befd271e47afaff22d87a8e5168eb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
