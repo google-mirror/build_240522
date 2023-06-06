@@ -16,6 +16,29 @@
       "message": "Do not submit until we have decided on what should encoded: is it namespace/name? package/name? namespace/package/name? Should we have package at all?",
       "revId": "40d89195938d781df014401565a541668795bc2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6717931_a5c86f88",
+        "filename": "tools/aconfig/templates/java.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1799018
+      },
+      "writtenOn": "2023-06-06T02:18:39Z",
+      "side": 1,
+      "message": "Can we also create constant for the namespace? Or just include the namespace into this constant? Since the namespace is also needed when specifying a feature flag.",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 51
+      },
+      "revId": "40d89195938d781df014401565a541668795bc2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
