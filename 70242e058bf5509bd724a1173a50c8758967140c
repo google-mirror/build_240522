@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01238527_7413e403",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1994695
+      },
+      "writtenOn": "2023-06-06T22:06:13Z",
+      "side": 1,
+      "message": "One alternative is to just have the script in the tree and run it standalone (as needed). Then, no changes in the Makefile are required.",
+      "parentUuid": "10ab6520_31b11ce5",
+      "revId": "70242e058bf5509bd724a1173a50c8758967140c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae1890e4_1e797a82",
