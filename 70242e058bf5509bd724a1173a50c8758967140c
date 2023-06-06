@@ -77,6 +77,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba6bd505_ece87d92",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3233,
+      "author": {
+        "id": 1994695
+      },
+      "writtenOn": "2023-06-06T18:03:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ae1890e4_1e797a82",
+      "range": {
+        "startLine": 3233,
+        "startChar": 1,
+        "endLine": 3233,
+        "endChar": 60
+      },
+      "revId": "70242e058bf5509bd724a1173a50c8758967140c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d342566_f033865f",
@@ -123,6 +147,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c788a907_56ab1b65",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3234,
+      "author": {
+        "id": 1994695
+      },
+      "writtenOn": "2023-06-06T18:03:23Z",
+      "side": 1,
+      "message": "Ack. In the new patch I\u0027m going to submit shortly, it\u0027s running for product, ramdisk, vendor_ramdisk, system, system_ext and system_other. This can be changed as required.",
+      "parentUuid": "5d342566_f033865f",
+      "range": {
+        "startLine": 3234,
+        "startChar": 31,
+        "endLine": 3234,
+        "endChar": 45
+      },
+      "revId": "70242e058bf5509bd724a1173a50c8758967140c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c23f5513_5b96c369",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3234,
+      "author": {
+        "id": 1994695
+      },
+      "writtenOn": "2023-06-06T18:03:23Z",
+      "side": 1,
+      "message": "It depends on how much duplicates it finds. The most time consuming part is the diff\u0027ing between ELF .text sections when it finds two duplicates by file size. The rest is quick enough.\n\nI tested it on the \u0027apex\u0027 directory just to check, as there are many duplicates there and it takes between 2-4 minutes, depending on the machine. If it doesn\u0027t find anything, then it\u0027s less than a second.",
+      "parentUuid": "e7fc168f_b27d0b6b",
+      "range": {
+        "startLine": 3234,
+        "startChar": 1,
+        "endLine": 3234,
+        "endChar": 31
+      },
+      "revId": "70242e058bf5509bd724a1173a50c8758967140c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c78eb530_7f46ffce",
@@ -136,6 +208,30 @@
       "writtenOn": "2023-05-31T19:23:02Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Inclusive Language: Prefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reaso...\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: inclusive-language-in-code@google.com\n\nPrefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 10
+      },
+      "revId": "70242e058bf5509bd724a1173a50c8758967140c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd3cc3c7_f57571bf",
+        "filename": "core/dupcheck.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1994695
+      },
+      "writtenOn": "2023-06-06T18:03:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c78eb530_7f46ffce",
       "range": {
         "startLine": 60,
         "startChar": 4,
