@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b2cbf0a_5c952b89",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-06-07T21:02:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b030890_37464fc9",
+      "range": {
+        "startLine": 975,
+        "startChar": 0,
+        "endLine": 975,
+        "endChar": 50
+      },
+      "revId": "6cce9b81b2c587336a8b5bdabb5bc86149175f08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f472916_3af42624",
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "Yeah, in practice this should be a check for /vendor code once the vndk is removed, as copy headers are deprecated in /vendor, but obsolete everywhere else: https://android.googlesource.com/platform/build/+/master/Changes.md#copy_headers-usage-now-produces-warnings-copy_headers\n\nCopy headers aren\u0027t even the global platform include dirs that most of Steven\u0027s story was about, they\u0027re the ability for arbitrary makefiles to define header files that get copied to a global directory which is automatically added to the include dirs of every module.",
       "parentUuid": "bd91c7cf_9f57d4e6",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 0
+      },
+      "revId": "6cce9b81b2c587336a8b5bdabb5bc86149175f08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0b1ec72_f1d95648",
+        "filename": "core/copy_headers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-06-07T21:02:43Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s tagged here, but each of these cases caused different issues that had to be fixed manually. It\u0027s not specific to this.",
+      "parentUuid": "b17ac22a_5051dcf2",
       "range": {
         "startLine": 19,
         "startChar": 0,
