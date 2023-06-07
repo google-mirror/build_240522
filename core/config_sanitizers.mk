@@ -249,6 +249,11 @@ ifneq ($(filter memtag_heap memtag_stack,$(my_sanitize)),)
   endif
 endif
 
+# Ignore SANITIZE_TARGET_DIAG=memtag_heap without SANITIZE_TARGET=memtag_heap
+ifneq ($(filter memtag_heap,$(my_sanitize_diag)),)
+	my_sanitize_diag := $(filter-out memtag_heap,$(my_sanitize_diag))
+endif
+
 ifneq ($(filter memtag_heap,$(my_sanitize)),)
   my_cflags += -fsanitize=memtag-heap
   my_sanitize := $(filter-out memtag_heap,$(my_sanitize))
