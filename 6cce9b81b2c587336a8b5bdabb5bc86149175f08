@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b030890_37464fc9",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-07T01:04:27Z",
+      "side": 1,
+      "message": "I think you could set BOARD_VNDK_VERSION before L362 in config.mk where it includes envsetup.sh (which includes board_config.mk)",
+      "parentUuid": "792ce755_55d316cb",
+      "range": {
+        "startLine": 975,
+        "startChar": 0,
+        "endLine": 975,
+        "endChar": 50
+      },
+      "revId": "6cce9b81b2c587336a8b5bdabb5bc86149175f08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f472916_3af42624",
         "filename": "core/copy_headers.mk",
         "patchSetId": 1
@@ -78,6 +102,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "2f472916_3af42624",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 0
+      },
+      "revId": "6cce9b81b2c587336a8b5bdabb5bc86149175f08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd91c7cf_9f57d4e6",
+        "filename": "core/copy_headers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-07T01:04:27Z",
+      "side": 1,
+      "message": "I thought this assert is just to reflect the fact that the use of `LOCAL_COPY_HEADERS` is so widespread in the vendor source tree and thus we couldn\u0027t fix them all at once.",
+      "parentUuid": "1e2e9392_0d66db42",
       "range": {
         "startLine": 19,
         "startChar": 0,
