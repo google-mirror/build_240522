@@ -155,6 +155,23 @@ else
   static_resource_overlays := $(product_package_overlays) $(device_package_overlays)
 endif
 
+# Add overlay resources of this package to auto generate RRO of each partition.
+auto_generate_runtime_resource_overlays_odm := $(strip \
+    $(wildcard $(foreach dir, $(PRODUCT_AUTO_GENERATE_ODM_RRO_DIRS), \
+      $(addprefix $(dir)/, $(LOCAL_RESOURCE_DIR)))))
+auto_generate_runtime_resource_overlays_oem := $(strip \
+    $(wildcard $(foreach dir, $(PRODUCT_AUTO_GENERATE_OEM_RRO_DIRS), \
+      $(addprefix $(dir)/, $(LOCAL_RESOURCE_DIR)))))
+auto_generate_runtime_resource_overlays_product := $(strip \
+    $(wildcard $(foreach dir, $(PRODUCT_AUTO_GENERATE_PRODUCT_RRO_DIRS), \
+      $(addprefix $(dir)/, $(LOCAL_RESOURCE_DIR)))))
+auto_generate_runtime_resource_overlays_system_ext := $(strip \
+    $(wildcard $(foreach dir, $(PRODUCT_AUTO_GENERATE_SYSTEM_EXT_RRO_DIRS), \
+      $(addprefix $(dir)/, $(LOCAL_RESOURCE_DIR)))))
+auto_generate_runtime_resource_overlays_vendor := $(strip \
+    $(wildcard $(foreach dir, $(PRODUCT_AUTO_GENERATE_VENDOR_RRO_DIRS), \
+      $(addprefix $(dir)/, $(LOCAL_RESOURCE_DIR)))))
+
 # Add the static overlays. Auto-RRO is created later, as it depends on
 # other logic in this file.
 LOCAL_RESOURCE_DIR := $(static_resource_overlays) $(LOCAL_RESOURCE_DIR)
@@ -695,7 +712,7 @@ PACKAGES := $(PACKAGES) $(LOCAL_PACKAGE_NAME)
 # Reset internal variables.
 all_res_assets :=
 
-ifneq (,$(runtime_resource_overlays_product)$(runtime_resource_overlays_vendor))
+ifneq (,$(runtime_resource_overlays_product)$(runtime_resource_overlays_vendor)$(auto_generate_runtime_resource_overlays_odm)$(auto_generate_runtime_resource_overlays_oem)$(auto_generate_runtime_resource_overlays_product)$(auto_generate_runtime_resource_overlays_system_ext)$(auto_generate_runtime_resource_overlays_vendor))
   ifdef LOCAL_EXPORT_PACKAGE_RESOURCES
     enforce_rro_use_res_lib := true
   else
@@ -710,23 +727,53 @@ ifneq (,$(runtime_resource_overlays_product)$(runtime_resource_overlays_vendor))
     enforce_rro_manifest_package_info := $(full_android_manifest)
   endif
 
-  ifdef runtime_resource_overlays_product
+  ifneq (,$(auto_generate_runtime_resource_overlays_odm))
     $(call append_enforce_rro_sources, \
         $(my_register_name), \
         $(enforce_rro_is_manifest_package_name), \
         $(enforce_rro_manifest_package_info), \
         $(enforce_rro_use_res_lib), \
-        $(runtime_resource_overlays_product), \
+        $(auto_generate_runtime_resource_overlays_odm), \
+        odm \
+    )
+  endif
+  ifneq (,$(auto_generate_runtime_resource_overlays_oem))
+    $(call append_enforce_rro_sources, \
+        $(my_register_name), \
+        $(enforce_rro_is_manifest_package_name), \
+        $(enforce_rro_manifest_package_info), \
+        $(enforce_rro_use_res_lib), \
+        $(auto_generate_runtime_resource_overlays_oem), \
+        oem \
+    )
+  endif
+  ifneq (,$(runtime_resource_overlays_product)$(auto_generate_runtime_resource_overlays_product))
+    $(call append_enforce_rro_sources, \
+        $(my_register_name), \
+        $(enforce_rro_is_manifest_package_name), \
+        $(enforce_rro_manifest_package_info), \
+        $(enforce_rro_use_res_lib), \
+        $(runtime_resource_overlays_product) $(auto_generate_runtime_resource_overlays_product), \
         product \
     )
   endif
-  ifdef runtime_resource_overlays_vendor
+  ifneq (,$(auto_generate_runtime_resource_overlays_system_ext))
     $(call append_enforce_rro_sources, \
         $(my_register_name), \
         $(enforce_rro_is_manifest_package_name), \
         $(enforce_rro_manifest_package_info), \
         $(enforce_rro_use_res_lib), \
-        $(runtime_resource_overlays_vendor), \
+        $(auto_generate_runtime_resource_overlays_system_ext), \
+        systemext \
+    )
+  endif
+  ifneq (,$(runtime_resource_overlays_vendor)$(auto_generate_runtime_resource_overlays_vendor))
+    $(call append_enforce_rro_sources, \
+        $(my_register_name), \
+        $(enforce_rro_is_manifest_package_name), \
+        $(enforce_rro_manifest_package_info), \
+        $(enforce_rro_use_res_lib), \
+        $(runtime_resource_overlays_vendor) $(auto_generate_runtime_resource_overlays_vendor), \
         vendor \
     )
   endif
