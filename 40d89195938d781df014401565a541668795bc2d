@@ -39,6 +39,30 @@
       },
       "revId": "40d89195938d781df014401565a541668795bc2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d643ef7a_8c8acb0a",
+        "filename": "tools/aconfig/templates/java.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-07T11:58:51Z",
+      "side": 1,
+      "message": "Added NAMESPACE as a specific constant. Not sure if needed but doesn\u0027t hurt?\n\nThe exact value of the FLAG_* fields is yet to be decided, but shouldn\u0027t matter as long as everyone refers to the flags by using the constants.",
+      "parentUuid": "a6717931_a5c86f88",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 51
+      },
+      "revId": "40d89195938d781df014401565a541668795bc2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
