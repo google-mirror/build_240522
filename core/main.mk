@@ -581,6 +581,12 @@ $(call generate_all_enforce_rro_packages)
 endif
 
 # -------------------------------------------------------------------
+# All modules have now been defined.  Disallow adding new ones after
+# this.
+# -------------------------------------------------------------------
+base-rules-no-new-modules := true
+
+# -------------------------------------------------------------------
 # Sort ALL_MODULES to remove duplicate entries.
 # -------------------------------------------------------------------
 ALL_MODULES := $(sort $(ALL_MODULES))

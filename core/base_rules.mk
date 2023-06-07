@@ -17,6 +17,25 @@
 # Catch users that directly include base_rules.mk
 $(call record-module-type,base_rules)
 
+# Once all of the makefiles have been included, it is too late to add new
+# modules, since additional processing has happened that relies on all modules
+# being previously defined.
+# TODO: Fix these modules and remove the code that generates warnings for them.
+# See b/286300075.
+base-rules-known-late-modules := continuous_instrumentation_metric_tests
+base-rules-known-late-modules += continuous_instrumentation_tests
+base-rules-known-late-modules += continuous_native_metric_tests
+base-rules-known-late-modules += continuous_native_tests
+base-rules-known-late-modules += platform_tests
+
+ifdef base-rules-no-new-modules
+  ifneq (,$(filter $(LOCAL_MODULE),$(base-rules-known-late-modules)))
+    $(warning Adding module "$(LOCAL_MODULE)" later than permissible. It may not be properly incorporated.)
+  else
+    $(error Attempting to add module "$(LOCAL_MODULE)" later than permissible.)
+  endif
+endif
+
 # Users can define base-rules-hook in their buildspec.mk to perform
 # arbitrary operations as each module is included.
 ifdef base-rules-hook
