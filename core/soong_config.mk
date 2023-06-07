@@ -92,6 +92,11 @@ $(call add_json_list, DeviceResourceOverlays,            $(DEVICE_PACKAGE_OVERLA
 $(call add_json_list, ProductResourceOverlays,           $(PRODUCT_PACKAGE_OVERLAYS))
 $(call add_json_list, EnforceRROTargets,                 $(PRODUCT_ENFORCE_RRO_TARGETS))
 $(call add_json_list, EnforceRROExcludedOverlays,        $(PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS))
+$(call add_json_list, AutoGenerateOdmRRODirs,            $(AUTO_GENERATE_ODM_RRO_DIRS))
+$(call add_json_list, AutoGenerateOemRRODirs,            $(AUTO_GENERATE_OEM_RRO_DIRS))
+$(call add_json_list, AutoGenerateProductRRODirs,        $(AUTO_GENERATE_PRODUCT_RRO_DIRS))
+$(call add_json_list, AutoGenerateSystemExtRRODirs,      $(AUTO_GENERATE_SYSTEM_EXT_RRO_DIRS))
+$(call add_json_list, AutoGenerateVendorRRODirs,         $(AUTO_GENERATE_VENDOR_RRO_DIRS))
 
 $(call add_json_str,  AAPTCharacteristics,               $(TARGET_AAPT_CHARACTERISTICS))
 $(call add_json_list, AAPTConfig,                        $(PRODUCT_AAPT_CONFIG))

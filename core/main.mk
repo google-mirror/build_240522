@@ -504,9 +504,7 @@ ADDITIONAL_SYSTEM_PROPERTIES := $(strip $(ADDITIONAL_SYSTEM_PROPERTIES))
 ADDITIONAL_PRODUCT_PROPERTIES := $(strip $(ADDITIONAL_PRODUCT_PROPERTIES))
 .KATI_READONLY := ADDITIONAL_PRODUCT_PROPERTIES
 
-ifneq ($(PRODUCT_ENFORCE_RRO_TARGETS),)
 ENFORCE_RRO_SOURCES :=
-endif
 
 # Color-coded warnings including current module info
 # $(1): message to print
@@ -576,7 +574,7 @@ endef
 # Enforce to generate all RRO packages for modules having resource
 # overlays.
 # -------------------------------------------------------------------
-ifneq ($(PRODUCT_ENFORCE_RRO_TARGETS),)
+ifneq ($(ENFORCE_RRO_SOURCES),)
 $(call generate_all_enforce_rro_packages)
 endif
 
