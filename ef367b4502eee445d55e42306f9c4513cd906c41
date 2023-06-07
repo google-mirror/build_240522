@@ -16,6 +16,24 @@
       "message": "Odd error. All of the build_test presubmit builds are failing with \n\n```\n\u003e error: external/stg/Android.bp:24:1: \"llvm_license\" depends on undefined module \"SPDX-license-identifier-Apache-2.0 WITH LLVM-exception\".\n```\n\nFor some reason the checkout doesn\u0027t have aosp/2333147 for `external/stg`. But the checkouts are running off 53c64b3530a2e039ac5905393547657f157e5e7a for external/stg, which is a June 7 commit.",
       "revId": "ef367b4502eee445d55e42306f9c4513cd906c41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ff048ac_0a5c5d98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-07T07:44:13Z",
+      "side": 1,
+      "message": "http://go/agwp/external/stg/+/refs/heads/master/Android.bp#28 at HEAD also shows that `llvm-license` depends on `SPDX-license-identifier-Apache-2.0`, not `SPDX-license-identifier-Apache-2.0 WITH LLVM-exception`, which was last seen ~6 months ago in go/agwp/external/stg/+/e25ea4255496b3bbad83dc424d0b37018f133c97/Android.bp#28",
+      "parentUuid": "1fef34b2_97b04d99",
+      "revId": "ef367b4502eee445d55e42306f9c4513cd906c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
