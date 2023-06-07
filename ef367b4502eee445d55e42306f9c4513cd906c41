@@ -52,6 +52,24 @@
       "parentUuid": "6ff048ac_0a5c5d98",
       "revId": "ef367b4502eee445d55e42306f9c4513cd906c41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0b95f8c_1cd593f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-07T15:07:27Z",
+      "side": 1,
+      "message": "The build seems to be progressing further. Will resolve this for now for autosubmit.",
+      "parentUuid": "f1072113_1fee694e",
+      "revId": "ef367b4502eee445d55e42306f9c4513cd906c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
