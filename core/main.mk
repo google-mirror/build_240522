@@ -250,9 +250,7 @@ include $(BUILD_SYSTEM)/dex_preopt.mk
 # Strip and readonly a few more variables so they won't be modified.
 $(readonly-final-product-vars)
 
-ifneq ($(PRODUCT_ENFORCE_RRO_TARGETS),)
 ENFORCE_RRO_SOURCES :=
-endif
 
 # Color-coded warnings including current module info
 # $(1): message to print
@@ -323,7 +321,7 @@ endef
 # Enforce to generate all RRO packages for modules having resource
 # overlays.
 # -------------------------------------------------------------------
-ifneq ($(PRODUCT_ENFORCE_RRO_TARGETS),)
+ifneq ($(ENFORCE_RRO_SOURCES),)
 $(call generate_all_enforce_rro_packages)
 endif
 

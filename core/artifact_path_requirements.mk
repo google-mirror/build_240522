@@ -6,6 +6,9 @@ static_allowed_patterns := $(TARGET_OUT_FAKE)/% $(SOONG_OUT_DIR)/ndk/%
 # RROs become REQUIRED by the source module, but are always placed on the vendor partition.
 static_allowed_patterns += %__auto_generated_characteristics_rro.apk
 static_allowed_patterns += %__auto_generated_rro_product.apk
+static_allowed_patterns += %__auto_generated_rro_odm.apk
+static_allowed_patterns += %__auto_generated_rro_oem.apk
+static_allowed_patterns += %__auto_generated_rro_systemext.apk
 static_allowed_patterns += %__auto_generated_rro_vendor.apk
 # Auto-included targets are not considered
 static_allowed_patterns += $(call product-installed-files,)
