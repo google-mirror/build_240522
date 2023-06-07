@@ -34,6 +34,24 @@
       "parentUuid": "dd2db6f8_1b236003",
       "revId": "a7dfd9502a2627868d94e58ac03e9959f6811e8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd64a9a9_665667ee",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2023-06-07T23:24:25Z",
+      "side": 1,
+      "message": "This can happen for various reasons where further up in this file memtag_heap is filtered from the my_sanitize list. In my case it was this\n\n```\nifneq ($(filter arm x86 x86_64,$(TARGET_$(LOCAL_2ND_ARCH_VAR_PREFIX)ARCH)),)\n```\n\nI think it\u0027s easier to just fix it in one place than fix up all the places that don\u0027t properly exclude it, especially as the file is written in a way that the build will incorrectly just pass through the memtag_heap to clang if one is set but not the other.\n\nSoong doesn\u0027t have this bug.",
+      "parentUuid": "ab396aeb_4b895bee",
+      "revId": "a7dfd9502a2627868d94e58ac03e9959f6811e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
