@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fef34b2_97b04d99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-07T07:28:53Z",
+      "side": 1,
+      "message": "Odd error. All of the build_test presubmit builds are failing with \n\n```\n\u003e error: external/stg/Android.bp:24:1: \"llvm_license\" depends on undefined module \"SPDX-license-identifier-Apache-2.0 WITH LLVM-exception\".\n```\n\nFor some reason the checkout doesn\u0027t have aosp/2333147 for `external/stg`. But the checkouts are running off 53c64b3530a2e039ac5905393547657f157e5e7a for external/stg, which is a June 7 commit.",
+      "revId": "ef367b4502eee445d55e42306f9c4513cd906c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
