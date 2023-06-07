@@ -134,6 +134,30 @@
       },
       "revId": "6cce9b81b2c587336a8b5bdabb5bc86149175f08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b17ac22a_5051dcf2",
+        "filename": "core/copy_headers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-06-07T01:12:15Z",
+      "side": 1,
+      "message": "Yeah, in practice this should be a check for /vendor code once the vndk is removed, as copy headers are deprecated in /vendor, but obsolete everywhere else: https://android.googlesource.com/platform/build/+/master/Changes.md#copy_headers-usage-now-produces-warnings-copy_headers\n\nCopy headers aren\u0027t even the global platform include dirs that most of Steven\u0027s story was about, they\u0027re the ability for arbitrary makefiles to define header files that get copied to a global directory which is automatically added to the include dirs of every module.",
+      "parentUuid": "bd91c7cf_9f57d4e6",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 0
+      },
+      "revId": "6cce9b81b2c587336a8b5bdabb5bc86149175f08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
