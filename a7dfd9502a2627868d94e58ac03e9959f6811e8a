@@ -16,6 +16,24 @@
       "message": "Where is `SANITIZE_TARGET_DIAG\u003dmemtag_heap` getting set but not `SANITIZE_TARGET\u003dmemtag_heap`?  Does that make sense?  If so, can you explain in the commit message or the comment where this comes from?",
       "revId": "a7dfd9502a2627868d94e58ac03e9959f6811e8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab396aeb_4b895bee",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-06-07T23:03:12Z",
+      "side": 1,
+      "message": "And is a similar change needed in Soong?",
+      "parentUuid": "dd2db6f8_1b236003",
+      "revId": "a7dfd9502a2627868d94e58ac03e9959f6811e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
