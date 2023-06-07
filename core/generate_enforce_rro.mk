@@ -41,12 +41,18 @@ LOCAL_FULL_MANIFEST_FILE := $(rro_android_manifest_file)
 LOCAL_AAPT_FLAGS += --auto-add-overlay --keep-raw-values
 LOCAL_RESOURCE_DIR := $(enforce_rro_source_overlays)
 
-ifeq (product,$(enforce_rro_partition))
+ifeq (odm,$(enforce_rro_partition))
+  LOCAL_ODM_MODULE := true
+else ifeq (oem,$(enforce_rro_partition))
+  LOCAL_OEM_MODULE := true
+else ifeq (product,$(enforce_rro_partition))
   LOCAL_PRODUCT_MODULE := true
+else ifeq (systemext,$(enforce_rro_partition))
+  LOCAL_SYSTEM_EXT_MODULE := true
 else ifeq (vendor,$(enforce_rro_partition))
   LOCAL_VENDOR_MODULE := true
 else
-  $(error Unsupported partition. Want: [vendor/product] Got: [$(enforce_rro_partition)])
+  $(error Unsupported partition. Want: [vendor/systemext/product/oem/odm] Got: [$(enforce_rro_partition)])
 endif
 ifneq (,$(TARGET_BUILD_UNBUNDLED))
   LOCAL_SDK_VERSION := current
