@@ -22,6 +22,30 @@
       },
       "revId": "d306dfec39db7c982d5151b809902c65fdc9df7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c529152_a470d3cc",
+        "filename": "tools/aconfig/templates/cpp.template",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-08T09:07:48Z",
+      "side": 1,
+      "message": "This is the C++ namespace. Can rename to cpp_namespace to make it clearer.",
+      "parentUuid": "6833062b_46d1f3d9",
+      "range": {
+        "startLine": 7,
+        "startChar": 11,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "d306dfec39db7c982d5151b809902c65fdc9df7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
