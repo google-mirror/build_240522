@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0350c72a_ae222711",
+        "filename": "target/product/aosp_arm64_fullmte.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2023-06-08T22:31:41Z",
+      "side": 1,
+      "message": "I guess doesn\u0027t hurt. Doesn\u0027t seem necessary (builds without) current.",
+      "parentUuid": "4ddaf395_288c21e9",
+      "revId": "c6ec3730c7f8d9c6c941c8d25d056d4db7b7ce22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "821930d0_a5c597ec",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-08T22:22:41Z",
       "side": 1,
       "message": "fix indent",
+      "revId": "c6ec3730c7f8d9c6c941c8d25d056d4db7b7ce22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "836b70cf_e7140638",
+        "filename": "target/product/aosp_arm64_fullmte.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2023-06-08T22:31:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "821930d0_a5c597ec",
       "revId": "c6ec3730c7f8d9c6c941c8d25d056d4db7b7ce22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
