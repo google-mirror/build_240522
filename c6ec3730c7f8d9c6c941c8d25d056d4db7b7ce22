@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ddaf395_288c21e9",
+        "filename": "target/product/aosp_arm64_fullmte.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2023-06-08T22:22:41Z",
+      "side": 1,
+      "message": "Do we want `PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS :\u003d relaxed` as in the parent config?",
+      "revId": "c6ec3730c7f8d9c6c941c8d25d056d4db7b7ce22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "821930d0_a5c597ec",
+        "filename": "target/product/aosp_arm64_fullmte.mk",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2023-06-08T22:22:41Z",
+      "side": 1,
+      "message": "fix indent",
+      "revId": "c6ec3730c7f8d9c6c941c8d25d056d4db7b7ce22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
