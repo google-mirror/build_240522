@@ -70,6 +70,30 @@
       },
       "revId": "e8c4b1b1a416fabab036d726c2bb9e5f58eeb873",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24714e15_5dbdd8ff",
+        "filename": "tools/aconfig/src/aconfig.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-08T08:45:31Z",
+      "side": 1,
+      "message": "Decided to proceed with this. New patch sets uploaded.",
+      "parentUuid": "a372345c_e05a8e35",
+      "range": {
+        "startLine": 112,
+        "startChar": 8,
+        "endLine": 112,
+        "endChar": 15
+      },
+      "revId": "e8c4b1b1a416fabab036d726c2bb9e5f58eeb873",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
