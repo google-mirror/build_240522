@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "db2b9462_729de19b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-06-08T00:14:17Z",
+      "side": 1,
+      "message": "I checked the build commands of before and after the change. Thanks to your help, now the build commands are identical, except for the fs_config option that still is using the same information though. (details are in b/281960439#comment22)",
+      "parentUuid": "bcff05de_7b09daee",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 12
+      },
+      "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8ba6acea_b74e0271",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
