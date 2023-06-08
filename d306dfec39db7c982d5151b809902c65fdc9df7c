@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6833062b_46d1f3d9",
+        "filename": "tools/aconfig/templates/cpp.template",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2023-06-08T09:05:17Z",
+      "side": 1,
+      "message": "Is this the com::android::foo style C++ namespace, or the proto field namespace? The commit message implies the former but I\u0027d assume the latter",
+      "range": {
+        "startLine": 7,
+        "startChar": 11,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "d306dfec39db7c982d5151b809902c65fdc9df7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
