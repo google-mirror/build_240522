@@ -80,6 +80,24 @@
       "message": "map_file_generator failed to parse ext2fs in the presubmit targets.",
       "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "603da06c_fc3f1732",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-06-08T09:47:36Z",
+      "side": 1,
+      "message": "It must fall back to the original process if map_file_generator is not supported. Let me work on it.",
+      "parentUuid": "3f4be55d_abbe3d3a",
+      "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
