@@ -98,6 +98,24 @@
       "parentUuid": "3f4be55d_abbe3d3a",
       "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "659fb6b4_8a545025",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-06-08T17:32:09Z",
+      "side": 1,
+      "message": "I will look into why map_file_generator failed, it should work for all images.",
+      "parentUuid": "603da06c_fc3f1732",
+      "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
