@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000046463875",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2617915?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "feeee77a_7b9fedc5",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "core/release_config.bzl",
+              "range": {
+                "startLine": 77,
+                "startChar": 0,
+                "endLine": 78,
+                "endChar": 0
+              },
+              "replacement": "                fail(\"A flag must be a struct with name and value fields, got: \" + str(sorted(dir(flag))))\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "59bc15fd_fa28ee0e",
+        "filename": "core/release_config.bzl",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-08T22:33:12Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier core/release_config.bzl` to format the file, or apply the suggested fix.",
+      "revId": "b02139bb94d8e4ac490e2c33297928834375a58a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
