@@ -16,6 +16,24 @@
       "message": "This should be \n\n$(MODULE_INFO_JSON): PRIVATE_SEP :\u003d $(COMMA) $(EMPTY)\n\nI\u0027d say don\u0027t fix this though, because it\u0027s about to be superseded by the next change.",
       "revId": "6aea8da4101405579263de67dbb12b7616dddaa2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6586dcaf_3be1a97a",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-06-08T18:40:33Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "c704884b_4251dfaf",
+      "revId": "6aea8da4101405579263de67dbb12b7616dddaa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
