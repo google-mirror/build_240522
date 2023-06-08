@@ -16,6 +16,23 @@
       "message": "Adding SzuWei for the .mk under gsi/",
       "revId": "78549acb477c6dd0e0abba3184357280e7111c5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97b2b22a_68fc525e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2023-06-08T08:10:44Z",
+      "side": 1,
+      "message": "LGTM for `target/product/gsi/Android.mk`",
+      "revId": "78549acb477c6dd0e0abba3184357280e7111c5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
