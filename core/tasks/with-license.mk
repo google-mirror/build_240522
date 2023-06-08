@@ -20,8 +20,7 @@ ifeq ($(TARGET_BUILD_TYPE),debug)
 	name := $(name)_debug
 endif
 
-dist_name := $(name)-flashable-FILE_NAME_TAG_PLACEHOLDER-with-license
-name := $(name)-flashable-with-license
+name := $(name)-flashable-$(FILE_NAME_TAG)-with-license
 
 with_license_intermediates := \
 	$(call intermediates-dir-for,PACKAGING,with_license)
@@ -43,7 +42,6 @@ $(call declare-1p-container,$(license_image_input_zip),build)
 $(call declare-container-deps,$(license_image_input_zip),$(BUILT_TARGET_FILES_PACKAGE))
 
 with_license_zip := $(PRODUCT_OUT)/$(name).sh
-dist_name := $(dist_name).sh
 $(with_license_zip): PRIVATE_NAME := $(name)
 $(with_license_zip): PRIVATE_INPUT_ZIP := $(license_image_input_zip)
 $(with_license_zip): PRIVATE_VENDOR_BLOBS_LICENSE := $(VENDOR_BLOBS_LICENSE)
@@ -53,7 +51,7 @@ $(with_license_zip): $(HOST_OUT_EXECUTABLES)/generate-self-extracting-archive
 	$(HOST_OUT_EXECUTABLES)/generate-self-extracting-archive $@ \
 		$(PRIVATE_INPUT_ZIP) $(PRIVATE_NAME) $(PRIVATE_VENDOR_BLOBS_LICENSE)
 with-license : $(with_license_zip)
-$(call dist-for-goals, with-license, $(with_license_zip):$(dist_name))
+$(call dist-for-goals, with-license, $(with_license_zip))
 
 $(call declare-1p-container,$(with_license_zip),)
 $(call declare-container-license-deps,$(with_license_zip),$(license_image_input_zip),$(with_license_zip):)

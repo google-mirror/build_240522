@@ -174,7 +174,7 @@ ifeq (,$(strip $(BUILD_FINGERPRINT)))
   ifeq ($(strip $(HAS_BUILD_NUMBER)),false)
     BF_BUILD_NUMBER := $(BUILD_USERNAME)$$($(DATE_FROM_FILE) +%m%d%H%M)
   else
-    BF_BUILD_NUMBER := $$(cat $(SOONG_OUT_DIR)/build_hostname.txt)
+    BF_BUILD_NUMBER := $(file <$(BUILD_NUMBER_FILE))
   endif
   BUILD_FINGERPRINT := $(PRODUCT_BRAND)/$(TARGET_PRODUCT)/$(TARGET_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BF_BUILD_NUMBER):$(TARGET_BUILD_VARIANT)/$(BUILD_VERSION_TAGS)
 endif
@@ -196,9 +196,6 @@ ifeq (,$(strip $(BUILD_THUMBPRINT)))
 endif
 
 BUILD_THUMBPRINT_FILE := $(PRODUCT_OUT)/build_thumbprint.txt
-ifeq ($(strip $(HAS_BUILD_NUMBER)),true)
-$(BUILD_THUMBPRINT_FILE): $(BUILD_NUMBER_FILE)
-endif
 ifneq (,$(shell mkdir -p $(PRODUCT_OUT) && echo $(BUILD_THUMBPRINT) >$(BUILD_THUMBPRINT_FILE) && grep " " $(BUILD_THUMBPRINT_FILE)))
   $(error BUILD_THUMBPRINT cannot contain spaces: "$(file <$(BUILD_THUMBPRINT_FILE))")
 endif
@@ -263,11 +260,7 @@ $(strip $(subst _,-, $(firstword $(1))))
 endef
 
 gen_from_buildinfo_sh := $(call intermediates-dir-for,PACKAGING,system_build_prop)/buildinfo.prop
-
-ifeq ($(strip $(HAS_BUILD_NUMBER)),true)
-$(gen_from_buildinfo_sh): $(BUILD_NUMBER_FILE)
-endif
-$(gen_from_buildinfo_sh): $(INTERNAL_BUILD_ID_MAKEFILE) $(API_FINGERPRINT) $(BUILD_HOSTNAME_FILE) | $(BUILD_DATETIME_FILE)
+$(gen_from_buildinfo_sh): $(INTERNAL_BUILD_ID_MAKEFILE) $(API_FINGERPRINT) | $(BUILD_DATETIME_FILE) $(BUILD_NUMBER_FILE)
 	$(hide) TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
 	        TARGET_BUILD_FLAVOR="$(TARGET_BUILD_FLAVOR)" \
 	        TARGET_DEVICE="$(TARGET_DEVICE)" \
@@ -278,7 +271,7 @@ $(gen_from_buildinfo_sh): $(INTERNAL_BUILD_ID_MAKEFILE) $(API_FINGERPRINT) $(BUI
 	        BUILD_DISPLAY_ID="$(BUILD_DISPLAY_ID)" \
 	        DATE="$(DATE_FROM_FILE)" \
 	        BUILD_USERNAME="$(BUILD_USERNAME)" \
-	        BUILD_HOSTNAME="$(BUILD_HOSTNAME_FROM_FILE)" \
+	        BUILD_HOSTNAME="$(BUILD_HOSTNAME)" \
 	        BUILD_NUMBER="$(BUILD_NUMBER_FROM_FILE)" \
 	        BOARD_USE_VBMETA_DIGTEST_IN_FINGERPRINT="$(BOARD_USE_VBMETA_DIGTEST_IN_FINGERPRINT)" \
 	        PLATFORM_VERSION="$(PLATFORM_VERSION)" \
