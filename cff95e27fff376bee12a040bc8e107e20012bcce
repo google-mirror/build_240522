@@ -116,6 +116,24 @@
       "parentUuid": "603da06c_fc3f1732",
       "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27a2a58a_742ef0f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-06-08T19:09:13Z",
+      "side": 1,
+      "message": "aosp/2620452 should fix the failure",
+      "parentUuid": "659fb6b4_8a545025",
+      "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
