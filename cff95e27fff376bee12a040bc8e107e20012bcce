@@ -63,6 +63,23 @@
       "message": "out of curiosity, it looks like some partition has fs_config related rule, but not map_file related rule, is it intentional?",
       "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f4be55d_abbe3d3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-06-08T07:20:40Z",
+      "side": 1,
+      "message": "map_file_generator failed to parse ext2fs in the presubmit targets.",
+      "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
