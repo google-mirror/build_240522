@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "734f51d6_5c11dc9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-09T08:27:36Z",
+      "side": 1,
+      "message": "Updated this CL to only expect default flag values. When the build supports aconfig to say \"use these values\" we\u0027ll update the tests, but at least PS2 will make sure we have tests that verify that the auto-generated Java code compiles.",
+      "parentUuid": "a797c81a_2d798b78",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 58
+      },
+      "revId": "eb0fbe82507131070f9a31ca98fded0f8f7436af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "eedd3091_e87d3991",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f94123ec_8456878f",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-09T08:27:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a89d1c7_c30eeafd",
+      "range": {
+        "startLine": 58,
+        "startChar": 31,
+        "endLine": 58,
+        "endChar": 48
+      },
+      "revId": "eb0fbe82507131070f9a31ca98fded0f8f7436af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d38d114b_c6d1f94d",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-05-30T10:24:03Z",
       "side": 1,
       "message": "Now that this file is part of the Android build, we should change the name to something less generic. `aconfig.test`?",
+      "range": {
+        "startLine": 1,
+        "startChar": 12,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "eb0fbe82507131070f9a31ca98fded0f8f7436af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d16aa68f_78cec084",
+        "filename": "tools/aconfig/tests/test.aconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-09T08:27:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d38d114b_c6d1f94d",
       "range": {
         "startLine": 1,
         "startChar": 12,
