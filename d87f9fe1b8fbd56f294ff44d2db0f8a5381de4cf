@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3023e8a_d3ee8b63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-09T08:44:40Z",
+      "side": 1,
+      "message": "This has been implemented in aosp/2607366. Please abandon this CL.",
+      "revId": "d87f9fe1b8fbd56f294ff44d2db0f8a5381de4cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
