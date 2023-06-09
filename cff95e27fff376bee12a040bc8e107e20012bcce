@@ -134,6 +134,41 @@
       "parentUuid": "659fb6b4_8a545025",
       "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a893611_bf3429ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-06-09T05:49:19Z",
+      "side": 1,
+      "message": "The CL is ready now.\nJingwen and Joe, could you give the final approval review?",
+      "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "483fa24b_7cdea3a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-06-09T05:49:19Z",
+      "side": 1,
+      "message": "Thanks! Now the build is successful.",
+      "parentUuid": "27a2a58a_742ef0f8",
+      "revId": "cff95e27fff376bee12a040bc8e107e20012bcce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
