@@ -99,6 +99,24 @@
       "parentUuid": "a7ed3650_0322fd77",
       "revId": "d54eee2727aac6c24a045317bc845cfcec1b308d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "432dd331_59199905",
+        "filename": "target/product/aosp_arm64_fullmte.mk",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2023-06-09T18:23:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "906ca547_df012cd4",
+      "revId": "d54eee2727aac6c24a045317bc845cfcec1b308d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
