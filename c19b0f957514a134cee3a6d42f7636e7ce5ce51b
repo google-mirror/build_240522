@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cd65615_17d43083",
+        "filename": "core/release_config.bzl",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-09T03:04:22Z",
+      "side": 1,
+      "message": "extract into an `enforce_struct_fields(s: struct, fields: list[string])` function and reuse below?",
+      "range": {
+        "startLine": 38,
+        "startChar": 7,
+        "endLine": 39,
+        "endChar": 85
+      },
+      "revId": "c19b0f957514a134cee3a6d42f7636e7ce5ce51b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c97cf8f_bfd567f3",
+        "filename": "core/release_config.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-09T03:04:22Z",
+      "side": 1,
+      "message": "lberki mentioned this before, but consider adding a TODO/bug to avoid templating starlark code like this in Make? It\u0027s not very easy to understand.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 74
+      },
+      "revId": "c19b0f957514a134cee3a6d42f7636e7ce5ce51b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
