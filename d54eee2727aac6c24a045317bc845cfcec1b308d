@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d46ecf4_138ea1d8",
+        "filename": "target/product/aosp_arm64_fullmte.mk",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2023-06-09T18:15:06Z",
+      "side": 1,
+      "message": "copypasta from aosp_arm64 :)",
+      "parentUuid": "2a2bc1a0_512131de",
+      "range": {
+        "startLine": 18,
+        "startChar": 31,
+        "endLine": 18,
+        "endChar": 41
+      },
+      "revId": "d54eee2727aac6c24a045317bc845cfcec1b308d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc1b8601_9d156788",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-06-09T17:01:40Z",
       "side": 1,
       "message": "What\u0027s the purpose of this conditional?  Do you expect other products to inherit from aosp_arm64_fullmte.mk?  If so, I\u0027d suggest splitting the common part you expect to inherit from from the specifics of this build.  Maybe that\u0027s already what fullmte.mk is?",
+      "revId": "d54eee2727aac6c24a045317bc845cfcec1b308d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7ed3650_0322fd77",
+        "filename": "target/product/aosp_arm64_fullmte.mk",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2023-06-09T18:15:06Z",
+      "side": 1,
+      "message": "I don\u0027t have strong opinions. This is to be consistent with `aosp_arm64`, I can remove it.",
+      "parentUuid": "cc1b8601_9d156788",
       "revId": "d54eee2727aac6c24a045317bc845cfcec1b308d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
