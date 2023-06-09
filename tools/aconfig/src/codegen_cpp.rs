@@ -134,18 +134,12 @@ mod tests {
 
         namespace com::example {
 
-            class my_flag_one {
-                public:
-                    virtual const bool value() {
-                        return false;
-                    }
+            const bool my_flag_one() {
+                return false;
             }
 
-            class my_flag_two {
-                public:
-                    virtual const bool value() {
-                        return true;
-                    }
+            const bool my_flag_two() {
+                return true;
             }
 
         }
@@ -201,24 +195,18 @@ mod tests {
 
         namespace com::example {
 
-            class my_flag_one {
-                public:
-                    virtual const bool value() {
-                        return GetServerConfigurableFlag(
-                            "ns",
-                            "com.example.my_flag_one",
-                            "false") == "true";
-                    }
+            const bool my_flag_one() {
+                return GetServerConfigurableFlag(
+                    "ns",
+                    "com.example.my_flag_one",
+                    "false") == "true";
             }
 
-            class my_flag_two {
-                public:
-                    virtual const bool value() {
-                        return GetServerConfigurableFlag(
-                            "ns",
-                            "com.example.my_flag_two",
-                            "true") == "true";
-                    }
+            const bool my_flag_two() {
+                return GetServerConfigurableFlag(
+                    "ns",
+                    "com.example.my_flag_two",
+                    "true") == "true";
             }
 
         }
