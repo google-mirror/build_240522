@@ -29,6 +29,9 @@
 #
 # All components inherited here go to system image
 #
+
+PRODUCT_MAX_PAGE_SIZE_SUPPORTED := 65536
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_system.mk)
 
