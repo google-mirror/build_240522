@@ -49,6 +49,7 @@ struct Context {
 #[derive(Serialize)]
 struct ClassElement {
     pub method_name: String,
+    pub constant_suffix: String,
     pub readwrite: bool,
     pub default_value: String,
     pub device_config_namespace: String,
@@ -60,6 +61,7 @@ fn create_class_element(package: &str, item: &Item) -> ClassElement {
         .expect("values checked at cache creation time");
     ClassElement {
         method_name: item.name.replace('-', "_"),
+        constant_suffix: item.name.to_uppercase(),
         readwrite: item.permission == Permission::ReadWrite,
         default_value: if item.state == FlagState::Enabled {
             "true".to_string()
@@ -117,6 +119,10 @@ mod tests {
         import android.provider.DeviceConfig;
 
         public final class Flags {
+            public static final String NAMESPACE_TEST = "ns";
+            public static final String FLAG_TEST = "com.example.test";
+            public static final String NAMESPACE_TEST2 = "ns";
+            public static final String FLAG_TEST2 = "com.example.test2";
 
             public static boolean test() {
                 return false;
@@ -124,8 +130,8 @@ mod tests {
 
             public static boolean test2() {
                 return DeviceConfig.getBoolean(
-                    "ns",
-                    "com.example.test2",
+                    NAMESPACE_TEST2,
+                    FLAG_TEST2,
                     false
                 );
             }
