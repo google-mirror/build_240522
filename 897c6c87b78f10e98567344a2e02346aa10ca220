@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5a03f8a_336027ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-12T07:52:11Z",
+      "side": 1,
+      "message": "Change to\n\n`atest aconfig.test`\n\n(ideally it should be possible to copy\u0026paste the command; imagine someone unfamiliar with aconfig investigating if this CL is causing an issue or not: that person wouldn\u0027t know what parameters to give atest)",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 11
+      },
+      "revId": "897c6c87b78f10e98567344a2e02346aa10ca220",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
