@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6714e8af_8e4411d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-06-12T00:58:46Z",
+      "side": 1,
+      "message": "This may change the GSI image configuration. Let me ask a question (updated the bug) to clarify the reason to change the configuration for Android T.",
+      "revId": "5e63f4ad0a9cea403a9cd71333dc7efd960c75b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
