@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a1df531_4538c700",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-12T16:08:36Z",
+      "side": 1,
+      "message": "Thanks for the CL, more descriptive comments across this codebase and examples will be great.",
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5147fa60_ae3c2f55",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2193,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-12T16:08:36Z",
+      "side": 1,
+      "message": "why is sort needed? the PATH and SOONG_MODULE_TYPE are just strings right?",
+      "range": {
+        "startLine": 2193,
+        "startChar": 71,
+        "endLine": 2193,
+        "endChar": 75
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bfb9e98_3dd9395c",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2194,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-12T16:08:36Z",
+      "side": 1,
+      "message": "examples as comments will help.",
+      "range": {
+        "startLine": 2193,
+        "startChar": 3,
+        "endLine": 2194,
+        "endChar": 201
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7c6bc88_7a60562d",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-12T16:08:36Z",
+      "side": 1,
+      "message": "examples as comments will help.",
+      "range": {
+        "startLine": 2200,
+        "startChar": 1,
+        "endLine": 2200,
+        "endChar": 43
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4293ca93_5ce5eaee",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2208,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-12T16:08:36Z",
+      "side": 1,
+      "message": "you removed $(comma) usage above, why not do it here too to be consistent?",
+      "range": {
+        "startLine": 2208,
+        "startChar": 75,
+        "endLine": 2208,
+        "endChar": 115
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "125ee33b_a49c6dcc",
+        "filename": "core/sbom.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-12T16:08:36Z",
+      "side": 1,
+      "message": "examples as comments will help.",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 203
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c2a6dd4_de72fadf",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-12T16:08:36Z",
+      "side": 1,
+      "message": "please add a comment on why static libs are skipped.\n\ne.g. \"entries in the metadata file corresponding to variants of static lib dependencies on installed files may themselves not be available, and therefore are expected to not be found\".\n\nor something like that.",
+      "range": {
+        "startLine": 486,
+        "startChar": 13,
+        "endLine": 486,
+        "endChar": 26
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79cbb25e_e9fb3ffd",
+        "filename": "tools/sbom/sbom_writers.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-12T16:08:36Z",
+      "side": 1,
+      "message": "Why is this relying on the implicit ordering of the packages list to express inter-element relationships? Wouldn\u0027t that be errorprone as the list gets large?\n\nPlease add some comments and refactor if possible.",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 146,
+        "endChar": 14
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25c7f161_616e5d5f",
+        "filename": "tools/sbom/sbom_writers.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-12T16:08:36Z",
+      "side": 1,
+      "message": "can you add a comment on why fragment skips this relationship?",
+      "range": {
+        "startLine": 171,
+        "startChar": 47,
+        "endLine": 171,
+        "endChar": 55
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
