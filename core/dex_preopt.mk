@@ -95,7 +95,7 @@ booclasspath_locations_arg := $(subst $(space),:,$(DEXPREOPT_BOOTCLASSPATH_DEX_L
 boot_images := $(subst :,$(space),$(DEXPREOPT_IMAGE_LOCATIONS_ON_DEVICE$(DEXPREOPT_INFIX)))
 boot_image_arg := $(subst $(space),:,$(patsubst /%,%,$(boot_images)))
 
-boot_zip_metadata_txt := $(boot_zip).METADATA.txt
+boot_zip_metadata_txt := $(dir $(boot_zip))boot_zip/METADATA.txt
 $(boot_zip_metadata_txt):
 	rm -f $@
 	echo "booclasspath = $(booclasspath_arg)" >> $@
