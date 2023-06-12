@@ -1,4 +1,3 @@
-#
 # Copyright (C) 2023 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +13,7 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/module_common.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
-
-PRODUCT_NAME := module_riscv64
-PRODUCT_DEVICE := module_riscv64
+TARGET_ARCH := riscv64
+TARGET_ARCH_VARIANT :=
+TARGET_CPU_VARIANT := generic
+TARGET_CPU_ABI := riscv64
