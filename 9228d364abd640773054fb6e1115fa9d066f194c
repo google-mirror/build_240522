@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33855948_3caf2e65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-13T14:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51350637_d21f362c",
+      "range": {
+        "startLine": 11,
+        "startChar": 24,
+        "endLine": 11,
+        "endChar": 30
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a3a7b00_2112fa13",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69977846_a73838cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-13T14:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a3a7b00_2112fa13",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 41
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad51aeb0_f9e26dfa",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-06-13T11:20:23Z",
       "side": 1,
       "message": "Add unit tests in `mod tests` below please. If nothing else\n\n```\nfn test_format_java_method_name() {\n    assert_eq!(\"fooBar\", \"foo_bar\");\n}\n```\n\nwill make it obvious to someone new to the code what the method does.\n\n\n(Rust has doc tests (doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html) where you essentially give an assert_eq! example in the docs, and cargo can then run those tests! Not sure if the Android build system supports this. Will check when I get around to adding docs to aconfig.)",
+      "range": {
+        "startLine": 93,
+        "startChar": 18,
+        "endLine": 93,
+        "endChar": 19
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b669bbc6_af13beea",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-13T14:51:40Z",
+      "side": 1,
+      "message": "removed the name transformation",
+      "parentUuid": "ad51aeb0_f9e26dfa",
       "range": {
         "startLine": 93,
         "startChar": 18,
@@ -117,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f9e7cae_b59b17a6",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-13T14:51:40Z",
+      "side": 1,
+      "message": "removed the name transformation. but I think we still can check in your change aosp/2624469 to reject consecutive underscores.",
+      "parentUuid": "3294fee8_ea9a7bf8",
+      "range": {
+        "startLine": 101,
+        "startChar": 15,
+        "endLine": 101,
+        "endChar": 81
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "942ec5d2_e34bfc7f",
@@ -153,6 +249,54 @@
       "writtenOn": "2023-06-13T11:20:23Z",
       "side": 1,
       "message": "The agreed upon format is \"package.flag\" (there was some confusion about using that or \"package/flag\" but DeviceConfig has ACKed \"package.flag\").",
+      "range": {
+        "startLine": 5,
+        "startChar": 73,
+        "endLine": 5,
+        "endChar": 105
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b1f4f6b_a4448acf",
+        "filename": "tools/aconfig/templates/Flags.java.template",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-13T14:51:40Z",
+      "side": 1,
+      "message": "removed the constants. the constants will be added in change aosp/2611170",
+      "parentUuid": "942ec5d2_e34bfc7f",
+      "range": {
+        "startLine": 5,
+        "startChar": 4,
+        "endLine": 5,
+        "endChar": 68
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b39a70d2_3c5d91aa",
+        "filename": "tools/aconfig/templates/Flags.java.template",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-13T14:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aca0421d_7191d52f",
       "range": {
         "startLine": 5,
         "startChar": 73,
