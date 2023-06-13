@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1cbb73b_145563c7",
+        "filename": "target/product/memtag-common.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-06-13T17:38:12Z",
+      "side": 1,
+      "message": "MEMTAG_HEAP_MINIMAL?\n\nUsing a product variable for this won\u0027t work, so I assume you\u0027re just setting a plain Make variable.  Mixing plain Make variables and product variables like this is confusing, and may not be supported by the starlark product configuration.\n\nWhen do you expect MEMTAG_HEAP_MINIMAL to be set?",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 24
+      },
+      "revId": "48c3e4c503b3280b98361cc434bc9c7fb779cd79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
