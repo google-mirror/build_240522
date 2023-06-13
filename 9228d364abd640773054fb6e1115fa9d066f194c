@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51350637_d21f362c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-13T11:20:23Z",
+      "side": 1,
+      "message": "typo: support",
+      "range": {
+        "startLine": 11,
+        "startChar": 24,
+        "endLine": 11,
+        "endChar": 30
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a3a7b00_2112fa13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-13T11:20:23Z",
+      "side": 1,
+      "message": "Please change to `atest aconfig.test aconfig.test.java`.\n\nRationale:\n\n- cargo is not officially supported so should not be mentioned in commit messages\n- \u0027aconfig.test\u0027: you changed the unit tests so should be included (it\u0027s just good hygiene to always include this)\n- \u0027aconfig.test.java\u0027: change in java templates -\u003e run the java integration tests; this will also build aconfig because aconfig.java.test depends on the generated lib, which depends on aconfig",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 41
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad51aeb0_f9e26dfa",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-13T11:20:23Z",
+      "side": 1,
+      "message": "Add unit tests in `mod tests` below please. If nothing else\n\n```\nfn test_format_java_method_name() {\n    assert_eq!(\"fooBar\", \"foo_bar\");\n}\n```\n\nwill make it obvious to someone new to the code what the method does.\n\n\n(Rust has doc tests (doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html) where you essentially give an assert_eq! example in the docs, and cargo can then run those tests! Not sure if the Android build system supports this. Will check when I get around to adding docs to aconfig.)",
+      "range": {
+        "startLine": 93,
+        "startChar": 18,
+        "endLine": 93,
+        "endChar": 19
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ad76297_9271c7c9",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-13T11:20:23Z",
+      "side": 1,
+      "message": "format_java_method_name will panic if passed in something with multiple consecutive underscores, like \"foo__bar\":\n\n```\nthread \u0027codegen_java::tests::test_debug\u0027 panicked at \u0027byte index 1 is out of bounds of ``\u0027, src/codegen_java.rs:101:17\n```\n\nConsecutive underscores are (currently) allowed as identifiers. After fixing the crash above, \"foo_bar\" and \"foo__bar\" would expand to the same \"fooBar\" symbol which is ambiguous. How should we handle this?\n\nI propose that we lock down the allowed identifier pattern even more: consecutive underscores are not allowed. If you have a better suggestion, please let me know.",
+      "range": {
+        "startLine": 101,
+        "startChar": 15,
+        "endLine": 101,
+        "endChar": 81
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942ec5d2_e34bfc7f",
+        "filename": "tools/aconfig/templates/Flags.java.template",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-13T11:20:23Z",
+      "side": 1,
+      "message": "Adding Java constants for the flag names (and flag namespaces) is handled in aosp/2611170 but I would be more than happy to abandon that CL if you incorporate the work in this CL. Please?\n\nNote that aosp/2611170 limits the number the actual strings are encoded, not because of performance (I\u0027m sure string literals are re-used anyway) but to make the generated code easier to reason about if you need to manually debug it. Would prefer if the same pattern was used here.",
+      "range": {
+        "startLine": 5,
+        "startChar": 4,
+        "endLine": 5,
+        "endChar": 68
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca0421d_7191d52f",
+        "filename": "tools/aconfig/templates/Flags.java.template",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-13T11:20:23Z",
+      "side": 1,
+      "message": "The agreed upon format is \"package.flag\" (there was some confusion about using that or \"package/flag\" but DeviceConfig has ACKed \"package.flag\").",
+      "range": {
+        "startLine": 5,
+        "startChar": 73,
+        "endLine": 5,
+        "endChar": 105
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
