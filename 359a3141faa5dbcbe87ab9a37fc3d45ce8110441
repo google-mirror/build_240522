@@ -39,6 +39,30 @@
       },
       "revId": "359a3141faa5dbcbe87ab9a37fc3d45ce8110441",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f156909_c944e50c",
+        "filename": "tools/aconfig/templates/java.template",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1799018
+      },
+      "writtenOn": "2023-06-13T15:09:58Z",
+      "side": 1,
+      "message": "Yes, with current template, the FLAG_{item.constant_suffix} contains all the information for the test rule to identify the Flags class and the method to get the flag value.",
+      "parentUuid": "bdf1a58c_f2dba068",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "359a3141faa5dbcbe87ab9a37fc3d45ce8110441",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
