@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04153c8d_37f2ce08",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 2011063
+      },
+      "writtenOn": "2023-06-13T12:16:33Z",
+      "side": 1,
+      "message": "why not add\n\"  path \u003d os.path.join(target_files_dir, \"IMAGES\", partition + \".map\")\n  if os.path.exists(path):\n    return path\"",
+      "range": {
+        "startLine": 754,
+        "startChar": 2,
+        "endLine": 755,
+        "endChar": 15
+      },
+      "revId": "fcd731e3d69baa70f3ee84fd86970d4c3a2ac32e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
