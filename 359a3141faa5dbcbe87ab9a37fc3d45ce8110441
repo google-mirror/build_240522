@@ -16,6 +16,29 @@
       "message": "This CL will conflict with aosp/2619534; happy to wait for aosp/2619534 to go in first.",
       "revId": "359a3141faa5dbcbe87ab9a37fc3d45ce8110441",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdf1a58c_f2dba068",
+        "filename": "tools/aconfig/templates/java.template",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-13T15:01:09Z",
+      "side": 1,
+      "message": "I think Wenshan doesn\u0027t need the namespace now since namespace is not the package name of the library.",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "359a3141faa5dbcbe87ab9a37fc3d45ce8110441",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
