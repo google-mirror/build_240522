@@ -22,6 +22,30 @@
       },
       "revId": "48c3e4c503b3280b98361cc434bc9c7fb779cd79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89bf023b_f6c4c8b7",
+        "filename": "target/product/memtag-common.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2023-06-13T20:14:25Z",
+      "side": 1,
+      "message": "Per offline discussion, I went with a separate product variable to skip the default list at the point of use.",
+      "parentUuid": "e1cbb73b_145563c7",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 24
+      },
+      "revId": "48c3e4c503b3280b98361cc434bc9c7fb779cd79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
