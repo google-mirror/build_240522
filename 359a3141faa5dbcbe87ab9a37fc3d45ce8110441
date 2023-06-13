@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7dad66d_a1096aa5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-13T06:29:18Z",
+      "side": 1,
+      "message": "This CL will conflict with aosp/2619534; happy to wait for aosp/2619534 to go in first.",
+      "revId": "359a3141faa5dbcbe87ab9a37fc3d45ce8110441",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
