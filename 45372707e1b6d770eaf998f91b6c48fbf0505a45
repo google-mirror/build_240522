@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3bc54ba_aeba0717",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5893,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-06-13T18:12:36Z",
+      "side": 1,
+      "message": "To prevent new tools from being used without considering dependencies we usually prefer to pass paths to individual tools.  Can this be `UNSQUASHFS\u003d$(HOST_OUT_EXECUTABLES)/unsquashfs`, and then `map_file_generator` can check if the `UNSQUASHFS` environment variable is set and use that, or fall back to `$PATH` if it is not?",
+      "revId": "45372707e1b6d770eaf998f91b6c48fbf0505a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
