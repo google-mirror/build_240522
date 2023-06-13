@@ -95,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3294fee8_ea9a7bf8",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-13T11:35:40Z",
+      "side": 1,
+      "message": "Uploaded aosp/2624469 to reject consecutive underscores in identifiers. If this is what we want, aosp/2624469 should be merged before this CL.",
+      "parentUuid": "0ad76297_9271c7c9",
+      "range": {
+        "startLine": 101,
+        "startChar": 15,
+        "endLine": 101,
+        "endChar": 81
+      },
+      "revId": "9228d364abd640773054fb6e1115fa9d066f194c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "942ec5d2_e34bfc7f",
         "filename": "tools/aconfig/templates/Flags.java.template",
         "patchSetId": 2
