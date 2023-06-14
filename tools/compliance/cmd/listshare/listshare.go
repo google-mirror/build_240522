@@ -62,11 +62,10 @@ func main() {
 		fmt.Fprintf(os.Stderr, `Usage: %s {-o outfile} file.meta_lic {file.meta_lic...}
 
 Outputs a csv file with 1 project per line in the first field followed
-by target:condition pairs describing why the project must be shared.
+by conditions describing why the project must be shared.
 
-Each target is the path to a generated license metadata file for a
-Soong module or Make target, and the license condition is either
-restricted (e.g. GPL) or reciprocal (e.g. MPL).
+Each license condition is either restricted (e.g. GPL),
+restricted_if_statically_linked (e.g. LGPL), or reciprocal (e.g. MPL).
 `, filepath.Base(os.Args[0]))
 	}
 
