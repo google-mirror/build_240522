@@ -273,7 +273,8 @@ mod tests {
         let parsed_flags = crate::test::parse_test_flags(); // calls create_cache
         crate::protos::parsed_flags::verify_fields(&parsed_flags).unwrap();
 
-        let enabled_ro = parsed_flags.parsed_flag.iter().find(|pf| pf.name() == "enabled_ro").unwrap();
+        let enabled_ro =
+            parsed_flags.parsed_flag.iter().find(|pf| pf.name() == "enabled_ro").unwrap();
         assert!(crate::protos::parsed_flag::verify_fields(enabled_ro).is_ok());
         assert_eq!("com.android.aconfig.test", enabled_ro.package());
         assert_eq!("enabled_ro", enabled_ro.name());
@@ -303,82 +304,28 @@ mod tests {
         }
     }
 
-    /*
     #[test]
     fn test_create_device_config_defaults() {
-        let caches = vec![crate::test::create_cache()];
-        let bytes = create_device_config_defaults(caches).unwrap();
+        let parsed_flags = crate::test::parse_test_flags();
+        let bytes = create_device_config_defaults(parsed_flags).unwrap();
         let text = std::str::from_utf8(&bytes).unwrap();
         assert_eq!("aconfig_test:com.android.aconfig.test.disabled_rw=disabled\naconfig_test:com.android.aconfig.test.enabled_rw=enabled\n", text);
     }
 
     #[test]
     fn test_create_device_config_sysprops() {
-        let caches = vec![crate::test::create_cache()];
-        let bytes = create_device_config_sysprops(caches).unwrap();
+        let parsed_flags = crate::test::parse_test_flags();
+        let bytes = create_device_config_sysprops(parsed_flags).unwrap();
         let text = std::str::from_utf8(&bytes).unwrap();
         assert_eq!("persist.device_config.com.android.aconfig.test.disabled_rw=false\npersist.device_config.com.android.aconfig.test.enabled_rw=true\n", text);
     }
 
     #[test]
     fn test_dump_text_format() {
-        let caches = vec![create_test_cache_com_example()];
-        let bytes = dump_cache(caches, DumpFormat::Text).unwrap();
+        let parsed_flags = crate::test::parse_test_flags();
+        let bytes = dump_cache(parsed_flags, DumpFormat::Text).unwrap();
         let text = std::str::from_utf8(&bytes).unwrap();
-        assert!(text.contains("a: Disabled"));
+        dbg!(&text);
+        assert!(text.contains("com.android.aconfig.test/disabled_ro: DISABLED READ_ONLY"));
     }
-
-    #[test]
-    fn test_dump_protobuf_format() {
-        use crate::protos::{ProtoFlagPermission, ProtoFlagState, ProtoTracepoint};
-        use protobuf::Message;
-
-        let caches = vec![create_test_cache_com_example()];
-        let bytes = dump_cache(caches, DumpFormat::Protobuf).unwrap();
-        let actual = ProtoParsedFlags::parse_from_bytes(&bytes).unwrap();
-
-        assert_eq!(
-            vec!["a".to_string(), "b".to_string()],
-            actual.parsed_flag.iter().map(|item| item.name.clone().unwrap()).collect::<Vec<_>>()
-        );
-
-        let item =
-            actual.parsed_flag.iter().find(|item| item.name == Some("b".to_string())).unwrap();
-        assert_eq!(item.package(), "com.example");
-        assert_eq!(item.name(), "b");
-        assert_eq!(item.description(), "Description of b");
-        assert_eq!(item.state(), ProtoFlagState::DISABLED);
-        assert_eq!(item.permission(), ProtoFlagPermission::READ_WRITE);
-        let mut tp = ProtoTracepoint::new();
-        tp.set_source("<memory>".to_string());
-        tp.set_state(ProtoFlagState::DISABLED);
-        tp.set_permission(ProtoFlagPermission::READ_WRITE);
-        assert_eq!(item.trace, vec![tp]);
-    }
-    */
-
-    /*
-    #[test]
-    fn test_dump_multiple_caches() {
-        let caches = vec![create_test_cache_com_example(), create_test_cache_com_other()];
-        let bytes = dump_cache(caches, DumpFormat::Protobuf).unwrap();
-        let dump = ProtoParsedFlags::parse_from_bytes(&bytes).unwrap();
-        assert_eq!(
-            dump.parsed_flag
-                .iter()
-                .map(|parsed_flag| format!("{}/{}", parsed_flag.package(), parsed_flag.name()))
-                .collect::<Vec<_>>(),
-            vec![
-                "com.example/a".to_string(),
-                "com.example/b".to_string(),
-                "com.other/c".to_string()
-            ]
-        );
-
-        let caches = vec![create_test_cache_com_other(), create_test_cache_com_example()];
-        let bytes = dump_cache(caches, DumpFormat::Protobuf).unwrap();
-        let dump_reversed_input = ProtoParsedFlags::parse_from_bytes(&bytes).unwrap();
-        assert_eq!(dump, dump_reversed_input);
-    }
-    */
 }
