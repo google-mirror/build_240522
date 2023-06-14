@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc7ce32b_6486d4ea",
+        "filename": "target/product/sysconfig/preinstalled-packages-platform-generic-system.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1840886
+      },
+      "writtenOn": "2023-06-14T11:22:38Z",
+      "side": 1,
+      "message": "is this SYSTEM required?\nwhat will happen if you give like \n\u003cdo-not-install-in user-type\u003d\"SYSTEM\" /\u003e",
+      "range": {
+        "startLine": 23,
+        "startChar": 40,
+        "endLine": 23,
+        "endChar": 41
+      },
+      "revId": "5c7ec1088e8f7582ef64e004451900cafb3588a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
