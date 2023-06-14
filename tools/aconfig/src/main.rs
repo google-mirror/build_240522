@@ -24,8 +24,6 @@ use std::io;
 use std::io::Write;
 use std::path::{Path, PathBuf};
 
-mod aconfig;
-mod cache;
 mod codegen;
 mod codegen_cpp;
 mod codegen_java;
@@ -36,8 +34,8 @@ mod protos;
 #[cfg(test)]
 mod test;
 
-use crate::cache::Cache;
-use commands::{DumpFormat, Input, OutputFile, Source};
+use commands::{DumpFormat, Input, OutputFile};
+use protos::ProtoParsedFlags;
 
 fn cli() -> Command {
     Command::new("aconfig")
@@ -100,9 +98,24 @@ fn open_zero_or_more_files(matches: &ArgMatches, arg_name: &str) -> Result<Vec<I
     let mut opened_files = vec![];
     for path in matches.get_many::<String>(arg_name).unwrap_or_default() {
         let file = Box::new(fs::File::open(path)?);
-        opened_files.push(Input { source: Source::File(path.to_string()), reader: file });
+        opened_files.push(Input { source: path.to_string(), reader: file });
     }
     Ok(opened_files)
+}
+
+// FIXME: convert [u8] to ProtoParsedFlags in commands.rs, make all command functions take [u8] or
+// Vec<[u8]> as input
+fn read_parsed_flags_from_zero_or_more_files(
+    matches: &ArgMatches,
+    arg_name: &str,
+) -> Result<ProtoParsedFlags> {
+    let mut indvidual_parsed_flags = Vec::new();
+    for path in matches.get_many::<String>(arg_name).unwrap_or_default() {
+        let bytes = fs::read(path)?;
+        let message = crate::protos::parsed_flags::try_from_binary_proto(&bytes)?;
+        indvidual_parsed_flags.push(message);
+    }
+    crate::protos::parsed_flags::merge(indvidual_parsed_flags)
 }
 
 fn write_output_file_realtive_to_dir(root: &Path, output_file: &OutputFile) -> Result<()> {
@@ -137,68 +150,52 @@ fn main() -> Result<()> {
             let package = get_required_arg::<String>(sub_matches, "package")?;
             let declarations = open_zero_or_more_files(sub_matches, "declarations")?;
             let values = open_zero_or_more_files(sub_matches, "values")?;
-            let cache = commands::create_cache(package, declarations, values)?;
+            let output = commands::create_cache(package, declarations, values)?;
             let path = get_required_arg::<String>(sub_matches, "cache")?;
-            let file = fs::File::create(path)?;
-            cache.write_to_writer(file)?;
+            write_output_to_file_or_stdout(path, &output)?;
         }
         Some(("create-java-lib", sub_matches)) => {
             let path = get_required_arg::<String>(sub_matches, "cache")?;
-            let file = fs::File::open(path)?;
-            let cache = Cache::read_from_reader(file)?;
+            let bytes = fs::read(path)?;
+            let parsed_flags = crate::protos::parsed_flags::try_from_binary_proto(&bytes)?;
             let dir = PathBuf::from(get_required_arg::<String>(sub_matches, "out")?);
-            let generated_files = commands::create_java_lib(cache)?;
+            let generated_files = commands::create_java_lib(parsed_flags)?;
             generated_files
                 .iter()
                 .try_for_each(|file| write_output_file_realtive_to_dir(&dir, file))?;
         }
         Some(("create-cpp-lib", sub_matches)) => {
             let path = get_required_arg::<String>(sub_matches, "cache")?;
-            let file = fs::File::open(path)?;
-            let cache = Cache::read_from_reader(file)?;
+            let bytes = fs::read(path)?;
+            let parsed_flags = crate::protos::parsed_flags::try_from_binary_proto(&bytes)?;
             let dir = PathBuf::from(get_required_arg::<String>(sub_matches, "out")?);
-            let generated_file = commands::create_cpp_lib(cache)?;
+            let generated_file = commands::create_cpp_lib(parsed_flags)?;
             write_output_file_realtive_to_dir(&dir, &generated_file)?;
         }
         Some(("create-rust-lib", sub_matches)) => {
             let path = get_required_arg::<String>(sub_matches, "cache")?;
-            let file = fs::File::open(path)?;
-            let cache = Cache::read_from_reader(file)?;
+            let bytes = fs::read(path)?;
+            let parsed_flags = crate::protos::parsed_flags::try_from_binary_proto(&bytes)?;
             let dir = PathBuf::from(get_required_arg::<String>(sub_matches, "out")?);
-            let generated_file = commands::create_rust_lib(cache)?;
+            let generated_file = commands::create_rust_lib(parsed_flags)?;
             write_output_file_realtive_to_dir(&dir, &generated_file)?;
         }
         Some(("create-device-config-defaults", sub_matches)) => {
-            let mut caches = Vec::new();
-            for path in sub_matches.get_many::<String>("cache").unwrap_or_default() {
-                let file = fs::File::open(path)?;
-                let cache = Cache::read_from_reader(file)?;
-                caches.push(cache);
-            }
-            let output = commands::create_device_config_defaults(caches)?;
+            let parsed_flags = read_parsed_flags_from_zero_or_more_files(sub_matches, "cache")?;
+            let output = commands::create_device_config_defaults(parsed_flags)?;
             let path = get_required_arg::<String>(sub_matches, "out")?;
             write_output_to_file_or_stdout(path, &output)?;
         }
         Some(("create-device-config-sysprops", sub_matches)) => {
-            let mut caches = Vec::new();
-            for path in sub_matches.get_many::<String>("cache").unwrap_or_default() {
-                let file = fs::File::open(path)?;
-                let cache = Cache::read_from_reader(file)?;
-                caches.push(cache);
-            }
-            let output = commands::create_device_config_sysprops(caches)?;
+            let parsed_flags = read_parsed_flags_from_zero_or_more_files(sub_matches, "cache")?;
+            let output = commands::create_device_config_sysprops(parsed_flags)?;
             let path = get_required_arg::<String>(sub_matches, "out")?;
             write_output_to_file_or_stdout(path, &output)?;
         }
         Some(("dump", sub_matches)) => {
-            let mut caches = Vec::new();
-            for path in sub_matches.get_many::<String>("cache").unwrap_or_default() {
-                let file = fs::File::open(path)?;
-                let cache = Cache::read_from_reader(file)?;
-                caches.push(cache);
-            }
+            let parsed_flags = read_parsed_flags_from_zero_or_more_files(sub_matches, "cache")?;
             let format = get_required_arg::<DumpFormat>(sub_matches, "format")?;
-            let output = commands::dump_cache(caches, *format)?;
+            let output = commands::dump_cache(parsed_flags, *format)?;
             let path = get_required_arg::<String>(sub_matches, "out")?;
             write_output_to_file_or_stdout(path, &output)?;
         }
