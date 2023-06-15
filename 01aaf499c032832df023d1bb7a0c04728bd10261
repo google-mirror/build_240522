@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3e3dd44_a8718cd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-15T10:05:36Z",
+      "side": 1,
+      "message": "This CL includes more than it should. Bad rebase on my part. Will fix.",
+      "revId": "01aaf499c032832df023d1bb7a0c04728bd10261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
