@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "099ed084_bab4864f",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5898,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-06-15T14:29:46Z",
+      "side": 0,
+      "message": "I removed this because the map_file_generator does not support squashfs now.",
+      "range": {
+        "startLine": 5898,
+        "startChar": 4,
+        "endLine": 5898,
+        "endChar": 49
+      },
+      "revId": "1cda03b44bb061c79d4c449a75f6d7d667d0b50e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
