@@ -5,3 +5,6 @@ per-file proguard*.flags = jdduke@google.com
 # For version updates
 per-file version_defaults.mk = aseaton@google.com,lubomir@google.com,pscovanner@google.com,bkhalife@google.com,jainne@google.com
 
+# For catbox
+per-file tasks/catbox.mk = smara@google.com,kaneesh@google.com,schinchalkar@google.com
+
