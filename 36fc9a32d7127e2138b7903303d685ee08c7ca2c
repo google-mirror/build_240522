@@ -22,6 +22,30 @@
       },
       "revId": "36fc9a32d7127e2138b7903303d685ee08c7ca2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5169c00c_7d14f188",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-15T13:19:58Z",
+      "side": 1,
+      "message": "When we deprecate flattened APEX for Android V, no one (even GSI) wouldn\u0027t have to refer to this sysprop. (This file updatable_apex.mk will be removed.)",
+      "parentUuid": "5752a6dc_5aef8085",
+      "range": {
+        "startLine": 18,
+        "startChar": 22,
+        "endLine": 20,
+        "endChar": 39
+      },
+      "revId": "36fc9a32d7127e2138b7903303d685ee08c7ca2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
