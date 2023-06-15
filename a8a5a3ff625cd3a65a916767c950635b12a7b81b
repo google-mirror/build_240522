@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e67728b_c6756f74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-06-15T23:50:41Z",
+      "side": 1,
+      "message": "Previous presubmit failed non-related problem. To unblock build breaks, merging the CL.",
+      "revId": "a8a5a3ff625cd3a65a916767c950635b12a7b81b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
