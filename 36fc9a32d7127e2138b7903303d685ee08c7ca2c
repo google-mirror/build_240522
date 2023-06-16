@@ -46,6 +46,30 @@
       },
       "revId": "36fc9a32d7127e2138b7903303d685ee08c7ca2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "804f9283_8da8cc12",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-06-16T01:56:17Z",
+      "side": 1,
+      "message": "Acknowledged. And we\u0027ll no longer need the property ro.apex.updatable, right?",
+      "parentUuid": "5169c00c_7d14f188",
+      "range": {
+        "startLine": 18,
+        "startChar": 22,
+        "endLine": 20,
+        "endChar": 39
+      },
+      "revId": "36fc9a32d7127e2138b7903303d685ee08c7ca2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
