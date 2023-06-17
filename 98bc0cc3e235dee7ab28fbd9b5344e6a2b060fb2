@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff7a22e7_4a644393",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2193,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-06-17T06:02:53Z",
+      "side": 1,
+      "message": "These variables might contain duplicated items which can cause problems in the following process, so better to remove them here.",
+      "parentUuid": "5147fa60_ae3c2f55",
+      "range": {
+        "startLine": 2193,
+        "startChar": 71,
+        "endLine": 2193,
+        "endChar": 75
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bfb9e98_3dd9395c",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-06-12T16:08:36Z",
       "side": 1,
       "message": "examples as comments will help.",
+      "range": {
+        "startLine": 2193,
+        "startChar": 3,
+        "endLine": 2194,
+        "endChar": 201
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e086fc6_0c0b7753",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2194,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-06-17T06:02:53Z",
+      "side": 1,
+      "message": "Added in the comments for sbom-metadata.csv",
+      "parentUuid": "0bfb9e98_3dd9395c",
       "range": {
         "startLine": 2193,
         "startChar": 3,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aac25d5_8c96e853",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-06-17T06:02:53Z",
+      "side": 1,
+      "message": "Added in the comments for sbom-metadata.csv",
+      "parentUuid": "f7c6bc88_7a60562d",
+      "range": {
+        "startLine": 2200,
+        "startChar": 1,
+        "endLine": 2200,
+        "endChar": 43
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4293ca93_5ce5eaee",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-06-12T16:08:36Z",
       "side": 1,
       "message": "you removed $(comma) usage above, why not do it here too to be consistent?",
+      "range": {
+        "startLine": 2208,
+        "startChar": 75,
+        "endLine": 2208,
+        "endChar": 115
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ba264da_ae9b6a46",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2208,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-06-17T06:02:53Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "4293ca93_5ce5eaee",
       "range": {
         "startLine": 2208,
         "startChar": 75,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b2b5551_818b767c",
+        "filename": "core/sbom.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-06-17T06:02:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "125ee33b_a49c6dcc",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 203
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c2a6dd4_de72fadf",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-06-12T16:08:36Z",
       "side": 1,
       "message": "please add a comment on why static libs are skipped.\n\ne.g. \"entries in the metadata file corresponding to variants of static lib dependencies on installed files may themselves not be available, and therefore are expected to not be found\".\n\nor something like that.",
+      "range": {
+        "startLine": 486,
+        "startChar": 13,
+        "endLine": 486,
+        "endChar": 26
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abae876c_e71a1e5d",
+        "filename": "tools/sbom/generate-sbom.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-06-17T06:02:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c2a6dd4_de72fadf",
       "range": {
         "startLine": 486,
         "startChar": 13,
@@ -179,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "550d3a41_9abe590a",
+        "filename": "tools/sbom/sbom_writers.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-06-17T06:02:53Z",
+      "side": 1,
+      "message": "This is for grouping the SOURCE, UPSTREAM and their relationship(VARIANT_OF) in SBOMs in tagvalue format, so it is easier for developers(me) to read and verify the data manually. It doesn\u0027t change anything in the data model and just moves some related entities closer to each other. This is in the initial implementation and covered in the unit test of tagvalue format writer. Some comments are added in case it is confusing.",
+      "parentUuid": "79cbb25e_e9fb3ffd",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 146,
+        "endChar": 14
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25c7f161_616e5d5f",
@@ -192,6 +360,30 @@
       "writtenOn": "2023-06-12T16:08:36Z",
       "side": 1,
       "message": "can you add a comment on why fragment skips this relationship?",
+      "range": {
+        "startLine": 171,
+        "startChar": 47,
+        "endLine": 171,
+        "endChar": 55
+      },
+      "revId": "98bc0cc3e235dee7ab28fbd9b5344e6a2b060fb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95d4d6d4_968f5049",
+        "filename": "tools/sbom/sbom_writers.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-06-17T06:02:53Z",
+      "side": 1,
+      "message": "Fragment is not a full SBOM document so the DESCRIBES relationship is not applicable.",
+      "parentUuid": "25c7f161_616e5d5f",
       "range": {
         "startLine": 171,
         "startChar": 47,
