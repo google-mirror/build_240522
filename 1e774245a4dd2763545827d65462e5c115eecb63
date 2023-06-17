@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf1224c4_929506be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2023-06-17T17:07:17Z",
+      "side": 1,
+      "message": "TH broken not due to this change (not used in any build), but because of https://googleplex-android-review.git.corp.google.com/c/platform/packages/modules/common/+/23737984 (revert not submitted)",
+      "revId": "1e774245a4dd2763545827d65462e5c115eecb63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
