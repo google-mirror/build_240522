@@ -129,6 +129,24 @@
       "parentUuid": "7487bb60_413b5a47",
       "revId": "36fc9a32d7127e2138b7903303d685ee08c7ca2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca612eb6_dfdbeed9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-19T08:30:38Z",
+      "side": 1,
+      "message": "Well, if this fails, the device doesn\u0027t boot. So, I was relying on the existing boot health tests.",
+      "parentUuid": "cdc4a53d_1483a1a2",
+      "revId": "36fc9a32d7127e2138b7903303d685ee08c7ca2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
