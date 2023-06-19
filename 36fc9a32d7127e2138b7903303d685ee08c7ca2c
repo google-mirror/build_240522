@@ -94,6 +94,23 @@
       },
       "revId": "36fc9a32d7127e2138b7903303d685ee08c7ca2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7487bb60_413b5a47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-19T08:01:04Z",
+      "side": 1,
+      "message": "Thanks for the detailed commit message!",
+      "revId": "36fc9a32d7127e2138b7903303d685ee08c7ca2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
