@@ -77,6 +77,7 @@ PRODUCT_APEX_BOOT_JARS := \
     com.android.tethering:framework-connectivity \
     com.android.tethering:framework-connectivity-t \
     com.android.tethering:framework-tethering \
+    com.android.threadnetwork:framework-threadnetwork \
     com.android.uwb:framework-uwb \
     com.android.virt:framework-virtualization \
     com.android.wifi:framework-wifi \
