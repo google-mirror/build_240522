@@ -16,6 +16,23 @@
       "message": "Hi Dash,\n\nWhen I first started all this stuff, the http://go/thirdpartylicenses page had a statement that we give notice for all licenses including permissive. That statement has since been deleted. No statement was added that we do not give notice for permissive so I left the code as it was.\n\nTodd created a buganizer saying we want to skip permissive license texts. We can very easily change the logic to skip permissive-only or unencumbered-only license text.\n\nIn a lot of cases, it will make little difference. If the LICENSE file has the text of every license, it will often have MIT and GPL+Classpath or some other permissive license, and we will still give notice for the entire file because it includes the notice MIT license.\n\nIf that is what you want, please approve this change.\n\nThanks!",
       "revId": "b71446819e8153f9ea6356643e5dd5aa12981df5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff185292_ca75fe88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981105
+      },
+      "writtenOn": "2023-06-19T22:50:52Z",
+      "side": 1,
+      "message": "alsaire711",
+      "revId": "b71446819e8153f9ea6356643e5dd5aa12981df5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
