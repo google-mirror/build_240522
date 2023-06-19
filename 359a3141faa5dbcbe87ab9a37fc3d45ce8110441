@@ -63,6 +63,30 @@
       },
       "revId": "359a3141faa5dbcbe87ab9a37fc3d45ce8110441",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da0fd43a_7aa83232",
+        "filename": "tools/aconfig/templates/java.template",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-19T14:18:22Z",
+      "side": 1,
+      "message": "Removed the NAMESPACE flag in PS5.",
+      "parentUuid": "0f156909_c944e50c",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "359a3141faa5dbcbe87ab9a37fc3d45ce8110441",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
