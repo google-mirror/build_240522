@@ -111,6 +111,24 @@
       "message": "Thanks for the detailed commit message!",
       "revId": "36fc9a32d7127e2138b7903303d685ee08c7ca2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdc4a53d_1483a1a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-06-19T08:02:16Z",
+      "side": 1,
+      "message": "For my own curiosity, is there any sort of test coverage for this type of configuration?",
+      "parentUuid": "7487bb60_413b5a47",
+      "revId": "36fc9a32d7127e2138b7903303d685ee08c7ca2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
