@@ -1069,11 +1069,6 @@ $(call declare-container-license-deps,$(INSTALLED_RAMDISK_TARGET),$(INTERNAL_RAM
 
 UNMOUNTED_NOTICE_VENDOR_DEPS += $(INSTALLED_RAMDISK_TARGET)
 
-.PHONY: ramdisk-nodeps
-ramdisk-nodeps: $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
-	@echo "make $@: ignoring dependencies"
-	$(hide) $(MKBOOTFS) -d $(TARGET_OUT) $(TARGET_RAMDISK_OUT) | $(COMPRESSION_COMMAND) > $(INSTALLED_RAMDISK_TARGET)
-
 endif # BUILDING_RAMDISK_IMAGE
 
 # -----------------------------------------------------------------
@@ -1262,11 +1257,6 @@ $(call declare-container-license-deps,$(INSTALLED_BOOTIMAGE_TARGET),$(INTERNAL_B
 
 UNMOUNTED_NOTICE_VENDOR_DEPS += $(INSTALLED_BOOTIMAGE_TARGET)
 
-.PHONY: bootimage-nodeps
-bootimage-nodeps: $(MKBOOTIMG) $(AVBTOOL) $(BOARD_AVB_BOOT_KEY_PATH) $(INTERNAL_GKI_CERTIFICATE_DEPS)
-	@echo "make $@: ignoring dependencies"
-	$(foreach b,$(INSTALLED_BOOTIMAGE_TARGET),$(call build_boot_board_avb_enabled,$(b)))
-
 else ifeq (true,$(PRODUCT_SUPPORTS_VBOOT)) # BOARD_AVB_ENABLE != true
 
 # $1: boot image target
@@ -1285,11 +1275,6 @@ $(call declare-container-license-deps,$(INSTALLED_BOOTIMAGE_TARGET),$(INTERNAL_B
 
 UNMOUNTED_NOTICE_VENDOR_DEPS += $(INSTALLED_BOOTIMAGE_TARGET)
 
-.PHONY: bootimage-nodeps
-bootimage-nodeps: $(MKBOOTIMG) $(VBOOT_SIGNER) $(FUTILITY)
-	@echo "make $@: ignoring dependencies"
-	$(foreach b,$(INSTALLED_BOOTIMAGE_TARGET),$(call build_boot_supports_vboot,$(b)))
-
 else # PRODUCT_SUPPORTS_VBOOT != true
 
 # $1: boot image target
@@ -1306,11 +1291,6 @@ $(call declare-container-license-metadata,$(INSTALLED_BOOTIMAGE_TARGET),SPDX-lic
 $(call declare-container-license-deps,$(INSTALLED_BOOTIMAGE_TARGET),$(INTERNAL_BOOTIMAGE_FILES),$(PRODUCT_OUT)/:/)
 
 UNMOUNTED_NOTICE_VENDOR_DEPS += $(INSTALLED_BOOTIMAGE_TARGET)
-
-.PHONY: bootimage-nodeps
-bootimage-nodeps: $(MKBOOTIMG)
-	@echo "make $@: ignoring dependencies"
-	$(foreach b,$(INSTALLED_BOOTIMAGE_TARGET),$(call build_boot_novboot,$(b)))
 
 endif # BOARD_AVB_ENABLE
 endif # BUILDING_BOOT_IMAGE
@@ -2668,12 +2648,6 @@ $(call declare-container-license-deps,$(INSTALLED_RECOVERYIMAGE_TARGET),$(recove
 
 UNMOUNTED_NOTICE_VENDOR_DEPS+= $(INSTALLED_RECOVERYIMAGE_TARGET)
 
-.PHONY: recoveryimage-nodeps
-recoveryimage-nodeps:
-	@echo "make $@: ignoring dependencies"
-	$(call build-recoveryimage-target, $(INSTALLED_RECOVERYIMAGE_TARGET), \
-	  $(if $(filter true, $(BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE)),, $(recovery_kernel)))
-
 else # BUILDING_RECOVERY_IMAGE
 RECOVERY_RESOURCE_ZIP :=
 endif # BUILDING_RECOVERY_IMAGE
@@ -2754,13 +2728,6 @@ $(call declare-container-license-deps,$(INSTALLED_DEBUG_RAMDISK_TARGET),$(INSTAL
 
 UNMOUNTED_NOTICE_VENDOR_DEPS+= $(INSTALLED_DEBUG_RAMDISK_TARGET)
 
-.PHONY: ramdisk_debug-nodeps
-ramdisk_debug-nodeps: $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
-	@echo "make $@: ignoring dependencies"
-	$(hide) rm -f $(INSTALLED_DEBUG_RAMDISK_TARGET)
-	$(hide) mkdir -p $(dir $(INSTALLED_DEBUG_RAMDISK_TARGET)) $(INTERNAL_DEBUG_RAMDISK_SRC_DIRS)
-	$(MKBOOTFS) -d $(TARGET_OUT) $(INTERNAL_DEBUG_RAMDISK_SRC_DIRS) | $(COMPRESSION_COMMAND) > $(INSTALLED_DEBUG_RAMDISK_TARGET)
-
 # -----------------------------------------------------------------
 # the boot-debug.img, which is the kernel plus ramdisk-debug.img
 #
@@ -2820,11 +2787,6 @@ $(call declare-container-license-metadata,$(INSTALLED_DEBUG_BOOTIMAGE_TARGET),SP
 $(call declare-container-license-deps,$(INSTALLED_DEBUG_BOOTIMAGE_TARGET),$(INSTALLED_BOOTIMAGE_TARGET),$(PRODUCT_OUT)/:/)
 
 UNMOUNTED_NOTICE_VENDOR_DEPS+= $(INSTALLED_DEBUG_BOOTIMAGE_TARGET)
-
-.PHONY: bootimage_debug-nodeps
-bootimage_debug-nodeps: $(MKBOOTIMG) $(AVBTOOL)
-	echo "make $@: ignoring dependencies"
-	$(foreach b,$(INSTALLED_DEBUG_BOOTIMAGE_TARGET),$(call build-debug-bootimage-target,$b))
 
 endif # BUILDING_DEBUG_BOOT_IMAGE
 
@@ -2974,13 +2936,6 @@ $(call declare-container-license-deps,$(INSTALLED_TEST_HARNESS_RAMDISK_TARGET),$
 
 UNMOUNTED_NOTICE_VENDOR_DEPS+= $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET)
 
-.PHONY: ramdisk_test_harness-nodeps
-ramdisk_test_harness-nodeps: $(MKBOOTFS) | $(COMPRESSION_COMMAND_DEPS)
-	@echo "make $@: ignoring dependencies"
-	$(hide) rm -f $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET)
-	$(hide) mkdir -p $(dir $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET)) $(INTERNAL_TEST_HARNESS_RAMDISK_SRC_DIRS)
-	$(MKBOOTFS) -d $(TARGET_OUT) $(INTERNAL_TEST_HARNESS_RAMDISK_SRC_DIRS) | $(COMPRESSION_COMMAND) > $(INSTALLED_TEST_HARNESS_RAMDISK_TARGET)
-
 # -----------------------------------------------------------------
 # the boot-test-harness.img, which is the kernel plus ramdisk-test-harness.img
 #
@@ -3022,11 +2977,6 @@ $(call declare-1p-container,$(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET),)
 $(call declare-container-license-deps,$(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET),$(INSTALLED_DEBUG_BOOTIMAGE_TARGET),$(PRODUCT_OUT)/:/)
 
 UNMOUNTED_NOTICE_VENDOR_DEPS+= $(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET)
-
-.PHONY: bootimage_test_harness-nodeps
-bootimage_test_harness-nodeps: $(MKBOOTIMG) $(AVBTOOL)
-	echo "make $@: ignoring dependencies"
-	$(foreach b,$(INSTALLED_TEST_HARNESS_BOOTIMAGE_TARGET),$(call build-boot-test-harness-target,$b))
 
 endif # BUILDING_DEBUG_BOOT_IMAGE
 
@@ -3380,16 +3330,6 @@ systemimage: $(INSTALLED_SYSTEMIMAGE_TARGET)
 
 SYSTEM_NOTICE_DEPS += $(INSTALLED_SYSTEMIMAGE_TARGET)
 
-.PHONY: systemimage-nodeps snod
-systemimage-nodeps snod: $(filter-out systemimage-nodeps snod,$(MAKECMDGOALS)) \
-	            | $(INTERNAL_USERIMAGES_DEPS)
-	@echo "make $@: ignoring dependencies"
-	$(call build-systemimage-target,$(INSTALLED_SYSTEMIMAGE_TARGET))
-	$(hide) $(call assert-max-image-size,$(INSTALLED_SYSTEMIMAGE_TARGET),$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
-ifeq (true,$(WITH_DEXPREOPT))
-	$(warning Warning: with dexpreopt enabled, you may need a full rebuild.)
-endif
-
 endif # BUILDING_SYSTEM_IMAGE
 
 .PHONY: sync syncsys sync_system
@@ -3441,10 +3381,6 @@ $(call declare-container-license-deps,$(INSTALLED_USERDATAIMAGE_TARGET),$(INSTAL
 
 UNMOUNTED_NOTICE_VENDOR_DEPS+= $(INSTALLED_USERDATAIMAGE_TARGET)
 
-.PHONY: userdataimage-nodeps
-userdataimage-nodeps: | $(INTERNAL_USERIMAGES_DEPS)
-	$(build-userdataimage-target)
-
 endif # BUILDING_USERDATA_IMAGE
 
 # ASAN libraries in the system image - build rule.
@@ -3493,10 +3429,6 @@ $(call declare-container-license-deps,$(INSTALLED_BPTIMAGE_TARGET),$(BOARD_BPT_I
 
 UNMOUNTED_NOTICE_VENDOR_DEPS+= $(INSTALLED_BPTIMAGE_TARGET)
 
-.PHONY: bptimage-nodeps
-bptimage-nodeps:
-	$(build-bptimage-target)
-
 endif # BOARD_BPT_INPUT_FILES
 
 # -----------------------------------------------------------------
@@ -3531,10 +3463,6 @@ $(call declare-1p-container,$(INSTALLED_CACHEIMAGE_TARGET),)
 $(call declare-container-license-deps,$(INSTALLED_CACHEIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_CACHEIMAGE_FILES),$(PRODUCT_OUT)/:/)
 
 UNMOUNTED_NOTICE_VENDOR_DEPS+= $(INSTALLED_CACHEIMAGE_TARGET)
-
-.PHONY: cacheimage-nodeps
-cacheimage-nodeps: | $(INTERNAL_USERIMAGES_DEPS)
-	$(build-cacheimage-target)
 
 else # BUILDING_CACHE_IMAGE
 # we need to ignore the broken cache link when doing the rsync
@@ -3615,10 +3543,6 @@ $(call declare-container-license-deps,$(INSTALLED_SYSTEMOTHERIMAGE_TARGET),$(INT
 
 UNMOUNTED_NOTICE_DEPS += $(INSTALLED_SYSTEMOTHERIMAGE_TARGET)
 endif
-
-.PHONY: systemotherimage-nodeps
-systemotherimage-nodeps: | $(INTERNAL_USERIMAGES_DEPS)
-	$(build-systemotherimage-target)
 
 endif # BUILDING_SYSTEM_OTHER_IMAGE
 
@@ -3717,10 +3641,6 @@ VENDOR_NOTICE_DEPS += $(INSTALLED_VENDORIMAGE_TARGET)
 $(call declare-container-license-metadata,$(INSTALLED_VENDORIMAGE_TARGET),legacy_proprietary,proprietary,,"Vendor Image",vendor)
 $(call declare-container-license-deps,$(INSTALLED_VENDORIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_VENDORIMAGE_FILES) $(RECOVERY_FROM_BOOT_PATH),$(PRODUCT_OUT)/:/)
 
-.PHONY: vendorimage-nodeps vnod
-vendorimage-nodeps vnod: | $(INTERNAL_USERIMAGES_DEPS)
-	$(build-vendorimage-target)
-
 .PHONY: sync_vendor
 sync sync_vendor: $(INTERNAL_VENDORIMAGE_FILES)
 
@@ -3782,10 +3702,6 @@ PRODUCT_NOTICE_DEPS += $(INSTALLED_PRODUCTIMAGE_TARGET)
 $(call declare-1p-container,$(INSTALLED_PRODUCTIMAGE_TARGET),)
 $(call declare-container-license-deps,$(INSTALLED_PRODUCTIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_PRODUCTIMAGE_FILES) $(INSTALLED_FILES_FILE_PRODUCT),$(PRODUCT_OUT)/:/)
 
-.PHONY: productimage-nodeps pnod
-productimage-nodeps pnod: | $(INTERNAL_USERIMAGES_DEPS)
-	$(build-productimage-target)
-
 .PHONY: sync_product
 sync sync_product: $(INTERNAL_PRODUCTIMAGE_FILES)
 
@@ -3844,10 +3760,6 @@ SYSTEM_EXT_NOTICE_DEPS += $(INSTALLED_SYSTEM_EXTIMAGE_TARGET)
 
 $(call declare-1p-container,$(INSTALLED_SYSTEM_EXTIMAGE_TARGET),)
 $(call declare-container-license-deps,$(INSTALLED_SYSTEM_EXTIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_SYSTEM_EXTIMAGE_FILES) $(INSTALLED_FILES_FILE_SYSTEM_EXT),$(PRODUCT_OUT)/:/)
-
-.PHONY: systemextimage-nodeps senod
-systemextimage-nodeps senod: | $(INTERNAL_USERIMAGES_DEPS)
-	$(build-system_extimage-target)
 
 .PHONY: sync_system_ext
 sync sync_system_ext: $(INTERNAL_SYSTEM_EXTIMAGE_FILES)
@@ -3927,10 +3839,6 @@ ODM_NOTICE_DEPS += $(INSTALLED_ODMIMAGE_TARGET)
 $(call declare-1p-container,$(INSTALLED_ODMIMAGE_TARGET),)
 $(call declare-container-license-deps,$(INSTALLED_ODMIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_ODMIMAGE_FILES) $(INSTALLED_FILES_FILE_ODM),$(PRODUCT_OUT)/:/)
 
-.PHONY: odmimage-nodeps onod
-odmimage-nodeps onod: | $(INTERNAL_USERIMAGES_DEPS)
-	$(build-odmimage-target)
-
 .PHONY: sync_odm
 sync sync_odm: $(INTERNAL_ODMIMAGE_FILES)
 
@@ -3989,10 +3897,6 @@ VENDOR_DLKM_NOTICE_DEPS += $(INSTALLED_VENDOR_DLKMIMAGE_TARGET)
 $(call declare-1p-container,$(INSTALLED_VENDOR_DLKMIMAGE_TARGET),)
 $(call declare-container-license-deps,$(INSTALLED_VENDOR_DLKMIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_VENDOR_DLKMIMAGE_FILES) $(INSTALLED_FILES_FILE_VENDOR_DLKM),$(PRODUCT_OUT)/:/)
 
-.PHONY: vendor_dlkmimage-nodeps vdnod
-vendor_dlkmimage-nodeps vdnod: | $(INTERNAL_USERIMAGES_DEPS)
-	$(build-vendor_dlkmimage-target)
-
 .PHONY: sync_vendor_dlkm
 sync sync_vendor_dlkm: $(INTERNAL_VENDOR_DLKMIMAGE_FILES)
 
@@ -4050,10 +3954,6 @@ ODM_DLKM_NOTICE_DEPS += $(INSTALLED_ODM_DLKMIMAGE_TARGET)
 
 $(call declare-1p-container,$(INSTALLED_ODM_DLKMIMAGE_TARGET),)
 $(call declare-container-license-deps,$(INSTALLED_ODM_DLKMIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_ODM_DLKMIMAGE_FILES) $(INSTALLED_FILES_FILE_ODM_DLKM),$(PRODUCT_OUT)/:/)
-
-.PHONY: odm_dlkmimage-nodeps odnod
-odm_dlkmimage-nodeps odnod: | $(INTERNAL_USERIMAGES_DEPS)
-	$(build-odm_dlkmimage-target)
 
 .PHONY: sync_odm_dlkm
 sync sync_odm_dlkm: $(INTERNAL_ODM_DLKMIMAGE_FILES)
@@ -4114,10 +4014,6 @@ SYSTEM_DLKM_NOTICE_DEPS += $(INSTALLED_SYSTEM_DLKMIMAGE_TARGET)
 
 $(call declare-1p-container,$(INSTALLED_SYSTEM_DLKMIMAGE_TARGET),)
 $(call declare-container-license-deps,$(INSTALLED_SYSTEM_DLKMIMAGE_TARGET),$(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_SYSTEM_DLKMIMAGE_FILES) $(INSTALLED_FILES_FILE_SYSTEM_DLKM),$(PRODUCT_OUT)/:/)
-
-.PHONY: system_dlkmimage-nodeps sdnod
-system_dlkmimage-nodeps sdnod: | $(INTERNAL_USERIMAGES_DEPS)
-	$(build-system_dlkmimage-target)
 
 .PHONY: sync_system_dlkm
 sync sync_system_dlkm: $(INTERNAL_SYSTEM_DLKMIMAGE_FILES)
@@ -4795,11 +4691,6 @@ $(call declare-1p-container,$(INSTALLED_VBMETAIMAGE_TARGET),)
 
 UNMOUNTED_NOTICE_DEPS += $(INSTALLED_VBMETAIMAGE_TARGET)
 
-.PHONY: vbmetaimage-nodeps
-vbmetaimage-nodeps: PRIVATE_AVB_VBMETA_SIGNING_ARGS := \
-    --algorithm $(BOARD_AVB_ALGORITHM) --key $(BOARD_AVB_KEY_PATH)
-vbmetaimage-nodeps:
-	$(build-vbmetaimage-target)
 endif # BUILDING_VBMETA_IMAGE
 
 endif # BOARD_AVB_ENABLE
@@ -5149,11 +5040,6 @@ $(call declare-1p-target,$(check_all_partition_sizes_log))
 
 .PHONY: check-all-partition-sizes
 check-all-partition-sizes: $(check_all_partition_sizes_log)
-
-.PHONY: check-all-partition-sizes-nodeps
-check-all-partition-sizes-nodeps:
-	$(call check-all-partition-sizes-target, \
-	  $(call intermediates-dir-for,PACKAGING,check-all-partition-sizes-nodeps)/misc_info.txt)
 
 endif # PRODUCT_BUILD_SUPER_PARTITION
 
@@ -7009,14 +6895,6 @@ droidcore-unbundled: $(INSTALLED_SUPERIMAGE_TARGET)
 
 $(call dist-for-goals,dist_files,$(INSTALLED_MISC_INFO_TARGET):super_misc_info.txt)
 endif # BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT
-
-# Build $(PRODUCT_OUT)/super.img without dependencies.
-.PHONY: superimage-nodeps supernod
-superimage-nodeps supernod: intermediates :=
-superimage-nodeps supernod: | $(INSTALLED_SUPERIMAGE_DEPENDENCIES)
-	$(call pretty,"make $(INSTALLED_SUPERIMAGE_TARGET): ignoring dependencies")
-	$(call build-superimage-target,$(INSTALLED_SUPERIMAGE_TARGET),\
-	  $(call intermediates-dir-for,PACKAGING,superimage-nodeps)/misc_info.txt)
 
 endif # PRODUCT_RETROFIT_DYNAMIC_PARTITIONS != "true"
 endif # BOARD_SUPER_PARTITION_SIZE != ""
