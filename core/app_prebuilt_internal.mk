@@ -226,10 +226,6 @@ embedded_prebuilt_jni_libs :=
 endif
 $(built_module): PRIVATE_EMBEDDED_JNI_LIBS := $(embedded_prebuilt_jni_libs)
 
-ifdef LOCAL_COMPRESSED_MODULE
-$(built_module) : $(MINIGZIP)
-endif
-
 ifeq ($(module_run_appcompat),true)
 $(built_module) : $(appcompat-files)
 $(LOCAL_BUILT_MODULE): PRIVATE_INSTALLED_MODULE := $(LOCAL_INSTALLED_MODULE)

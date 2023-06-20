@@ -2941,7 +2941,7 @@ endef
 define compress-package
 $(hide) \
   mv $@ $@.uncompressed; \
-  $(MINIGZIP) -9 -c $@.uncompressed > $@.compressed; \
+  gzip -9 -c $@.uncompressed > $@.compressed; \
   rm -f $@.uncompressed; \
   mv $@.compressed $@;
 endef
