@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5796fa6_7366e460",
+        "filename": "envsetup.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2023-06-20T17:24:36Z",
+      "side": 1,
+      "message": "This line is too long.",
+      "range": {
+        "startLine": 65,
+        "startChar": 100,
+        "endLine": 65,
+        "endChar": 102
+      },
+      "revId": "37fc0b2d87bc79d16559e8f6f90675ea6440df6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d749018c_37808d42",
+        "filename": "target/board/module_riscv64/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2023-06-20T17:24:36Z",
+      "side": 1,
+      "message": "Nit: \"a\" (I don\u0027t think anyone spells out the next word letter by letter)",
+      "range": {
+        "startLine": 1,
+        "startChar": 73,
+        "endLine": 1,
+        "endChar": 75
+      },
+      "revId": "37fc0b2d87bc79d16559e8f6f90675ea6440df6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d3ce2b9_e33aa9ab",
+        "filename": "target/board/module_riscv64/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2023-06-20T17:24:36Z",
+      "side": 1,
+      "message": "Please clarify that 32 bit binaries will not be built.",
+      "revId": "37fc0b2d87bc79d16559e8f6f90675ea6440df6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
