@@ -16,6 +16,24 @@
       "message": "entries?",
       "revId": "1208a7ceb99da2fbb67e2befd4c01629484d3acd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38a65363_22d4bf4e",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2186,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-06-21T20:31:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c70804d6_25ec82e5",
+      "revId": "1208a7ceb99da2fbb67e2befd4c01629484d3acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
