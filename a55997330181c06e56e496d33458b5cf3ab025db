@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83cd3da7_9cd0c77f",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2944,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-06-21T23:41:12Z",
+      "side": 1,
+      "message": "I wonder if we should run this directly and add a dependency instead of relying on `$PATH`.  For most toybox tools I\u0027m not too worried about rerunning them when toybox changes, but gzip can produce varied enough output that it\u0027s probably worth rerunning it whenever it changes.",
+      "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
