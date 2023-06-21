@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b08053ee_db4a5a96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-06-21T22:50:24Z",
+      "side": 1,
+      "message": "Dan, do you know if these have any manual uses? Or are they safe to remove?",
+      "revId": "385f07ad398b0514e7509f2842265294e69065c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
