@@ -16,6 +16,24 @@
       "message": "I wonder if we should run this directly and add a dependency instead of relying on `$PATH`.  For most toybox tools I\u0027m not too worried about rerunning them when toybox changes, but gzip can produce varied enough output that it\u0027s probably worth rerunning it whenever it changes.",
       "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "727856c6_bd129d03",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2944,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-06-22T18:40:09Z",
+      "side": 1,
+      "message": "how would we implement that? and are you sure you don\u0027t just want to do it for all of toybox? so far tar and sed have been the most problematic for me. as long as it\u0027s not too expensive (which aiui is why _toolchain_ updates don\u0027t cause full rebuilds), i\u0027d love to just have toybox prebuilt updates cause the relevant subset of rules to be rerun. iirc dwillemsen told me toybox isn\u0027t a significant chunk of build time last time he looked?",
+      "parentUuid": "83cd3da7_9cd0c77f",
+      "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
