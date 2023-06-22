@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cc1807f_d7bbd621",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-06-22T17:10:27Z",
+      "side": 1,
+      "message": "There were 122 CLs in the first broken master-art build. Why do you think this topic broke it?\n\nhttps://android-build.corp.google.com/build_explorer/branch/git_master-art/?gridSize\u003d30\u0026selectionType\u003dSTART_BUILD_WINDOW\u0026startBuildId\u003d10356665\u0026numBuilds\u003d30\u0026activeBuildId\u003d10355030\u0026activeTarget\u003dmainline_modules",
+      "revId": "a5ded5c2e5931623dcdfb2b5b8685c0d6f8e8a93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
