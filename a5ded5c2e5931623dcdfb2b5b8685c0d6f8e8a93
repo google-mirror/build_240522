@@ -16,6 +16,24 @@
       "message": "There were 122 CLs in the first broken master-art build. Why do you think this topic broke it?\n\nhttps://android-build.corp.google.com/build_explorer/branch/git_master-art/?gridSize\u003d30\u0026selectionType\u003dSTART_BUILD_WINDOW\u0026startBuildId\u003d10356665\u0026numBuilds\u003d30\u0026activeBuildId\u003d10355030\u0026activeTarget\u003dmainline_modules",
       "revId": "a5ded5c2e5931623dcdfb2b5b8685c0d6f8e8a93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e6c6b82_2a909b5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-06-22T17:15:52Z",
+      "side": 1,
+      "message": "The build error was clearly related: https://logs.chromium.org/logs/art/buildbucket/cr-buildbucket/8777585650400804625/+/u/build_target/stdout?format\u003draw\n\nBesides, there was a bypass-presubmit without a reason on the original change, and one broken presubmit on git_master-art that looked suspicious. \n\nHowever thanks to mast@ we established that this is a split topic, so revert is not needed.",
+      "parentUuid": "9cc1807f_d7bbd621",
+      "revId": "a5ded5c2e5931623dcdfb2b5b8685c0d6f8e8a93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
