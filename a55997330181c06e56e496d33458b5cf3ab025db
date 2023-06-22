@@ -88,6 +88,24 @@
       "parentUuid": "b2840046_2ec8e3ce",
       "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed04c6bc_1e5039d4",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2944,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-06-22T23:11:49Z",
+      "side": 1,
+      "message": "yeah, that makes sense.\n\ndid you want me to make any/all of the callers in this topic use `$(GZIP)`? (at the moment we have a tie --- there are the same number of .bp files calling `gzip` as there are `$(location minigzip)` users!) i\u0027m assuming you think bootable/recovery should be `$(GZIP)`, and frameworks doesn\u0027t care, and  i\u0027m not sure about mkbootimg?",
+      "parentUuid": "b4e8b251_d99ce166",
+      "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
