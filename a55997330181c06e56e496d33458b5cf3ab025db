@@ -52,6 +52,24 @@
       "parentUuid": "727856c6_bd129d03",
       "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2840046_2ec8e3ce",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2944,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-06-22T20:04:56Z",
+      "side": 1,
+      "message": "i suspect most people wouldn\u0027t use that anyway (because they\u0027ll try `gzip` first, it\u0027ll work, and they\u0027ll move on with their lives; and even if they do use `$(GZIP)` i bet they won\u0027t realize/remember to _also_ add that as a dependency, and that will still work)?\n\ni don\u0027t have a strong opinion (beyond \"ideally toybox would be an implicit dependency for all rules using toybox\"), so just let me know whether you prefer `gzip` or `$(GZIP)`.",
+      "parentUuid": "c1599286_6894f527",
+      "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
