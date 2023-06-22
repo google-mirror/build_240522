@@ -70,6 +70,24 @@
       "parentUuid": "c1599286_6894f527",
       "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4e8b251_d99ce166",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2944,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-06-22T20:06:04Z",
+      "side": 1,
+      "message": "`$(GZIP)` at least lets you do it right if you want/need to.",
+      "parentUuid": "b2840046_2ec8e3ce",
+      "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
