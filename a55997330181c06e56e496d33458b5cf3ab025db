@@ -34,6 +34,24 @@
       "parentUuid": "83cd3da7_9cd0c77f",
       "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1599286_6894f527",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2944,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-06-22T19:53:36Z",
+      "side": 1,
+      "message": "There unfortunately isn\u0027t a good way to do it automatically unless you change the path to toybox and its tool symlinks each time you update it.  To do it manually you would basically leave everything as it is now, rename `MINIGZIP` to `GZIP` and set it to the path to the prebuilt.  Anything that uses it should then add `$(GZIP)` to its dependencies.",
+      "parentUuid": "727856c6_bd129d03",
+      "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
