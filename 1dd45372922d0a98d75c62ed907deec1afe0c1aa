@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f73948af_1deefeac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2023-06-22T16:04:37Z",
+      "side": 1,
+      "message": "Hi Joe, now that the design docs are done, might we get this reviewed and merged?",
+      "revId": "1dd45372922d0a98d75c62ed907deec1afe0c1aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
