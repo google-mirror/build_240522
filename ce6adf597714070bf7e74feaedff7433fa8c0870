@@ -39,6 +39,30 @@
       },
       "revId": "ce6adf597714070bf7e74feaedff7433fa8c0870",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fb128e8_7f8db4df",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-22T14:56:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d157fba_beeda401",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 10
+      },
+      "revId": "ce6adf597714070bf7e74feaedff7433fa8c0870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
