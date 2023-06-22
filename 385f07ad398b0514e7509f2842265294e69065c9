@@ -16,6 +16,24 @@
       "message": "Dan, do you know if these have any manual uses? Or are they safe to remove?",
       "revId": "385f07ad398b0514e7509f2842265294e69065c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8beca2d_484f2b74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-06-22T00:03:45Z",
+      "side": 1,
+      "message": "These are documented portions of the user interface: https://cs.android.com/android/platform/superproject/+/master:build/make/help.sh;drc\u003d1778342af20dc893301a5d116411536de3fff57b;l\u003d43",
+      "parentUuid": "b08053ee_db4a5a96",
+      "revId": "385f07ad398b0514e7509f2842265294e69065c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
