@@ -62,13 +62,29 @@ mod auto_generated {
 pub use auto_generated::*;
 
 use anyhow::Result;
+use paste::paste;
 
 fn try_from_text_proto<T>(s: &str) -> Result<T>
 where
     T: protobuf::MessageFull,
 {
-    // warning: parse_from_str does not check if required fields are set
     protobuf::text_format::parse_from_str(s).map_err(|e| e.into())
+}
+
+macro_rules! ensure_required_fields {
+    ($type:expr, $struct:expr, $($field:expr),+) => {
+        $(
+        paste! {
+            ensure!($struct.[<has_ $field>](), "bad {}: missing {}", $type, $field);
+        }
+        )+
+    };
+}
+
+// no-op: this macro is used to mark a field as is optional (and not accidentally missing from the
+// list of required fields)
+macro_rules! ensure_optional_fields {
+    ($type:expr, $struct:expr, $($field:expr),+) => {};
 }
 
 pub mod flag_declaration {
@@ -77,9 +93,8 @@ pub mod flag_declaration {
     use anyhow::ensure;
 
     pub fn verify_fields(pdf: &ProtoFlagDeclaration) -> Result<()> {
-        ensure!(pdf.has_name(), "bad flag declaration: missing name");
-        ensure!(pdf.has_namespace(), "bad flag declaration: missing namespace");
-        ensure!(pdf.has_description(), "bad flag declaration: missing description");
+        ensure_required_fields!("flag declaration", pdf, "name", "namespace", "description");
+        ensure_optional_fields!("flag declaration", pdf, "bug");
 
         ensure!(codegen::is_valid_name_ident(pdf.name()), "bad flag declaration: bad name");
         ensure!(codegen::is_valid_name_ident(pdf.namespace()), "bad flag declaration: bad name");
@@ -101,7 +116,7 @@ pub mod flag_declarations {
     }
 
     pub fn verify_fields(pdf: &ProtoFlagDeclarations) -> Result<()> {
-        ensure!(pdf.has_package(), "bad flag declarations: missing package");
+        ensure_required_fields!("flag declarations", pdf, "package");
 
         ensure!(
             codegen::is_valid_package_ident(pdf.package()),
@@ -121,10 +136,7 @@ pub mod flag_value {
     use anyhow::ensure;
 
     pub fn verify_fields(fv: &ProtoFlagValue) -> Result<()> {
-        ensure!(fv.has_package(), "bad flag value: missing package");
-        ensure!(fv.has_name(), "bad flag value: missing name");
-        ensure!(fv.has_state(), "bad flag value: missing state");
-        ensure!(fv.has_permission(), "bad flag value: missing permission");
+        ensure_required_fields!("flag value", fv, "package", "name", "state", "permission");
 
         ensure!(codegen::is_valid_package_ident(fv.package()), "bad flag value: bad package");
         ensure!(codegen::is_valid_name_ident(fv.name()), "bad flag value: bad name");
@@ -155,9 +167,7 @@ pub mod tracepoint {
     use anyhow::ensure;
 
     pub fn verify_fields(tp: &ProtoTracepoint) -> Result<()> {
-        ensure!(tp.has_source(), "bad tracepoint: missing source");
-        ensure!(tp.has_state(), "bad tracepoint: missing state");
-        ensure!(tp.has_permission(), "bad tracepoint: missing permission");
+        ensure_required_fields!("tracepoint", tp, "source", "state", "permission");
 
         ensure!(!tp.source().is_empty(), "bad tracepoint: empty source");
 
@@ -171,12 +181,17 @@ pub mod parsed_flag {
     use anyhow::ensure;
 
     pub fn verify_fields(pf: &ProtoParsedFlag) -> Result<()> {
-        ensure!(pf.has_package(), "bad parsed flag: missing package");
-        ensure!(pf.has_name(), "bad parsed flag: missing name");
-        ensure!(pf.has_namespace(), "bad parsed flag: missing namespace");
-        ensure!(pf.has_description(), "bad parsed flag: missing description");
-        ensure!(pf.has_state(), "bad parsed flag: missing state");
-        ensure!(pf.has_permission(), "bad parsed flag: missing permission");
+        ensure_required_fields!(
+            "parsed flag",
+            pf,
+            "package",
+            "name",
+            "namespace",
+            "description",
+            "state",
+            "permission"
+        );
+        ensure_optional_fields!("parsed flag", pf, "bug");
 
         ensure!(codegen::is_valid_package_ident(pf.package()), "bad parsed flag: bad package");
         ensure!(codegen::is_valid_name_ident(pf.name()), "bad parsed flag: bad name");
