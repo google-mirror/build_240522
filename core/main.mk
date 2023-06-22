@@ -4,7 +4,7 @@ $(warning Either use 'envsetup.sh; m' or 'build/soong/soong_ui.bash --make-mode'
 $(error done)
 endif
 
-$(info [1/1] initializing build system ...)
+$(info [1/1] initializing legacy Make module parser ...)
 
 # Absolute path of the present working direcotry.
 # This overrides the shell variable $PWD, which does not necessarily points to
