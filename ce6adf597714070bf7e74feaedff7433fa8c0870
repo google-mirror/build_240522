@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61d00360_a3c1781e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-22T13:34:13Z",
+      "side": 1,
+      "message": "Field should be \u0027repeated\u0027.\n\nAlso, field doesn\u0027t propagate from flag_declaration to parsed_flag! I have forgotten to add the code to do so -- and a unit test to keep me honest.",
+      "revId": "ce6adf597714070bf7e74feaedff7433fa8c0870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d157fba_beeda401",
