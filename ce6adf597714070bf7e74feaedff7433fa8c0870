@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d157fba_beeda401",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-22T12:25:15Z",
+      "side": 1,
+      "message": "Should this be `repeated` instead (i.e. do we expect multiple bugs to track a single flag?)",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 10
+      },
+      "revId": "ce6adf597714070bf7e74feaedff7433fa8c0870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
