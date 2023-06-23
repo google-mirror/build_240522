@@ -342,6 +342,16 @@ else
 JAVA_TMPDIR_ARG :=
 endif
 
+_build_broken_bool_vars := \
+  BUILD_BROKEN_USES_SOONG_PYTHON2_MODULES \
+
+_build_broken_list_vars := \
+  BUILD_BROKEN_PLUGIN_VALIDATION \
+
+_build_broken_var_names := $(_build_broken_bool_vars)
+_build_broken_var_names := $(_build_broken_list_vars)
+$(foreach v,$(_build_broken_var_names),$(eval $(v) :=))
+
 # ###############################################################
 # Include sub-configuration files
 # ###############################################################
@@ -370,6 +380,13 @@ endif
 # Define most of the global variables.  These are the ones that
 # are specific to the user's build configuration.
 include $(BUILD_SYSTEM)/envsetup.mk
+
+
+$(foreach var,$(_build_broken_bool_vars), \
+  $(if $(filter-out true false,$($(var))), \
+    $(error Valid values of $(var) are "true", "false", and "". Not "$($(var))")))
+
+.KATI_READONLY := $(_build_broken_var_names)
 
 # Returns true if it is a low memory device, otherwise it returns false.
 define is-low-mem-device

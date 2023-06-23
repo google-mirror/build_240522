@@ -174,7 +174,6 @@ _board_strip_list += ODM_MANIFEST_SKUS
 
 
 _build_broken_var_list := \
-  BUILD_BROKEN_PLUGIN_VALIDATION \
   BUILD_BROKEN_CLANG_PROPERTY \
   BUILD_BROKEN_CLANG_ASFLAGS \
   BUILD_BROKEN_CLANG_CFLAGS \
@@ -189,7 +188,6 @@ _build_broken_var_list := \
   BUILD_BROKEN_PREBUILT_ELF_FILES \
   BUILD_BROKEN_TREBLE_SYSPROP_NEVERALLOW \
   BUILD_BROKEN_USES_NETWORK \
-  BUILD_BROKEN_USES_SOONG_PYTHON2_MODULES \
   BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE \
   BUILD_BROKEN_VINTF_PRODUCT_COPY_FILES \
 
@@ -202,6 +200,7 @@ _build_broken_var_list += \
 _board_true_false_vars := $(_build_broken_var_list)
 _board_strip_readonly_list += $(_build_broken_var_list) \
   BUILD_BROKEN_NINJA_USES_ENV_VARS
+_board_strip_readonly_list += $(_build_broken_list_vars) \
 
 # Conditional to building on linux, as dex2oat currently does not work on darwin.
 ifeq ($(HOST_OS),linux)
@@ -211,6 +210,7 @@ endif
 # ###############################################################
 # Broken build defaults
 # ###############################################################
+$(foreach v,$(_build_broken_var_list),$(eval $(v) :=))
 $(foreach v,$(_build_broken_var_list),$(eval $(v) :=))
 BUILD_BROKEN_NINJA_USES_ENV_VARS :=
 
