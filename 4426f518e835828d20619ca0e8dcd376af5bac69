@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fd151f0_cab7e2cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-06-23T19:28:22Z",
+      "side": 1,
+      "message": "Could you add some information to the commit message on the motivation behind this change? and maybe include a bug?",
+      "revId": "4426f518e835828d20619ca0e8dcd376af5bac69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19a28eaf_6addc83b",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-06-23T19:28:22Z",
+      "side": 1,
+      "message": "Should you also add `_build_broken_bool_vars` here?",
+      "revId": "4426f518e835828d20619ca0e8dcd376af5bac69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aede76aa_9a902343",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-06-23T19:28:22Z",
+      "side": 1,
+      "message": "Duplicated line? Presumably this should be `_build_broken_list_vars`, but then I think that would break the ability to set it in `envsetup.mk`",
+      "revId": "4426f518e835828d20619ca0e8dcd376af5bac69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2276eed7_19072c53",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-06-23T19:28:22Z",
+      "side": 1,
+      "message": "Could you add a comment here about how these variables could be set in a buildspec file, but the other build broken flags are defined elsewhere and must be set in board config?",
+      "revId": "4426f518e835828d20619ca0e8dcd376af5bac69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
