@@ -119,18 +119,21 @@ mod tests {
                 .unwrap();
         let expect_flags_content = r#"
         package com.android.aconfig.test;
+        import com.android.aconfig.annotations.AssumeFalseForR8;
+        import com.android.aconfig.annotations.AssumeTrueForR8;
         public final class Flags {
             public static final String FLAG_DISABLED_RO = "com.android.aconfig.test.disabled_ro";
             public static final String FLAG_DISABLED_RW = "com.android.aconfig.test.disabled_rw";
             public static final String FLAG_ENABLED_RO = "com.android.aconfig.test.enabled_ro";
             public static final String FLAG_ENABLED_RW = "com.android.aconfig.test.enabled_rw";
-
+            @AssumeFalseForR8
             public static boolean disabledRo() {
                 return FEATURE_FLAGS.disabledRo();
             }
             public static boolean disabledRw() {
                 return FEATURE_FLAGS.disabledRw();
             }
+            @AssumeTrueForR8
             public static boolean enabledRo() {
                 return FEATURE_FLAGS.enabledRo();
             }
