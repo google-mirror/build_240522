@@ -63,7 +63,7 @@ struct Context {
 
 #[derive(Serialize)]
 struct ClassElement {
-    pub default_value: String,
+    pub default_value: bool,
     pub device_config_namespace: String,
     pub device_config_flag: String,
     pub flag_name_constant_suffix: String,
@@ -75,11 +75,7 @@ fn create_class_element(package: &str, pf: &ProtoParsedFlag) -> ClassElement {
     let device_config_flag = codegen::create_device_config_ident(package, pf.name())
         .expect("values checked at flag parse time");
     ClassElement {
-        default_value: if pf.state() == ProtoFlagState::ENABLED {
-            "true".to_string()
-        } else {
-            "false".to_string()
-        },
+        default_value: pf.state() == ProtoFlagState::ENABLED,
         device_config_namespace: pf.namespace().to_string(),
         device_config_flag,
         flag_name_constant_suffix: pf.name().to_ascii_uppercase(),
@@ -116,18 +112,21 @@ mod tests {
             generate_java_code(crate::test::TEST_PACKAGE, parsed_flags.parsed_flag.iter()).unwrap();
         let expect_flags_content = r#"
         package com.android.aconfig.test;
+        import com.android.aconfig.annotations.AssumeFalseForR8;
+        import com.android.aconfig.annotations.AssumeTrueForR8;
         public final class Flags {
             public static final String FLAG_DISABLED_RO = "com.android.aconfig.test.disabled_ro";
             public static final String FLAG_DISABLED_RW = "com.android.aconfig.test.disabled_rw";
             public static final String FLAG_ENABLED_RO = "com.android.aconfig.test.enabled_ro";
             public static final String FLAG_ENABLED_RW = "com.android.aconfig.test.enabled_rw";
-
+            @AssumeFalseForR8
             public static boolean disabledRo() {
                 return FEATURE_FLAGS.disabledRo();
             }
             public static boolean disabledRw() {
                 return FEATURE_FLAGS.disabledRw();
             }
+            @AssumeTrueForR8
             public static boolean enabledRo() {
                 return FEATURE_FLAGS.enabledRo();
             }

@@ -46,7 +46,7 @@ pub struct OutputFile {
 }
 
 const DEFAULT_FLAG_STATE: ProtoFlagState = ProtoFlagState::DISABLED;
-const DEFAULT_FLAG_PERMISSION: ProtoFlagPermission = ProtoFlagPermission::READ_WRITE;
+const DEFAULT_FLAG_PERMISSION: ProtoFlagPermission = ProtoFlagPermission::READ_ONLY;
 
 pub fn parse_flags(package: &str, declarations: Vec<Input>, values: Vec<Input>) -> Result<Vec<u8>> {
     let mut parsed_flags = ProtoParsedFlags::new();
