@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d52cdb0_78e78c0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-06-26T18:03:17Z",
+      "side": 1,
+      "message": "+ Collin for OWNERs. Submitting this one to AOSP by itself since it can and is AOSP-first. \nIt\u0027s being used in https://googleplex-android-review.git.corp.google.com/q/topic:%22cherrypicker-L62700000961027431:N37800001374606210%22 and CL there will be abandoned when this once is submitted/merged internally.",
+      "revId": "078bfdfeb42a135e23efea64f45e452340a210e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
