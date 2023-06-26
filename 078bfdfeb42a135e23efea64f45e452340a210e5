@@ -107,6 +107,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6bdbd77_978c6e1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-06-26T23:43:20Z",
+      "side": 1,
+      "message": "Build failure from offending entries from artifact_path_requirements. I don\u0027t think that\u0027s related to libvintf.\nDon\u0027t see any bugs for it so maybe its intermittent. Retrying presubmits.",
+      "revId": "078bfdfeb42a135e23efea64f45e452340a210e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "861ad236_7f96f189",
