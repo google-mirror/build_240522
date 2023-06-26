@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2de6b54_3f30d3cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-06-26T18:23:34Z",
+      "side": 1,
+      "message": "@elsk@google.com",
+      "parentUuid": "f91725ab_59a08b52",
+      "revId": "078bfdfeb42a135e23efea64f45e452340a210e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "861ad236_7f96f189",
         "filename": "core/Makefile",
         "patchSetId": 5
@@ -48,6 +66,30 @@
       "writtenOn": "2023-06-26T18:13:48Z",
       "side": 1,
       "message": "Does this not require updates as well?",
+      "range": {
+        "startLine": 4884,
+        "startChar": 0,
+        "endLine": 4885,
+        "endChar": 85
+      },
+      "revId": "078bfdfeb42a135e23efea64f45e452340a210e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b1fec18_80a22abe",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 4885,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-06-26T18:23:34Z",
+      "side": 1,
+      "message": "It was not required for my issue - the current patch set is enough to allow the services to move from system to system_ext.\n\n@elsk@google.com for more detail",
+      "parentUuid": "861ad236_7f96f189",
       "range": {
         "startLine": 4884,
         "startChar": 0,

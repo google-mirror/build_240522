@@ -70,6 +70,30 @@
       },
       "revId": "b367b9bcda7a9294c2caf7c1ad92c218c8747409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75c965af_f749bf78",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4792,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-06-26T18:23:34Z",
+      "side": 1,
+      "message": "\u003e Devin, did you evaluate whether changes are needed for APEXes?\n\nNo, I\u0027m not sure how to do that. I don\u0027t currently see any issues with what we have now.",
+      "parentUuid": "ef25c1d7_7c2c9db8",
+      "range": {
+        "startLine": 4792,
+        "startChar": 26,
+        "endLine": 4792,
+        "endChar": 47
+      },
+      "revId": "b367b9bcda7a9294c2caf7c1ad92c218c8747409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
