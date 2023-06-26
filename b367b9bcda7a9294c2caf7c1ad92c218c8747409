@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0eb967cf_09a1474e",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4785,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-06-26T20:02:52Z",
+      "side": 1,
+      "message": "Check the framework manifest (consists of system, system_ext, product manifests) against the frozen manifests. This ensures that, no matter what value the target FCM version (defined by device manifest) is, the framework manifest does not serve any deprecated HALs beyond that target FCM version.",
+      "range": {
+        "startLine": 4785,
+        "startChar": 0,
+        "endLine": 4785,
+        "endChar": 99
+      },
+      "revId": "b367b9bcda7a9294c2caf7c1ad92c218c8747409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a381bc82_e4c0ccae",
         "filename": "core/Makefile",
         "patchSetId": 2

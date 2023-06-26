@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc9ff3c7_a758f1fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-06-26T20:02:52Z",
+      "side": 1,
+      "message": "code-level documentation is at L4785:\n\n\u003e -- Check framework manifest against frozen manifests for GSI targets. They need to be compatible.\n\nThe content of the framework manifest is defined by libvintf, not here. The \"check\" is defined by vintffm, also not here.\n\nI could expand these two definitions. Is this what you are referring to? I provided a detailed explanation in the other comment.",
+      "parentUuid": "92ade0d8_fc3e53d9",
+      "revId": "078bfdfeb42a135e23efea64f45e452340a210e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "861ad236_7f96f189",
         "filename": "core/Makefile",
         "patchSetId": 5
