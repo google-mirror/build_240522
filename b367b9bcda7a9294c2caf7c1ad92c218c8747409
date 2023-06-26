@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "951d72d2_c334173a",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4785,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-06-26T20:04:42Z",
+      "side": 1,
+      "message": "For details about framework manifest, see https://source.android.com/docs/core/architecture/vintf/objects#framework-manifest-file\n\nFor details about target FCM version, see https://source.android.com/docs/core/architecture/vintf/fcm#terminology",
+      "parentUuid": "0eb967cf_09a1474e",
+      "range": {
+        "startLine": 4785,
+        "startChar": 0,
+        "endLine": 4785,
+        "endChar": 99
+      },
+      "revId": "b367b9bcda7a9294c2caf7c1ad92c218c8747409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a381bc82_e4c0ccae",
         "filename": "core/Makefile",
         "patchSetId": 2
