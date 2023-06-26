@@ -240,33 +240,28 @@ def PrepareApexDirectory(inp):
     if os.path.isfile(deapexer_path):
       deapexer = deapexer_path
 
-  def ExtractApexes(path, outp):
+  def ExtractApexes(apex_dir, outp):
     # Extract all APEXes found in input path.
-    logger.info('Extracting APEXs in %s', path)
-    for f in os.listdir(path):
+    logger.info('Extracting APEXs in %s', apex_dir)
+    for f in os.listdir(apex_dir):
       logger.info('  adding APEX %s', os.path.basename(f))
-      apex = os.path.join(path, f)
-      if os.path.isdir(apex) and os.path.isfile(os.path.join(apex, 'apex_manifest.pb')):
-        info = ParseApexManifest(os.path.join(apex, 'apex_manifest.pb'))
-        # Flattened APEXes may have symlinks for libs (linked to /system/lib)
-        # We need to blindly copy them all.
-        shutil.copytree(apex, os.path.join(outp, info.name), symlinks=True)
-      elif os.path.isfile(apex) and apex.endswith(('.apex', '.capex')):
+      apex_file_path = os.path.join(apex_dir, f)
+      if os.path.isfile(apex_file_path) and apex_file_path.endswith(('.apex', '.capex')):
         cmd = [deapexer,
                '--debugfs_path', debugfs_path,
                'info',
-               apex]
+               apex_file_path]
         info = json.loads(common.RunAndCheckOutput(cmd))
 
         cmd = [deapexer,
                '--debugfs_path', debugfs_path,
                '--fsckerofs_path', fsckerofs_path,
                'extract',
-               apex,
+               apex_file_path,
                os.path.join(outp, info['name'])]
         common.RunAndCheckOutput(cmd)
       else:
-        logger.info('  .. skipping %s (is it APEX?)', path)
+        logger.info('  .. skipping %s (is it APEX?)', apex_file_path)
 
   root_dir_name = 'APEX'
   root_dir = os.path.join(inp, root_dir_name)
@@ -287,7 +282,7 @@ def PrepareApexDirectory(inp):
     for target_files_rel_path in target_files_rel_paths:
       inp_partition = os.path.join(inp, target_files_rel_path,"apex")
       if os.path.exists(inp_partition):
-        apex_dir = root_dir + os.path.join(device_path + "/apex");
+        apex_dir = root_dir + os.path.join(device_path + "/apex")
         os.makedirs(root_dir + device_path)
         shutil.copytree(inp_partition, apex_dir, symlinks=True)
         ExtractApexes(apex_dir, extracted_root)
