@@ -46,6 +46,30 @@
       },
       "revId": "b367b9bcda7a9294c2caf7c1ad92c218c8747409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef25c1d7_7c2c9db8",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4792,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2023-06-26T18:13:48Z",
+      "side": 1,
+      "message": "Devin, did you evaluate whether changes are needed for APEXes?",
+      "parentUuid": "66e25cb8_d41056b8",
+      "range": {
+        "startLine": 4792,
+        "startChar": 26,
+        "endLine": 4792,
+        "endChar": 47
+      },
+      "revId": "b367b9bcda7a9294c2caf7c1ad92c218c8747409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

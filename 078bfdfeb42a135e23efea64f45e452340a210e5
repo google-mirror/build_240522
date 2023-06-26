@@ -16,6 +16,46 @@
       "message": "+ Collin for OWNERs. Submitting this one to AOSP by itself since it can and is AOSP-first. \nIt\u0027s being used in https://googleplex-android-review.git.corp.google.com/q/topic:%22cherrypicker-L62700000961027431:N37800001374606210%22 and CL there will be abandoned when this once is submitted/merged internally.",
       "revId": "078bfdfeb42a135e23efea64f45e452340a210e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f91725ab_59a08b52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2023-06-26T18:13:48Z",
+      "side": 1,
+      "message": "Given the lack of clarity on whether this change was sufficient, can someone take a follow-up to improve the documentation of this functionality? Both its purpose and more context on the division of relevant vintf fragments discussed in the comments?",
+      "revId": "078bfdfeb42a135e23efea64f45e452340a210e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "861ad236_7f96f189",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 4885,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2023-06-26T18:13:48Z",
+      "side": 1,
+      "message": "Does this not require updates as well?",
+      "range": {
+        "startLine": 4884,
+        "startChar": 0,
+        "endLine": 4885,
+        "endChar": 85
+      },
+      "revId": "078bfdfeb42a135e23efea64f45e452340a210e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
