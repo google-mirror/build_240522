@@ -1,12 +1,20 @@
 package {package_name};
-{{ if is_read_write }}
+{{ -if is_test_mode }}
+import static java.util.Arrays.asList;
+
+import java.util.HashMap;
+import java.util.HashSet;
+{{ else}}
+{{ if is_read_write- }}
 import android.provider.DeviceConfig;
+{{ -endif- }}
 {{ endif }}
 public final class FeatureFlagsImpl implements FeatureFlags \{
     {{ for item in class_elements}}
     @Override
     public boolean {item.method_name}() \{
-        {{ if item.is_read_write- }}
+        {{ -if not is_test_mode- }}
+        {{ if item.is_read_write }}
         return DeviceConfig.getBoolean(
             "{item.device_config_namespace}",
             "{item.device_config_flag}",
@@ -14,7 +22,40 @@ public final class FeatureFlagsImpl implements FeatureFlags \{
         );
         {{ -else- }}
         return {item.default_value};
+        {{ -endif- }}
+        {{ else }}
+        return getFlag(Flags.FLAG_{item.flag_name_constant_suffix});
         {{ -endif }}
     }
     {{ endfor }}
+
+    {{ if is_test_mode- }}
+    public FeatureFlagsImpl() \{
+        this.flagMap = new HashMap<>();
+        this.flagSet = new HashSet<>();
+        this.flagSet.addAll(asList(
+            {{-for item in class_elements}}
+            Flags.FLAG_{item.flag_name_constant_suffix}{{ if not @last }},{{ endif }}
+            {{ -endfor }}
+        ));
+    }
+
+    public void setFlag(String flagName, boolean value) \{
+        if (!this.flagSet.contains(flagName)) \{
+            throw new NullPointerException("no such flag" + flagName);
+        }
+        this.flagMap.put(flagName, value);
+    }
+
+    private boolean getFlag(String flagName) \{
+        Boolean value = this.flagMap.get(flagName);
+        if (value == null) \{
+            throw new NullPointerException(flagName + " is not set");
+        }
+        return value;
+    }
+
+    private HashMap<String, Boolean> flagMap;
+    private HashSet<String> flagSet;
+    {{ -endif }}
 }
