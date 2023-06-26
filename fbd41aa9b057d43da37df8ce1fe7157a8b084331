@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "507fd3e7_718a72c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-06-26T15:15:51Z",
+      "side": 1,
+      "message": "Please approve this CL. pranavgupta@ said ideally we should merge the CLs to AOSP.",
+      "revId": "fbd41aa9b057d43da37df8ce1fe7157a8b084331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
