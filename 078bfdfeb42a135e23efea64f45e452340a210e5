@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c98ae42_b21c4d9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-06-26T18:58:51Z",
+      "side": 1,
+      "message": "Which documentation are you referring to? Internal documentation or external?",
+      "parentUuid": "a2de6b54_3f30d3cd",
+      "revId": "078bfdfeb42a135e23efea64f45e452340a210e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "861ad236_7f96f189",
         "filename": "core/Makefile",
         "patchSetId": 5
@@ -90,6 +108,30 @@
       "side": 1,
       "message": "It was not required for my issue - the current patch set is enough to allow the services to move from system to system_ext.\n\n@elsk@google.com for more detail",
       "parentUuid": "861ad236_7f96f189",
+      "range": {
+        "startLine": 4884,
+        "startChar": 0,
+        "endLine": 4885,
+        "endChar": 85
+      },
+      "revId": "078bfdfeb42a135e23efea64f45e452340a210e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1870f1a_bcfdb1eb",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 4885,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-06-26T18:58:51Z",
+      "side": 1,
+      "message": "No. This is only checking the system partition. The other partitions are not included.",
+      "parentUuid": "8b1fec18_80a22abe",
       "range": {
         "startLine": 4884,
         "startChar": 0,
