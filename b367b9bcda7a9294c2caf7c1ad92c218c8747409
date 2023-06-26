@@ -118,6 +118,30 @@
       },
       "revId": "b367b9bcda7a9294c2caf7c1ad92c218c8747409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33b33ab9_d182a5de",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4792,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2023-06-26T19:35:05Z",
+      "side": 1,
+      "message": "A follow-up is fine. Can you two coordinate on determining if it is necessary and sending the CL?",
+      "parentUuid": "60e68ad6_ea92459a",
+      "range": {
+        "startLine": 4792,
+        "startChar": 26,
+        "endLine": 4792,
+        "endChar": 47
+      },
+      "revId": "b367b9bcda7a9294c2caf7c1ad92c218c8747409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
