@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c14d4dd7_645458ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-06-27T09:09:19Z",
+      "side": 1,
+      "message": "In fact, the follow-up change (aosp/2639710) overlaps.",
+      "revId": "2ac1f2fabc6c7e52a398ff25c159fc94fbc12434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
