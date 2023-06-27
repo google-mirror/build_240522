@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ec2bd68_a0c741ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-06-27T04:31:59Z",
+      "side": 1,
+      "message": "Not sure if this matters, but I think this does not emit the actual list of .class files, but rather a list of string patterns (it is not possible to know if A/B/C.java has an inner class without reading it).",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "e2d7b2fa8d60e81a3c4d8382b20487e1e2c2ff51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
