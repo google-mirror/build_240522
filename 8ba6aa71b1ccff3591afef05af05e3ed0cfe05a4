@@ -22,6 +22,30 @@
       },
       "revId": "8ba6aa71b1ccff3591afef05af05e3ed0cfe05a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d43e52e_43a69341",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T23:32:28Z",
+      "side": 1,
+      "message": "Thank you. Yes, we can have a clearFlags method FeatureFlagImpl.\n\nThe rest method is necessary for the static API, Flags.java, because we want to reset the status of the static API from tests to tests. We have this java unit test rule aosp/2626359 to reset the status.",
+      "parentUuid": "9283cc4f_97c50142",
+      "range": {
+        "startLine": 261,
+        "startChar": 28,
+        "endLine": 261,
+        "endChar": 35
+      },
+      "revId": "8ba6aa71b1ccff3591afef05af05e3ed0cfe05a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
