@@ -22,6 +22,30 @@
       },
       "revId": "e2d7b2fa8d60e81a3c4d8382b20487e1e2c2ff51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3133f26_5b05b286",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-06-27T04:49:18Z",
+      "side": 1,
+      "message": "Thanks for pointing this out. I have modified the commit message as well as the flag description. I believe that passing a pattern is a viable solution, as `soong_zip` can ignore missing files.",
+      "parentUuid": "7ec2bd68_a0c741ae",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "e2d7b2fa8d60e81a3c4d8382b20487e1e2c2ff51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
