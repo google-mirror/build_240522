@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80a2c77b_4452b3d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T16:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77512ed5_deafb681",
+      "range": {
+        "startLine": 9,
+        "startChar": 62,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d662c4b2_24259c48",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-06-27T14:08:45Z",
       "side": 1,
       "message": "typo: allows",
+      "range": {
+        "startLine": 13,
+        "startChar": 67,
+        "endLine": 13,
+        "endChar": 72
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b048231d_575098b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T16:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d662c4b2_24259c48",
       "range": {
         "startLine": 13,
         "startChar": 67,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8659d24c_a480ab73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T16:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f81bcbf4_5e00e83a",
+      "range": {
+        "startLine": 14,
+        "startChar": 28,
+        "endLine": 14,
+        "endChar": 33
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3537810_1d5ac546",
@@ -83,6 +155,24 @@
       "writtenOn": "2023-06-27T14:08:45Z",
       "side": 1,
       "message": "Add a paragraph on how to invoke the new mode (aconfig create-java-lib --mode\u003d...) and what the default for --mode is.",
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d32a319f_7db6b3c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T16:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3537810_1d5ac546",
       "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -133,6 +223,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d68fd012_226ed02e",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T16:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd441cf3_744e61ff",
+      "range": {
+        "startLine": 65,
+        "startChar": 22,
+        "endLine": 65,
+        "endChar": 26
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bcfb677_f75e239e",
@@ -146,6 +260,30 @@
       "writtenOn": "2023-06-27T14:08:45Z",
       "side": 1,
       "message": "This looks identical to the expected_flags_content in  test_generate_java_code_production. Extract to a constant in mod tests instead, to remove repetition and make it more apparent what the difference between prod and test is?\n\nSame for expected_featureflags_content, below.",
+      "range": {
+        "startLine": 212,
+        "startChar": 12,
+        "endLine": 212,
+        "endChar": 32
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b074917_9cac1758",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T16:28:33Z",
+      "side": 1,
+      "message": "Thank you. Flags.java is not the same. It has the extra setter, and getter, and the won\u0027t initialize FEATURE_FLAGS. But yes, I think separate them will be helpful. I extracted the common part.",
+      "parentUuid": "2bcfb677_f75e239e",
       "range": {
         "startLine": 212,
         "startChar": 12,
@@ -181,6 +319,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eda807ba_61a32d99",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T16:28:33Z",
+      "side": 1,
+      "message": "Great question! For production version, my original thought is the number of instance of FeatureFlagsImpl shouldn\u0027t matter. or they should have the same behavior in the same process. So it will be the user\u0027s decision to use it as singleton or not.\n\nSo for the test mode, I keep the same behavior.",
+      "parentUuid": "13d8238d_5e28354c",
+      "range": {
+        "startLine": 263,
+        "startChar": 19,
+        "endLine": 263,
+        "endChar": 35
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "798b1eb9_e868bc77",
         "filename": "tools/aconfig/src/codegen_java.rs",
         "patchSetId": 3
@@ -192,6 +354,30 @@
       "writtenOn": "2023-06-27T14:08:45Z",
       "side": 1,
       "message": "Recommend this instead, initializing the set when loading the class:\n\n```\npublic final class FeatureFlagsImpl implements FeatureFlags {\n  private static final HashSet\u003cString\u003e flagSet \u003d new HashSet\u003c\u003e(Arrays.asList(Flags.FLAG_ONE, Flags.FLAG_TWO, ...));\n  ...\n}\n```",
+      "range": {
+        "startLine": 265,
+        "startChar": 16,
+        "endLine": 271,
+        "endChar": 19
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d77f95b_00e8294c",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T16:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "798b1eb9_e868bc77",
       "range": {
         "startLine": 265,
         "startChar": 16,
@@ -225,6 +411,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a87cbb6b_780ac809",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T16:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2e586b9_75a5db5c",
+      "range": {
+        "startLine": 274,
+        "startChar": 26,
+        "endLine": 274,
+        "endChar": 33
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4fc255c_e965dfdd",
@@ -238,6 +448,30 @@
       "writtenOn": "2023-06-27T14:10:22Z",
       "side": 1,
       "message": "This is getting difficult to read. Will splitting this file into two separate files (one for prod, one for test) help? (And does TinyTemplate support this?)",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49434ca1_c865a8d6",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T16:28:33Z",
+      "side": 1,
+      "message": "Yes we can have a separate file, like FeatureFlagsImpl.template, and FeatureFlagsImpl.test.template. The reason I put them together in one file is, originally I thought that in one file it will be helpful if we need to change some common places, and it might be easy to see the diff between these to version.\n\nBut you are right, it will be hard to read. Do you prefer separate files?",
+      "parentUuid": "b4fc255c_e965dfdd",
       "range": {
         "startLine": 16,
         "startChar": 11,
