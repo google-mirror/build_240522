@@ -142,6 +142,24 @@
       "parentUuid": "cf6d998f_bd3b425a",
       "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebbdf226_53775239",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2944,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-06-27T22:23:45Z",
+      "side": 1,
+      "message": "Yeah, that seems fine.",
+      "parentUuid": "aeaff946_cdd17c94",
+      "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
