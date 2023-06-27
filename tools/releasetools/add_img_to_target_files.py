@@ -517,8 +517,8 @@ def AddPvmfw(output_zip):
   return img.name
 
 
-def AddCustomImages(output_zip, partition_name):
-  """Adds and signs custom images in IMAGES/.
+def AddAVBCustomImages(output_zip, partition_name):
+  """Adds and signs avb custom images in IMAGES/.
 
   Args:
     output_zip: The output zip file (needs to be already open), or None to
@@ -799,6 +799,39 @@ def AddPackRadioImages(output_zip, images):
     else:
       shutil.copy(img_radio_path, prebuilt_path)
 
+
+def AddCustomImages(output_zip, partition_name):
+  """Copies images listed in META/custom_images_partition_list.txt from PREBUILT_IMAGES/ to IMAGES/.
+
+  Args:
+    output_zip: The output zip file (needs to be already open), or None to
+        write images to OPTIONS.input_tmp/.
+    Uses the image under IMAGES/ if it already exists. Otherwise looks for the
+    image under PREBUILT_IMAGES/, copy to IMAGES/
+
+  Raises:
+    AssertionError: If the image can't be found.
+  """
+
+  for img_name in OPTIONS.info_dict.get(
+           "{}_image_list".format(partition_name)).split():
+    custom_image = os.path.join(OPTIONS.input_tmp, "IMAGES", img_name)
+    if os.path.exists(custom_image):
+      logger.info("%s already exists, no need to overwrite...", img_name)
+      continue
+    custom_image_prebuilt_path = os.path.join(OPTIONS.input_tmp, "PREBUILT_IMAGES", img_name)
+    assert os.path.exists(custom_image_prebuilt_path), \
+        "Failed to find %s at %s" % (img_name, custom_image_prebuilt_path)
+
+    if output_zip:
+      common.ZipWrite(output_zip, custom_image_prebuilt_path, "IMAGES/" + img_name)
+    else:
+      shutil.copy(custom_image_prebuilt_path, custom_image)
+
+  img = OutputFile(output_zip, OPTIONS.input_tmp, "PREBUILT_IMAGES", partition_name + ".img")
+  assert os.path.exists(img.name), \
+      "There should be one %s.img" % (partition_name)
+  return partition_name
 
 def AddSuperEmpty(output_zip):
   """Create a super_empty.img and store it in output_zip."""
@@ -1098,18 +1131,25 @@ def AddImagesToTargetFiles(filename):
 
   # Custom images.
   custom_partitions = OPTIONS.info_dict.get(
-      "avb_custom_images_partition_list", "").strip().split()
+      "custom_images_partition_list", "").strip().split()
   for partition_name in custom_partitions:
     partition_name = partition_name.strip()
     banner("custom images for " + partition_name)
     partitions[partition_name] = AddCustomImages(output_zip, partition_name)
 
+  avb_custom_partitions = OPTIONS.info_dict.get(
+      "avb_custom_images_partition_list", "").strip().split()
+  for partition_name in avb_custom_partitions:
+    partition_name = partition_name.strip()
+    banner("avb custom images for " + partition_name)
+    partitions[partition_name] = AddAVBCustomImages(output_zip, partition_name)
+
   if OPTIONS.info_dict.get("avb_enable") == "true":
     # vbmeta_partitions includes the partitions that should be included into
     # top-level vbmeta.img, which are the ones that are not included in any
     # chained VBMeta image plus the chained VBMeta images themselves.
-    # Currently custom_partitions are all chained to VBMeta image.
-    vbmeta_partitions = common.AVB_PARTITIONS[:] + tuple(custom_partitions)
+    # Currently avb_custom_partitions are all chained to VBMeta image.
+    vbmeta_partitions = common.AVB_PARTITIONS[:] + tuple(avb_custom_partitions)
 
     vbmeta_system = OPTIONS.info_dict.get("avb_vbmeta_system", "").strip()
     if vbmeta_system:
