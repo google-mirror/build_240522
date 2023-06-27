@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "569a4446_e963d32d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T19:00:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09add079_2ff849b6",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 205
+      },
+      "revId": "332b86b59e13c2d4b7d9c2f46fe134dc78e0240c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a72d4422_d81b2954",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-06-27T18:42:10Z",
       "side": 1,
       "message": "IllegalArgumentException seems a better fit?",
+      "range": {
+        "startLine": 35,
+        "startChar": 22,
+        "endLine": 35,
+        "endChar": 42
+      },
+      "revId": "332b86b59e13c2d4b7d9c2f46fe134dc78e0240c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44ff7082_1cb36502",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T19:00:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a72d4422_d81b2954",
       "range": {
         "startLine": 35,
         "startChar": 22,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fdf3e9d_5dd26037",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T19:00:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c792d8e_193fe33d",
+      "range": {
+        "startLine": 43,
+        "startChar": 22,
+        "endLine": 43,
+        "endChar": 42
+      },
+      "revId": "332b86b59e13c2d4b7d9c2f46fe134dc78e0240c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "687c55b4_fb144f71",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-06-27T18:42:10Z",
       "side": 1,
       "message": "mFlags to follow Android\u0027s naming convention?",
+      "range": {
+        "startLine": 48,
+        "startChar": 37,
+        "endLine": 48,
+        "endChar": 44
+      },
+      "revId": "332b86b59e13c2d4b7d9c2f46fe134dc78e0240c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0e35ad8_2cc6671f",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T19:00:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "687c55b4_fb144f71",
       "range": {
         "startLine": 48,
         "startChar": 37,

@@ -576,6 +576,30 @@
       },
       "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb97ab36_9fb3b515",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-06-27T19:00:47Z",
+      "side": 1,
+      "message": "Sure, sounds good. then let\u0027s keep it like this in change. If the content becomes more complex later, we can think of changing the template engine. Thank you.",
+      "parentUuid": "5e4cddf4_3ea355a2",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
