@@ -124,6 +124,24 @@
       "parentUuid": "ed04c6bc_1e5039d4",
       "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeaff946_cdd17c94",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2944,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-06-27T22:23:10Z",
+      "side": 1,
+      "message": "there are a couple of devices that refer to $(MINIGZIP) (https://source.corp.google.com/search?q\u003dMINIGZIP%20case:yes%20file:mk$%20-file:%5Ebuild%2F\u0026sq\u003dpackage:%5Eandroid$%20-file:prebuilts%2Fvndk%2F%20-file:prebuilts%2Fruntime%2F) --- which probably means there are even more out in the wild. is a better answer to just rewrite MINIGZIP to point to GZIP, rather than (or at least \"in addition to\") actually introducing a new GZIP?",
+      "parentUuid": "cf6d998f_bd3b425a",
+      "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
