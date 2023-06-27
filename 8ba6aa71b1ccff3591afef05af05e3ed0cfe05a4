@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9283cc4f_97c50142",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T19:13:48Z",
+      "side": 1,
+      "message": "I\u0027m not 100% up to date on how the tests will use this. Are we missing a clearFlags method that sets all mFlagMap values to null?",
+      "range": {
+        "startLine": 261,
+        "startChar": 28,
+        "endLine": 261,
+        "endChar": 35
+      },
+      "revId": "8ba6aa71b1ccff3591afef05af05e3ed0cfe05a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
