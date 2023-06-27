@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77512ed5_deafb681",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T14:08:45Z",
+      "side": 1,
+      "message": "mising: and",
+      "range": {
+        "startLine": 9,
+        "startChar": 62,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d662c4b2_24259c48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T14:08:45Z",
+      "side": 1,
+      "message": "typo: allows",
+      "range": {
+        "startLine": 13,
+        "startChar": 67,
+        "endLine": 13,
+        "endChar": 72
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f81bcbf4_5e00e83a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T14:08:45Z",
+      "side": 1,
+      "message": "typo: values",
+      "range": {
+        "startLine": 14,
+        "startChar": 28,
+        "endLine": 14,
+        "endChar": 33
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3537810_1d5ac546",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T14:08:45Z",
+      "side": 1,
+      "message": "Add a paragraph on how to invoke the new mode (aconfig create-java-lib --mode\u003d...) and what the default for --mode is.",
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50a11e30_76f67b94",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T14:08:45Z",
+      "side": 1,
+      "message": "I would prefer `mode: CodegenMode` instead of a bool.",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 23
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd441cf3_744e61ff",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T14:08:45Z",
+      "side": 1,
+      "message": "No need to propagate CodegenMode here, OK to keep as bool. (In fact, necessary because of how TinyTemplate works!)",
+      "range": {
+        "startLine": 65,
+        "startChar": 22,
+        "endLine": 65,
+        "endChar": 26
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bcfb677_f75e239e",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T14:08:45Z",
+      "side": 1,
+      "message": "This looks identical to the expected_flags_content in  test_generate_java_code_production. Extract to a constant in mod tests instead, to remove repetition and make it more apparent what the difference between prod and test is?\n\nSame for expected_featureflags_content, below.",
+      "range": {
+        "startLine": 212,
+        "startChar": 12,
+        "endLine": 212,
+        "endChar": 32
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d8238d_5e28354c",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T14:08:45Z",
+      "side": 1,
+      "message": "What is the maximum number of FeatureFlagsImpl objects we expect to exist? I\u0027m guessing only a single object, so make this a singleton?",
+      "range": {
+        "startLine": 263,
+        "startChar": 19,
+        "endLine": 263,
+        "endChar": 35
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "798b1eb9_e868bc77",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T14:08:45Z",
+      "side": 1,
+      "message": "Recommend this instead, initializing the set when loading the class:\n\n```\npublic final class FeatureFlagsImpl implements FeatureFlags {\n  private static final HashSet\u003cString\u003e flagSet \u003d new HashSet\u003c\u003e(Arrays.asList(Flags.FLAG_ONE, Flags.FLAG_TWO, ...));\n  ...\n}\n```",
+      "range": {
+        "startLine": 265,
+        "startChar": 16,
+        "endLine": 271,
+        "endChar": 19
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2e586b9_75a5db5c",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T14:08:45Z",
+      "side": 1,
+      "message": "How about collapsing the set and the map to save memory? The map\u0027s keys are the FLAG_NAMES, the map\u0027s values are null (flag not set) or a Boolean value?",
+      "range": {
+        "startLine": 274,
+        "startChar": 26,
+        "endLine": 274,
+        "endChar": 33
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
