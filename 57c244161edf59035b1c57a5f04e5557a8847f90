@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c7f1e8e_4cdd95d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-06-27T15:12:40Z",
+      "side": 1,
+      "message": "I mean the link on the Gerrit UI works. If you click the link, it takes you to the right CL. It doesn\u0027t work if you copy the link and paste it to the address bar manually.\n\nAlternatively, you can right-click the link on the Gerrit UI and select \"copy link address\". That also works.",
+      "parentUuid": "a04b9d9f_9505976b",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 23
+      },
+      "revId": "57c244161edf59035b1c57a5f04e5557a8847f90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca7b9a0c_bd62eb11",
