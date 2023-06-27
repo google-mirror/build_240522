@@ -365,6 +365,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c56306e_b66407c5",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T18:42:10Z",
+      "side": 1,
+      "message": "OK. I was thinking about multithreading etc but if we go with multiple instances of the class that\u0027s not really a problem.",
+      "parentUuid": "eda807ba_61a32d99",
+      "range": {
+        "startLine": 263,
+        "startChar": 19,
+        "endLine": 263,
+        "endChar": 35
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "798b1eb9_e868bc77",
@@ -496,6 +520,30 @@
       "side": 1,
       "message": "Yes we can have a separate file, like FeatureFlagsImpl.template, and FeatureFlagsImpl.test.template. The reason I put them together in one file is, originally I thought that in one file it will be helpful if we need to change some common places, and it might be easy to see the diff between these to version.\n\nBut you are right, it will be hard to read. Do you prefer separate files?",
       "parentUuid": "b4fc255c_e965dfdd",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "5fc3d14899412d2b2760eabd1a40a1fc66dc261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e4cddf4_3ea355a2",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-27T18:42:10Z",
+      "side": 1,
+      "message": "I don\u0027t feel strongly either way. As discussed offline, I\u0027m overwhelmed by the amount of conditionals vs verbatim text in the template files and splitting into two files may only add a new problem to the mix.\n\nLet\u0027s keep this as is for now. We might replace tiny template with something else down the line, but that\u0027s a problem we can punt for now.",
+      "parentUuid": "49434ca1_c865a8d6",
       "range": {
         "startLine": 16,
         "startChar": 11,
