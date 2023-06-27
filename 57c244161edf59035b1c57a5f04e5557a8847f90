@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2524d9f_a5403f9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-06-27T13:33:19Z",
+      "side": 1,
+      "message": "use a link that works externally, e.g. https://r.android.com/2637193",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 23
+      },
+      "revId": "57c244161edf59035b1c57a5f04e5557a8847f90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca7b9a0c_bd62eb11",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-06-27T13:33:19Z",
+      "side": 1,
+      "message": "Add a comment similar to the one in Soong here as well, explaining why this is needed and the details like rsync.",
+      "range": {
+        "startLine": 447,
+        "startChar": 0,
+        "endLine": 447,
+        "endChar": 72
+      },
+      "revId": "57c244161edf59035b1c57a5f04e5557a8847f90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
