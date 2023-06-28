@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7a2b73f_f6baf2d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2023-06-28T17:09:55Z",
+      "side": 1,
+      "message": "Let\u0027s",
+      "revId": "e80156ea51139785a54792a16ef40d76084a70b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ac02ca9_9284fec4",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2023-06-28T17:09:55Z",
+      "side": 1,
+      "message": "Let\u0027s remove this file from the CL, so that we don\u0027t run `dupcheck.sh` on build invocations. Instead, let\u0027s make sure that we document that someone can run it after creating a build to see what duplicates exist.",
+      "revId": "e80156ea51139785a54792a16ef40d76084a70b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
