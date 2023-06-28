@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "745bfdc4_e41d70e4",
+        "filename": "tools/aconfig/TEST_MAPPING",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-28T19:50:24Z",
+      "side": 1,
+      "message": "Caveat: not an expert on presubmit and TEST_MAPPING.\n\naconfig.test used to be part of presubmit, and from what I understood it was automatically picked up because there was no TEST_MAPPING file. If adding this file doesn\u0027t remove aconfig.test from presubmit, stop reading now.\n\nIf adding this file *does* remove aconfig.test from presubmit, I want aconfig.test to be mentioned in TEST_MAPPING as well as FlagAnnotationTests.\n\nReplacing line 7 with \u0027\"name\": \"aconfig.test\"\u0027 and running atest --test-mapping makes atest think aconfig.test is a device test:\n\n`Running 1 tests that require device.`\n \nThis is not true; aconfig.test are host tests (soong module type rust_test_host). I don\u0027t know how to fix this. Any advice?",
+      "range": {
+        "startLine": 8,
+        "startChar": 4,
+        "endLine": 8,
+        "endChar": 5
+      },
+      "revId": "d5253a03bfb5034b26fa5bbfbe682c48b6d1e314",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
