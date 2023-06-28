@@ -10,8 +10,14 @@ package {
 
 cc_defaults {
     name: "zipalign_defaults",
+    multilib: {
+        lib32: {
+            suffix: "32",
+        },
+    },
     target: {
         windows: {
+            compile_multilib: "both",
             host_ldlibs: ["-lpthread"],
             enabled: true,
         },
