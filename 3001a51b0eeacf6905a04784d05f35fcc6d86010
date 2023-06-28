@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "275293e7_29e0d330",
+        "filename": "core/tasks/art-host-tests.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-06-28T22:22:15Z",
+      "side": 1,
+      "message": "This should be indented with a tab plus 2 spaces",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 4
+      },
+      "revId": "3001a51b0eeacf6905a04784d05f35fcc6d86010",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
