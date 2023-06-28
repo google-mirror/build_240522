@@ -3354,6 +3354,10 @@ installed-file-list: $(INSTALLED_FILES_FILE)
 systemimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,systemimage)
 BUILT_SYSTEMIMAGE := $(systemimage_intermediates)/system.img
+BUILT_SYSTEMIMAGE_ZIP := $(systemimage_intermediates)/system.zip
+
+$(systemimage_intermediates)/staging_dir.stamp: $(FULL_SYSTEMIMAGE_DEPS)
+	touch $@
 
 # $(1): output file
 define build-systemimage-target
@@ -3368,6 +3372,14 @@ define build-systemimage-target
                cp $(INSTALLED_FILES_FILE) $${DIST_DIR}/installed-files-rescued.txt; \
                exit 1 )
 endef
+
+$(warning BUILT_SYSTEMIMAGE_ZIP: $(BUILT_SYSTEMIMAGE_ZIP))
+# out/target/product/emulator_x86_64/obj/PACKAGING/systemimage_intermediates/system.zip
+
+
+$(BUILT_SYSTEMIMAGE_ZIP): $(SOONG_ZIP) $(FULL_SYSTEMIMAGE_DEPS)
+	$(SOONG_ZIP) -C $(TARGET_OUT) -D $(TARGET_OUT) -o $@
+
 
 ifeq ($(BOARD_AVB_ENABLE),true)
 $(BUILT_SYSTEMIMAGE): $(BOARD_AVB_SYSTEM_KEY_PATH)
