@@ -16,6 +16,24 @@
       "message": "Friendly ping :)",
       "revId": "d455603a5eae19580f3cb2fb55c5278ca3408ce9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81edc287_e0a2a70b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-06-28T10:20:34Z",
+      "side": 1,
+      "message": "Sorry for the delay, I thought it was +2ed already",
+      "parentUuid": "35870051_a1d764f2",
+      "revId": "d455603a5eae19580f3cb2fb55c5278ca3408ce9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
