@@ -3308,25 +3308,36 @@ installed-file-list: $(INSTALLED_FILES_FILE)
 systemimage_intermediates := \
     $(call intermediates-dir-for,PACKAGING,systemimage)
 BUILT_SYSTEMIMAGE := $(systemimage_intermediates)/system.img
+BUILT_SYSTEMIMAGE_PROPS_FILE := $(systemimage_intermediates)/system_image_info.txt
+BUILT_SYSTEMIMAGE_ZIP := $(systemimage_intermediates)/system.zip
 
 # $(1): output file
 define build-systemimage-target
   @echo "Target system fs image: $(1)"
-  @mkdir -p $(dir $(1)) $(systemimage_intermediates) && rm -rf $(systemimage_intermediates)/system_image_info.txt
-  $(call generate-image-prop-dictionary, $(systemimage_intermediates)/system_image_info.txt,system, \
-      skip_fsck=true)
+  @mkdir -p $(dir $(1)) $(systemimage_intermediates)
   PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
       $(BUILD_IMAGE) \
-          $(TARGET_OUT) $(systemimage_intermediates)/system_image_info.txt $(1) $(TARGET_OUT) \
+          $(TARGET_OUT) $(BUILT_SYSTEMIMAGE_PROPS_FILE) $(1) $(TARGET_OUT) \
           || ( mkdir -p $${DIST_DIR}; \
                cp $(INSTALLED_FILES_FILE) $${DIST_DIR}/installed-files-rescued.txt; \
                exit 1 )
 endef
 
+$(warning BUILT_SYSTEMIMAGE_PROPS_FILE: $(BUILT_SYSTEMIMAGE_PROPS_FILE))
+$(warning BUILT_SYSTEMIMAGE_ZIP: $(BUILT_SYSTEMIMAGE_ZIP))
+# out/target/product/emulator_x86_64/obj/PACKAGING/systemimage_intermediates/system.zip
+$(BUILT_SYSTEMIMAGE_PROPS_FILE):
+	@mkdir -p $(dir $@)
+	$(call generate-image-prop-dictionary,$@,system,skip_fsck=true)
+
+$(BUILT_SYSTEMIMAGE_ZIP): $(SOONG_ZIP) $(FULL_SYSTEMIMAGE_DEPS)
+	$(SOONG_ZIP) -C $(TARGET_OUT) -D $(TARGET_OUT) -o $@
+
+
 ifeq ($(BOARD_AVB_ENABLE),true)
 $(BUILT_SYSTEMIMAGE): $(BOARD_AVB_SYSTEM_KEY_PATH)
 endif
-$(BUILT_SYSTEMIMAGE): $(FULL_SYSTEMIMAGE_DEPS) $(INSTALLED_FILES_FILE)
+$(BUILT_SYSTEMIMAGE): $(BUILT_SYSTEMIMAGE_PROPS_FILE) $(FULL_SYSTEMIMAGE_DEPS) $(INSTALLED_FILES_FILE)
 	$(call build-systemimage-target,$@)
 
 $(call declare-1p-container,$(BUILT_SYSTEMIMAGE),system/extras)
@@ -3381,7 +3392,7 @@ systemimage: $(INSTALLED_SYSTEMIMAGE_TARGET)
 SYSTEM_NOTICE_DEPS += $(INSTALLED_SYSTEMIMAGE_TARGET)
 
 .PHONY: systemimage-nodeps snod
-systemimage-nodeps snod: $(filter-out systemimage-nodeps snod,$(MAKECMDGOALS)) \
+systemimage-nodeps snod: $(BUILT_SYSTEMIMAGE_PROPS_FILE) $(filter-out systemimage-nodeps snod,$(MAKECMDGOALS)) \
 	            | $(INTERNAL_USERIMAGES_DEPS)
 	@echo "make $@: ignoring dependencies"
 	$(call build-systemimage-target,$(INSTALLED_SYSTEMIMAGE_TARGET))
