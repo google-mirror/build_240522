@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88daace7_035a3cda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-06-28T10:20:07Z",
+      "side": 1,
+      "message": "I think the links should work everywhere externally, as this is just a commit message in an open-source project. If I were an external contributor and I would try and follow the link and it failed, I would have hardly guessed that I should go the right web page first.",
+      "parentUuid": "8c7f1e8e_4cdd95d0",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 23
+      },
+      "revId": "57c244161edf59035b1c57a5f04e5557a8847f90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca7b9a0c_bd62eb11",
