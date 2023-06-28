@@ -16,6 +16,24 @@
       "message": "Thanks for a quick fix.",
       "revId": "97a5afe0f3a2ab6ee41176863452e00e66820f83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df0ecb24_f3ad123c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-06-28T01:28:04Z",
+      "side": 1,
+      "message": "Btw, should we fix test code as well? It looks like it has been flaky since the test execution order has impacted. (The test passes when the other tests run before it and set OPTION.search_path). I think it\u0027s not good if tests behave differently based on execution order, or relying on side effects. Should the test (test_GenerateGkiCertificate_KeyPathNotFound) needs to set OPTION.search_path as None explicitly if it\u0027s the behavior we want to test?",
+      "parentUuid": "4942558e_215efd6c",
+      "revId": "97a5afe0f3a2ab6ee41176863452e00e66820f83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
