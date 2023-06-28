@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "333a87a9_40a9b0ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-06-28T15:56:44Z",
+      "side": 1,
+      "message": "@ccross@android.com is there a better place for this change? \nI wanted it in target/product/base_system.mk next to where we include hwservicemanager in `PRODUCT_PACKAGES` but it doesn\u0027t have access to `TARGET_OUT` and I don\u0027t understand the hierarchy/order of all the different types of makefiles. I just put it here because of the other symlinks and it works.",
+      "revId": "9076617102d60de9d15413d6247156e6a139551f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
