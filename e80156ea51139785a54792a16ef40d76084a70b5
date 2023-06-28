@@ -51,6 +51,24 @@
       "parentUuid": "0ac02ca9_9284fec4",
       "revId": "e80156ea51139785a54792a16ef40d76084a70b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9978f039_c36074fe",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2023-06-28T17:34:52Z",
+      "side": 1,
+      "message": "Maybe just document it inside the script (how to run it, etc.). Specifically, it would be good to know that this needs to be run for each partition separately.",
+      "parentUuid": "ef3347ae_1e8164e3",
+      "revId": "e80156ea51139785a54792a16ef40d76084a70b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
