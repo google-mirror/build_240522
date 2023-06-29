@@ -1,0 +1,10 @@
+
+#include "{header}.h"
+#include "{header}_flag_provider.h"
+
+namespace {cpp_namespace} \{
+{{ for item in class_elements}}
+std::string const {class_name}::{item.capitalized_flag_name} = "{item.device_config_flag}";{{ endfor }}
+std::unique_ptr<{class_name}_flag_provider_interface> {class_name}::provider_ =
+    std::make_unique<{class_name}_flag_provider>();
+}
