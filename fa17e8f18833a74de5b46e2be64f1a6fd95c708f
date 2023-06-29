@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b47867a0_92ba632c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-29T07:59:29Z",
+      "side": 1,
+      "message": "t least",
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67f4dd79_fe55e584",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-29T07:59:29Z",
+      "side": 1,
+      "message": "CodegenMode (even if the enum only has two values IMO an explicit enum conveys the intent more clearly)",
+      "range": {
+        "startLine": 29,
+        "startChar": 14,
+        "endLine": 29,
+        "endChar": 18
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34e9e26d_3e092681",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-29T07:59:29Z",
+      "side": 1,
+      "message": "Simplify: `join(\"::\")`",
+      "range": {
+        "startLine": 39,
+        "startChar": 48,
+        "endLine": 39,
+        "endChar": 77
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a7de938_7b0cb1be",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-29T07:59:29Z",
+      "side": 1,
+      "message": "package fields are not required to include dots, so `cpp_namespace` may end up as the empty string which would lead to an anonymous namespace in the generated code\n\n```\nnamespace { ... }\n```\n\nWe *could* add a constraint to the package field to require at least one dot. I\u0027m not against this but would like to discuss it in the aconfig chat first. Starting a thread there now.",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 77
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e763eb4_fed6d0fb",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-29T07:59:29Z",
+      "side": 1,
+      "message": "```\n\u0026format!(\"{}.h\", header)\n```\n\n(This is more rust-like IMO)",
+      "range": {
+        "startLine": 53,
+        "startChar": 18,
+        "endLine": 53,
+        "endChar": 43
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c079983_255fadc3",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-29T07:59:29Z",
+      "side": 1,
+      "message": "Change variable name to `uppercase_flag_name`: only the first letter in a  capitalized word is upper case, the rest lowercase, but here you\u0027re making all chars upper case.",
+      "range": {
+        "startLine": 119,
+        "startChar": 8,
+        "endLine": 119,
+        "endChar": 29
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56100059_aff90695",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-29T07:59:29Z",
+      "side": 1,
+      "message": "The contents of test_generate_cpp_code_for_prod and _test look identical except for PROD_FLAG_PROVIDER_HEADER_EXPECTED vs TEST_FLAG_PROVIDER_HEADER_EXPECTED. Extract to separate fn (in mod tests) and change\n\n```\n#[test]\nfn test_generate_cpp_code_for_prod {\n  foo(PROD_FLAG_PROVIDER_HEADER_EXPECTED);\n}\n\n#[test]\nfn test_generate_cpp_code_for_test {\n  foo(TEST_FLAG_PROVIDER_HEADER_EXPECTED);\n}\n```",
+      "range": {
+        "startLine": 333,
+        "startChar": 1,
+        "endLine": 373,
+        "endChar": 10
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f36b10a_983fe9be",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-29T07:59:29Z",
+      "side": 1,
+      "message": "Use the new CodegenMode enum introduced in aosp/2638410. See that CL for how to hook it up to clap.",
+      "range": {
+        "startLine": 140,
+        "startChar": 50,
+        "endLine": 140,
+        "endChar": 54
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "602ddef1_ef702b9e",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-29T07:59:29Z",
+      "side": 1,
+      "message": "```suggestion\n.arg(Arg::new(\"mode\").long(\"mode\").value_parser(EnumValueParser::\u003ccommands::CodegenMode\u003e::new()).default_value(\"production\"),\n```",
+      "range": {
+        "startLine": 60,
+        "startChar": 16,
+        "endLine": 60,
+        "endChar": 79
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
