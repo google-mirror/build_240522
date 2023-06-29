@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0845e5bb_691083e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1994695
+      },
+      "writtenOn": "2023-06-29T13:50:26Z",
+      "side": 1,
+      "message": "Removed the Makefile changes and the script is now standalone, with instructions on how to run it.",
+      "revId": "6e6a95b6063a920ca369f9fb4f6963aeeb8d4390",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
