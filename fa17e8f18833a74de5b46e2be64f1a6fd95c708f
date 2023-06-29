@@ -294,6 +294,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "beb60314_0bb666bb",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-06-29T18:26:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56100059_aff90695",
+      "range": {
+        "startLine": 333,
+        "startChar": 1,
+        "endLine": 373,
+        "endChar": 10
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f36b10a_983fe9be",
