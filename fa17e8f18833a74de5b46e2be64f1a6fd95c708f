@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86d91bb1_3d7ba3fc",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-06-29T18:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67f4dd79_fe55e584",
+      "range": {
+        "startLine": 29,
+        "startChar": 14,
+        "endLine": 29,
+        "endChar": 18
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34e9e26d_3e092681",
@@ -176,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "208b8732_250c256b",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-06-29T18:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e763eb4_fed6d0fb",
+      "range": {
+        "startLine": 53,
+        "startChar": 18,
+        "endLine": 53,
+        "endChar": 43
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c079983_255fadc3",
@@ -189,6 +237,30 @@
       "writtenOn": "2023-06-29T07:59:29Z",
       "side": 1,
       "message": "Change variable name to `uppercase_flag_name`: only the first letter in a  capitalized word is upper case, the rest lowercase, but here you\u0027re making all chars upper case.",
+      "range": {
+        "startLine": 119,
+        "startChar": 8,
+        "endLine": 119,
+        "endChar": 29
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50fd1f29_7797a433",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-06-29T18:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c079983_255fadc3",
       "range": {
         "startLine": 119,
         "startChar": 8,
@@ -245,6 +317,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aa52dfc_ad417a32",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-06-29T18:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f36b10a_983fe9be",
+      "range": {
+        "startLine": 140,
+        "startChar": 50,
+        "endLine": 140,
+        "endChar": 54
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "602ddef1_ef702b9e",
@@ -258,6 +354,30 @@
       "writtenOn": "2023-06-29T07:59:29Z",
       "side": 1,
       "message": "```suggestion\n.arg(Arg::new(\"mode\").long(\"mode\").value_parser(EnumValueParser::\u003ccommands::CodegenMode\u003e::new()).default_value(\"production\"),\n```",
+      "range": {
+        "startLine": 60,
+        "startChar": 16,
+        "endLine": 60,
+        "endChar": 79
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fda07b8e_5b1f77fd",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-06-29T18:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "602ddef1_ef702b9e",
       "range": {
         "startLine": 60,
         "startChar": 16,
