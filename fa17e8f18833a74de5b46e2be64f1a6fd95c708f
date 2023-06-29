@@ -105,6 +105,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01a71647_2ccf4ea2",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-06-29T17:46:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a7de938_7b0cb1be",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 77
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fe8b91a_5ffe8394",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-06-29T17:46:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34e9e26d_3e092681",
+      "range": {
+        "startLine": 39,
+        "startChar": 48,
+        "endLine": 39,
+        "endChar": 77
+      },
+      "revId": "fa17e8f18833a74de5b46e2be64f1a6fd95c708f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e763eb4_fed6d0fb",
