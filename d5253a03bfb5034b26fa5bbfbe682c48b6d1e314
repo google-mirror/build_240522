@@ -22,6 +22,30 @@
       },
       "revId": "d5253a03bfb5034b26fa5bbfbe682c48b6d1e314",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bba4ae10_0b10b7ae",
+        "filename": "tools/aconfig/TEST_MAPPING",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1799018
+      },
+      "writtenOn": "2023-06-29T00:34:29Z",
+      "side": 1,
+      "message": "The aconfig.test is a unit test which is always included in presubmit (go/a-unit-tests#marking-a-build-target-as-unit-test, note rust_test_host by default are unit tests). You can find this test in suite/bazel_host_unit_tests_presubmit for this change (https://screenshot.googleplex.com/97C9McmidJuXnF9).\n\nThe TEST_MAPPING just adds tests into the related test_mapping test suites. In this case, it is the test_mapping/presubmit-avd. It won\u0027t remove any test from suite/bazel_host_unit_tests_presubmit. So the aconfig.test will still be in presubmit.",
+      "parentUuid": "745bfdc4_e41d70e4",
+      "range": {
+        "startLine": 8,
+        "startChar": 4,
+        "endLine": 8,
+        "endChar": 5
+      },
+      "revId": "d5253a03bfb5034b26fa5bbfbe682c48b6d1e314",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
