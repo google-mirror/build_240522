@@ -74,7 +74,7 @@ java_aconfig_library {
     aconfig_declarations: "aconfig.test.flags",
 }
 
-android_test {
+android_app {
     name: "aconfig.test.java",
     srcs: [
         "tests/**/*.java",
@@ -86,5 +86,5 @@ android_test {
         "testng",
         "aconfig_test_java",
     ],
-    test_suites: ["device-tests"],
+    platform_apis:true,
 }
