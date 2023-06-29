@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "836c0bc0_920a9e07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-29T07:15:34Z",
+      "side": 1,
+      "message": "Thanks for the details explanation on presubmit and TEST_MAPPING!",
+      "revId": "16e6825fc187d10f21a20ed94f1a79ecf405805e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
