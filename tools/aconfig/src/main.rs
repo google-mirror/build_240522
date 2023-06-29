@@ -17,7 +17,9 @@
 //! `aconfig` is a build time tool to manage build time configurations, such as feature flags.
 
 use anyhow::{anyhow, bail, ensure, Result};
-use clap::{builder::ArgAction, builder::EnumValueParser, Arg, ArgMatches, Command};
+use clap::{
+    builder::ArgAction, builder::EnumValueParser, parser::ValueSource, Arg, ArgMatches, Command,
+};
 use core::any::Any;
 use std::fs;
 use std::io;
@@ -54,7 +56,8 @@ fn cli() -> Command {
         .subcommand(
             Command::new("create-cpp-lib")
                 .arg(Arg::new("cache").long("cache").required(true))
-                .arg(Arg::new("out").long("out").required(true)),
+                .arg(Arg::new("out").long("out").required(true))
+                .arg(Arg::new("test").long("test").action(ArgAction::SetTrue)),
         )
         .subcommand(
             Command::new("create-rust-lib")
@@ -156,9 +159,12 @@ fn main() -> Result<()> {
         }
         Some(("create-cpp-lib", sub_matches)) => {
             let cache = open_single_file(sub_matches, "cache")?;
-            let generated_file = commands::create_cpp_lib(cache)?;
+            let for_test = sub_matches.value_source("test") == Some(ValueSource::CommandLine);
+            let generated_files = commands::create_cpp_lib(cache, for_test)?;
             let dir = PathBuf::from(get_required_arg::<String>(sub_matches, "out")?);
-            write_output_file_realtive_to_dir(&dir, &generated_file)?;
+            generated_files
+                .iter()
+                .try_for_each(|file| write_output_file_realtive_to_dir(&dir, file))?;
         }
         Some(("create-rust-lib", sub_matches)) => {
             let cache = open_single_file(sub_matches, "cache")?;
