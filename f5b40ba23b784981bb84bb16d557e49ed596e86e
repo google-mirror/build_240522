@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure if this is the best place to add this soong variable.\nI need it for the https://android-review.git.corp.google.com/c/platform/external/armnn/+/2645504/1/shim/sl/generate_prebuilts.sh script that builds that dynamic library for aosp_arm-userdebug and aosp_arm64-userdebug.",
       "revId": "f5b40ba23b784981bb84bb16d557e49ed596e86e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f57dd5f4_6f5bf92f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-06-30T16:30:19Z",
+      "side": 1,
+      "message": "At first glance, adding it here would set this variable for all products. Instead can we perhaps set it just for those the two products that you are interested in?\n\nJoe, do you have a recommendation for this use case?",
+      "parentUuid": "d2b44faa_bebc3bc6",
+      "revId": "f5b40ba23b784981bb84bb16d557e49ed596e86e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
