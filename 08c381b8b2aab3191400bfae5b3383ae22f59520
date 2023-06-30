@@ -56,6 +56,30 @@
       },
       "revId": "08c381b8b2aab3191400bfae5b3383ae22f59520",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d604478a_e7ae0097",
+        "filename": "target/board/module_riscv64/BoardConfig.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-06-30T12:50:57Z",
+      "side": 1,
+      "message": "This is copy-pasted from http://cs/h/android/platform/superproject/+/master:build/make/target/board/generic_riscv64/BoardConfig.mk?l\u003d27 (and a few other board configs for riscv64). I\u0027m not sure there isn\u0027t a bug already, but if I file one, I would need to add it in all board configs. If you think this is necessary, should it be done in a follow up CL?",
+      "parentUuid": "a9b7ca36_5ba1b1a7",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 34
+      },
+      "revId": "08c381b8b2aab3191400bfae5b3383ae22f59520",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
