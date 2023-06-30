@@ -16,6 +16,23 @@
       "message": "https://android.googlesource.com/platform/build",
       "revId": "08c381b8b2aab3191400bfae5b3383ae22f59520",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c63cda3f_b54a99ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-06-30T10:56:20Z",
+      "side": 1,
+      "message": "Forrest build with the change https://android-build.corp.google.com/build_explorer/branch_dashboard/git_master/build_id/P59172386/ has passed, this means that the presubmit error is unrelated.",
+      "revId": "08c381b8b2aab3191400bfae5b3383ae22f59520",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
