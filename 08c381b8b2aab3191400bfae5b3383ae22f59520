@@ -33,6 +33,29 @@
       "message": "Forrest build with the change https://android-build.corp.google.com/build_explorer/branch_dashboard/git_master/build_id/P59172386/ has passed, this means that the presubmit error is unrelated.",
       "revId": "08c381b8b2aab3191400bfae5b3383ae22f59520",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9b7ca36_5ba1b1a7",
+        "filename": "target/board/module_riscv64/BoardConfig.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2023-06-30T12:42:51Z",
+      "side": 1,
+      "message": "Can you file a bug and a TODO for this to be removed?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 34
+      },
+      "revId": "08c381b8b2aab3191400bfae5b3383ae22f59520",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
