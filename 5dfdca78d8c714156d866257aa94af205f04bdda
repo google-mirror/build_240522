@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fa4f11a_3e3f8f65",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-30T07:17:36Z",
+      "side": 1,
+      "message": "I would prefer if this was a match statement instead -- today it doesn\u0027t matter but if someone adds a new CodegenMode in the future, rustc will warn about the new value not being covered in the match; with an if statement you don\u0027t get that support.\n\n```\ntemplate: match codegen_mode {\n  CodegenMode::Production \u003d\u003e include_str!(...),\n  CodegenMode::Test \u003d\u003e include_str!(...),\n},\n```",
+      "range": {
+        "startLine": 61,
+        "startChar": 22,
+        "endLine": 65,
+        "endChar": 14
+      },
+      "revId": "5dfdca78d8c714156d866257aa94af205f04bdda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65bbb19f_5435013e",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-30T07:17:36Z",
+      "side": 1,
+      "message": "Add `inline` to these functions?\n\nNot sure what the consensus on `inline` is these days, but I think it doesn\u0027t hurt and at worst is just ignored.",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 4
+      },
+      "revId": "5dfdca78d8c714156d866257aa94af205f04bdda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2a448e8_92987237",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-30T07:17:36Z",
+      "side": 1,
+      "message": "(If what follows needs to be changed, it can be changed in a follow-up CL.)\n\nShould the prod version of read-the-value-of-a-READ_ONLY-flag functions call out to a provider? There should be a (negligible?) performance overhead to call a virtual method compared to a hard-coded \"return \u003cbool\u003e\" where the compiler can optimize by replacing the entire `if (enabled_ro())` with `if (true)`?",
+      "range": {
+        "startLine": 170,
+        "startChar": 5,
+        "endLine": 170,
+        "endChar": 15
+      },
+      "revId": "5dfdca78d8c714156d866257aa94af205f04bdda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c199666_3a53637b",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-30T07:17:36Z",
+      "side": 1,
+      "message": "match instead of if",
+      "range": {
+        "startLine": 352,
+        "startChar": 16,
+        "endLine": 352,
+        "endChar": 52
+      },
+      "revId": "5dfdca78d8c714156d866257aa94af205f04bdda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fe00474_e7022eb4",
+        "filename": "tools/aconfig/templates/cpp_test_flag_provider.template",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-06-30T07:17:36Z",
+      "side": 1,
+      "message": "This can be collapsed to just use a map, and map flag names to to a tristate (override-not-set, override-to-true, override-to-false).\n\nSee similar discussion here: https://android-review.git.corp.google.com/c/platform/build/+/2638410/comment/f2e586b9_75a5db5c/\n\nWDYT?",
+      "range": {
+        "startLine": 12,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 48
+      },
+      "revId": "5dfdca78d8c714156d866257aa94af205f04bdda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
