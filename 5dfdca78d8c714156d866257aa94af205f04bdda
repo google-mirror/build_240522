@@ -234,6 +234,30 @@
       },
       "revId": "5dfdca78d8c714156d866257aa94af205f04bdda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad0482a6_fa838b90",
+        "filename": "tools/aconfig/templates/cpp_test_flag_provider.template",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-03T11:31:19Z",
+      "side": 1,
+      "message": "Right, I forgot this was only for testing. Thanks for pointing that out; your reasoning makes perfect sense.",
+      "parentUuid": "d4f8857b_3a476ff2",
+      "range": {
+        "startLine": 12,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 48
+      },
+      "revId": "5dfdca78d8c714156d866257aa94af205f04bdda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
