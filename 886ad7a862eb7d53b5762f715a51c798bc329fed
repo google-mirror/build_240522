@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ad0b04b_4df2cb68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1650177
+      },
+      "writtenOn": "2023-07-03T05:32:11Z",
+      "side": 1,
+      "message": "b/288624195#comment7: Cherrypick to aosp",
+      "revId": "886ad7a862eb7d53b5762f715a51c798bc329fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
