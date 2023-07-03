@@ -104,6 +104,30 @@
       },
       "revId": "1a4a1716f1472069d0e151414d3016454490cd2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fdc5536_d988f85d",
+        "filename": "core/tasks/tools/compatibility.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1863710
+      },
+      "writtenOn": "2023-07-03T09:16:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f91491a_45e73525",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 14
+      },
+      "revId": "1a4a1716f1472069d0e151414d3016454490cd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
