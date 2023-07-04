@@ -2086,6 +2086,15 @@ function avbtool() {
     "$ANDROID_SOONG_HOST_OUT"/bin/avbtool $@
 }
 
+function printflags() {
+    local aconfig="$ANDROID_SOONG_HOST_OUT"/bin/aconfig
+    local flags_file="$(gettop)"/out/soong/.intermediates/all_aconfig_declarations.pb
+    if [[ ! -f "$aconfig" || ! -f "$flags_file" ]]; then
+        m aconfig all_aconfig_declarations
+    fi
+    $aconfig dump --cache $flags_file $@
+}
+
 validate_current_shell
 set_global_paths
 source_vendorsetup
