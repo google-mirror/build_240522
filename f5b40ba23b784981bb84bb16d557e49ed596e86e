@@ -52,6 +52,24 @@
       "parentUuid": "f57dd5f4_6f5bf92f",
       "revId": "f5b40ba23b784981bb84bb16d557e49ed596e86e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "933aa07f_5d754e91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-07-05T16:27:16Z",
+      "side": 1,
+      "message": "Does arm and arm64 *always* imply these flags, even when it\u0027s not being used to make these prebuilts?\n\nBut actually first, I have a deeper question: Why does this have to be a prebuilt at all?",
+      "parentUuid": "045a61e4_b1956005",
+      "revId": "f5b40ba23b784981bb84bb16d557e49ed596e86e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
