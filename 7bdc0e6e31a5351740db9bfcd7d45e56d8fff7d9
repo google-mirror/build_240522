@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bb4fc68_a965a6c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1799018
+      },
+      "writtenOn": "2023-07-05T08:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "918c511f_32f37dbd",
+      "revId": "7bdc0e6e31a5351740db9bfcd7d45e56d8fff7d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b486b776_8828927d",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e30cd094_a507a4c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1799018
+      },
+      "writtenOn": "2023-07-05T08:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b486b776_8828927d",
+      "revId": "7bdc0e6e31a5351740db9bfcd7d45e56d8fff7d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b7a8942_c3da7bc3",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-07-05T06:51:10Z",
       "side": 1,
       "message": "```suggestion\n// proto libraries for consumers of `aconfig dump --format\u003dprotobuf` output\n```",
+      "revId": "7bdc0e6e31a5351740db9bfcd7d45e56d8fff7d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ad8a1bc_6af8967b",
+        "filename": "tools/aconfig/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1799018
+      },
+      "writtenOn": "2023-07-05T08:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b7a8942_c3da7bc3",
       "revId": "7bdc0e6e31a5351740db9bfcd7d45e56d8fff7d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
