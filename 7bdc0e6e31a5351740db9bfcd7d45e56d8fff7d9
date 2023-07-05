@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "918c511f_32f37dbd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-05T06:51:10Z",
+      "side": 1,
+      "message": "nit: please prefix with aconfig:, i.e.\n\naconfig: create java libraries for aconfig proto",
+      "revId": "7bdc0e6e31a5351740db9bfcd7d45e56d8fff7d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b486b776_8828927d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-05T06:51:10Z",
+      "side": 1,
+      "message": "Please describe why this CL is needed. Who are the intended consumers of the libraries?",
+      "revId": "7bdc0e6e31a5351740db9bfcd7d45e56d8fff7d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b7a8942_c3da7bc3",
+        "filename": "tools/aconfig/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-05T06:51:10Z",
+      "side": 1,
+      "message": "```suggestion\n// proto libraries for consumers of `aconfig dump --format\u003dprotobuf` output\n```",
+      "revId": "7bdc0e6e31a5351740db9bfcd7d45e56d8fff7d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
