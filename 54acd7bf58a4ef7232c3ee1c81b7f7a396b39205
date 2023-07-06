@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50ce9345_0d040351",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1799018
+      },
+      "writtenOn": "2023-07-06T15:32:03Z",
+      "side": 1,
+      "message": "I\u0027m concerned about the first one. Will it cause unexpected flag state that is hard to debug?",
+      "revId": "54acd7bf58a4ef7232c3ee1c81b7f7a396b39205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
