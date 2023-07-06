@@ -124,9 +124,13 @@ mod tests {
     const EXPECTED_FLAG_COMMON_CONTENT: &str = r#"
     package com.android.aconfig.test;
     public final class Flags {
+        public static final String NAMESPACE_DISABLED_RO = "aconfig_test";
         public static final String FLAG_DISABLED_RO = "com.android.aconfig.test.disabled_ro";
+        public static final String NAMESPACE_DISABLED_RW = "aconfig_test";
         public static final String FLAG_DISABLED_RW = "com.android.aconfig.test.disabled_rw";
+        public static final String NAMESPACE_ENABLED_RO = "aconfig_test";
         public static final String FLAG_ENABLED_RO = "com.android.aconfig.test.enabled_ro";
+        public static final String NAMESPACE_ENABLED_RW = "aconfig_test";
         public static final String FLAG_ENABLED_RW = "com.android.aconfig.test.enabled_rw";
 
         public static boolean disabledRo() {
