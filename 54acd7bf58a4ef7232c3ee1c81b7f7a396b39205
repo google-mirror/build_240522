@@ -50,6 +50,24 @@
       "message": "Package name + flag name should be unique across Android. I\u0027d like the build system to enforce that there is exactly one aconfig_value_set for a given package. Can you discuss this with joeo, please?",
       "revId": "54acd7bf58a4ef7232c3ee1c81b7f7a396b39205",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "024abdb6_c53d531f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-07-06T15:50:44Z",
+      "side": 1,
+      "message": "I didn\u0027t before. But my understanding from Joe is it will be hard to enforce that.",
+      "parentUuid": "a1f35427_0334f02f",
+      "revId": "54acd7bf58a4ef7232c3ee1c81b7f7a396b39205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
