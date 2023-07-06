@@ -70,6 +70,24 @@
       "parentUuid": "045a61e4_b1956005",
       "revId": "f5b40ba23b784981bb84bb16d557e49ed596e86e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45199eba_0a016ab3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1986055
+      },
+      "writtenOn": "2023-07-06T07:09:52Z",
+      "side": 1,
+      "message": "pszczepaniak@google.com should know why this need to be a prebuilt.\n\nWe\u0027re enabling the Shim only for Pixel devices that have the Mali GPU, so the prebuilt can always have those flags.\n\nIs there a way to set that soong variable when invoking build/soong/soong_ui.bash from generate_prebuilts.sh so that I can hardcode it in that script instead of finding a board config mk file?",
+      "parentUuid": "933aa07f_5d754e91",
+      "revId": "f5b40ba23b784981bb84bb16d557e49ed596e86e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
