@@ -16,6 +16,23 @@
       "message": "I\u0027m concerned about the first one. Will it cause unexpected flag state that is hard to debug?",
       "revId": "54acd7bf58a4ef7232c3ee1c81b7f7a396b39205",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c21023b9_6071b93e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1799018
+      },
+      "writtenOn": "2023-07-06T15:36:13Z",
+      "side": 1,
+      "message": "But adding the namespace in this class can help the test infra get the unique identity of each flag. Which is helpful especially for host side tests that can not read flag values from the Flags class.",
+      "revId": "54acd7bf58a4ef7232c3ee1c81b7f7a396b39205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
