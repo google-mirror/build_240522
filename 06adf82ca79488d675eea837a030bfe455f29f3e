@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf380be6_b34f6921",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889741
+      },
+      "writtenOn": "2023-07-07T14:12:23Z",
+      "side": 1,
+      "message": "Hi Sam, your name was suggested as owner of this file. We are deprecating the `dmtracedump` tool so we are removing this function.",
+      "revId": "06adf82ca79488d675eea837a030bfe455f29f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
