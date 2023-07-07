@@ -106,6 +106,24 @@
       "parentUuid": "45199eba_0a016ab3",
       "revId": "f5b40ba23b784981bb84bb16d557e49ed596e86e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bea8a7f_fedd99be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1986055
+      },
+      "writtenOn": "2023-07-07T12:30:13Z",
+      "side": 1,
+      "message": "I\u0027ll abandon the change in this repo: adding the backend selection is too controversial and add risks to miss the deadline for this change.\n\nI\u0027ll try again the backend selection as a follow up improvement, but I\u0027ll have ArmNN build in both the GPU and NEON backends for now.",
+      "parentUuid": "b809a094_9b6d0cca",
+      "revId": "f5b40ba23b784981bb84bb16d557e49ed596e86e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
