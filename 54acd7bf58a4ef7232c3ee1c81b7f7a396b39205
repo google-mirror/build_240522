@@ -68,6 +68,23 @@
       "parentUuid": "a1f35427_0334f02f",
       "revId": "54acd7bf58a4ef7232c3ee1c81b7f7a396b39205",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aa6af87_c77d35c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-07T07:55:42Z",
+      "side": 1,
+      "message": "As discussed offline, the `all_aconfig_declarations` build target already verifies that the same package and flag name can\u0027t be used in multiple declaration files. Marking this CL as -2 and asking Zhi to abandon.\n\nIf in the future we see the need to generate constants for each flag\u0027s namespace, we can resurrect this CL (and change its commit message) but for now it\u0027s not needed for the purpose outlined in the commit message.",
+      "revId": "54acd7bf58a4ef7232c3ee1c81b7f7a396b39205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
