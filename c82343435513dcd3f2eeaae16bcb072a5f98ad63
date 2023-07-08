@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a6dc935_e122ac49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042719
+      },
+      "writtenOn": "2023-07-08T00:36:36Z",
+      "side": 1,
+      "message": "The commit message may need a Merged-In: line to avoid automerge conflicts.",
+      "revId": "c82343435513dcd3f2eeaae16bcb072a5f98ad63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
