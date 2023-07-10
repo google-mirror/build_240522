@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd72f6d_bec0aca2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T04:41:32Z",
+      "side": 1,
+      "message": "While `make`, the custom image should also be installed into `PRODUCT_OUT`. Please update https://cs.android.com/android/platform/superproject/main/+/main:build/make/core/Makefile;drc\u003d9ec80322d6e8d513793547e9f37b8f70dbd30701;l\u003d4201 to install it.",
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
