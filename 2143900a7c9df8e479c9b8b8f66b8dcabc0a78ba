@@ -16,6 +16,24 @@
       "message": "leaving it up to Joe to decide, but I think one alternative solution would be to add a folder to a path with an `adb` script that just errors out telling you to build adb first. Though then you\u0027d still run into the caching issue unless you made the script also do this which check",
       "revId": "2143900a7c9df8e479c9b8b8f66b8dcabc0a78ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d28bab0f_78a85183",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1080,
+      "author": {
+        "id": 1579231
+      },
+      "writtenOn": "2023-07-10T18:09:52Z",
+      "side": 1,
+      "message": "The problem is that *despite* a build of adb (under /out/host/\u003c\u003e), the build continues to use the system default (under platform-tools). I guess that\u0027s what you meant by \u0027caching issue\u0027.",
+      "parentUuid": "c970aaf7_b057e294",
+      "revId": "2143900a7c9df8e479c9b8b8f66b8dcabc0a78ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
