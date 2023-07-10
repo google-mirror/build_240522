@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d377e67_27c1b65d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "Allow non-AVB custom partition.\n\nIf BOARD_AVB_$(custom_partition)_KEY_PATH is empty, the image will be used directly, w/o AVB signing.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 41
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7fd72f6d_bec0aca2",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -14,6 +37,380 @@
       "writtenOn": "2023-07-10T04:41:32Z",
       "side": 1,
       "message": "While `make`, the custom image should also be installed into `PRODUCT_OUT`. Please update https://cs.android.com/android/platform/superproject/main/+/main:build/make/core/Makefile;drc\u003d9ec80322d6e8d513793547e9f37b8f70dbd30701;l\u003d4201 to install it.",
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30bd08f8_4a267095",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "Sorry to ask you to change it again. After reading the code again, align with other partitions, instead of define a new variable, I think we should check `BOARD_AVB_$(custom_partition)_KEY_PATH`. If it\u0027s empty, that partition could be a non AVB custom partition.",
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22d1501e_e2a964eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "Please ignore this comment. This is a wrong comment.",
+      "parentUuid": "7fd72f6d_bec0aca2",
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a564974_96f01b8d",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 4209,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "`BOARD_NONAVB_CUSTOMIMAGES_PARTITION_LIST` looks like a very weird name. Instead of define this list, can we check whether `BOARD_AVB_$(partition)_KEY_PATH` is empty instead?",
+      "range": {
+        "startLine": 4203,
+        "startChar": 0,
+        "endLine": 4209,
+        "endChar": 5
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "374b21be_71624e0c",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 4511,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "add one check here to check whether `BOARD_AVB_$(PART)_KEY_PATH` is empty.",
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38a39571_304ac026",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 4683,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "add one check here to check whether `BOARD_AVB_$(partition)_KEY_PATH` is empty",
+      "range": {
+        "startLine": 4682,
+        "startChar": 8,
+        "endLine": 4683,
+        "endChar": 53
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd6255e7_5584549d",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 5613,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "Check whether `BOARD_AVB_$(partition)_KEY_PATH` is empty. If it\u0027s not, add partition to `avb_custom_images_partition_list` and images to `avb_$(partition)_image_list`. Otherwise, add partition to `custom_images_partition_list` and `$(partition)_image_list`.",
+      "range": {
+        "startLine": 5599,
+        "startChar": 0,
+        "endLine": 5613,
+        "endChar": 45
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc52b10_130aa487",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 6426,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "By checking above change to checking `BOARD_AVB_$(partition)_KEY_PATH`, we don\u0027t need this change any more.",
+      "range": {
+        "startLine": 6423,
+        "startChar": 0,
+        "endLine": 6426,
+        "endChar": 126
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7b847c7_4e3a0125",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "`AddCustomImages` -\u003e `AddAVBCustomImages`",
+      "range": {
+        "startLine": 520,
+        "startChar": 4,
+        "endLine": 520,
+        "endChar": 19
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a07045a_761705a8",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "`AddNonAVBCustomImages` -\u003e `AddCustomImages`",
+      "range": {
+        "startLine": 803,
+        "startChar": 4,
+        "endLine": 803,
+        "endChar": 25
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d984729f_347a3fb1",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "`nonavb_{}_image_list` -\u003e `{}_image_list`",
+      "range": {
+        "startLine": 817,
+        "startChar": 12,
+        "endLine": 817,
+        "endChar": 32
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38349ba6_e68d932f",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "`nonavb_custom_partitions` -\u003e `custom_partitions`",
+      "range": {
+        "startLine": 1133,
+        "startChar": 2,
+        "endLine": 1133,
+        "endChar": 26
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a618366_5d44e663",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "`nonavb_custom_images_partition_list` -\u003e `custom_images_partition_list`",
+      "range": {
+        "startLine": 1134,
+        "startChar": 7,
+        "endLine": 1134,
+        "endChar": 42
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff37f35b_7e0d1e6d",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "`nonavb_custom_partitions` -\u003e `custom_partitions`",
+      "range": {
+        "startLine": 1135,
+        "startChar": 24,
+        "endLine": 1135,
+        "endChar": 48
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04392ddd_c552d031",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "`AddNonAVBCustomImages` -\u003e `AddAVBCustomImages`",
+      "range": {
+        "startLine": 1138,
+        "startChar": 33,
+        "endLine": 1138,
+        "endChar": 54
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf74e096_626260b6",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1144,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "`custom images for` -\u003e `AVB custom images for`",
+      "range": {
+        "startLine": 1144,
+        "startChar": 12,
+        "endLine": 1144,
+        "endChar": 29
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82653d9_0b669384",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "`AddCustomImages` -\u003e AddAVBCustomImages`",
+      "range": {
+        "startLine": 1145,
+        "startChar": 33,
+        "endLine": 1145,
+        "endChar": 48
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25c28d21_02a21a4a",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-10T05:10:35Z",
+      "side": 1,
+      "message": "`nonavb_custom_images_partition_list` -\u003e `custom_images_partition_list`",
+      "range": {
+        "startLine": 1242,
+        "startChar": 20,
+        "endLine": 1242,
+        "endChar": 27
+      },
       "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
