@@ -16,6 +16,29 @@
       "message": "This change won\u0027t be merged until July 14",
       "revId": "c6c98282603f4994327005a3655459d01be021f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a4be51_cb9ac6cf",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-07-11T07:38:22Z",
+      "side": 1,
+      "message": "Can we add this to `ADDITIONAL_SYSTEM_PROPERTIES` instead? I don\u0027t think this is a property for the vendor specific configuration.",
+      "range": {
+        "startLine": 224,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 32
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
