@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee31821f_33888176",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-07-11T16:24:42Z",
+      "side": 1,
+      "message": "Looks like this change is on master branch. I don\u0027t have +2 capability on this branch. Can you try uploading this to the new trunk stable main branch?",
+      "revId": "8cc6f6b7864aabe133648cf6d3de61a8e78a74ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
