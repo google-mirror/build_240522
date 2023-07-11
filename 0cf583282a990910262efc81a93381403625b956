@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ae077fc_069f455c",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1967,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-07-11T15:54:56Z",
+      "side": 1,
+      "message": "fs_config_file\u003dfs_config_file",
+      "range": {
+        "startLine": 1967,
+        "startChar": 40,
+        "endLine": 1967,
+        "endChar": 54
+      },
+      "revId": "0cf583282a990910262efc81a93381403625b956",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
