@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (6bd2bd Merge "Remove the X attribute from .mk files" into main)
 BUILD_ID=AOSP.MASTER
+=======
+BUILD_ID=TQ3A.230705.001
+>>>>>>> BRANCH (d97788 Make change and version bump to TQ3A.230705.001 Merge cherry)
