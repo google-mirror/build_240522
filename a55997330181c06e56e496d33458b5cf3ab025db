@@ -160,6 +160,24 @@
       "parentUuid": "aeaff946_cdd17c94",
       "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f49c333e_400e2eb3",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 2944,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-07-11T15:52:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ebbdf226_53775239",
+      "revId": "a55997330181c06e56e496d33458b5cf3ab025db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
