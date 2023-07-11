@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a573a12f_d851787e",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-11T07:42:56Z",
+      "side": 1,
+      "message": "Line length",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 152
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fca41d6_74c75de4",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-11T07:42:56Z",
+      "side": 1,
+      "message": "I think this should be the opposite. Introduce `KEEP_VNDK` which defaults to false. Some targets that do need to keep VNDK can override it to true.",
+      "range": {
+        "startLine": 223,
+        "startChar": 10,
+        "endLine": 223,
+        "endChar": 24
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95a4be51_cb9ac6cf",
         "filename": "core/main.mk",
         "patchSetId": 1
@@ -31,6 +77,30 @@
       "writtenOn": "2023-07-11T07:38:22Z",
       "side": 1,
       "message": "Can we add this to `ADDITIONAL_SYSTEM_PROPERTIES` instead? I don\u0027t think this is a property for the vendor specific configuration.",
+      "range": {
+        "startLine": 224,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 32
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27887f54_94d3bb82",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-11T07:42:56Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "95a4be51_cb9ac6cf",
       "range": {
         "startLine": 224,
         "startChar": 4,
