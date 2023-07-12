@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07656ef8_b38de633",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-07-12T05:45:48Z",
+      "side": 1,
+      "message": "In which case, is `ro.deprecate.vndk` required?\nI thought, if vendor defines `ro.vndk.version`, system must provide the vndk apex for the vendor modules to use. Otherwise, the libs must be found in the vendor partition.\nIn that way, we may define `KEEP_VNDK` flag for the devices that still requires VNDK, but I don\u0027t know why we need the run time flag `ro.deprecate.vndk`.",
+      "parentUuid": "30ca6c31_1a75350b",
+      "range": {
+        "startLine": 223,
+        "startChar": 10,
+        "endLine": 223,
+        "endChar": 24
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95a4be51_cb9ac6cf",
         "filename": "core/main.mk",
         "patchSetId": 1
@@ -149,6 +173,30 @@
       "side": 1,
       "message": "Even system has ro.vndk.deprecate, if vendor does not have VNDK libraries in its own image, it would fail.\n\nIf vendor has ro.vndk.deprecate (and vendor has VNDK libraries within its own image), then we can ignore VNDK APEX even it is in the system(_ext), and it would work (probably?).\n\nThis is why I thought to put deprecate property in vendor. Please let me know if I\u0027m missing anything from this.",
       "parentUuid": "27887f54_94d3bb82",
+      "range": {
+        "startLine": 224,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 32
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09e22588_93f981e2",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-07-12T05:45:48Z",
+      "side": 1,
+      "message": "If the vendor image did not install VNDK with it, it must have `ro.vndk.version` to find the vndk image from the VNDK APEX.\nWe can say the device without `ro.vndk.version` installs the VNDK libs in the vendor partition.",
+      "parentUuid": "a10174e2_a028ea7e",
       "range": {
         "startLine": 224,
         "startChar": 4,
