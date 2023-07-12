@@ -138,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b76dd71_75f96ccb",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-12T12:07:54Z",
+      "side": 1,
+      "message": "You can have something like `KEEP_VNDK ?\u003d false` so that VNDK is by default deprecated unless explicitly set to true.\n\nIf you think this is too early, it could be `KEEP_VNDK ?\u003d true` for now, and then later on the default value could be false. Eventually, the variable will disappear.",
+      "parentUuid": "e1bc948c_7c1e4746",
+      "range": {
+        "startLine": 223,
+        "startChar": 10,
+        "endLine": 223,
+        "endChar": 24
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95a4be51_cb9ac6cf",
         "filename": "core/main.mk",
         "patchSetId": 1
@@ -221,6 +245,30 @@
       "side": 1,
       "message": "If the vendor image did not install VNDK with it, it must have `ro.vndk.version` to find the vndk image from the VNDK APEX.\nWe can say the device without `ro.vndk.version` installs the VNDK libs in the vendor partition.",
       "parentUuid": "a10174e2_a028ea7e",
+      "range": {
+        "startLine": 224,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 32
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38e12f7a_c9f535f9",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-12T12:07:54Z",
+      "side": 1,
+      "message": "Like Justin said. Then, I think we don\u0027t need ro.deprecate.vndk at all? ro.vndk.version can tell whether VNDK APEX has to be activated or not.",
+      "parentUuid": "09e22588_93f981e2",
       "range": {
         "startLine": 224,
         "startChar": 4,
