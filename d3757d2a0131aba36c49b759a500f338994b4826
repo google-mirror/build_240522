@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "892d9a2b_8a409267",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-07-12T17:56:49Z",
+      "side": 1,
+      "message": "Can you vote Qualcomm-Review +1 on this CL so that we can merge this?",
+      "revId": "d3757d2a0131aba36c49b759a500f338994b4826",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
