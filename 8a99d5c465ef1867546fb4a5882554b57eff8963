@@ -147,6 +147,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f28eda02_c7b2701c",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2023-07-12T18:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c270704_882ba810",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 78
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc146c8c_aad62715",
