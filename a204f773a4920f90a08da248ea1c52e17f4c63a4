@@ -16,6 +16,29 @@
       "message": "Hi Kelvin, \nCan you let us know why presubmit failed and will resolve ?",
       "revId": "a204f773a4920f90a08da248ea1c52e17f4c63a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf533c1_f10549e7",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1951,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-07-12T07:03:04Z",
+      "side": 1,
+      "message": "this changes order of parameters and break other callsites of `_BuildVendorBootImage`",
+      "range": {
+        "startLine": 1951,
+        "startChar": 37,
+        "endLine": 1951,
+        "endChar": 51
+      },
+      "revId": "a204f773a4920f90a08da248ea1c52e17f4c63a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
