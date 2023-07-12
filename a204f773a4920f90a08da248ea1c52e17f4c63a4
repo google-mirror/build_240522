@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bddcf4bc_c05f9ea1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1970380
+      },
+      "writtenOn": "2023-07-12T06:07:44Z",
+      "side": 1,
+      "message": "Hi Kelvin, \nCan you let us know why presubmit failed and will resolve ?",
+      "revId": "a204f773a4920f90a08da248ea1c52e17f4c63a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
