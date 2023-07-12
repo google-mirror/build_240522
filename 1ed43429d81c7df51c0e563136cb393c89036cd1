@@ -43,6 +43,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9de87cbd_0caca6b3",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-07-12T12:32:27Z",
+      "side": 1,
+      "message": "They need to be there even in prod but no op in prod. The reason is the teams might write their main function in a way that will accept flag overrides as command line arguments, and then call these methods to apply flag overrides. \n\nSo in production, these methods are no op, even if somebody passed in flag overrides as command line flag, it has no effect. But in test, say they want to fork and exec a child process with a specific set of flag overrides, they can do that by passing a set of command line arguments, and the child process will properly apply the desired overrides.",
+      "parentUuid": "d0b4ff23_9e6ee0f1",
+      "revId": "1ed43429d81c7df51c0e563136cb393c89036cd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d8216c3_4df4cbf2",
         "filename": "tools/aconfig/src/codegen_cpp.rs",
         "patchSetId": 1
