@@ -78,6 +78,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28121b8d_1ab1a3a8",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-07-12T12:37:06Z",
+      "side": 1,
+      "message": "the flag constants are introduced in both c and c++. this is to prevent typo when calling override_flag method which requires the flag name as the first input. Ideally, we would like to use enum for flag names, but after discussing with Jeff, constants are good enough. So if developer misspelled the flag name constants in the code, it would be a compile time error and can be detected early.",
+      "parentUuid": "5d8216c3_4df4cbf2",
+      "revId": "1ed43429d81c7df51c0e563136cb393c89036cd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b05d4a3_5efe3a72",
         "filename": "tools/aconfig/templates/c_exported_header.template",
         "patchSetId": 1
