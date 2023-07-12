@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30ca6c31_1a75350b",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-07-12T04:50:34Z",
+      "side": 1,
+      "message": "I was not sure to introduce new property and set it true by default (for now). Or should we use `KEEP_VNDK` and consider it as true if not set?",
+      "parentUuid": "4fca41d6_74c75de4",
+      "range": {
+        "startLine": 223,
+        "startChar": 10,
+        "endLine": 223,
+        "endChar": 24
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95a4be51_cb9ac6cf",
         "filename": "core/main.mk",
         "patchSetId": 1
@@ -101,6 +125,30 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "95a4be51_cb9ac6cf",
+      "range": {
+        "startLine": 224,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 32
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10174e2_a028ea7e",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-07-12T04:50:34Z",
+      "side": 1,
+      "message": "Even system has ro.vndk.deprecate, if vendor does not have VNDK libraries in its own image, it would fail.\n\nIf vendor has ro.vndk.deprecate (and vendor has VNDK libraries within its own image), then we can ignore VNDK APEX even it is in the system(_ext), and it would work (probably?).\n\nThis is why I thought to put deprecate property in vendor. Please let me know if I\u0027m missing anything from this.",
+      "parentUuid": "27887f54_94d3bb82",
       "range": {
         "startLine": 224,
         "startChar": 4,
