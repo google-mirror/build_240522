@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b6e3700_1ea4da99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-07-12T12:48:34Z",
+      "side": 1,
+      "message": "will do once Joe finished build system integration.",
+      "parentUuid": "e78c88bf_8214221c",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 4
+      },
+      "revId": "1ed43429d81c7df51c0e563136cb393c89036cd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0b4ff23_9e6ee0f1",
@@ -153,6 +177,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a5e8e1b_a561e501",
+        "filename": "tools/aconfig/templates/c_exported_header.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-07-12T12:48:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b05d4a3_5efe3a72",
+      "range": {
+        "startLine": 9,
+        "startChar": 55,
+        "endLine": 9,
+        "endChar": 67
+      },
+      "revId": "1ed43429d81c7df51c0e563136cb393c89036cd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b5146aa_33db4ece",
@@ -166,6 +214,24 @@
       "writtenOn": "2023-07-12T06:37:19Z",
       "side": 1,
       "message": "nit: unnecessary blank linke",
+      "revId": "1ed43429d81c7df51c0e563136cb393c89036cd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cabb348d_50f437f3",
+        "filename": "tools/aconfig/templates/c_source_file.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-07-12T12:48:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b5146aa_33db4ece",
       "revId": "1ed43429d81c7df51c0e563136cb393c89036cd1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
