@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88b07146_5a3fabd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2023-07-12T18:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bba47600_d5235eba",
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9640f73f_ee2c1a46",
@@ -266,6 +284,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52d9521a_9d7eaf66",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2023-07-12T18:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d933210b_d3b588e6",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 50
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07467700_1497ee53",
@@ -361,6 +403,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6426839_4b91699c",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2023-07-12T18:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea3966f7_c936025a",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 62
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15ca4b87_0f90b015",
@@ -446,6 +512,30 @@
       "side": 1,
       "message": "We use the ro.build.description field in automated bug report emails, and the description we set has more relevant information about the device.",
       "parentUuid": "ebbda8d1_c32f08b0",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 48
+      },
+      "revId": "8a99d5c465ef1867546fb4a5882554b57eff8963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a47e71b_f4d2c839",
+        "filename": "tools/buildinfo.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2023-07-12T18:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ac4521e_2522ad3c",
       "range": {
         "startLine": 52,
         "startChar": 6,
