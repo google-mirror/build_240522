@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e02bb440_e8d16d56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-12T00:58:55Z",
+      "side": 1,
+      "message": "I support this change. Please refer to my private comment (sent via email \"Change in aosp/build[master]: Make common signature system property definitions optional\") for the rationale.",
+      "revId": "19450e3a0b6f9a80d282a7a9f284e53b24bca8fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
