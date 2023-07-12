@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1bc948c_7c1e4746",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-07-12T06:14:38Z",
+      "side": 1,
+      "message": "We need ro.deprecate.vndk until we can remove ro.vndk.version properly with VNDK APEX. For now, VNDK APEX is still required, until we move llndk.libraries.txt to system.",
+      "parentUuid": "07656ef8_b38de633",
+      "range": {
+        "startLine": 223,
+        "startChar": 10,
+        "endLine": 223,
+        "endChar": 24
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95a4be51_cb9ac6cf",
         "filename": "core/main.mk",
         "patchSetId": 1
