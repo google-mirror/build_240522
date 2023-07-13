@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de9a370a_1e52b86c",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-07-13T12:16:55Z",
+      "side": 1,
+      "message": "Can you use spaces for indentation as on line 45? Makefiles only require tabs for rule definition, and in other places I think it\u0027s more usual to see spaces.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 27
+      },
+      "revId": "c270eb509d86c86797570496432b674623288828",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "597fd708_9f61e8ff",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-07-13T12:16:55Z",
+      "side": 1,
+      "message": "While at it, maybe change tabs to spaces here as well.",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 59
+      },
+      "revId": "c270eb509d86c86797570496432b674623288828",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
