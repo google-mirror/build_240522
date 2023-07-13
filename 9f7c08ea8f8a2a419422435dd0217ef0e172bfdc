@@ -22,6 +22,30 @@
       },
       "revId": "9f7c08ea8f8a2a419422435dd0217ef0e172bfdc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e1fc132_1e0ddd5a",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-07-13T23:31:01Z",
+      "side": 1,
+      "message": "That\u0027s true. I wanted to find a flag that is available to ninja if \u0027dist\u0027 is in the goal. Any idea on this?",
+      "parentUuid": "cbafce59_c006aee5",
+      "range": {
+        "startLine": 688,
+        "startChar": 27,
+        "endLine": 688,
+        "endChar": 55
+      },
+      "revId": "9f7c08ea8f8a2a419422435dd0217ef0e172bfdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
