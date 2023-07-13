@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbafce59_c006aee5",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-07-13T23:22:43Z",
+      "side": 1,
+      "message": "It doesn\u0027t seem reasonable to expect every developer to know to set this locally.",
+      "range": {
+        "startLine": 688,
+        "startChar": 27,
+        "endLine": 688,
+        "endChar": 55
+      },
+      "revId": "9f7c08ea8f8a2a419422435dd0217ef0e172bfdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
