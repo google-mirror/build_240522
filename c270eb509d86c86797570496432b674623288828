@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f7fe6e5_0a8d0e60",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-07-13T13:25:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de9a370a_1e52b86c",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 27
+      },
+      "revId": "c270eb509d86c86797570496432b674623288828",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "597fd708_9f61e8ff",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-13T12:16:55Z",
       "side": 1,
       "message": "While at it, maybe change tabs to spaces here as well.",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 59
+      },
+      "revId": "c270eb509d86c86797570496432b674623288828",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ab20d93_81e142d5",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-07-13T13:25:44Z",
+      "side": 1,
+      "message": "Done at aosp/2655205.",
+      "parentUuid": "597fd708_9f61e8ff",
       "range": {
         "startLine": 120,
         "startChar": 0,
