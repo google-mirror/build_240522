@@ -89,7 +89,6 @@ PRODUCT_PACKAGES += \
     dump.erofs \
     dumpstate \
     dumpsys \
-    DynamicSystemInstallationService \
     e2fsck \
     ExtShared \
     flags_health_check \
@@ -295,6 +294,13 @@ PRODUCT_PACKAGES += \
 ifneq ($(PRODUCT_IS_ATV),true)
   PRODUCT_PACKAGES += \
       SoundPicker \
+
+endif
+
+# These packages are not used on Android Wear
+ifneq ($(TARGET_SUPPORTS_WEARABLES),true)
+    PRODUCT_PACKAGES += \
+        DynamicSystemInstallationService \
 
 endif
 
