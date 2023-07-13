@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "063b3101_1e230540",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-07-13T10:32:37Z",
+      "side": 1,
+      "message": "I wonder if it also should be added to the list of PRODUCT variables, for example one line above PRODUCT_CERTIFICATE_OVERRIDES is added here: https://source.corp.google.com/h/android/platform/superproject/+/master:build/make/core/product.mk;l\u003d318",
+      "range": {
+        "startLine": 238,
+        "startChar": 59,
+        "endLine": 238,
+        "endChar": 100
+      },
+      "revId": "7a1aea73c03b570ad1359ca91aefc2a1aab37fec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
