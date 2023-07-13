@@ -3398,6 +3398,7 @@ endif # BUILDING_SYSTEM_IMAGE
 
 .PHONY: sync syncsys sync_system
 sync syncsys sync_system: $(INTERNAL_SYSTEMIMAGE_FILES)
+sync syncsys sync_system: checkapi
 
 # -----------------------------------------------------------------
 # Old PDK fusion targets
