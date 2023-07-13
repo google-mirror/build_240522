@@ -22,6 +22,30 @@
       },
       "revId": "7a1aea73c03b570ad1359ca91aefc2a1aab37fec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a97458e8_58a252cf",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-07-13T11:56:38Z",
+      "side": 1,
+      "message": "Looks like so. Thanks for the reminder! Looks like adding it to `_product_list_vars` makes it readonly so that it can\u0027t be changed in later stages, which is a good thing.\n\nWithout adding it to `_product_list_vars`, it still works, but doing so is better.",
+      "parentUuid": "063b3101_1e230540",
+      "range": {
+        "startLine": 238,
+        "startChar": 59,
+        "endLine": 238,
+        "endChar": 100
+      },
+      "revId": "7a1aea73c03b570ad1359ca91aefc2a1aab37fec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
