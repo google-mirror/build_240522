@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e743903_e50efd4a",
+        "filename": "core/dex_preopt_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2023-07-13T10:33:51Z",
+      "side": 1,
+      "message": "Should it be added to the list of PRODUCT vars as well?",
+      "range": {
+        "startLine": 114,
+        "startChar": 67,
+        "endLine": 114,
+        "endChar": 104
+      },
+      "revId": "f4888ef5a3d5c8dd6b2061ea11d80ac53c5cf08b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
