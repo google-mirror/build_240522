@@ -38,6 +38,9 @@ var _ fs.FS = globalFS{}
 var _ fs.StatFS = globalFS{}
 
 func (s globalFS) Open(name string) (fs.File, error) {
+	if strings.HasPrefix(name, "{PRODUCT_OUT}") {
+		name = strings.Replace(name, "{PRODUCT_OUT}", os.Getenv("PRODUCT_OUT"), 1)
+	}
 	return os.Open(name)
 }
 

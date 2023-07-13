@@ -64,7 +64,7 @@ $(1) : PRIVATE_TARGETS := $(2)
 $(1): $(2) $(COMPLIANCE_LISTSHARE)
 	$(hide) rm -f $$@
 	mkdir -p $$(dir $$@)
-	$$(if $$(strip $$(PRIVATE_TARGETS)),OUT_DIR=$(OUT_DIR) $(COMPLIANCE_LISTSHARE) -o $$@ $$(PRIVATE_TARGETS),touch $$@)
+	$$(if $$(strip $$(PRIVATE_TARGETS)),OUT_DIR=$(OUT_DIR) PRODUCT_OUT=$(PRODUCT_OUT) $(COMPLIANCE_LISTSHARE) -o $$@ $$(PRIVATE_TARGETS),touch $$@)
 endef
 
 # build list of projects to share in $(1) for meta_lic in $(2)
@@ -92,7 +92,7 @@ $(2): $(3) $(TEXTNOTICE)
             -strip_prefix=$(PRODUCT_OUT)/ -strip_prefix=$(HOST_OUT)/\
             $$(PRIVATE_TARGETS),\
             $$(PRIVATE_ARGUMENT_FILE)))
-	$$(if $$(strip $$(PRIVATE_TARGETS)),OUT_DIR=$(OUT_DIR) $(TEXTNOTICE) -o $$@ @$$(PRIVATE_ARGUMENT_FILE),touch $$@)
+	$$(if $$(strip $$(PRIVATE_TARGETS)),OUT_DIR=$(OUT_DIR) PRODUCT_OUT=$(PRODUCT_OUT) $(TEXTNOTICE) -o $$@ @$$(PRIVATE_ARGUMENT_FILE),touch $$@)
 endef
 
 # build list of projects to share in $(2) for meta_lic in $(3) for dist goals $(1)

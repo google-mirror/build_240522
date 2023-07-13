@@ -608,22 +608,22 @@ endef
 $(KATI_obsolete_var notice-rule, This function has been removed)
 
 define _license-metadata-rule
-$(strip $(eval _srcs := $(strip $(foreach d,$(ALL_MODULES.$(1).NOTICE_DEPS),$(if $(strip $(ALL_MODULES.$(call word-colon,1,$(d)).INSTALLED)), $(ALL_MODULES.$(call word-colon,1,$(d)).INSTALLED),$(if $(strip $(ALL_MODULES.$(call word-colon,1,$(d)).BUILT)), $(ALL_MODULES.$(call word-colon,1,$(d)).BUILT), $(call word-colon,1,$d)))))))
-$(strip $(eval _deps := $(sort $(filter-out $(2)%,\
+$(eval _srcs := $(strip $(foreach d,$(ALL_MODULES.$(1).NOTICE_DEPS),$(if $(strip $(ALL_MODULES.$(call word-colon,1,$(d)).INSTALLED)), $(ALL_MODULES.$(call word-colon,1,$(d)).INSTALLED),$(if $(strip $(ALL_MODULES.$(call word-colon,1,$(d)).BUILT)), $(ALL_MODULES.$(call word-colon,1,$(d)).BUILT), $(call word-colon,1,$d))))))
+$(eval _deps := $(sort $(filter-out $(2)%,\
    $(foreach d,$(ALL_MODULES.$(1).NOTICE_DEPS),\
      $(addsuffix :$(call wordlist-colon,2,9999,$(d)), \
        $(foreach dt,$(ALL_MODULES.$(d).BUILT) $(ALL_MODULES.$(d).INSTALLED),\
-         $(ALL_TARGETS.$(dt).META_LIC))))))))
-$(strip $(eval _notices := $(sort $(ALL_MODULES.$(1).NOTICES))))
-$(strip $(eval _tgts := $(sort $(ALL_MODULES.$(1).BUILT))))
-$(strip $(eval _inst := $(sort $(ALL_MODULES.$(1).INSTALLED))))
-$(strip $(eval _path := $(sort $(ALL_MODULES.$(1).PATH))))
-$(strip $(eval _map := $(strip $(foreach _m,$(sort $(ALL_MODULES.$(1).LICENSE_INSTALL_MAP)), \
+         $(ALL_TARGETS.$(dt).META_LIC)))))))
+$(eval _notices := $(sort $(ALL_MODULES.$(1).NOTICES)))
+$(eval _tgts := $(sort $(ALL_MODULES.$(1).BUILT)))
+$(eval _inst := $(sort $(ALL_MODULES.$(1).INSTALLED)))
+$(eval _path := $(sort $(ALL_MODULES.$(1).PATH)))
+$(eval _map := $(strip $(foreach _m,$(sort $(ALL_MODULES.$(1).LICENSE_INSTALL_MAP)), \
   $(eval _s := $(call word-colon,1,$(_m))) \
   $(eval _d := $(call word-colon,2,$(_m))) \
   $(eval _ns := $(if $(strip $(ALL_MODULES.$(_s).INSTALLED)),$(ALL_MODULES.$(_s).INSTALLED),$(if $(strip $(ALL_MODULES.$(_s).BUILT)),$(ALL_MODULES.$(_s).BUILT),$(_s)))) \
   $(foreach ns,$(_ns),$(ns):$(_d) ) \
-))))
+)))
 
 $(2): PRIVATE_KINDS := $(sort $(ALL_MODULES.$(1).LICENSE_KINDS))
 $(2): PRIVATE_CONDITIONS := $(sort $(ALL_MODULES.$(1).LICENSE_CONDITIONS))
@@ -653,11 +653,11 @@ $(2) : $(foreach d,$(_deps),$(call word-colon,1,$(d))) $(foreach n,$(_notices),$
 	    $$(addprefix -k ,$$(PRIVATE_KINDS))\
 	    $$(addprefix -c ,$$(PRIVATE_CONDITIONS))\
 	    $$(addprefix -n ,$$(PRIVATE_NOTICES))\
-	    $$(addprefix -d ,$$(PRIVATE_NOTICE_DEPS))\
-	    $$(addprefix -s ,$$(PRIVATE_SOURCES))\
-	    $$(addprefix -m ,$$(PRIVATE_INSTALL_MAP))\
-	    $$(addprefix -t ,$$(PRIVATE_TARGETS))\
-	    $$(addprefix -i ,$$(PRIVATE_INSTALLED))\
+	    $$(addprefix -d ,$$(patsubst $(PRODUCT_OUT)/%,{PRODUCT_OUT}/%,$$(PRIVATE_NOTICE_DEPS)))\
+	    $$(addprefix -s ,$$(patsubst $(PRODUCT_OUT)/%,{PRODUCT_OUT}/%,$$(PRIVATE_SOURCES)))\
+	    $$(addprefix -m ,$$(patsubst $(PRODUCT_OUT)/%,{PRODUCT_OUT}/%,$$(PRIVATE_INSTALL_MAP)))\
+	    $$(addprefix -t ,$$(patsubst $(PRODUCT_OUT)/%,{PRODUCT_OUT}/%,$$(PRIVATE_TARGETS)))\
+	    $$(addprefix -i ,$$(patsubst $(PRODUCT_OUT)/%,{PRODUCT_OUT}/%,$$(PRIVATE_INSTALLED)))\
 	    $$(addprefix -r ,$$(PRIVATE_PATH)),\
 	    $$(PRIVATE_ARGUMENT_FILE))
 	OUT_DIR=$(OUT_DIR) $(BUILD_LICENSE_METADATA) \
@@ -700,10 +700,10 @@ $(_meta) : $(foreach d,$(_deps),$(call word-colon,1,$(d))) $(foreach n,$(_notice
 	    $$(addprefix -k ,$$(PRIVATE_KINDS))\
 	    $$(addprefix -c ,$$(PRIVATE_CONDITIONS))\
 	    $$(addprefix -n ,$$(PRIVATE_NOTICES))\
-	    $$(addprefix -d ,$$(PRIVATE_NOTICE_DEPS))\
-	    $$(addprefix -s ,$$(PRIVATE_SOURCES))\
-	    $$(addprefix -m ,$$(PRIVATE_INSTALL_MAP))\
-	    $$(addprefix -t ,$$(PRIVATE_TARGETS))\
+	    $$(addprefix -d ,$$(patsubst $(PRODUCT_OUT)/%,{PRODUCT_OUT}/%,$$(PRIVATE_NOTICE_DEPS)))\
+	    $$(addprefix -s ,$$(patsubst $(PRODUCT_OUT)/%,{PRODUCT_OUT}/%,$$(PRIVATE_SOURCES)))\
+	    $$(addprefix -m ,$$(patsubst $(PRODUCT_OUT)/%,{PRODUCT_OUT}/%,$$(PRIVATE_INSTALL_MAP)))\
+	    $$(addprefix -t ,$$(patsubst $(PRODUCT_OUT)/%,{PRODUCT_OUT}/%,$$(PRIVATE_TARGETS)))\
 	    $$(addprefix -r ,$$(PRIVATE_PATH)),\
 	    $$(PRIVATE_ARGUMENT_FILE))
 	OUT_DIR=$(OUT_DIR) $(BUILD_LICENSE_METADATA) \
@@ -3269,8 +3269,8 @@ define copy-license-metadata-file-to-target
 @mkdir -p $(dir $@)
 $(hide) rm -f $@
 $(hide) cp "$<" "$@" $(strip \
-  $(foreach b,$(1), && (grep -F 'built: "'"$(b)"'"' "$@" >/dev/null || echo 'built: "'"$(b)"'"' >>"$@")) \
-  $(foreach i,$(2), && (grep -F 'installed: "'"$(i)"'"' "$@" >/dev/null || echo 'installed: "'"$(i)"'"' >>"$@")) \
+  $(foreach b,$(1), && (grep -F 'built: "'"$(b)"'"' "$@" >/dev/null || echo 'built: "'"$(patsubst $(PRODUCT_OUT)/%,{PRODUCT_OUT}/%,$(b))"'"' >>"$@")) \
+  $(foreach i,$(2), && (grep -F 'installed: "'"$(i)"'"' "$@" >/dev/null || echo 'installed: "'"$(patsubst $(PRODUCT_OUT)/%,{PRODUCT_OUT}/%,$(i))"'"' >>"$@")) \
 )
 endef
 
