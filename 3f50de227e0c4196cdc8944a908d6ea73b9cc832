@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f14e2e_2205c1b4",
+        "filename": "tools/aconfig/templates/c_exported_header.template",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-14T07:08:31Z",
+      "side": 1,
+      "message": "Nit: I see a lot of `if not for_prod`; maybe it would be cleaner to say `if test_mode`. Can be fixed in a follow-up CL, or ignored.",
+      "range": {
+        "startLine": 11,
+        "startChar": 6,
+        "endLine": 11,
+        "endChar": 18
+      },
+      "revId": "3f50de227e0c4196cdc8944a908d6ea73b9cc832",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
