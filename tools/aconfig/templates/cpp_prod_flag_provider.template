@@ -3,7 +3,6 @@
 #include "{header}.h"
 {{ if readwrite }}
 #include <server_configurable_flags/get_flags.h>
-using namespace server_configurable_flags;
 {{ endif }}
 
 namespace {cpp_namespace} \{
@@ -12,7 +11,7 @@ public:
     {{ for item in class_elements}}
     virtual bool {item.flag_name}() override \{
         {{ if item.readwrite- }}
-        return GetServerConfigurableFlag(
+        return server_configurable_flags::GetServerConfigurableFlag(
             "{item.device_config_namespace}",
             "{item.device_config_flag}",
             "{item.default_value}") == "true";
