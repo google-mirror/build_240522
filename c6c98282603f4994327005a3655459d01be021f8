@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0b853e6_c733ea64",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-07-14T01:14:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a573a12f_d851787e",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 152
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fca41d6_74c75de4",
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "You can have something like `KEEP_VNDK ?\u003d false` so that VNDK is by default deprecated unless explicitly set to true.\n\nIf you think this is too early, it could be `KEEP_VNDK ?\u003d true` for now, and then later on the default value could be false. Eventually, the variable will disappear.",
       "parentUuid": "e1bc948c_7c1e4746",
+      "range": {
+        "startLine": 223,
+        "startChar": 10,
+        "endLine": 223,
+        "endChar": 24
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c10f16_2a2f0149",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-07-14T01:14:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b76dd71_75f96ccb",
       "range": {
         "startLine": 223,
         "startChar": 10,
@@ -281,6 +329,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59e08f85_4ebd2f7d",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-07-14T01:14:44Z",
+      "side": 1,
+      "message": "As I mentioned from b/290159430, `ro.deprecate.vndk` is very temporal variable until we can unset `ro.vndk.version` and do not install VNDK APEX with current version. There are still a bit more works to do before VNDK APEX can be removed.",
+      "parentUuid": "38e12f7a_c9f535f9",
+      "range": {
+        "startLine": 224,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 32
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab4b47cc_bb6ae767",
         "filename": "core/soong_config.mk",
         "patchSetId": 1
@@ -292,6 +364,30 @@
       "writtenOn": "2023-07-11T07:41:52Z",
       "side": 1,
       "message": "Should this be a buildtime feature flag?",
+      "range": {
+        "startLine": 321,
+        "startChar": 53,
+        "endLine": 321,
+        "endChar": 67
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f5cde5_44d02236",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-07-14T01:14:44Z",
+      "side": 1,
+      "message": "As discussed offline, this flag can be differentiated by version, but also can be differentiated by target device.",
+      "parentUuid": "ab4b47cc_bb6ae767",
       "range": {
         "startLine": 321,
         "startChar": 53,
