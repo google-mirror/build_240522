@@ -8,6 +8,7 @@ using namespace server_configurable_flags;
 {{ endif }}
 
 #include <unordered_map>
+#include <string>
 
 namespace {cpp_namespace} \{
 class flag_provider : public flag_provider_interface \{
