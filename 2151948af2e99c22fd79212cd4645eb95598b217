@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7402b5fc_284806d6",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-07-15T19:39:34Z",
+      "side": 1,
+      "message": "This is out of date",
+      "revId": "2151948af2e99c22fd79212cd4645eb95598b217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
