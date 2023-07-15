@@ -683,7 +683,12 @@ def ImagePropFromGlobalDict(glob_dict, mount_point):
   d = {}
   TryParseFingerprint(glob_dict)
 
-  d["timestamp"] = FIXED_FILE_TIMESTAMP
+  # Set fixed timestamp for building the OTA package.
+  # However, with the fixed timestamp, 'adb sync' will not work correctly.
+  # To use the 'adb sync', TARGET_SKIP_OTA_PACKAGE=true must be added to the
+  # build command.
+  if "use_fixed_timestamp" in glob_dict:
+    d["timestamp"] = FIXED_FILE_TIMESTAMP
   if "build.prop" in glob_dict:
     timestamp = glob_dict["build.prop"].GetProp("ro.build.date.utc")
     if timestamp:
