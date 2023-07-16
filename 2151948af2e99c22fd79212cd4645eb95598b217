@@ -16,6 +16,24 @@
       "message": "This is out of date",
       "revId": "2151948af2e99c22fd79212cd4645eb95598b217",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc80a6a0_c69d9ac0",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-07-16T22:48:54Z",
+      "side": 1,
+      "message": "Done\nThanks!",
+      "parentUuid": "7402b5fc_284806d6",
+      "revId": "2151948af2e99c22fd79212cd4645eb95598b217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
