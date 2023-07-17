@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f313dea9_94a3f6cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293545
+      },
+      "writtenOn": "2023-07-17T05:12:52Z",
+      "side": 1,
+      "message": "The build is pass on https://android-build.corp.google.com/build_explorer/branch_dashboard/git_aosp-main-future/build_id/P59823625/ by adding this CLs.",
+      "revId": "fd63ee6609a5a8dc73529b0e25984aad933cc3a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
