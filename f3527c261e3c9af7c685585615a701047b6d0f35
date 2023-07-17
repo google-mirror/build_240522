@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e9c0e91_33bd80ac",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 4205,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T16:07:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52302f09_179daee8",
+      "range": {
+        "startLine": 4204,
+        "startChar": 0,
+        "endLine": 4205,
+        "endChar": 42
+      },
+      "revId": "f3527c261e3c9af7c685585615a701047b6d0f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50cb8759_578a1296",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-07-17T02:56:00Z",
       "side": 1,
       "message": "`copy_unsigned_custom_image` -\u003e `copy_custom_image`",
+      "range": {
+        "startLine": 4237,
+        "startChar": 7,
+        "endLine": 4237,
+        "endChar": 33
+      },
+      "revId": "f3527c261e3c9af7c685585615a701047b6d0f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b731209c_9db0f51f",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 4237,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T16:07:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50cb8759_578a1296",
       "range": {
         "startLine": 4237,
         "startChar": 7,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa422350_1a50b2bb",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 4253,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T16:07:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d76e115e_cf8cc8f8",
+      "range": {
+        "startLine": 4253,
+        "startChar": 19,
+        "endLine": 4253,
+        "endChar": 45
+      },
+      "revId": "f3527c261e3c9af7c685585615a701047b6d0f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54d00988_5ea71cba",
@@ -100,6 +172,24 @@
       "writtenOn": "2023-07-17T02:54:16Z",
       "side": 1,
       "message": "Please remove this new empty line",
+      "revId": "f3527c261e3c9af7c685585615a701047b6d0f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e043a454_d63f7819",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 5619,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T16:07:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54d00988_5ea71cba",
       "revId": "f3527c261e3c9af7c685585615a701047b6d0f35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
