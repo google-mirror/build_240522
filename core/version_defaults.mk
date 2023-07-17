@@ -73,7 +73,11 @@ ifndef PLATFORM_SDK_VERSION
   # When you increment the PLATFORM_SDK_VERSION please ensure you also
   # clear out the following text file of all older PLATFORM_VERSION's:
   # cts/tests/tests/os/assets/platform_versions.txt
-  PLATFORM_SDK_VERSION := 33
+  ifeq ($(TARGET_ARCH),riscv64)
+	PLATFORM_SDK_VERSION := 35
+  else
+	PLATFORM_SDK_VERSION := 33
+  endif
 endif
 .KATI_READONLY := PLATFORM_SDK_VERSION
 
