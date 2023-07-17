@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aac03e98_5d395b9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Thank you for the CL. Please help refine two small coding style before sending the code owner for review.",
+      "revId": "f3527c261e3c9af7c685585615a701047b6d0f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52302f09_179daee8",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 4205,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Please make these lines shorter\n\n```\n# If BOARD_AVB_$(call to-upper,$(partition))_KEY_PATH is set, the image will be included in\n# BOARD_AVB_CUSTOMIMAGES_PARTITION_LIST, Otherwise the image won\u0027t be AVB signed.\n```",
+      "range": {
+        "startLine": 4204,
+        "startChar": 0,
+        "endLine": 4205,
+        "endChar": 42
+      },
+      "revId": "f3527c261e3c9af7c685585615a701047b6d0f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54d00988_5ea71cba",
+        "filename": "core/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 5619,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Please remove this new empty line",
+      "revId": "f3527c261e3c9af7c685585615a701047b6d0f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

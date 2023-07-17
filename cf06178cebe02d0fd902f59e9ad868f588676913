@@ -70,6 +70,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d37df663_93310cbb",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 4204,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef3037bf_fa9dec4d",
+      "range": {
+        "startLine": 4203,
+        "startChar": 0,
+        "endLine": 4204,
+        "endChar": 57
+      },
+      "revId": "cf06178cebe02d0fd902f59e9ad868f588676913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "682b5897_00f9b78f",
@@ -83,6 +107,30 @@
       "writtenOn": "2023-06-30T06:37:27Z",
       "side": 1,
       "message": "Can the image path be a full path like the images in BOARD_AVB_$(partition)_IMAGE_LIST? Coping from $(PRODUCT_OUT) does not so make sene because the custom images should be prebuilt images. \n\nAlso, it looks here you assume one non AVB custom partition can only have one prebuilt image. Is this expected? If that\u0027s the case, I think you don\u0027t need to make it to be a custom image at all. What do you think\u003e",
+      "range": {
+        "startLine": 6424,
+        "startChar": 12,
+        "endLine": 6424,
+        "endChar": 43
+      },
+      "revId": "cf06178cebe02d0fd902f59e9ad868f588676913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf4df876_cfc02acb",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 6424,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "682b5897_00f9b78f",
       "range": {
         "startLine": 6424,
         "startChar": 12,
@@ -116,6 +164,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a7c680e_23ac431a",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e160d11a_f593ad76",
+      "range": {
+        "startLine": 803,
+        "startChar": 38,
+        "endLine": 803,
+        "endChar": 44
+      },
+      "revId": "cf06178cebe02d0fd902f59e9ad868f588676913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b26adb31_06cec087",
@@ -129,6 +201,30 @@
       "writtenOn": "2023-06-30T06:37:27Z",
       "side": 1,
       "message": "This is partition list, not image list.",
+      "range": {
+        "startLine": 804,
+        "startChar": 34,
+        "endLine": 804,
+        "endChar": 73
+      },
+      "revId": "cf06178cebe02d0fd902f59e9ad868f588676913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c6fb9e6_a3372fd1",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b26adb31_06cec087",
       "range": {
         "startLine": 804,
         "startChar": 34,

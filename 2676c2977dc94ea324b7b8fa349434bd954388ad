@@ -135,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34c88fe3_bd862dcd",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 4209,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a564974_96f01b8d",
+      "range": {
+        "startLine": 4203,
+        "startChar": 0,
+        "endLine": 4209,
+        "endChar": 5
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "374b21be_71624e0c",
@@ -152,6 +176,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73f0c55e_4cc0f244",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 4511,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "374b21be_71624e0c",
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38a39571_304ac026",
@@ -165,6 +207,30 @@
       "writtenOn": "2023-07-10T05:10:35Z",
       "side": 1,
       "message": "add one check here to check whether `BOARD_AVB_$(partition)_KEY_PATH` is empty",
+      "range": {
+        "startLine": 4682,
+        "startChar": 8,
+        "endLine": 4683,
+        "endChar": 53
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8165bc18_4b5c4a7c",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 4683,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38a39571_304ac026",
       "range": {
         "startLine": 4682,
         "startChar": 8,
@@ -198,6 +264,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ee5df54_73225228",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 5613,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd6255e7_5584549d",
+      "range": {
+        "startLine": 5599,
+        "startChar": 0,
+        "endLine": 5613,
+        "endChar": 45
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bc52b10_130aa487",
@@ -211,6 +301,30 @@
       "writtenOn": "2023-07-10T05:10:35Z",
       "side": 1,
       "message": "By checking above change to checking `BOARD_AVB_$(partition)_KEY_PATH`, we don\u0027t need this change any more.",
+      "range": {
+        "startLine": 6423,
+        "startChar": 0,
+        "endLine": 6426,
+        "endChar": 126
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "949ea1c3_a427b946",
+        "filename": "core/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 6426,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bc52b10_130aa487",
       "range": {
         "startLine": 6423,
         "startChar": 0,
@@ -244,6 +358,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc0c4fd7_91e46224",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7b847c7_4e3a0125",
+      "range": {
+        "startLine": 520,
+        "startChar": 4,
+        "endLine": 520,
+        "endChar": 19
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a07045a_761705a8",
@@ -257,6 +395,30 @@
       "writtenOn": "2023-07-10T05:10:35Z",
       "side": 1,
       "message": "`AddNonAVBCustomImages` -\u003e `AddCustomImages`",
+      "range": {
+        "startLine": 803,
+        "startChar": 4,
+        "endLine": 803,
+        "endChar": 25
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "079775d7_4bde7c70",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a07045a_761705a8",
       "range": {
         "startLine": 803,
         "startChar": 4,
@@ -290,6 +452,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71ffab48_cbaa2b2a",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d984729f_347a3fb1",
+      "range": {
+        "startLine": 817,
+        "startChar": 12,
+        "endLine": 817,
+        "endChar": 32
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38349ba6_e68d932f",
@@ -303,6 +489,30 @@
       "writtenOn": "2023-07-10T05:10:35Z",
       "side": 1,
       "message": "`nonavb_custom_partitions` -\u003e `custom_partitions`",
+      "range": {
+        "startLine": 1133,
+        "startChar": 2,
+        "endLine": 1133,
+        "endChar": 26
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5b835d6_fc6fd8cf",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38349ba6_e68d932f",
       "range": {
         "startLine": 1133,
         "startChar": 2,
@@ -336,6 +546,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07f7df2a_47ff380e",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a618366_5d44e663",
+      "range": {
+        "startLine": 1134,
+        "startChar": 7,
+        "endLine": 1134,
+        "endChar": 42
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff37f35b_7e0d1e6d",
@@ -349,6 +583,30 @@
       "writtenOn": "2023-07-10T05:10:35Z",
       "side": 1,
       "message": "`nonavb_custom_partitions` -\u003e `custom_partitions`",
+      "range": {
+        "startLine": 1135,
+        "startChar": 24,
+        "endLine": 1135,
+        "endChar": 48
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28df4edf_7d6b7a77",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff37f35b_7e0d1e6d",
       "range": {
         "startLine": 1135,
         "startChar": 24,
@@ -382,6 +640,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0802bf67_c33825d6",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04392ddd_c552d031",
+      "range": {
+        "startLine": 1138,
+        "startChar": 33,
+        "endLine": 1138,
+        "endChar": 54
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf74e096_626260b6",
@@ -395,6 +677,30 @@
       "writtenOn": "2023-07-10T05:10:35Z",
       "side": 1,
       "message": "`custom images for` -\u003e `AVB custom images for`",
+      "range": {
+        "startLine": 1144,
+        "startChar": 12,
+        "endLine": 1144,
+        "endChar": 29
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f63470a9_3db3b212",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1144,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf74e096_626260b6",
       "range": {
         "startLine": 1144,
         "startChar": 12,
@@ -428,6 +734,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cfacb85_ad033716",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b82653d9_0b669384",
+      "range": {
+        "startLine": 1145,
+        "startChar": 33,
+        "endLine": 1145,
+        "endChar": 48
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25c28d21_02a21a4a",
@@ -441,6 +771,30 @@
       "writtenOn": "2023-07-10T05:10:35Z",
       "side": 1,
       "message": "`nonavb_custom_images_partition_list` -\u003e `custom_images_partition_list`",
+      "range": {
+        "startLine": 1242,
+        "startChar": 20,
+        "endLine": 1242,
+        "endChar": 27
+      },
+      "revId": "2676c2977dc94ea324b7b8fa349434bd954388ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f34b7b8_747e17e0",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-17T02:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25c28d21_02a21a4a",
       "range": {
         "startLine": 1242,
         "startChar": 20,
