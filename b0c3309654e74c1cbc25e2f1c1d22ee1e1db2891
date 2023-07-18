@@ -191,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5991b80c_0d5762c6",
+        "filename": "tools/aconfig/src/codegen_rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-18T15:04:40Z",
+      "side": 1,
+      "message": "But we don\u0027t support overriding flag values in production?",
+      "parentUuid": "20a03f3b_07c617ed",
+      "range": {
+        "startLine": 95,
+        "startChar": 7,
+        "endLine": 95,
+        "endChar": 19
+      },
+      "revId": "b0c3309654e74c1cbc25e2f1c1d22ee1e1db2891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf038e04_8a668f34",
         "filename": "tools/aconfig/templates/rust_prod.template",
         "patchSetId": 3
@@ -220,6 +244,24 @@
       "side": 1,
       "message": "Is the purpose to reduce one level of indirection for performance reasons? If that is the case, can we inline the FlagProvider implementation? \n\nOne advantage of doing so via PROVIDER is that we only have one source of truth in the generated code which is the flag provider, if any update needs to be made, we only need to update flag provider.",
       "parentUuid": "bf038e04_8a668f34",
+      "revId": "b0c3309654e74c1cbc25e2f1c1d22ee1e1db2891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7384014c_93946885",
+        "filename": "tools/aconfig/templates/rust_prod.template",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-18T15:04:40Z",
+      "side": 1,
+      "message": "I see the source of truth as the call to GetServerConfigurableFlag, not the indirection via PROVIDER. If we were to update something in the future, we would still need to re-create the auto-generated lib.\n\nI don\u0027t see a reason not to write this as\n\n```\nfn get_some_read_write_flag() { flags_rust::GetServerConfigurableFlag(...) }\nfn get_some_read_only_flag() { false }\n```\n\nBut again, maybe I\u0027m missing something?",
+      "parentUuid": "ecb16078_1988c983",
       "revId": "b0c3309654e74c1cbc25e2f1c1d22ee1e1db2891",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
