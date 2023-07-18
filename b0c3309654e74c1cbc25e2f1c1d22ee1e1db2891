@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c5db774_01b9d044",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-07-18T13:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c07de17f_460b3acf",
+      "range": {
+        "startLine": 10,
+        "startChar": 34,
+        "endLine": 10,
+        "endChar": 37
+      },
+      "revId": "b0c3309654e74c1cbc25e2f1c1d22ee1e1db2891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d3948df_c0ab3001",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-07-18T13:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5023398b_410fbd7a",
+      "range": {
+        "startLine": 10,
+        "startChar": 22,
+        "endLine": 10,
+        "endChar": 27
+      },
+      "revId": "b0c3309654e74c1cbc25e2f1c1d22ee1e1db2891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01a04ace_97220610",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-07-18T09:11:35Z",
       "side": 1,
       "message": "Change to `match`: it will help if someone adds a new ProtoFlagState in the future.",
+      "range": {
+        "startLine": 73,
+        "startChar": 27,
+        "endLine": 73,
+        "endChar": 68
+      },
+      "revId": "b0c3309654e74c1cbc25e2f1c1d22ee1e1db2891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a167d6ef_a8d47e11",
+        "filename": "tools/aconfig/src/codegen_rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-07-18T13:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01a04ace_97220610",
       "range": {
         "startLine": 73,
         "startChar": 27,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20a03f3b_07c617ed",
+        "filename": "tools/aconfig/src/codegen_rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-07-18T13:45:59Z",
+      "side": 1,
+      "message": "The FlagProvider is there to support injection pattern with this static object.",
+      "parentUuid": "00f33664_fba7e64c",
+      "range": {
+        "startLine": 95,
+        "startChar": 7,
+        "endLine": 95,
+        "endChar": 19
+      },
+      "revId": "b0c3309654e74c1cbc25e2f1c1d22ee1e1db2891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf038e04_8a668f34",
         "filename": "tools/aconfig/templates/rust_prod.template",
         "patchSetId": 3
@@ -106,6 +202,24 @@
       "writtenOn": "2023-07-18T09:11:35Z",
       "side": 1,
       "message": "Why not remove FlagProvider from the prod code and just call GetServerConfigurableFlag directly in all READ_WRITE functions?",
+      "revId": "b0c3309654e74c1cbc25e2f1c1d22ee1e1db2891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecb16078_1988c983",
+        "filename": "tools/aconfig/templates/rust_prod.template",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-07-18T13:45:59Z",
+      "side": 1,
+      "message": "Is the purpose to reduce one level of indirection for performance reasons? If that is the case, can we inline the FlagProvider implementation? \n\nOne advantage of doing so via PROVIDER is that we only have one source of truth in the generated code which is the flag provider, if any update needs to be made, we only need to update flag provider.",
+      "parentUuid": "bf038e04_8a668f34",
       "revId": "b0c3309654e74c1cbc25e2f1c1d22ee1e1db2891",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
