@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c528240_09f95fd4",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-07-18T16:10:13Z",
+      "side": 1,
+      "message": "feels like a large block of duplicated code. Can we re-use AddAVBCustomImages() with an empty `builder` ?",
+      "range": {
+        "startLine": 803,
+        "startChar": 4,
+        "endLine": 803,
+        "endChar": 19
+      },
+      "revId": "fea3f4cc5a25c0155785cac54b86e2d4677d5325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
