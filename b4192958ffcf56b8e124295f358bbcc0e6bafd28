@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6ad5386_22e901ca",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2023-07-18T07:12:47Z",
+      "side": 1,
+      "message": "i\u0027d prefer we use an explicit option like `PRODUCT_NO_DYNAMIC_SYSTEM_UPDATE` to disable this, rather then making this an implicit behavior of `TARGET_SUPPORTS_WEARABLES`",
+      "range": {
+        "startLine": 301,
+        "startChar": 9,
+        "endLine": 301,
+        "endChar": 34
+      },
+      "revId": "b4192958ffcf56b8e124295f358bbcc0e6bafd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
