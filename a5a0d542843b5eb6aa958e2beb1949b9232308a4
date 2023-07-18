@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f50c292b_5b795a4e",
+        "filename": "core/distdir.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-07-18T05:22:32Z",
+      "side": 1,
+      "message": "Doesn\u0027t this generating a rule with the `$(PRODUCT_OUT)` which has the product name to ninja?",
+      "range": {
+        "startLine": 67,
+        "startChar": 56,
+        "endLine": 67,
+        "endChar": 82
+      },
+      "revId": "a5a0d542843b5eb6aa958e2beb1949b9232308a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
