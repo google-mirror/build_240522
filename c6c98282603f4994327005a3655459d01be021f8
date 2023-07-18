@@ -351,6 +351,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d2ed269_c2eba252",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-07-18T01:11:50Z",
+      "side": 1,
+      "message": "Marking this discussion as resolved for now. Feel free to re-open if needed.",
+      "parentUuid": "59e08f85_4ebd2f7d",
+      "range": {
+        "startLine": 224,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 32
+      },
+      "revId": "c6c98282603f4994327005a3655459d01be021f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab4b47cc_bb6ae767",
