@@ -239,6 +239,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02e7815e_579f72d5",
+        "filename": "tools/aconfig/src/codegen_rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-18T15:45:25Z",
+      "side": 1,
+      "message": "Oh, I didn\u0027t realize that people may want to use a provider object. That clears up a lot of confusion!\n\nIn that case, you need to make struct FlagProvider and PROVIDER pub.",
+      "parentUuid": "04b6cebd_2b63247e",
+      "range": {
+        "startLine": 95,
+        "startChar": 7,
+        "endLine": 95,
+        "endChar": 19
+      },
+      "revId": "b0c3309654e74c1cbc25e2f1c1d22ee1e1db2891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf038e04_8a668f34",
         "filename": "tools/aconfig/templates/rust_prod.template",
         "patchSetId": 3
