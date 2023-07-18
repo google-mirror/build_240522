@@ -1,6 +1,8 @@
 #ifndef {header}_HEADER_H
 #define {header}_HEADER_H
 
+#ifdef __cplusplus
+
 #include <string>
 #include <memory>
 
@@ -50,4 +52,24 @@ inline void reset_flags() \{
 }
 {{ -endif }}
 }
+
+extern "C" \{
+#endif // __cplusplus
+
+{{ for item in class_elements }}
+bool {header}_{item.flag_name}();
+
+{{ if for_test }}
+void set_{header}_{item.flag_name}(bool val);
+{{ -endif }}
+{{ endfor - }}
+
+{{ if for_test }}
+void {header}_reset_flags();
+{{ -endif }}
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

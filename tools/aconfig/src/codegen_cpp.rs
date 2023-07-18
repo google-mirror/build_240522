@@ -57,26 +57,6 @@ where
             template: include_str!("../templates/cpp_source_file.template"),
             dir: "",
         },
-        FileSpec {
-            name: &format!("{}_flag_provider.h", header),
-            template: match codegen_mode {
-                CodegenMode::Production => {
-                    include_str!("../templates/cpp_prod_flag_provider.template")
-                }
-                CodegenMode::Test => include_str!("../templates/cpp_test_flag_provider.template"),
-            },
-            dir: "",
-        },
-        FileSpec {
-            name: &format!("{}_c.h", header),
-            template: include_str!("../templates/c_exported_header.template"),
-            dir: "include",
-        },
-        FileSpec {
-            name: &format!("{}_c.cc", header),
-            template: include_str!("../templates/c_source_file.template"),
-            dir: "",
-        },
     ];
     files.iter().map(|file| generate_file(file, &context)).collect()
 }
