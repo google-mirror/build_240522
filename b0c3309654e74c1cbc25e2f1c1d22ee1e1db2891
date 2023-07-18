@@ -354,6 +354,24 @@
       "parentUuid": "7384014c_93946885",
       "revId": "b0c3309654e74c1cbc25e2f1c1d22ee1e1db2891",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "564ba363_6f5a0435",
+        "filename": "tools/aconfig/templates/rust_prod.template",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-18T19:09:17Z",
+      "side": 1,
+      "message": "Now that I understand that developers are allowed to access the PROVIDER struct if they want to use an injection like API, I agree the call to GetServerConfigurableFlag can be consolidated to that struct only.",
+      "parentUuid": "bc4736ea_60284d91",
+      "revId": "b0c3309654e74c1cbc25e2f1c1d22ee1e1db2891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

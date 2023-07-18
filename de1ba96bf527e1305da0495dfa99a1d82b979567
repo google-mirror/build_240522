@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "452e5120_02c4fc94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-18T19:09:17Z",
+      "side": 1,
+      "message": "Remember to fix the RustFormatter lint checks.\n\nI\u0027m looking forward to the end-to-end tests in aconfig/tests to verify that the auto-generated Rust code works, and that you can interact with it using both the free methods and the provider struct.",
+      "revId": "de1ba96bf527e1305da0495dfa99a1d82b979567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
