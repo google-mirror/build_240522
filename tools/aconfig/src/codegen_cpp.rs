@@ -155,14 +155,14 @@ public:
     virtual bool enabled_rw() = 0;
 };
 
-extern std::unique_ptr<flag_provider_interface> provider_;
+flag_provider_interface& getProvider();
 
 inline bool disabled_ro() {
     return false;
 }
 
 inline bool disabled_rw() {
-    return provider_->disabled_rw();
+    return getProvider().disabled_rw();
 }
 
 inline bool enabled_ro() {
@@ -170,7 +170,7 @@ inline bool enabled_ro() {
 }
 
 inline bool enabled_rw() {
-    return provider_->enabled_rw();
+    return getProvider().enabled_rw();
 }
 
 }
@@ -206,42 +206,42 @@ public:
     virtual void reset_flags() {}
 };
 
-extern std::unique_ptr<flag_provider_interface> provider_;
+flag_provider_interface& getProvider();
 
 inline bool disabled_ro() {
-    return provider_->disabled_ro();
+    return getProvider().disabled_ro();
 }
 
 inline void disabled_ro(bool val) {
-    provider_->disabled_ro(val);
+    getProvider().disabled_ro(val);
 }
 
 inline bool disabled_rw() {
-    return provider_->disabled_rw();
+    return getProvider().disabled_rw();
 }
 
 inline void disabled_rw(bool val) {
-    provider_->disabled_rw(val);
+    getProvider().disabled_rw(val);
 }
 
 inline bool enabled_ro() {
-    return provider_->enabled_ro();
+    return getProvider().enabled_ro();
 }
 
 inline void enabled_ro(bool val) {
-    provider_->enabled_ro(val);
+    getProvider().enabled_ro(val);
 }
 
 inline bool enabled_rw() {
-    return provider_->enabled_rw();
+    return getProvider().enabled_rw();
 }
 
 inline void enabled_rw(bool val) {
-    provider_->enabled_rw(val);
+    getProvider().enabled_rw(val);
 }
 
 inline void reset_flags() {
-    return provider_->reset_flags();
+    return getProvider().reset_flags();
 }
 
 }
@@ -368,12 +368,17 @@ public:
 "#;
 
     const SOURCE_FILE_EXPECTED: &str = r#"
+#include <android_base/no_destructor.h>
 #include "com_android_aconfig_test.h"
 #include "com_android_aconfig_test_flag_provider.h"
 
 namespace com::android::aconfig::test {
-    std::unique_ptr<flag_provider_interface> provider_ =
-        std::make_unique<flag_provider>();
+
+flag_provider_interface& getProvider() {
+    static android::base::NoDestructor<flag_provider> provider;
+    return provider;
+}
+
 }
 "#;
 
