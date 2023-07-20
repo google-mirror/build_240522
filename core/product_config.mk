@@ -367,6 +367,18 @@ PRODUCT_APEX_SYSTEM_SERVER_JARS := $(sort $(PRODUCT_APEX_SYSTEM_SERVER_JARS))
 PRODUCT_STANDALONE_SYSTEM_SERVER_JARS := \
   $(call qualify-platform-jars,$(PRODUCT_STANDALONE_SYSTEM_SERVER_JARS))
 
+# ART needs statsd and conscrypt module SDK prebuilts in order to build for
+# target `riscv64` on master-art branch. However, mainline does not support
+# riscv64 yet and these prebuilts do not exist in the official tree. ART keeps
+# local custom-built prebuilts and the corresponding Android.bp files that are
+# copied in place with art/tools/buildbot-build.sh script before starting the
+# build. ART local directory containing these .bp files must be excluded or else
+# Soong will fail with duplicate module definitions error.
+#
+# TODO(b/286551985): remove this once mainline supports riscv64.
+PRODUCT_SOURCE_ROOT_DIRS += \
+  -prebuilts/runtime/mainline/local_riscv64
+
 ifndef PRODUCT_SYSTEM_NAME
   PRODUCT_SYSTEM_NAME := $(PRODUCT_NAME)
 endif
