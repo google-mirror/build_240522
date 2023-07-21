@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61e0ebf1_3c1b426b",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-07-21T18:31:42Z",
+      "side": 1,
+      "message": "This should be `+\u003d`",
+      "range": {
+        "startLine": 359,
+        "startChar": 24,
+        "endLine": 359,
+        "endChar": 25
+      },
+      "revId": "062fc636a0176c7e4b7569f81996cd956074a446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
