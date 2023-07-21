@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "198e502c_077bb4ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-21T07:20:12Z",
+      "side": 1,
+      "message": "I would like to consolidate the e2e tests under tests/ (cf aconfig.test.java), but I\u0027m happy to do that in a follow-up commit if merging this means we submit the soong c++ rules today.\n\nI can adjust the e2e tests next week.",
+      "revId": "d930af853384b923e71200a8b6e00def2fe95385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83b7f123_e465c987",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-21T07:20:12Z",
+      "side": 1,
+      "message": "I\u0027m guessing this was unintentionally left from development? Please un-comment.",
+      "range": {
+        "startLine": 499,
+        "startChar": 8,
+        "endLine": 499,
+        "endChar": 10
+      },
+      "revId": "d930af853384b923e71200a8b6e00def2fe95385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbb59e24_60b4566e",
+        "filename": "tools/aconfig/test_cc/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-21T07:20:12Z",
+      "side": 1,
+      "message": "Please remove leading and trailing blank lines in this file.",
+      "revId": "d930af853384b923e71200a8b6e00def2fe95385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
