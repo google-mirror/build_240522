@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2456d94f_f24e92b9",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-07-21T16:12:41Z",
+      "side": 1,
+      "message": "oops. fixed.",
+      "parentUuid": "83b7f123_e465c987",
+      "range": {
+        "startLine": 499,
+        "startChar": 8,
+        "endLine": 499,
+        "endChar": 10
+      },
+      "revId": "d930af853384b923e71200a8b6e00def2fe95385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbb59e24_60b4566e",
@@ -71,6 +95,24 @@
       "writtenOn": "2023-07-21T07:20:12Z",
       "side": 1,
       "message": "Please remove leading and trailing blank lines in this file.",
+      "revId": "d930af853384b923e71200a8b6e00def2fe95385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aad585d1_3cf17a6f",
+        "filename": "tools/aconfig/test_cc/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-07-21T16:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbb59e24_60b4566e",
       "revId": "d930af853384b923e71200a8b6e00def2fe95385",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
