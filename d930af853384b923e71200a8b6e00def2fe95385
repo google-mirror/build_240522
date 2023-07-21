@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "601f5785_dba8676c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-21T07:22:07Z",
+      "side": 1,
+      "message": "The lint checks warn about\n\n`\nbuild/make/tools/aconfig/test_cc/aconfig_hello_world.cpp:18:10: fatal error: \u0027com_android_aconfig_test.h\u0027 file not found\n#include \"com_android_aconfig_test.h\"\n^~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.\n`\n\nWhen testing this topic locally I ran into the same issue. I poked around in the source and the generated files, and the next time I compiled it worked. I don\u0027t think it was because I added anything; instead I think there is some build dependency that isn\u0027t correctly set up, so that the build will fail on the first run, and succeed in later runs.",
+      "revId": "d930af853384b923e71200a8b6e00def2fe95385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83b7f123_e465c987",
