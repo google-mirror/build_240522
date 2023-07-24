@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee6bef45_008c077e",
+        "filename": "tools/aconfig/tests/aconfig_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-07-24T13:50:35Z",
+      "side": 1,
+      "message": "we need to setup the mendel namespace for the test, currently the test aconfig file, it is using aconfig.test for mendel namespace, but that namespace has not been setup yet. I think we could either\n\n1, setup a namespace just for aconfig test, so these flags can get actual values. \n2, use ACE (android core experiments) namespace b/292124848 for these tests\n\nI would vote for 2 as creating a namespace just for test seems a bit excessive.",
+      "revId": "af3da9d1bedef7db10618bcda0663c93d67def84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
