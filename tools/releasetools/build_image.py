@@ -181,8 +181,10 @@ def SetUpInDirAndFsConfig(origin_in, prop_dict):
   in_dir = common.MakeTempDir()
   root_dir = prop_dict.get("root_dir")
   if root_dir:
+    logger.info("Copy root_dir(%s): %s", root_dir, os.listdir(root_dir))
     shutil.rmtree(in_dir)
     shutil.copytree(root_dir, in_dir, symlinks=True)
+    logger.info("To root_dir(%s): %s", in_dir, os.listdir(in_dir))
   in_dir_system = os.path.join(in_dir, "system")
   shutil.rmtree(in_dir_system, ignore_errors=True)
   shutil.copytree(origin_in, in_dir_system, symlinks=True)
