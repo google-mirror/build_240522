@@ -15,13 +15,13 @@ using namespace base;
 // This load the whole file to memory so be careful!
 static bool sameContent(const std::string& path1, const std::string& path2) {
   std::string f1;
-  if (!ReadFileToString(path1, &f1)) {
+  if (!ReadFileToString(path1, &f1, true)) {
     printf("Unable to read '%s' content: %m\n", path1.c_str());
     return false;
   }
 
   std::string f2;
-  if (!ReadFileToString(path2, &f2)) {
+  if (!ReadFileToString(path2, &f2, true)) {
     printf("Unable to read '%s' content %m\n", path1.c_str());
     return false;
   }
@@ -76,10 +76,10 @@ TEST(Align, DoubleAligment) {
 
   // Nothing should have changed between tmp and dst.
   std::string tmp_content;
-  ASSERT_EQ(true, ReadFileToString(tmp, &tmp_content));
+  ASSERT_EQ(true, ReadFileToString(tmp, &tmp_content, true));
 
   std::string dst_content;
-  ASSERT_EQ(true, ReadFileToString(dst, &dst_content));
+  ASSERT_EQ(true, ReadFileToString(dst, &dst_content, true));
 
   ASSERT_EQ(tmp_content, dst_content);
 }
