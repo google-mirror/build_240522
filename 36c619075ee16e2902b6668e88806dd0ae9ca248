@@ -46,6 +46,30 @@
       },
       "revId": "36c619075ee16e2902b6668e88806dd0ae9ca248",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0556366_6752b44a",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 5738,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-07-25T04:45:27Z",
+      "side": 0,
+      "message": "I mean, it does not look safe to remove the condition. Or are there any check that $(1) is a valid directory?",
+      "parentUuid": "a4424ad8_ab171af1",
+      "range": {
+        "startLine": 5738,
+        "startChar": 7,
+        "endLine": 5738,
+        "endChar": 25
+      },
+      "revId": "36c619075ee16e2902b6668e88806dd0ae9ca248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
