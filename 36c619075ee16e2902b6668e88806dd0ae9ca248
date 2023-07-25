@@ -118,6 +118,30 @@
       },
       "revId": "36c619075ee16e2902b6668e88806dd0ae9ca248",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82a0eb2e_cbb012d4",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 5738,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-07-25T04:59:52Z",
+      "side": 0,
+      "message": "Thank you for catching this. I restored the guard so that we can skip (as before) when $(1) is not a directory or $(1) is empty.",
+      "parentUuid": "dbf35d6e_d9e13d60",
+      "range": {
+        "startLine": 5738,
+        "startChar": 7,
+        "endLine": 5738,
+        "endChar": 25
+      },
+      "revId": "36c619075ee16e2902b6668e88806dd0ae9ca248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
