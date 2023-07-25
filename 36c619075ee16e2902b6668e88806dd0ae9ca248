@@ -22,6 +22,30 @@
       },
       "revId": "36c619075ee16e2902b6668e88806dd0ae9ca248",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4424ad8_ab171af1",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 5738,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-07-25T04:43:09Z",
+      "side": 0,
+      "message": "Removed in the PS2",
+      "parentUuid": "b1de77fd_2a07a9aa",
+      "range": {
+        "startLine": 5738,
+        "startChar": 7,
+        "endLine": 5738,
+        "endChar": 25
+      },
+      "revId": "36c619075ee16e2902b6668e88806dd0ae9ca248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
