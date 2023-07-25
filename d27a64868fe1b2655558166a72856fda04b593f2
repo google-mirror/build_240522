@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86030b4c_460bba60",
+        "filename": "core/config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-07-25T22:45:29Z",
+      "side": 1,
+      "message": "log the actual value of TARGET_MAX_PAGE_SIZE_SUPPORTED as well for debugging?",
+      "range": {
+        "startLine": 448,
+        "startChar": 14,
+        "endLine": 448,
+        "endChar": 44
+      },
+      "revId": "d27a64868fe1b2655558166a72856fda04b593f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
