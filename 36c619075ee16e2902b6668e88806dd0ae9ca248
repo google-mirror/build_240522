@@ -94,6 +94,30 @@
       },
       "revId": "36c619075ee16e2902b6668e88806dd0ae9ca248",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbf35d6e_d9e13d60",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 5738,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-07-25T04:55:55Z",
+      "side": 0,
+      "message": "I don\u0027t think so. It will copy the host root files (/.) to $(2), if $(1) is empty, which is not expected. The original behavior was to skip the copy action.\nI think the original behavior must not be changed.",
+      "parentUuid": "cf532c2d_a724bb36",
+      "range": {
+        "startLine": 5738,
+        "startChar": 7,
+        "endLine": 5738,
+        "endChar": 25
+      },
+      "revId": "36c619075ee16e2902b6668e88806dd0ae9ca248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
