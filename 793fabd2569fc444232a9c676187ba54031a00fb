@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e4a6ab6_0d0cd783",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-25T14:48:11Z",
+      "side": 1,
+      "message": "Instead of having 3 functions, can we do it in one? Fake code:\n\n```\ndef AddCustomImages(output_zip, partition_name, image_list):\n  \"\"\"Adds and signs custom images, as needed, in IMAGES/.\n\n  Args:\n    output_zip: The output zip file (needs to be already open), or None to\n        write images to OPTIONS.input_tmp/.\n\n  Uses the image under IMAGES/ if it already exists. Otherwise looks for the\n  image under PREBUILT_IMAGES/, signs it as needed, and returns the image name.\n\n  Raises:\n    AssertionError: If image can\u0027t be found.\n  \"\"\"\n\n  builder \u003d None\n  key_path \u003d OPTIONS.info_dict.get(\"avb_{}_key_path\".format(partition_name))\n  if key_path is Not None:\n    algorithm \u003d OPTIONS.info_dict.get(\"avb_{}_algorithm\".format(partition_name))\n    extra_args \u003d OPTIONS.info_dict.get(\n        \"avb_{}_add_hashtree_footer_args\".format(partition_name))\n    partition_size \u003d OPTIONS.info_dict.get(\n        \"avb_{}_partition_size\".format(partition_name))\n\n    builder \u003d verity_utils.CreateCustomImageBuilder(\n        OPTIONS.info_dict, partition_name, partition_size,\n        key_path, algorithm, extra_args)\n\n  for img_name in image_list:\n    custom_image \u003d OutputFile(\n        output_zip, OPTIONS.input_tmp, \"IMAGES\", img_name)\n    if os.path.exists(custom_image.name):\n      continue\n\n    custom_image_prebuilt_path \u003d os.path.join(\n        OPTIONS.input_tmp, \"PREBUILT_IMAGES\", img_name)\n    assert os.path.exists(custom_image_prebuilt_path), \\\n        \"Failed to find %s at %s\" % (img_name, custom_image_prebuilt_path)\n\n    shutil.copy(custom_image_prebuilt_path, custom_image.name)\n\n    if builder is not None:\n      builder.Build(custom_image.name)\n\n    custom_image.Write()\n\n  default \u003d os.path.join(OPTIONS.input_tmp, \"IMAGES\", partition_name + \".img\")\n  assert os.path.exists(default), \\\n      \"There should be one %s.img\" % (partition_name)\n  return default\n```",
+      "range": {
+        "startLine": 520,
+        "startChar": 0,
+        "endLine": 590,
+        "endChar": 16
+      },
+      "revId": "793fabd2569fc444232a9c676187ba54031a00fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de3f27f6_194c3f11",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-25T14:48:11Z",
+      "side": 1,
+      "message": "```\nimage_list \u003d OPTIONS.info_dict.get(\n          \"{}_image_list\".format(partition_name)).split()\nAddCustomImages(output_zip, partition_name, image_list)\n```",
+      "range": {
+        "startLine": 1128,
+        "startChar": 33,
+        "endLine": 1128,
+        "endChar": 76
+      },
+      "revId": "793fabd2569fc444232a9c676187ba54031a00fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aace6a1_a4696bc5",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-25T14:48:11Z",
+      "side": 1,
+      "message": "```\nimage_list \u003d OPTIONS.info_dict.get(\"avb_{}_image_list\".format(partition_name)).split()\nAddCustomImages(output_zip, partition_name, image_list)\n```",
+      "range": {
+        "startLine": 1135,
+        "startChar": 33,
+        "endLine": 1135,
+        "endChar": 79
+      },
+      "revId": "793fabd2569fc444232a9c676187ba54031a00fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
