@@ -46,6 +46,30 @@
       },
       "revId": "d40686b97f574002037dc0fad88df21d64c93f32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de40c502_4a4f73d9",
+        "filename": "tools/aconfig/src/protos.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2023-07-26T13:51:19Z",
+      "side": 1,
+      "message": "Yes, enforcing it exists but not the format (explicitly not enforcing \"b/xxxx\" or \"issuetracker.google.com/xxxx\") sounds good so others can format in ways that makes sense for them. If we find that to be a problem we can add a flag to disable the enforcement, but we should leave it enabled in AOSP.",
+      "parentUuid": "1c62a909_823eeb29",
+      "range": {
+        "startLine": 95,
+        "startChar": 30,
+        "endLine": 95,
+        "endChar": 34
+      },
+      "revId": "d40686b97f574002037dc0fad88df21d64c93f32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
