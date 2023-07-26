@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Copyright (C) 2011 The Android Open Source Project
 #
@@ -22,9 +22,9 @@ Usage:  build_image input_directory properties_file output_image \\
             target_output_directory
 """
 
-from __future__ import print_function
 import datetime
 
+import argparse
 import glob
 import logging
 import os
@@ -919,27 +919,84 @@ def BuildVBMeta(in_dir, glob_dict, output_path):
   common.BuildVBMeta(output_path, partitions, name, vbmeta_partitions)
 
 
-def main(argv):
-  args = common.ParseOptions(argv, __doc__)
+def CleanInputDirectory(input_directory, filter_file):
+  input_directory = os.path.abspath(input_directory)
+  allowed_files = set()
+  with open(filter_file, 'r') as f:
+    for line in f:
+      line = line.strip()
+      if not line:
+        continue
+      if line != os.path.normpath(line):
+        sys.exit(f"{line}: not normalized")
+      if line.startswith("../") or line.startswith('/'):
+        sys.exit(f"{line}: escapes staging directory by starting with ../ or /")
 
-  if len(args) != 4:
-    print(__doc__)
+      while line:
+        allowed_files.add(line)
+        line = os.path.dirname(line)
+
+  removed_files = []
+  for (path, dirs, files) in os.walk(input_directory):
+    for d in list(dirs):
+      d_orig = d
+      d = os.path.join(path, d)
+      if os.path.relpath(d, input_directory) not in allowed_files:
+        # os.walk will include symlinks to directories under the directory list
+        if os.path.islink(d):
+          removed_files.append(d)
+          #os.remove(d)
+        else:
+          removed_files.append(d)
+          #shutil.rmtree(d)
+        # os.walk will not attempt to recurse into subdirectories if we delete
+        # them from the origional list
+        del dirs[dirs.index(d_orig)]
+    for f in files:
+      f = os.path.join(path, f)
+      if os.path.relpath(f, input_directory) not in allowed_files:
+        removed_files.append(f)
+        #os.remove(f)
+
+  if removed_files:
+    print("ERROR: There were files in the staging dir that there shouldn't be!")
+    for f in removed_files:
+      print(f)
     sys.exit(1)
+
+
+def main(argv):
+  parser = argparse.ArgumentParser(
+    description="Builds output_image from the given input_directory and properties_file, and "
+    "writes the image to target_output_directory.")
+  parser.add_argument("--input_directory_filter_file",
+    help="the path to a file that contains a list of all files in the input_directory. If this "
+    "option is provided, all files under the input_directory that are not listed in this file will "
+    "be deleted before building the image. This is to work around the fact that building a module "
+    "will install in by default, so there could be files in the input_directory that are not "
+    "actually supposed to be part of the partition. The paths in this file must be relative to "
+    "input_directory.")
+  parser.add_argument("input_directory",
+    help="the staging directory to be converted to an image file")
+  parser.add_argument("properties_file",
+    help="a file containing the 'global dictionary' of properties that affect how the image is "
+    "built")
+  parser.add_argument("out_file",
+    help="the output file to write")
+  parser.add_argument("target_out",
+    help="the path to $(TARGET_OUT). Certain tools will use this to look through multiple staging "
+    "directories for fs config files.")
+  args = parser.parse_args()
 
   common.InitLogging()
 
-  in_dir = args[0]
-  glob_dict_file = args[1]
-  out_file = args[2]
-  target_out = args[3]
-
-  glob_dict = LoadGlobalDict(glob_dict_file)
+  glob_dict = LoadGlobalDict(args.properties_file)
   if "mount_point" in glob_dict:
     # The caller knows the mount point and provides a dictionary needed by
     # BuildImage().
     image_properties = glob_dict
   else:
-    image_filename = os.path.basename(out_file)
+    image_filename = os.path.basename(args.out_file)
     mount_point = ""
     if image_filename == "system.img":
       mount_point = "system"
@@ -974,14 +1031,17 @@ def main(argv):
     if "vbmeta" != mount_point:
       image_properties = ImagePropFromGlobalDict(glob_dict, mount_point)
 
+  if args.input_directory_filter_file:
+    CleanInputDirectory(args.input_directory, args.input_directory_filter_file)
+
   try:
-    if "vbmeta" in os.path.basename(out_file):
+    if "vbmeta" in os.path.basename(args.out_file):
       OPTIONS.info_dict = glob_dict
-      BuildVBMeta(in_dir, glob_dict, out_file)
+      BuildVBMeta(args.input_directory, glob_dict, args.out_file)
     else:
-      BuildImage(in_dir, image_properties, out_file, target_out)
+      BuildImage(args.input_directory, image_properties, args.out_file, args.target_out)
   except:
-    logger.error("Failed to build %s from %s", out_file, in_dir)
+    logger.error("Failed to build %s from %s", args.out_file, args.input_directory)
     raise
 
 
