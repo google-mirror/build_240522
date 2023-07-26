@@ -70,6 +70,30 @@
       },
       "revId": "d40686b97f574002037dc0fad88df21d64c93f32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20fef419_f82f01e4",
+        "filename": "tools/aconfig/src/protos.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 2011130
+      },
+      "writtenOn": "2023-07-26T15:21:21Z",
+      "side": 1,
+      "message": "We\u0027d like for it to be exactly one so gantry can enforce policies on it.\n\ndev specifies feaeture bug id -\u003e halyard picks it up -\u003e plumbs it to gantry -\u003e gantry gate does policy (e.g., if it\u0027s a feature bug, makes sure the appropriate bits are signed off on before you can enable a feature in prod)",
+      "parentUuid": "de40c502_4a4f73d9",
+      "range": {
+        "startLine": 95,
+        "startChar": 30,
+        "endLine": 95,
+        "endChar": 34
+      },
+      "revId": "d40686b97f574002037dc0fad88df21d64c93f32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
