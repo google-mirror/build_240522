@@ -38,7 +38,7 @@ message flag_declaration {
   optional string name = 1;
   optional string namespace = 2;
   optional string description = 3;
-  repeated string bug = 4;
+  optional string bug = 4;
 };
 
 message flag_declarations {
@@ -71,7 +71,7 @@ message parsed_flag {
   optional string name = 2;
   optional string namespace = 3;
   optional string description = 4;
-  repeated string bug = 5;
+  optional string bug = 5;
   optional flag_state state = 6;
   optional flag_permission permission = 7;
   repeated tracepoint trace = 8;

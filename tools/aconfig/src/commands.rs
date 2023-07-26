@@ -74,7 +74,9 @@ pub fn parse_flags(package: &str, declarations: Vec<Input>, values: Vec<Input>) 
             parsed_flag.set_name(flag_declaration.take_name());
             parsed_flag.set_namespace(flag_declaration.take_namespace());
             parsed_flag.set_description(flag_declaration.take_description());
-            parsed_flag.bug.append(&mut flag_declaration.bug);
+            if flag_declaration.has_bug() {
+                parsed_flag.set_bug(flag_declaration.take_bug());
+            }
             parsed_flag.set_state(DEFAULT_FLAG_STATE);
             parsed_flag.set_permission(DEFAULT_FLAG_PERMISSION);
             let mut tracepoint = ProtoTracepoint::new();

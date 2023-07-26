@@ -93,7 +93,7 @@ pub mod flag_declaration {
         ensure!(codegen::is_valid_name_ident(pdf.namespace()), "bad flag declaration: bad name");
         ensure!(!pdf.description().is_empty(), "bad flag declaration: empty description");
 
-        // ProtoFlagDeclaration.bug: Vec<String>: may be empty, no checks needed
+        // ProtoFlagDeclaration.bug: may be omitted, no checks needed
 
         Ok(())
     }
@@ -196,7 +196,7 @@ pub mod parsed_flag {
             super::tracepoint::verify_fields(tp)?;
         }
 
-        // ProtoParsedFlag.bug: Vec<String>: may be empty, no checks needed
+        // ProtoParsedFlag.bug: may be omitted, no checks needed
 
         Ok(())
     }
@@ -279,7 +279,6 @@ flag {
     namespace: "first_ns"
     description: "This is the description of the first flag."
     bug: "123"
-    bug: "abc"
 }
 flag {
     name: "second"
@@ -294,14 +293,12 @@ flag {
         assert_eq!(first.name(), "first");
         assert_eq!(first.namespace(), "first_ns");
         assert_eq!(first.description(), "This is the description of the first flag.");
-        assert_eq!(first.bug.len(), 2);
-        assert_eq!(first.bug[0], "123");
-        assert_eq!(first.bug[1], "abc");
+        assert_eq!(first.bug(), "123");
         let second = flag_declarations.flag.iter().find(|pf| pf.name() == "second").unwrap();
         assert_eq!(second.name(), "second");
         assert_eq!(second.namespace(), "second_ns");
         assert_eq!(second.description(), "This is the description of the second flag.");
-        assert_eq!(second.bug.len(), 0);
+        assert!(!second.has_bug());
 
         // bad input: missing package in flag declarations
         let error = flag_declarations::try_from_text_proto(
