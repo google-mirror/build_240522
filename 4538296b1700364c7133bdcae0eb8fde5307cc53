@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea4fd38_552c1f81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-26T07:19:10Z",
+      "side": 1,
+      "message": "Teja to CR+2 if he\u0027s OK with re-importing aconfig.proto due to this change.",
+      "revId": "4538296b1700364c7133bdcae0eb8fde5307cc53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
