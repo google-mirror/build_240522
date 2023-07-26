@@ -92,8 +92,7 @@ pub mod flag_declaration {
         ensure!(codegen::is_valid_name_ident(pdf.name()), "bad flag declaration: bad name");
         ensure!(codegen::is_valid_name_ident(pdf.namespace()), "bad flag declaration: bad name");
         ensure!(!pdf.description().is_empty(), "bad flag declaration: empty description");
-
-        // ProtoFlagDeclaration.bug: Vec<String>: may be empty, no checks needed
+        ensure!(pdf.bug.len() <= 1, "bad flag declaration: multiple bug fields");
 
         Ok(())
     }
@@ -195,8 +194,7 @@ pub mod parsed_flag {
         for tp in pf.trace.iter() {
             super::tracepoint::verify_fields(tp)?;
         }
-
-        // ProtoParsedFlag.bug: Vec<String>: may be empty, no checks needed
+        ensure!(pf.bug.len() <= 1, "bad flag declaration: multiple bug fields");
 
         Ok(())
     }
@@ -279,7 +277,6 @@ flag {
     namespace: "first_ns"
     description: "This is the description of the first flag."
     bug: "123"
-    bug: "abc"
 }
 flag {
     name: "second"
@@ -294,9 +291,8 @@ flag {
         assert_eq!(first.name(), "first");
         assert_eq!(first.namespace(), "first_ns");
         assert_eq!(first.description(), "This is the description of the first flag.");
-        assert_eq!(first.bug.len(), 2);
+        assert_eq!(first.bug.len(), 1);
         assert_eq!(first.bug[0], "123");
-        assert_eq!(first.bug[1], "abc");
         let second = flag_declarations.flag.iter().find(|pf| pf.name() == "second").unwrap();
         assert_eq!(second.name(), "second");
         assert_eq!(second.namespace(), "second_ns");
@@ -376,6 +372,22 @@ flag {
         )
         .unwrap_err();
         assert!(format!("{:?}", error).contains("bad flag declaration: bad name"));
+
+        // bad input: multiple bug entries in flag declaration
+        let error = flag_declarations::try_from_text_proto(
+            r#"
+package: "com.foo.bar"
+flag {
+    name: "first"
+    namespace: "first_ns"
+    description: "This is the description of the first flag."
+    bug: "123"
+    bug: "abc"
+}
+"#,
+        )
+        .unwrap_err();
+        assert!(format!("{:?}", error).contains("bad flag declaration: multiple bug fields"));
     }
 
     #[test]
