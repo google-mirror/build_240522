@@ -3351,9 +3351,9 @@ $(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON)))
 .PHONY: installed-file-list
 installed-file-list: $(INSTALLED_FILES_FILE)
 
-systemimage_intermediates := \
-    $(call intermediates-dir-for,PACKAGING,systemimage)
-BUILT_SYSTEMIMAGE := $(systemimage_intermediates)/system.img
+systemimage_intermediates :=$= $(call intermediates-dir-for,PACKAGING,systemimage)
+BUILT_SYSTEMIMAGE :=$= $(systemimage_intermediates)/system.img
+
 
 # $(1): output file
 define build-systemimage-target
@@ -3363,16 +3363,27 @@ define build-systemimage-target
       skip_fsck=true)
   PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH \
       $(BUILD_IMAGE) \
+          --input_directory_filter_file $(systemimage_intermediates)/file_list.txt \
           $(TARGET_OUT) $(systemimage_intermediates)/system_image_info.txt $(1) $(TARGET_OUT) \
           || ( mkdir -p $${DIST_DIR}; \
                cp $(INSTALLED_FILES_FILE) $${DIST_DIR}/installed-files-rescued.txt; \
                exit 1 )
 endef
 
+#$(warning FULL_SYSTEMIMAGE_DEPS: $(FULL_SYSTEMIMAGE_DEPS))
+$(file >/tmp/full_systemimage_deps.txt,$(subst $(space),$(newline),$(strip $(FULL_SYSTEMIMAGE_DEPS))))
+$(warning BOARD_AVB_SYSTEM_KEY_PATH: $(BOARD_AVB_SYSTEM_KEY_PATH))
+#$(warning PRIVATE_FILE_LIST: $(subst $(TARGET_OUT)/,,$(filter $(TARGET_OUT)/%,$(FULL_SYSTEMIMAGE_DEPS))))
+$(systemimage_intermediates)/file_list.txt: PRIVATE_FILE_LIST := $(subst $(TARGET_OUT)/,,$(filter $(TARGET_OUT)/%,$(FULL_SYSTEMIMAGE_DEPS)))
+$(systemimage_intermediates)/file_list.txt:
+	rm -f $@
+	$(foreach f,$(PRIVATE_FILE_LIST),echo "$(f)" >> $@$(newline))
+
+$(file >/tmp/real_full_systemimage_deps.txt,$(subst $(space),$(newline),$(strip $(FULL_SYSTEMIMAGE_DEPS) $(BOARD_AVB_SYSTEM_KEY_PATH))))
 ifeq ($(BOARD_AVB_ENABLE),true)
 $(BUILT_SYSTEMIMAGE): $(BOARD_AVB_SYSTEM_KEY_PATH)
 endif
-$(BUILT_SYSTEMIMAGE): $(FULL_SYSTEMIMAGE_DEPS) $(INSTALLED_FILES_FILE)
+$(BUILT_SYSTEMIMAGE): $(FULL_SYSTEMIMAGE_DEPS) $(INSTALLED_FILES_FILE) $(systemimage_intermediates)/file_list.txt
 	$(call build-systemimage-target,$@)
 
 $(call declare-1p-container,$(BUILT_SYSTEMIMAGE),system/extras)
@@ -3428,7 +3439,7 @@ SYSTEM_NOTICE_DEPS += $(INSTALLED_SYSTEMIMAGE_TARGET)
 
 .PHONY: systemimage-nodeps snod
 systemimage-nodeps snod: $(filter-out systemimage-nodeps snod,$(MAKECMDGOALS)) \
-	            | $(INTERNAL_USERIMAGES_DEPS)
+	            | $(INTERNAL_USERIMAGES_DEPS) $(systemimage_intermediates)/file_list.txt
 	@echo "make $@: ignoring dependencies"
 	$(call build-systemimage-target,$(INSTALLED_SYSTEMIMAGE_TARGET))
 	$(hide) $(call assert-max-image-size,$(INSTALLED_SYSTEMIMAGE_TARGET),$(BOARD_SYSTEMIMAGE_PARTITION_SIZE))
