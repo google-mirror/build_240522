@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d1a355_e992ad9a",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-26T14:34:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e4a6ab6_0d0cd783",
+      "range": {
+        "startLine": 520,
+        "startChar": 0,
+        "endLine": 590,
+        "endChar": 16
+      },
+      "revId": "793fabd2569fc444232a9c676187ba54031a00fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de3f27f6_194c3f11",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aff7967a_4bbea82e",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-26T14:34:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de3f27f6_194c3f11",
+      "range": {
+        "startLine": 1128,
+        "startChar": 33,
+        "endLine": 1128,
+        "endChar": 76
+      },
+      "revId": "793fabd2569fc444232a9c676187ba54031a00fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3aace6a1_a4696bc5",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-07-25T14:48:11Z",
       "side": 1,
       "message": "```\nimage_list \u003d OPTIONS.info_dict.get(\"avb_{}_image_list\".format(partition_name)).split()\nAddCustomImages(output_zip, partition_name, image_list)\n```",
+      "range": {
+        "startLine": 1135,
+        "startChar": 33,
+        "endLine": 1135,
+        "endChar": 79
+      },
+      "revId": "793fabd2569fc444232a9c676187ba54031a00fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1160a195_440eeac2",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2023-07-26T14:34:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3aace6a1_a4696bc5",
       "range": {
         "startLine": 1135,
         "startChar": 33,
