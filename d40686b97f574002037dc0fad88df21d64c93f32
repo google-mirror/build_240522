@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be8f9a1e_18d7d1b7",
+        "filename": "tools/aconfig/src/protos.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2023-07-26T12:31:22Z",
+      "side": 1,
+      "message": "I think we should be enforcing this is exactly one as we want to make sure each flag is tracked by a bug.",
+      "range": {
+        "startLine": 95,
+        "startChar": 30,
+        "endLine": 95,
+        "endChar": 34
+      },
+      "revId": "d40686b97f574002037dc0fad88df21d64c93f32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
