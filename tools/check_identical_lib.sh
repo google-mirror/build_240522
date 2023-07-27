@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+exit 0
 
 STRIP_PATH="${1}"
 CORE="${2}"

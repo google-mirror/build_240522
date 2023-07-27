@@ -116,17 +116,19 @@ ifeq ($(LOCAL_SANITIZE),never)
 endif
 
 # Enable CFI in included paths.
-ifeq ($(filter cfi, $(my_sanitize)),)
-  combined_include_paths := $(CFI_INCLUDE_PATHS) \
-                            $(PRODUCT_CFI_INCLUDE_PATHS)
-  combined_exclude_paths := $(CFI_EXCLUDE_PATHS) \
-                            $(PRODUCT_CFI_EXCLUDE_PATHS)
+ifneq ($(CFI_EXTRA_CFLAGS),)
+  ifeq ($(filter cfi, $(my_sanitize)),)
+    combined_include_paths := $(CFI_INCLUDE_PATHS) \
+                              $(PRODUCT_CFI_INCLUDE_PATHS)
+    combined_exclude_paths := $(CFI_EXCLUDE_PATHS) \
+                              $(PRODUCT_CFI_EXCLUDE_PATHS)
 
-  ifneq ($(strip $(foreach dir,$(subst $(comma),$(space),$(combined_include_paths)),\
-         $(filter $(dir)%,$(LOCAL_PATH)))),)
-    ifeq ($(strip $(foreach dir,$(subst $(comma),$(space),$(combined_exclude_paths)),\
-         $(filter $(dir)%,$(LOCAL_PATH)))),)
-      my_sanitize := cfi $(my_sanitize)
+    ifneq ($(strip $(foreach dir,$(subst $(comma),$(space),$(combined_include_paths)),\
+           $(filter $(dir)%,$(LOCAL_PATH)))),)
+      ifeq ($(strip $(foreach dir,$(subst $(comma),$(space),$(combined_exclude_paths)),\
+           $(filter $(dir)%,$(LOCAL_PATH)))),)
+        my_sanitize := cfi $(my_sanitize)
+      endif
     endif
   endif
 endif
