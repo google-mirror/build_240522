@@ -94,6 +94,30 @@
       },
       "revId": "d40686b97f574002037dc0fad88df21d64c93f32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49f788f1_5699704c",
+        "filename": "tools/aconfig/src/protos.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-27T07:54:32Z",
+      "side": 1,
+      "message": "Changed the impl to require exactly one bug per flag, while keeping the field as `repeated` instead of `optional` (so no need to re-import the proto).",
+      "parentUuid": "20fef419_f82f01e4",
+      "range": {
+        "startLine": 95,
+        "startChar": 30,
+        "endLine": 95,
+        "endChar": 34
+      },
+      "revId": "d40686b97f574002037dc0fad88df21d64c93f32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
