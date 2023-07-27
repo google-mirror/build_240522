@@ -16,6 +16,23 @@
       "message": "The build failed on downstream branches, it looks like not all CLs in this topic were merged to those branches? This is very unexpected.\n\nWe could potentially work around this by submitting the CLs in the development and cts projects first, and *then* the aconfig enforcement.",
       "revId": "6353c6c635f1219c6cf9ae93ea4e6acf81b779a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "621383c8_f76b4c0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-07-27T14:01:10Z",
+      "side": 1,
+      "message": "I suggest we enforce this in presubmit instead. aconfig should be agnostic of policies around the number of bugs, formatting of those fields, additional data on the buganizer issues, etc.",
+      "revId": "6353c6c635f1219c6cf9ae93ea4e6acf81b779a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
