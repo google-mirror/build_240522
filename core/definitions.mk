@@ -3203,8 +3203,9 @@ endef
 define copy-vintf-manifest-checked
 $(2): $(1) $(HOST_OUT_EXECUTABLES)/assemble_vintf
 	@echo "Copy xml: $$@"
-	$(hide) $(HOST_OUT_EXECUTABLES)/assemble_vintf -i $$< >/dev/null  # Don't print the xml file to stdout.
-	$$(copy-file-to-target)
+	$(hide) mkdir -p "$$(dir $$@)"
+	$(hide) rm -f "$$@"
+	$(hide) $(HOST_OUT_EXECUTABLES)/assemble_vintf -i $$< -o $$@
 endef
 
 # Copies many vintf manifest files checked.
