@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d07ae108_4329b15a",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 3207,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-07-29T01:08:03Z",
+      "side": 1,
+      "message": "Why is this needed? Doesn\u0027t assemble_vintf override the existing file?",
+      "range": {
+        "startLine": 3207,
+        "startChar": 0,
+        "endLine": 3207,
+        "endChar": 20
+      },
+      "revId": "1b61aa378c319041d89e5138358b70f58b4ad6a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
