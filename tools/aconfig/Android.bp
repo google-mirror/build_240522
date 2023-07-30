@@ -109,4 +109,5 @@ android_test {
         "aconfig_test_java",
     ],
     test_suites: ["device-tests"],
+    sdk_version: "system_current",
 }
