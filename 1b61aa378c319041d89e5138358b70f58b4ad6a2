@@ -22,6 +22,30 @@
       },
       "revId": "1b61aa378c319041d89e5138358b70f58b4ad6a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97ab0e30_fd32551f",
+        "filename": "core/definitions.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 3207,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-07-31T17:33:08Z",
+      "side": 1,
+      "message": "It\u0027s what the copy-file-to-target was doing. Looks like assemble_vintf does overwite the file if it exists (, so I removed this line.",
+      "parentUuid": "d07ae108_4329b15a",
+      "range": {
+        "startLine": 3207,
+        "startChar": 0,
+        "endLine": 3207,
+        "endChar": 20
+      },
+      "revId": "1b61aa378c319041d89e5138358b70f58b4ad6a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
