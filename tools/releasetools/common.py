@@ -2438,8 +2438,8 @@ def GetMinSdkVersion(apk_name):
             apk_name, proc.returncode, stdoutdata, stderrdata))
 
   for line in stdoutdata.split("\n"):
-    # Looking for lines such as sdkVersion:'23' or sdkVersion:'M'.
-    m = re.match(r'sdkVersion:\'([^\']*)\'', line)
+    # Looking for lines such as MinSdkVersion:'23' or MinSdkVersion:'M'.
+    m = re.match(r'MinSdkVersion:\'([^\']*)\'', line)
     if m:
       return m.group(1)
   raise ExternalError("No minSdkVersion returned by aapt2")
