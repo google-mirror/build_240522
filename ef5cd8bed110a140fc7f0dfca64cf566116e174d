@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c790373_5406ffbc",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 2434,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-08-02T19:23:59Z",
+      "side": 1,
+      "message": "You can do this in one regex: `re.match(r\u0027(?:minSdkVersion|sdkVersion):\\\u0027([^\\\u0027]*)\\\u0027\u0027, line)`",
+      "revId": "ef5cd8bed110a140fc7f0dfca64cf566116e174d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
