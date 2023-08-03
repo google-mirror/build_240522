@@ -326,6 +326,7 @@ OPTIONS.enable_zucchini = True
 OPTIONS.enable_puffdiff = None
 OPTIONS.enable_lz4diff = False
 OPTIONS.vabc_compression_param = None
+OPTIONS.vabc_compression_level = 0
 OPTIONS.security_patch_level = None
 OPTIONS.max_threads = None
 
@@ -1210,7 +1211,11 @@ def main(argv):
       assert a.lower() in ["true", "false"]
       OPTIONS.enable_lz4diff = a.lower() != "false"
     elif o == "--vabc_compression_param":
-      OPTIONS.vabc_compression_param = a.lower()
+      words = a.split(",")
+      assert len(words) >= 1 and len(words) <= 2
+      OPTIONS.vabc_compression_param = words[0].lower()
+      if len(words) == 2:
+        OPTIONS.vabc_compression_level = int(words[1])
     elif o == "--security_patch_level":
       OPTIONS.security_patch_level = a
     elif o in ("--max_threads"):
