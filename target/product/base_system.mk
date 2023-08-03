@@ -155,6 +155,9 @@ PRODUCT_PACKAGES += \
     libFFTEm \
     libfilterfw \
     libgatekeeper \
+    libEGL_angle \
+    libGLESv1_CM_angle \
+    libGLESv2_angle \
     libGLESv1_CM \
     libGLESv2 \
     libGLESv3 \

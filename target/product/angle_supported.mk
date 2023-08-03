@@ -17,11 +17,3 @@
 # To include ANGLE into the image build, add
 # $(call inherit-product, $(SRC_TARGET_DIR)/product/angle_supported.mk) to the Makefile.
 # By default, this will allow ANGLE binaries to coexist with native GLES drivers.
-
-PRODUCT_PACKAGES += \
-    libEGL_angle \
-    libGLESv1_CM_angle \
-    libGLESv2_angle
-
-# Set ro.gfx.angle.supported based on if ANGLE is installed in vendor partition
-PRODUCT_VENDOR_PROPERTIES += ro.gfx.angle.supported=true
