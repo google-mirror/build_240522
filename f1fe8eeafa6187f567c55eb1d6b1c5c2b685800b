@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42d107d5_afff9972",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-08-04T00:11:54Z",
+      "side": 1,
+      "message": "don\u0027t add an extra option in python. Instead, let libsnapshot\u0027s CowWriter to parse the levels.",
+      "range": {
+        "startLine": 329,
+        "startChar": 8,
+        "endLine": 329,
+        "endChar": 30
+      },
+      "revId": "f1fe8eeafa6187f567c55eb1d6b1c5c2b685800b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
