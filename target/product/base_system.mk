@@ -92,6 +92,7 @@ PRODUCT_PACKAGES += \
     ExtShared \
     flags_health_check \
     framework-graphics \
+    framework-location \
     framework-minus-apex \
     framework-res \
     framework-sysconfig.xml \
