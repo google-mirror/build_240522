@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "540838d1_0b4b4841",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2023-08-07T10:15:27Z",
+      "side": 1,
+      "message": "I don\u0027t think the original cl https://android-review.git.corp.google.com/c/platform/build/+/2694247 is related to b/294789803.",
+      "revId": "4876ec4b60d2ca48ac9a2802e8d60890f36bcdb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
