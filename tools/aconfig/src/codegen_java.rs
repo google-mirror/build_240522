@@ -47,9 +47,18 @@ where
         "FeatureFlags.java",
         include_str!("../templates/FeatureFlags.java.template"),
     )?;
+    template.add_template(
+        "FakeFeatureFlagsImpl.java",
+        include_str!("../templates/FakeFeatureFlagsImpl.java.template"),
+    )?;
 
     let path: PathBuf = package.split('.').collect();
-    ["Flags.java", "FeatureFlagsImpl.java", "FeatureFlags.java"]
+    let mut files = vec!["Flags.java", "FeatureFlagsImpl.java", "FeatureFlags.java"];
+    if is_test_mode {
+        files.push("FakeFeatureFlagsImpl.java")
+    }
+
+    files
         .iter()
         .map(|file| {
             Ok(OutputFile {
@@ -143,6 +152,37 @@ mod tests {
         }
     "#;
 
+    const EXPECTED_FEATUREFLAGSIMPL_COMMON_CONTENT: &str = r#"
+    package com.android.aconfig.test;
+    import android.provider.DeviceConfig;
+    public final class FeatureFlagsImpl implements FeatureFlags {
+        @Override
+        public boolean disabledRo() {
+            return false;
+        }
+        @Override
+        public boolean disabledRw() {
+            return DeviceConfig.getBoolean(
+                "aconfig_test",
+                "com.android.aconfig.test.disabled_rw",
+                false
+            );
+        }
+        @Override
+        public boolean enabledRo() {
+            return true;
+        }
+        @Override
+        public boolean enabledRw() {
+            return DeviceConfig.getBoolean(
+                "aconfig_test",
+                "com.android.aconfig.test.enabled_rw",
+                true
+            );
+        }
+    }
+    "#;
+
     #[test]
     fn test_generate_java_code_production() {
         let parsed_flags = crate::test::parse_test_flags();
@@ -156,39 +196,13 @@ mod tests {
             + r#"
             private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
         }"#;
-        let expected_featureflagsimpl_content = r#"
-        package com.android.aconfig.test;
-        import android.provider.DeviceConfig;
-        public final class FeatureFlagsImpl implements FeatureFlags {
-            @Override
-            public boolean disabledRo() {
-                return false;
-            }
-            @Override
-            public boolean disabledRw() {
-                return DeviceConfig.getBoolean(
-                    "aconfig_test",
-                    "com.android.aconfig.test.disabled_rw",
-                    false
-                );
-            }
-            @Override
-            public boolean enabledRo() {
-                return true;
-            }
-            @Override
-            public boolean enabledRw() {
-                return DeviceConfig.getBoolean(
-                    "aconfig_test",
-                    "com.android.aconfig.test.enabled_rw",
-                    true
-                );
-            }
-        }
-        "#;
+
         let mut file_set = HashMap::from([
             ("com/android/aconfig/test/Flags.java", expect_flags_content.as_str()),
-            ("com/android/aconfig/test/FeatureFlagsImpl.java", expected_featureflagsimpl_content),
+            (
+                "com/android/aconfig/test/FeatureFlagsImpl.java",
+                EXPECTED_FEATUREFLAGSIMPL_COMMON_CONTENT,
+            ),
             ("com/android/aconfig/test/FeatureFlags.java", EXPECTED_FEATUREFLAGS_CONTENT),
         ]);
 
@@ -230,13 +244,13 @@ mod tests {
             private static FeatureFlags FEATURE_FLAGS;
         }
         "#;
-        let expected_featureflagsimpl_content = r#"
+        let expect_fakefeatureflagsimpl_content = r#"
         package com.android.aconfig.test;
         import static java.util.stream.Collectors.toMap;
         import java.util.HashMap;
         import java.util.Map;
         import java.util.stream.Stream;
-        public final class FeatureFlagsImpl implements FeatureFlags {
+        public class FakeFeatureFlagsImpl implements FeatureFlags {
             @Override
             public boolean disabledRo() {
                 return getFlag(Flags.FLAG_DISABLED_RO);
@@ -284,10 +298,18 @@ mod tests {
                 );
         }
         "#;
+
         let mut file_set = HashMap::from([
             ("com/android/aconfig/test/Flags.java", expect_flags_content.as_str()),
-            ("com/android/aconfig/test/FeatureFlagsImpl.java", expected_featureflagsimpl_content),
+            (
+                "com/android/aconfig/test/FeatureFlagsImpl.java",
+                EXPECTED_FEATUREFLAGSIMPL_COMMON_CONTENT,
+            ),
             ("com/android/aconfig/test/FeatureFlags.java", EXPECTED_FEATUREFLAGS_CONTENT),
+            (
+                "com/android/aconfig/test/FakeFeatureFlagsImpl.java",
+                expect_fakefeatureflagsimpl_content,
+            ),
         ]);
 
         for file in generated_files {
