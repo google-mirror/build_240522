@@ -30,6 +30,7 @@ public final class FeatureFlagsImpl implements FeatureFlags \{
     }
 {{ endfor- }}
 {{ if is_test_mode }}
+    @Override
     public void setFlag(String flagName, boolean value) \{
         if (!this.mFlagMap.containsKey(flagName)) \{
             throw new IllegalArgumentException("no such flag" + flagName);
@@ -37,6 +38,7 @@ public final class FeatureFlagsImpl implements FeatureFlags \{
         this.mFlagMap.put(flagName, value);
     }
 
+    @Override
     public void resetAll() \{
         for (Map.Entry entry : mFlagMap.entrySet()) \{
             entry.setValue(null);
