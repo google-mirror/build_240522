@@ -112,14 +112,14 @@ mod tests {
     use super::*;
     use std::collections::HashMap;
 
-    const EXPECTED_FEATUREFLAGS_CONTENT: &str = r#"
+    const EXPECTED_FEATUREFLAGS_COMMON_CONTENT: &str = r#"
     package com.android.aconfig.test;
     public interface FeatureFlags {
         boolean disabledRo();
         boolean disabledRw();
         boolean enabledRo();
         boolean enabledRw();
-    }"#;
+    "#;
 
     const EXPECTED_FLAG_COMMON_CONTENT: &str = r#"
     package com.android.aconfig.test;
@@ -156,6 +156,9 @@ mod tests {
             + r#"
             private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
         }"#;
+        let expect_featureflags_content = EXPECTED_FEATUREFLAGS_COMMON_CONTENT.to_string()
+            + r#"
+        }"#;
         let expected_featureflagsimpl_content = r#"
         package com.android.aconfig.test;
         import android.provider.DeviceConfig;
@@ -189,7 +192,7 @@ mod tests {
         let mut file_set = HashMap::from([
             ("com/android/aconfig/test/Flags.java", expect_flags_content.as_str()),
             ("com/android/aconfig/test/FeatureFlagsImpl.java", expected_featureflagsimpl_content),
-            ("com/android/aconfig/test/FeatureFlags.java", EXPECTED_FEATUREFLAGS_CONTENT),
+            ("com/android/aconfig/test/FeatureFlags.java", expect_featureflags_content.as_str()),
         ]);
 
         for file in generated_files {
@@ -230,6 +233,11 @@ mod tests {
             private static FeatureFlags FEATURE_FLAGS;
         }
         "#;
+        let expect_featureflags_content = EXPECTED_FEATUREFLAGS_COMMON_CONTENT.to_string()
+            + r#"
+            public void setFlag(String flagName, boolean value);
+            public void resetAll();
+        }"#;
         let expected_featureflagsimpl_content = r#"
         package com.android.aconfig.test;
         import static java.util.stream.Collectors.toMap;
@@ -253,12 +261,14 @@ mod tests {
             public boolean enabledRw() {
                 return getFlag(Flags.FLAG_ENABLED_RW);
             }
+            @Override
             public void setFlag(String flagName, boolean value) {
                 if (!this.mFlagMap.containsKey(flagName)) {
                     throw new IllegalArgumentException("no such flag" + flagName);
                 }
                 this.mFlagMap.put(flagName, value);
             }
+            @Override
             public void resetAll() {
                 for (Map.Entry entry : mFlagMap.entrySet()) {
                     entry.setValue(null);
@@ -287,7 +297,7 @@ mod tests {
         let mut file_set = HashMap::from([
             ("com/android/aconfig/test/Flags.java", expect_flags_content.as_str()),
             ("com/android/aconfig/test/FeatureFlagsImpl.java", expected_featureflagsimpl_content),
-            ("com/android/aconfig/test/FeatureFlags.java", EXPECTED_FEATUREFLAGS_CONTENT),
+            ("com/android/aconfig/test/FeatureFlags.java", expect_featureflags_content.as_str()),
         ]);
 
         for file in generated_files {
