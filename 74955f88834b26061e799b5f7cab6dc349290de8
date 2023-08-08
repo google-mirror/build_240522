@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d4f706_a5817f79",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-08-08T16:14:53Z",
+      "side": 1,
+      "message": "remove trailing space",
+      "range": {
+        "startLine": 250,
+        "startChar": 96,
+        "endLine": 250,
+        "endChar": 97
+      },
+      "revId": "74955f88834b26061e799b5f7cab6dc349290de8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f07babb7_7e7e16fa",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-08-08T16:14:53Z",
+      "side": 1,
+      "message": "remove extra space",
+      "range": {
+        "startLine": 251,
+        "startChar": 74,
+        "endLine": 251,
+        "endChar": 75
+      },
+      "revId": "74955f88834b26061e799b5f7cab6dc349290de8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
