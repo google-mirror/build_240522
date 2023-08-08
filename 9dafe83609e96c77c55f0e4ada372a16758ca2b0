@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d86ef0a0_40013f92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1620010
+      },
+      "writtenOn": "2023-08-08T18:01:15Z",
+      "side": 1,
+      "message": "I think I\u0027ve been added as a random Rust reviewer. LGTM from that perspective.",
+      "revId": "9dafe83609e96c77c55f0e4ada372a16758ca2b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
