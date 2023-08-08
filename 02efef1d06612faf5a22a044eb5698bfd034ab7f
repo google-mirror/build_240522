@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "6eb1c96e_47453abc",
         "filename": "Changes.md",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "(if we don\u0027t end up clearing out old sections of this, we might want to put some version information in here, like \"New In P\" or something like that)",
       "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "14026df6_05681dc2",
         "filename": "Changes.md",
@@ -32,10 +33,28 @@
       "message": "I hope that this eventually turns into a newest-first list for the most part, at least until make is removed. I don\u0027t particularly want to attempt to figure out what was released when, including cherry-picks, so I\u0027m planning to ignore this now, but we could go back and fill that in later. Until then, you can always look at the differences to this file between the release version and the next version.",
       "parentUuid": "6eb1c96e_47453abc",
       "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b9806c8_8ccbfaf4",
+        "filename": "Changes.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1899090
+      },
+      "writtenOn": "2023-08-08T18:51:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14026df6_05681dc2",
+      "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "7d6c57ba_7a925042",
         "filename": "README.md",
@@ -49,10 +68,10 @@
       "side": 1,
       "message": "Maybe emphasize that the fact that they look similar is a coincidence? Like \"Our Android.mk files coincidentally look similar to, but are actually different from\"?",
       "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "8ff4f58e_261b037b",
         "filename": "README.md",
@@ -67,10 +86,28 @@
       "message": "I updated this paragraph a bit. As a future cleanup, we could mark a lot of the NDK-style variables as obsolete, which would be better than silently ignoring them like we do today.",
       "parentUuid": "7d6c57ba_7a925042",
       "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55662fb8_ef5f7d9a",
+        "filename": "README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1899090
+      },
+      "writtenOn": "2023-08-08T18:51:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ff4f58e_261b037b",
+      "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "0a17b656_57328bae",
         "filename": "README.md",
@@ -90,10 +127,10 @@
         "endChar": 40
       },
       "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "c4d265dc_9ffcfa60",
         "filename": "README.md",
@@ -114,10 +151,10 @@
         "endChar": 40
       },
       "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "14ce3230_a6434ba2",
         "filename": "core/config.mk",
@@ -131,10 +168,10 @@
       "side": 1,
       "message": "Is Changes.md going to have obsolete entries removed eventually?\n\nI\u0027m thinking it\u0027d be nice to have the error message also mention the filepath of changes.md to make it extra obvious that the canonical version is in source control and that the link is intended as a pretty rendering of it",
       "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "2dd56ef2_e807edf4",
         "filename": "core/config.mk",
@@ -149,10 +186,28 @@
       "message": "I don\u0027t expect to remove obsolete entries -- if we do, we can at least keep a pointer to the old version at the same url (that\u0027s why I provided stable # tags in the markdown).\n\nThere\u0027s a few advantages of a real url:\n* it\u0027s far more likely that your terminal can open up the page when you click the link\n* we can update the wording if it turns out not to be clear enough (too many questions, etc)\n\nThough it does mean that if we change the recommended new behavior, we either need to make sure it works on older versions, or provide multiple sets of instructions.",
       "parentUuid": "14ce3230_a6434ba2",
       "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48a5a7b8_556c4e2a",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1899090
+      },
+      "writtenOn": "2023-08-08T18:51:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dd56ef2_e807edf4",
+      "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "8d5d9f2f_c9ac2f1c",
         "filename": "navbar.md",
@@ -172,10 +227,10 @@
         "endChar": 10
       },
       "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "54ac56b9_f8ad9737",
         "filename": "navbar.md",
@@ -196,8 +251,31 @@
         "endChar": 10
       },
       "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f63d5c3_a896af1c",
+        "filename": "navbar.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1899090
+      },
+      "writtenOn": "2023-08-08T18:51:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54ac56b9_f8ad9737",
+      "range": {
+        "startLine": 3,
+        "startChar": 3,
+        "endLine": 3,
+        "endChar": 10
+      },
+      "revId": "02efef1d06612faf5a22a044eb5698bfd034ab7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
