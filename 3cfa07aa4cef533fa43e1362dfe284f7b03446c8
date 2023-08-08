@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "668f7cbd_4c6ded7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-08-08T16:20:36Z",
+      "side": 1,
+      "message": "Looks fine for Rust style, not that there\u0027s much of it changed here.",
+      "revId": "3cfa07aa4cef533fa43e1362dfe284f7b03446c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
