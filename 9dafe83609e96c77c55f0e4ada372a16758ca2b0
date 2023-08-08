@@ -16,6 +16,24 @@
       "message": "I think I\u0027ve been added as a random Rust reviewer. LGTM from that perspective.",
       "revId": "9dafe83609e96c77c55f0e4ada372a16758ca2b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53ca4f13_533f7285",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-08-08T18:04:20Z",
+      "side": 1,
+      "message": "Yes, I added for Rust review. Thank you!",
+      "parentUuid": "d86ef0a0_40013f92",
+      "revId": "9dafe83609e96c77c55f0e4ada372a16758ca2b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
