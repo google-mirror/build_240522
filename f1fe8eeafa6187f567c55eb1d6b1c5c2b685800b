@@ -22,6 +22,30 @@
       },
       "revId": "f1fe8eeafa6187f567c55eb1d6b1c5c2b685800b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98b686a8_4c48979a",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2023-08-08T15:09:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42d107d5_afff9972",
+      "range": {
+        "startLine": 329,
+        "startChar": 8,
+        "endLine": 329,
+        "endChar": 30
+      },
+      "revId": "f1fe8eeafa6187f567c55eb1d6b1c5c2b685800b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
