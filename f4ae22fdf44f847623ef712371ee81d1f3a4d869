@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cc0de61_fa23176a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156110
+      },
+      "writtenOn": "2023-08-09T15:05:36Z",
+      "side": 1,
+      "message": "Might want to add to the description that it also sets remote execution parameters that are preferred for cog.  (Lower parallelism, remote_local_fallback, deps_cache)",
+      "revId": "f4ae22fdf44f847623ef712371ee81d1f3a4d869",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
