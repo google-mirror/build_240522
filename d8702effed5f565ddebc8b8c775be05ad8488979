@@ -16,6 +16,24 @@
       "message": "You don\u0027t want the \"Merged-In: If478a4efef937a0a986bfefdb61cc25921863b25\" tag if the CL that you cherry-picked from wasn\u0027t merged.",
       "revId": "d8702effed5f565ddebc8b8c775be05ad8488979",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a24b6b7d_bc764ffb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-08-10T16:26:41Z",
+      "side": 1,
+      "message": "Thanks!  Fixed in Patch Set 2.",
+      "parentUuid": "413cbdb8_fd4d3ffb",
+      "revId": "d8702effed5f565ddebc8b8c775be05ad8488979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
