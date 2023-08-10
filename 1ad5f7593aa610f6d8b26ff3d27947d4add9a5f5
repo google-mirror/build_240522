@@ -16,6 +16,23 @@
       "message": "ptal",
       "revId": "1ad5f7593aa610f6d8b26ff3d27947d4add9a5f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e57a6e75_d00534be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-08-10T23:54:42Z",
+      "side": 1,
+      "message": "this patch needs to be landed internally first",
+      "revId": "1ad5f7593aa610f6d8b26ff3d27947d4add9a5f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
