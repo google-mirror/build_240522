@@ -22,6 +22,30 @@
       },
       "revId": "ee3a191656fae6db7416265c6b087a39b7cc9352",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b33aa99f_37f8de72",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 5326,
+      "author": {
+        "id": 1943660
+      },
+      "writtenOn": "2023-08-11T03:14:19Z",
+      "side": 1,
+      "message": "I add this line because my team uses otatools to test Pixel WiFi functions after OTA updates, and the added line is recommended by @zhangkelvin who is one of the active authors for update engine.\n\nKelvin, could you help to answer Jingwen\u0027s question? sorry that I am not familiar with how",
+      "parentUuid": "598adbfc_64bd2530",
+      "range": {
+        "startLine": 5326,
+        "startChar": 2,
+        "endLine": 5326,
+        "endChar": 15
+      },
+      "revId": "ee3a191656fae6db7416265c6b087a39b7cc9352",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
