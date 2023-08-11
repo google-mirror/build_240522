@@ -22,6 +22,30 @@
       },
       "revId": "a329e3b8ffa11a50987bcd7c4630083fd12f08d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d68109ce_1d2a50dc",
+        "filename": "target/product/generic_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-08-11T08:08:15Z",
+      "side": 1,
+      "message": "`KEEP_VNDK` is set as `true` by default for now. https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:build/make/core/config.mk;l\u003d835?q\u003dKEEP_VNDK\u0026sq\u003drepo:googleplex-android%2Fplatform%2Fsuperproject%2Fmain%20b:main\nThe only way to test this as `false` is to build with the value as false : `KEEP_VNDK\u003dfalse m -j\u0027.\n\n\nThis will be changed as `false` once everything is ready (and 2024Q2 branch being frozen).",
+      "parentUuid": "a429d82a_85f15133",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 25
+      },
+      "revId": "a329e3b8ffa11a50987bcd7c4630083fd12f08d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
