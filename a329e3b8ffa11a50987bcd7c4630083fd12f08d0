@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a429d82a_85f15133",
+        "filename": "target/product/generic_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-08-11T08:05:19Z",
+      "side": 1,
+      "message": "for my own curiosity, what currently sets `KEEP_VNDK` to anything but `true`?",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 25
+      },
+      "revId": "a329e3b8ffa11a50987bcd7c4630083fd12f08d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
