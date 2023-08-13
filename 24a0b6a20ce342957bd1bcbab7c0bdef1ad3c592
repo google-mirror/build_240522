@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3982536d_6a8f29b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1601857
+      },
+      "writtenOn": "2023-08-13T18:36:15Z",
+      "side": 1,
+      "message": "protos.rs is intended to cover only what exists in aconfig.proto. Suggest you move the new enum (and rename it?) to commands.rs.",
+      "revId": "24a0b6a20ce342957bd1bcbab7c0bdef1ad3c592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
