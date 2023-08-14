@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83260bb6_8bcb68b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-14T08:44:44Z",
+      "side": 1,
+      "message": "Compared to a base build (go/ab/10604780) where\n```\n$ unzip -l aosp_*-target_files-*.zip | grep -i pvmfw\n  1048576  2008-01-01 00:00   IMAGES/pvmfw.img\n   634880  2008-01-01 00:00   PREBUILT_IMAGES/pvmfw.img\n     1032  2008-01-01 00:00   PREBUILT_IMAGES/pvmfw_embedded.avbpubkey\n        0  2008-01-01 00:00   PVMFW/\n   489056  2008-01-01 00:00   PVMFW/pvmfw.bin\n   489056  2008-01-01 00:00   SYSTEM/etc/pvmfw.bin\n```\n```\n$ grep pvmfw installed-files.txt\n      489056  /system/etc/pvmfw.bin\n```\naosp/2689446 was used to show (go/ab/P60667389) that this CL removes `pvmfw.bin` from `system.img`:\n```\n$ grep pvmfw installed-files.txt\n```\nwithout bringing back b/261393794, as `taget_files:PVMFW/` is still modified iff the pvmfw binary changed:\n```\nunzip -l aosp_*-target_files-*.zip | grep -i pvmfw\n  1048576  2008-01-01 00:00   IMAGES/pvmfw.img\n   634880  2008-01-01 00:00   PREBUILT_IMAGES/pvmfw.img\n     1032  2008-01-01 00:00   PREBUILT_IMAGES/pvmfw_embedded.avbpubkey\n        0  2008-01-01 00:00   PVMFW/\n   489056  2008-01-01 00:00   PVMFW/pvmfw_bin\n```",
+      "revId": "4e1f71ff7eee4dacd79689cde74318fb94a9f00c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
