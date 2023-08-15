@@ -1393,7 +1393,7 @@ modules_to_install := $(sort \
 # Deduplicate compatibility suite dist files across modules and packages before
 # copying them to their requested locations. Assign the eval result to an unused
 # var to prevent Make from trying to make a sense of it.
-_unused := $(call copy-many-files, $(sort $(ALL_COMPATIBILITY_DIST_FILES)))
+_unused := $(call hardlink-many-files, $(sort $(ALL_COMPATIBILITY_DIST_FILES)))
 
 # Don't include any GNU General Public License shared objects or static
 # libraries in SDK images.  GPL executables (not static/dynamic libraries)

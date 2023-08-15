@@ -3065,6 +3065,15 @@ $(2): $(1)
 	$$(copy-file-to-target)
 endef
 
+# Define a rule to copy a file.  For use via $(eval).
+# $(1): source file
+# $(2): destination file
+define hardlink-one-file
+$(2): $(1)
+	@echo "Copy: $$@"
+	$$(hardlink-file-to-target)
+endef
+
 # Define a rule to copy a license metadata file. For use via $(eval).
 # $(1): source license metadata file
 # $(2): destination license metadata file
@@ -3118,6 +3127,22 @@ $(foreach f, $(1), $(strip \
       $(eval _cmf_dest := $(patsubst %/,%,$(strip $(2)))/$(patsubst /%,%,$(_cmf_dest)))) \
     $(if $(filter-out $(_cmf_src), $(_cmf_dest)), \
       $(eval $(call copy-one-file,$(_cmf_src),$(_cmf_dest)))) \
+    $(_cmf_dest)))
+endef
+
+# Hardlink many files.
+# $(1): The files to hardlink.  Each entry is a ':' separated src:dst pair
+# $(2): An optional directory to prepend to the destination
+# Evaluates to the list of the dst files (ie suitable for a dependency list)
+define hardlink-many-files
+$(foreach f, $(1), $(strip \
+    $(eval _cmf_tuple := $(subst :, ,$(f))) \
+    $(eval _cmf_src := $(word 1,$(_cmf_tuple))) \
+    $(eval _cmf_dest := $(word 2,$(_cmf_tuple))) \
+    $(if $(strip $(2)), \
+      $(eval _cmf_dest := $(patsubst %/,%,$(strip $(2)))/$(patsubst /%,%,$(_cmf_dest)))) \
+    $(if $(filter-out $(_cmf_src), $(_cmf_dest)), \
+      $(eval $(call hardlink-one-file,$(_cmf_src),$(_cmf_dest)))) \
     $(_cmf_dest)))
 endef
 
@@ -3264,6 +3289,14 @@ define copy-file-to-target
 @mkdir -p $(dir $@)
 $(hide) rm -f $@
 $(hide) cp "$<" "$@"
+endef
+
+# Copy a single file from one place to another, using a hardlink.
+# If hardlinking fails (e.g. on an unsupported OS), fall back to regular copying.
+define hardlink-file-to-target
+@mkdir -p $(dir $@)
+$(hide) rm -f $@
+$(hide) cp -l "$<" "$@" 2>/dev/null || cp "$<" "$@"
 endef
 
 # Same as copy-file-to-target, but assume file is a licenes metadata file,
