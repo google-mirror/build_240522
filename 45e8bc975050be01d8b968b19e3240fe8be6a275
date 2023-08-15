@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73c98039_11380a82",
+        "filename": "core/definitions.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 3072,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-08-15T04:45:22Z",
+      "side": 1,
+      "message": "I don\u0027t believe hardlinks can safely be added to the ninja graph. What we\u0027d really want is copy-on-write, but that has very very limited support (it requires filesystem support, and the default filesystems we all use do not support it)\n\nhttps://android-review.git.corp.google.com/c/platform/build/soong/+/2516697 is adding hardlinks for certain packaging tasks, but only ones that are not exposed in the ninja graph. That has more discussion around the dangers here too.",
+      "range": {
+        "startLine": 3072,
+        "startChar": 0,
+        "endLine": 3072,
+        "endChar": 10
+      },
+      "revId": "45e8bc975050be01d8b968b19e3240fe8be6a275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
