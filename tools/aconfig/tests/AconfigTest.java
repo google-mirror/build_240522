@@ -49,8 +49,9 @@ public final class AconfigTest {
     }
 
     @Test
-    public void testFakeFeatureFlagsImplNotImpl() {
-        FeatureFlags featureFlags = new FakeFeatureFlagsImpl();
-        assertThrows(UnsupportedOperationException.class, () -> featureFlags.enabledRw());
+    public void testFakeFeatureFlagsImplImpled() {
+        FakeFeatureFlagsImpl fakeFeatureFlags = new FakeFeatureFlagsImpl();
+        fakeFeatureFlags.setFlag(FLAG_ENABLED_RW, false);
+        assertFalse(fakeFeatureFlags.enabledRw());
     }
 }
