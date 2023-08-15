@@ -844,7 +844,10 @@ function lunch()
     if [ -n "$release" ]; then
       export TARGET_RELEASE=$release
     else
-      unset TARGET_RELEASE
+      # This is equivalent to what people would have been running before, except
+      # on REL builds, which would be equivalent to "next" now.
+      echo "WARNING: release (next/trunk_staging/trunk_droid/trunk) not set. This will be an error in the future"
+      TARGET_RELEASE="trunk_staging"
     fi
     export TARGET_BUILD_TYPE=release
 
