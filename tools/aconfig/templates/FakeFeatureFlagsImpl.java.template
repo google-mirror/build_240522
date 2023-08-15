@@ -1,5 +1,5 @@
 package {package_name};
-{{ if is_test_mode }}
+
 import static java.util.stream.Collectors.toMap;
 
 import java.util.HashMap;
@@ -47,15 +47,3 @@ public class FakeFeatureFlagsImpl implements FeatureFlags \{
             HashMap::putAll
         );
 }
-{{ else }}
-{#- Generate only stub if in prod mode #}
-public class FakeFeatureFlagsImpl implements FeatureFlags \{
-{{ for item in class_elements}}
-    @Override
-    public boolean {item.method_name}() \{
-        throw new UnsupportedOperationException(
-            "Method is not implemented.");
-    }
-{{ endfor}}
-}
-{{ endif }}

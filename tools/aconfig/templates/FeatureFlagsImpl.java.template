@@ -17,7 +17,18 @@ public final class FeatureFlagsImpl implements FeatureFlags \{
         return {item.default_value};
     {{ endif- }}
     }
-{{ endfor- }}
+{{ endfor }}
+    @Override
+    public void setFlag(String flagName, boolean value) \{
+        throw new UnsupportedOperationException(
+            "Method is not implemented.");
+    }
+
+    @Override
+    public void resetAll() \{
+        throw new UnsupportedOperationException(
+            "Method is not implemented.");
+    }
 }
 {{ else }}
 {#- Generate only stub if in test mode #}
@@ -28,7 +39,7 @@ public final class FeatureFlagsImpl implements FeatureFlags \{
         throw new UnsupportedOperationException(
             "Method is not implemented.");
     }
-{{ endfor- }}
+{{ endfor }}
     @Override
     public void setFlag(String flagName, boolean value) \{
         throw new UnsupportedOperationException(
