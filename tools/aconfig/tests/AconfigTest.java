@@ -15,7 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import com.android.aconfig.test.FakeFeatureFlagsImpl;
+import com.android.aconfig.test.FeatureFlagsImpl;
 import com.android.aconfig.test.FeatureFlags;
 
 @RunWith(JUnit4.class)
@@ -49,8 +49,13 @@ public final class AconfigTest {
     }
 
     @Test
-    public void testFakeFeatureFlagsImplNotImpl() {
-        FeatureFlags featureFlags = new FakeFeatureFlagsImpl();
-        assertThrows(UnsupportedOperationException.class, () -> featureFlags.enabledRw());
+    public void testFeatureFlagsImplNotImpl() {
+        FeatureFlags featureFlags = new FeatureFlagsImpl();
+        assertThrows(
+            UnsupportedOperationException.class,
+            () -> featureFlags.setFlag(FLAG_DISABLED_RO, true));
+                assertThrows(
+            UnsupportedOperationException.class,
+            () -> featureFlags.resetAll());
     }
 }
