@@ -1,3 +1,5 @@
+<<<<<<< PATCH SET (6ba984 [CrashRecovery] Add module to BCP and SSCP)
+=======
 #
 # Copyright (C) 2018 The Android Open Source Project
 #
@@ -456,3 +458,4 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/runtime_libart.mk)
 
 # Use "image" APEXes always.
 $(call inherit-product,$(SRC_TARGET_DIR)/product/updatable_apex.mk)
+>>>>>>> BASE      (82ae71 Merge "Handle the case where the release value set is a list)

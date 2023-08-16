@@ -1,3 +1,5 @@
+<<<<<<< PATCH SET (6ba984 [CrashRecovery] Add module to BCP and SSCP)
+=======
 #
 # Copyright (C) 2020 The Android Open Source Project
 #
@@ -138,3 +140,4 @@ PRODUCT_SYSTEM_PROPERTIES += \
     dalvik.vm.dex2oat-Xmx=512m \
 
 PRODUCT_ENABLE_UFFD_GC := default
+>>>>>>> BASE      (82ae71 Merge "Handle the case where the release value set is a list)
