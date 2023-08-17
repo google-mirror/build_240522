@@ -139,14 +139,15 @@ int main(int argc, char* const argv[])
 
     if (check) {
         /* check existing archive for correct alignment */
-        result = verify(argv[optind + 1], alignment, verbose, pageAlignSharedLibs);
+        result = verify(argv[optind + 1], alignment, verbose, pageAlignSharedLibs, pageSize);
     } else {
         /* create the new archive */
-        result = process(argv[optind + 1], argv[optind + 2], alignment, force, zopfli, pageAlignSharedLibs);
+        result = process(argv[optind + 1], argv[optind + 2], alignment, force, zopfli, pageAlignSharedLibs,
+                         pageSize);
 
         /* trust, but verify */
         if (result == 0) {
-            result = verify(argv[optind + 2], alignment, verbose, pageAlignSharedLibs);
+            result = verify(argv[optind + 2], alignment, verbose, pageAlignSharedLibs, pageSize);
         }
     }
 
