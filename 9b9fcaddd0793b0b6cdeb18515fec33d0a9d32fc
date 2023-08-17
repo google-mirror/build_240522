@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8dcc35c6_68e11498",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-08-17T13:38:13Z",
+      "side": 1,
+      "message": "Thank you for your suggestion! Yes it makes sense to me. The reason I added them here is I heard from Dave that in the tests of SysUi, the interface, FeatureFlags here, is used through the tests. If it won\u0027t cause much inconvenience, I actually like to remove them from the interface.",
+      "parentUuid": "05e226c0_9c80a9d8",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 127,
+        "endChar": 31
+      },
+      "revId": "9b9fcaddd0793b0b6cdeb18515fec33d0a9d32fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "697f6fce_13afa1e8",
         "filename": "tools/aconfig/src/codegen_java.rs",
         "patchSetId": 1
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b10fec9_f1a278f7",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-08-17T13:38:13Z",
+      "side": 1,
+      "message": "Yes will change. Thank you.",
+      "parentUuid": "697f6fce_13afa1e8",
+      "range": {
+        "startLine": 210,
+        "startChar": 16,
+        "endLine": 210,
+        "endChar": 23
+      },
+      "revId": "9b9fcaddd0793b0b6cdeb18515fec33d0a9d32fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec6d6d4a_80de782d",
         "filename": "tools/aconfig/src/codegen_java.rs",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2023-08-17T01:34:16Z",
       "side": 1,
       "message": "A stream is a bit of overkill here; suggest this form:\n\n```\n  Map.of(\n    Flags.FLAG_DISABLED_RO, null,\n    Flags.FLAG_DISABLED_RW, null,\n    Flags.FLAG_ENABLED_RO, null,\n    Flags.FLAG_ENABLED_RW, null)\n```",
+      "range": {
+        "startLine": 210,
+        "startChar": 52,
+        "endLine": 220,
+        "endChar": 14
+      },
+      "revId": "9b9fcaddd0793b0b6cdeb18515fec33d0a9d32fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c27db237_955f6519",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-08-17T13:38:13Z",
+      "side": 1,
+      "message": "Thank you. I totally agree. The Map.of will return a unmodifiable map, so I didn\u0027t use it. Before I initialize the map in constructor, and put all the entries there, but for some reason I forgot, some reviewers comment to initialize the map out of the constructor. so it ended with this. I can move it into constructor, and put all the entries, if it has much performance impact",
+      "parentUuid": "ec6d6d4a_80de782d",
       "range": {
         "startLine": 210,
         "startChar": 52,

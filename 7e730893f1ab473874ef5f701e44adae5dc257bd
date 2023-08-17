@@ -22,6 +22,30 @@
       },
       "revId": "7e730893f1ab473874ef5f701e44adae5dc257bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51817af7_3cc64de8",
+        "filename": "tools/aconfig/tests/AconfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-08-17T13:38:13Z",
+      "side": 0,
+      "message": "Oh, yes, we have these tests, but in another file",
+      "parentUuid": "a559c46e_9da4f29a",
+      "range": {
+        "startLine": 18,
+        "startChar": 32,
+        "endLine": 18,
+        "endChar": 52
+      },
+      "revId": "7e730893f1ab473874ef5f701e44adae5dc257bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
