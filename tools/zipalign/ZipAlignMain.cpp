@@ -24,6 +24,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <string>
+
 using namespace android;
 
 /*
@@ -34,8 +36,8 @@ void usage(void)
     fprintf(stderr, "Zip alignment utility\n");
     fprintf(stderr, "Copyright (C) 2009 The Android Open Source Project\n\n");
     fprintf(stderr,
-        "Usage: zipalign [-f] [-p] [-v] [-z] <align> infile.zip outfile.zip\n"
-        "       zipalign -c [-p] [-v] <align> infile.zip\n\n" );
+        "Usage: zipalign [-f] [-p] [--pagesize <pagesize>] [-v] [-z] <align> infile.zip outfile.zip\n"
+        "       zipalign -c [-p] [--pagesize <pagesize>] [-v] <align> infile.zip\n\n" );
     fprintf(stderr,
         "  <align>: alignment in bytes, e.g. '4' provides 32-bit alignment\n");
     fprintf(stderr, "  -c: check alignment only (does not modify file)\n");
@@ -43,6 +45,9 @@ void usage(void)
     fprintf(stderr, "  -p: page-align uncompressed .so files\n");
     fprintf(stderr, "  -v: verbose output\n");
     fprintf(stderr, "  -z: recompress using Zopfli\n");
+    fprintf(stderr, "  --pagesize <pagesize>: Specifies the pagesize of the target device.\n");
+    fprintf(stderr, "                         Valid pagesize's are 4096, 16384 and 65536\n");
+    fprintf(stderr, "                         pagesize default's to 4096 if not specified\n");
 }
 
 
@@ -57,12 +62,23 @@ int main(int argc, char* const argv[])
     bool verbose = false;
     bool zopfli = false;
     bool pageAlignSharedLibs = false;
+    // Keep the default 4kB for now. This will likely need to be updated
+    // to 16kB in the future.
+    int pageSize = 4096;
     int result = 1;
     int alignment;
     char* endp;
 
+    const struct option long_opts[] = {
+        {"pagesize", required_argument, NULL, 0},
+        {NULL, 0, NULL, 0}
+    };
+
     int opt;
-    while ((opt = getopt(argc, argv, "fcpvz")) != -1) {
+    int opt_index;
+    std::string flag;
+
+    while ((opt = getopt_long(argc, argv, "fcpvz", long_opts, &opt_index)) != -1) {
         switch (opt) {
         case 'c':
             check = true;
@@ -78,6 +94,29 @@ int main(int argc, char* const argv[])
             break;
         case 'p':
             pageAlignSharedLibs = true;
+            break;
+        case 0:
+            flag = long_opts[opt_index].name;
+
+            if (flag != "pagesize") {
+                fprintf(stderr, "ERROR: unknown flag %s\n", flag.c_str());
+                wantUsage = true;
+                goto bail;
+            }
+
+            if (!optarg) {
+                fprintf(stderr, "ERROR: --pagesize requires an argument\n");
+                wantUsage = true;
+                goto bail;
+            }
+
+            pageSize = atoi(optarg);
+            if (pageSize != 4096 && pageSize != 16384 && pageSize != 65536) {
+                fprintf(stderr, "ERROR: Invalid argument for --pagesize: %s\n", optarg);
+                wantUsage = true;
+                goto bail;
+            }
+
             break;
         default:
             fprintf(stderr, "ERROR: unknown flag -%c\n", opt);
