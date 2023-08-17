@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a559c46e_9da4f29a",
+        "filename": "tools/aconfig/tests/AconfigTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060062
+      },
+      "writtenOn": "2023-08-17T01:34:16Z",
+      "side": 0,
+      "message": "Can we add tests for FakeFeatureFlagsImpl to test that `setFlag()` causes the associated getter to return a different value?",
+      "range": {
+        "startLine": 18,
+        "startChar": 32,
+        "endLine": 18,
+        "endChar": 52
+      },
+      "revId": "7e730893f1ab473874ef5f701e44adae5dc257bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

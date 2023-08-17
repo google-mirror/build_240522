@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05e226c0_9c80a9d8",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1060062
+      },
+      "writtenOn": "2023-08-17T01:34:16Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to add these methods to the public interface. The tests can directly instantiate the fake, e.g.\n\n```\npublic class MyClassTest {\n    private FakeFeatureFlags flags \u003d new FakeFeatureFlags();\n    \n    private classUnderTest \u003d new ClassUnderTest(..., fakeFeatureFlags);\n    \n    @Test\n    public void testAThing() {\n        flags.setFlag(\"foo.bar.baz\", true);\n        \n        assertTrue(classUnderTest.doThing());\n    }\n}\n```",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 127,
+        "endChar": 31
+      },
+      "revId": "9b9fcaddd0793b0b6cdeb18515fec33d0a9d32fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "697f6fce_13afa1e8",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1060062
+      },
+      "writtenOn": "2023-08-17T01:34:16Z",
+      "side": 1,
+      "message": "Idiomatic Java would prefer this to be a pure interface, in this case `Map\u003cString, Boolean\u003e`",
+      "range": {
+        "startLine": 210,
+        "startChar": 16,
+        "endLine": 210,
+        "endChar": 23
+      },
+      "revId": "9b9fcaddd0793b0b6cdeb18515fec33d0a9d32fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec6d6d4a_80de782d",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1060062
+      },
+      "writtenOn": "2023-08-17T01:34:16Z",
+      "side": 1,
+      "message": "A stream is a bit of overkill here; suggest this form:\n\n```\n  Map.of(\n    Flags.FLAG_DISABLED_RO, null,\n    Flags.FLAG_DISABLED_RW, null,\n    Flags.FLAG_ENABLED_RO, null,\n    Flags.FLAG_ENABLED_RW, null)\n```",
+      "range": {
+        "startLine": 210,
+        "startChar": 52,
+        "endLine": 220,
+        "endChar": 14
+      },
+      "revId": "9b9fcaddd0793b0b6cdeb18515fec33d0a9d32fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
