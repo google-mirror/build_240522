@@ -46,6 +46,10 @@ if [ ! "$T" ]; then
     echo "Couldn't locate the top of the tree. Always source build/envsetup.sh from the root of the tree." >&2
     return 1
 fi
+if [[ "$T" == /google/cog/cloud/* ]]; then
+    echo "Run build/make/cogsetup.sh when in a Cog workspace."
+    return 1
+fi
 IMPORTING_ENVSETUP=true source $T/build/make/shell_utils.sh
 
 
