@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33f31dd2_5686b887",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2023-08-18T11:13:20Z",
+      "side": 1,
+      "message": "The variable occurs in many places. Do we have to filter them all?\nhttps://cs.android.com/search?q\u003dPRODUCT_EXTRA_VNDK_VERSIONS\u0026sq\u003d\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain",
+      "revId": "a5e5151af8bb769d155d7863d56656100026d69d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
