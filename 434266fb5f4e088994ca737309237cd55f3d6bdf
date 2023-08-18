@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e59d70a2_71de4783",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-08-18T19:43:44Z",
+      "side": 1,
+      "message": "pagesizes",
+      "range": {
+        "startLine": 49,
+        "startChar": 52,
+        "endLine": 49,
+        "endChar": 62
+      },
+      "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a90bb097_db3ad0ec",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-08-18T19:43:44Z",
+      "side": 1,
+      "message": "defaults\n\nalthough i\u0027m normally very much a \"the only unit is bytes\" person, i wonder here whether these aren\u0027t a bit error prone, and we should actually use 4/16/64 instead?",
+      "range": {
+        "startLine": 50,
+        "startChar": 55,
+        "endLine": 50,
+        "endChar": 64
+      },
+      "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52eb18b4_a8d347f3",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-08-18T19:43:44Z",
+      "side": 1,
+      "message": "prefer to use a short opt instead to avoid all this mess.\n\n(is there a reason why you didn\u0027t just go with an optional argument to the existing -p?)",
+      "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
