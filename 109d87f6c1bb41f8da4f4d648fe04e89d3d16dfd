@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4b2c5e2_1b2141fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-08-18T23:50:40Z",
+      "side": 1,
+      "message": "Sounds good to me. Will post a update patch.",
+      "parentUuid": "12cc3221_68967a1d",
+      "revId": "109d87f6c1bb41f8da4f4d648fe04e89d3d16dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61a4db19_8554f8bf",
         "filename": "tools/zipalign/tests/src/align_test.cpp",
         "patchSetId": 1
@@ -102,6 +120,24 @@
       "writtenOn": "2023-08-18T23:35:32Z",
       "side": 1,
       "message": "...but aren\u0027t these verify() calls wrong then? the comment above the previous process() call explicitly says \"double aligning\".",
+      "revId": "109d87f6c1bb41f8da4f4d648fe04e89d3d16dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "184f1b6d_7172eb61",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-08-18T23:50:40Z",
+      "side": 1,
+      "message": "They don\u0027t check .so alignment only the align of other files. None of the test data has .so files.\n\nLet me create some test for shared library alignment.",
+      "parentUuid": "01949c3f_4dd10350",
       "revId": "109d87f6c1bb41f8da4f4d648fe04e89d3d16dfd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
