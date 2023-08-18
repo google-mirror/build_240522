@@ -80,6 +80,24 @@
       "parentUuid": "52eb18b4_a8d347f3",
       "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38dcd82d_56a7ce32",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-08-18T22:58:30Z",
+      "side": 1,
+      "message": "yeah, that\u0027s annoying and getopt\u0027s `:` and `::` don\u0027t really implement what we want either. (toybox\u0027s command-line parsing is better at this.)\n\nmaybe just use -P or if you really like --pagesize, give it \u0027P\u0027 as its (undocumented) equivalent just to keep the code easy ... that\u0027s what i usually do to avoid messing around with strings and having to do manual argument error checking :-)",
+      "parentUuid": "c7ff673a_01cb041b",
+      "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
