@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "856c37d3_eb8c7a48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896276
+      },
+      "writtenOn": "2023-08-18T10:35:36Z",
+      "side": 1,
+      "message": "Need a code owner review for this change to fix device ID attestation on GSI builds.",
+      "revId": "99fafaec2245faebb787a0d1f7451557ab4a8fb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
