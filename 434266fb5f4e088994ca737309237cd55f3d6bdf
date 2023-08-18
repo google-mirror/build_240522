@@ -62,6 +62,24 @@
       "message": "prefer to use a short opt instead to avoid all this mess.\n\n(is there a reason why you didn\u0027t just go with an optional argument to the existing -p?)",
       "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7ff673a_01cb041b",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-08-18T20:33:39Z",
+      "side": 1,
+      "message": "I thought the `-p [pagesize]` would be cleaner too.\n\nBut the issue for example in the below command:\n\n```\nzipalign -p 4 in.zip out.zip\n```\n\nIn this case we cannot easily tell if the `4` is intended as the optional page size for `-p`; or the `\u003calign\u003e` for other files (not .so files) in which case `-p` has no args and we default to `4096`.\n\nWe could try counting the args. I\u0027m not sure if that will be more messy. Let me give it a try.",
+      "parentUuid": "52eb18b4_a8d347f3",
+      "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
