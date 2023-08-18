@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61a4db19_8554f8bf",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-08-18T19:39:24Z",
+      "side": 1,
+      "message": "shouldn\u0027t these be \u0027true\u0027, since 4096 was non-zero?",
+      "range": {
+        "startLine": 52,
+        "startChar": 68,
+        "endLine": 52,
+        "endChar": 73
+      },
+      "revId": "109d87f6c1bb41f8da4f4d648fe04e89d3d16dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
