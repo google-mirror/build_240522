@@ -140,6 +140,24 @@
       "parentUuid": "01949c3f_4dd10350",
       "revId": "109d87f6c1bb41f8da4f4d648fe04e89d3d16dfd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "406c9e54_59189298",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-08-19T00:05:28Z",
+      "side": 1,
+      "message": "ah, yeah, i forgot that there\u0027s that functionality too. (which i\u0027m pretty convinced is useless --- http://b/141281419.)\n\n+1 to having .so alignment tests (and feel free to rename the existing tests to make it less unclear).\n\n/me wonders whether we should admit that three booleans is a bad code smell and go for a kForce | kZopfli | kPageAlignedSharedObjects type bitmask?",
+      "parentUuid": "184f1b6d_7172eb61",
+      "revId": "109d87f6c1bb41f8da4f4d648fe04e89d3d16dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
