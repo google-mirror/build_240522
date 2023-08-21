@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1077a665_0578c9c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2023-08-21T19:43:37Z",
+      "side": 1,
+      "message": "Is this something that could/should be called as part of envsetup rather than requiring a separate invocation? or is the intention that cogsetup.sh will also do the relevant pieces of envsetup as well?\n\nAlternatively, are any of these things we could do in Cog workspace setup? e.g. repo command sounds like a problem in any Cog workspace, not just if you\u0027ve run envsetup.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 303
+      },
+      "revId": "2b7722af67b29b156aba3373043a3084cd7916f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
