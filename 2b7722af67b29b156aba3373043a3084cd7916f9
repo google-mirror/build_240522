@@ -22,6 +22,47 @@
       },
       "revId": "2b7722af67b29b156aba3373043a3084cd7916f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e180a3d5_96b08556",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-08-21T19:57:14Z",
+      "side": 1,
+      "message": "\u003e Is this something that could/should be called as part of envsetup rather than requiring a separate invocation? or is the intention that cogsetup.sh will also do the relevant pieces of envsetup as well?\n\nThe intention is that \"cogsetup.sh\" will implicitly also call \"envsetup.sh\", then do some additional configuration needed for Cog. I wanted to keep envsetup.sh as it is to avoid polluting it with code specific to Cog.\n\n\u003e Alternatively, are any of these things we could do in Cog workspace setup? e.g. repo command sounds like a problem in any Cog workspace, not just if you\u0027ve run envsetup.\n\nGood catch about repo command! Cogsetup.sh specifically prevents repo from being run if the user is inside the Cog workspace (https://android-review.git.corp.google.com/c/platform/build/+/2699193).",
+      "parentUuid": "1077a665_0578c9c2",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 303
+      },
+      "revId": "2b7722af67b29b156aba3373043a3084cd7916f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5f10c2e_0842345d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-08-21T19:57:14Z",
+      "side": 1,
+      "message": "Thank you for reviewing!",
+      "revId": "2b7722af67b29b156aba3373043a3084cd7916f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
