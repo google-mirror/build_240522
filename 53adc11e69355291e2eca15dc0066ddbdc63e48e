@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bee6d1c9_044dca50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-08-21T17:27:16Z",
+      "side": 1,
+      "message": "Please get skvadrik\u0027s review as well before submitting.",
+      "revId": "53adc11e69355291e2eca15dc0066ddbdc63e48e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
