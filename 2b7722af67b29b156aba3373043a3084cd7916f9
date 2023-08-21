@@ -63,6 +63,46 @@
       "message": "Thank you for reviewing!",
       "revId": "2b7722af67b29b156aba3373043a3084cd7916f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cad1535_5cabce47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-08-21T22:31:56Z",
+      "side": 1,
+      "message": "Rather than adding a new cogsetup.sh, can you add what you need to vendor/google/build/vendorsetup.sh instead.\n\nWe need to keep tabs on the overall developer experience, so please actually put it in vendorsetup.sh directly.",
+      "revId": "2b7722af67b29b156aba3373043a3084cd7916f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bae4a3e6_cec55ce7",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-08-21T22:31:56Z",
+      "side": 1,
+      "message": "We",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 62
+      },
+      "revId": "2b7722af67b29b156aba3373043a3084cd7916f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
