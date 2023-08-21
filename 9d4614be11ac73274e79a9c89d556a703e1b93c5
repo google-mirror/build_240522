@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d789de28_0c94e2da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-08-21T19:54:16Z",
+      "side": 1,
+      "message": "Ah sure. The goal is, developers using Cog for Android Platform builds would use this script instead of \"envsetup.sh\" for setting up their environment.\n\nI have another change to prevent or redirect users from running envsetup.sh and instead run this script (https://android-review.git.corp.google.com/c/platform/build/+/2714613).\n\nWe\u0027ll also add this as the replacement for \"envsetup.sh\" in the \"Building Android Platform with Cog\" instructions doc.",
+      "parentUuid": "1a50528e_503a428c",
+      "revId": "9d4614be11ac73274e79a9c89d556a703e1b93c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa7efa4f_b80d50c1",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93e7d42e_b7e08220",
+        "filename": "cogsetup.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-08-21T19:54:16Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed, removed.",
+      "parentUuid": "aa7efa4f_b80d50c1",
+      "revId": "9d4614be11ac73274e79a9c89d556a703e1b93c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4607c0dd_839d54d6",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-08-21T17:02:46Z",
       "side": 1,
       "message": "Why are we adding this script to AOSP, instead of internal? (It\u0027s referencing script locations for scripts that don\u0027t exist in AOSP).",
+      "revId": "9d4614be11ac73274e79a9c89d556a703e1b93c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec2d95fe_08adce98",
+        "filename": "cogsetup.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-08-21T19:54:16Z",
+      "side": 1,
+      "message": "Ah this is also an artifact of a copy from the rbesetup.sh script. Its not needed anymore (I think we decided not to collect aosp metrics). Removed.",
+      "parentUuid": "4607c0dd_839d54d6",
       "revId": "9d4614be11ac73274e79a9c89d556a703e1b93c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
