@@ -16,6 +16,24 @@
       "message": "The variable occurs in many places. Do we have to filter them all?\nhttps://cs.android.com/search?q\u003dPRODUCT_EXTRA_VNDK_VERSIONS\u0026sq\u003d\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain",
       "revId": "a5e5151af8bb769d155d7863d56656100026d69d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a9b0e8_8a3f8302",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-08-21T00:53:04Z",
+      "side": 1,
+      "message": "Thanks for finding this.\nI checked the searched code and this change does not impact to any other code, except for vintf.\nIn case of vintf, it will include the allowed vndk list without filtering out the versions in PROVIDED_VNDK_VERSIONS. However, the filtered out version must be the one that is provided by the source tree (PLATFORM_VNDK_VERSION) which must be in the framework vndk list, too. So I don\u0027t think this changes the behavior.",
+      "parentUuid": "33f31dd2_5686b887",
+      "revId": "a5e5151af8bb769d155d7863d56656100026d69d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
