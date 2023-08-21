@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a50528e_503a428c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1605027
+      },
+      "writtenOn": "2023-08-21T17:02:46Z",
+      "side": 1,
+      "message": "Can I get some more details about this script?\n\n1. What\u0027s going to be responsible for running the script?",
+      "revId": "9d4614be11ac73274e79a9c89d556a703e1b93c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa7efa4f_b80d50c1",
+        "filename": "cogsetup.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1605027
+      },
+      "writtenOn": "2023-08-21T17:02:46Z",
+      "side": 1,
+      "message": "This is a kind of awkward mode -- what are the plans wrt invoking this via envsetup.sh or separately from envsetup.sh? Or is this just \"covering our bases from wherever this is called\"?",
+      "revId": "9d4614be11ac73274e79a9c89d556a703e1b93c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4607c0dd_839d54d6",
+        "filename": "cogsetup.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1605027
+      },
+      "writtenOn": "2023-08-21T17:02:46Z",
+      "side": 1,
+      "message": "Why are we adding this script to AOSP, instead of internal? (It\u0027s referencing script locations for scripts that don\u0027t exist in AOSP).",
+      "revId": "9d4614be11ac73274e79a9c89d556a703e1b93c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
