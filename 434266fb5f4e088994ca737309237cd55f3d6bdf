@@ -49,6 +49,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f002684_64225b3e",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2023-08-22T22:24:06Z",
+      "side": 1,
+      "message": "+1 to enh suggestion",
+      "parentUuid": "a90bb097_db3ad0ec",
+      "range": {
+        "startLine": 50,
+        "startChar": 55,
+        "endLine": 50,
+        "endChar": 64
+      },
+      "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d076a5fe_fc81289e",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2023-08-22T22:24:06Z",
+      "side": 1,
+      "message": "nit: Add a why in the comment?",
+      "range": {
+        "startLine": 65,
+        "startChar": 37,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52eb18b4_a8d347f3",
         "filename": "tools/zipalign/ZipAlignMain.cpp",
         "patchSetId": 2
