@@ -84,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5bb6a3f_1a4b0c01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-08-22T14:59:24Z",
+      "side": 1,
+      "message": "If we configure this in `vendor/google/build/vendorsetup.sh`, we won\u0027t be able to make this apply to developers working on aosp. I also want the override of the repo command to be in aosp, so we also catch aosp developers accidentally running repo commands while in a cog workspace.\n\nThis would also mean developers working on aosp and wanting to use Cog will have to set these variables manually (or they end up with broken / subpar builds).\n\ncc @samccone / @emrass",
+      "parentUuid": "8cad1535_5cabce47",
+      "revId": "2b7722af67b29b156aba3373043a3084cd7916f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bae4a3e6_cec55ce7",
         "filename": "envsetup.sh",
         "patchSetId": 1
