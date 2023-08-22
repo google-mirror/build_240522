@@ -1047,47 +1047,18 @@ $(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON_RAMDISK)))
 
 BUILT_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk.img
 
-
-ifneq ($(BOARD_KERNEL_MODULES_16K),)
-
-TARGET_OUT_RAMDISK_16K := $(PRODUCT_OUT)/ramdisk_16k
-BUILT_RAMDISK_16K_TARGET := $(PRODUCT_OUT)/ramdisk_16k.img
-RAMDISK_16K_STAGING_DIR := $(call intermediates-dir-for,PACKAGING,depmod_ramdisk_16k)
-
-$(foreach \
-  file,\
-  $(BOARD_KERNEL_MODULES_16K),\
-  $(eval \
-    $(call copy-and-strip-kernel-module,\
-      $(file),\
-      $(RAMDISK_16K_STAGING_DIR)/lib/modules/0.0/$(notdir $(file)) \
-    ) \
-  ) \
-)
-
-BOARD_VENDOR_RAMDISK_FRAGMENT.16K.PREBUILT := $(BUILT_RAMDISK_16K_TARGET)
-
-$(BUILT_RAMDISK_16K_TARGET): $(DEPMOD) $(MKBOOTFS) $(EXTRACT_KERNEL) $(COMPRESSION_COMMAND_DEPS)
-$(BUILT_RAMDISK_16K_TARGET): $(foreach file,$(BOARD_KERNEL_MODULES_16K),$(RAMDISK_16K_STAGING_DIR)/lib/modules/0.0/$(notdir $(file)))
-	$(DEPMOD) -b $(RAMDISK_16K_STAGING_DIR) 0.0
-	for MODULE in $(BOARD_KERNEL_MODULES_16K); do \
-		basename $$MODULE >> $(RAMDISK_16K_STAGING_DIR)/lib/modules/0.0/modules.load ; \
-	done;
-	rm -rf $(TARGET_OUT_RAMDISK_16K)/lib/modules
-	mkdir -p $(TARGET_OUT_RAMDISK_16K)/lib/modules
-	KERNEL_RELEASE=`$(EXTRACT_KERNEL) --input $(BOARD_KERNEL_PATH_16K) --output-release /dev/stdout` ;\
-	IS_16K_KERNEL=`$(EXTRACT_KERNEL) --input $(BOARD_KERNEL_PATH_16K) --output-config /dev/stdout` ;\
-	if [[ "$$IS_16K_KERNEL" == *"CONFIG_ARM64_16K_PAGES"* ]]; then SUFFIX=_16k; fi ;\
-	cp -r $(RAMDISK_16K_STAGING_DIR)/lib/modules/0.0 $(TARGET_OUT_RAMDISK_16K)/lib/modules/$$KERNEL_RELEASE$$SUFFIX
-	$(MKBOOTFS) $(TARGET_OUT_RAMDISK_16K) | $(COMPRESSION_COMMAND) > $@
-
-# Builds a ramdisk using modules defined in BOARD_KERNEL_MODULES_16K
-ramdisk_16k: $(BUILT_RAMDISK_16K_TARGET)
-.PHONY: ramdisk_16k
-
-endif
-
 ifneq ($(BOARD_KERNEL_PATH_16K),)
+KERNEL_16K_VERSION := $(shell $(EXTRACT_KERNEL) --input $(BOARD_KERNEL_PATH_16K) --output-release /dev/stdout)
+KERNEL_16K_CONFIG := $(shell $(EXTRACT_KERNEL) --input $(BOARD_KERNEL_PATH_16K) --output-config /dev/stdout)
+KERNEL_16K_PAGE_SIZE_SUFFIX := $(strip $(if \
+  $(findstring CONFIG_ARM64_16K_PAGES=y,$(KERNEL_16K_CONFIG)),\
+  _16k,\
+  $(if \
+    $(findstring CONFIG_ARM64_64K_PAGES=y,$(KERNEL_16K_CONFIG)),\
+    _64k) \
+  ))
+
+
 BUILT_KERNEL_16K_TARGET := $(PRODUCT_OUT)/kernel_16k
 
 $(eval $(call copy-one-file,$(BOARD_KERNEL_PATH_16K),$(BUILT_KERNEL_16K_TARGET)))
@@ -1108,6 +1079,73 @@ bootimage_16k: $(BUILT_BOOTIMAGE_16K_TARGET)
 
 endif
 
+
+
+ifneq ($(BOARD_KERNEL_MODULES_16K),)
+
+TARGET_OUT_RAMDISK_16K := $(PRODUCT_OUT)/ramdisk_16k
+BUILT_RAMDISK_16K_TARGET := $(PRODUCT_OUT)/ramdisk_16k.img
+RAMDISK_16K_STAGING_DIR := $(call intermediates-dir-for,PACKAGING,depmod_ramdisk_16k)
+RAMDISK_16K_MODULE_SUBDIR := lib/modules/$(KERNEL_16K_VERSION)$(KERNEL_16K_PAGE_SIZE_SUFFIX)
+
+
+$(foreach \
+  file,\
+  $(BOARD_KERNEL_MODULES_16K),\
+  $(eval \
+    $(call copy-and-strip-kernel-module,\
+      $(file),\
+      $(RAMDISK_16K_STAGING_DIR)/$(DEPMOD_STAGING_SUBDIR)/$(notdir $(file)) \
+    ) \
+  ) \
+)
+
+RAMDISK_16K_MODULE_LOAD := $(foreach file,$(BOARD_KERNEL_MODULES_16K),$(notdir $(file)))
+RAMDISK_16K_STRIPPED_KERNEL_MODULES := $(addprefix $(RAMDISK_16K_STAGING_DIR)/$(DEPMOD_STAGING_SUBDIR)/,$(RAMDISK_16K_MODULE_LOAD))
+RAMDISK_16K_MODULE_LOAD_FILE := $(TARGET_OUT_RAMDISK_16K)/$(RAMDISK_16K_MODULE_SUBDIR)/modules.load
+RAMDISK_16K_MODULE_DEP_FILE := $(TARGET_OUT_RAMDISK_16K)/$(RAMDISK_16K_MODULE_SUBDIR)/modules.dep
+
+$(foreach \
+  file,\
+  $(RAMDISK_16K_MODULE_LOAD),\
+  $(eval \
+    $(call copy-one-file,\
+      $(RAMDISK_16K_STAGING_DIR)/$(DEPMOD_STAGING_SUBDIR)/$(file), \
+      $(TARGET_OUT_RAMDISK_16K)/$(RAMDISK_16K_MODULE_SUBDIR)/$(file) \
+    ) \
+  ) \
+)
+
+
+BOARD_VENDOR_RAMDISK_FRAGMENT.16K.FILES := $(foreach \
+  file,\
+  $(RAMDISK_16K_MODULE_LOAD),\
+  $(TARGET_OUT_RAMDISK_16K)/$(RAMDISK_16K_MODULE_SUBDIR)/$(file) \
+  )
+
+$(RAMDISK_16K_STAGING_DIR)/$(DEPMOD_STAGING_SUBDIR)/modules.dep: $(RAMDISK_16K_STRIPPED_KERNEL_MODULES)
+	$(DEPMOD) -b $(RAMDISK_16K_STAGING_DIR) 0.0
+
+$(eval $(call copy-one-file,$(RAMDISK_16K_STAGING_DIR)/$(DEPMOD_STAGING_SUBDIR)/modules.dep,$(RAMDISK_16K_MODULE_DEP_FILE)))
+BOARD_VENDOR_RAMDISK_FRAGMENT.16K.FILES += $(RAMDISK_16K_MODULE_LOAD_FILE)
+BOARD_VENDOR_RAMDISK_FRAGMENT.16K.FILES += $(RAMDISK_16K_MODULE_DEP_FILE)
+
+
+
+BOARD_VENDOR_RAMDISK_FRAGMENT.16K.STAGING_DIR := $(TARGET_OUT_RAMDISK_16K)
+
+$(RAMDISK_16K_MODULE_LOAD_FILE):
+	echo $(RAMDISK_16K_MODULE_LOAD) > $@
+
+
+$(BUILT_RAMDISK_16K_TARGET): $(DEPMOD) $(MKBOOTFS) $(EXTRACT_KERNEL) $(COMPRESSION_COMMAND_DEPS) $(BOARD_VENDOR_RAMDISK_FRAGMENT.16K.FILES)
+	$(MKBOOTFS) $(TARGET_OUT_RAMDISK_16K) | $(COMPRESSION_COMMAND) > $@
+
+# Builds a ramdisk using modules defined in BOARD_KERNEL_MODULES_16K
+ramdisk_16k: $(BUILT_RAMDISK_16K_TARGET)
+.PHONY: ramdisk_16k
+
+endif
 
 ifeq ($(BOARD_RAMDISK_USE_LZ4),true)
 # -l enables the legacy format used by the Linux kernel
@@ -4210,7 +4248,7 @@ pvmfwimage: $(INSTALLED_PVMFWIMAGE_TARGET)
 
 INSTALLED_PVMFWIMAGE_TARGET := $(PRODUCT_OUT)/pvmfw.img
 INSTALLED_PVMFW_EMBEDDED_AVBKEY_TARGET := $(PRODUCT_OUT)/pvmfw_embedded.avbpubkey
-INSTALLED_PVMFW_BINARY_TARGET := $(call module-target-built-files,pvmfw_bin)
+INSTALLED_PVMFW_BINARY_TARGET := $(call module-installed-files,pvmfw_bin)
 INTERNAL_PVMFWIMAGE_FILES := $(call module-target-built-files,pvmfw_img)
 INTERNAL_PVMFW_EMBEDDED_AVBKEY := $(call module-target-built-files,pvmfw_embedded_key)
 INTERNAL_PVMFW_SYMBOL := $(TARGET_OUT_EXECUTABLES_UNSTRIPPED)/pvmfw
@@ -5360,7 +5398,6 @@ INTERNAL_OTATOOLS_MODULES := \
   toybox \
   tune2fs \
   unpack_bootimg \
-  update_device \
   update_host_simulator \
   validate_target_files \
   verity_signer \
@@ -6269,10 +6306,11 @@ ifdef INTERNAL_VENDOR_RAMDISK_FRAGMENTS
 	  mkdir -p $(zip_root)/VENDOR_BOOT/RAMDISK_FRAGMENTS/$(vendor_ramdisk_fragment); \
 	  echo "$(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).MKBOOTIMG_ARGS)" > "$(zip_root)/VENDOR_BOOT/RAMDISK_FRAGMENTS/$(vendor_ramdisk_fragment)/mkbootimg_args"; \
 	  $(eval prebuilt_ramdisk := $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).PREBUILT)) \
+	  $(eval staging_dir := $(BOARD_VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).STAGING_DIR)) \
 	  $(if $(prebuilt_ramdisk), \
 	    cp "$(prebuilt_ramdisk)" "$(zip_root)/VENDOR_BOOT/RAMDISK_FRAGMENTS/$(vendor_ramdisk_fragment)/prebuilt_ramdisk";, \
 	    $(call package_files-copy-root, \
-	      $(VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).STAGING_DIR), \
+	      $(staging_dir), \
 	      $(zip_root)/VENDOR_BOOT/RAMDISK_FRAGMENTS/$(vendor_ramdisk_fragment)/RAMDISK); \
 	  ))
 endif # INTERNAL_VENDOR_RAMDISK_FRAGMENTS != ""
@@ -6927,7 +6965,6 @@ $(JACOCO_REPORT_CLASSES_ALL) :
 ifeq (,$(TARGET_BUILD_UNBUNDLED))
   $(JACOCO_REPORT_CLASSES_ALL): $(INTERNAL_ALLIMAGES_FILES)
 endif
-
 # This is not ideal, but it is difficult to correctly figure out the actual jacoco report
 # jars we need to add here as dependencies, so we add the device-tests as a dependency when
 # the env variable is set and this should guarantee thaat all the jacoco report jars are ready
@@ -7164,7 +7201,6 @@ $(INTERNAL_UPDATE_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(IMG_FROM_TARG
 	PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$(dir $(ZIP2ZIP)):$$PATH \
 	    $(IMG_FROM_TARGET_FILES) \
 	        --additional IMAGES/VerifiedBootParams.textproto:VerifiedBootParams.textproto \
-	        --build_super_image $(BUILD_SUPER_IMAGE) \
 	        $(BUILT_TARGET_FILES_PACKAGE) $@
 
 $(call declare-1p-container,$(INTERNAL_UPDATE_PACKAGE_TARGET),)
