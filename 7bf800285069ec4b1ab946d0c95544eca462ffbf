@@ -16,6 +16,24 @@
       "message": "To make sure I understand the intention of the change:\nFlags that have the is_fixed_read_only attribute set to true will:\n1) By default (i.e. in the absence of an explicit value set in the release configuration) be disabled read_only\n2) If the release configuration sets an explicit value of read_write, the build will fail\nIs that correct?",
       "revId": "7bf800285069ec4b1ab946d0c95544eca462ffbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93e40942_82232957",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-08-22T20:31:47Z",
+      "side": 1,
+      "message": "yes that is correct. is_fixed_read_only will make a flag read_only forever... change to turn it to read_write will fail in build. but the Release configuration can still set the true/false value.",
+      "parentUuid": "a3e03956_543673ed",
+      "revId": "7bf800285069ec4b1ab946d0c95544eca462ffbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
