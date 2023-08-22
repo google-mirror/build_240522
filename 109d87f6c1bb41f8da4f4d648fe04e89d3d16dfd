@@ -158,6 +158,24 @@
       "parentUuid": "184f1b6d_7172eb61",
       "revId": "109d87f6c1bb41f8da4f4d648fe04e89d3d16dfd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e243e48_60ad831d",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2023-08-22T22:21:00Z",
+      "side": 1,
+      "message": "Three booleans is definitely two (three?) too many.",
+      "parentUuid": "406c9e54_59189298",
+      "revId": "109d87f6c1bb41f8da4f4d648fe04e89d3d16dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
