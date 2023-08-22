@@ -118,6 +118,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6157819c_5df18428",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-08-22T16:53:09Z",
+      "side": 1,
+      "message": "This is what we have aosp-main-with-phones for. It looks vendor/google/build isn\u0027t in that branch, but maybe we should add it.",
+      "revId": "2b7722af67b29b156aba3373043a3084cd7916f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bae4a3e6_cec55ce7",
