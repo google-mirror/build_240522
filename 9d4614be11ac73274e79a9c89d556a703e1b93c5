@@ -104,6 +104,24 @@
       "parentUuid": "4607c0dd_839d54d6",
       "revId": "9d4614be11ac73274e79a9c89d556a703e1b93c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbe118a9_c7927bf0",
+        "filename": "cogsetup.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1605027
+      },
+      "writtenOn": "2023-08-22T16:53:16Z",
+      "side": 1,
+      "message": "OK -- my question still stands, though, is there a reason we are adding this to AOSP instead of internal? IIUC we don\u0027t have plans on releasing this functionality outside of internal, correct?\n\n(Particularly, referencing /google/cog from AOSP makes me slightly uncomfortable)",
+      "parentUuid": "ec2d95fe_08adce98",
+      "revId": "9d4614be11ac73274e79a9c89d556a703e1b93c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
