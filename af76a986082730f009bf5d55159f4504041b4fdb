@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ea8af1_b9edd8af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958248
+      },
+      "writtenOn": "2023-08-23T14:52:17Z",
+      "side": 1,
+      "message": "r.android.com/2505881 should fix the current presubmit errors, wil re-run after that\u0027s merged.",
+      "revId": "af76a986082730f009bf5d55159f4504041b4fdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
