@@ -131,6 +131,9 @@ _product_list_vars += \
     PRODUCT_AUTO_GENERATE_SYSTEM_EXT_RRO_DIRS \
     PRODUCT_AUTO_GENERATE_VENDOR_RRO_DIRS
 
+# The priority for auto generated RROs
+_product_single_value_vars +=  PRODUCT_AUTO_GENERATE_RRO_PRIORITY
+
 _product_list_vars += PRODUCT_SDK_ATREE_FILES
 _product_list_vars += PRODUCT_SDK_ADDON_NAME
 _product_list_vars += PRODUCT_SDK_ADDON_COPY_FILES
