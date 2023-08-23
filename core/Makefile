@@ -1048,8 +1048,8 @@ $(eval $(call declare-0p-target,$(INSTALLED_FILES_JSON_RAMDISK)))
 BUILT_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk.img
 
 ifneq ($(BOARD_KERNEL_PATH_16K),)
-KERNEL_16K_VERSION := $(shell $(EXTRACT_KERNEL) --input $(BOARD_KERNEL_PATH_16K) --output-release /dev/stdout)
-KERNEL_16K_CONFIG := $(shell $(EXTRACT_KERNEL) --input $(BOARD_KERNEL_PATH_16K) --output-config /dev/stdout)
+KERNEL_16K_VERSION := $(shell $(EXTRACT_KERNEL) --input $(BOARD_KERNEL_PATH_16K) --tools lz4:$(LZ4) --output-release)
+KERNEL_16K_CONFIG := $(shell $(EXTRACT_KERNEL) --input $(BOARD_KERNEL_PATH_16K) --tools lz4:$(LZ4) --output-config)
 KERNEL_16K_PAGE_SIZE_SUFFIX := $(strip $(if \
   $(findstring CONFIG_ARM64_16K_PAGES=y,$(KERNEL_16K_CONFIG)),\
   _16k,\
