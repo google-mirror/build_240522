@@ -6,6 +6,12 @@ LOCAL_PACKAGE_NAME := $(enforce_rro_module)
 intermediates := $(call intermediates-dir-for,APPS,$(LOCAL_PACKAGE_NAME),,COMMON)
 rro_android_manifest_file := $(intermediates)/AndroidManifest.xml
 
+ifneq ($(PRODUCT_AUTO_GENERATE_RRO_PRIORITY),)
+  enforce_rro_android_priority := $(PRODUCT_AUTO_GENERATE_RRO_PRIORITY)
+else
+  enforce_rro_android_priority := 0
+endif
+
 ifeq (true,$(enforce_rro_source_is_manifest_package_name))
   use_package_name_arg := --use-package-name
 else
@@ -16,9 +22,8 @@ endif
 $(rro_android_manifest_file): PRIVATE_PACKAGE_INFO := $(enforce_rro_source_manifest_package_info)
 $(rro_android_manifest_file): PRIVATE_USE_PACKAGE_NAME := $(use_package_name_arg)
 $(rro_android_manifest_file): PRIVATE_PARTITION := $(enforce_rro_partition)
-# There should be no duplicate overrides, but just in case, set the priority of
-# /product overlays to be higher than /vendor, to at least get deterministic results.
-$(rro_android_manifest_file): PRIVATE_PRIORITY := $(if $(filter product,$(enforce_rro_partition)),1,0)
+# Set the default priority to 0 but make it possible to override with PRODUCT_AUTO_GENERATE_RRO_PRIORITY
+$(rro_android_manifest_file): PRIVATE_PRIORITY := $(enforce_rro_android_priority)
 $(rro_android_manifest_file): build/make/tools/generate-enforce-rro-android-manifest.py
 	$(hide) build/make/tools/generate-enforce-rro-android-manifest.py \
 	    --package-info $(PRIVATE_PACKAGE_INFO) \
