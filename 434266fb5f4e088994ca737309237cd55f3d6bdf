@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ba7e955_f7da94a7",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-08-23T23:00:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e59d70a2_71de4783",
+      "range": {
+        "startLine": 49,
+        "startChar": 52,
+        "endLine": 49,
+        "endChar": 62
+      },
+      "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a90bb097_db3ad0ec",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef1f3592_3dded3fb",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-08-23T23:00:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f002684_64225b3e",
+      "range": {
+        "startLine": 50,
+        "startChar": 55,
+        "endLine": 50,
+        "endChar": 64
+      },
+      "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d076a5fe_fc81289e",
@@ -84,6 +132,30 @@
       "writtenOn": "2023-08-22T22:24:06Z",
       "side": 1,
       "message": "nit: Add a why in the comment?",
+      "range": {
+        "startLine": 65,
+        "startChar": 37,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7ebcfb7_554a064c",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-08-23T23:00:04Z",
+      "side": 1,
+      "message": "I\u0027ve removed this default since -p will be always 4k and -P will always specify the required alignment.",
+      "parentUuid": "d076a5fe_fc81289e",
       "range": {
         "startLine": 65,
         "startChar": 37,
@@ -143,6 +215,24 @@
       "side": 1,
       "message": "yeah, that\u0027s annoying and getopt\u0027s `:` and `::` don\u0027t really implement what we want either. (toybox\u0027s command-line parsing is better at this.)\n\nmaybe just use -P or if you really like --pagesize, give it \u0027P\u0027 as its (undocumented) equivalent just to keep the code easy ... that\u0027s what i usually do to avoid messing around with strings and having to do manual argument error checking :-)",
       "parentUuid": "c7ff673a_01cb041b",
+      "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3206380_90783d8f",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-08-23T23:00:04Z",
+      "side": 1,
+      "message": "Went with your suggestion of `-P`",
+      "parentUuid": "38dcd82d_56a7ce32",
       "revId": "434266fb5f4e088994ca737309237cd55f3d6bdf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
