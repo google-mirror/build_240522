@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4774cf8_b7d1e740",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2023-08-23T00:54:56Z",
+      "side": 1,
+      "message": "Why don\u0027t we have target_files.zip for 16k OTA ? During build, we already create full OTA which is from target_file.\n\nThis is helpful to generate package directly based on image files but I don\u0027t get how it fits with 16k OTA ?",
+      "revId": "8b531d4e25299b254bdce98bd725085ec8781a2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
