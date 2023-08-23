@@ -176,6 +176,24 @@
       "parentUuid": "406c9e54_59189298",
       "revId": "109d87f6c1bb41f8da4f4d648fe04e89d3d16dfd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65aca492_54e7360d",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-08-23T22:58:54Z",
+      "side": 1,
+      "message": "If it\u0027s preferred, I can add this refactor to bitmask in a subsequent patch after the new option is flushed out.",
+      "parentUuid": "7e243e48_60ad831d",
+      "revId": "109d87f6c1bb41f8da4f4d648fe04e89d3d16dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
