@@ -16,6 +16,24 @@
       "message": "Why don\u0027t we have target_files.zip for 16k OTA ? During build, we already create full OTA which is from target_file.\n\nThis is helpful to generate package directly based on image files but I don\u0027t get how it fits with 16k OTA ?",
       "revId": "8b531d4e25299b254bdce98bd725085ec8781a2a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a517f1ce_5abce3c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-08-23T01:20:10Z",
+      "side": 1,
+      "message": "\u003e Why don\u0027t we have target_files.zip for 16k OTA ? \n\n1. Building a target_files.zip takes a long time.\n2. To build a 16K target_files.zip, we would need to first obtain a regular target_files.zip, replace the boot image inside, and repack. Much of the work in this process is just unnecessary. Better to create OTA from a single boot_16k.img directly.\n\n\u003e This is helpful to generate package directly based on image files but I don\u0027t get how it fits with 16k OTA ?\n\n\nDuring build, we will create a boot_16k.img, which contains the 16K linux kernel. This tool would allow the build pipeline to start building a 16K OTA as soon as the boot image is ready, rather than having to wait until EVERYTHING finishes(target_files.zip gets built after everything else finishes building).",
+      "parentUuid": "f4774cf8_b7d1e740",
+      "revId": "8b531d4e25299b254bdce98bd725085ec8781a2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
