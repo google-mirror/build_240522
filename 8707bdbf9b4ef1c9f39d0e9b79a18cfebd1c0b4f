@@ -16,6 +16,40 @@
       "message": "LGTM, letting @enh take a look as well.",
       "revId": "8707bdbf9b4ef1c9f39d0e9b79a18cfebd1c0b4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade6276a_a1568ff3",
+        "filename": "tools/zipalign/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-08-24T18:33:25Z",
+      "side": 1,
+      "message": "|sort",
+      "revId": "8707bdbf9b4ef1c9f39d0e9b79a18cfebd1c0b4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c877094b_fccd1bc3",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-08-24T18:33:25Z",
+      "side": 1,
+      "message": "`\u003d 4096` here to avoid passing around uninitialized variables. it\u0027ll make valgrind unhappy, and \"we won\u0027t actually use it unless it\u0027s set\" -- while i think it\u0027s true -- is non-trivial to prove even as a human reader.",
+      "revId": "8707bdbf9b4ef1c9f39d0e9b79a18cfebd1c0b4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
