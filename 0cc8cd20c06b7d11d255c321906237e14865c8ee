@@ -34,6 +34,24 @@
       "parentUuid": "527d8187_fbfcb258",
       "revId": "0cc8cd20c06b7d11d255c321906237e14865c8ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "201a6f80_b3622f63",
+        "filename": "core/Makefile",
+        "patchSetId": 7
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-08-24T17:34:14Z",
+      "side": 1,
+      "message": "You can\u0027t unless you can get the kernel version from a build file like BoardConfig.mk.",
+      "parentUuid": "c63e286c_a5e25875",
+      "revId": "0cc8cd20c06b7d11d255c321906237e14865c8ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
