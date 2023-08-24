@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "527d8187_fbfcb258",
+        "filename": "core/Makefile",
+        "patchSetId": 7
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-08-24T17:31:26Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be using `$(shell)`, that runs on every incremental build invocation instead of as part of the build graph.  Using `$(LZ4)` here won\u0027t work, on a clean build it won\u0027t exist yet when `$(shell)` is executed.",
+      "revId": "0cc8cd20c06b7d11d255c321906237e14865c8ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
