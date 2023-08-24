@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfdb7385_7f6a23df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-08-24T17:18:42Z",
+      "side": 1,
+      "message": "Is this commit message accurate? This cl is a no-op if PLATFORM_SEPOLICY_VERSION is REL.\n\nCould you also give some more information and background about why we\u0027re making this change?",
+      "revId": "271c48202307650be6a3a1da3c23bf374a113332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
