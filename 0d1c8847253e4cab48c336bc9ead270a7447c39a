@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afdd5b5f_9584bf2d",
+        "filename": "core/Makefile",
+        "patchSetId": 13
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-08-24T17:32:04Z",
+      "side": 1,
+      "message": "Don\u0027t use `$(shell)`, that runs at analysis time (and on every incremental build) instead of being part of the build graph.",
+      "revId": "0d1c8847253e4cab48c336bc9ead270a7447c39a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
