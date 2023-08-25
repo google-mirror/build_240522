@@ -56,10 +56,10 @@ int main(int argc, char* const argv[])
 {
     bool wantUsage = false;
     bool check = false;
-    bool force = false;
-    bool verbose = false;
-    bool zopfli = false;
-    bool pageAlignSharedLibs = false;
+    OverwriteOutput force = OverwriteOutput::NO;
+    Verbose verbose = Verbose::NO;
+    RecompressWithZopfli zopfli = RecompressWithZopfli::NO;
+    PageAlignSharedLibs pageAlignSharedLibs = PageAlignSharedLibs::NO;
     int pageSize = 4096;
     bool legacyPageAlignmentFlag = false;   // -p
     bool pageAlignmentFlag = false;         // -P <pagesize_kb>
@@ -75,22 +75,22 @@ int main(int argc, char* const argv[])
             check = true;
             break;
         case 'f':
-            force = true;
+            force = OverwriteOutput::YES;
             break;
         case 'v':
-            verbose = true;
+            verbose = Verbose::YES;
             break;
         case 'z':
-            zopfli = true;
+            zopfli = RecompressWithZopfli::YES;
             break;
         case 'p':
             legacyPageAlignmentFlag = true;
-            pageAlignSharedLibs = true;
+            pageAlignSharedLibs = PageAlignSharedLibs::YES;
             pageSize = 4096;
             break;
         case 'P':
             pageAlignmentFlag = true;
-            pageAlignSharedLibs = true;
+            pageAlignSharedLibs = PageAlignSharedLibs::YES;
 
             if (!optarg) {
                 fprintf(stderr, "ERROR: -P requires an argument\n");

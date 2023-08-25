@@ -19,6 +19,26 @@
 
 namespace android {
 
+enum class OverwriteOutput {
+    YES,
+    NO,
+};
+
+enum class RecompressWithZopfli {
+    YES,
+    NO,
+};
+
+enum class PageAlignSharedLibs {
+    YES,
+    NO,
+};
+
+enum class Verbose {
+    YES,
+    NO,
+};
+
 /*
  * Generate a new, aligned, zip "output" from an "input" zip.
  * - alignTo: Alignment (in bytes) for uncompressed entries.
@@ -32,8 +52,8 @@ namespace android {
  *
  * Returns 0 on success.
  */
-int process(const char* input, const char* output, int alignTo, bool force,
-    bool zopfli, bool pageAlignSharedLibs, int pageSize);
+int process(const char* input, const char* output, int alignTo, OverwriteOutput force,
+            RecompressWithZopfli zopfli, PageAlignSharedLibs pageAlignSharedLibs, int pageSize);
 
 /*
  * Verify the alignment of a zip archive.
@@ -45,8 +65,8 @@ int process(const char* input, const char* output, int alignTo, bool force,
  *
  * Returns 0 on success.
  */
-int verify(const char* fileName, int alignTo, bool verbose,
-    bool pageAlignSharedLibs, int pageSize);
+int verify(const char* fileName, int alignTo, Verbose verbose,
+           PageAlignSharedLibs pageAlignSharedLibs, int pageSize);
 
 } // namespace android
 

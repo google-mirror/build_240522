@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include "ZipAlign.h"
 #include "ZipFile.h"
 
 #include <stdio.h>
@@ -36,9 +37,9 @@ static bool isDirectory(ZipEntry* entry) {
    return lastChar == '/' || lastChar == '\\';
 }
 
-static int getAlignment(bool pageAlignSharedLibs, int defaultAlignment,
-    ZipEntry* pEntry, int pageSize) {
-    if (!pageAlignSharedLibs) {
+static int getAlignment(PageAlignSharedLibs pageAlignSharedLibs, int defaultAlignment,
+                        ZipEntry* pEntry, int pageSize) {
+    if (pageAlignSharedLibs == PageAlignSharedLibs::NO) {
         return defaultAlignment;
     }
 
@@ -53,9 +54,8 @@ static int getAlignment(bool pageAlignSharedLibs, int defaultAlignment,
 /*
  * Copy all entries from "pZin" to "pZout", aligning as needed.
  */
-static int copyAndAlign(ZipFile* pZin, ZipFile* pZout, int alignment, bool zopfli,
-    bool pageAlignSharedLibs, int pageSize)
-{
+static int copyAndAlign(ZipFile* pZin, ZipFile* pZout, int alignment, RecompressWithZopfli zopfli,
+                        PageAlignSharedLibs pageAlignSharedLibs, int pageSize) {
     int numEntries = pZin->getNumEntries();
     ZipEntry* pEntry;
     status_t status;
@@ -76,7 +76,7 @@ static int copyAndAlign(ZipFile* pZin, ZipFile* pZout, int alignment, bool zopfl
             //    pEntry->getFileName(), (long) pEntry->getFileOffset(),
             //    (long) pEntry->getUncompressedLen());
 
-            if (zopfli) {
+            if (zopfli == RecompressWithZopfli::YES) {
                 status = pZout->addRecompress(pZin, pEntry, &pNewEntry);
             } else {
                 status = pZout->add(pZin, pEntry, padding, &pNewEntry);
@@ -105,9 +105,8 @@ static int copyAndAlign(ZipFile* pZin, ZipFile* pZout, int alignment, bool zopfl
  * Process a file.  We open the input and output files, failing if the
  * output file exists and "force" wasn't specified.
  */
-int process(const char* inFileName, const char* outFileName,
-    int alignment, bool force, bool zopfli, bool pageAlignSharedLibs, int pageSize)
-{
+int process(const char* inFileName, const char* outFileName, int alignment, OverwriteOutput force,
+            RecompressWithZopfli zopfli, PageAlignSharedLibs pageAlignSharedLibs, int pageSize) {
     ZipFile zin, zout;
 
     //printf("PROCESS: align=%d in='%s' out='%s' force=%d\n",
@@ -120,7 +119,7 @@ int process(const char* inFileName, const char* outFileName,
     }
 
     /* don't overwrite existing unless given permission */
-    if (!force && access(outFileName, F_OK) == 0) {
+    if (force == OverwriteOutput::NO && access(outFileName, F_OK) == 0) {
         fprintf(stderr, "Output file '%s' exists\n", outFileName);
         return 1;
     }
@@ -149,13 +148,12 @@ int process(const char* inFileName, const char* outFileName,
 /*
  * Verify the alignment of a zip archive.
  */
-int verify(const char* fileName, int alignment, bool verbose,
-    bool pageAlignSharedLibs, int pageSize)
-{
+int verify(const char* fileName, int alignment, Verbose verbose,
+           PageAlignSharedLibs pageAlignSharedLibs, int pageSize) {
     ZipFile zipFile;
     bool foundBad = false;
 
-    if (verbose)
+    if (verbose == Verbose::YES)
         printf("Verifying alignment of %s (%d)...\n", fileName, alignment);
 
     if (zipFile.open(fileName, ZipFile::kOpenReadOnly) != OK) {
@@ -169,13 +167,13 @@ int verify(const char* fileName, int alignment, bool verbose,
     for (int i = 0; i < numEntries; i++) {
         pEntry = zipFile.getEntryByIndex(i);
         if (pEntry->isCompressed()) {
-            if (verbose) {
+            if (verbose == Verbose::YES) {
                 printf("%8jd %s (OK - compressed)\n",
                     (intmax_t) pEntry->getFileOffset(), pEntry->getFileName());
             }
         } else if(isDirectory(pEntry)) {
             // Directory entries do not need to be aligned.
-            if (verbose)
+            if (verbose == Verbose::YES)
                 printf("%8jd %s (OK - directory)\n",
                        (intmax_t) pEntry->getFileOffset(), pEntry->getFileName());
             continue;
@@ -184,14 +182,14 @@ int verify(const char* fileName, int alignment, bool verbose,
             const int alignTo = getAlignment(pageAlignSharedLibs, alignment, pEntry,
                                              pageSize);
             if ((offset % alignTo) != 0) {
-                if (verbose) {
+                if (verbose == Verbose::YES) {
                     printf("%8jd %s (BAD - %jd)\n",
                         (intmax_t) offset, pEntry->getFileName(),
                         (intmax_t) (offset % alignTo));
                 }
                 foundBad = true;
             } else {
-                if (verbose) {
+                if (verbose == Verbose::YES) {
                     printf("%8jd %s (OK)\n",
                         (intmax_t) offset, pEntry->getFileName());
                 }
@@ -199,7 +197,7 @@ int verify(const char* fileName, int alignment, bool verbose,
         }
     }
 
-    if (verbose)
+    if (verbose == Verbose::YES)
         printf("Verification %s\n", foundBad ? "FAILED" : "succesful");
 
     return foundBad ? 1 : 0;

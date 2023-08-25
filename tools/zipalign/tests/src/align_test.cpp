@@ -50,10 +50,12 @@ TEST(Align, Unaligned) {
   const std::string dst = GetTempPath("unaligned_out.zip");
   int pageSize = 4096;
 
-  int processed = process(src.c_str(), dst.c_str(), 4, true, false, false, pageSize);
+  int processed = process(src.c_str(), dst.c_str(), 4,
+                          OverwriteOutput::YES, RecompressWithZopfli::NO,
+                          PageAlignSharedLibs::NO, pageSize);
   ASSERT_EQ(0, processed);
 
-  int verified = verify(dst.c_str(), 4, true, false, pageSize);
+  int verified = verify(dst.c_str(), 4, Verbose::YES, PageAlignSharedLibs::NO, pageSize);
   ASSERT_EQ(0, verified);
 }
 
@@ -63,17 +65,21 @@ TEST(Align, DoubleAligment) {
   const std::string dst = GetTempPath("da_d_aligner.zip");
   int pageSize = 4096;
 
-  int processed = process(src.c_str(), tmp.c_str(), 4, true, false, false, pageSize);
+  int processed = process(src.c_str(), tmp.c_str(), 4,
+                          OverwriteOutput::YES, RecompressWithZopfli::NO,
+                          PageAlignSharedLibs::NO, pageSize);
   ASSERT_EQ(0, processed);
 
-  int verified = verify(tmp.c_str(), 4, true, false, pageSize);
+  int verified = verify(tmp.c_str(), 4, Verbose::YES, PageAlignSharedLibs::NO, pageSize);
   ASSERT_EQ(0, verified);
 
   // Align the result of the previous run. Essentially double aligning.
-  processed = process(tmp.c_str(), dst.c_str(), 4, true, false, false, pageSize);
+  processed = process(tmp.c_str(), dst.c_str(), 4,
+                      OverwriteOutput::YES, RecompressWithZopfli::NO,
+                      PageAlignSharedLibs::NO, pageSize);
   ASSERT_EQ(0, processed);
 
-  verified = verify(dst.c_str(), 4, true, false, pageSize);
+  verified = verify(dst.c_str(), 4, Verbose::YES, PageAlignSharedLibs::NO, pageSize);
   ASSERT_EQ(0, verified);
 
   // Nothing should have changed between tmp and dst.
@@ -94,10 +100,12 @@ TEST(Align, Holes) {
   const std::string dst = GetTempPath("holes_out.zip");
   int pageSize = 4096;
 
-  int processed = process(src.c_str(), dst.c_str(), 4, true, false, true, pageSize);
+  int processed = process(src.c_str(), dst.c_str(), 4,
+                          OverwriteOutput::YES, RecompressWithZopfli::NO,
+                          PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, processed);
 
-  int verified = verify(dst.c_str(), 4, false, true, pageSize);
+  int verified = verify(dst.c_str(), 4, Verbose::NO, PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, verified);
 }
 
@@ -107,17 +115,19 @@ TEST(Align, DifferenteOrders) {
   const std::string dst = GetTempPath("diffOrders_out.zip");
   int pageSize = 4096;
 
-  int processed = process(src.c_str(), dst.c_str(), 4, true, false, true, pageSize);
+  int processed = process(src.c_str(), dst.c_str(), 4,
+                          OverwriteOutput::YES, RecompressWithZopfli::NO,
+                          PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, processed);
 
-  int verified = verify(dst.c_str(), 4, false, true, pageSize);
+  int verified = verify(dst.c_str(), 4, Verbose::NO, PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, verified);
 }
 
 TEST(Align, DirectoryEntryDoNotRequireAlignment) {
   const std::string src = GetTestPath("archiveWithOneDirectoryEntry.zip");
   int pageSize = 4096;
-  int verified = verify(src.c_str(), 4, false, true, pageSize);
+  int verified = verify(src.c_str(), 4, Verbose::NO, PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, verified);
 }
 
@@ -126,11 +136,13 @@ TEST(Align, DirectoryEntry) {
   const std::string dst = GetTempPath("archiveWithOneDirectoryEntry_out.zip");
   int pageSize = 4096;
 
-  int processed = process(src.c_str(), dst.c_str(), 4, true, false, true, pageSize);
+  int processed = process(src.c_str(), dst.c_str(), 4,
+                          OverwriteOutput::YES, RecompressWithZopfli::NO,
+                          PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, processed);
   ASSERT_EQ(true, sameContent(src, dst));
 
-  int verified = verify(dst.c_str(), 4, false, true, pageSize);
+  int verified = verify(dst.c_str(), 4, Verbose::NO, PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, verified);
 }
 
@@ -151,39 +163,47 @@ std::string UncompressedSharedLibsTest::dst;
 TEST_F(UncompressedSharedLibsTest, Unaligned) {
   int pageSize = 4096;
 
-  int processed = process(src.c_str(), dst.c_str(), 4, true, false, false, pageSize);
+  int processed = process(src.c_str(), dst.c_str(), 4,
+                          OverwriteOutput::YES, RecompressWithZopfli::NO,
+                          PageAlignSharedLibs::NO, pageSize);
   ASSERT_EQ(0, processed);
 
-  int verified = verify(dst.c_str(), 4, true, true, pageSize);
+  int verified = verify(dst.c_str(), 4, Verbose::YES, PageAlignSharedLibs::YES, pageSize);
   ASSERT_NE(0, verified); // .so's not page-aligned
 }
 
 TEST_F(UncompressedSharedLibsTest, AlignedPageSize4kB) {
   int pageSize = 4096;
 
-  int processed = process(src.c_str(), dst.c_str(), 4, true, false, true, pageSize);
+  int processed = process(src.c_str(), dst.c_str(), 4,
+                          OverwriteOutput::YES, RecompressWithZopfli::NO,
+                          PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, processed);
 
-  int verified = verify(dst.c_str(), 4, true, true, pageSize);
+  int verified = verify(dst.c_str(), 4, Verbose::YES, PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, verified);
 }
 
 TEST_F(UncompressedSharedLibsTest, AlignedPageSize16kB) {
   int pageSize = 16384;
 
-  int processed = process(src.c_str(), dst.c_str(), 4, true, false, true, pageSize);
+  int processed = process(src.c_str(), dst.c_str(), 4,
+                          OverwriteOutput::YES, RecompressWithZopfli::NO,
+                          PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, processed);
 
-  int verified = verify(dst.c_str(), 4, true, true, pageSize);
+  int verified = verify(dst.c_str(), 4, Verbose::YES, PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, verified);
 }
 
 TEST_F(UncompressedSharedLibsTest, AlignedPageSize64kB) {
   int pageSize = 65536;
 
-  int processed = process(src.c_str(), dst.c_str(), 4, true, false, true, pageSize);
+  int processed = process(src.c_str(), dst.c_str(), 4,
+                          OverwriteOutput::YES, RecompressWithZopfli::NO,
+                          PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, processed);
 
-  int verified = verify(dst.c_str(), 4, true, true, pageSize);
+  int verified = verify(dst.c_str(), 4, Verbose::YES, PageAlignSharedLibs::YES, pageSize);
   ASSERT_EQ(0, verified);
 }
