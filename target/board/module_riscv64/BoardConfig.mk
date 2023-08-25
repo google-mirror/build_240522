@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-TARGET_ARCH := riscv64
+TARGET_ARCH ?= riscv64
 TARGET_ARCH_VARIANT :=
 TARGET_CPU_VARIANT := generic
 TARGET_CPU_ABI := riscv64
