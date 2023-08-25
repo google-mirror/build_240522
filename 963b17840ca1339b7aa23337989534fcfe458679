@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc238169_9af8385d",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-08-25T17:51:50Z",
+      "side": 1,
+      "message": "Variables starting with `PRODUCT_` should be product variables, please add this variable to `_product_single_value_vars`. And move this logic to `product_config.mk`. Product variables also become readonly earlier than this, so you may need to restructure the logic, like by making a new non-product variable that is the result of combining the product variable and `vsr_vendor_api_level`.",
+      "revId": "963b17840ca1339b7aa23337989534fcfe458679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
