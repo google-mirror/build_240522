@@ -793,6 +793,14 @@ else ifneq ($(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),26),)
   PRODUCT_FULL_TREBLE := true
 endif
 
+# Boolean variable determining if vendor seapp contexts is enforced
+PRODUCT_CHECK_VENDOR_SEAPP_VIOLATIONS := false
+ifneq ($(call math_gt_or_eq,$(vsr_vendor_api_level),35),)
+  PRODUCT_CHECK_VENDOR_SEAPP_VIOLATIONS := true
+else ifneq ($(PRODUCT_CHECK_VENDOR_SEAPP_VIOLATIONS_OVERRIDE),)
+  PRODUCT_CHECK_VENDOR_SEAPP_VIOLATIONS := $(PRODUCT_CHECK_VENDOR_SEAPP_VIOLATIONS_OVERRIDE)
+endif
+
 # TODO(b/69865032): Make PRODUCT_NOTICE_SPLIT the default behavior and remove
 #    references to it here and below.
 ifdef PRODUCT_NOTICE_SPLIT_OVERRIDE
