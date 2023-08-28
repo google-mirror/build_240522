@@ -122,6 +122,24 @@
       "parentUuid": "ec2d95fe_08adce98",
       "revId": "9d4614be11ac73274e79a9c89d556a703e1b93c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef460ba1_4f2fe90e",
+        "filename": "cogsetup.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-08-28T15:02:23Z",
+      "side": 1,
+      "message": "Good point - we actually discussed it with Joe / Sam / Enrico over chat as well and decided to make this functionality apply to internal repositories only. I\u0027ll abandon this change and will create a CL to internal repo 😊",
+      "parentUuid": "dbe118a9_c7927bf0",
+      "revId": "9d4614be11ac73274e79a9c89d556a703e1b93c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
