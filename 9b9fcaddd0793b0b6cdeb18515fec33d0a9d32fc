@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2581dc1_9530c4e0",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-08-28T16:55:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b10fec9_f1a278f7",
+      "range": {
+        "startLine": 210,
+        "startChar": 16,
+        "endLine": 210,
+        "endChar": 23
+      },
+      "revId": "9b9fcaddd0793b0b6cdeb18515fec33d0a9d32fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec6d6d4a_80de782d",
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "Thank you. I totally agree. The Map.of will return a unmodifiable map, so I didn\u0027t use it. Before I initialize the map in constructor, and put all the entries there, but for some reason I forgot, some reviewers comment to initialize the map out of the constructor. so it ended with this. I can move it into constructor, and put all the entries, if it has much performance impact",
       "parentUuid": "ec6d6d4a_80de782d",
+      "range": {
+        "startLine": 210,
+        "startChar": 52,
+        "endLine": 220,
+        "endChar": 14
+      },
+      "revId": "9b9fcaddd0793b0b6cdeb18515fec33d0a9d32fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8314b60_fe004568",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-08-28T16:55:51Z",
+      "side": 1,
+      "message": "Changed to Map.of. thank you!",
+      "parentUuid": "c27db237_955f6519",
       "range": {
         "startLine": 210,
         "startChar": 52,
