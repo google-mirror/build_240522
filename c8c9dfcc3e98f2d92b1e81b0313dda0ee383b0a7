@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fdb853b_8dd71ed8",
+        "filename": "tools/zipalign/include/ZipAlign.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-08-28T17:41:46Z",
+      "side": 1,
+      "message": "yeah, either that or a bitmask:\n```\nenum class Flags {\n  kOverwrite \u003d 1, kZopfli \u003d 2, kPageAlign \u003d 4, ...\n};\n```\nso the call sites are things like `kOverwrite|kPageAlign`, and you only need one argument (even if you add more stuff later).",
+      "parentUuid": "cb59de44_3f61758c",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 2
+      },
+      "revId": "c8c9dfcc3e98f2d92b1e81b0313dda0ee383b0a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f6136ce_da847781",
         "filename": "tools/zipalign/tests/src/align_test.cpp",
         "patchSetId": 1
