@@ -16,6 +16,75 @@
       "message": "This is a beautiful refactor. But how do we make sure nothing got broken? Most of these path have zero tests.",
       "revId": "c8c9dfcc3e98f2d92b1e81b0313dda0ee383b0a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "966c11cd_2d55e651",
+        "filename": "tools/zipalign/ZipAlignMain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2023-08-28T17:26:56Z",
+      "side": 1,
+      "message": "Same comment as elsewhere, we have no test to make sure this is not breaking anything....",
+      "range": {
+        "startLine": 78,
+        "startChar": 12,
+        "endLine": 78,
+        "endChar": 41
+      },
+      "revId": "c8c9dfcc3e98f2d92b1e81b0313dda0ee383b0a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb59de44_3f61758c",
+        "filename": "tools/zipalign/include/ZipAlign.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2023-08-28T17:26:56Z",
+      "side": 1,
+      "message": "Same comment for all of these enum. This is not the best way to substitute boolean with enum. What would make more sense would be:\n\n```\nenum class DsoAlignPolicy {\n NORMAL,\n PAGE_ALIGN,\n}\n```",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 2
+      },
+      "revId": "c8c9dfcc3e98f2d92b1e81b0313dda0ee383b0a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f6136ce_da847781",
+        "filename": "tools/zipalign/tests/src/align_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2023-08-28T17:26:56Z",
+      "side": 1,
+      "message": "`RecompressWithZopfli::YES` is never tested.",
+      "range": {
+        "startLine": 54,
+        "startChar": 48,
+        "endLine": 54,
+        "endChar": 72
+      },
+      "revId": "c8c9dfcc3e98f2d92b1e81b0313dda0ee383b0a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
