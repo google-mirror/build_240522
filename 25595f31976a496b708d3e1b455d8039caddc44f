@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4651afd9_70bf4b98",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-28T07:34:16Z",
+      "side": 1,
+      "message": "I think changing this logic is out of scope. I simply moved this logic from `config.mk`.\n\nThis comment and below comment should be discussed separately, I think.",
+      "parentUuid": "2107fd42_65912d12",
+      "range": {
+        "startLine": 576,
+        "startChar": 19,
+        "endLine": 576,
+        "endChar": 42
+      },
+      "revId": "25595f31976a496b708d3e1b455d8039caddc44f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc10b67f_b927296f",
@@ -95,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daa7c329_cec99966",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-28T07:34:16Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "96f3ac70_7ca587df",
+      "range": {
+        "startLine": 587,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 5
+      },
+      "revId": "25595f31976a496b708d3e1b455d8039caddc44f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3666d8bd_525fcf76",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "or use `$(call math_gt,$(VSR_VENDOR_API_LEVEL),34)` instead of using undefined version `35`.",
       "parentUuid": "3666d8bd_525fcf76",
+      "range": {
+        "startLine": 594,
+        "startChar": 52,
+        "endLine": 594,
+        "endChar": 54
+      },
+      "revId": "25595f31976a496b708d3e1b455d8039caddc44f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc37ead3_a1a90a37",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-28T07:34:16Z",
+      "side": 1,
+      "message": "Changed to `$(call math_gt,$(VSR_VENDOR_API_LEVEL),34)`. We could move this to YYYYMM format, once the format is finalized.",
+      "parentUuid": "5ca27fe5_aa774d01",
       "range": {
         "startLine": 594,
         "startChar": 52,
