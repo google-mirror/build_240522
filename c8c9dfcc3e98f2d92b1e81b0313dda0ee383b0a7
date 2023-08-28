@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f187cc0e_4cda554c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2023-08-28T17:18:23Z",
+      "side": 1,
+      "message": "This is a beautiful refactor. But how do we make sure nothing got broken? Most of these path have zero tests.",
+      "revId": "c8c9dfcc3e98f2d92b1e81b0313dda0ee383b0a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
