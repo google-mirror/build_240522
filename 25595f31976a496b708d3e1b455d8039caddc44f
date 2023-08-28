@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2107fd42_65912d12",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-08-28T07:14:19Z",
+      "side": 1,
+      "message": "Only non-GRF devices use the default value. In that case, PRODUCT_SHIPPING_API_LEVEL will be used as the ro.vendor.api_level. So either PLATFORM_SDK_VERSION or any bigger number like 10000 works here.",
+      "parentUuid": "9923255c_31b6a3ce",
+      "range": {
+        "startLine": 576,
+        "startChar": 19,
+        "endLine": 576,
+        "endChar": 42
+      },
+      "revId": "25595f31976a496b708d3e1b455d8039caddc44f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc10b67f_b927296f",
         "filename": "core/product_config.mk",
         "patchSetId": 2
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96f3ac70_7ca587df",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-08-28T07:14:19Z",
+      "side": 1,
+      "message": "This the version what VSR requires. Upgrading devices checked by PRODUCT_SHIPPING_API_LEVEL do not follow the latest VSR requirement.",
+      "parentUuid": "cc10b67f_b927296f",
+      "range": {
+        "startLine": 587,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 5
+      },
+      "revId": "25595f31976a496b708d3e1b455d8039caddc44f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3666d8bd_525fcf76",
         "filename": "core/product_config.mk",
         "patchSetId": 2
@@ -60,6 +108,30 @@
       "writtenOn": "2023-08-28T06:49:52Z",
       "side": 1,
       "message": "202404? (not sure about the 04 part)",
+      "range": {
+        "startLine": 594,
+        "startChar": 52,
+        "endLine": 594,
+        "endChar": 54
+      },
+      "revId": "25595f31976a496b708d3e1b455d8039caddc44f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ca27fe5_aa774d01",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-08-28T07:14:19Z",
+      "side": 1,
+      "message": "or use `$(call math_gt,$(VSR_VENDOR_API_LEVEL),34)` instead of using undefined version `35`.",
+      "parentUuid": "3666d8bd_525fcf76",
       "range": {
         "startLine": 594,
         "startChar": 52,
