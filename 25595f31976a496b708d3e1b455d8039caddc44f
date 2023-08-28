@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9923255c_31b6a3ce",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-28T06:49:52Z",
+      "side": 1,
+      "message": "Board API level won\u0027t follow the platform sdk level, right? Can this default to something like 999912 ? (or trigger an error if BOARD_API_LEVEL is not defined)",
+      "range": {
+        "startLine": 576,
+        "startChar": 19,
+        "endLine": 576,
+        "endChar": 42
+      },
+      "revId": "25595f31976a496b708d3e1b455d8039caddc44f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc10b67f_b927296f",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-28T06:49:52Z",
+      "side": 1,
+      "message": "Again, vendor api level and product api level are in different spaces. They can\u0027t be comparable.",
+      "range": {
+        "startLine": 587,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 5
+      },
+      "revId": "25595f31976a496b708d3e1b455d8039caddc44f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3666d8bd_525fcf76",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-28T06:49:52Z",
+      "side": 1,
+      "message": "202404? (not sure about the 04 part)",
+      "range": {
+        "startLine": 594,
+        "startChar": 52,
+        "endLine": 594,
+        "endChar": 54
+      },
+      "revId": "25595f31976a496b708d3e1b455d8039caddc44f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
