@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31cb7ccc_f9e69097",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1387509
+      },
+      "writtenOn": "2023-08-28T14:00:55Z",
+      "side": 1,
+      "message": "I must have flaked here. Ned is correct. `Fake` should implement `FeatureFlags`, but the `#set` methods only need to exist on the fake, not on the interface.",
+      "parentUuid": "8dcc35c6_68e11498",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 127,
+        "endChar": 31
+      },
+      "revId": "9b9fcaddd0793b0b6cdeb18515fec33d0a9d32fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "697f6fce_13afa1e8",
         "filename": "tools/aconfig/src/codegen_java.rs",
         "patchSetId": 1
