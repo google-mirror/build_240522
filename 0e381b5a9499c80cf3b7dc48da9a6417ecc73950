@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "458c0d3a_66d61106",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-08-29T00:09:40Z",
+      "side": 1,
+      "message": "My theory when I added this zip file was that there was at least one other place in the build that unzipped a zip file (maybe handling \".apks\" files?), and that if the build system handled the unzipping it could write the list of files it unzipped somewhere for use by anything that needed to track installed files.  This is fine too though, as long as it doesn\u0027t get to complicated to guess the installed file locations.",
+      "revId": "0e381b5a9499c80cf3b7dc48da9a6417ecc73950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23576523_31c4e2d7",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-08-29T00:09:40Z",
+      "side": 1,
+      "message": "This is fine I guess, but the usual trick we use here is to put the rule into a separate function that can be called and evaluated.",
+      "range": {
+        "startLine": 542,
+        "startChar": 0,
+        "endLine": 542,
+        "endChar": 10
+      },
+      "revId": "0e381b5a9499c80cf3b7dc48da9a6417ecc73950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
