@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba2fb34e_69fbb50e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-08-29T01:22:42Z",
+      "side": 1,
+      "message": "this explains \"what\" this CL does but does not explain \"why\" we need to do so.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 46
+      },
+      "revId": "51f8a2017b34191355f7d4a687494edae6adcf34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
