@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae8f3201_d48f4c84",
+        "filename": "core/dex_preopt_odex_install.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2023-08-29T02:07:15Z",
+      "side": 1,
+      "message": "This is how I did it for SBOM in execution time, https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:build/make/core/main.mk;drc\u003d075d9622ff6265f884818ab02e5629a0e3375260;l\u003d2208",
+      "parentUuid": "16f57051_3eebb0c5",
+      "revId": "0e381b5a9499c80cf3b7dc48da9a6417ecc73950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23576523_31c4e2d7",
