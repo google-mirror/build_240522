@@ -551,6 +551,11 @@ $(newline)	unzip -qoDD -d $(PRODUCT_OUT) $(my_dexpreopt_zip) $(installed_dex_fil
 
   ALL_MODULES.$(my_register_name).INSTALLED += $(addprefix $(PRODUCT_OUT)/,$(my_dexpreopt_zip_contents))
 
+  # Normally this happens in sbom.mk, which is included from base_rules.mk. But since
+  # dex_preopt_odex_install.mk is included after base_rules.mk, it misses these odex files.
+  $(foreach installed_file,$(addprefix $(PRODUCT_OUT)/,$(my_dexpreopt_zip_contents)), \
+    $(eval ALL_INSTALLED_FILES.$(installed_file) := $(my_register_name)))
+
   my_dexpreopt_config :=
   my_dexpreopt_config_for_postprocessing :=
   my_dexpreopt_jar_copy :=
