@@ -22,6 +22,30 @@
       },
       "revId": "51f8a2017b34191355f7d4a687494edae6adcf34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd8f5aae_16f885ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-08-29T01:29:13Z",
+      "side": 1,
+      "message": "Commit message amended.",
+      "parentUuid": "ba2fb34e_69fbb50e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 46
+      },
+      "revId": "51f8a2017b34191355f7d4a687494edae6adcf34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
