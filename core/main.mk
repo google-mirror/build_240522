@@ -191,6 +191,11 @@ ifneq (,$(PRODUCT_SYSTEM_SERVER_COMPILER_FILTER))
 ADDITIONAL_PRODUCT_PROPERTIES += dalvik.vm.systemservercompilerfilter=$(PRODUCT_SYSTEM_SERVER_COMPILER_FILTER)
 endif
 
+# Add the system server compiler filter if they are specified for the product.
+ifneq (,$(PRODUCT_16K_DEVELOPER_OPTION))
+ADDITIONAL_PRODUCT_PROPERTIES += ro.build.enable_16k_dev_option=$(PRODUCT_16K_DEVELOPER_OPTION)
+endif
+
 # Enable core platform API violation warnings on userdebug and eng builds.
 ifneq ($(TARGET_BUILD_VARIANT),user)
 ADDITIONAL_SYSTEM_PROPERTIES += persist.debug.dalvik.vm.core_platform_api_policy=just-warn
