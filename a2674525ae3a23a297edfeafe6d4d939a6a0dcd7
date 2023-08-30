@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "881860b5_3daaed7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-08-30T21:53:42Z",
+      "side": 1,
+      "message": "This is pretty expensive on the devices it affects, 20MB on aosp_cf_arm64_only_phone-trunk_staging-userdebug.  How widely is this planned to be rolled out?",
+      "revId": "a2674525ae3a23a297edfeafe6d4d939a6a0dcd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
