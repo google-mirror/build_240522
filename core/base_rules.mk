@@ -467,7 +467,7 @@ $(LOCAL_INTERMEDIATE_TARGETS) : PRIVATE_MODULE:= $(my_register_name)
 # We name both BUILT and INSTALLED in case
 # LOCAL_UNINSTALLABLE_MODULE is set.
 .PHONY: $(my_all_targets)
-$(my_all_targets): $(LOCAL_BUILT_MODULE) $(LOCAL_INSTALLED_MODULE) $(LOCAL_ADDITIONAL_CHECKED_MODULE)
+$(my_all_targets): $(LOCAL_BUILT_MODULE) $(LOCAL_ADDITIONAL_CHECKED_MODULE)
 
 .PHONY: $(my_register_name)
 $(my_register_name): $(my_all_targets)
