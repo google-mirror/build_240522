@@ -16,6 +16,24 @@
       "message": "This is pretty expensive on the devices it affects, 20MB on aosp_cf_arm64_only_phone-trunk_staging-userdebug.  How widely is this planned to be rolled out?",
       "revId": "a2674525ae3a23a297edfeafe6d4d939a6a0dcd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "114197ca_6b181494",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-08-30T22:36:49Z",
+      "side": 1,
+      "message": "This will be enabled for devices which need the 16K Boot options in settings app. Our current plan is to test this on cuttlefish and 1 pixel device, then leave the choice to individual OEMs.",
+      "parentUuid": "881860b5_3daaed7c",
+      "revId": "a2674525ae3a23a297edfeafe6d4d939a6a0dcd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
