@@ -22,6 +22,30 @@
       },
       "revId": "0ba7b5a6840fefb747452ce02963824491702ea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad2cd870_1cf958fd",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2023-08-31T15:29:06Z",
+      "side": 1,
+      "message": "I am planning to use SystemProperties:get API which allows to specify default value - shttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/base/core/java/android/os/SystemProperties.java;l\u003d163;drc\u003d8c959cde947879cbbe3b18b6f148ceceed95eb7b.\n\nI have tested both scenarios and this API works fine.",
+      "parentUuid": "2c5b21c1_a256b439",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 0
+      },
+      "revId": "0ba7b5a6840fefb747452ce02963824491702ea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
