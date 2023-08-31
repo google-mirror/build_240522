@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45178143_43032c15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2023-08-31T14:16:01Z",
+      "side": 1,
+      "message": "Is this eventually going to be an implicit dependency of rules? In the future could we rely on implicit attr visibility rather than making it public : https://bazel.build/concepts/visibility#visibility-implicit-dependencies? e.g. with rule extensibility mechanisms?",
+      "revId": "bec914598f09580e4f68f2a5bae01f14dc8d69ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
