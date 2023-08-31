@@ -34,6 +34,24 @@
       "parentUuid": "8ee4bf91_49e7ccac",
       "revId": "7083a1c98e2402871268b629f054b106632d920b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0370241e_25d14e2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-08-31T15:51:28Z",
+      "side": 1,
+      "message": "I\u0027d be ok with using something like that if it existed. Is that something already planned, or would it be created just for this case?\n\nI\u0027ll submit this as-is and we can create a bug to swap it if that\u0027s what we want to do.",
+      "parentUuid": "3449ea69_ec3c6438",
+      "revId": "7083a1c98e2402871268b629f054b106632d920b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
