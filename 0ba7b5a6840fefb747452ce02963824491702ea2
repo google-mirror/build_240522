@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c5b21c1_a256b439",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-31T01:52:42Z",
+      "side": 1,
+      "message": "nit; for products not defining `PRODUCT_16K_DEVELOPER_OPTION`, this may cause the property to be set to an unexpected value. How about this?\n\n```\nifeq ($(PRODUCT_16K_DEVELOPER_OPTION),true)\nADDITIONAL_PRODUCT_PROPERTIES +\u003d ro.build.enable_16k_dev_option\u003dtrue\nelse\nADDITIONAL_PRODUCT_PROPERTIES +\u003d ro.build.enable_16k_dev_option\u003dfalse\nendif\n```",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 0
+      },
+      "revId": "0ba7b5a6840fefb747452ce02963824491702ea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
