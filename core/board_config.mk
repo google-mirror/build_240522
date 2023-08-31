@@ -1054,3 +1054,10 @@ ifeq (true,$(BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT))
       both true. Recovery resources should be installed to either boot or vendor_boot, but not both)
   endif
 endif
+ifeq ($(BUILDING_SYSTEM_IMAGE),true)
+# Create symlink /system/bin/hwservicemanager -> /system/system_ext/bin/hwservicemanager
+# Old vendor libraries (like libhidlbase) may require /system/bin/hwservicemanager to be present
+$(call symlink-file,$(TARGET_OUT_SYSTEM_EXT)/bin/hwservicemanager,/system/system_ext/bin/hwservicemanager, $(TARGET_OUT)/bin/hwservicemanager)
+INTERNAL_SYSTEMIMAGE_FILES += \
+    $(TARGET_OUT)/bin/hwservicemanager
+endif
