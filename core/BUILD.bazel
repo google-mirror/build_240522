@@ -18,6 +18,7 @@ exports_files(
 )
 
 # Export proguard flag files for r8.
+# TODO: b/298429465 - make this an implicit rule input and adjust visibility.
 filegroup(
     name = "global_proguard_flags",
     srcs = [
