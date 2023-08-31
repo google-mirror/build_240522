@@ -46,6 +46,30 @@
       },
       "revId": "0ba7b5a6840fefb747452ce02963824491702ea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "113ad1bb_e670cc63",
+        "filename": "core/main.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-31T16:11:53Z",
+      "side": 1,
+      "message": "I mean someone can make a mistake setting this value to either true or false, if the property is not set here. I thought it\u0027s the reason why you used `ro.` property?",
+      "parentUuid": "ad2cd870_1cf958fd",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 0
+      },
+      "revId": "0ba7b5a6840fefb747452ce02963824491702ea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
