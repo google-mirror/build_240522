@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c031ac7f_cb761ff2",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-08-31T17:40:18Z",
+      "side": 1,
+      "message": "I\u0027ve never seen this used, if it causes any trouble its probably reasonable to remove.",
+      "revId": "b35231ece0dda829187ee3688d0b6ef8f3ff755c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
