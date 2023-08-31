@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc575ee1_457c3686",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-08-31T18:24:36Z",
+      "side": 1,
+      "message": "Sorry I don\u0027t know the build system details very well so bear with me.\n\nThis symlink needs to be in the system image for all devices including the GSI. Is `PRODUCT_COPY_FILES` right for that?\n\nI tried adding it to `PRODUCT_COPY_FILES` in `build/core/board_config.mk` which looks like it worked, but didn\u0027t look like the right place for it. aosp/2736139\n\nI tried it again in `build/make/target/product/base_system.mk` and it doesn\u0027t have access to the TARGET_OUT* variables and if I hardcode the paths to `/system/bin/hwservicemanager` I get `build/make/core/product_config.mk:272: error: : malformed COPY_FILE \"/system/bin/hwservicemanager\"`.",
+      "parentUuid": "bafa3750_307db1c7",
+      "revId": "7083a1c98e2402871268b629f054b106632d920b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fe82d11_267fa70b",
@@ -103,6 +121,24 @@
       "writtenOn": "2023-08-31T17:05:14Z",
       "side": 1,
       "message": "I just realized, this comment talks about `/system/bin/hwservicemanager`, but it should be `/system_ext/bin/hwservicemanager`, right?",
+      "revId": "7083a1c98e2402871268b629f054b106632d920b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04209cf4_7a50386c",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3237,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-08-31T18:24:36Z",
+      "side": 1,
+      "message": "`/system/bin/hwservicemanager` is where libhidlbase used to look to see if `hwservicemanager` is installed. It\u0027s changed in aosp/2610094, but since it\u0027s a vendor library, it\u0027s not guaranteed to be updated and not updated in our devices with prebuilt vendor images.\n\nSo we have the symlink at `/system/bin/hwservicemanager` pointing to the new location `/system/system_ext/bin/hwservicemanager`.",
+      "parentUuid": "8fe82d11_267fa70b",
       "revId": "7083a1c98e2402871268b629f054b106632d920b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
