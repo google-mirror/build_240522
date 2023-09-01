@@ -84,6 +84,14 @@ PRODUCT_PACKAGES += \
     libhidltransport \
     libhwbinder \
 
+# Add these HIDL services to the GSI. They are optional for devices to add to system_ext
+# for HIDL support, so we add them to the GSI to support those devices that rely on them.
+# These can be removed once we stop supporting upgrades for devices with Android V vendor
+# images because HIDL HALs are not allowed for Android V+.
+PRODUCT_PACKAGES += \
+    hwservicemanager \
+    android.hidl.allocator@1.0-service
+
 PRODUCT_PACKAGES_DEBUG += \
     avbctl \
     bootctl \
