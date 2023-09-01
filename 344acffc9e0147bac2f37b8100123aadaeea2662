@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44dbf6a9_b0e1965f",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-09-01T23:52:59Z",
+      "side": 1,
+      "message": "..e.g. `install_symlink`",
+      "range": {
+        "startLine": 546,
+        "startChar": 46,
+        "endLine": 547,
+        "endChar": 19
+      },
+      "revId": "344acffc9e0147bac2f37b8100123aadaeea2662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04091ec5_4c991a1d",
+        "filename": "target/product/generic_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-09-01T23:52:59Z",
+      "side": 1,
+      "message": "Should this be tracked with a bug?",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 46
+      },
+      "revId": "344acffc9e0147bac2f37b8100123aadaeea2662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
