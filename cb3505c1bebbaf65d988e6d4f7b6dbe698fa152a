@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa95b7c_7f0e3d5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-09-01T21:31:35Z",
+      "side": 1,
+      "message": "I think I can take advantage of b/289087274 and export_proguard_flags_files to achieve this, but that\u0027s a bit more invasive to the ART module and I\u0027ll have to make sure it propagates fully.\n\nIan I know we have some special treatment for these annotations in R8, but seems like we still need the explicit (minimal) keep rule. Does that align with what we would expect?",
+      "revId": "cb3505c1bebbaf65d988e6d4f7b6dbe698fa152a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
