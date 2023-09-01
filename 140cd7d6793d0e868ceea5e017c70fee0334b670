@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51bb4b19_4f948068",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-01T02:16:42Z",
+      "side": 1,
+      "message": "Drop this log message?",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 95
+      },
+      "revId": "140cd7d6793d0e868ceea5e017c70fee0334b670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f44423_b210b95d",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-01T02:16:42Z",
+      "side": 1,
+      "message": "Doesn\u0027t have to be part of this CL but if we expect many of these, I wish we have a better build system support for this.",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 100
+      },
+      "revId": "140cd7d6793d0e868ceea5e017c70fee0334b670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
