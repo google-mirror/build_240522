@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "065f80b1_c2bfda47",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-09-01T12:57:46Z",
+      "side": 1,
+      "message": "Ooops :) done",
+      "parentUuid": "51bb4b19_4f948068",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 95
+      },
+      "revId": "140cd7d6793d0e868ceea5e017c70fee0334b670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6f44423_b210b95d",
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "d6f44423_b210b95d",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 100
+      },
+      "revId": "140cd7d6793d0e868ceea5e017c70fee0334b670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a8566f2_676b4e37",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-09-01T12:57:46Z",
+      "side": 1,
+      "message": "Agree, however I don\u0027t want to block development of our features on this, hence for the time being I think we will just add our flags here.",
+      "parentUuid": "b4424160_cfd8393e",
       "range": {
         "startLine": 162,
         "startChar": 0,
