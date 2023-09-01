@@ -108,6 +108,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "071cb723_bab73896",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-01T23:24:37Z",
+      "side": 1,
+      "message": "I made aosp/2736498 to hopefully better resolve this.",
+      "parentUuid": "dc575ee1_457c3686",
+      "revId": "7083a1c98e2402871268b629f054b106632d920b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fe82d11_267fa70b",
@@ -139,6 +157,24 @@
       "side": 1,
       "message": "`/system/bin/hwservicemanager` is where libhidlbase used to look to see if `hwservicemanager` is installed. It\u0027s changed in aosp/2610094, but since it\u0027s a vendor library, it\u0027s not guaranteed to be updated and not updated in our devices with prebuilt vendor images.\n\nSo we have the symlink at `/system/bin/hwservicemanager` pointing to the new location `/system/system_ext/bin/hwservicemanager`.",
       "parentUuid": "8fe82d11_267fa70b",
+      "revId": "7083a1c98e2402871268b629f054b106632d920b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd100523_59b2e818",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3237,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-01T23:24:37Z",
+      "side": 1,
+      "message": "ah, I misread how symlink-file works, sorry.",
+      "parentUuid": "04209cf4_7a50386c",
       "revId": "7083a1c98e2402871268b629f054b106632d920b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
