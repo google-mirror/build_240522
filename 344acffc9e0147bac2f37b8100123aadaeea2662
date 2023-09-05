@@ -93,6 +93,30 @@
       },
       "revId": "344acffc9e0147bac2f37b8100123aadaeea2662",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74fa8bc9_4dac5b00",
+        "filename": "target/product/generic_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-05T21:17:38Z",
+      "side": 1,
+      "message": "nevermind, fixing that exposes some issues that weren\u0027t checked before. Just keep the allowlist addition for this cl and then we can fix the real issue in b/299166571",
+      "parentUuid": "9133f64f_3f92df77",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 46
+      },
+      "revId": "344acffc9e0147bac2f37b8100123aadaeea2662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
