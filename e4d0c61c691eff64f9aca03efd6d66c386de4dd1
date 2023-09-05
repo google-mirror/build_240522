@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71d96dae_9438353d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-09-05T20:18:15Z",
+      "side": 1,
+      "message": "Might be nice to have a very basic smoke test that is running with a target that has R8 enabled? To start we can just validate that the resulting values are what we expect, and later we can add an end-to-end test to validate that it actually facilitates code stripping.",
+      "revId": "e4d0c61c691eff64f9aca03efd6d66c386de4dd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
