@@ -69,6 +69,30 @@
       },
       "revId": "344acffc9e0147bac2f37b8100123aadaeea2662",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9133f64f_3f92df77",
+        "filename": "target/product/generic_system.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-05T19:03:51Z",
+      "side": 1,
+      "message": "I did some more debugging, and figured out this was happening because hwservicemanager was added to `PRODUCT_PACKAGES_SHIPPING_API_LEVEL_34`, and the shipping level product_packages variables were not handled in a way that the artifact path requirements checker understood. I\u0027ve reworked them now, which removes the need for the allowlist.",
+      "parentUuid": "04091ec5_4c991a1d",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 46
+      },
+      "revId": "344acffc9e0147bac2f37b8100123aadaeea2662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
