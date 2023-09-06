@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3a30105_ae3af44a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-09-06T07:55:14Z",
+      "side": 1,
+      "message": "This is not an atest target, it\u0027s the aconfig binary. Did you mean aconfig.test? The aconfig.test.flags is not a test either. Not sure what you had in mind?\n\nTip: you can give atest multiple targets in the same command. I suggest this:\n\nTest: atest aconfig.test aconfig.foo aconfig.bar",
+      "range": {
+        "startLine": 15,
+        "startChar": 12,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "e4d0c61c691eff64f9aca03efd6d66c386de4dd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71d96dae_9438353d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -14,6 +37,23 @@
       "writtenOn": "2023-09-05T20:18:15Z",
       "side": 1,
       "message": "Might be nice to have a very basic smoke test that is running with a target that has R8 enabled? To start we can just validate that the resulting values are what we expect, and later we can add an end-to-end test to validate that it actually facilitates code stripping.",
+      "revId": "e4d0c61c691eff64f9aca03efd6d66c386de4dd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d2e79b0_3680de76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-09-06T07:55:14Z",
+      "side": 1,
+      "message": "Code LGTM. The Test: line in the commit message needs an update.\n\n+1 to Jared\u0027s comment about tests. Can be added in a later CL.",
       "revId": "e4d0c61c691eff64f9aca03efd6d66c386de4dd1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
