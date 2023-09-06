@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4c92069_07e82553",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1574225
+      },
+      "writtenOn": "2023-09-06T21:45:32Z",
+      "side": 1,
+      "message": "Same change as https://android-review.git.corp.google.com/c/platform/system/libziparchive/+/2740935",
+      "revId": "0d7190b41336d81d73a5e88047dd56d7cffef7bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
