@@ -16,6 +16,24 @@
       "message": "Don\u0027t revert this just for the sbom test, we can fix that easily. There is also b/299224830, but that requires an internal only fix so reverting is not that useful there either.",
       "revId": "40cc4d7f36d3e64490db5aeac57268af3dcdc9b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08493325_03687b56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-09-06T16:17:47Z",
+      "side": 1,
+      "message": "Yeah sorry, this is actually a bad revert (gerrit failed to revert the whole topic) - https://android-review.git.corp.google.com/q/topic:%22revert-2650297-no_hidl_support-EYTSOFAIJR%22 had the full revert, and I abandoned it after talking to weiwli@.\n\nI didn\u0027t notice this partial topic was still created! Abandoning now.",
+      "parentUuid": "bcdff4e0_a79d8536",
+      "revId": "40cc4d7f36d3e64490db5aeac57268af3dcdc9b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
