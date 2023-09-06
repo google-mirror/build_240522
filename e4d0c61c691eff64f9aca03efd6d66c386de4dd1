@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "751a75c5_51d07d0e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-09-06T12:56:52Z",
+      "side": 1,
+      "message": "Oh, yes, I meant `aconfig.test.java` updated. Thank you.",
+      "parentUuid": "e3a30105_ae3af44a",
+      "range": {
+        "startLine": 15,
+        "startChar": 12,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "e4d0c61c691eff64f9aca03efd6d66c386de4dd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71d96dae_9438353d",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-09-06T07:55:14Z",
       "side": 1,
       "message": "Code LGTM. The Test: line in the commit message needs an update.\n\n+1 to Jared\u0027s comment about tests. Can be added in a later CL.",
+      "revId": "e4d0c61c691eff64f9aca03efd6d66c386de4dd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7ddb370_7fd3d53c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-09-06T12:56:52Z",
+      "side": 1,
+      "message": "Yes, thank you! Discussed offline. Currently we don\u0027t have a easy way to define a read only flags. but we will have shortly. so will add e2e tests in later changes. thank you!",
+      "parentUuid": "71d96dae_9438353d",
       "revId": "e4d0c61c691eff64f9aca03efd6d66c386de4dd1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
