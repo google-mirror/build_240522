@@ -417,14 +417,14 @@ ifneq ($(filter cfi,$(my_sanitize)),)
   # LLVM is not set up to do this on a function basis, so force Thumb on the
   # entire module.
   LOCAL_ARM_MODE := thumb
-  my_cflags += $(CFI_EXTRA_CFLAGS)
-  my_asflags += $(CFI_EXTRA_ASFLAGS)
+  my_cflags += -flto $(CFI_EXTRA_CFLAGS)
+  my_asflags += -flto $(CFI_EXTRA_ASFLAGS)
   # Only append the default visibility flag if -fvisibility has not already been
   # set to hidden.
   ifeq ($(filter -fvisibility=hidden,$(LOCAL_CFLAGS)),)
     my_cflags += -fvisibility=default
   endif
-  my_ldflags += $(CFI_EXTRA_LDFLAGS)
+  my_ldflags += -flto $(CFI_EXTRA_LDFLAGS)
 
   ifeq ($(LOCAL_FORCE_STATIC_EXECUTABLE),true)
         my_ldflags := $(filter-out -fsanitize-cfi-cross-dso,$(my_ldflags))
