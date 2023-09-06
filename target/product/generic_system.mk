@@ -141,5 +141,11 @@ _my_allowed_list := $(_base_mk_allowed_list)
 _my_paths := \
   $(TARGET_COPY_OUT_ROOT)/ \
   $(TARGET_COPY_OUT_SYSTEM)/ \
+  $(TARGET_COPY_OUT_SYSTEM_EXT)/system_ext/bin/hw/android.hidl.allocator@1.0-service \
+  $(TARGET_COPY_OUT_SYSTEM_EXT)/system_ext/bin/hwservicemanager \
+  $(TARGET_COPY_OUT_SYSTEM_EXT)/system_ext/etc/init/android.hidl.allocator@1.0-service.rc \
+  $(TARGET_COPY_OUT_SYSTEM_EXT)/system_ext/etc/init/hwservicemanager.rc \
+  $(TARGET_COPY_OUT_SYSTEM_EXT)/system_ext/etc/vintf/manifest/android.hidl.allocator@1.0-service.xml \
+  $(TARGET_COPY_OUT_SYSTEM_EXT)/system_ext/etc/vintf/manifest/hwservicemanager.xml \
 
 $(call require-artifacts-in-path, $(_my_paths), $(_my_allowed_list))
