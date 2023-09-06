@@ -147,10 +147,6 @@ define true-or-empty
 $(filter true, $(1))
 endef
 
-define boolean-not
-$(if $(filter true,$(1)),,true)
-endef
-
 ###########################################################
 ## Rule for touching GCNO files.
 ###########################################################
