@@ -158,6 +158,8 @@ $(call add_soong_config_var_value,ANDROID,release_avf_enable_multi_tenant_microd
 $(call add_soong_config_var_value,ANDROID,release_avf_enable_device_assignment,$(RELEASE_AVF_ENABLE_DEVICE_ASSIGNMENT))
 $(call add_soong_config_var_value,ANDROID,release_avf_enable_vendor_modules,$(RELEASE_AVF_ENABLE_VENDOR_MODULES))
 
+$(call add_soong_config_var_value,ANDROID,release_avf_sample_flag,$(RELEASE_AVF_SAMPLE_FLAG))
+
 # Enable system_server optimizations by default unless explicitly set or if
 # there may be dependent runtime jars.
 # TODO(b/240588226): Remove the off-by-default exceptions after handling
