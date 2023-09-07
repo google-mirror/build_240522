@@ -22,6 +22,30 @@
       },
       "revId": "0c869edcd1888d6e397e4b499dac64b784c35389",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d029ed4_ce21594d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-07T20:41:05Z",
+      "side": 1,
+      "message": "Yes, it\u0027s because the internal one is not formatted.\n\nI\u0027d rather make aosp unformatted then reformat it in the followup cl (which has already been done), because then I don\u0027t need to figure out if I also need to format udc-qpr-dev-plus-aosp, udc-d1-dev-plus-aosp, udc-dev-plus-aosp, and tm-qpr-dev-plus-aosp.",
+      "parentUuid": "736228f4_99a2dcd0",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 24
+      },
+      "revId": "0c869edcd1888d6e397e4b499dac64b784c35389",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
