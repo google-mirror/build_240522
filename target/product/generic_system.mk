@@ -93,6 +93,7 @@ PRODUCT_PACKAGES_DEBUG += \
     tinypcminfo \
     tinyplay \
     update_engine_client \
+    uwb_androidx_backend_app
 
 PRODUCT_HOST_PACKAGES += \
     tinyplay
