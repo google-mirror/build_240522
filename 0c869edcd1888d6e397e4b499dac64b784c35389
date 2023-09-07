@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000053080631",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2746117?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "ea2d1eab_ada0fc1f",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "core/release_config.bzl",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": "            fail(\"Invalid partition: \" + partition + \", allowed partitions: \" +\n                 str(_flag_partitions))\n"
+            },
+            {
+              "path": "core/release_config.bzl",
+              "range": {
+                "startLine": 51,
+                "startChar": 0,
+                "endLine": 52,
+                "endChar": 0
+              },
+              "replacement": "        \"default\": default,\n"
+            },
+            {
+              "path": "core/release_config.bzl",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 54,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "core/release_config.bzl",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "core/release_config.bzl",
+              "range": {
+                "startLine": 72,
+                "startChar": 0,
+                "endLine": 73,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "core/release_config.bzl",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 75,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            },
+            {
+              "path": "core/release_config.bzl",
+              "range": {
+                "startLine": 124,
+                "startChar": 0,
+                "endLine": 125,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "28056f0d_a2709f96",
+        "filename": "core/release_config.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-07T19:33:32Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier core/release_config.bzl` to format the file, or apply the suggested fix.",
+      "revId": "0c869edcd1888d6e397e4b499dac64b784c35389",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
