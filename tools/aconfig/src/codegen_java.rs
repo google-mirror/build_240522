@@ -133,10 +133,15 @@ mod tests {
     const EXPECTED_FLAG_COMMON_CONTENT: &str = r#"
     package com.android.aconfig.test;
     public final class Flags {
+        /** @hide */
         public static final String FLAG_DISABLED_RO = "com.android.aconfig.test.disabled_ro";
+        /** @hide */
         public static final String FLAG_DISABLED_RW = "com.android.aconfig.test.disabled_rw";
+        /** @hide */
         public static final String FLAG_ENABLED_FIXED_RO = "com.android.aconfig.test.enabled_fixed_ro";
+        /** @hide */
         public static final String FLAG_ENABLED_RO = "com.android.aconfig.test.enabled_ro";
+        /** @hide */
         public static final String FLAG_ENABLED_RW = "com.android.aconfig.test.enabled_rw";
 
         @com.android.aconfig.annotations.AssumeFalseForR8
