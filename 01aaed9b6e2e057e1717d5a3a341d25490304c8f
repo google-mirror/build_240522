@@ -39,6 +39,30 @@
       },
       "revId": "01aaed9b6e2e057e1717d5a3a341d25490304c8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40396c8e_ae0455b3",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-09-08T13:45:36Z",
+      "side": 1,
+      "message": "Thanks makes sense. There are multiple java classes generated; I\u0027ll @hide all of them.",
+      "parentUuid": "b97e3bda_a6125443",
+      "range": {
+        "startLine": 135,
+        "startChar": 23,
+        "endLine": 135,
+        "endChar": 28
+      },
+      "revId": "01aaed9b6e2e057e1717d5a3a341d25490304c8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
