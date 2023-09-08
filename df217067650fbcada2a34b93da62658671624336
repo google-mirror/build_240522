@@ -34,6 +34,24 @@
       "parentUuid": "36267b1b_c010efeb",
       "revId": "df217067650fbcada2a34b93da62658671624336",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6c6bdbb_02811e14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-08T03:16:41Z",
+      "side": 1,
+      "message": "I took a look, and it\u0027s not trivial to fix. The issue comes from [here](https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:vendor/qcom/sm7250/proprietary/chi-cdk/api/generated/build/android/Android.mk;l\u003d107;drc\u003d2b9c6bd2e47b4a4826e5901c993ec7bda58ef500). We can revert this, but we need to submit [this other revert topic](https://android-review.git.corp.google.com/q/topic:%22revert-2745814-bazel_staging_dir_file_list-ONJUFZLRHH%22) first.",
+      "parentUuid": "a4a814d9_e800fe32",
+      "revId": "df217067650fbcada2a34b93da62658671624336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
