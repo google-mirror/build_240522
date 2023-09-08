@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f080140c_088d166a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1061009
+      },
+      "writtenOn": "2023-09-08T13:39:07Z",
+      "side": 1,
+      "message": "I thi",
+      "revId": "01aaed9b6e2e057e1717d5a3a341d25490304c8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b97e3bda_a6125443",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1061009
+      },
+      "writtenOn": "2023-09-08T13:39:07Z",
+      "side": 1,
+      "message": "I think the `/** @hide */` should probably go on the class (we don\u0027t want the generated flags code to be public API right?)",
+      "range": {
+        "startLine": 135,
+        "startChar": 23,
+        "endLine": 135,
+        "endChar": 28
+      },
+      "revId": "01aaed9b6e2e057e1717d5a3a341d25490304c8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
