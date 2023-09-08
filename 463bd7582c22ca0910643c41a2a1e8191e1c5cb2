@@ -22,6 +22,30 @@
       },
       "revId": "463bd7582c22ca0910643c41a2a1e8191e1c5cb2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f547b56_787cf568",
+        "filename": "cogsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-09-08T17:29:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d1e7f77_49388b37",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 20
+      },
+      "revId": "463bd7582c22ca0910643c41a2a1e8191e1c5cb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
