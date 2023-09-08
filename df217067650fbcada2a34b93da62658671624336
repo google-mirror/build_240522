@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36267b1b_c010efeb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-08T01:29:33Z",
+      "side": 1,
+      "message": "This is the root cause cl, but because of other cls that went in since, if you revert it, it will cause a lot more breakages than there are currently.",
+      "revId": "df217067650fbcada2a34b93da62658671624336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
