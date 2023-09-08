@@ -933,6 +933,50 @@ def BuildImageOrVBMeta(input_directory, target_out, glob_dict, image_properties,
 
 
 def CopyInputDirectory(src, dst, filter_file):
+  input_directory = os.path.abspath(src)
+  allowed_files = set()
+  with open(filter_file, 'r') as f:
+    for line in f:
+      line = line.strip()
+      if not line:
+        continue
+      if line != os.path.normpath(line):
+        sys.exit(f"{line}: not normalized")
+      if line.startswith("../") or line.startswith('/'):
+        sys.exit(f"{line}: escapes staging directory by starting with ../ or /")
+
+      while line:
+        allowed_files.add(line)
+        line = os.path.dirname(line)
+
+  removed_files = []
+  for (path, dirs, files) in os.walk(input_directory):
+    for d in list(dirs):
+      d_orig = d
+      d = os.path.join(path, d)
+      if os.path.relpath(d, input_directory) not in allowed_files:
+        # os.walk will include symlinks to directories under the directory list
+        if os.path.islink(d):
+          removed_files.append(d)
+          #os.remove(d)
+        else:
+          removed_files.append(d)
+          #shutil.rmtree(d)
+        # os.walk will not attempt to recurse into subdirectories if we delete
+        # them from the origional list
+        del dirs[dirs.index(d_orig)]
+    for f in files:
+      f = os.path.join(path, f)
+      if os.path.relpath(f, input_directory) not in allowed_files:
+        removed_files.append(f)
+        #os.remove(f)
+
+  if removed_files:
+    print("ERROR: There were files in the staging dir that there shouldn't be!")
+    for f in removed_files:
+      print(f)
+    sys.exit(1)
+
   with open(filter_file, 'r') as f:
     for line in f:
       line = line.strip()
