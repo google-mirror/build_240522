@@ -34,6 +34,24 @@
       "parentUuid": "db7627a6_6fa2b32d",
       "revId": "e78ad74b2be076ac4aeb64ebf096cfcc141d66a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dff88f3_4cdd40b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-11T21:59:41Z",
+      "side": 1,
+      "message": "Could you fix this issue only running this test in soong if the apex is going to be installed?",
+      "parentUuid": "5f0cd56d_6d4eeeb4",
+      "revId": "e78ad74b2be076ac4aeb64ebf096cfcc141d66a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
