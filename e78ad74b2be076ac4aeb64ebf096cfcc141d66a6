@@ -70,6 +70,24 @@
       "parentUuid": "6dff88f3_4cdd40b3",
       "revId": "e78ad74b2be076ac4aeb64ebf096cfcc141d66a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5abf9917_ce90884b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-11T22:20:34Z",
+      "side": 1,
+      "message": "ah, yeah, that\u0027s a good point.\n\n\nI think longer term, apex_sepolicy_tests is going to need to accept an sepolicy as input, and then the apex will pass it\u0027s sepolicy to the test. But we can go with this for now.",
+      "parentUuid": "bf21fedd_ed19529a",
+      "revId": "e78ad74b2be076ac4aeb64ebf096cfcc141d66a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
