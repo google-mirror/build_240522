@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db7627a6_6fa2b32d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-11T18:03:17Z",
+      "side": 1,
+      "message": "I don\u0027t understand why this needs to be done in a Makefile still. Prebuilt apexes are handled with the `prebuilt_apex` soong module type, and this makefile code doesn\u0027t import any special vendor sepolicy besides what\u0027s in the apex already.",
+      "revId": "e78ad74b2be076ac4aeb64ebf096cfcc141d66a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
