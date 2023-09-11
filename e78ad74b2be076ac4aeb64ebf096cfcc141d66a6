@@ -16,6 +16,24 @@
       "message": "I don\u0027t understand why this needs to be done in a Makefile still. Prebuilt apexes are handled with the `prebuilt_apex` soong module type, and this makefile code doesn\u0027t import any special vendor sepolicy besides what\u0027s in the apex already.",
       "revId": "e78ad74b2be076ac4aeb64ebf096cfcc141d66a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f0cd56d_6d4eeeb4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-09-11T21:26:25Z",
+      "side": 1,
+      "message": "\u003e  this makefile code doesn\u0027t import any special vendor sepolicy\n\n`apex_sepolicy_tests` is built with vendor specific sepolicy (via `BOARD_SEPOLICY_DIRS`).\n\nFor example, `com.xxx.foo` APEX uses a label `xxx_hal_foo` in its file image and `xxx_hal_foo` is only available when building the target `device_xxx` (via `BOARD_SEPOLICY_DIRS`). Then, when building another target (say, `device_yyy`) the label (`xxx_hal_foo`) is not available. This should be OK because `com.xxx.foo` is for the target `device_xxx`, not for others. But, when I added the new check (see if every label is known. See the other change in this topic), I got many errors in presubmit because `checkbuild` on other targets tries to build device-specific APEXes. The workaround for this was to put these APEXes under soong namespaces so that they are not exported to Make when building irrelevant targets. (e.g. See the abandoned: aosp/2745118)",
+      "parentUuid": "db7627a6_6fa2b32d",
+      "revId": "e78ad74b2be076ac4aeb64ebf096cfcc141d66a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
