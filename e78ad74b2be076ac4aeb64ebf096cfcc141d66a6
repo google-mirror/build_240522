@@ -52,6 +52,24 @@
       "parentUuid": "5f0cd56d_6d4eeeb4",
       "revId": "e78ad74b2be076ac4aeb64ebf096cfcc141d66a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf21fedd_ed19529a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-09-11T22:06:25Z",
+      "side": 1,
+      "message": "This might not be true today but, AFAIK, Soong doesn\u0027t know whether a module is to be installed or not becase it\u0027s handled by processing PRODUCT_PACKAGES in Make.",
+      "parentUuid": "6dff88f3_4cdd40b3",
+      "revId": "e78ad74b2be076ac4aeb64ebf096cfcc141d66a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
