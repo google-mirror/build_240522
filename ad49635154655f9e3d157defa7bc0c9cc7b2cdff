@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc7d145a_91def424",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-09-12T13:08:12Z",
+      "side": 1,
+      "message": "I need to",
+      "revId": "ad49635154655f9e3d157defa7bc0c9cc7b2cdff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8e11e9f_e03a1b02",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-09-12T09:22:51Z",
       "side": 1,
       "message": "35",
+      "range": {
+        "startLine": 4,
+        "startChar": 7,
+        "endLine": 4,
+        "endChar": 9
+      },
+      "revId": "ad49635154655f9e3d157defa7bc0c9cc7b2cdff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbb2d030_5c745535",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-09-12T13:08:12Z",
+      "side": 1,
+      "message": "I think my comment is correct, that means, \"if PLATFORM_VNDK_VERSION \u003e 34, do not freeze VNDK.\"\nv35 will not be defined and be used for the version from trunk stable.",
+      "parentUuid": "f8e11e9f_e03a1b02",
       "range": {
         "startLine": 4,
         "startChar": 7,
