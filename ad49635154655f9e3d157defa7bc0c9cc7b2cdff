@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d36f31f8_402aa951",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-09-12T13:09:11Z",
+      "side": 1,
+      "message": "I need to check the boot failures, before going forward.",
+      "parentUuid": "fc7d145a_91def424",
+      "revId": "ad49635154655f9e3d157defa7bc0c9cc7b2cdff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8e11e9f_e03a1b02",
