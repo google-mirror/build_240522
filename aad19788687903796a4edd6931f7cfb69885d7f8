@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abda07e8_9249db04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-12T07:01:13Z",
+      "side": 1,
+      "message": "It seems very unlikely that this would cause the error message in b/299939794",
+      "revId": "aad19788687903796a4edd6931f7cfb69885d7f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
