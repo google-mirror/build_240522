@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42e8fb80_35d38456",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-09-12T19:13:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23052c81_341cb8eb",
+      "range": {
+        "startLine": 11,
+        "startChar": 36,
+        "endLine": 11,
+        "endChar": 74
+      },
+      "revId": "bd843cb165f66584a26905df6e38bb5d4c26cdd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "088a33cf_24342a4d",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-12T19:07:15Z",
       "side": 1,
       "message": "s/setups/sets",
+      "range": {
+        "startLine": 60,
+        "startChar": 19,
+        "endLine": 60,
+        "endChar": 22
+      },
+      "revId": "bd843cb165f66584a26905df6e38bb5d4c26cdd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "217601f5_621aad78",
+        "filename": "cogsetup.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-09-12T19:13:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "088a33cf_24342a4d",
       "range": {
         "startLine": 60,
         "startChar": 19,
