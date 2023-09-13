@@ -74,7 +74,8 @@ def MergeUpdateEngineConfig(input_metadir1, input_metadir2, merged_meta_dir):
         merged_meta_dir, UPDATE_ENGINE_CONFIG_NAME))
 
 
-def MergeMetaFiles(temp_dir, merged_dir):
+def MergeMetaFiles(temp_dir, merged_dir, framework_partitions,
+                   vendor_partitions):
   """Merges various files in META/*."""
 
   framework_meta_dir = os.path.join(temp_dir, 'framework_meta', 'META')
@@ -114,7 +115,9 @@ def MergeMetaFiles(temp_dir, merged_dir):
     MergeAbPartitions(
         framework_meta_dir=framework_meta_dir,
         vendor_meta_dir=vendor_meta_dir,
-        merged_meta_dir=merged_meta_dir)
+        merged_meta_dir=merged_meta_dir,
+        framework_partitions=framework_partitions,
+        vendor_partitions=vendor_partitions)
     UpdateCareMapImageSizeProps(images_dir=os.path.join(merged_dir, 'IMAGES'))
 
   for file_name in ('apkcerts.txt', 'apexkeys.txt'):
@@ -135,16 +138,25 @@ def MergeMetaFiles(temp_dir, merged_dir):
       path=os.path.join(merged_meta_dir, 'misc_info.txt'))
 
 
-def MergeAbPartitions(framework_meta_dir, vendor_meta_dir, merged_meta_dir):
+def MergeAbPartitions(framework_meta_dir, vendor_meta_dir, merged_meta_dir,
+                      framework_partitions, vendor_partitions):
   """Merges META/ab_partitions.txt.
 
   The output contains the union of the partition names.
   """
   with open(os.path.join(framework_meta_dir, 'ab_partitions.txt')) as f:
-    framework_ab_partitions = f.read().splitlines()
+    framework_ab_partitions = [
+        partition
+        for partition in f.read().splitlines()
+        if partition in framework_partitions
+    ]
 
   with open(os.path.join(vendor_meta_dir, 'ab_partitions.txt')) as f:
-    vendor_ab_partitions = f.read().splitlines()
+    vendor_ab_partitions = [
+        partition
+        for partition in f.read().splitlines()
+        if partition in vendor_partitions
+    ]
 
   merge_utils.WriteSortedData(
       data=set(framework_ab_partitions + vendor_ab_partitions),
