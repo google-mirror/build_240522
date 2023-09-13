@@ -16,6 +16,29 @@
       "message": "LGTM, but I think the owner needs to review this",
       "revId": "807a2fa52902602d522ffa4f4e6dff2a09a95f15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f37feb1_040a1eb7",
+        "filename": "tools/releasetools/merge/merge_meta.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-09-13T16:43:30Z",
+      "side": 1,
+      "message": "this will filter out some partitions in the process. Can you test and make sure the resulting image can be flashed successfully and device boots?",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 5
+      },
+      "revId": "807a2fa52902602d522ffa4f4e6dff2a09a95f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
