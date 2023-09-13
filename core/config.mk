@@ -427,13 +427,6 @@ else
 endif
 .KATI_READONLY := TARGET_MAX_PAGE_SIZE_SUPPORTED
 
-# Only arm64 arch supports TARGET_MAX_PAGE_SIZE_SUPPORTED greater than 4096.
-ifneq ($(TARGET_MAX_PAGE_SIZE_SUPPORTED),4096)
-  ifneq ($(TARGET_ARCH),arm64)
-    $(error TARGET_MAX_PAGE_SIZE_SUPPORTED=$(TARGET_MAX_PAGE_SIZE_SUPPORTED) is greater than 4096. Only supported in arm64 arch)
-  endif
-endif
-
 # Boolean variable determining if AOSP is page size agnostic. This means
 # that AOSP can use a kernel configured with 4k/16k/64k PAGE SIZES.
 TARGET_PAGE_SIZE_AGNOSTIC := false
