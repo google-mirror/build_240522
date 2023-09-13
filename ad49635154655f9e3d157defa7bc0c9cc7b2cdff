@@ -123,6 +123,30 @@
       },
       "revId": "ad49635154655f9e3d157defa7bc0c9cc7b2cdff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02d67be9_b5d7900b",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2023-09-13T07:12:40Z",
+      "side": 1,
+      "message": "oh right, I got confused because the mixed terms. I thought you mean \"API greater or equal 34\" due to the next line, but reading it again Line 5 is actually checking \"34 greater or equal API\", the negation of this sentence.",
+      "parentUuid": "fc052fda_3426ddf0",
+      "range": {
+        "startLine": 4,
+        "startChar": 7,
+        "endLine": 4,
+        "endChar": 9
+      },
+      "revId": "ad49635154655f9e3d157defa7bc0c9cc7b2cdff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
