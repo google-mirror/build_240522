@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b8e3678_bb2c98d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-09-13T01:25:29Z",
+      "side": 1,
+      "message": "The boot failure is caused by the mixed build (GSI system + old vendor). In this case, the GSI image does not include the current VNDK apex that was installed in vendor partition. However, the product partition still requires the current VNDK APEX to be loaded and that caused the failure.\nFor the quick fix, let me install the current VNDK to system partition as before, and we can revisit this problem by defining vndk.on_product to include the vndk on vendor partition.",
+      "parentUuid": "d36f31f8_402aa951",
+      "revId": "ad49635154655f9e3d157defa7bc0c9cc7b2cdff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8e11e9f_e03a1b02",
