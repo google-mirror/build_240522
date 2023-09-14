@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4647e4a2_990f32ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-09-14T07:01:45Z",
+      "side": 1,
+      "message": "nit: throw exception if reading from DeviceConfig fails",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 67
+      },
+      "revId": "c852a39adc3a7bf4a3b8d416d3471f711a32caff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "538ed645_3c3fe436",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-09-14T07:01:45Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 11,
+        "startChar": 48,
+        "endLine": 11,
+        "endChar": 54
+      },
+      "revId": "c852a39adc3a7bf4a3b8d416d3471f711a32caff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b15e6ce_7571b492",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-09-14T07:01:45Z",
+      "side": 1,
+      "message": "do you mean to say \"failure to read a DeviceConfig value is guaranteed to not be becuase of initialization issues, because the relevant classes are static wrappers (and thus already initialized)\"?",
+      "range": {
+        "startLine": 11,
+        "startChar": 13,
+        "endLine": 11,
+        "endChar": 55
+      },
+      "revId": "c852a39adc3a7bf4a3b8d416d3471f711a32caff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74e3229c_17e76c05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-09-14T07:01:45Z",
+      "side": 1,
+      "message": "The change itself LGTM. CR+2 with a few typos to fix/clarifications to make before submitting.",
+      "revId": "c852a39adc3a7bf4a3b8d416d3471f711a32caff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c025f47_1bbc56af",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-09-14T07:01:45Z",
+      "side": 1,
+      "message": "Suggestion: `\"Cannot read value of flag \" + flagName + \" from DeviceConfig \"`.",
+      "range": {
+        "startLine": 286,
+        "startChar": 25,
+        "endLine": 286,
+        "endChar": 65
+      },
+      "revId": "c852a39adc3a7bf4a3b8d416d3471f711a32caff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce6a8d44_e4467502",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-09-14T07:01:45Z",
+      "side": 1,
+      "message": "The attribute is `is_fixed_read_only`. I don\u0027t think a developer unfamiliar with aconfig would understand how to mentally map \"frozen flag\" to the attribute.\n\nRephrase as `Please change the flag to `is_fixed_read_only: true`` or something similar.",
+      "range": {
+        "startLine": 289,
+        "startChar": 25,
+        "endLine": 289,
+        "endChar": 47
+      },
+      "revId": "c852a39adc3a7bf4a3b8d416d3471f711a32caff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
