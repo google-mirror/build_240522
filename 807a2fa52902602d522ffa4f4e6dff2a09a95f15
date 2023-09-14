@@ -39,6 +39,30 @@
       },
       "revId": "807a2fa52902602d522ffa4f4e6dff2a09a95f15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eee6e9b9_4e21bada",
+        "filename": "tools/releasetools/merge/merge_meta.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2023-09-14T17:26:11Z",
+      "side": 1,
+      "message": "Revisited the motivation of making this change, I think I don\u0027t need to filter out the vendor\u0027s ab partitions. More details in b/300193612#comment9.",
+      "parentUuid": "8f37feb1_040a1eb7",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 5
+      },
+      "revId": "807a2fa52902602d522ffa4f4e6dff2a09a95f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
