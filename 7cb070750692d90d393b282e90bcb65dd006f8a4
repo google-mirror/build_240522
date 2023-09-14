@@ -22,6 +22,30 @@
       },
       "revId": "7cb070750692d90d393b282e90bcb65dd006f8a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4292acb_aa742fad",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1951966
+      },
+      "writtenOn": "2023-09-14T11:15:00Z",
+      "side": 1,
+      "message": "I made this to be consistent with my change in aosp/2744200 (I use \u0027_\u0027 to split build flag name and the value); however, that pattern might be confusing. - I will fix it and also make the similar fix for flag value.",
+      "parentUuid": "4e498424_e498e2c9",
+      "range": {
+        "startLine": 288,
+        "startChar": 26,
+        "endLine": 288,
+        "endChar": 27
+      },
+      "revId": "7cb070750692d90d393b282e90bcb65dd006f8a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
