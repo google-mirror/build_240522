@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27d56e9b_1593a152",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-09-14T15:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4647e4a2_990f32ad",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 67
+      },
+      "revId": "c852a39adc3a7bf4a3b8d416d3471f711a32caff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "538ed645_3c3fe436",
@@ -72,6 +96,54 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a62df78f_6cfe4c5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-09-14T15:29:17Z",
+      "side": 1,
+      "message": "yes. I want to say it is not the issue on DeviceConfig, and Settings, since they static wrapper. So the null pointer exception is caused by the initialization of SettingsProvider",
+      "parentUuid": "3b15e6ce_7571b492",
+      "range": {
+        "startLine": 11,
+        "startChar": 13,
+        "endLine": 11,
+        "endChar": 55
+      },
+      "revId": "c852a39adc3a7bf4a3b8d416d3471f711a32caff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "748de277_f9e5b7d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-09-14T15:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "538ed645_3c3fe436",
+      "range": {
+        "startLine": 11,
+        "startChar": 48,
+        "endLine": 11,
+        "endChar": 54
+      },
+      "revId": "c852a39adc3a7bf4a3b8d416d3471f711a32caff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "74e3229c_17e76c05",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11469478_86387e9e",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-09-14T15:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c025f47_1bbc56af",
+      "range": {
+        "startLine": 286,
+        "startChar": 25,
+        "endLine": 286,
+        "endChar": 65
+      },
+      "revId": "c852a39adc3a7bf4a3b8d416d3471f711a32caff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce6a8d44_e4467502",
@@ -123,6 +219,30 @@
       "writtenOn": "2023-09-14T07:01:45Z",
       "side": 1,
       "message": "The attribute is `is_fixed_read_only`. I don\u0027t think a developer unfamiliar with aconfig would understand how to mentally map \"frozen flag\" to the attribute.\n\nRephrase as `Please change the flag to `is_fixed_read_only: true`` or something similar.",
+      "range": {
+        "startLine": 289,
+        "startChar": 25,
+        "endLine": 289,
+        "endChar": 47
+      },
+      "revId": "c852a39adc3a7bf4a3b8d416d3471f711a32caff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a54f3d0c_16444f19",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-09-14T15:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce6a8d44_e4467502",
       "range": {
         "startLine": 289,
         "startChar": 25,
