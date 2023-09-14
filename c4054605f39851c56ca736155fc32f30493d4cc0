@@ -34,6 +34,24 @@
       "parentUuid": "e3b7522e_5800b2e0",
       "revId": "c4054605f39851c56ca736155fc32f30493d4cc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e12c4f1_557ac859",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-09-14T17:14:33Z",
+      "side": 1,
+      "message": "Apologies, I meant to delete this comment (but uploading from Cider-G auto pushes the unfinished comment too, which I didn\u0027t expect).",
+      "parentUuid": "a4ced406_8fc732d3",
+      "revId": "c4054605f39851c56ca736155fc32f30493d4cc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
