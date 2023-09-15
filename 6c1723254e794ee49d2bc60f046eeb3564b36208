@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c31b159_f8598d5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1166043
+      },
+      "writtenOn": "2023-09-15T15:01:49Z",
+      "side": 1,
+      "message": "Let\u0027s wait until it\u0027s working locally.",
+      "revId": "6c1723254e794ee49d2bc60f046eeb3564b36208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
