@@ -108,6 +108,14 @@ fn cli() -> Command {
                 )
                 .arg(Arg::new("out").long("out").default_value("-")),
         )
+        .subcommand(
+            Command::new("override")
+                .arg(Arg::new("cache").long("cache").required(true))
+                .arg(Arg::new("values").long("values").action(ArgAction::Append))
+                .arg(Arg::new("android-bp").long("android-bp").required(true))
+                .arg(Arg::new("override-file").long("override-file").required(true))
+                .arg(Arg::new("out").long("out").default_value("-")),
+        )
 }
 
 fn get_required_arg<'a, T>(matches: &'a ArgMatches, arg_name: &str) -> Result<&'a T>
@@ -225,6 +233,26 @@ fn main() -> Result<()> {
             let output = commands::dump_parsed_flags(input, *format)?;
             let path = get_required_arg::<String>(sub_matches, "out")?;
             write_output_to_file_or_stdout(path, &output)?;
+        }
+        Some(("override", sub_matches)) => {
+            let cache = open_single_file(sub_matches, "cache")?;
+            let values = open_zero_or_more_files(sub_matches, "values")?;
+            let android_bp = open_single_file(sub_matches, "android-bp")?;
+            let override_file = open_single_file(sub_matches, "override-file")?;
+            let dir = PathBuf::from(get_required_arg::<String>(sub_matches, "out")?);
+            let modified_files =
+                commands::override_flags(cache, values, android_bp, override_file)?;
+            // check the folder existence local/package name
+            // check the android.bp file for the value def exsitence
+            // check the value file existence
+            // check the
+
+            // new android.bp top leve/
+            // new android.bp flag value
+            // new flag value file/
+            modified_files
+                .iter()
+                .try_for_each(|file| write_output_file_realtive_to_dir(&dir, file))?;
         }
         _ => unreachable!(),
     }

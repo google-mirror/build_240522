@@ -17,14 +17,18 @@
 use anyhow::{bail, ensure, Context, Result};
 use clap::ValueEnum;
 use protobuf::Message;
+use serde::Serialize;
 use std::io::Read;
+use std::path::Path;
 use std::path::PathBuf;
+use tinytemplate::TinyTemplate;
 
 use crate::codegen_cpp::generate_cpp_code;
 use crate::codegen_java::generate_java_code;
 use crate::codegen_rust::generate_rust_code;
 use crate::protos::{
-    ProtoFlagPermission, ProtoFlagState, ProtoParsedFlag, ProtoParsedFlags, ProtoTracepoint,
+    ProtoFlagPermission, ProtoFlagState, ProtoFlagValues, ProtoParsedFlag, ProtoParsedFlags,
+    ProtoTracepoint,
 };
 
 pub struct Input {
@@ -39,6 +43,15 @@ impl Input {
             .read_to_end(&mut buffer)
             .with_context(|| format!("failed to read {}", self.source))?;
         crate::protos::parsed_flags::try_from_binary_proto(&buffer)
+            .with_context(|| self.error_context())
+    }
+
+    fn try_pasre_flag_values(&mut self) -> Result<ProtoFlagValues> {
+        let mut contents = String::new();
+        self.reader
+            .read_to_string(&mut contents)
+            .with_context(|| format!("failed to read {}", self.source))?;
+        crate::protos::flag_values::try_from_text_proto(&contents)
             .with_context(|| self.error_context())
     }
 
@@ -293,6 +306,95 @@ pub fn dump_parsed_flags(mut input: Vec<Input>, format: DumpFormat) -> Result<Ve
         }
     }
     Ok(output)
+}
+
+pub fn override_flags(
+    mut cache: Input,
+    values: Vec<Input>,
+    android_bp: Input,
+    mut override_file: Input,
+) -> Result<Vec<OutputFile>> {
+    // generage new top level android.bp file
+    // geneerage new flag value android.bp file
+
+    // generate flag value file
+    // parse all value files
+    // distribute all flags into the right packages
+    // create text proto file
+
+    // chech override in the cache
+
+    // check the override file, and update it it exist
+
+    let mut exist_values = override_file.try_pasre_flag_values()?;
+    let mut parsed_flags = cache.try_parse_flags()?;
+
+    for mut value in values {
+        let flag_values = value.try_pasre_flag_values()?;
+        for flag_value in flag_values.flag_value.into_iter() {
+            crate::protos::flag_value::verify_fields(&flag_value)
+                .with_context(|| value.error_context())?;
+
+            let Some(parsed_flag) = parsed_flags
+                .parsed_flag
+                .iter_mut()
+                .find(|pf| pf.package() == flag_value.package() && pf.name() == flag_value.name())
+            else {
+                // (silently) skip unknown flags
+                continue;
+            };
+
+            ensure!(
+                !parsed_flag.is_fixed_read_only()
+                    || flag_value.permission() == ProtoFlagPermission::READ_ONLY,
+                "failed to set permission of flag {}, since this flag is fixed read only flag",
+                flag_value.name()
+            );
+
+            let Some(exist_value) = exist_values
+                .flag_value
+                .iter_mut()
+                .find(|fv| fv.package() == flag_value.package() && fv.name() == flag_value.name())
+            else {
+                exist_values.flag_value.push(flag_value);
+                continue;
+            };
+            exist_value.set_state(flag_value.state());
+            exist_value.set_permission(flag_value.permission());
+        }
+    }
+
+    let mut package_names =
+        exist_values.flag_value.iter().map(|fv| fv.package().to_string()).collect::<Vec<String>>();
+    package_names.sort();
+    package_names.dedup();
+    let override_file_name =
+        Path::new(&override_file.source).file_name().unwrap().to_str().unwrap();
+    let android_bp_name = Path::new(&android_bp.source).file_name().unwrap().to_str().unwrap();
+
+    let mut template = TinyTemplate::new();
+    template.add_template(android_bp_name, include_str!("../templates/Android.bp.template"))?;
+
+    let ele = Element { package_names, override_file_name: override_file_name.to_string() };
+
+    let new_android_bp = OutputFile {
+        contents: template.render(android_bp_name, &ele)?.into(),
+        path: android_bp_name.into(),
+    };
+
+    let mut output = Vec::new();
+    let s = protobuf::text_format::print_to_string_pretty(&exist_values);
+    output.extend_from_slice(s.as_bytes());
+
+    let new_override_file = OutputFile { contents: output, path: override_file_name.into() };
+
+    Ok(vec![new_android_bp, new_override_file])
+}
+
+#[derive(Serialize)]
+struct Element {
+    pub package_names: Vec<String>,
+    pub override_file_name: String,
 }
 
 fn find_unique_package(parsed_flags: &ProtoParsedFlags) -> Option<&str> {
