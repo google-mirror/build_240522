@@ -27,13 +27,27 @@
 
 PRODUCT_VIRTUAL_AB_OTA := true
 
+# Features which are enabled by default for VSR/GMS requirement
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.enabled=true
 
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.enabled=true
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.userspace.snapshots.enabled=true
+
+# Tunables for VABC
+BOARD_VABC_IO_URING_ENABLE ?= true
+BOARD_VABC_XOR_ENABLE ?= true
+BOARD_VABC_BATCH_WRITES_ENABLE ?= true
+
+
+ifeq ($(BOARD_VABC_IO_URING_ENABLE),true)
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.io_uring.enabled=true
+endif
+ifeq ($(BOARD_VABC_XOR_ENABLE),true)
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.xor.enabled=true
+endif
+ifeq ($(BOARD_VABC_BATCH_WRITES_ENABLE),true)
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.batch_writes=true
+endif
 
 # Enabling this property, will improve OTA install time
 # but will use an additional CPU core
