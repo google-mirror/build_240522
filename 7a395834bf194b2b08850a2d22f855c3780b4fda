@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adbae6e2_43fd815d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-09-15T14:47:26Z",
+      "side": 1,
+      "message": "We don\u0027t yet have confirmation that testing has confirmed -next is healthy.  So I just want to -1 to avoid accidental submission for now.",
+      "revId": "7a395834bf194b2b08850a2d22f855c3780b4fda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
