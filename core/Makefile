@@ -5160,14 +5160,12 @@ my_board_extracted_kernel := true
 endif # BOARD_KERNEL_CONFIG_FILE
 endif # BOARD_KERNEL_VERSION
 
-ifneq ($(my_board_extracted_kernel),true)
 # Tools for decompression that is not in PATH.
 # Check $(EXTRACT_KERNEL) for decompression algorithms supported by the script.
 # Algorithms that are in the script but not in this list will be found in PATH.
 my_decompress_tools := \
     lz4:$(HOST_OUT_EXECUTABLES)/lz4 \
 
-endif # my_board_extracted_kernel
 
 ifneq ($(my_board_extracted_kernel),true)
 ifdef INSTALLED_KERNEL_TARGET
