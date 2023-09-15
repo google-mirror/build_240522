@@ -63,6 +63,30 @@
       },
       "revId": "807a2fa52902602d522ffa4f4e6dff2a09a95f15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ea2d7e_6189c353",
+        "filename": "tools/releasetools/merge/merge_meta.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2023-09-15T06:45:21Z",
+      "side": 1,
+      "message": "Tested patch set#4 using Pixel and Cuttlefish, both are able to flash and successfully boot.",
+      "parentUuid": "eee6e9b9_4e21bada",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 5
+      },
+      "revId": "807a2fa52902602d522ffa4f4e6dff2a09a95f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
