@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc4f22b2_4ce09515",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-09-15T06:27:57Z",
+      "side": 1,
+      "message": "nit: private vars should be lowercase.",
+      "range": {
+        "startLine": 85,
+        "startChar": 17,
+        "endLine": 85,
+        "endChar": 28
+      },
+      "revId": "98bedd885428326ccda078b01c8bc6756b6a4459",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
