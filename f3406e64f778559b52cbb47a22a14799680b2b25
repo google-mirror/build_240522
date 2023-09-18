@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03daa2e9_f528082b",
+        "filename": "tools/BUILD.bazel",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-18T18:00:07Z",
+      "side": 1,
+      "message": "Optional: I think it would be better if we didn\u0027t have this BUILD file at all, and just bp2build\u0027d the modules.",
+      "revId": "f3406e64f778559b52cbb47a22a14799680b2b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "248dd694_4dee3451",
+        "filename": "tools/auto_gen_test_config.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-18T18:00:07Z",
+      "side": 1,
+      "message": "Could we use `argparse` instead?",
+      "revId": "f3406e64f778559b52cbb47a22a14799680b2b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2403b779_60c553da",
+        "filename": "tools/auto_gen_test_config.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-18T18:00:07Z",
+      "side": 1,
+      "message": "Is there anything stopping us from adding the ability to dump a real xml file to aapt2? (aside from more work, probably not for this cl)",
+      "revId": "f3406e64f778559b52cbb47a22a14799680b2b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80723366_5fc2abf8",
+        "filename": "tools/auto_gen_test_config.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-18T18:00:07Z",
+      "side": 1,
+      "message": "nit: not necessary",
+      "range": {
+        "startLine": 73,
+        "startChar": 26,
+        "endLine": 73,
+        "endChar": 38
+      },
+      "revId": "f3406e64f778559b52cbb47a22a14799680b2b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
