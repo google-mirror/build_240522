@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14078d88_55789048",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-09-18T11:30:49Z",
+      "side": 1,
+      "message": "Ignore the lint failure - it\u0027s necessary for the diff test.",
+      "revId": "9af1bad5eb28b94f5218e6236bc2b7fe96e5bc82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
