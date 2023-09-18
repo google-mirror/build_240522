@@ -17,6 +17,7 @@
 """A tool to generate TradeFed test config file.
 """
 
+import re
 import os
 import shutil
 import sys
@@ -44,7 +45,7 @@ def main(argv):
   """
   if len(argv) != 4 and len(argv) != 6:
     sys.stderr.write(
-        'Invalid arguments. The script requires 4 arguments for file paths: '
+        f'Invalid arguments: {argv}. The script requires 4 arguments for file paths: '
         'target_config android_manifest empty_config '
         'instrumentation_test_config_template '
         'and 2 optional arguments for extra configs: '
@@ -57,27 +58,57 @@ def main(argv):
   instrumentation_test_config_template = argv[3]
   extra_configs = '\n'.join(argv[5].split('\\n')) if len(argv) == 6 else ''
 
-  manifest = parse(android_manifest)
-  instrumentation_elements = manifest.getElementsByTagName('instrumentation')
-  manifest_elements = manifest.getElementsByTagName('manifest')
-  if len(instrumentation_elements) != 1 or len(manifest_elements) != 1:
-    # Failed to locate instrumentation or manifest element in AndroidManifest.
-    # file. Empty test config file will be created.
-    shutil.copyfile(empty_config, target_config)
-    return 0
-
   module = os.path.splitext(os.path.basename(target_config))[0]
-  instrumentation = instrumentation_elements[0]
-  manifest = manifest_elements[0]
-  if ATTRIBUTE_LABEL in instrumentation.attributes:
-    label = instrumentation.attributes[ATTRIBUTE_LABEL].value
-  else:
+
+  if android_manifest.endswith(".xmltree"):
     label = module
-  runner = instrumentation.attributes[ATTRIBUTE_RUNNER].value
-  package = manifest.attributes[ATTRIBUTE_PACKAGE].value
+    with open(android_manifest, encoding="utf-8") as manifest:
+      # e.g. A: package="android.test.example.helloworld" (Raw: "android.test.example.helloworld")
+      #                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      pattern = re.compile(r"\(Raw:\s\"(.*)\"\)$")
+      curr_element = None
+      for line in manifest.readlines():
+        curr_line = line.strip()
+        if curr_line.startswith("E:"):
+          # e.g. "E: instrumentation (line=9)"
+          #          ^^^^^^^^^^^^^^^
+          curr_element = curr_line.split(" ")[1]
+        if curr_element == "instrumentation":
+          if ATTRIBUTE_RUNNER in curr_line:
+            runner =  re.findall(pattern, curr_line)[0]
+          if ATTRIBUTE_LABEL in curr_line:
+            label = re.findall(pattern, curr_line)[0]
+        if curr_element == "manifest":
+          if ATTRIBUTE_PACKAGE in curr_line:
+            package = re.findall(pattern, curr_line)[0]
+
+    if not (runner and label and package):
+      # Failed to locate instrumentation or manifest element in AndroidManifest.
+      # file. Empty test config file will be created.
+      shutil.copyfile(empty_config, target_config)
+      return 0
+  else:
+    manifest = parse(android_manifest)
+    instrumentation_elements = manifest.getElementsByTagName('instrumentation')
+    manifest_elements = manifest.getElementsByTagName('manifest')
+    if len(instrumentation_elements) != 1 or len(manifest_elements) != 1:
+      # Failed to locate instrumentation or manifest element in AndroidManifest.
+      # file. Empty test config file will be created.
+      shutil.copyfile(empty_config, target_config)
+      return 0
+
+    instrumentation = instrumentation_elements[0]
+    manifest = manifest_elements[0]
+    if ATTRIBUTE_LABEL in instrumentation.attributes:
+      label = instrumentation.attributes[ATTRIBUTE_LABEL].value
+    else:
+      label = module
+    runner = instrumentation.attributes[ATTRIBUTE_RUNNER].value
+    package = manifest.attributes[ATTRIBUTE_PACKAGE].value
+
   test_type = ('InstrumentationTest'
-               if runner.endswith('.InstrumentationTestRunner')
-               else 'AndroidJUnitTest')
+              if runner.endswith('.InstrumentationTestRunner')
+              else 'AndroidJUnitTest')
 
   with open(instrumentation_test_config_template) as template:
     config = template.read()
