@@ -213,6 +213,36 @@ include $(BUILD_PHONY_PACKAGE)
 _vndk_versions :=
 
 #####################################################################
+# core_modules, which were previously installed with VNDK libraries,
+# but need to be still installed after VNDK deprecation.
+include $(CLEAR_VARS)
+LOCAL_MODULE := core_modules
+LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0
+LOCAL_LICENSE_CONDITIONS := notice
+LOCAL_NOTICE_FILE := build/soong/licenses/LICENSE
+
+# Filter LLNDK libs moved to APEX to avoid pulling them into /system/LIB
+LOCAL_REQUIRED_MODULES := \
+    $(filter-out $(LLNDK_MOVED_TO_APEX_LIBRARIES),$(LLNDK_LIBRARIES))
+
+# Include former VNDK-Core and VNDK-SP modules as vendor variant
+VENDOR_ESSENTIAL_MODULES := libbase.vendor \
+                            libc++.vendor \
+                            libcutils.vendor \
+                            libhidlbase.vendor \
+                            libutils.vendor \
+                            android.hidl.memory@1.0.vendor \
+                            android.hidl.memory@1.0-impl.vendor \
+
+LOCAL_REQUIRED_MODULES += \
+    $(VENDOR_ESSENTIAL_MODULES)
+
+LOCAL_ADDITIONAL_DEPENDENCIES += $(call module-built-files,$(VENDOR_ESSENTIAL_MODULES))
+
+include $(BUILD_PHONY_PACKAGE)
+VENDOR_ESSENTIAL_MODULES :=
+
+#####################################################################
 # skip_mount.cfg, read by init to skip mounting some partitions when GSI is used.
 
 include $(CLEAR_VARS)
