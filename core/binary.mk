@@ -145,14 +145,20 @@ endif
 ifneq (,$(strip $(foreach dir,$(NATIVE_COVERAGE_PATHS),$(filter $(dir)%,$(LOCAL_PATH)))))
 ifeq (,$(strip $(foreach dir,$(NATIVE_COVERAGE_EXCLUDE_PATHS),$(filter $(dir)%,$(LOCAL_PATH)))))
   my_native_coverage := true
+  my_clang_coverage := true
 else
   my_native_coverage := false
+  my_clang_coverage := false
 endif
 else
   my_native_coverage := false
+  my_clang_coverage := false
 endif
 ifneq ($(NATIVE_COVERAGE),true)
   my_native_coverage := false
+endif
+ifneq ($(CLANG_COVERAGE),true)
+  my_clang_coverage := false
 endif
 
 # Exclude directories from checking allowed manual binder interface lists.
@@ -270,6 +276,7 @@ ifneq ($(LOCAL_SDK_VERSION),)
   ifneq ($(my_ndk_api),current)
     ifeq ($(call math_lt, $(my_ndk_api),23),true)
       my_native_coverage := false
+      my_clang_coverage := false
     endif
   endif
 endif
@@ -284,6 +291,33 @@ ifeq ($(NATIVE_COVERAGE),true)
       else
         my_whole_static_libraries += libprofile-extras_ndk
       endif
+    endif
+  endif
+endif
+
+ifeq ($(CLANG_COVERAGE),true)
+  ifndef LOCAL_IS_HOST_MODULE
+    my_ldflags += -Wl,--no-as-needed
+
+    ifneq ($(LOCAL_MODULE_CLASS),STATIC_LIBRARIES)
+      my_whole_static_libraries += libclang_rt.profile
+    endif
+  endif
+  ifeq ($(my_clang_coverage),true)
+    my_profile_instr_generate := -fprofile-instr-generate=/data/misc/trace/clang-%p-%m.profraw
+    ifeq ($(CLANG_COVERAGE_CONTINUOUS_MODE),true)
+      my_cflags += -mllvm -runtime-counter-relocation
+      my_ldflags += -mllvm -runtime-counter-relocation
+      my_profile_instr_generate := -fprofile-instr-generate=/data/misc/trace/clang%c-%p-%m.profraw
+    endif
+
+    my_profile_instr_generate += -fcoverage-mapping -Wno-pass-failed -D__ANDROID_CLANG_COVERAGE__
+    my_cflags += $(my_profile_instr_generate) -Wno-frame-larger-than=
+    my_ldflags += $(my_profile_instr_generate)
+
+    ifneq ($(filter hwaddress,$(my_sanitize)),)
+      my_cflags += -mllvm -hwasan-globals=0
+      my_ldflags += -mllvm -hwasan-globals=0
     endif
   endif
 endif
