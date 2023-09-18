@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcc3877d_51cf4ae5",
+        "filename": "target/product/virtual_ab_ota/vabc_features.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-09-18T20:50:23Z",
+      "side": 1,
+      "message": "`BOARD_*` variables are usually set in a `BoardConfig.mk` file, which hasn\u0027t been parsed yet when product makefiles are being parsed.",
+      "revId": "4235290b59720628178915bacb35191e00d1371e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
