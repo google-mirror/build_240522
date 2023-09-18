@@ -44,7 +44,7 @@ def main(argv):
   """
   if len(argv) != 4 and len(argv) != 6:
     sys.stderr.write(
-        'Invalid arguments. The script requires 4 arguments for file paths: '
+        f'Invalid arguments: {argv}. The script requires 4 arguments for file paths: '
         'target_config android_manifest empty_config '
         'instrumentation_test_config_template '
         'and 2 optional arguments for extra configs: '
