@@ -30,6 +30,24 @@ MANIFEST_INVALID = """<?xml version="1.0" encoding="utf-8"?>
 </manifest>
 """
 
+XMLTREE_JUNIT_TEST = """N: android=http://schemas.android.com/apk/res/android (line=2)
+  E: manifest (line=2)
+    A: package="com.android.my.tests.x" (Raw: "com.android.my.tests.x")
+      E: instrumentation (line=9)
+        A: http://schemas.android.com/apk/res/android:label(0x01010001)="My Tests" (Raw: "My Tests")
+        A: http://schemas.android.com/apk/res/android:name(0x01010003)="androidx.test.runner.AndroidJUnitRunner" (Raw: "androidx.test.runner.AndroidJUnitRunner")
+        A: http://schemas.android.com/apk/res/android:targetPackage(0x01010021)="com.android.my.tests" (Raw: "com.android.my.tests")
+"""
+
+XMLTREE_INSTRUMENTATION_TEST = """N: android=http://schemas.android.com/apk/res/android (line=2)
+  E: manifest (line=2)
+    A: package="com.android.my.tests.x" (Raw: "com.android.my.tests.x")
+      E: instrumentation (line=9)
+        A: http://schemas.android.com/apk/res/android:label(0x01010001)="My Tests" (Raw: "My Tests")
+        A: http://schemas.android.com/apk/res/android:name(0x01010003)="android.test.InstrumentationTestRunner" (Raw: "android.test.InstrumentationTestRunner")
+        A: http://schemas.android.com/apk/res/android:targetPackage(0x01010021)="com.android.my.tests" (Raw: "com.android.my.tests")
+"""
+
 MANIFEST_JUNIT_TEST = """<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.android.my.tests.x">
@@ -120,6 +138,7 @@ class AutoGenTestConfigUnittests(unittest.TestCase):
     self.test_dir = tempfile.mkdtemp()
     self.config_file = os.path.join(self.test_dir, TEST_MODULE + '.config')
     self.manifest_file = os.path.join(self.test_dir, 'AndroidManifest.xml')
+    self.xmltree_file = os.path.join(self.test_dir, TEST_MODULE + '.xmltree')
 
   def tearDown(self):
     """Cleanup the test directory."""
@@ -162,6 +181,35 @@ class AutoGenTestConfigUnittests(unittest.TestCase):
 
     argv = [self.config_file,
             self.manifest_file,
+            EMPTY_TEST_CONFIG,
+            INSTRUMENTATION_TEST_CONFIG_TEMPLATE]
+    auto_gen_test_config.main(argv)
+    with open(self.config_file) as config_file:
+      self.assertEqual(
+          config_file.read(), EXPECTED_INSTRUMENTATION_TEST_CONFIG)
+
+  def testCreateJUnitTestConfigWithXMLTree(self):
+    """Test creating test config for AndroidJUnitTest.
+    """
+    with open(self.xmltree_file, 'w') as f:
+      f.write(XMLTREE_JUNIT_TEST)
+
+    argv = [self.config_file,
+            self.xmltree_file,
+            EMPTY_TEST_CONFIG,
+            INSTRUMENTATION_TEST_CONFIG_TEMPLATE]
+    auto_gen_test_config.main(argv)
+    with open(self.config_file) as config_file:
+      self.assertEqual(config_file.read(), EXPECTED_JUNIT_TEST_CONFIG)
+
+  def testCreateInstrumentationTestConfigWithXMLTree(self):
+    """Test creating test config for InstrumentationTest.
+    """
+    with open(self.xmltree_file, 'w') as f:
+      f.write(XMLTREE_INSTRUMENTATION_TEST)
+
+    argv = [self.config_file,
+            self.xmltree_file,
             EMPTY_TEST_CONFIG,
             INSTRUMENTATION_TEST_CONFIG_TEMPLATE]
     auto_gen_test_config.main(argv)
