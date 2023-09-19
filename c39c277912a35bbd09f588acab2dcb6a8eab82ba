@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64eed3d0_2ebd9706",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-19T09:42:57Z",
+      "side": 1,
+      "message": "I think this name is too good to be used for these files. vendor_essential_libs?",
+      "range": {
+        "startLine": 219,
+        "startChar": 16,
+        "endLine": 219,
+        "endChar": 28
+      },
+      "revId": "c39c277912a35bbd09f588acab2dcb6a8eab82ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
