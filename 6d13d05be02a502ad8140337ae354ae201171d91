@@ -16,6 +16,24 @@
       "message": "Can you add more context in the commit message explaining what this patch does and why it is necessary?",
       "revId": "6d13d05be02a502ad8140337ae354ae201171d91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b688d85_e3524d86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1905021
+      },
+      "writtenOn": "2023-09-19T00:54:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62cbcc35_eb94dae5",
+      "revId": "6d13d05be02a502ad8140337ae354ae201171d91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
