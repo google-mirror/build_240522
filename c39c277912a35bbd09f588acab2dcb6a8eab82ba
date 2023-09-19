@@ -22,6 +22,52 @@
       },
       "revId": "c39c277912a35bbd09f588acab2dcb6a8eab82ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34fc307f_6535613f",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-09-19T09:54:50Z",
+      "side": 1,
+      "message": "`LOCAL_REQUIRED_MODULES +\u003d`?",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 27
+      },
+      "revId": "c39c277912a35bbd09f588acab2dcb6a8eab82ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2511ccd4_1bcf2ed6",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-09-19T09:54:50Z",
+      "side": 1,
+      "message": "I think they are already listed as required modules from each module that is using these. Why do we list them here again?",
+      "range": {
+        "startLine": 229,
+        "startChar": 28,
+        "endLine": 235,
+        "endChar": 63
+      },
+      "revId": "c39c277912a35bbd09f588acab2dcb6a8eab82ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
