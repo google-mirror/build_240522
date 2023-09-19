@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2290378d_24a076ec",
+        "filename": "tools/auto_gen_test_config.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-19T18:02:02Z",
+      "side": 1,
+      "message": "Optional: Ideally we wouldn\u0027t pass argv. Right now we\u0027re hiding the binary name from argparse which affects it\u0027s help output because we\u0027re passing sys.argv[1:]. The tests should call a function that accepts concrete data rather than command line arguments.",
+      "range": {
+        "startLine": 62,
+        "startChar": 27,
+        "endLine": 62,
+        "endChar": 31
+      },
+      "revId": "4bccadd460dd4c33fd7cb7ad2d976c8e5e8598da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
