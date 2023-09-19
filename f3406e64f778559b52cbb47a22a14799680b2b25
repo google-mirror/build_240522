@@ -55,6 +55,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a6abe279_61db1f12",
+        "filename": "tools/auto_gen_test_config.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-09-19T06:37:33Z",
+      "side": 1,
+      "message": "aosp/2756029",
+      "parentUuid": "d89bfdb6_3d29dae6",
+      "revId": "f3406e64f778559b52cbb47a22a14799680b2b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2403b779_60c553da",
         "filename": "tools/auto_gen_test_config.py",
         "patchSetId": 10
@@ -125,6 +143,30 @@
       "side": 1,
       "message": "Will remove in the follow up. Leaving unresolved.",
       "parentUuid": "80723366_5fc2abf8",
+      "range": {
+        "startLine": 73,
+        "startChar": 26,
+        "endLine": 73,
+        "endChar": 38
+      },
+      "revId": "f3406e64f778559b52cbb47a22a14799680b2b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82d543b9_f8e47439",
+        "filename": "tools/auto_gen_test_config.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-09-19T06:37:33Z",
+      "side": 1,
+      "message": "aosp/2756029",
+      "parentUuid": "d97875da_96c2ceb4",
       "range": {
         "startLine": 73,
         "startChar": 26,
