@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7081fe95_0b78d28b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-09-19T18:18:40Z",
+      "side": 1,
+      "message": "Note we also have https://android-review.git.corp.google.com/c/platform/build/+/2751295 as a revert of this.  I don\u0027t have an opinion (they\u0027re both Gerrit reverts) other than I\u0027d like to see:\n\n```\nBug: 294161396\n```\n\nin the commit message so it will be associated with the bug.",
+      "revId": "24812adae21cd07401c322c45359cc822bc6a882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e09e43bd_7e08f17d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-09-19T18:18:40Z",
+      "side": 1,
+      "message": "Note we also have https://android-review.git.corp.google.com/c/platform/build/+/2751295 as a revert of this.  I don\u0027t have an opinion other than I\u0027d like to see:\n\n```\nBug:",
+      "revId": "24812adae21cd07401c322c45359cc822bc6a882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
