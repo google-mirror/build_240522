@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf1fff17_e1a15e70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-19T14:41:56Z",
+      "side": 1,
+      "message": "(I\u0027m assuming that `$(call add_soong_config_var_value,ANDROID,release_avf_enable_dice_changes,$(RELEASE_AVF_ENABLE_LLPVM_CHANGES))` was by accident rather than design.)",
+      "revId": "efcd43d7e60cd1a9b0402ce77a356aeab9b35f44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
