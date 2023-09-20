@@ -235,11 +235,19 @@ include $(BUILD_SYSTEM)/link_type.mk
 endif # !LOCAL_IS_HOST_MODULE
 
 ifeq (,$(filter tests,$(LOCAL_MODULE_TAGS)))
+  ifdef LOCAL_SOONG_OVERRIDEN_MANIFEST_PACKAGE_NAME
+    enforce_rro_is_manifest_package_name := true
+    enforce_rro_manifest_package_info := $(LOCAL_SOONG_OVERRIDEN_MANIFEST_PACKAGE_NAME)
+  else
+    enforce_rro_is_manifest_package_name := false
+    enforce_rro_manifest_package_info := $(LOCAL_FULL_MANIFEST_FILE)
+  endif
+
   ifneq (,$(LOCAL_SOONG_DEVICE_RRO_DIRS)$(LOCAL_SOONG_AUTO_GENERATE_VENDOR_RRO_DIRS))
     $(call append_enforce_rro_sources, \
         $(my_register_name), \
-        false, \
-        $(LOCAL_FULL_MANIFEST_FILE), \
+        $(enforce_rro_is_manifest_package_name), \
+        $(enforce_rro_manifest_package_info), \
         $(if $(LOCAL_EXPORT_PACKAGE_RESOURCES),true,false), \
         $(LOCAL_SOONG_DEVICE_RRO_DIRS) $(LOCAL_SOONG_AUTO_GENERATE_VENDOR_RRO_DIRS), \
         vendor \
@@ -249,8 +257,8 @@ ifeq (,$(filter tests,$(LOCAL_MODULE_TAGS)))
   ifneq (,$(LOCAL_SOONG_AUTO_GENERATE_SYSTEM_EXT_RRO_DIRS))
     $(call append_enforce_rro_sources, \
         $(my_register_name), \
-        false, \
-        $(LOCAL_FULL_MANIFEST_FILE), \
+        $(enforce_rro_is_manifest_package_name), \
+        $(enforce_rro_manifest_package_info), \
         $(if $(LOCAL_EXPORT_PACKAGE_RESOURCES),true,false), \
         $(LOCAL_SOONG_AUTO_GENERATE_SYSTEM_EXT_RRO_DIRS), \
         systemext \
@@ -260,8 +268,8 @@ ifeq (,$(filter tests,$(LOCAL_MODULE_TAGS)))
   ifneq (,$(LOCAL_SOONG_PRODUCT_RRO_DIRS)$(LOCAL_SOONG_AUTO_GENERATE_PRODUCT_RRO_DIRS))
     $(call append_enforce_rro_sources, \
         $(my_register_name), \
-        false, \
-        $(LOCAL_FULL_MANIFEST_FILE), \
+        $(enforce_rro_is_manifest_package_name), \
+        $(enforce_rro_manifest_package_info), \
         $(if $(LOCAL_EXPORT_PACKAGE_RESOURCES),true,false), \
         $(LOCAL_SOONG_PRODUCT_RRO_DIRS) $(LOCAL_SOONG_AUTO_GENERATE_PRODUCT_RRO_DIRS), \
         product \
@@ -271,8 +279,8 @@ ifeq (,$(filter tests,$(LOCAL_MODULE_TAGS)))
   ifneq (,$(LOCAL_SOONG_AUTO_GENERATE_OEM_RRO_DIRS))
     $(call append_enforce_rro_sources, \
         $(my_register_name), \
-        false, \
-        $(LOCAL_FULL_MANIFEST_FILE), \
+        $(enforce_rro_is_manifest_package_name), \
+        $(enforce_rro_manifest_package_info), \
         $(if $(LOCAL_EXPORT_PACKAGE_RESOURCES),true,false), \
         $(LOCAL_SOONG_AUTO_GENERATE_OEM_RRO_DIRS), \
         oem \
@@ -282,8 +290,8 @@ ifeq (,$(filter tests,$(LOCAL_MODULE_TAGS)))
   ifneq (,$(LOCAL_SOONG_AUTO_GENERATE_ODM_RRO_DIRS))
     $(call append_enforce_rro_sources, \
         $(my_register_name), \
-        false, \
-        $(LOCAL_FULL_MANIFEST_FILE), \
+        $(enforce_rro_is_manifest_package_name), \
+        $(enforce_rro_manifest_package_info), \
         $(if $(LOCAL_EXPORT_PACKAGE_RESOURCES),true,false), \
         $(LOCAL_SOONG_AUTO_GENERATE_ODM_RRO_DIRS), \
         odm \
