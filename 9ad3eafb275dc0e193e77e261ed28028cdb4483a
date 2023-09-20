@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f11de78d_5bcceb81",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 5944,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-09-20T02:29:53Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 5944,
+        "startChar": 57,
+        "endLine": 5944,
+        "endChar": 63
+      },
+      "revId": "9ad3eafb275dc0e193e77e261ed28028cdb4483a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
