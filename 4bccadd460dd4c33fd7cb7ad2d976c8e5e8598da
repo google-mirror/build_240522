@@ -22,6 +22,30 @@
       },
       "revId": "4bccadd460dd4c33fd7cb7ad2d976c8e5e8598da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e2cdb32_c4583a3f",
+        "filename": "tools/auto_gen_test_config.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-09-20T09:44:00Z",
+      "side": 1,
+      "message": "Ack, keeping this change small so I\u0027ll skip that for now.",
+      "parentUuid": "2290378d_24a076ec",
+      "range": {
+        "startLine": 62,
+        "startChar": 27,
+        "endLine": 62,
+        "endChar": 31
+      },
+      "revId": "4bccadd460dd4c33fd7cb7ad2d976c8e5e8598da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
