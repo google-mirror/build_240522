@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3697772_ef0fdcb5",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-09-20T01:29:38Z",
+      "side": 1,
+      "message": "I tried to avoid \u0027vendor\u0027 naming because this package includes llndk installed in system image, but I cannot come up with better name 😞. Renamed as `vendor_essential_modules`.",
+      "parentUuid": "64eed3d0_2ebd9706",
+      "range": {
+        "startLine": 219,
+        "startChar": 16,
+        "endLine": 219,
+        "endChar": 28
+      },
+      "revId": "c39c277912a35bbd09f588acab2dcb6a8eab82ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34fc307f_6535613f",
         "filename": "target/product/gsi/Android.mk",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-19T09:54:50Z",
       "side": 1,
       "message": "`LOCAL_REQUIRED_MODULES +\u003d`?",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 27
+      },
+      "revId": "c39c277912a35bbd09f588acab2dcb6a8eab82ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bb2e9fd_13ce8348",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-09-20T01:29:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34fc307f_6535613f",
       "range": {
         "startLine": 229,
         "startChar": 0,
@@ -60,6 +108,30 @@
       "writtenOn": "2023-09-19T09:54:50Z",
       "side": 1,
       "message": "I think they are already listed as required modules from each module that is using these. Why do we list them here again?",
+      "range": {
+        "startLine": 229,
+        "startChar": 28,
+        "endLine": 235,
+        "endChar": 63
+      },
+      "revId": "c39c277912a35bbd09f588acab2dcb6a8eab82ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ebe9cc0_c478275b",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-09-20T01:29:38Z",
+      "side": 1,
+      "message": "Because if these libraries are not used in vendor, these libraries will be installed from dependency in `generic_system.mk`, and this would cause build error because there are vendor modules installed from system dependency. Also, libc++ dependency somewhat omitted in the soong dependency.",
+      "parentUuid": "2511ccd4_1bcf2ed6",
       "range": {
         "startLine": 229,
         "startChar": 28,
