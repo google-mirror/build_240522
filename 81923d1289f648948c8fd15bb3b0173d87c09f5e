@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6de0ba69_65b9bb72",
+        "filename": "core/main.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-09-21T06:48:36Z",
+      "side": 1,
+      "message": "Could you update this as well?",
+      "range": {
+        "startLine": 223,
+        "startChar": 2,
+        "endLine": 223,
+        "endChar": 28
+      },
+      "revId": "81923d1289f648948c8fd15bb3b0173d87c09f5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52519f1c_2224e577",
+        "filename": "core/main.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-09-21T06:48:36Z",
+      "side": 1,
+      "message": "This, too.",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 342,
+        "endChar": 26
+      },
+      "revId": "81923d1289f648948c8fd15bb3b0173d87c09f5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
