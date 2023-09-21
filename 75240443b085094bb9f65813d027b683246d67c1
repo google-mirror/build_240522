@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7aa1e99_c36ab8ff",
+        "filename": "core/main.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 1239,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-21T04:55:35Z",
+      "side": 1,
+      "message": "generally make vars are \"true\" when true, and an empty string when false. So I\u0027d consider changing this to `$(if $(filter true,$(KEEP_VNDK)),,llndk_in_system)`",
+      "range": {
+        "startLine": 1239,
+        "startChar": 7,
+        "endLine": 1239,
+        "endChar": 35
+      },
+      "revId": "75240443b085094bb9f65813d027b683246d67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b54bc8d5_1217f05e",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-09-21T04:55:35Z",
+      "side": 1,
+      "message": "If might be clearer if you make `vndk_package` require `llndk_in_system` now.",
+      "revId": "75240443b085094bb9f65813d027b683246d67c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
