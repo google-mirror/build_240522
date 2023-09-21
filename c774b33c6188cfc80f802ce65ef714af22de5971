@@ -22,6 +22,30 @@
       },
       "revId": "c774b33c6188cfc80f802ce65ef714af22de5971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db157bd5_a18751d8",
+        "filename": "target/board/emulator_arm64/BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2005646
+      },
+      "writtenOn": "2023-09-21T21:59:29Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "c65f1bb1_ec194518",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 30
+      },
+      "revId": "c774b33c6188cfc80f802ce65ef714af22de5971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

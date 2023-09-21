@@ -52,6 +52,24 @@
       "parentUuid": "3623a722_5d25408b",
       "revId": "49e0a2b94f4a34070110ee15684050c2dd622566",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "599012e4_bf961c9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005646
+      },
+      "writtenOn": "2023-09-21T21:59:29Z",
+      "side": 1,
+      "message": "`sdk_phone64_arm64` does work. Hm, when should one use `sdk_phone64` vs `sdk_phone` variants?",
+      "parentUuid": "2ffbda98_306bfbde",
+      "revId": "49e0a2b94f4a34070110ee15684050c2dd622566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
