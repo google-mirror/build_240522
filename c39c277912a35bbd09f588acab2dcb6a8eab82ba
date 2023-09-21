@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ea1312c_585cad24",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-09-21T02:49:56Z",
+      "side": 1,
+      "message": "Update - package name has been changed into `llndk_in_system`.",
+      "parentUuid": "d3697772_ef0fdcb5",
+      "range": {
+        "startLine": 219,
+        "startChar": 16,
+        "endLine": 219,
+        "endChar": 28
+      },
+      "revId": "c39c277912a35bbd09f588acab2dcb6a8eab82ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34fc307f_6535613f",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Because if these libraries are not used in vendor, these libraries will be installed from dependency in `generic_system.mk`, and this would cause build error because there are vendor modules installed from system dependency. Also, libc++ dependency somewhat omitted in the soong dependency.",
       "parentUuid": "2511ccd4_1bcf2ed6",
+      "range": {
+        "startLine": 229,
+        "startChar": 28,
+        "endLine": 235,
+        "endChar": 63
+      },
+      "revId": "c39c277912a35bbd09f588acab2dcb6a8eab82ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "132d18ba_4e0e03a8",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-09-21T02:49:56Z",
+      "side": 1,
+      "message": "As discussed, these will be removed and `android.hidl.memory@1.0-impl.vendor` will be moved into `base_vendor.mk`.",
+      "parentUuid": "0ebe9cc0_c478275b",
       "range": {
         "startLine": 229,
         "startChar": 28,
