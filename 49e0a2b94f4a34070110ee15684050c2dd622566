@@ -34,6 +34,24 @@
       "parentUuid": "77140ac8_991d43e2",
       "revId": "49e0a2b94f4a34070110ee15684050c2dd622566",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ffbda98_306bfbde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2023-09-21T21:40:23Z",
+      "side": 1,
+      "message": "Could you please try sdk_phone64_arm64? We don\u0027t have a host to run sdk_phone_arm64 on, so it might require some care like you just pointed.",
+      "parentUuid": "3623a722_5d25408b",
+      "revId": "49e0a2b94f4a34070110ee15684050c2dd622566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
