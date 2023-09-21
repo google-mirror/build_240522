@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77140ac8_991d43e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005646
+      },
+      "writtenOn": "2023-09-21T21:19:57Z",
+      "side": 1,
+      "message": "Posting this mainly as a RFC as I don\u0027t have the historical context on why `TARGET_NO_KERNEL` was originally set to false for `emulator_arm64`. Have I missed anything that might break with this change?\n\nCurrently `sdk_phone_arm64` fails to compile for me with the error mentioned in the commit message, and with this CL it builds and runs successfully (although I did have to make a couple of minor fixes in `external/qemu` to get this working on x86 hosts: aosp/2758345, aosp/2759488).",
+      "revId": "49e0a2b94f4a34070110ee15684050c2dd622566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
