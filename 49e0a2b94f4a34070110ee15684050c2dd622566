@@ -70,6 +70,24 @@
       "parentUuid": "2ffbda98_306bfbde",
       "revId": "49e0a2b94f4a34070110ee15684050c2dd622566",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd48f1b0_25929fd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2023-09-22T06:44:30Z",
+      "side": 1,
+      "message": "`sdk_phone64` is 64bit-only, `sdk_phone` is 32bit+64bit. The latter is deprecated.",
+      "parentUuid": "599012e4_bf961c9f",
+      "revId": "49e0a2b94f4a34070110ee15684050c2dd622566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
