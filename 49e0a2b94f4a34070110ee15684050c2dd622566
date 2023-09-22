@@ -88,6 +88,24 @@
       "parentUuid": "599012e4_bf961c9f",
       "revId": "49e0a2b94f4a34070110ee15684050c2dd622566",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d75bdcec_5084e9ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005646
+      },
+      "writtenOn": "2023-09-22T15:13:29Z",
+      "side": 1,
+      "message": "Given that `emulator_arm64` is deprecated, would we still want to merge this CL or is the plan to just remove that board config at some point?",
+      "parentUuid": "dd48f1b0_25929fd7",
+      "revId": "49e0a2b94f4a34070110ee15684050c2dd622566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
