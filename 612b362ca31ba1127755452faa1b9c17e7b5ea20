@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ef6749a_2cad3e7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037988
+      },
+      "writtenOn": "2023-09-23T05:26:19Z",
+      "side": 1,
+      "message": "Confirmed this revert addresses b/301547660 in test build P63056319.",
+      "revId": "612b362ca31ba1127755452faa1b9c17e7b5ea20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
