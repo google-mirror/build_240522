@@ -72,6 +72,8 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - mmm:        Builds and installs all of the modules in the supplied directories, and their
               dependencies.
               To limit the modules being built use the syntax: mmm dir/:target1,target2.
+- mu:         Same as 'm' and also updates your device with the changes.
+- mmu:        Same as 'm' and also updates your device with the changes.
 - mma:        Same as 'mm'
 - mmma:       Same as 'mmm'
 - provision:  Flash device with all required partitions. Options will be passed on to fastboot.
@@ -1880,10 +1882,21 @@ function m()
     _trigger_build "all-modules" "$@"
 )
 
+function mu()
+(
+    _trigger_build "all-modules" "$@" && adevice update --verbose=none
+)
+
 function mm()
 (
     _trigger_build "modules-in-a-dir-no-deps" "$@"
 )
+
+function mmu()
+(
+    _trigger_build "modules-in-a-dir-no-deps" "$@" && adevice update --verbose=none
+)
+
 
 function mmm()
 (
