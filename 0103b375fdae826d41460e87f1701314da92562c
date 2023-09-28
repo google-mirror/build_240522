@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e580f41f_ae3b3283",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1799018
+      },
+      "writtenOn": "2023-09-28T14:47:53Z",
+      "side": 1,
+      "message": "I think the way how the host side tests get flag values will be affected: https://cs.android.com/android/platform/superproject/main/+/main:platform_testing/libraries/flag-helpers/junit/src_host/android/platform/test/flag/junit/host/DeviceFlags.java;l\u003d150;bpv\u003d0",
+      "revId": "0103b375fdae826d41460e87f1701314da92562c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
