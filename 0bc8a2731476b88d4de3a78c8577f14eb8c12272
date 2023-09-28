@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "270f7132_bd903375",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-09-28T00:04:17Z",
+      "side": 1,
+      "message": "are we sure server configurable flags will retain same value after we ship a vendor image using them?",
+      "revId": "0bc8a2731476b88d4de3a78c8577f14eb8c12272",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
