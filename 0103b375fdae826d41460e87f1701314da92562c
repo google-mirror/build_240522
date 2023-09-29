@@ -16,6 +16,24 @@
       "message": "I think the way how the host side tests get flag values will be affected: https://cs.android.com/android/platform/superproject/main/+/main:platform_testing/libraries/flag-helpers/junit/src_host/android/platform/test/flag/junit/host/DeviceFlags.java;l\u003d150;bpv\u003d0",
       "revId": "0103b375fdae826d41460e87f1701314da92562c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f92591e5_b31c6dc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-09-29T06:32:40Z",
+      "side": 1,
+      "message": "Ooops! Sorry about that. Can you convert to reading /\u003cpartition\u003e/etc/aconfig_flags.pb instead? It contains the same information as the textproto but in binarty protobuf format so you can get rid of any custom textproto parser you have, and use one of the existing libaconfig_*proto* libs instead.",
+      "parentUuid": "e580f41f_ae3b3283",
+      "revId": "0103b375fdae826d41460e87f1701314da92562c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
