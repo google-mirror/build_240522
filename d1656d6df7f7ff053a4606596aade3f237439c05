@@ -33,6 +33,23 @@
       "message": "2388673: Revert \"Switch back to 23823: Switch back to mksh as the default | https://android-review.googlesource.com/c/platform/build/+/23823 mksh as the default\" | https://android-review.googlesource.com/c/platform/build/+/2388673",
       "revId": "d1656d6df7f7ff053a4606596aade3f237439c05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "771e25de_d36876e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1918451
+      },
+      "writtenOn": "2023-09-29T12:13:02Z",
+      "side": 1,
+      "message": "2388673: Revert \"Switch back to 23823: Switch back to mksh as the default | https://android-review.googlesource.com/c/platform/build/+/23823 mksh as the default\" | https://android-review.googlesource.com/c/platform/build/+/2388673",
+      "revId": "d1656d6df7f7ff053a4606596aade3f237439c05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
