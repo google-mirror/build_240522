@@ -16,6 +16,24 @@
       "message": "@joeo@google.com - I\u0027ve changed my CL a bit. Do you want to re-review or can I submit?",
       "revId": "798080b0f3e1964fe6f6340333265b5cfbb36984",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecedfb31_1ea50e1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2023-10-01T02:26:54Z",
+      "side": 1,
+      "message": "Confirmed over chat that this is gtg.",
+      "parentUuid": "6cbf487d_95b452f7",
+      "revId": "798080b0f3e1964fe6f6340333265b5cfbb36984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
