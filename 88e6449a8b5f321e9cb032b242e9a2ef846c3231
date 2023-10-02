@@ -22,6 +22,29 @@
       },
       "revId": "88e6449a8b5f321e9cb032b242e9a2ef846c3231",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae524e5f_9910354b",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-10-02T17:23:56Z",
+      "side": 1,
+      "message": "This is a refactoring change, please move this to a separate CL to keep the commit history clean.",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 50
+      },
+      "revId": "88e6449a8b5f321e9cb032b242e9a2ef846c3231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
