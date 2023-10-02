@@ -20,7 +20,6 @@ import copy
 import datetime
 import errno
 import fnmatch
-from genericpath import isdir
 import getopt
 import getpass
 import gzip
@@ -40,6 +39,8 @@ import tempfile
 import threading
 import time
 import zipfile
+from dataclasses import dataclass
+from genericpath import isdir
 from hashlib import sha1, sha256
 
 import images
@@ -119,6 +120,10 @@ AVB_PARTITIONS = ('boot', 'init_boot', 'dtbo', 'odm', 'product', 'pvmfw', 'recov
 # Chained VBMeta partitions.
 AVB_VBMETA_PARTITIONS = ('vbmeta_system', 'vbmeta_vendor')
 
+# avbtool arguments name
+AVB_ARG_NAME_INCLUDE_DESC_FROM_IMG = '--include_descriptors_from_image'
+AVB_ARG_NAME_CHAIN_PARTITION = '--chain_partition'
+
 # Partitions that should have their care_map added to META/care_map.pb
 PARTITIONS_WITH_CARE_MAP = [
     'system',
@@ -137,6 +142,19 @@ PARTITIONS_WITH_BUILD_PROP = PARTITIONS_WITH_CARE_MAP + ['boot', 'init_boot']
 # See sysprop.mk. If file is moved, add new search paths here; don't remove
 # existing search paths.
 RAMDISK_BUILD_PROP_REL_PATHS = ['system/etc/ramdisk/build.prop']
+
+
+@dataclass
+class AvbChainedPartitionArg:
+  """The required arguments for avbtool --chain_partition."""
+  partition: str
+  rollback_index_location: int
+  pubkey_path: str
+
+  def to_string(self):
+    """Convert to string command arguments."""
+    return '{}:{}:{}'.format(
+        self.partition, self.rollback_index_location, self.pubkey_path)
 
 
 class ErrorCode(object):
@@ -1447,7 +1465,7 @@ def ResolveAVBSigningPathArgs(split_args):
 
 
 def GetAvbPartitionArg(partition, image, info_dict=None):
-  """Returns the VBMeta arguments for partition.
+  """Returns the VBMeta arguments for one partition.
 
   It sets up the VBMeta argument by including the partition descriptor from the
   given 'image', or by configuring the partition as a chained partition.
@@ -1459,7 +1477,7 @@ def GetAvbPartitionArg(partition, image, info_dict=None):
         OPTIONS.info_dict if None has been given.
 
   Returns:
-    A list of VBMeta arguments.
+    A list of VBMeta arguments for one partition.
   """
   if info_dict is None:
     info_dict = OPTIONS.info_dict
@@ -1467,7 +1485,7 @@ def GetAvbPartitionArg(partition, image, info_dict=None):
   # Check if chain partition is used.
   key_path = info_dict.get("avb_" + partition + "_key_path")
   if not key_path:
-    return ["--include_descriptors_from_image", image]
+    return [AVB_ARG_NAME_INCLUDE_DESC_FROM_IMG, image]
 
   # For a non-A/B device, we don't chain /recovery nor include its descriptor
   # into vbmeta.img. The recovery image will be configured on an independent
@@ -1479,7 +1497,50 @@ def GetAvbPartitionArg(partition, image, info_dict=None):
 
   # Otherwise chain the partition into vbmeta.
   chained_partition_arg = GetAvbChainedPartitionArg(partition, info_dict)
-  return ["--chain_partition", chained_partition_arg]
+  return [AVB_ARG_NAME_CHAIN_PARTITION, chained_partition_arg]
+
+
+def GetAvbPartitionsArg(partitions, info_dict=None):
+  """Returns the VBMeta arguments for all AVB partitions.
+
+  It sets up the VBMeta argument by calling GetAvbPartitionArg of all
+  partitions.
+
+  Args:
+    partitions: A dict of all AVB partitions.
+    info_dict: A dict returned by common.LoadInfoDict().
+
+  Returns:
+    A list of VBMeta arguments for all partitions.
+  """
+  valid_args = {
+      AVB_ARG_NAME_INCLUDE_DESC_FROM_IMG: [],
+      AVB_ARG_NAME_CHAIN_PARTITION: []
+  }
+
+  for partition, path in partitions.items():
+    avb_partition_arg = GetAvbPartitionArg(partition, path, info_dict)
+    if not avb_partition_arg:
+      continue
+    arg_name, arg_value = avb_partition_arg
+    assert arg_name in valid_args
+    valid_args[arg_name].append(arg_value)
+
+  avb_args = []
+  for image in valid_args[AVB_ARG_NAME_INCLUDE_DESC_FROM_IMG]:
+    avb_args.extend([AVB_ARG_NAME_INCLUDE_DESC_FROM_IMG, image])
+
+  used_index_loc = set()
+  for chained_partition_arg in valid_args[AVB_ARG_NAME_CHAIN_PARTITION]:
+    if OPTIONS.avb_resolve_rollback_index_location_conflict:
+      while chained_partition_arg.rollback_index_location in used_index_loc:
+        chained_partition_arg.rollback_index_location += 1
+
+    used_index_loc.add(chained_partition_arg.rollback_index_location)
+    avb_args.extend([AVB_ARG_NAME_CHAIN_PARTITION,
+                     chained_partition_arg.to_string()])
+
+  return avb_args
 
 
 def GetAvbChainedPartitionArg(partition, info_dict, key=None):
@@ -1493,8 +1554,8 @@ def GetAvbChainedPartitionArg(partition, info_dict, key=None):
         the key listed in info_dict.
 
   Returns:
-    A string of form "partition:rollback_index_location:key" that can be used to
-    build or verify vbmeta image.
+    An AvbChainedPartitionArg object with rollback_index_location and
+    pubkey_path that can be used to build or verify vbmeta image.
   """
   if key is None:
     key = info_dict["avb_" + partition + "_key_path"]
@@ -1502,7 +1563,10 @@ def GetAvbChainedPartitionArg(partition, info_dict, key=None):
   pubkey_path = ExtractAvbPublicKey(info_dict["avb_avbtool"], key)
   rollback_index_location = info_dict[
       "avb_" + partition + "_rollback_index_location"]
-  return "{}:{}:{}".format(partition, rollback_index_location, pubkey_path)
+  return AvbChainedPartitionArg(
+      partition=partition,
+      rollback_index_location=int(rollback_index_location),
+      pubkey_path=pubkey_path)
 
 
 def _HasGkiCertificationArgs():
@@ -1577,6 +1641,7 @@ def BuildVBMeta(image_path, partitions, name, needed_partitions):
   custom_avb_partitions = ["vbmeta_" + part for part in OPTIONS.info_dict.get(
       "avb_custom_vbmeta_images_partition_list", "").strip().split()]
 
+  avb_partitions = {}
   for partition, path in partitions.items():
     if partition not in needed_partitions:
       continue
@@ -1587,7 +1652,8 @@ def BuildVBMeta(image_path, partitions, name, needed_partitions):
         'Unknown partition: {}'.format(partition)
     assert os.path.exists(path), \
         'Failed to find {} for {}'.format(path, partition)
-    cmd.extend(GetAvbPartitionArg(partition, path))
+    avb_partitions[partition] = path
+  cmd.extend(GetAvbPartitionsArg(avb_partitions))
 
   args = OPTIONS.info_dict.get("avb_{}_args".format(name))
   if args and args.strip():
@@ -1598,7 +1664,7 @@ def BuildVBMeta(image_path, partitions, name, needed_partitions):
       # same location when running this script (we have the input target_files
       # zip only). For such cases, we additionally scan other locations (e.g.
       # IMAGES/, RADIO/, etc) before bailing out.
-      if arg == '--include_descriptors_from_image':
+      if arg == AVB_ARG_NAME_INCLUDE_DESC_FROM_IMG:
         chained_image = split_args[index + 1]
         if os.path.exists(chained_image):
           continue
