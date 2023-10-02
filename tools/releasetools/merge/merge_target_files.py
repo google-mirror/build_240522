@@ -90,6 +90,10 @@ Usage: merge_target_files [args]
   --keep-tmp
       Keep tempoary files for debugging purposes.
 
+  --avb-resolve-rollback-index-location-conflict
+      If provided, resolve the conflict AVB rollback index location when
+      necessary.
+
   The following only apply when using the VSDK to perform dexopt on vendor apps:
 
   --framework-dexpreopt-config
@@ -144,6 +148,7 @@ OPTIONS.allow_duplicate_apkapex_keys = False
 OPTIONS.vendor_otatools = None
 OPTIONS.rebuild_sepolicy = False
 OPTIONS.keep_tmp = False
+OPTIONS.avb_resolve_rollback_index_location_conflict = False
 OPTIONS.framework_dexpreopt_config = None
 OPTIONS.framework_dexpreopt_tools = None
 OPTIONS.vendor_dexpreopt_config = None
@@ -554,6 +559,8 @@ def main():
       OPTIONS.rebuild_sepolicy = True
     elif o == '--keep-tmp':
       OPTIONS.keep_tmp = True
+    elif o == '--avb-resolve-rollback-index-location-conflict':
+      OPTIONS.avb_resolve_rollback_index_location_conflict = True
     elif o == '--framework-dexpreopt-config':
       OPTIONS.framework_dexpreopt_config = a
     elif o == '--framework-dexpreopt-tools':
@@ -593,6 +600,7 @@ def main():
           'vendor-otatools=',
           'rebuild-sepolicy',
           'keep-tmp',
+          'avb-resolve-rollback-index-location-conflict',
       ],
       extra_option_handler=option_handler)
 
