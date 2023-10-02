@@ -52,6 +52,8 @@ PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
 # Disable the build-time debugfs restrictions on GSI builds
 PRODUCT_SET_DEBUGFS_RESTRICTIONS := false
 
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += system/etc/init/config
+
 # GSI specific tasks on boot
 PRODUCT_PACKAGES += \
     gsi_skip_mount.cfg \
