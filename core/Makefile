@@ -1109,13 +1109,13 @@ bootimage_16k: $(BUILT_BOOTIMAGE_16K_TARGET)
 .PHONY: bootimage_16k
 
 BUILT_BOOT_OTA_PACKAGE_16K := $(PRODUCT_OUT)/boot_ota_16k.zip
-$(BUILT_BOOT_OTA_PACKAGE_16K): $(OTA_FROM_RAW_IMG) $(BUILT_BOOTIMAGE_16K_TARGET) $(DEFAULT_SYSTEM_DEV_CERTIFICATE).pk8
+$(BUILT_BOOT_OTA_PACKAGE_16K): $(OTA_FROM_RAW_IMG) $(BUILT_BOOTIMAGE_16K_TARGET) $(INSTALLED_BOOTIMAGE_TARGET) $(DEFAULT_SYSTEM_DEV_CERTIFICATE).pk8
 	$(OTA_FROM_RAW_IMG) --package_key $(DEFAULT_SYSTEM_DEV_CERTIFICATE) \
                       --max_timestamp `cat $(BUILD_DATETIME_FILE)` \
                       --path $(HOST_OUT) \
                       --partition_name boot \
                       --output $@ \
-                      $(BUILT_BOOTIMAGE_16K_TARGET)
+                      $(INSTALLED_BOOTIMAGE_TARGET):$(BUILT_BOOTIMAGE_16K_TARGET)
 
 boototapackage_16k: $(BUILT_BOOT_OTA_PACKAGE_16K)
 .PHONY: boototapackage_16k
@@ -1233,6 +1233,7 @@ define build_boot_from_kernel_avb_enabled
   $(AVBTOOL) add_hash_footer \
           --image $(1) \
           $(call get-partition-size-argument,$(call get-bootimage-partition-size,$(1),boot)) \
+          --salt `sha256sum "$(kernel)" | cut -d " " -f 1` \
           --partition_name boot $(INTERNAL_AVB_BOOT_SIGNING_ARGS) \
           $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS)
 endef
@@ -1440,13 +1441,13 @@ endif # my_installed_prebuilt_gki_apex not defined
 
 ifneq ($(BOARD_KERNEL_PATH_16K),)
 BUILT_BOOT_OTA_PACKAGE_4K := $(PRODUCT_OUT)/boot_ota_4k.zip
-$(BUILT_BOOT_OTA_PACKAGE_4K): $(OTA_FROM_RAW_IMG) $(INSTALLED_BOOTIMAGE_TARGET) $(DEFAULT_SYSTEM_DEV_CERTIFICATE).pk8
+$(BUILT_BOOT_OTA_PACKAGE_4K): $(OTA_FROM_RAW_IMG) $(INSTALLED_BOOTIMAGE_TARGET) $(BUILT_BOOTIMAGE_16K_TARGET) $(DEFAULT_SYSTEM_DEV_CERTIFICATE).pk8
 	$(OTA_FROM_RAW_IMG) --package_key $(DEFAULT_SYSTEM_DEV_CERTIFICATE) \
                       --max_timestamp `cat $(BUILD_DATETIME_FILE)` \
                       --path $(HOST_OUT) \
                       --partition_name boot \
                       --output $@ \
-                      $(INSTALLED_BOOTIMAGE_TARGET)
+                      $(BUILT_BOOTIMAGE_16K_TARGET):$(INSTALLED_BOOTIMAGE_TARGET)
 
 boototapackage_4k: $(BUILT_BOOT_OTA_PACKAGE_4K)
 .PHONY: boototapackage_4k
@@ -5682,6 +5683,7 @@ endef
 $(INSTALLED_MISC_INFO_TARGET):
 	rm -f $@
 	$(call pretty,"Target misc_info.txt: $@")
+	$(hide) echo "build_fingerprint=`cat $(BUILD_FINGERPRINT_FILE)`" >> $@
 	$(hide) echo "recovery_api_version=$(RECOVERY_API_VERSION)" >> $@
 	$(hide) echo "fstab_version=$(RECOVERY_FSTAB_VERSION)" >> $@
 ifdef BOARD_FLASH_BLOCK_SIZE
