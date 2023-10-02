@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5871c6ad_289319e3",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-10-02T23:28:43Z",
+      "side": 1,
+      "message": "This should be updated",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 63
+      },
+      "revId": "f8815ce0620955eefae28471aee9195d2b398563",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
