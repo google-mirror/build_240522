@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3053132b_0008d826",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-10-02T17:22:46Z",
+      "side": 1,
+      "message": "reword \"resolve conflicting index locations by assigning the smallest unused index location.\"",
+      "range": {
+        "startLine": 11,
+        "startChar": 20,
+        "endLine": 13,
+        "endChar": 10
+      },
+      "revId": "88e6449a8b5f321e9cb032b242e9a2ef846c3231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
