@@ -1233,6 +1233,7 @@ define build_boot_from_kernel_avb_enabled
   $(AVBTOOL) add_hash_footer \
           --image $(1) \
           $(call get-partition-size-argument,$(call get-bootimage-partition-size,$(1),boot)) \
+          --salt `sha256sum "$(kernel)" | cut -d " " -f 1` \
           --partition_name boot $(INTERNAL_AVB_BOOT_SIGNING_ARGS) \
           $(BOARD_AVB_BOOT_ADD_HASH_FOOTER_ARGS)
 endef
@@ -5682,6 +5683,7 @@ endef
 $(INSTALLED_MISC_INFO_TARGET):
 	rm -f $@
 	$(call pretty,"Target misc_info.txt: $@")
+	$(hide) echo "build_fingerprint=`cat $(BUILD_FINGERPRINT_FILE)`" >> $@
 	$(hide) echo "recovery_api_version=$(RECOVERY_API_VERSION)" >> $@
 	$(hide) echo "fstab_version=$(RECOVERY_FSTAB_VERSION)" >> $@
 ifdef BOARD_FLASH_BLOCK_SIZE
