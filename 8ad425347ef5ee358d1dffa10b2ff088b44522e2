@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54626d41_26991f30",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2023-10-03T09:34:08Z",
+      "side": 1,
+      "message": "`--chain_partition_do_not_use_ab` is added recently.\n\nhttps://android-review.git.corp.google.com/c/platform/external/avb/+/2736237/9/README.md\n\nWe may need to support that as well (it can be a separate CL).",
+      "range": {
+        "startLine": 126,
+        "startChar": 32,
+        "endLine": 126,
+        "endChar": 49
+      },
+      "revId": "8ad425347ef5ee358d1dffa10b2ff088b44522e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "480664d2_b1ef2066",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1517,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2023-10-03T09:34:08Z",
+      "side": 1,
+      "message": "I was thinking about what\u0027s the meaning of \"valid\" here.\n\nHow about adding some comments for explanation?\n\ne.g., \n\nAn AVB partition will be linked into a vbmeta partition by either \nAVB_ARG_NAME_INCLUDE_DESC_FROM_IMG or AVB_ARG_NAME_CHAIN_PARTITION, there\nshould be no other cases.",
+      "range": {
+        "startLine": 1517,
+        "startChar": 2,
+        "endLine": 1517,
+        "endChar": 12
+      },
+      "revId": "8ad425347ef5ee358d1dffa10b2ff088b44522e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ee3d1d4_7fbf3d35",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2023-10-03T09:34:08Z",
+      "side": 1,
+      "message": "nit: Add a comment to explain it.\n\n\nHandles non-chained AVB partitions, where the descriptors are included into a\nvbmeta image directly.",
+      "revId": "8ad425347ef5ee358d1dffa10b2ff088b44522e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd282b28_22f6a546",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2023-10-03T09:34:08Z",
+      "side": 1,
+      "message": "nit: Adding some comments.\n\ne.g.,\n\nHandles chained AVB partitions. The rollback index might be adjusted if two\npartitions use the same rollback index location. e.g., when mixing a shared system image with other vendor images.",
+      "range": {
+        "startLine": 1534,
+        "startChar": 1,
+        "endLine": 1542,
+        "endChar": 56
+      },
+      "revId": "8ad425347ef5ee358d1dffa10b2ff088b44522e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

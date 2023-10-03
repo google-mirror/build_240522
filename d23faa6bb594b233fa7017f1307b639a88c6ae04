@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e0e89e_492d4b62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2023-10-03T09:34:08Z",
+      "side": 1,
+      "message": "LGTM from AVB POV.",
+      "revId": "d23faa6bb594b233fa7017f1307b639a88c6ae04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
