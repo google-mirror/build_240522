@@ -93,17 +93,7 @@ define declare-release-config
 $(error declare-release-config can only be called from inside release_config_map.mk files)
 endef
 
-# TODO: Remove this check after enough people have sourced lunch that we don't
-# need to worry about it trying to do get_build_vars TARGET_RELEASE. Maybe after ~9/2023
-ifneq ($(CALLED_FROM_SETUP),true)
-define TARGET_RELEASE
-$(error TARGET_RELEASE may not be accessed directly. Use individual flags.)
-endef
-else
-TARGET_RELEASE:=
-endif
 .KATI_READONLY := TARGET_RELEASE
-
 
 $(foreach config, $(_all_release_configs), \
     $(eval _all_release_configs.$(config).DECLARED_IN:= ) \
