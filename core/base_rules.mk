@@ -276,7 +276,12 @@ ifeq ($(LOCAL_IS_UNIT_TEST),true)
 endif
 
 ifeq ($(my_module_path),)
-  install_path_var := $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT$(partition_tag)_$(LOCAL_MODULE_CLASS)
+  ifeq ($(LOCAL_MODULE_CLASS),FAKE)
+    # There are no TARGET_OUT_<partition>_FAKE variables, so use TARGET_OUT_FAKE for all partitions
+    install_path_var := TARGET_OUT_FAKE
+  else
+    install_path_var := $(LOCAL_2ND_ARCH_VAR_PREFIX)$(my_prefix)OUT$(partition_tag)_$(LOCAL_MODULE_CLASS)
+  endif
   ifeq (true,$(LOCAL_PRIVILEGED_MODULE))
     install_path_var := $(install_path_var)_PRIVILEGED
   endif
