@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8526a4e_a10ea939",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2023-10-03T17:34:31Z",
+      "side": 1,
+      "message": "`$(OUT_DIR)`",
+      "range": {
+        "startLine": 780,
+        "startChar": 28,
+        "endLine": 780,
+        "endChar": 31
+      },
+      "revId": "fe073db8593110cdb1e303c4ed954868fd0faabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
