@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02bb394d_65f6eb54",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1517,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2023-10-03T15:32:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "480664d2_b1ef2066",
+      "range": {
+        "startLine": 1517,
+        "startChar": 2,
+        "endLine": 1517,
+        "endChar": 12
+      },
+      "revId": "8ad425347ef5ee358d1dffa10b2ff088b44522e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ee3d1d4_7fbf3d35",
@@ -64,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d66c590_2c6d1110",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2023-10-03T15:32:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ee3d1d4_7fbf3d35",
+      "revId": "8ad425347ef5ee358d1dffa10b2ff088b44522e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd282b28_22f6a546",
@@ -77,6 +119,30 @@
       "writtenOn": "2023-10-03T09:34:08Z",
       "side": 1,
       "message": "nit: Adding some comments.\n\ne.g.,\n\nHandles chained AVB partitions. The rollback index might be adjusted if two\npartitions use the same rollback index location. e.g., when mixing a shared system image with other vendor images.",
+      "range": {
+        "startLine": 1534,
+        "startChar": 1,
+        "endLine": 1542,
+        "endChar": 56
+      },
+      "revId": "8ad425347ef5ee358d1dffa10b2ff088b44522e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "982cefb6_aec28ee1",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2023-10-03T15:32:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd282b28_22f6a546",
       "range": {
         "startLine": 1534,
         "startChar": 1,
