@@ -22,6 +22,30 @@
       },
       "revId": "f8815ce0620955eefae28471aee9195d2b398563",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f638cf22_7d741860",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-03T00:29:47Z",
+      "side": 1,
+      "message": "Removed because it wasn\u0027t really telling us anything useful, and was also out of date already in internal main.",
+      "parentUuid": "5871c6ad_289319e3",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 63
+      },
+      "revId": "f8815ce0620955eefae28471aee9195d2b398563",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
