@@ -16,6 +16,23 @@
       "message": "snup",
       "revId": "cdbecbdd8427d0c1c0cb640449ce38f768c33f52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db893056_705e0b3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981275
+      },
+      "writtenOn": "2023-10-04T03:51:19Z",
+      "side": 1,
+      "message": "git clone https://android.googlesource.com/platform/build",
+      "revId": "cdbecbdd8427d0c1c0cb640449ce38f768c33f52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
