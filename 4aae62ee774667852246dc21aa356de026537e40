@@ -22,6 +22,30 @@
       },
       "revId": "4aae62ee774667852246dc21aa356de026537e40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b10c3913_9b97e1b9",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2023-10-04T17:13:19Z",
+      "side": 1,
+      "message": "In order to easier adjust the rollback index location, I changed the return type of `GetAvbChainedPartitionArg()` from `string` to `class AvbChainedPartitionArg`. The change here is to generate the original string command from the returned `AvbChainedPartitionArg` object.",
+      "parentUuid": "7169e445_bf131360",
+      "range": {
+        "startLine": 433,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 55
+      },
+      "revId": "4aae62ee774667852246dc21aa356de026537e40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
