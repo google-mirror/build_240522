@@ -102,6 +102,8 @@ parsed_flag {
     permission: READ_ONLY
   }
   is_fixed_read_only: false
+  tag: "first-tag"
+  tag: "second-tag"
 }
 parsed_flag {
   package: "com.android.aconfig.test"

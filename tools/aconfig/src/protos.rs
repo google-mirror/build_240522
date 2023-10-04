@@ -61,7 +61,7 @@ mod auto_generated {
 // ---- Common for both the Android tool-chain and cargo ----
 pub use auto_generated::*;
 
-use anyhow::Result;
+use anyhow::{ensure, Result};
 use paste::paste;
 
 fn try_from_text_proto<T>(s: &str) -> Result<T>
@@ -81,10 +81,22 @@ macro_rules! ensure_required_fields {
     };
 }
 
+fn verify_field_tag(type_: &str, tags: &[String]) -> Result<()> {
+    ensure!(tags.iter().all(|s| !s.is_empty()), "bad {}: empty tag", type_);
+
+    // TODO: replace with Vec::partition_dedup when it moves out of nightly
+    let mut found = Vec::with_capacity(tags.len());
+    for tag in tags {
+        ensure!(!found.contains(tag), "bad {}: duplicate tag: {}", type_, tag);
+        found.push(tag.to_string());
+    }
+
+    Ok(())
+}
+
 pub mod flag_declaration {
     use super::*;
     use crate::codegen;
-    use anyhow::ensure;
 
     pub fn verify_fields(pdf: &ProtoFlagDeclaration) -> Result<()> {
         ensure_required_fields!("flag declaration", pdf, "name", "namespace", "description");
@@ -93,6 +105,7 @@ pub mod flag_declaration {
         ensure!(codegen::is_valid_name_ident(pdf.namespace()), "bad flag declaration: bad name");
         ensure!(!pdf.description().is_empty(), "bad flag declaration: empty description");
         ensure!(pdf.bug.len() == 1, "bad flag declaration: exactly one bug required");
+        verify_field_tag("flag declaration", &pdf.tag)?;
 
         Ok(())
     }
@@ -226,6 +239,7 @@ pub mod parsed_flag {
                 );
             }
         }
+        verify_field_tag("parsed flag", &pf.tag)?;
 
         Ok(())
     }
@@ -308,6 +322,8 @@ flag {
     namespace: "first_ns"
     description: "This is the description of the first flag."
     bug: "123"
+    tag: "foo"
+    tag: "bar"
 }
 flag {
     name: "second"
@@ -325,6 +341,9 @@ flag {
         assert_eq!(first.namespace(), "first_ns");
         assert_eq!(first.description(), "This is the description of the first flag.");
         assert_eq!(first.bug, vec!["123"]);
+        let mut tags = first.tag.clone();
+        tags.sort();
+        assert_eq!(tags, vec!["bar", "foo"]);
         assert!(!first.is_fixed_read_only());
         let second = flag_declarations.flag.iter().find(|pf| pf.name() == "second").unwrap();
         assert_eq!(second.name(), "second");
@@ -436,6 +455,39 @@ flag {
         )
         .unwrap_err();
         assert!(format!("{:?}", error).contains("bad flag declaration: exactly one bug required"));
+
+        // bad input: empty string used as tag
+        let error = flag_declarations::try_from_text_proto(
+            r#"
+package: "com.foo.bar"
+flag {
+    name: "first"
+    namespace: "first_ns"
+    description: "This is the description of the first flag."
+    bug: "123"
+    tag: ""
+}
+"#,
+        )
+        .unwrap_err();
+        assert!(format!("{:?}", error).contains("bad flag declaration: empty tag"));
+
+        // bad input: duplicate flags
+        let error = flag_declarations::try_from_text_proto(
+            r#"
+package: "com.foo.bar"
+flag {
+    name: "first"
+    namespace: "first_ns"
+    description: "This is the description of the first flag."
+    bug: "123"
+    tag: "foo"
+    tag: "foo"
+}
+"#,
+        )
+        .unwrap_err();
+        assert!(format!("{:?}", error).contains("bad flag declaration: duplicate tag: foo"));
     }
 
     #[test]
@@ -570,6 +622,8 @@ parsed_flag {
         permission: READ_ONLY
     }
     is_fixed_read_only: true
+    tag: "foo"
+    tag: "bar"
 }
 "#;
         let parsed_flags = try_from_binary_proto_from_text_proto(text_proto).unwrap();
@@ -589,6 +643,9 @@ parsed_flag {
         assert_eq!(second.trace[1].source(), "flags.values");
         assert_eq!(second.trace[1].state(), ProtoFlagState::ENABLED);
         assert_eq!(second.trace[1].permission(), ProtoFlagPermission::READ_ONLY);
+        let mut tags = second.tag.clone();
+        tags.sort();
+        assert_eq!(tags, vec!["bar".to_string(), "foo".to_string()]);
         assert!(second.is_fixed_read_only());
 
         // valid input: empty

@@ -103,6 +103,7 @@ pub fn parse_flags(
             tracepoint.set_state(DEFAULT_FLAG_STATE);
             tracepoint.set_permission(flag_permission);
             parsed_flag.trace.push(tracepoint);
+            parsed_flag.tag.append(&mut flag_declaration.tag);
 
             // verify ParsedFlag looks reasonable
             crate::protos::parsed_flag::verify_fields(&parsed_flag)?;

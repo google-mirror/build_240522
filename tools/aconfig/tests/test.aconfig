@@ -9,6 +9,8 @@ flag {
     namespace: "aconfig_test"
     description: "This flag is ENABLED + READ_ONLY"
     bug: "abc"
+    tag: "first-tag"
+    tag: "second-tag"
 }
 
 # This flag's final value is calculated from:
