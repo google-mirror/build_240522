@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b757019_f83e6c11",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 1538,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2023-10-04T06:22:45Z",
+      "side": 1,
+      "message": "nit: sorry, on a second look, let\u0027s be clear about it.\n\n\ne.g.,\nCopy the arguments for non-chained AVB partitions as is, without intervention.",
+      "range": {
+        "startLine": 1537,
+        "startChar": 2,
+        "endLine": 1538,
+        "endChar": 28
+      },
+      "revId": "66b7ab7e633c11cd359d6f160f0265b4b24bfc4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
