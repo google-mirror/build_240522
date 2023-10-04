@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07e98326_1b83e2ec",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 1504,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2023-10-04T03:33:05Z",
+      "side": 1,
+      "message": "Set a default value to \u0027false\u0027?",
+      "range": {
+        "startLine": 1504,
+        "startChar": 36,
+        "endLine": 1504,
+        "endChar": 76
+      },
+      "revId": "865466c44fbe85c4d553dd8e905c892d1bad0e98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
