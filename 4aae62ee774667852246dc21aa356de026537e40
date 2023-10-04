@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7169e445_bf131360",
+        "filename": "tools/releasetools/validate_target_files.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-10-04T16:34:13Z",
+      "side": 1,
+      "message": "unrelated change?",
+      "range": {
+        "startLine": 433,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 55
+      },
+      "revId": "4aae62ee774667852246dc21aa356de026537e40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
