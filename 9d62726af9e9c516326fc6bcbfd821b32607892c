@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3cfabe5_ef2b7bb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-10-04T00:05:54Z",
+      "side": 1,
+      "message": "I\u0027ve already fielded questions from about 5 people who got this error and asked how to access TARGET_RELEASE, and I\u0027ve diverted them to one of the better flagging technologies.  So I consider this check as working very well.\n\nIf I had to choose between that and printing the TARGET_RELEASE, I have to choose the strong nudge into flags instead of printing the TARGET_RELEASE.",
+      "revId": "9d62726af9e9c516326fc6bcbfd821b32607892c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
