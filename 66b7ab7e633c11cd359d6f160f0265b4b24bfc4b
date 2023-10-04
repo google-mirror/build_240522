@@ -22,6 +22,30 @@
       },
       "revId": "66b7ab7e633c11cd359d6f160f0265b4b24bfc4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2550efbf_7dea1a2d",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 1538,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2023-10-04T06:46:31Z",
+      "side": 1,
+      "message": "Done, how about \"Copy the arguments for non-chained AVB partitions directly without intervention.\"?",
+      "parentUuid": "8b757019_f83e6c11",
+      "range": {
+        "startLine": 1537,
+        "startChar": 2,
+        "endLine": 1538,
+        "endChar": 28
+      },
+      "revId": "66b7ab7e633c11cd359d6f160f0265b4b24bfc4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
