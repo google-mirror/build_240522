@@ -3889,7 +3889,7 @@ def MakeRecoveryPatch(input_dir, output_sink, recovery_img, boot_img,
 
     d = Difference(recovery_img, boot_img, diff_program=diff_program)
     _, _, patch = d.ComputePatch()
-    output_sink("recovery-from-boot.p", patch)
+    output_sink("recovery-from-boot.p", str(patch).encode())
 
   try:
     # The following GetTypeAndDevice()s need to use the path in the target
