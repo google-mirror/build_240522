@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a1e81a_f7dbf38d",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2023-10-05T09:04:25Z",
+      "side": 1,
+      "message": "indentations should be spaces, never tab.\ntab characters have special meaning in Makefile. Using tab for indent often lead to surprsing behaviors because these lines could be parsed as build commands in some surprising way \u003d(",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 1
+      },
+      "revId": "002bd54df70aec6fab6d2a040fd2756679c0965e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
