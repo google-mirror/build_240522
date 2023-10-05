@@ -22,6 +22,30 @@
       },
       "revId": "002bd54df70aec6fab6d2a040fd2756679c0965e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2a843eb_6783c6ab",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-05T09:08:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74a1e81a_f7dbf38d",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 1
+      },
+      "revId": "002bd54df70aec6fab6d2a040fd2756679c0965e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
