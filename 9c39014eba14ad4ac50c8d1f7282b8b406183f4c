@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a91a3435_3c5ea838",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-05T04:31:44Z",
+      "side": 1,
+      "message": "Ok for the first sentence.\n\nBut why we don\u0027t want to move it for trunk-staging?",
+      "parentUuid": "721b6353_541ed00a",
+      "range": {
+        "startLine": 3,
+        "startChar": 55,
+        "endLine": 3,
+        "endChar": 66
+      },
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f057806_0bb8cd54",
         "filename": "target/product/gsi/Android.mk",
         "patchSetId": 1
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Yes, you are right. I just cleared the duplicated lines.\nFor the trunk_staging build, `UNFROZEN_VNDK` is not set but `PLATFORM_VERSION_CODENAME` is not `REL`.",
       "parentUuid": "0f057806_0bb8cd54",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c78829a_2d94e853",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-05T04:31:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d6f3da6f_c913140e",
       "range": {
         "startLine": 19,
         "startChar": 0,
