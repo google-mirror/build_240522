@@ -157,6 +157,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "581ea41e_bb276d18",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2023-10-05T08:01:10Z",
+      "side": 1,
+      "message": "I see. I\u0027m thinking something like to dedup it to\n\n```\nLATEST_VNDK_LIB_LIST :\u003d $(LOCAL_PATH)/current.txt\nUNFROZEN_VNDK :\u003d\n\nif PLATFORM_VNDK_VERSION is number\n  if PLATFORM_VNDK_VERSION \u003c\u003d 34\n    LATEST_VNDK_LIB_LIST :\u003d $(LOCAL_PATH)/$(PLATFORM_VNDK_VERSION).txt\n  else\n    UNFROZEN_VNDK :\u003d true\n  endif # PLATFORM_VNDK_VERSION \u003c\u003d 34\nendif # PLATFORM_VNDK_VERSION is number\n```\n\nso it\u0027s clear that `UNFROZEN_VNDK` and `$(PLATFORM_VNDK_VERSION).txt` are exclusive.",
+      "parentUuid": "d0d6e47a_fce8dc58",
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f057806_0bb8cd54",
         "filename": "target/product/gsi/Android.mk",
         "patchSetId": 1
@@ -281,6 +299,24 @@
       "side": 1,
       "message": "Correct.",
       "parentUuid": "90ba3400_8b8451be",
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d16fbc6_fce97b20",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2023-10-05T08:01:10Z",
+      "side": 1,
+      "message": "I think for GSI targets we still want to install the \"normal\" vndk apex.\n\nOtherwise v35 GSI would not boot on v34 vendor. (GSI product modules want v35 VNDK, but GSI doesn\u0027t contain v35 VNDK)",
+      "parentUuid": "87e4314e_5fa33770",
       "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
