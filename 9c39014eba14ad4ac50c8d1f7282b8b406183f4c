@@ -139,6 +139,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0d6e47a_fce8dc58",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-05T07:17:35Z",
+      "side": 1,
+      "message": "Yes, they are the same. Do you mean to replace the `PLATFORM_VNDK_VERSION is number` check with `PLATFORM_VERSION_CODENAME \u003d\u003d REL`?\nI used the former to pair with `math_gt`, but I also like to use the latter to show the meaning more clearly.",
+      "parentUuid": "4e65e210_ccba7c3c",
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f057806_0bb8cd54",
         "filename": "target/product/gsi/Android.mk",
         "patchSetId": 1
@@ -245,6 +263,24 @@
       "writtenOn": "2023-10-05T06:43:51Z",
       "side": 1,
       "message": "If product partition modules uses the same VNDK API level, they would link to this VNDK during runtime too, right?",
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87e4314e_5fa33770",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-05T07:17:35Z",
+      "side": 1,
+      "message": "Correct.",
+      "parentUuid": "90ba3400_8b8451be",
       "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
