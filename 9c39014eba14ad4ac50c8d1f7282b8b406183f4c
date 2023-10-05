@@ -355,6 +355,24 @@
       "parentUuid": "7d16fbc6_fce97b20",
       "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "235c7bee_66153cf5",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2023-10-05T08:52:16Z",
+      "side": 1,
+      "message": "\u003e If we do have to build the GSI with the -next build, the only solution is to deprecate the VNDK for the product partition in the -next build.\n\nI think if we could install v35 VNDK in GSI, then we don\u0027t _need_ to deprecate product partition VNDK. Though I do agree deprecating it altogether would be a lot less messy.\n\nIf v35 GSI + v35 vendor, then we assume/require they are from the same build, so apexd could just choose to use the on_vendor one unconditionally.\nIf v35 GSI + v34 vendor, then apexd would enable both v35 for product modules and v34 for vendor modules.\n\n\u003e But I don\u0027t think we need it, do we?\n\nI\u0027m not sure... need to check with SzuWei and probably the platform release team.\nvN GSI + v(N-1) vendor is something we always support in the past. We _can_ treat U -next special and just don\u0027t support all kinds of cross-version mixing with U -next GSI at all. But that would be a conscious change and we need to modify existing processes and inform stakeholders for this special case.\n\n* One use case is our CI mixed-testing, which ties to how we manage the GSI branches. I still don\u0027t know if we would have multiple android14-qpr-gsi branches, or just one android14-gsi branch for all the qprs (latter is how we handled it in Android 13)\n* Another use case if for Android beta release. Platform release team releases Android beta images for Pixel and GSI. The Android beta GSI \"works\" because we support the N + (N-1) combo.\n\n@szuweilin@google.com",
+      "parentUuid": "0c318aaa_6b319370",
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
