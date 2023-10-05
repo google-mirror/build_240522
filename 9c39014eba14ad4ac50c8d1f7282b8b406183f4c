@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "721b6353_541ed00a",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-05T04:22:45Z",
+      "side": 1,
+      "message": "In the trunk_staging build, it is `VanillaIceCream`.\nSo this is not to move the VNDK apex to the vendor partition for the trunk_staging build.",
+      "parentUuid": "605cca95_92a02c6a",
+      "range": {
+        "startLine": 3,
+        "startChar": 55,
+        "endLine": 3,
+        "endChar": 66
+      },
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f057806_0bb8cd54",
         "filename": "target/product/gsi/Android.mk",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-05T04:04:52Z",
       "side": 1,
       "message": "I don\u0027 think there\u0027s a behavioral change here. Am I correct?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f3da6f_c913140e",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-05T04:22:45Z",
+      "side": 1,
+      "message": "Yes, you are right. I just cleared the duplicated lines.\nFor the trunk_staging build, `UNFROZEN_VNDK` is not set but `PLATFORM_VERSION_CODENAME` is not `REL`.",
+      "parentUuid": "0f057806_0bb8cd54",
       "range": {
         "startLine": 19,
         "startChar": 0,
