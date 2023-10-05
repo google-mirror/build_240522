@@ -175,6 +175,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07b07db6_f9e7dd9c",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-05T08:11:24Z",
+      "side": 1,
+      "message": "It looks better. Let me update with it. Thanks!",
+      "parentUuid": "581ea41e_bb276d18",
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f057806_0bb8cd54",
         "filename": "target/product/gsi/Android.mk",
         "patchSetId": 1
@@ -317,6 +335,24 @@
       "side": 1,
       "message": "I think for GSI targets we still want to install the \"normal\" vndk apex.\n\nOtherwise v35 GSI would not boot on v34 vendor. (GSI product modules want v35 VNDK, but GSI doesn\u0027t contain v35 VNDK)",
       "parentUuid": "87e4314e_5fa33770",
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c318aaa_6b319370",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-05T08:11:24Z",
+      "side": 1,
+      "message": "Yes, that\u0027s still a problem. We will deprecate the VNDK in V. So the problem will be gone in trunk_staging (that will be in V). But the GSI from the -next build can be used only with the vendor from -next version. This vendor image can also work with GSI from UDC.\n\nIf we do have to build the GSI with the -next build, the only solution is to deprecate the VNDK for the product partition in the -next build. But I don\u0027t think we need it, do we?",
+      "parentUuid": "7d16fbc6_fce97b20",
       "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
