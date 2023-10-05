@@ -235,8 +235,20 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
       "boot.img", "boot.img", OPTIONS.input_tmp, "BOOT")
   common.CheckSize(boot_img.data, "boot.img", target_info)
   common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
-
   script.WriteRawImage("/boot", "boot.img")
+
+  init_boot_image = common.GetBootableImage(
+        "init_boot.img", "init_boot.img", OPTIONS.input_tmp, "INIT_BOOT")
+  common.CheckSize(init_boot_image.data, "init_boot.img", target_info)
+  common.ZipWriteStr(output_zip, "init_boot.img", init_boot_image.data)
+  script.WriteRawImage("/init_boot", "init_boot.img")
+
+  vendor_boot_image = common.GetVendorBootImage(
+        "vendor_boot.img", "vendor_boot.img", OPTIONS.input_tmp,
+        "VENDOR_BOOT")
+  common.CheckSize(vendor_boot_image.data, "vendor_boot.img", target_info)
+  common.ZipWriteStr(output_zip, "vendor_boot.img", vendor_boot_image.data)
+  script.WriteRawImage("/vendor_boot", "vendor_boot.img")
 
   script.ShowProgress(0.1, 10)
   device_specific.FullOTA_InstallEnd()

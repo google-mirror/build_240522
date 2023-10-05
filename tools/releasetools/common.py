@@ -925,6 +925,8 @@ def LoadInfoDict(input_file, repacking=False):
   makeint("blocksize")
   makeint("system_size")
   makeint("vendor_size")
+  makeint("init_boot_size")
+  makeint("vendor_boot_size")
   makeint("userdata_size")
   makeint("cache_size")
   makeint("recovery_size")
