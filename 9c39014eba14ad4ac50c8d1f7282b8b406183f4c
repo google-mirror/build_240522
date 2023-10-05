@@ -391,6 +391,24 @@
       "parentUuid": "0c318aaa_6b319370",
       "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "600ad6d7_bcd1432e",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-05T09:03:36Z",
+      "side": 1,
+      "message": "We need VNDK v35 on vendor to make the vendor partition built from -next work without VNDK snapshot.\n\nIn case of GSI, we may choose to install the product VNDK only for GSI or manually install the required VNDK libs for the product libs (they only 10+ libs).\nLet\u0027s discuss the details in b/299867815.",
+      "parentUuid": "235c7bee_66153cf5",
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
