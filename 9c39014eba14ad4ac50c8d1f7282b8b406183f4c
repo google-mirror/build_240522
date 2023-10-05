@@ -189,6 +189,47 @@
       },
       "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "998f1a34_980d9935",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2023-10-05T06:43:51Z",
+      "side": 1,
+      "message": "while you are at it could you also indent the if-else blocks so it\u0027s more readable \u003d)",
+      "parentUuid": "7c78829a_2d94e853",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90ba3400_8b8451be",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2023-10-05T06:43:51Z",
+      "side": 1,
+      "message": "If product partition modules uses the same VNDK API level, they would link to this VNDK during runtime too, right?",
+      "revId": "9c39014eba14ad4ac50c8d1f7282b8b406183f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
