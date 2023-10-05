@@ -20,3 +20,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/base_system.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base_system_ext.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base_vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base_product.mk)
+ifeq ($(ENABLE_AB), false)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/non_ab_device.mk)
+endif
