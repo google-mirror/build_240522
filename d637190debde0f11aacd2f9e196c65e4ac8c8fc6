@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd8ba25f_51b3eb44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2021570
+      },
+      "writtenOn": "2023-10-05T09:55:14Z",
+      "side": 1,
+      "message": "The only one CL between breakages https://b.corp.google.com/issues/303552537#comment4",
+      "revId": "d637190debde0f11aacd2f9e196c65e4ac8c8fc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
