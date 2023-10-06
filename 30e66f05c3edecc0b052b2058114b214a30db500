@@ -56,6 +56,30 @@
       },
       "revId": "30e66f05c3edecc0b052b2058114b214a30db500",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75fa417f_459ab862",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 2054210
+      },
+      "writtenOn": "2023-10-06T08:16:01Z",
+      "side": 1,
+      "message": "thanks Yi-Yo for reviewing , i have commited in patchset2 set as per naming parrern..",
+      "parentUuid": "f022ad14_c53f9698",
+      "range": {
+        "startLine": 661,
+        "startChar": 2,
+        "endLine": 661,
+        "endChar": 52
+      },
+      "revId": "30e66f05c3edecc0b052b2058114b214a30db500",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
