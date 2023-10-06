@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de358292_e13c9433",
+        "filename": "target/product/base.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1946061
+      },
+      "writtenOn": "2023-10-06T22:02:40Z",
+      "side": 1,
+      "message": "im not sure if this should be in the generic base.mk - rather it should be in the product mk like we have it in aosp*_64",
+      "range": {
+        "startLine": 23,
+        "startChar": 50,
+        "endLine": 23,
+        "endChar": 66
+      },
+      "revId": "efd6b14a5699792cd31ebdec1f293057e7ce0455",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
