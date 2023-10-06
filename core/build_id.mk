@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (e86410 Merge "Make change and version bump to RBT1.231005.001 Snap )
 BUILD_ID=RBT1.231005.001
+=======
+BUILD_ID=MAIN
+>>>>>>> BRANCH (b89b3f Merge "Revert "Added new framework-pdf jar inside MediaProvi)
