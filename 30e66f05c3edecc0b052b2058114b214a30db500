@@ -33,6 +33,29 @@
       "message": "dvander@google.com",
       "revId": "30e66f05c3edecc0b052b2058114b214a30db500",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f022ad14_c53f9698",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2023-10-06T06:40:13Z",
+      "side": 1,
+      "message": "the naming pattern here is `$(partition)_STRIPPED_MODULE_STAGING_DIR`\nso `GENERIC_RAMDISK_STRIPPED_MODULE_STAGING_DIR` \u0026 `BOARD_DO_NOT_STRIP_GENERIC_RAMDISK_MODULES`",
+      "range": {
+        "startLine": 661,
+        "startChar": 2,
+        "endLine": 661,
+        "endChar": 52
+      },
+      "revId": "30e66f05c3edecc0b052b2058114b214a30db500",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
