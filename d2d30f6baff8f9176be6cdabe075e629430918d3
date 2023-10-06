@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cb8faf9_56dc9129",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054210
+      },
+      "writtenOn": "2023-10-06T08:18:56Z",
+      "side": 1,
+      "message": "Hi Yi-Yo ,  Would you please revew, previous comment resolved.",
+      "revId": "d2d30f6baff8f9176be6cdabe075e629430918d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
