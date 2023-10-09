@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a6d9edf_eec02ca6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-09T17:40:41Z",
+      "side": 1,
+      "message": "These products are used in CI builds currently, they need to be removed from the gcl configuration first.\n\nAlso, is it true that the sdk is arch-agnostic? The sdk includes tools like adb and fastboot, which may technically need an ARM version if on certain windows or mac devices that run on ARM.",
+      "revId": "228de7b72c4f4fe1a40ee73cb99ddb1c1bfadf65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
