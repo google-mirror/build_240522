@@ -34,6 +34,24 @@
       "parentUuid": "f39d7c88_a90322ca",
       "revId": "92d921ce24ef083cf4b35b63bb88c634abd3de66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaae3e37_776bc1c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-09T19:40:14Z",
+      "side": 1,
+      "message": "yeah, I made this change because the `sdk_\u003carch\u003e` builds were failing on CI. But removing them from CI and here SGTM.",
+      "parentUuid": "6c3949f4_84a72d68",
+      "revId": "92d921ce24ef083cf4b35b63bb88c634abd3de66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
