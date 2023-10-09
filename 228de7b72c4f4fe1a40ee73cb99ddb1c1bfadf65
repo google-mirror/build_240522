@@ -34,6 +34,24 @@
       "parentUuid": "6a6d9edf_eec02ca6",
       "revId": "228de7b72c4f4fe1a40ee73cb99ddb1c1bfadf65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "473c216a_83b117ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-09T18:11:50Z",
+      "side": 1,
+      "message": "These CI builds (plus the other arches): https://source.corp.google.com/search?q\u003dp:%5Epiper$%20f:%5C.gcl%20sdk_x86%20f:main",
+      "parentUuid": "5a0867c1_0075d1bc",
+      "revId": "228de7b72c4f4fe1a40ee73cb99ddb1c1bfadf65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
