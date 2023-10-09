@@ -16,6 +16,24 @@
       "message": "Cole, is there more background for this change somewhere? I don\u0027t know why `sdk.mk` is made to inherit `sdk_x86.mk` again. I did a significant amount of work to get the SDK arch-agnostic in b/205008975 and this CL is IMO not a step in the right direction. We should remove the `sdk_\u003carch\u003e.mk` files.",
       "revId": "92d921ce24ef083cf4b35b63bb88c634abd3de66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c3949f4_84a72d68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-10-09T14:35:27Z",
+      "side": 1,
+      "message": "If I understand correctly this CL was to fix the badly configured SDK builds to keep working, but there was also a separate CL to remove those bad builds?\n\nIf so, it seems like we can now undo this CL (except for the app_prebuilt change)? aosp/2778929 does that, please take a look.",
+      "parentUuid": "f39d7c88_a90322ca",
+      "revId": "92d921ce24ef083cf4b35b63bb88c634abd3de66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
