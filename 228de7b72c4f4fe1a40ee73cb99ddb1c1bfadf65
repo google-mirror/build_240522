@@ -16,6 +16,24 @@
       "message": "These products are used in CI builds currently, they need to be removed from the gcl configuration first.\n\nAlso, is it true that the sdk is arch-agnostic? The sdk includes tools like adb and fastboot, which may technically need an ARM version if on certain windows or mac devices that run on ARM.",
       "revId": "228de7b72c4f4fe1a40ee73cb99ddb1c1bfadf65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a0867c1_0075d1bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-10-09T18:09:27Z",
+      "side": 1,
+      "message": "Which CI builds?\n\n\u003e Also, is it true that the sdk is arch-agnostic? The sdk includes tools like adb and fastboot, which may technically need an ARM version if on certain windows or mac devices that run on ARM.\n\nI meant target arch here, which is what these variants was referring to. I don\u0027t really know much about how the host variant stuff is configured. It\u0027s all in `development/build/Android.bp`, if you can make sense of that. Seems like we must be building for both mac archs, but I don\u0027t know how the output of that is managed",
+      "parentUuid": "6a6d9edf_eec02ca6",
+      "revId": "228de7b72c4f4fe1a40ee73cb99ddb1c1bfadf65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
