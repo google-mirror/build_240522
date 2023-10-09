@@ -1060,11 +1060,27 @@ TARGET_OUT_RAMDISK_16K := $(PRODUCT_OUT)/ramdisk_16k
 BUILT_RAMDISK_16K_TARGET := $(PRODUCT_OUT)/ramdisk_16k.img
 RAMDISK_16K_STAGING_DIR := $(call intermediates-dir-for,PACKAGING,depmod_ramdisk_16k)
 
+ifneq ($(BOARD_SYSTEM_KERNEL_MODULES),)
+SYSTEM_DLKM_MODULE_PATTERNS = $(foreach path,$(BOARD_SYSTEM_KERNEL_MODULES),%/$(notdir $(path)))
+
+endif
+
 $(foreach \
   file,\
-  $(BOARD_KERNEL_MODULES_16K),\
+  $(filter-out $(SYSTEM_DLKM_MODULE_PATTERNS),$(BOARD_KERNEL_MODULES_16K)),\
   $(eval \
     $(call copy-and-strip-kernel-module,\
+      $(file),\
+      $(RAMDISK_16K_STAGING_DIR)/lib/modules/0.0/$(notdir $(file)) \
+    ) \
+  ) \
+)
+
+$(foreach \
+  file,\
+  $(filter $(SYSTEM_DLKM_MODULE_PATTERNS),$(BOARD_KERNEL_MODULES_16K)),\
+  $(eval \
+    $(call copy-one-file,\
       $(file),\
       $(RAMDISK_16K_STAGING_DIR)/lib/modules/0.0/$(notdir $(file)) \
     ) \
