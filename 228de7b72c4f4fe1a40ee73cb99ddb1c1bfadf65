@@ -52,6 +52,24 @@
       "parentUuid": "5a0867c1_0075d1bc",
       "revId": "228de7b72c4f4fe1a40ee73cb99ddb1c1bfadf65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "475d510e_56d248b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-10-09T18:39:06Z",
+      "side": 1,
+      "message": "Thanks. Strange, somehow they keep reappearing 😊. I followed up with the person who added them and they\u0027re getting removed.",
+      "parentUuid": "473c216a_83b117ca",
+      "revId": "228de7b72c4f4fe1a40ee73cb99ddb1c1bfadf65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
