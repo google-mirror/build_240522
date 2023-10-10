@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18f0e99a_e0294830",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-10-10T15:01:07Z",
+      "side": 1,
+      "message": "This seems like a question for API Council.  Is it okay for CTS to be using these flag functions if they aren\u0027t part of the API?",
+      "revId": "22a90f4f10a39a64ad785fa5444fc396d4e9d8e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
