@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "090874b0_d93ef687",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-10-11T22:23:04Z",
+      "side": 1,
+      "message": "nit: can you leave a comment about what this check does?",
+      "range": {
+        "startLine": 287,
+        "startChar": 59,
+        "endLine": 287,
+        "endChar": 186
+      },
+      "revId": "b515b229b746d2d8f818bb77d0c80005f2742e77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
