@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63feaf67_db2e746c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-11T06:02:33Z",
+      "side": 1,
+      "message": "nit: prefix with aconfig to make it easier to quickly see what area of the code this CL touches",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "16f85b26d5fdb5182fb45c7c45f67ed3858a5450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c9f8b75_e488fe11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-11T06:02:33Z",
+      "side": 1,
+      "message": "nit: missing Test:",
+      "revId": "16f85b26d5fdb5182fb45c7c45f67ed3858a5450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
