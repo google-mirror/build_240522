@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bedfceeb_8c3ae40b",
+        "filename": "tools/aconfig/printflags/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-11T11:49:53Z",
+      "side": 1,
+      "message": "anyhow::Context brings with_context in to scope for use with anyhow::Result. See https://docs.rs/anyhow/latest/anyhow/trait.Context.html#tymethod.with_context.",
+      "parentUuid": "d1a9c4fb_aac11807",
+      "range": {
+        "startLine": 21,
+        "startChar": 19,
+        "endLine": 21,
+        "endChar": 26
+      },
+      "revId": "6e61f84fd64f7b2140e6892369f6ce17cfdda87b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b26bba88_133763e1",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-11T11:45:57Z",
       "side": 1,
       "message": "what does this name stand for? Can we have a better name or is this some convention that I\u0027m not aware of?",
+      "range": {
+        "startLine": 42,
+        "startChar": 3,
+        "endLine": 42,
+        "endChar": 6
+      },
+      "revId": "6e61f84fd64f7b2140e6892369f6ce17cfdda87b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0975c5f_7647d714",
+        "filename": "tools/aconfig/printflags/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-11T11:49:53Z",
+      "side": 1,
+      "message": "I named it after the Linux command `xxd` which produces a hex dump. If you feel strongly about it I can rename it.",
+      "parentUuid": "b26bba88_133763e1",
       "range": {
         "startLine": 42,
         "startChar": 3,
