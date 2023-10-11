@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1a9c4fb_aac11807",
+        "filename": "tools/aconfig/printflags/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1787007
+      },
+      "writtenOn": "2023-10-11T11:45:57Z",
+      "side": 1,
+      "message": "maybe this doesn\u0027t work like java... but I don\u0027t see this class being mentioned in the code below",
+      "range": {
+        "startLine": 21,
+        "startChar": 19,
+        "endLine": 21,
+        "endChar": 26
+      },
+      "revId": "6e61f84fd64f7b2140e6892369f6ce17cfdda87b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b26bba88_133763e1",
+        "filename": "tools/aconfig/printflags/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1787007
+      },
+      "writtenOn": "2023-10-11T11:45:57Z",
+      "side": 1,
+      "message": "what does this name stand for? Can we have a better name or is this some convention that I\u0027m not aware of?",
+      "range": {
+        "startLine": 42,
+        "startChar": 3,
+        "endLine": 42,
+        "endChar": 6
+      },
+      "revId": "6e61f84fd64f7b2140e6892369f6ce17cfdda87b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
