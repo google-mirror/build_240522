@@ -56,10 +56,10 @@ cat <<EOF
 Run "m help" for help with the build system itself.
 
 Invoke ". build/envsetup.sh" from your shell to add the following functions to your environment:
-- lunch:      lunch <product_name>-<build_variant>
+- lunch:      lunch <product_name>-trunk_stable-<build_variant>
               Selects <product_name> as the product to build, and <build_variant> as the variant to
               build, and stores those selections in the environment to be read by subsequent
-              invocations of 'm' etc.
+              invocations of 'm' etc. 'trunk_stable' is highly recommended, but can be omitted.
 - tapas:      tapas [<App1> <App2> ...] [arm|x86|arm64|x86_64] [eng|userdebug|user]
               Sets up the build environment for building unbundled apps (APKs).
 - banchan:    banchan <module1> [<module2> ...] \
@@ -825,6 +825,11 @@ function lunch()
         echo
         echo "Invalid lunch combo: $selection"
         return 1
+    fi
+
+    # Nudge for usage of trunk_stable targets
+    if [[ "$answer" != *"trunk"* ]]; then
+        echo "WARNING: Use $product-trunk_stable-$variant instead, if possible. This ensures trunk stable changes are properly applied in your builds."
     fi
 
     TARGET_PRODUCT=$product \
