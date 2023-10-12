@@ -33,6 +33,24 @@
       "message": "this should be something like\n```rm -f $$(PRIVATE_OUT) \u0026\u0026 touch $$(PRIVATE_OUT)```\nSo if the last flag was removed the new file is empty not just having its timestamp updated.",
       "revId": "0966565d2fc1078c3db983c56605b821b070c83b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "403fe9aa_5aa328d5",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-12T15:47:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8e9e8bd_ec64be47",
+      "revId": "0966565d2fc1078c3db983c56605b821b070c83b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
