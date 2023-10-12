@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fe6de8b_d92b5146",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-10-12T17:32:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6e7cebe_d7f630ad",
+      "range": {
+        "startLine": 1064,
+        "startChar": 28,
+        "endLine": 1064,
+        "endChar": 29
+      },
+      "revId": "84dff4534cdca7c75a68b8a2631054cb60e0d8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "314fb705_dfc029de",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-10-12T17:25:27Z",
       "side": 1,
       "message": "The difference between here and line 1068 is subtle, can you include a comment on how they differ and why you need both?",
+      "revId": "84dff4534cdca7c75a68b8a2631054cb60e0d8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e40fe337_b36db63e",
+        "filename": "core/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 1079,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-10-12T17:32:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "314fb705_dfc029de",
       "revId": "84dff4534cdca7c75a68b8a2631054cb60e0d8a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
