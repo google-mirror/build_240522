@@ -16,6 +16,23 @@
       "message": "Unless you need a quick approval in this time zone, I\u0027d prefer to bump this to Joe; he\u0027s much more familiar with the proceedings here.",
       "revId": "0966565d2fc1078c3db983c56605b821b070c83b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e9e8bd_ec64be47",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-10-12T15:23:01Z",
+      "side": 1,
+      "message": "this should be something like\n```rm -f $$(PRIVATE_OUT) \u0026\u0026 touch $$(PRIVATE_OUT)```\nSo if the last flag was removed the new file is empty not just having its timestamp updated.",
+      "revId": "0966565d2fc1078c3db983c56605b821b070c83b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
