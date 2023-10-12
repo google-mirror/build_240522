@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64e405b3_9a21f094",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-10-12T17:13:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "034317e9_900838c7",
+      "revId": "7113f9be3b1169a04928b013a1831976ea96915f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4becd595_7dfeef54",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7529d271_40754a7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-10-12T17:13:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4becd595_7dfeef54",
+      "range": {
+        "startLine": 15,
+        "startChar": 5,
+        "endLine": 15,
+        "endChar": 16
+      },
+      "revId": "7113f9be3b1169a04928b013a1831976ea96915f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9451413_6041e53f",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-10-12T07:21:29Z",
       "side": 1,
       "message": "incorrect help str",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 40
+      },
+      "revId": "7113f9be3b1169a04928b013a1831976ea96915f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c579e65d_398c857d",
+        "filename": "tools/aconfig/overrideflags/overrideflags.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-10-12T17:13:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9451413_6041e53f",
       "range": {
         "startLine": 96,
         "startChar": 0,
