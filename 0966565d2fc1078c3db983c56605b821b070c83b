@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "add612c8_a21c0136",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2023-10-12T12:15:08Z",
+      "side": 1,
+      "message": "Unless you need a quick approval in this time zone, I\u0027d prefer to bump this to Joe; he\u0027s much more familiar with the proceedings here.",
+      "revId": "0966565d2fc1078c3db983c56605b821b070c83b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
