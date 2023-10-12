@@ -32,6 +32,32 @@
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2787002?revision\u003d1",
       "fixSuggestions": [],
       "key": {
+        "uuid": "3c087adc_57e5a8aa",
+        "filename": "core/release_config.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-12T19:50:30Z",
+      "side": 1,
+      "message": "The file has no module docstring.\nA module docstring is a string literal (not a comment) which should be the first statement of a file (it may follow comment lines). http://go/buildifier-warnings#module-docstring",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 1
+      },
+      "revId": "6764704a6f6a4cd51e8e8647cfb10ecbc9580f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056035391",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2787002?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
         "uuid": "7ddb6420_bdae4a25",
         "filename": "core/release_config.bzl",
         "patchSetId": 1
@@ -84,6 +110,58 @@
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2787002?revision\u003d1",
       "fixSuggestions": [],
       "key": {
+        "uuid": "5c1fce31_4b09cccb",
+        "filename": "core/release_config.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-12T19:50:30Z",
+      "side": 1,
+      "message": "Return value of \"flag\" is not documented. http://go/buildifier-warnings#function-docstring-return",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 21
+      },
+      "revId": "6764704a6f6a4cd51e8e8647cfb10ecbc9580f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056035391",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2787002?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0e5552cc_7cb95326",
+        "filename": "core/release_config.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-12T19:50:30Z",
+      "side": 1,
+      "message": "Arguments \"name\", \"partitions\", \"default\", \"_kwmarker\", \"value_type\" are not documented.\n\nIf the documentation for the arguments exists but is not recognized by Buildifier\nmake sure it follows the line \"Args:\" which has the same indentation as the opening \"\"\",\nand the argument description starts with \"\u003cargument_name\u003e:\" and indented with at least\none (preferably two) space more than \"Args:\", for example:\n\n    def flag(name):\n        \"\"\"Function description.\n\n        Args:\n          name: argument description, can be\n            multiline with additional indentation.\n        \"\"\" http://go/buildifier-warnings#function-docstring-args",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 21
+      },
+      "revId": "6764704a6f6a4cd51e8e8647cfb10ecbc9580f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056035391",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2787002?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
         "uuid": "c9ef0d97_4ec4459f",
         "filename": "core/release_config.bzl",
         "patchSetId": 1
@@ -119,6 +197,58 @@
         "id": 1757831
       },
       "writtenOn": "2023-10-12T19:48:30Z",
+      "side": 1,
+      "message": "Return value of \"release_config\" is not documented. http://go/buildifier-warnings#function-docstring-return",
+      "range": {
+        "startLine": 129,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 75
+      },
+      "revId": "6764704a6f6a4cd51e8e8647cfb10ecbc9580f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056035391",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2787002?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2270897a_3d7abd8f",
+        "filename": "core/release_config.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-12T19:50:30Z",
+      "side": 1,
+      "message": "Arguments \"all_flags\", \"all_values\" are not documented.\n\nIf the documentation for the arguments exists but is not recognized by Buildifier\nmake sure it follows the line \"Args:\" which has the same indentation as the opening \"\"\",\nand the argument description starts with \"\u003cargument_name\u003e:\" and indented with at least\none (preferably two) space more than \"Args:\", for example:\n\n    def release_config(all_flags):\n        \"\"\"Function description.\n\n        Args:\n          all_flags: argument description, can be\n            multiline with additional indentation.\n        \"\"\" http://go/buildifier-warnings#function-docstring-args",
+      "range": {
+        "startLine": 129,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 75
+      },
+      "revId": "6764704a6f6a4cd51e8e8647cfb10ecbc9580f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000056035391",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2787002?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c26e38b5_0d24b4d1",
+        "filename": "core/release_config.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-12T19:50:30Z",
       "side": 1,
       "message": "Return value of \"release_config\" is not documented. http://go/buildifier-warnings#function-docstring-return",
       "range": {
