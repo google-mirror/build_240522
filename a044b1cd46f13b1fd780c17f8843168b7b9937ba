@@ -50,6 +50,23 @@
       "message": "Also removing myself since I don\u0027t have context here. Adding colefaust@ who knows some more",
       "revId": "a044b1cd46f13b1fd780c17f8843168b7b9937ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8faebc3_8ad799e4",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5541,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-12T19:50:54Z",
+      "side": 1,
+      "message": "I think BUILT_TARGET_FILES_DIR needs the dependency instead of that package itself, so the files are there when the directory is assembled.\n\nTo be consistent with the other partitions, could you make `INTERNAL_VENDOR_KERNEL_RAMDISK_TARGET` a dependency of `BUILT_TARGET_FILES_DIR` instead of this? Around line 5630.",
+      "revId": "a044b1cd46f13b1fd780c17f8843168b7b9937ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
