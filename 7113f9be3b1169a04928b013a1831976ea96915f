@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "034317e9_900838c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-12T07:21:29Z",
+      "side": 1,
+      "message": "Would love an example of the resulting Android.bp file in the commit messsage, please.",
+      "revId": "7113f9be3b1169a04928b013a1831976ea96915f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4becd595_7dfeef54",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-12T07:21:29Z",
+      "side": 1,
+      "message": "not a valid bug id",
+      "range": {
+        "startLine": 15,
+        "startChar": 5,
+        "endLine": 15,
+        "endChar": 16
+      },
+      "revId": "7113f9be3b1169a04928b013a1831976ea96915f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9451413_6041e53f",
+        "filename": "tools/aconfig/overrideflags/overrideflags.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-12T07:21:29Z",
+      "side": 1,
+      "message": "incorrect help str",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 40
+      },
+      "revId": "7113f9be3b1169a04928b013a1831976ea96915f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
