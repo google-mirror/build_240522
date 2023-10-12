@@ -67,6 +67,24 @@
       "message": "I think BUILT_TARGET_FILES_DIR needs the dependency instead of that package itself, so the files are there when the directory is assembled.\n\nTo be consistent with the other partitions, could you make `INTERNAL_VENDOR_KERNEL_RAMDISK_TARGET` a dependency of `BUILT_TARGET_FILES_DIR` instead of this? Around line 5630.",
       "revId": "a044b1cd46f13b1fd780c17f8843168b7b9937ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4acd65dc_61b174db",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5541,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-12T21:25:09Z",
+      "side": 1,
+      "message": "Actually, doesn\u0027t this line cover this already?\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:build/make/core/Makefile;l\u003d6190;drc\u003dad3c30528d190d713360a35b48c6a03f221e0a5c",
+      "parentUuid": "e8faebc3_8ad799e4",
+      "revId": "a044b1cd46f13b1fd780c17f8843168b7b9937ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
