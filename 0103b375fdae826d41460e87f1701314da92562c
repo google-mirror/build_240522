@@ -34,6 +34,24 @@
       "parentUuid": "e580f41f_ae3b3283",
       "revId": "0103b375fdae826d41460e87f1701314da92562c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df8adbb4_7c95f3f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-12T08:03:02Z",
+      "side": 1,
+      "message": "All clients of the textproto files have migrated to the binary proto. We should merge this CL now.",
+      "parentUuid": "f92591e5_b31c6dc1",
+      "revId": "0103b375fdae826d41460e87f1701314da92562c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
