@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4af39246_89ffb19c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-13T06:53:26Z",
+      "side": 1,
+      "message": "remove this",
+      "range": {
+        "startLine": 17,
+        "startChar": 3,
+        "endLine": 17,
+        "endChar": 6
+      },
+      "revId": "c5b2bdfb20bd8132af36dac9055f8dfca67e3431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
