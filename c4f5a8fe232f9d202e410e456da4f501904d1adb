@@ -39,6 +39,30 @@
       },
       "revId": "c4f5a8fe232f9d202e410e456da4f501904d1adb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "060be031_89d65a34",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-13T07:51:09Z",
+      "side": 1,
+      "message": "Fixed in the next PS.",
+      "parentUuid": "867a5dbf_4d5ec08f",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 83,
+        "endChar": 49
+      },
+      "revId": "c4f5a8fe232f9d202e410e456da4f501904d1adb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
