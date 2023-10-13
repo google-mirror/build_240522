@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f20fb54b_927640db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2023-10-13T07:45:20Z",
+      "side": 1,
+      "message": "In the absence of joeo@, I\u0027ll do my best.",
+      "revId": "c4f5a8fe232f9d202e410e456da4f501904d1adb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "867a5dbf_4d5ec08f",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1066075
+      },
+      "writtenOn": "2023-10-13T07:45:20Z",
+      "side": 1,
+      "message": "nit: why not `echo -n \u003e $$(PRIVATE_OUT)` then? Has the same effect, much more obvious",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 83,
+        "endChar": 49
+      },
+      "revId": "c4f5a8fe232f9d202e410e456da4f501904d1adb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
