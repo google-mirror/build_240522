@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54d56b43_6c32f7ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1388190
+      },
+      "writtenOn": "2023-10-13T02:24:38Z",
+      "side": 1,
+      "message": "Can you please attach an output sample of the generated code as well so we could see how the MACRO looks like?",
+      "revId": "b83eb1eb3254102fa795d7940ea6818501c3b8bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42aa845b_3d3d709d",
+        "filename": "tools/aconfig/templates/cpp_exported_header.template",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1388190
+      },
+      "writtenOn": "2023-10-13T02:24:38Z",
+      "side": 1,
+      "message": "should be here `{package_macro}_{item.flag_macro}` to allow tests to override the macro value and get the same value from the runtime flag",
+      "range": {
+        "startLine": 47,
+        "startChar": 11,
+        "endLine": 47,
+        "endChar": 31
+      },
+      "revId": "b83eb1eb3254102fa795d7940ea6818501c3b8bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
