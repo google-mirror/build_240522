@@ -85,6 +85,24 @@
       "parentUuid": "e8faebc3_8ad799e4",
       "revId": "a044b1cd46f13b1fd780c17f8843168b7b9937ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19266306_8e343786",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5541,
+      "author": {
+        "id": 1010080
+      },
+      "writtenOn": "2023-10-14T00:39:24Z",
+      "side": 1,
+      "message": "The explicit dependency is needed because of ordering, without this\n\n```\nlunch aosp_shiba-userdebug\nm target-files-package # Fails from clean\nm; m target-files-package # Works. Also reproducible with updatepackage\n```",
+      "parentUuid": "4acd65dc_61b174db",
+      "revId": "a044b1cd46f13b1fd780c17f8843168b7b9937ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
