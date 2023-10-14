@@ -16,6 +16,23 @@
       "message": "Use command instead of which to locate/run adb\n\nIf adb is not found on PATH, which will silently fail and evaluate to\nthe empty string. This will cause the remaining arguments to be\ninterpreted as a command to run in the shell, which is generally\nundesirable. (Consider, for example, \"adb reboot\" -\u003e \"reboot\".)\n\nBug: 24473359\nTest: Just run adb before lunch so it\u0027s not on PATH\n\nChange-Id: I6b20722add6c67d1d2627f963dc66095502ab816\nSigned-off-by: Saagar Jha \u003csaagarjha@google.com\u003e",
       "revId": "11f188c09ae2cd0446296f8bcf996f2e63f3a0e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2790ebb_95244f32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2057143
+      },
+      "writtenOn": "2023-10-14T18:18:54Z",
+      "side": 1,
+      "message": "Use command instead of which to locate/run adb\n\nIf adb is not found on PATH, which will silently fail and evaluate to\nthe empty string. This will cause the remaining arguments to be\ninterpreted as a command to run in the shell, which is generally\nundesirable. (Consider, for example, \"adb reboot\" -\u003e \"reboot\".)\n\nBug: 24473359\nTest: Just run adb before lunch so it\u0027s not on PATH\n\nChange-Id: I6b20722add6c67d1d2627f963dc66095502ab816\nSigned-off-by: Saagar Jha \u003csaagarjha@google.com\u003e",
+      "revId": "11f188c09ae2cd0446296f8bcf996f2e63f3a0e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
