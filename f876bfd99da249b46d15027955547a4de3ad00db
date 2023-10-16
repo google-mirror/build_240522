@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af9edd4b_675dbcae",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1388190
+      },
+      "writtenOn": "2023-10-16T16:39:07Z",
+      "side": 1,
+      "message": "`#ifndef` doesn\u0027t take parameter macro. should be\n```\n#ifndef COM_ANDROID_ACONFIG_TEST\n#define COM_ANDROID_ACONFIG_TEST(FLAG) COM_ANDROID_ACONFIG_TEST_##FLAG\n#endif\n```",
+      "range": {
+        "startLine": 131,
+        "startChar": 32,
+        "endLine": 131,
+        "endChar": 38
+      },
+      "revId": "f876bfd99da249b46d15027955547a4de3ad00db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
