@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d1ce40_ecb87fa4",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1644,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-16T17:35:58Z",
+      "side": 1,
+      "message": "This should probably exit with an error still.",
+      "revId": "408865f95d05f14761c7a5f248ce70a54aae6bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
