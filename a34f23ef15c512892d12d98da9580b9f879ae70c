@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49b3d3c1_2ce77925",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-10-16T17:45:19Z",
+      "side": 1,
+      "message": "CheckSize should already handle the case of missing keys, is this really needed?",
+      "range": {
+        "startLine": 928,
+        "startChar": 0,
+        "endLine": 929,
+        "endChar": 29
+      },
+      "revId": "a34f23ef15c512892d12d98da9580b9f879ae70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
