@@ -16,6 +16,24 @@
       "message": "What if this were a boolean that was \"appendable\" or something?  That would force the value to be a list, and signal that when overridden it\u0027ll be appended to instead of overridden.\n\nvalue_type\u003d\"list\" makes it look it\u0027s a more traditional type checking thing.",
       "revId": "6c6d2e6fc85283d3f9e7306c78487cf6d25a0749",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c1c4e87_b23d3e08",
+        "filename": "core/release_config.bzl",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-10-17T17:22:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "672a1133_357043f0",
+      "revId": "6c6d2e6fc85283d3f9e7306c78487cf6d25a0749",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
