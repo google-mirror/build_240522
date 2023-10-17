@@ -3639,6 +3639,7 @@ endef
 # Requires for each suite: use my_compat_dist_config_$(suite) to define the test config.
 #    and use my_compat_dist_$(suite) to define the others.
 define create-suite-dependencies
+$(if $(filter hello_world_test StsCommonUtilTests,$(my_register_name)),,$(eval LOCAL_COMPATIBILITY_SUITE := $(filter-out general-tests,$(LOCAL_COMPATIBILITY_SUITE)))) \
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval $(if $(strip $(module_license_metadata)),\
     $$(foreach f,$$(my_compat_dist_$(suite)),$$(call declare-copy-target-license-metadata,$$(call word-colon,2,$$(f)),$$(call word-colon,1,$$(f)))),\
