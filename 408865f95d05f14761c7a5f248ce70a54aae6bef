@@ -16,6 +16,24 @@
       "message": "This should probably exit with an error still.",
       "revId": "408865f95d05f14761c7a5f248ce70a54aae6bef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0e89f51_97930332",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1644,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-10-17T06:24:49Z",
+      "side": 1,
+      "message": "Made it such that it returns 1 if there are any unconverted modules. Ideally I don\u0027t want `bmod` to break early if there are unconverted modules, since the input list can be stale or contain internal modules. The result can be handled with postprocessing.",
+      "parentUuid": "c2d1ce40_ecb87fa4",
+      "revId": "408865f95d05f14761c7a5f248ce70a54aae6bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
