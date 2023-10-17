@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "348aae67_1e1417b1",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2023-10-17T19:47:20Z",
+      "side": 1,
+      "message": "it looks like elsewhere in Soong, it\u0027s just checking env variables for `EMMA_INSTRUMENT`, `EMMA_INSTRUMENT_STATIC`, `EMMA_INSTRUMENT_FRAMEWORK` -- can we do similar for this case instead?\n\nIt also looks like we\u0027re missing `EMMA_INSTRUMENT_STATIC` in our checks currently.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 100
+      },
+      "revId": "8848f7fe149ad550a1a119b1d1f38395878119bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
