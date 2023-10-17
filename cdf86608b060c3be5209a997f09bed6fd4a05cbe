@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23b3d102_e9b94dfb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-10-17T09:07:30Z",
+      "side": 1,
+      "message": "Isn\u0027t the failure mode from running dev_sign_bundle itself?",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 52
+      },
+      "revId": "cdf86608b060c3be5209a997f09bed6fd4a05cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f5f4618_b303f5ee",
+        "filename": "tools/releasetools/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-10-17T09:07:30Z",
+      "side": 1,
+      "message": "Please revert the removal of trailing commas.",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 55
+      },
+      "revId": "cdf86608b060c3be5209a997f09bed6fd4a05cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
