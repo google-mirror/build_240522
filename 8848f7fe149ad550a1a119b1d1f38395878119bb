@@ -22,6 +22,30 @@
       },
       "revId": "8848f7fe149ad550a1a119b1d1f38395878119bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b02ff73a_0f32223d",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-10-17T19:59:41Z",
+      "side": 1,
+      "message": "Thanks for the inputs. In that case, I will abandon this change and perform the check directly in Soong",
+      "parentUuid": "348aae67_1e1417b1",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 100
+      },
+      "revId": "8848f7fe149ad550a1a119b1d1f38395878119bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
