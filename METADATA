@@ -4,5 +4,6 @@ third_party {
   "   tools/droiddoc/templates-pdk/assets/jquery-1.6.2.min.js\n"
   "   tools/droiddoc/templates-pdk/assets/jquery-history.js\n"
   "   tools/droiddoc/templates-pdk/assets/jquery-resizable.min.js"
-  license_type: RESTRICTED
+  license_type: ALlowed
+
 }
