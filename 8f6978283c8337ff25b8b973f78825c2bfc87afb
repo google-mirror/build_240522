@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d86b56a_778f5fc0",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-10-18T00:07:55Z",
+      "side": 1,
+      "message": "erofs_blocksize \u003d prop_dict.get(\"erofs_blocksize\", \"4096\")",
+      "range": {
+        "startLine": 356,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 32
+      },
+      "revId": "8f6978283c8337ff25b8b973f78825c2bfc87afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
