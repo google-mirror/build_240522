@@ -22,6 +22,30 @@
       },
       "revId": "c60e473c8f345b0e4dade406354eb11e51ea852f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e0e8fba_cd8a080d",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 3892,
+      "author": {
+        "id": 2052331
+      },
+      "writtenOn": "2023-10-18T08:14:29Z",
+      "side": 1,
+      "message": "We are removing this change As we are including BOARD_USES_FULL_RECOVERY_IMAGE :\u003d true, it is not entering into this code base(else statement).",
+      "parentUuid": "9b41709a_280657f1",
+      "range": {
+        "startLine": 3892,
+        "startChar": 0,
+        "endLine": 3892,
+        "endChar": 60
+      },
+      "revId": "c60e473c8f345b0e4dade406354eb11e51ea852f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
