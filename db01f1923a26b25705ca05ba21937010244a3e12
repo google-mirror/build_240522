@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b454fec_30793b8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-10-18T17:35:43Z",
+      "side": 1,
+      "message": "I\u0027m intentionally deferring the work to revisit all of the individual build flags that have already been added individually.\n\nOnce this change is present, we can begin switching soong over to using `BuildFlags[\"{NAME}\"]` instead of the ad-hoc soong_config variable currently being used, followed by removing the variable definition here.",
+      "revId": "db01f1923a26b25705ca05ba21937010244a3e12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
