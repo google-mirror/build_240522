@@ -22,7 +22,7 @@ public final class FeatureFlagsImpl implements FeatureFlags \{
     {{ endif- }}
     }
 {{ endfor }}
-{{ if is_read_write- }}
+{{ -if is_read_write }}
     private boolean getValue(String nameSpace,
         String flagName, boolean defaultValue) \{
         boolean value = defaultValue;

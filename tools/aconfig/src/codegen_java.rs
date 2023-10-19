@@ -178,6 +178,10 @@ mod tests {
         public static boolean enabledRw() {
             return FEATURE_FLAGS.enabledRw();
         }
+        @UnsupportedAppUsage
+        public static FeatureFlags getFeatureFlags() {
+            return FEATURE_FLAGS;
+        }
     "#;
 
     const EXPECTED_FAKEFEATUREFLAGSIMPL_CONTENT: &str = r#"
