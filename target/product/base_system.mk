@@ -284,7 +284,6 @@ PRODUCT_PACKAGES += \
     uncrypt \
     usbd \
     vdc \
-    viewcompiler \
     voip-common \
     vold \
     watchdogd \
@@ -380,7 +379,6 @@ PRODUCT_HOST_PACKAGES += \
     unwind_info \
     unwind_reg_info \
     unwind_symbols \
-    viewcompiler \
     tzdata_host \
     tzdata_host_tzdata_apex \
     tzlookup.xml_host_tzdata_apex \
