@@ -16,6 +16,24 @@
       "message": "I would vote against this.\n\n`$(shell)` commands are run every single build, and this command takes 0.3 seconds on internal main for me. (Though it will be parallelized with other shell commands)\n\nIt should be straightforward for to adapt goldfish/cuttlefish to the existing infrastructure, I don\u0027t think \"their device folders are too crowded\" is a legitimate reason. Which board config file is used is already really confusing, I don\u0027t think we need more rules for it.",
       "revId": "f886e8e297a801e80fbef52b295935250506ce02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd53c6bb_f511121f",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2023-10-19T19:37:04Z",
+      "side": 1,
+      "message": "cf has 13 boards:\n\nhttps://android.googlesource.com/device/google/cuttlefish/+/refs/heads/main\n\n\u003e It should be straightforward for to adapt goldfish/cuttlefish to the existing infrastructure\n\nDo we keep doing like this (13 folders)?",
+      "parentUuid": "19106b4c_d10d73b9",
+      "revId": "f886e8e297a801e80fbef52b295935250506ce02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
