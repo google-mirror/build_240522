@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1d1eea6_729a95d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-19T20:05:34Z",
+      "side": 1,
+      "message": "This is the passing abtd run for main-without-vendor the failed before: https://android-build.corp.google.com/abtd/run/L00900000963598663/?referrer\u003demail\n\nHowever I\u0027m still trying to make sure all the internal branches are in sync before submitting this.",
+      "revId": "b0990300e98158e39aeb8cbe9c91bbea30b72fc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
