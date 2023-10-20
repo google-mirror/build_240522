@@ -70,6 +70,24 @@
       "parentUuid": "6f1a4301_f72de665",
       "revId": "f886e8e297a801e80fbef52b295935250506ce02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4545cf0_ce09ae98",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-20T19:07:43Z",
+      "side": 1,
+      "message": "Not ideal, but acceptable",
+      "parentUuid": "706cea56_42eb4d49",
+      "revId": "f886e8e297a801e80fbef52b295935250506ce02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
