@@ -52,6 +52,24 @@
       "parentUuid": "bd53c6bb_f511121f",
       "revId": "f886e8e297a801e80fbef52b295935250506ce02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "706cea56_42eb4d49",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2023-10-20T04:00:20Z",
+      "side": 1,
+      "message": "How about we add exactly `device/generic/goldfish/board/$(TARGET_DEVICE)/BoardConfig.mk` and `device/google/cuttlefish/board/$(TARGET_DEVICE)/BoardConfig.mk` paths here?",
+      "parentUuid": "6f1a4301_f72de665",
+      "revId": "f886e8e297a801e80fbef52b295935250506ce02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
