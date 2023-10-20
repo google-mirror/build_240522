@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af4a1f2f_45a6ebdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294681
+      },
+      "writtenOn": "2023-10-20T03:01:31Z",
+      "side": 1,
+      "message": "Approving this as a temporary workaround until we have a more permanent fix that allows the caller to specify the library alignment size.",
+      "revId": "6e4439fcca1784402a6a29c6dfa2e41ad0ab6d68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
