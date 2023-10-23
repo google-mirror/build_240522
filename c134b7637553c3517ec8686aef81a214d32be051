@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6a33c66_2aa01dac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514900
+      },
+      "writtenOn": "2023-10-23T11:48:22Z",
+      "side": 1,
+      "message": "Preferably have someone from the Android Studio team to review and understand this piece of code as well.",
+      "revId": "c134b7637553c3517ec8686aef81a214d32be051",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
