@@ -236,6 +236,7 @@ PRODUCT_PACKAGES += \
     perfetto \
     ping \
     ping6 \
+    pintool \
     platform.xml \
     pm \
     pppd \
