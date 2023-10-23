@@ -16,6 +16,23 @@
       "message": "Preferably have someone from the Android Studio team to review and understand this piece of code as well.",
       "revId": "c134b7637553c3517ec8686aef81a214d32be051",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b7e5ec0_e26efdc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064724
+      },
+      "writtenOn": "2023-10-23T16:48:30Z",
+      "side": 1,
+      "message": "LGTOM for the changes to layoutlib build",
+      "revId": "c134b7637553c3517ec8686aef81a214d32be051",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
