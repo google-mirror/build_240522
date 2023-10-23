@@ -1,0 +1,12 @@
+[package]
+name = "metadata"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = ["cargo"]
+cargo = []
+
+[dependencies]
+anyhow = "1.0.69"
+clap = "2.33"
