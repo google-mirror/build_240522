@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4895a45c_be014dd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2023-10-24T17:22:04Z",
+      "side": 1,
+      "message": "I think we don\u0027t need to as their existence have no effect, the actual enablement should be guarded by flag on enabled device. These libraries were already shipped by most of our partners in vendor partition pre-V.",
+      "parentUuid": "ed46d2d0_1b7497ca",
+      "revId": "96d1f32f0e1a8adf06fc6fc9ee5fea7eb9d9963b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3dd78761_b8b07ad6",
         "filename": "target/product/base_system.mk",
         "patchSetId": 7
