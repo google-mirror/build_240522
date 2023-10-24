@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94ca0960_815ca512",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-24T22:12:46Z",
+      "side": 1,
+      "message": "Does this need to happen only as part of bundled images? Consider moving it outside of the if statement if possible.",
+      "revId": "df85b8691e170f387170b58e40953f3ae313c05f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
