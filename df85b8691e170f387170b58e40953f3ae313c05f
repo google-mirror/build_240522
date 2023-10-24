@@ -16,6 +16,24 @@
       "message": "Does this need to happen only as part of bundled images? Consider moving it outside of the if statement if possible.",
       "revId": "df85b8691e170f387170b58e40953f3ae313c05f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92a8b503_54235079",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-10-24T22:21:04Z",
+      "side": 1,
+      "message": "I think the same comment from 561 applies to this too.  If you can\u0027t build the tools, you can\u0027t build the tests.  `checkbuild` shouldn\u0027t be run in any stripped down manifests anyways.",
+      "parentUuid": "94ca0960_815ca512",
+      "revId": "df85b8691e170f387170b58e40953f3ae313c05f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
