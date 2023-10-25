@@ -16,6 +16,24 @@
       "message": "Joe, I thought we were supposed to default TARGET_RELEASE to something but it appears that we actually don\u0027t. Is that something we should be doing?",
       "revId": "0fe27f448b075b3908c73d1c747077aec114d790",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "422c8365_cac58be7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-10-25T21:48:54Z",
+      "side": 1,
+      "message": "There\u0027s a pending CL that is trying to do that (go/aog/2710215), but from comments it looks like it might have issues.\n\nRegardless, the eventual end game (from comms I\u0027ve seen) is that lunch targets lacking a release type will not be allowed, and lunch will break on them.  So we\u0027ll need a CL like this eventually.\n\nIndeed, I claim that the current state is actively harmful, because if someone chooses one of these lunch targets as they currently are, they will get a \"fourth build type\" which is none of target_staging, trunk_food, nor next.  And it may very well break in subtle and time-wasting ways.  So I think we should land this sooner rather than later.",
+      "parentUuid": "45d2ceab_f811ecd3",
+      "revId": "0fe27f448b075b3908c73d1c747077aec114d790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
