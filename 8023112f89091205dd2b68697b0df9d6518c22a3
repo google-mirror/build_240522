@@ -22,6 +22,30 @@
       },
       "revId": "8023112f89091205dd2b68697b0df9d6518c22a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7399ddbe_bed00a69",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-25T17:14:14Z",
+      "side": 1,
+      "message": "b/304278614 is the bug that will be re-opened if we revert this without changing `echo` to `echo -n`. Ted, can you do that in this CL please?\n\nSee especially b/304278614#comment2",
+      "parentUuid": "dd16e0fc_66530688",
+      "range": {
+        "startLine": 85,
+        "startChar": 2,
+        "endLine": 85,
+        "endChar": 31
+      },
+      "revId": "8023112f89091205dd2b68697b0df9d6518c22a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
