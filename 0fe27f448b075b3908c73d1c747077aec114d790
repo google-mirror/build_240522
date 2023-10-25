@@ -34,6 +34,24 @@
       "parentUuid": "45d2ceab_f811ecd3",
       "revId": "0fe27f448b075b3908c73d1c747077aec114d790",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fd5d904_7328db34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-25T22:00:47Z",
+      "side": 1,
+      "message": "Ok, sounds good. FYI Joe and I were thinking of removing COMMON_LUNCH_CHOICES entirely, and replacing it with a complete list of products, because it\u0027s confusing that not everything in the tree is listed there.",
+      "parentUuid": "422c8365_cac58be7",
+      "revId": "0fe27f448b075b3908c73d1c747077aec114d790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
