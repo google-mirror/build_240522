@@ -31,12 +31,21 @@ pub fn generate_java_code<'a, I>(
 where
     I: Iterator<Item = &'a ProtoParsedFlag>,
 {
-    let class_elements: Vec<ClassElement> =
-        parsed_flags_iter.map(|pf| create_class_element(package, pf)).collect();
-    let is_read_write = class_elements.iter().any(|elem| elem.is_read_write);
+    let flag_elements: Vec<FlagElement> =
+        parsed_flags_iter.map(|pf| create_flag_element(package, pf)).collect();
+    let mut namespaces: Vec<String> =
+        flag_elements.iter().map(|fe| fe.device_config_namespace.clone()).collect();
+    namespaces.sort_unstable();
+    namespaces.dedup();
+    let is_read_write = flag_elements.iter().any(|elem| elem.is_read_write);
     let is_test_mode = codegen_mode == CodegenMode::Test;
-    let context =
-        Context { class_elements, is_test_mode, is_read_write, package_name: package.to_string() };
+    let context = Context {
+        flag_elements,
+        is_test_mode,
+        is_read_write,
+        namespaces,
+        package_name: package.to_string(),
+    };
     let mut template = TinyTemplate::new();
     template.add_template("Flags.java", include_str!("../templates/Flags.java.template"))?;
     template.add_template(
@@ -66,14 +75,15 @@ where
 
 #[derive(Serialize)]
 struct Context {
-    pub class_elements: Vec<ClassElement>,
+    pub flag_elements: Vec<FlagElement>,
     pub is_test_mode: bool,
     pub is_read_write: bool,
+    pub namespaces: Vec<String>,
     pub package_name: String,
 }
 
 #[derive(Serialize)]
-struct ClassElement {
+struct FlagElement {
     pub default_value: bool,
     pub device_config_namespace: String,
     pub device_config_flag: String,
@@ -82,10 +92,10 @@ struct ClassElement {
     pub method_name: String,
 }
 
-fn create_class_element(package: &str, pf: &ProtoParsedFlag) -> ClassElement {
+fn create_flag_element(package: &str, pf: &ProtoParsedFlag) -> FlagElement {
     let device_config_flag = codegen::create_device_config_ident(package, pf.name())
         .expect("values checked at flag parse time");
-    ClassElement {
+    FlagElement {
         default_value: pf.state() == ProtoFlagState::ENABLED,
         device_config_namespace: pf.namespace().to_string(),
         device_config_flag,
