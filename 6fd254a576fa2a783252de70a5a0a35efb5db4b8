@@ -16,6 +16,29 @@
       "message": "hey better this than never, huh? 😄",
       "revId": "6fd254a576fa2a783252de70a5a0a35efb5db4b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00cb3e07_f5b8ef08",
+        "filename": "envsetup.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2023-10-25T03:18:36Z",
+      "side": 1,
+      "message": "I\u0027m not sure this will do anything useful as the flag values aren\u0027t defined for any of the release configs right now. I\u0027d rather just have a warning that providing a release config will become mandatory soon, with a specific date. Maybe 11/15?",
+      "range": {
+        "startLine": 850,
+        "startChar": 21,
+        "endLine": 850,
+        "endChar": 36
+      },
+      "revId": "6fd254a576fa2a783252de70a5a0a35efb5db4b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
