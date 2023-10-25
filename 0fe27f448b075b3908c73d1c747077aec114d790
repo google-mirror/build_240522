@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d2ceab_f811ecd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-25T21:43:53Z",
+      "side": 1,
+      "message": "Joe, I thought we were supposed to default TARGET_RELEASE to something but it appears that we actually don\u0027t. Is that something we should be doing?",
+      "revId": "0fe27f448b075b3908c73d1c747077aec114d790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
