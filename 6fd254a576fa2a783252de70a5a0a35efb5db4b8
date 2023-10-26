@@ -39,6 +39,30 @@
       },
       "revId": "6fd254a576fa2a783252de70a5a0a35efb5db4b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6439a043_a4cce2a3",
+        "filename": "envsetup.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-10-26T17:21:49Z",
+      "side": 1,
+      "message": "I mean, do something? I thought this CL was a no-brainer: start the process of telling Android developers developing locally that they need to change something. At least they\u0027ll see it locally, and the information will start getting out there. I assumed it would be followed up a few times.\n\nI don\u0027t really care, but we have people bringing up the next version of Android in a configuration that doesn\u0027t exist. So, better to do something now, anything. If you don\u0027t like this, it\u0027s already late now, so can we merge something? If not this, something?",
+      "parentUuid": "00cb3e07_f5b8ef08",
+      "range": {
+        "startLine": 850,
+        "startChar": 21,
+        "endLine": 850,
+        "endChar": 36
+      },
+      "revId": "6fd254a576fa2a783252de70a5a0a35efb5db4b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
