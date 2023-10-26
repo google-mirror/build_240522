@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45146575_d3b8184f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-26T14:41:52Z",
+      "side": 1,
+      "message": "How slow is the new comparison function compared to the old one?",
+      "range": {
+        "startLine": 10,
+        "startChar": 46,
+        "endLine": 10,
+        "endChar": 50
+      },
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04357f4d_613048f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-26T14:41:52Z",
+      "side": 1,
+      "message": "This is very clever!",
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8275fc9d_a526555c",
+        "filename": "common/math.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-26T14:41:52Z",
+      "side": 1,
+      "message": "`$(empty),` to better express the intent?",
+      "range": {
+        "startLine": 77,
+        "startChar": 40,
+        "endLine": 77,
+        "endChar": 41
+      },
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "722859f3_4629cb68",
+        "filename": "common/math.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-26T14:41:52Z",
+      "side": 1,
+      "message": "`$(space)` ?",
+      "range": {
+        "startLine": 139,
+        "startChar": 36,
+        "endLine": 139,
+        "endChar": 37
+      },
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d3846a_bdb23260",
+        "filename": "common/math.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-26T14:41:52Z",
+      "side": 1,
+      "message": "Why do we have this limitation?",
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d0cba0d_a0f617d2",
+        "filename": "common/math.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-26T14:41:52Z",
+      "side": 1,
+      "message": "It\u0027s not critical, but this will incorrectly compare 001 and 2. So, we may want to remove leading zeros before.",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 59
+      },
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb00dae6_d909acf6",
+        "filename": "common/math.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-26T14:41:52Z",
+      "side": 1,
+      "message": "I think we need to add\n\n`$(call math-expect,(call math_max,7,32759),32759)`\n\nas well. Ditto for all the others.",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 49
+      },
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
