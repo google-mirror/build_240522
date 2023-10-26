@@ -69,24 +69,19 @@ $(foreach f, $(config_map_files), \
     $(eval include $(f)) \
 )
 
-# If TARGET_RELEASE is set, fail if there is no matching release config
-# If it isn't set, no release config files will be included and all flags
-# will get their default values.
-ifneq ($(TARGET_RELEASE),)
+# TARGET_RELEASE must be set (first check), and must be a valid release type
+# (second check).
+ifeq ($(TARGET_RELEASE),)
+    $(error No release config set for target; please 'lunch <target>-<release>-<build_type>', where <release> is one of: $(_all_release_configs))
+endif
+
 ifeq ($(filter $(_all_release_configs), $(TARGET_RELEASE)),)
     $(error No release config found for TARGET_RELEASE: $(TARGET_RELEASE). Available releases are: $(_all_release_configs))
-else
-    # Choose flag files
-    # Don't sort this, use it in the order they gave us.
-    flag_value_files := $(_all_release_configs.$(TARGET_RELEASE).FILES)
 endif
-else
-# Useful for finding scripts etc that aren't passing or setting TARGET_RELEASE
-ifneq ($(FAIL_IF_NO_RELEASE_CONFIG),)
-    $(error FAIL_IF_NO_RELEASE_CONFIG was set and TARGET_RELEASE was not)
-endif
-flag_value_files :=
-endif
+
+# Choose flag files
+# Don't sort this, use it in the order they gave us.
+flag_value_files := $(_all_release_configs.$(TARGET_RELEASE).FILES)
 
 # Unset variables so they can't use them
 define declare-release-config
