@@ -134,6 +134,12 @@ ifeq (true,$(MODULE_BUILD_FROM_SOURCE))
 $(call add_soong_config_var_value,ANDROID,module_build_from_source,true)
 endif
 
+# List of apex boot jars that are not actually in prebuilt apexes.
+PRODUCT_APEX_BOOT_JARS_EXCLUDED :=
+ifeq (false, $(call soong_config_get,mediaprovider_module,source_build))
+    PRODUCT_APEX_BOOT_JARS_EXCLUDED += com.android.mediaprovider:framework-pdf
+endif
+
 # Messaging app vars
 ifeq (eng,$(TARGET_BUILD_VARIANT))
 $(call soong_config_set,messaging,build_variant_eng,true)
