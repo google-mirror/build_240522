@@ -16,6 +16,23 @@
       "message": "With this stack of CLs, and the changes here in patchset 2, \u0027lunch\u0027 with no arguments now works as expected.\n\nI\u0027ll kick off presubmit again, hopefully all but 1 test should pass (and I think we\u0027ll be removing that one from presubmit soon).",
       "revId": "8076714b886a03b9bca1447ff90fa84489b4c61f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78cf74e3_dd7e2bda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-10-27T23:15:40Z",
+      "side": 1,
+      "message": "Note there is pending CL to fix the only failing presubmit here (go/aog/2808322).",
+      "revId": "8076714b886a03b9bca1447ff90fa84489b4c61f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
