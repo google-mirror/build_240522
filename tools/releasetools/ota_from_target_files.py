@@ -525,7 +525,8 @@ def GetTargetFilesZipWithoutPostinstallConfig(input_file):
 
 
 def ParseInfoDict(target_file_path):
-  return common.LoadInfoDict(target_file_path)
+  with zipfile.ZipFile(target_file_path, 'r', allowZip64=True) as zfp:
+    return common.LoadInfoDict(zfp)
 
 
 def GetTargetFilesZipForCustomVABCCompression(input_file, vabc_compression_param):
