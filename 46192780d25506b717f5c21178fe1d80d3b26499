@@ -33,6 +33,24 @@
       "message": "(Pulled off on a P0 for a little, but want to rerun presubmit here to see if at least 12 of these failures go away now)",
       "revId": "46192780d25506b717f5c21178fe1d80d3b26499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e5df822_30355596",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-10-27T20:26:30Z",
+      "side": 1,
+      "message": "Naively looking at this logic, things like `get_build_var` seem like they support (and require) emplty `TARGET_BUILD_VARIANT` and things like that.  We might need to allow empty `TARGET_RELEASE` to keep support for things like that, although I think we should be able to at least set a valid default value.\n\nI think we can require folks using `lunch` to set this, though, and I\u0027ve got go/aog/2808367 for that.\n\nThe second presubmit run, by the way, passed everything we hoped it would (and we\u0027re working through the others).",
+      "parentUuid": "8ab795d1_80f5bbe8",
+      "revId": "46192780d25506b717f5c21178fe1d80d3b26499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
