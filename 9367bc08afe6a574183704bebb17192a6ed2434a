@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f55c5e7_dc070dad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-27T13:38:54Z",
+      "side": 1,
+      "message": "Mention that this is done to increase performance.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "9367bc08afe6a574183704bebb17192a6ed2434a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22978a3b_a78cdf75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-27T13:38:54Z",
+      "side": 1,
+      "message": "rm",
+      "range": {
+        "startLine": 11,
+        "startChar": 4,
+        "endLine": 11,
+        "endChar": 5
+      },
+      "revId": "9367bc08afe6a574183704bebb17192a6ed2434a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "193c11e2_c2d39838",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-27T13:38:54Z",
+      "side": 1,
+      "message": "collect() into a BTreeSet instead of a Vec and you don\u0027t have to sort (from https://doc.rust-lang.org/std/collections/struct.BTreeSet.html: \"Iterators returned by BTreeSet::iter produce their items in order, and take worst-case logarithmic and amortized constant time per item returned.\") or dedup",
+      "range": {
+        "startLine": 36,
+        "startChar": 28,
+        "endLine": 36,
+        "endChar": 31
+      },
+      "revId": "9367bc08afe6a574183704bebb17192a6ed2434a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1006f7fd_6f22876c",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-27T13:38:54Z",
+      "side": 1,
+      "message": "BTreeSet?",
+      "range": {
+        "startLine": 81,
+        "startChar": 24,
+        "endLine": 81,
+        "endChar": 27
+      },
+      "revId": "9367bc08afe6a574183704bebb17192a6ed2434a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14ae3d45_cb7aac00",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-27T13:38:54Z",
+      "side": 1,
+      "message": "What if property_name.is_empty() \u003d\u003d true?",
+      "range": {
+        "startLine": 133,
+        "startChar": 31,
+        "endLine": 133,
+        "endChar": 42
+      },
+      "revId": "9367bc08afe6a574183704bebb17192a6ed2434a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b001eec7_1379dfa4",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-10-27T13:38:54Z",
+      "side": 1,
+      "message": "I prefer\n\n`format!(\"mProperties{}{}\", \u0026name[...], ...)`\n\nas it gets rid of `mProperties`.to_owned(). WDYT?",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 76
+      },
+      "revId": "9367bc08afe6a574183704bebb17192a6ed2434a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
