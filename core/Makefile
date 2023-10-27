@@ -5521,7 +5521,6 @@ INTERNAL_OTATOOLS_MODULES := \
   host_init_verifier \
   img2simg \
   img_from_target_files \
-  imgdiff \
   initrd_bootconfig \
   libconscrypt_openjdk_jni \
   lpmake \
@@ -6009,16 +6008,6 @@ define package_files-copy-root
   fi
 endef
 
-built_ota_tools :=
-
-# We can't build static executables when SANITIZE_TARGET=address
-ifeq (,$(filter address, $(SANITIZE_TARGET)))
-built_ota_tools += \
-    $(call intermediates-dir-for,EXECUTABLES,updater)/updater
-endif
-
-$(BUILT_TARGET_FILES_DIR): PRIVATE_OTA_TOOLS := $(built_ota_tools)
-
 tool_extension := $(wildcard $(tool_extensions)/releasetools.py)
 $(BUILT_TARGET_FILES_DIR): PRIVATE_TOOL_EXTENSION := $(tool_extension)
 
@@ -6029,11 +6018,6 @@ $(call declare-1p-target,system/update_engine/update_engine.conf,system/update_e
 updater_dep += external/zucchini/version_info.h
 $(call declare-license-metadata,external/zucchini/version_info.h,legacy_notice,notice,external/zucchini/LICENSE,external/zucchini)
 updater_dep += $(HOST_OUT_SHARED_LIBRARIES)/liblz4.so
-endif
-
-# Build OTA tools if non-A/B is allowed
-ifeq ($(TARGET_OTA_ALLOW_NON_AB),true)
-updater_dep += $(built_ota_tools)
 endif
 
 $(BUILT_TARGET_FILES_DIR): $(updater_dep)
@@ -6353,7 +6337,6 @@ $(BUILT_TARGET_FILES_DIR): \
 	    $(HOST_OUT_EXECUTABLES)/fs_config \
 	    $(HOST_OUT_EXECUTABLES)/map_file_generator \
 	    $(ADD_IMG_TO_TARGET_FILES) \
-	    $(MAKE_RECOVERY_PATCH) \
 	    $(BUILT_KERNEL_CONFIGS_FILE) \
 	    $(BUILT_KERNEL_VERSION_FILE) \
 	    | $(ACP)
@@ -6601,12 +6584,6 @@ ifneq ($(PRODUCT_SYSTEM_DLKM_BASE_FS_PATH),)
 	$(hide) cp $(PRODUCT_SYSTEM_DLKM_BASE_FS_PATH) \
 	  $(zip_root)/META/$(notdir $(PRODUCT_SYSTEM_DLKM_BASE_FS_PATH))
 endif
-ifeq ($(TARGET_OTA_ALLOW_NON_AB),true)
-ifneq ($(INSTALLED_RECOVERYIMAGE_TARGET),)
-	$(hide) PATH=$(INTERNAL_USERIMAGES_BINARY_PATHS):$$PATH MKBOOTIMG=$(MKBOOTIMG) \
-	    $(MAKE_RECOVERY_PATCH) $(zip_root) $(zip_root)
-endif
-endif
 ifeq ($(AB_OTA_UPDATER),true)
 	@# When using the A/B updater, include the updater config files in the zip.
 	$(hide) cp $(TOPDIR)system/update_engine/update_engine.conf $(zip_root)/META/update_engine_config.txt
@@ -6826,7 +6803,6 @@ $(call declare-container-license-deps,$(BUILT_TARGET_FILES_PACKAGE), $(INSTALLED
             $(HOST_OUT_EXECUTABLES)/fs_config \
             $(HOST_OUT_EXECUTABLES)/map_file_generator \
             $(ADD_IMG_TO_TARGET_FILES) \
-            $(MAKE_RECOVERY_PATCH) \
             $(BUILT_KERNEL_CONFIGS_FILE) \
             $(BUILT_KERNEL_VERSION_FILE),$(BUILT_TARGET_FILES_PACKAGE):)
 

@@ -284,7 +284,6 @@ from ota_utils import (VABC_COMPRESSION_PARAM_SUPPORT, FinalizeMetadata, GetPack
                        PayloadGenerator, SECURITY_PATCH_LEVEL_PROP_NAME, ExtractTargetFiles, CopyTargetFilesDir)
 from common import DoesInputFileContain, IsSparseImage
 import target_files_diff
-from non_ab_ota import GenerateNonAbOtaPackage
 from payload_signer import PayloadSigner
 
 if sys.hexversion < 0x02070000:
@@ -1483,14 +1482,7 @@ def main(argv):
                        " detected. Please only pass in this flag if you want a"
                        " SPL downgrade. Target SPL: {} Source SPL: {}"
                        .format(target_spl, source_spl))
-  if generate_ab:
-    GenerateAbOtaPackage(
-        target_file=args[0],
-        output_file=args[1],
-        source_file=OPTIONS.incremental_source)
-
-  else:
-    GenerateNonAbOtaPackage(
+  GenerateAbOtaPackage(
         target_file=args[0],
         output_file=args[1],
         source_file=OPTIONS.incremental_source)
