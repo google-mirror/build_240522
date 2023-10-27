@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98f0430d_f2f45036",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-10-27T15:40:37Z",
+      "side": 1,
+      "message": "Looks good, but I think you can clean up the CL descriptions in both changes if you\u0027ve cleared up the merge conflicts (remove the AOSP-first message, and the NOTE FOR REVIEWERS in the other change, assuming you\u0027re going to land this first and just rely on automerger).",
+      "revId": "97656203cc0b009d0adaf8ac7a4e6b1dd8d2cdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
