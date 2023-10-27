@@ -46,17 +46,22 @@ function _copy_reclient_binaries_from_cog() {
 
   local NONCOG_RECLIENT_BIN_DIR_BASE="${OUT_DIR}/.reclient"
   local NONCOG_RECLIENT_BIN_DIR="${NONCOG_RECLIENT_BIN_DIR_BASE}/${RECLIENT_VERSION}"
-
-  # Create the non cog directory and setup live symlink.
-  mkdir -p ${NONCOG_RECLIENT_BIN_DIR}
-
-  if [ `ls ${NONCOG_RECLIENT_BIN_DIR} | wc -l` -lt 8 ]; then
-    # Not all binaries exist, copy them from the Cog directory.
-    local TOP=$(gettop)
-    cp ${TOP}/prebuilts/remoteexecution-client/live/* ${NONCOG_RECLIENT_BIN_DIR}
+  if [ -d "${NONCOG_RECLIENT_BIN_DIR}" ]; then
+    if [ `ls ${NONCOG_RECLIENT_BIN_DIR} | wc -l` -gt 1 ] ; then
+      # binaries already exist, only update the symlink to ensure correct
+      # reclient version is set.
+      ln -sf ${RECLIENT_VERSION} ${NONCOG_RECLIENT_BIN_DIR_BASE}/live
+      return
+    fi
   fi
 
-  ln -sfn ${RECLIENT_VERSION} ${NONCOG_RECLIENT_BIN_DIR_BASE}/live
+  # Create the non cog directory and copy binaries into it.
+  mkdir -p ${NONCOG_RECLIENT_BIN_DIR}
+  local TOP=$(gettop)
+  cp ${TOP}/prebuilts/remoteexecution-client/live/* ${NONCOG_RECLIENT_BIN_DIR}
+  ln -sf ${RECLIENT_VERSION} ${NONCOG_RECLIENT_BIN_DIR_BASE}/live
+
+  # Finally set the RBE_DIR env var to point to the out-of-cog directory.
   export RBE_DIR="${NONCOG_RECLIENT_BIN_DIR_BASE}/live"
 }
 
