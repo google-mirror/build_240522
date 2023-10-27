@@ -150,8 +150,6 @@ java_library_static {
 python_defaults {
     name: "releasetools_ota_from_target_files_defaults",
     srcs: [
-        "edify_generator.py",
-        "non_ab_ota.py",
         "ota_from_target_files.py",
         "target_files_diff.py",
     ],
@@ -228,7 +226,6 @@ python_library_host {
 python_library_host {
     name: "releasetools_common",
     srcs: [
-        "blockimgdiff.py",
         "common.py",
         "images.py",
         "rangelib.py",
@@ -244,7 +241,6 @@ python_library_host {
         "boot_signer",
         "brotli",
         "bsdiff",
-        "imgdiff",
         "lz4",
         "mkbootfs",
         "signapk",
@@ -308,7 +304,6 @@ python_defaults {
         "brotli",
         "bsdiff",
         "deapexer",
-        "imgdiff",
         "lz4",
         "mkbootfs",
         "signapk",
@@ -476,17 +471,6 @@ python_library_host {
 }
 
 python_binary_host {
-    name: "make_recovery_patch",
-    defaults: ["releasetools_binary_defaults"],
-    srcs: [
-        "make_recovery_patch.py",
-    ],
-    libs: [
-        "releasetools_common",
-    ],
-}
-
-python_binary_host {
     name: "ota_from_target_files",
     defaults: [
         "releasetools_binary_defaults",
@@ -510,15 +494,6 @@ python_binary_host {
         "ota_metadata_proto",
         "releasetools_common",
         "ota_utils_lib",
-    ],
-}
-
-python_binary_host {
-    name: "ota_package_parser",
-    defaults: ["releasetools_binary_defaults"],
-    srcs: [
-        "ota_package_parser.py",
-        "rangelib.py",
     ],
 }
 
@@ -607,8 +582,6 @@ python_defaults {
         "check_ota_package_signature.py",
         "check_partition_sizes.py",
         "check_target_files_signatures.py",
-        "make_recovery_patch.py",
-        "ota_package_parser.py",
         "sign_apex.py",
         "sign_target_files_apks.py",
         "validate_target_files.py",
