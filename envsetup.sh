@@ -56,7 +56,7 @@ cat <<EOF
 Run "m help" for help with the build system itself.
 
 Invoke ". build/envsetup.sh" from your shell to add the following functions to your environment:
-- lunch:      lunch <product_name>-<build_variant>
+- lunch:      lunch <product_name>-<release_type>-<build_variant>
               Selects <product_name> as the product to build, and <build_variant> as the variant to
               build, and stores those selections in the environment to be read by subsequent
               invocations of 'm' etc.
@@ -486,7 +486,7 @@ function addcompletions()
 
 function multitree_lunch_help()
 {
-    echo "usage: lunch PRODUCT-VARIANT" 1>&2
+    echo "usage: lunch PRODUCT-RELEASE-VARIANT" 1>&2
     echo "    Set up android build environment based on a product short name and variant" 1>&2
     echo 1>&2
     echo "lunch COMBO_FILE VARIANT" 1>&2
@@ -728,7 +728,7 @@ function print_lunch_menu()
 {
     local uname=$(uname)
     local choices
-    choices=$(TARGET_BUILD_APPS= TARGET_PRODUCT= TARGET_BUILD_VARIANT= get_build_var COMMON_LUNCH_CHOICES 2>/dev/null)
+    choices=$(TARGET_BUILD_APPS= TARGET_PRODUCT= TARGET_BUILD_VARIANT= TARGET_RELEASE= get_build_var COMMON_LUNCH_CHOICES 2>/dev/null)
     local ret=$?
 
     echo
@@ -804,26 +804,16 @@ function lunch()
 
     export TARGET_BUILD_APPS=
 
-    # Support either <product>-<variant> or <product>-<release>-<variant>
-    local product release_and_variant release variant
-    product=${selection%%-*} # Trim everything after first dash
-    release_and_variant=${selection#*-} # Trim everything up to first dash
-    if [ "$release_and_variant" != "$selection" ]; then
-        local first=${release_and_variant%%-*} # Trim everything after first dash
-        if [ "$first" != "$release_and_variant" ]; then
-            # There is a 2nd dash, split into release-variant
-            release=$first # Everything up to the dash
-            variant=${release_and_variant#*-} # Trim everything up to dash
-        else
-            # There is not a 2nd dash, default to variant as the second param
-            variant=$first
-        fi
-    fi
+    # This must be <product>-<release>-<variant>
+    local product release variant
+    # Split string on the '-' character.
+    IFS="-" read -r product release variant <<< "$selection"
 
-    if [ -z "$product" ]
+    if [[ -z "$product" ]] || [[ -z "$release" ]] || [[ -z "$variant" ]]
     then
         echo
         echo "Invalid lunch combo: $selection"
+        echo "Valid combos must be of the form <product>-<release>-<variant>"
         return 1
     fi
 
