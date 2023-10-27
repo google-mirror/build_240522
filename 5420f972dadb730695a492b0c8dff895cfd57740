@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "240b0616_3902e32d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-27T02:21:44Z",
+      "side": 1,
+      "message": "I ran a test to use the original function and the extended function for the same input like `$(call math_max,20,21)`.\nThe time taken to run this call for 1000 loops are:\noriginal: 0.061s\nextended: 0.183s\nusing shell: 3.568s\n\nIt\u0027s still way better than using the shell commands.",
+      "parentUuid": "45146575_d3b8184f",
+      "range": {
+        "startLine": 10,
+        "startChar": 46,
+        "endLine": 10,
+        "endChar": 50
+      },
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "04357f4d_613048f6",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "219d78df_9efe9641",
+        "filename": "common/math.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-27T02:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8275fc9d_a526555c",
+      "range": {
+        "startLine": 77,
+        "startChar": 40,
+        "endLine": 77,
+        "endChar": 41
+      },
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "722859f3_4629cb68",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-10-26T14:41:52Z",
       "side": 1,
       "message": "`$(space)` ?",
+      "range": {
+        "startLine": 139,
+        "startChar": 36,
+        "endLine": 139,
+        "endChar": 37
+      },
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e1a096d_00dfd4e7",
+        "filename": "common/math.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-27T02:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "722859f3_4629cb68",
       "range": {
         "startLine": 139,
         "startChar": 36,
@@ -106,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f13c0ab9_e8f38ec0",
+        "filename": "common/math.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-27T02:21:44Z",
+      "side": 1,
+      "message": "I wanted to use the `_math_1digit_comp` to compare the lengths of numbers. We can be more scalable here, but that brings some more complexity. My target was to support 6-digit numbers.",
+      "parentUuid": "d6d3846a_bdb23260",
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d0cba0d_a0f617d2",
         "filename": "common/math.mk",
         "patchSetId": 2
@@ -117,6 +207,30 @@
       "writtenOn": "2023-10-26T14:41:52Z",
       "side": 1,
       "message": "It\u0027s not critical, but this will incorrectly compare 001 and 2. So, we may want to remove leading zeros before.",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 59
+      },
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "628c4598_abd324ba",
+        "filename": "common/math.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-27T02:21:44Z",
+      "side": 1,
+      "message": "Thanks for the catch.\nThe original function did not support numbers with leading zero, either. I added a validation check to report error if numbers with leading zero is used.",
+      "parentUuid": "6d0cba0d_a0f617d2",
       "range": {
         "startLine": 179,
         "startChar": 0,
@@ -140,6 +254,30 @@
       "writtenOn": "2023-10-26T14:41:52Z",
       "side": 1,
       "message": "I think we need to add\n\n`$(call math-expect,(call math_max,7,32759),32759)`\n\nas well. Ditto for all the others.",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 49
+      },
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8063a2f_76ed8f43",
+        "filename": "common/math.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-27T02:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb00dae6_d909acf6",
       "range": {
         "startLine": 220,
         "startChar": 0,
