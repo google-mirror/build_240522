@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ab795d1_80f5bbe8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-10-27T16:15:55Z",
+      "side": 1,
+      "message": "It looks like this might be overly aggressive as is.\n\n`lunch` ends up breaking with this.  That can be \"fixed\" by changing the `print_lunch_menu` logic in `build/make/envsetup.sh` to use `TARGET_RELEASE\u003dnext` in its call to `get_build_var`.  But that\u0027s unlikely to be the only similar usage.\n\nWe give an error (in a different place) with a `lunch` target like `mokey-trunk_staging-bogus`.  I\u0027ll look into moving the \"unset\" error near that logic.",
+      "revId": "46192780d25506b717f5c21178fe1d80d3b26499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
