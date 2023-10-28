@@ -778,6 +778,10 @@ else ifneq ($(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),26),)
   PRODUCT_FULL_TREBLE := true
 endif
 
+ifneq ($(PRODUCT_FULL_TREBLE),true)
+   $(error You need more Treble.)
+endif
+
 # TODO(b/69865032): Make PRODUCT_NOTICE_SPLIT the default behavior and remove
 #    references to it here and below.
 ifdef PRODUCT_NOTICE_SPLIT_OVERRIDE
