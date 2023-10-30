@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1df5ed0_e3e95e21",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-10-30T23:30:18Z",
+      "side": 1,
+      "message": "When I used `product-installed-modules`, I found test-only apexes are in the list. Can I stick to the current one?",
+      "parentUuid": "3fbd4afc_61f0f051",
+      "revId": "2168f3b0e8a9beaf276556ea043a702ab78e1808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e398442_49d21c04",
         "filename": "core/Makefile",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-30T19:08:07Z",
       "side": 1,
       "message": "`cat` can concatenate multiple files together, so this can be simplified to `cat $^ \u003e $@`.\n\nHowever if command line length is something you\u0027re concerned about, it might be better to keep the current design but change the `;` to `$(newline)` so kati breaks up the commands.",
+      "revId": "2168f3b0e8a9beaf276556ea043a702ab78e1808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "326e726a_aa3aaa3a",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-10-30T23:30:18Z",
+      "side": 1,
+      "message": "`cat $^ \u003e $@` might fail with empty list, right? Yeah, as of now, there\u0027s no chance of empty list. To handle empty list, I could guard it with `if [-z..]`, but I think the current one looks okay. Thanks for the tip (`$(newline)`).",
+      "parentUuid": "5e398442_49d21c04",
       "revId": "2168f3b0e8a9beaf276556ea043a702ab78e1808",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2023-10-30T19:08:07Z",
       "side": 1,
       "message": "Move this into the previous ifndef",
+      "revId": "2168f3b0e8a9beaf276556ea043a702ab78e1808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b5f4938_7a446e1e",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-10-30T23:30:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f63af54c_2b8f544b",
       "revId": "2168f3b0e8a9beaf276556ea043a702ab78e1808",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
