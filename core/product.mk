@@ -447,6 +447,9 @@ _product_list_vars += PRODUCT_AFDO_PROFILES
 
 _product_single_value_vars += PRODUCT_NEXT_RELEASE_HIDE_FLAGGED_API
 
+# List of apex metadata for source vs prebuilt selection
+_product_list_vars += PRODUCT_ALL_APEX_CONTRIBUTIONS
+
 .KATI_READONLY := _product_single_value_vars _product_list_vars
 _product_var_list :=$= $(_product_single_value_vars) $(_product_list_vars)
 

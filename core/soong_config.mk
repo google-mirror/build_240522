@@ -392,6 +392,8 @@ $(call end_json_map)
 
 $(call add_json_bool, NextReleaseHideFlaggedApi, $(filter true,$(PRODUCT_NEXT_RELEASE_HIDE_FLAGGED_API)))
 
+$(call add_json_list, AllApexContributions, $(sort $(PRODUCT_ALL_APEX_CONTRIBUTIONS)))
+
 $(call json_end)
 
 $(file >$(SOONG_VARIABLES).tmp,$(json_contents))

@@ -588,6 +588,31 @@ else ifneq ($(PRODUCT_CHECK_VENDOR_SEAPP_VIOLATIONS),)
 endif
 .KATI_READONLY := CHECK_VENDOR_SEAPP_VIOLATIONS
 
+# Collate the apex_contributions of every mainline module
+$(foreach apex, \
+    ADSERVICES \
+    APPSEARCH \
+    ART \
+    BLUETOOTH \
+    CONFIGINFRASTRUCTURE \
+    CONNECTIVITY \
+    CONSCRYPT \
+    CRASHRECOVERY \
+    DEVICELOCK \
+    HEALTHFITNESS \
+    IPSEC \
+    MEDIA \
+    MEDIAPROVIDER \
+    ONDEVICEPERSONALIZATION \
+    PERMISSION \
+    REMOTEKEYPROVISIONING \
+    SCHEDULING \
+    SDKEXTENSIONS \
+    STATSD \
+    UWB \
+    WIFI, \
+  $(eval PRODUCT_ALL_APEX_CONTRIBUTIONS += $(RELEASE_APEX_CONTRIBUTIONS_$(apex))))
+
 define product-overrides-config
 $$(foreach rule,$$(PRODUCT_$(1)_OVERRIDES),\
     $$(if $$(filter 2,$$(words $$(subst :,$$(space),$$(rule)))),,\
