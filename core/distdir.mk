@@ -22,7 +22,7 @@ _all_dist_goals :=
 # pairs of goal:distfile
 _all_dist_goal_output_pairs :=
 # pairs of srcfile:distfile
-_all_dist_src_dst_pairs :=
+ALL_DIST_SRC_DST_PAIRS :=
 
 # Other parts of the system should use this function to associate
 # certain files with certain goals.  When those goals are built
@@ -40,7 +40,7 @@ $(foreach file,$(2), \
   $(eval src := $(call word-colon,1,$(file))) \
   $(eval dst := $(call word-colon,2,$(file))) \
   $(if $(dst),,$(eval dst := $$(notdir $$(src)))) \
-  $(eval _all_dist_src_dst_pairs += $$(src):$$(dst)) \
+  $(eval ALL_DIST_SRC_DST_PAIRS += $$(src):$$(dst)) \
   $(foreach goal,$(1), \
     $(eval _all_dist_goal_output_pairs += $$(goal):$$(dst))))
 endef
@@ -180,7 +180,7 @@ $(strip $(eval _tdir := $(call intermediates-dir-for,METAPACKAGING,licensetexts)
 $(strip $(eval _allt := $(sort $(foreach goal,$(_all_dist_goal_output_pairs),$(call word-colon,2,$(goal)))))) \
 $(foreach target,$(_allt), \
   $(eval _goals := $(sort $(foreach dg,$(filter %:$(target),$(_all_dist_goal_output_pairs)),$(call word-colon,1,$(dg))))) \
-  $(eval _srcs := $(sort $(foreach sdp,$(filter %:$(target),$(_all_dist_src_dst_pairs)),$(call word-colon,1,$(sdp))))) \
+  $(eval _srcs := $(sort $(foreach sdp,$(filter %:$(target),$(ALL_DIST_SRC_DST_PAIRS)),$(call word-colon,1,$(sdp))))) \
   $(eval $(call _dist-target-license-metadata-rule,out/dist/$(target),$(_mdir)/out/dist/$(target).meta_lic,$(_srcs))) \
   $(eval _f := $(_idir)/$(target).shareprojects) \
   $(eval _n := $(_tdir)/$(target).txt) \
@@ -213,7 +213,7 @@ $(strip \
   $(shell mkdir -p $(dir $(1))) \
   $(file >$(1).tmp, \
     DIST_GOAL_OUTPUT_PAIRS := $(sort $(_all_dist_goal_output_pairs)) \
-    $(newline)DIST_SRC_DST_PAIRS := $(sort $(_all_dist_src_dst_pairs))) \
+    $(newline)DIST_SRC_DST_PAIRS := $(sort $(ALL_DIST_SRC_DST_PAIRS))) \
   $(shell if ! cmp -s $(1).tmp $(1); then \
             mv $(1).tmp $(1); \
           else \
