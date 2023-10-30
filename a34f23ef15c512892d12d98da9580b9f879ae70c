@@ -94,6 +94,30 @@
       },
       "revId": "a34f23ef15c512892d12d98da9580b9f879ae70c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba3e43ee_ce8b0bc2",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-10-30T17:07:57Z",
+      "side": 1,
+      "message": "Use \n\n```\n    limit \u003d int(info_dict.get(device + \"_size\", 0), 0)\n```\n\nto get base auto detection",
+      "parentUuid": "1a2476bc_d2aa5f9f",
+      "range": {
+        "startLine": 928,
+        "startChar": 0,
+        "endLine": 929,
+        "endChar": 29
+      },
+      "revId": "a34f23ef15c512892d12d98da9580b9f879ae70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
