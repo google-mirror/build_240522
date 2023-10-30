@@ -74,6 +74,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2bb21726_a17acfa8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-30T03:56:13Z",
+      "side": 1,
+      "message": "Resolving as colin +2\u0027ed.",
+      "parentUuid": "62affb1d_efb3ce96",
+      "range": {
+        "startLine": 10,
+        "startChar": 46,
+        "endLine": 10,
+        "endChar": 50
+      },
+      "revId": "5420f972dadb730695a492b0c8dff895cfd57740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "04357f4d_613048f6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
