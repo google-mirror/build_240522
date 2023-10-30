@@ -46,6 +46,30 @@
       },
       "revId": "c60e473c8f345b0e4dade406354eb11e51ea852f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e154233_7d8a09c3",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 3892,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-10-30T17:11:40Z",
+      "side": 1,
+      "message": "But the error message you saw is\n\n```\nTypeError: a bytes-like object is required, not \u0027NoneType\u0027\n\n```\n\nso there must be a None object flowing into `patch` variable. If this is the error you are trying to fix, I would recommend skipping output or raise an error if none is encountered.",
+      "parentUuid": "8e0e8fba_cd8a080d",
+      "range": {
+        "startLine": 3892,
+        "startChar": 0,
+        "endLine": 3892,
+        "endChar": 60
+      },
+      "revId": "c60e473c8f345b0e4dade406354eb11e51ea852f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
