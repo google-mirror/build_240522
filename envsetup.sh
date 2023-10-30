@@ -1878,6 +1878,10 @@ function _trigger_build()
       >&2 echo "Couldn't locate the top of the tree. Try setting TOP."
       return 1
     fi
+
+    if [[ -z "${ANDROID_QUIET_BUILD:-}" ]]; then
+      echo "Tip: flash less often with adevice. See tools/asuite/adevice/README.md"
+    fi
 )
 
 function m()
