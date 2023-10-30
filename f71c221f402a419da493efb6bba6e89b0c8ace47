@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c69514_46d6261e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-10-30T04:59:04Z",
+      "side": 1,
+      "message": "The failing build test is already broken (b/307551737)",
+      "revId": "f71c221f402a419da493efb6bba6e89b0c8ace47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
