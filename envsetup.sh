@@ -859,6 +859,11 @@ function lunch()
     [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || printconfig
     destroy_build_var_cache
 
+    local banner="/google/bin/releases/adevice-dev/adevice_banner"
+    if [[ -z "${ANDROID_QUIET_BUILD:-}" && -x "${banner}" ]]; then
+      $banner
+    fi
+
     if [[ -n "${CHECK_MU_CONFIG:-}" ]]; then
       check_mu_config
     fi
