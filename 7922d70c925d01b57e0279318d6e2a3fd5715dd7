@@ -16,6 +16,29 @@
       "message": "I\u0027m splitting up into two CLs here, because I think the latter CL might have controversy and/or problems, and I consider this to be the highest priority issue to address ASAP.\n\nSo this CL just silently has us use \"trunk_staging\" when we don\u0027t have a TARGET_RELEASE, to avoid using silently using an invalid build setup.\n\nThis is basically taking what smoreland@ did in go/aog/2710215, but applying it at the build level.",
       "revId": "7922d70c925d01b57e0279318d6e2a3fd5715dd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04fa1a0d_7a2e07d7",
+        "filename": "core/release_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-10-31T16:23:05Z",
+      "side": 1,
+      "message": "Note that this is more succinctly expressed as:\n\n```\nTARGET_RELEASE ?\u003d trunk_staging\n```\n\nbut I did it this way in anticipation of the follow-up CL.  I can switch this to the more succinct logic if we prefer.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 5
+      },
+      "revId": "7922d70c925d01b57e0279318d6e2a3fd5715dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
