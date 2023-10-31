@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "297ca6e7_09266c50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-10-31T18:16:27Z",
+      "side": 1,
+      "message": "I was worried that go/aog/2806253 has some issues that might delay it getting submitted (like not allowing a bare \"get_build_var\" invocation to work anymore).\n\nIn the meantime, I wanted to put the tree into a state where we at least don\u0027t allow invalid build setups.  Which I still think is a much better state than silently doing into an invalid build setup.\n\nI\u0027ll roll this back into go/aog/2806253, and hopefully there\u0027s less concern there than I thought (jham@ seems good with it), so we can stop allowing invalid build setups.",
+      "parentUuid": "650d7d8c_c9d1f8eb",
+      "revId": "7922d70c925d01b57e0279318d6e2a3fd5715dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "04fa1a0d_7a2e07d7",
         "filename": "core/release_config.mk",
         "patchSetId": 1
