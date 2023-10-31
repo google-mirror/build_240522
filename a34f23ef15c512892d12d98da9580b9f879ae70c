@@ -118,6 +118,30 @@
       },
       "revId": "a34f23ef15c512892d12d98da9580b9f879ae70c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81608e13_83841a72",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 2052331
+      },
+      "writtenOn": "2023-10-31T06:13:43Z",
+      "side": 1,
+      "message": "Traceback (most recent call last):\n  File \"/local/mnt/workspace/LW.UM.2.1_252/out/host/linux-x86/bin/add_img_to_target_files/internal/stdlib/runpy.py\", line 196, in _run_module_as_main\n  File \"/local/mnt/workspace/LW.UM.2.1_252/out/host/linux-x86/bin/add_img_to_target_files/internal/stdlib/runpy.py\", line 86, in _run_code\n  File \"/local/mnt/workspace/LW.UM.2.1_252/out/host/linux-x86/bin/add_img_to_target_files/__main__.py\", line 12, in \u003cmodule\u003e\n  File \"/local/mnt/workspace/LW.UM.2.1_252/out/host/linux-x86/bin/add_img_to_target_files/internal/stdlib/runpy.py\", line 196, in _run_module_as_main\n  File \"/local/mnt/workspace/LW.UM.2.1_252/out/host/linux-x86/bin/add_img_to_target_files/internal/stdlib/runpy.py\", line 86, in _run_code\n  File \"/local/mnt/workspace/LW.UM.2.1_252/out/host/linux-x86/bin/add_img_to_target_files/add_img_to_target_files.py\", line 1098, in \u003cmodule\u003e\n  File \"/local/mnt/workspace/LW.UM.2.1_252/out/host/linux-x86/bin/add_img_to_target_files/add_img_to_target_files.py\", line 1090, in main\n  File \"/local/mnt/workspace/LW.UM.2.1_252/out/host/linux-x86/bin/add_img_to_target_files/add_img_to_target_files.py\", line 934, in AddImagesToTargetFiles\n  File \"/local/mnt/workspace/LW.UM.2.1_252/out/host/linux-x86/bin/add_img_to_target_files/add_img_to_target_files.py\", line 506, in AddUserdata\n  File \"/local/mnt/workspace/LW.UM.2.1_252/out/host/linux-x86/bin/add_img_to_target_files/common.py\", line 2417, in CheckSize\nTypeError: int() can\u0027t convert non-string with explicit base\n\n\nActually int conversion needed only for these 2 partitions (vendor_boot, init_boot) ,because we are trying to add these 2 partitions inside OTA package please refer from below Gerrit line.\n\nhttps://android-review.googlesource.com/c/platform/build/+/2774647/1/tools/releasetools/non_ab_ota.py#242\n\n\nAnd Checksize is using in multiple files, Can you please reproduce from your end.\n\nThanks.",
+      "parentUuid": "ba3e43ee_ce8b0bc2",
+      "range": {
+        "startLine": 928,
+        "startChar": 0,
+        "endLine": 929,
+        "endChar": 29
+      },
+      "revId": "a34f23ef15c512892d12d98da9580b9f879ae70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
