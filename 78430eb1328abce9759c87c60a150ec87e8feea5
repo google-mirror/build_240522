@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b9e0bd9_1832f07a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-10-31T18:15:31Z",
+      "side": 1,
+      "message": "Patch Set 8 is going back to the original approach of doing this all at once.\n\nThe unresolved comment from Patch Set 7 still remains",
+      "revId": "78430eb1328abce9759c87c60a150ec87e8feea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
