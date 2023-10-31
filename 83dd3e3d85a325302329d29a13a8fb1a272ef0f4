@@ -16,6 +16,24 @@
       "message": "This error message always seemed a bit odd in trying to be helpful, since \u0027lunch\u0027 isn\u0027t a part of the Makefile system.  Especially with go/aog/2808367 landed with a specific helpful error at the \u0027lunch\u0027 level, I think we should reword this to be more Makefile system appropriate.",
       "revId": "83dd3e3d85a325302329d29a13a8fb1a272ef0f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae2c0d3d_ff8fbcce",
+        "filename": "core/release_config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2023-10-31T16:14:53Z",
+      "side": 1,
+      "message": "Maybe \"No release config set for target; please set TARGET_RELEASE, or if building on the command line use \u0027lunch \u003ctarget\u003e-\u003crelease\u003e-\u003cbuild_type\u003e\u0027, where release is one of: $(_all_release_configs)\"",
+      "parentUuid": "1f27bb3d_9b393e04",
+      "revId": "83dd3e3d85a325302329d29a13a8fb1a272ef0f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
