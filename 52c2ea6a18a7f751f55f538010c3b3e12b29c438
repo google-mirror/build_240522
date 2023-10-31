@@ -34,6 +34,24 @@
       "parentUuid": "7b32a8a6_a503d2f6",
       "revId": "52c2ea6a18a7f751f55f538010c3b3e12b29c438",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2816fbaf_374b1c3a",
+        "filename": "target/product/sdk_phone_x86_64.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-31T00:41:50Z",
+      "side": 0,
+      "message": "`sudo apt install libncurses5 libtinfo5` fixed it",
+      "parentUuid": "896340bb_bef4e0c1",
+      "revId": "52c2ea6a18a7f751f55f538010c3b3e12b29c438",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
