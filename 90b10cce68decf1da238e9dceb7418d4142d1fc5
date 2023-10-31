@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7246d70c_9fe6d196",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2023-10-31T17:55:11Z",
+      "side": 1,
+      "message": "Wait, isn\u0027t this displayed at the end of the build? I see a Soong call in there.",
+      "parentUuid": "61a1d56d_b41b6908",
+      "revId": "90b10cce68decf1da238e9dceb7418d4142d1fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae6c2cd8_c47d2a0b",
         "filename": "envsetup.sh",
         "patchSetId": 2
