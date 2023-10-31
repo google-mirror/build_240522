@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7859c8a8_61120056",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-10-31T16:21:36Z",
+      "side": 1,
+      "message": "I\u0027m splitting up into two CLs here, because I think the latter CL might have controversy and/or problems, and I consider this to be the highest priority issue to address ASAP.\n\nSo this CL just silently has us use \"trunk_staging\" when we don\u0027t have a TARGET_RELEASE, to avoid using silently using an invalid build setup.\n\nThis is basically taking what smoreland@ did in go/aog/2710215, but applying it at the build level.",
+      "revId": "7922d70c925d01b57e0279318d6e2a3fd5715dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
