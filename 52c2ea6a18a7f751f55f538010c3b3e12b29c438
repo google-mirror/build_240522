@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b32a8a6_a503d2f6",
+        "filename": "target/product/sdk_phone_x86_64.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-31T00:07:45Z",
+      "side": 0,
+      "message": "This is my primary development lunch target. I tried building `sdk_phone64_x86_64`, but that gets a bunch of errors like this:\n\n```\n[  2% 1103/49007] bc: libclcore_g.bc \u003c\u003d frameworks/rs/driver/runtime/arch/generic.c\nFAILED: out/target/product/emu64x/obj/RENDERSCRIPT_BITCODE/libclcore_g.bc_intermediates/arch/generic.bc\n/bin/bash -c \"PWD\u003d/proc/self/cwd prebuilts/clang/host/linux-x86/clang-3289846/bin/clang -Iframeworks/rs/script_api/include -Iexternal/clang/lib/He\naders -MD -DRS_VERSION\u003d24 -std\u003dc99 -c -O3 -fno-builtin -emit-llvm -target renderscript64-linux-android -fsigned-char -D__x86_64__ -Wno-deprecated \n-Werror  -Werror -Wall -Wextra -Iframeworks/rs/cpu_ref -DRS_DECLARE_EXPIRED_APIS -g -O0  -x renderscript -DRS_G_RUNTIME frameworks/rs/driver/runti\nme/arch/generic.c -o out/target/product/emu64x/obj/RENDERSCRIPT_BITCODE/libclcore_g.bc_intermediates/arch/generic.bc\"\nprebuilts/clang/host/linux-x86/clang-3289846/bin/clang.real: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: \nNo such file or directory\n```\n\nCan we keep this until `sdk_phone64_x86_64` is functional?",
+      "revId": "52c2ea6a18a7f751f55f538010c3b3e12b29c438",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
