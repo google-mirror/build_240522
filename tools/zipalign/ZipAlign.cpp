@@ -44,7 +44,9 @@ static int getAlignment(bool pageAlignSharedLibs, int defaultAlignment,
 
     const char* ext = strrchr(pEntry->getFileName(), '.');
     if (ext && strcmp(ext, ".so") == 0) {
-        return pageSize;
+        // The alignment needs to be at least 16KB to support
+        // both 4KB and 16KB page size devices.
+        return (pageSize < 16384) ? 16384 : pageSize;
     }
 
     return defaultAlignment;
