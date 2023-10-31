@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aadd4ad_43224ab3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-10-31T16:25:36Z",
+      "side": 1,
+      "message": "This CL now has a merge conflict.  I think go/aog/2808367 somewhat covers this now at the \"lunch\" level, in that it no longer allows the user to have TARGET_RELEASE unset after using \"lunch\".\n\nNote that I think this is useful at the build system level as well, and have put up go/aog/2812773 for that.",
+      "revId": "6fd254a576fa2a783252de70a5a0a35efb5db4b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00cb3e07_f5b8ef08",
