@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "650d7d8c_c9d1f8eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-10-31T17:50:45Z",
+      "side": 1,
+      "message": "We previously agreed that there is no correct default. What changed?",
+      "revId": "7922d70c925d01b57e0279318d6e2a3fd5715dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "04fa1a0d_7a2e07d7",
         "filename": "core/release_config.mk",
         "patchSetId": 1
