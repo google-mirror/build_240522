@@ -70,7 +70,16 @@ $(foreach f, $(config_map_files), \
 )
 
 ifeq ($(TARGET_RELEASE),)
-    # Default to a valid setting.
+    # We allow some internal paths to explicitly set TARGET_RELEASE to the
+    # empty string.  For the most part, 'make' treats unset and empty string as
+    # the same.  But the following line differentiates, and will only assign
+    # if the variable was completely unset.
+    TARGET_RELEASE ?= was_unset
+    ifeq ($(TARGET_RELEASE),was_unset)
+        $(error No release config set for target; please set TARGET_RELEASE, or if building on the command line use 'lunch <target>-<release>-<build_type>', where release is one of: $(_all_release_configs))
+    endif
+    # Instead of leaving this string empty, we want to default to a valid
+    # setting.
     TARGET_RELEASE = trunk_staging
 endif
 
