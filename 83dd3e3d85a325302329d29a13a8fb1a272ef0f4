@@ -34,6 +34,24 @@
       "parentUuid": "1f27bb3d_9b393e04",
       "revId": "83dd3e3d85a325302329d29a13a8fb1a272ef0f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a15cb72a_6f15de8e",
+        "filename": "core/release_config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-10-31T16:36:20Z",
+      "side": 1,
+      "message": "Done in Patch Set 7.",
+      "parentUuid": "ae2c0d3d_ff8fbcce",
+      "revId": "83dd3e3d85a325302329d29a13a8fb1a272ef0f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
