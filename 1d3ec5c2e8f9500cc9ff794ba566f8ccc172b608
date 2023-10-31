@@ -16,6 +16,24 @@
       "message": "While the bare \"lunch\" command works for a user with this change, a bare \"get_build_var COMMON_LUNCH_CHOICES\" does not.  \"lunch\" directly uses the \"get_build_var COMMON_LUNCH_CHOICES\" command, but sets `TARGET_RELEASE` (along with `TARGET_BUILD_VARIANT` and others) to the empty string.\n\nIf we\u0027re okay with requiring the empty string for using something like \"get_build_var\", then this shouldn\u0027t be a problem.  But if we want users and other scripts to be able to call this bare, then there\u0027s an issue with this CL.\n\nI don\u0027t know if changing up things that `build/soong/soong_ui.bash` calls into to set this (and other) strings empty would make sense.  Or if we would want to consider not requiring this setting.\n\nWe\u0027ve definitely found some internal automation setups which don\u0027t use \"lunch\", and which didn\u0027t set `TARGET_RELEASE`, so this is an issue to the extent that we want to require users to explicitly chose their target config.",
       "revId": "1d3ec5c2e8f9500cc9ff794ba566f8ccc172b608",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7883fe58_8386c273",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000678
+      },
+      "writtenOn": "2023-10-31T17:14:28Z",
+      "side": 1,
+      "message": "I don\u0027t see that limitation as a problem, but would like Joe to confirm.",
+      "parentUuid": "5d5e3abd_381ab76e",
+      "revId": "1d3ec5c2e8f9500cc9ff794ba566f8ccc172b608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
