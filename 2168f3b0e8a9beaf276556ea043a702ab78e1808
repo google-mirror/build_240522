@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41765efd_47f2baa3",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-01T00:52:58Z",
+      "side": 1,
+      "message": "Did you call it like `$(call product-installed-modules,$(INTERNAL_PRODUCT))`? when I add `$(warning $(filter com.android.%,$(call product-installed-modules,$(INTERNAL_PRODUCT))))`, I see a ton of apexes printed out, including `com.android.adbd`.",
+      "parentUuid": "f1df5ed0_e3e95e21",
+      "revId": "2168f3b0e8a9beaf276556ea043a702ab78e1808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e398442_49d21c04",
         "filename": "core/Makefile",
         "patchSetId": 1
