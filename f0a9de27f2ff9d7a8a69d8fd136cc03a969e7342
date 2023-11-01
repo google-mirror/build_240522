@@ -16,6 +16,23 @@
       "message": "(Patchset 9 resolves conflicts from go/aog/2787001, incorporating its updated assigning of `flag_value_files` here.)",
       "revId": "f0a9de27f2ff9d7a8a69d8fd136cc03a969e7342",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "232f412a_190b9960",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-11-01T17:26:09Z",
+      "side": 1,
+      "message": "I think/hope my presubmit run beat go/aog/2787001 automerging into git_main.  I\u0027ll relaunch presubmit in another hour.\n\nBut this is still ready for review, and has an unresolved comment for joeo@ to look at.",
+      "revId": "f0a9de27f2ff9d7a8a69d8fd136cc03a969e7342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
