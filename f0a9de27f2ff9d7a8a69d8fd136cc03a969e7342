@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b528b6f_bde1e8a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-11-01T16:50:08Z",
+      "side": 1,
+      "message": "(Patchset 9 resolves conflicts from go/aog/2787001, incorporating its updated assigning of `flag_value_files` here.)",
+      "revId": "f0a9de27f2ff9d7a8a69d8fd136cc03a969e7342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
