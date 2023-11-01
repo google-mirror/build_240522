@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b2eb89b_0cda4b12",
+        "filename": "envsetup.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1883,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2023-11-01T19:56:23Z",
+      "side": 1,
+      "message": "nit: `${ANDROID_BUILD_BANNER}`",
+      "range": {
+        "startLine": 1883,
+        "startChar": 12,
+        "endLine": 1883,
+        "endChar": 33
+      },
+      "revId": "6d10bbddf92887f3535fef2fc9bd4b701e9088d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
