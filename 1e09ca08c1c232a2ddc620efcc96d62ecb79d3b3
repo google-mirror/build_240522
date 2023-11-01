@@ -33,6 +33,23 @@
       "message": "1",
       "revId": "1e09ca08c1c232a2ddc620efcc96d62ecb79d3b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c4d5647_73ba19a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-01T00:33:38Z",
+      "side": 1,
+      "message": "Please do not submit the revert. There\u0027s no intermediate state to move the VNDK libraries. Reverting it will cause another failures to the targets that already adapted this change.\nWe must fix forward to land the CL for the failing targets. (b/308529110)",
+      "revId": "1e09ca08c1c232a2ddc620efcc96d62ecb79d3b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
