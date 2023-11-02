@@ -483,22 +483,69 @@ define inherit-product
     $(call dump-config-vals,$(current_mk),inherit))
 endef
 
+# $(1): Other makefiles' artifacts inside these paths will cause a build time error.
+# $(2): Creating artifacts outside these paths will cause a build-time error.
+# $(3): Suppress errors from $(2) for these paths
+define set-artifact-path-requirements
+$(eval current_mk := $(strip $(word 1,$(_include_stack)))) \
+$(if $(1),$(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_OWNERSHIP := $(strip $(1)))) \
+$(if $(2),$(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_BOUNDARY := $(strip $(2)))) \
+$(if $(3),$(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_EXCEPTION := $(strip $(3)))) \
+$(eval ARTIFACT_PATH_REQUIREMENT_PRODUCTS := \
+  $(sort $(ARTIFACT_PATH_REQUIREMENT_PRODUCTS) $(current_mk)))
+endef
+
 # Specifies a number of path prefixes, relative to PRODUCT_OUT, where the
 # product makefile hierarchy rooted in the current node places its artifacts.
 # Creating artifacts outside the specified paths will cause a build-time error.
+# Other makefiles' artifacts inside the specified paths will cause a build-time error.
 define require-artifacts-in-path
-  $(eval current_mk := $(strip $(word 1,$(_include_stack)))) \
-  $(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_REQUIREMENTS := $(strip $(1))) \
-  $(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_ALLOWED_LIST := $(strip $(2))) \
-  $(eval ARTIFACT_PATH_REQUIREMENT_PRODUCTS := \
-    $(sort $(ARTIFACT_PATH_REQUIREMENT_PRODUCTS) $(current_mk)))
+$(call set-artifact-path-requirements,$(1),$(1),$(2))
 endef
 
 # Like require-artifacts-in-path, but does not require all allow-list entries to
 # have an effect.
 define require-artifacts-in-path-relaxed
-  $(require-artifacts-in-path) \
-  $(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_REQUIREMENT_IS_RELAXED := true)
+$(require-artifacts-in-path) \
+$(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_REQUIREMENT_IS_RELAXED := true)
+endef
+
+# Specifies a number of path prefixes, relative to PRODUCT_OUT, where the
+# product makefile hierarchy rooted in the current node places its artifacts.
+# Creating artifacts outside the specified paths will cause a build-time error.
+define require-no-artifacts-outside-path
+$(call set-artifact-path-requirements,,$(1),$(2))
+endef
+
+# Like require-no-artifacts-outside-path, but does not require all allow-list entries to
+# have an effect.
+define require-no-artifacts-outside-path-relaxed
+$(require-no-artifacts-outside-path) \
+$(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_REQUIREMENT_IS_RELAXED := true)
+endef
+
+# Specifies a number of path prefixes, relative to PRODUCT_OUT, where the
+# product makefile hierarchy rooted in the current node places its artifacts.
+# Creating artifacts outside the specified paths will cause a build-time error.
+# Artifacts coming from inherited makefiles with path requirements will be
+# implicitly added to the allowlist.
+define require-no-new-artifacts-outside-path
+$(require-no-artifacts-outside-path) \
+$(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_REQUIREMENT_ALLOW_INHERITED := true)
+endef
+
+# Like require-no-new-artifacts-outside-path, but does not require all allow-list entries to
+# have an effect.
+define require-no-new-artifacts-outside-path-relaxed
+$(require-no-new-artifacts-outside-path) \
+$(eval PRODUCTS.$(current_mk).ARTIFACT_PATH_REQUIREMENT_IS_RELAXED := true)
+endef
+
+# Specifies a number of path prefixes, relative to PRODUCT_OUT, where the
+# product makefile hierarchy rooted in the current node places its artifacts.
+# Other makefiles' artifacts inside the specified paths will cause a build-time error.
+define require-only-artifacts-inside-path
+$(call set-artifact-path-requirements,$(1))
 endef
 
 # Makes including non-existent modules in PRODUCT_PACKAGES an error.
