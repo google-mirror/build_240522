@@ -16,6 +16,24 @@
       "message": "Can this be a revert of an existing CL? That would reveal the intent clearer.",
       "revId": "925d1f517c5924af7a1ffb0186beb08e5a73aa7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4561ac75_d37f588c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-02T09:21:13Z",
+      "side": 1,
+      "message": "Unfortunately it is somewhat different from the original change (aosp/2803633) because we are restoring the property only for the `next` build that has VNDK version 35.",
+      "parentUuid": "92749c5c_0602ef14",
+      "revId": "925d1f517c5924af7a1ffb0186beb08e5a73aa7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
