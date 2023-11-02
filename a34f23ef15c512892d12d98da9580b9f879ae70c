@@ -166,6 +166,30 @@
       },
       "revId": "a34f23ef15c512892d12d98da9580b9f879ae70c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29158a7c_1d46e08c",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 2052331
+      },
+      "writtenOn": "2023-11-02T05:06:29Z",
+      "side": 1,
+      "message": "We confirmed that With the above change compilation is successful, However i can see that we can use makeint function too.\ncan you please brief us the reason for using the above change.",
+      "parentUuid": "5011ab7f_8463652e",
+      "range": {
+        "startLine": 928,
+        "startChar": 0,
+        "endLine": 929,
+        "endChar": 29
+      },
+      "revId": "a34f23ef15c512892d12d98da9580b9f879ae70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
