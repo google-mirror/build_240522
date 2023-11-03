@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ceb6541c_2bacbbdd",
+        "filename": "core/proguard.flags",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-11-03T20:37:35Z",
+      "side": 1,
+      "message": "Sounds good!",
+      "parentUuid": "f1fcccf6_08ba2afc",
+      "range": {
+        "startLine": 65,
+        "startChar": 25,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "35c90a18f09956214c40b06227dc51a76b23a67b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4869908e_2f882cf2",
         "filename": "core/proguard/checknotnull.pgcfg",
         "patchSetId": 1
