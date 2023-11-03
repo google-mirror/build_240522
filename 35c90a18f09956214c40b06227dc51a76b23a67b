@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1fcccf6_08ba2afc",
+        "filename": "core/proguard.flags",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1609189
+      },
+      "writtenOn": "2023-11-03T20:26:53Z",
+      "side": 1,
+      "message": "I\u0027ll move those from this change into another one. I\u0027ll keep the debug metadata only for now.",
+      "parentUuid": "66de6e98_c8745d5d",
+      "range": {
+        "startLine": 65,
+        "startChar": 25,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "35c90a18f09956214c40b06227dc51a76b23a67b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4869908e_2f882cf2",
         "filename": "core/proguard/checknotnull.pgcfg",
         "patchSetId": 1
