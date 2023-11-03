@@ -61,3 +61,6 @@
 }
 
 -include proguard_basic_keeps.flags
+-include proguard/checknotnull.pgcfg
+-include proguard/kotlin.pgcfg
+-include proguard/optional_nonnull.pgcfg
