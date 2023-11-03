@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4152016_207c13c2",
+        "filename": "core/product_validation_checks.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-11-03T20:43:52Z",
+      "side": 1,
+      "message": "excellent",
+      "range": {
+        "startLine": 13,
+        "startChar": 23,
+        "endLine": 13,
+        "endChar": 38
+      },
+      "revId": "21db3f094648f5b8481146d97c44be9a9ca92989",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
