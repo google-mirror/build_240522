@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47c1460f_90b7fbe7",
+        "filename": "core/proguard.flags",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1609189
+      },
+      "writtenOn": "2023-11-03T21:42:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceb6541c_2bacbbdd",
+      "range": {
+        "startLine": 65,
+        "startChar": 25,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "35c90a18f09956214c40b06227dc51a76b23a67b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4869908e_2f882cf2",
@@ -102,6 +126,30 @@
       "writtenOn": "2023-11-03T20:19:47Z",
       "side": 1,
       "message": "AppReduce is internal.",
+      "range": {
+        "startLine": 1,
+        "startChar": 7,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "35c90a18f09956214c40b06227dc51a76b23a67b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5f0a7eb_f86fdf34",
+        "filename": "core/proguard/checknotnull.pgcfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1609189
+      },
+      "writtenOn": "2023-11-03T21:42:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4869908e_2f882cf2",
       "range": {
         "startLine": 1,
         "startChar": 7,
@@ -149,6 +197,30 @@
       "side": 1,
       "message": "Sure. It sounds like we definitely want to create a kotlin-checknull flag or something....",
       "parentUuid": "9487125e_dee8dbad",
+      "range": {
+        "startLine": 28,
+        "startChar": 47,
+        "endLine": 28,
+        "endChar": 57
+      },
+      "revId": "35c90a18f09956214c40b06227dc51a76b23a67b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e9723a_05900a8d",
+        "filename": "core/proguard/kotlin.pgcfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1609189
+      },
+      "writtenOn": "2023-11-03T21:42:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49071738_30d073a8",
       "range": {
         "startLine": 28,
         "startChar": 47,
