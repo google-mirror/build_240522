@@ -62,3 +62,4 @@
 
 -include proguard_basic_keeps.flags
 -include proguard/kotlin.flags
+-include proguard/optional_nonnull.flags
