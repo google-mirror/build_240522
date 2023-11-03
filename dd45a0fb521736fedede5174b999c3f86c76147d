@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb69fd3_bbf3c9c7",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-03T17:35:45Z",
+      "side": 1,
+      "message": "I was thinking a bit more about it, the following is still possible,\n\n2 threads T1 and T2 try and write to the map,\n\nT1 writes L1\nT1 reads L1\nT2 writes L2\nT2 reads L2\n\nTo prevent that let\u0027s lock the map while loading a key",
+      "range": {
+        "startLine": 74,
+        "startChar": 3,
+        "endLine": 74,
+        "endChar": 37
+      },
+      "revId": "dd45a0fb521736fedede5174b999c3f86c76147d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f1b1624_a4ae9855",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 10
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-03T17:35:45Z",
+      "side": 1,
+      "message": "what does this error look like when a duplicate value is enocuntered?",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 133,
+        "endChar": 2
+      },
+      "revId": "dd45a0fb521736fedede5174b999c3f86c76147d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

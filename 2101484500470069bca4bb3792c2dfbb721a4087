@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59bb1827_a427e7f4",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-03T17:35:45Z",
+      "side": 1,
+      "message": "should this be private?",
+      "range": {
+        "startLine": 16,
+        "startChar": 5,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c94217_be2f9d38",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-03T17:35:45Z",
+      "side": 1,
+      "message": "nit: rename to KeyToLocksMap\n\nAlso let\u0027s add some documentation here on why this is required etc.",
+      "range": {
+        "startLine": 16,
+        "startChar": 5,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d6945df_a2541a74",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-03T17:35:45Z",
+      "side": 1,
+      "message": "it\u0027s usage can be replaced with log.Fatal(...)",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 1
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c7cbba_41988eb9",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-03T17:35:45Z",
+      "side": 1,
+      "message": "nit: rename to map?",
+      "range": {
+        "startLine": 30,
+        "startChar": 19,
+        "endLine": 30,
+        "endChar": 39
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34ec2435_57ba7049",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-03T17:35:45Z",
+      "side": 1,
+      "message": "to confirm: this is intentional, right?",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 13
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1767dfb4_ec446e68",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-03T17:35:45Z",
+      "side": 1,
+      "message": "to confirm,\nthis will write and not append?",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 67
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7754d245_5dedae17",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-03T17:35:45Z",
+      "side": 1,
+      "message": "nit: rename to something more accurate",
+      "range": {
+        "startLine": 54,
+        "startChar": 5,
+        "endLine": 54,
+        "endChar": 16
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
