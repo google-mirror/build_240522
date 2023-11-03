@@ -1,0 +1,21 @@
+# Mark Optional set/get functions as nonnull
+-assumevalues class java.util.Optional {
+    java.util.Optional of(...) return _NONNULL_;
+    java.lang.Object get() return _NONNULL_;
+    java.util.Optional ofNullable(...) return _NONNULL_;
+    java.util.Optional empty() return _NONNULL_;
+}
+
+-assumevalues class j$.util.Optional {
+    j$.util.Optional of(...) return _NONNULL_;
+    java.lang.Object get() return _NONNULL_;
+    j$.util.Optional ofNullable(...) return _NONNULL_;
+    j$.util.Optional empty() return _NONNULL_;
+}
+
+-assumevalues class com.google.common.base.Optional {
+    com.google.common.base.Optional of(...) return _NONNULL_;
+    java.lang.Object get() return _NONNULL_;
+    com.google.common.base.Optional fromNullable(...) return _NONNULL_;
+    com.google.common.base.Optional absent() return _NONNULL_;
+}
