@@ -20,6 +20,11 @@ from common import OPTIONS
 
 logger = logging.getLogger(__name__)
 
+OPTIONS.payload_signer = None
+OPTIONS.payload_signer_args = []
+OPTIONS.payload_signer_maximum_signature_size = None
+OPTIONS.package_key = None
+
 
 class PayloadSigner(object):
   """A class that wraps the payload signing works.
