@@ -26,6 +26,8 @@ OPTIONS.payload_signer_args = []
 OPTIONS.payload_signer_maximum_signature_size = None
 OPTIONS.package_key = None
 
+
+
 class SignerOptions(OptionHandler):
 
   @staticmethod
