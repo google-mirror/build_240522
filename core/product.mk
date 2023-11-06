@@ -447,10 +447,13 @@ _product_list_vars += PRODUCT_AFDO_PROFILES
 
 _product_single_value_vars += PRODUCT_NEXT_RELEASE_HIDE_FLAGGED_API
 
+<<<<<<< PATCH SET (232926 Revert "Reapply "Add support for product-specific build flag)
+=======
 _product_list_vars += PRODUCT_RELEASE_CONFIG_MAPS
 
 _product_list_vars += PRODUCT_VALIDATION_CHECKS
 
+>>>>>>> BASE      (1acc86 Merge "Export build flags to soong." into main)
 .KATI_READONLY := _product_single_value_vars _product_list_vars
 _product_var_list :=$= $(_product_single_value_vars) $(_product_list_vars)
 
