@@ -170,7 +170,11 @@ def main():
   parser = argparse.ArgumentParser()
   parser.add_argument('certificate', help='The certificate to be used.')
   parser.add_argument('package', help='The OTA package to be verified.')
+  parser.add_argument("-v", action="store_true",
+                      help="Enable verbose logging", dest="verbose")
   args = parser.parse_args()
+  if args.verbose:
+    common.OPTIONS.verbose = True
 
   common.InitLogging()
 
