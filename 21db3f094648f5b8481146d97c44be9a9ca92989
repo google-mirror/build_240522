@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7955435d_21400ee4",
+        "filename": "core/product_validation_checks.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2065600
+      },
+      "writtenOn": "2023-11-06T18:14:52Z",
+      "side": 1,
+      "message": "\u003e excellent\n\nhttps://android-review.googlesource.com/c/platform/build/+/2816880/comment/b4152016_207c13c2/",
+      "parentUuid": "b4152016_207c13c2",
+      "range": {
+        "startLine": 13,
+        "startChar": 23,
+        "endLine": 13,
+        "endChar": 38
+      },
+      "revId": "21db3f094648f5b8481146d97c44be9a9ca92989",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bff55263_585ef0ee",
         "filename": "core/product_validation_checks.mk",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-06T03:40:53Z",
       "side": 1,
       "message": "Fabulous",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 82
+      },
+      "revId": "21db3f094648f5b8481146d97c44be9a9ca92989",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e457d07c_a510bc8d",
+        "filename": "core/product_validation_checks.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2065600
+      },
+      "writtenOn": "2023-11-06T18:14:52Z",
+      "side": 1,
+      "message": "\u003e Fabulous",
+      "parentUuid": "bff55263_585ef0ee",
       "range": {
         "startLine": 17,
         "startChar": 0,
