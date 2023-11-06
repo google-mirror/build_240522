@@ -552,6 +552,8 @@ python_binary_host {
     defaults: ["releasetools_binary_defaults"],
     srcs: [
         "sign_target_files_apks.py",
+        "payload_signer.py",
+        "ota_signing_utils.py",
     ],
     libs: [
         "releasetools_add_img_to_target_files",
