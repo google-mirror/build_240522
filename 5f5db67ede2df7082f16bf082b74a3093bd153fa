@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c335ea83_0baaddb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-11-06T21:28:24Z",
+      "side": 1,
+      "message": "(Patchset 12 rebases to resolve merge conflict)",
+      "revId": "5f5db67ede2df7082f16bf082b74a3093bd153fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
