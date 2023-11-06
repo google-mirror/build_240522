@@ -126,6 +126,31 @@ PRODUCT_SYSTEM_PROPERTIES += \
     pm.dexopt.cmdline?=verify \
     pm.dexopt.shared?=speed
 
+# OVERRIDE_DISABLE_DEXOPT_ALL disables all dexpreopt (build-time) and dexopt (on-device) activities.
+# This option is for faster iteration during development and should never be enabled for production.
+ifneq (,$(filter true,$(OVERRIDE_DISABLE_DEXOPT_ALL)))
+  PRODUCT_SYSTEM_PROPERTIES += \
+    pm.dexopt.post-boot=skip \
+    pm.dexopt.first-boot=skip \
+    pm.dexopt.boot-after-ota=skip \
+    pm.dexopt.boot-after-mainline-update=skip \
+    pm.dexopt.install=skip \
+    pm.dexopt.install-fast=skip \
+    pm.dexopt.install-bulk=skip \
+    pm.dexopt.install-bulk-secondary=skip \
+    pm.dexopt.install-bulk-downgraded=skip \
+    pm.dexopt.install-bulk-secondary-downgraded=skip \
+    pm.dexopt.bg-dexopt=skip \
+    pm.dexopt.ab-ota=skip \
+    pm.dexopt.inactive=skip \
+    pm.dexopt.cmdline=skip \
+    pm.dexopt.shared=skip
+
+  PRODUCT_SYSTEM_PROPERTIES += dalvik.vm.disable-odrefresh=true
+
+  WITH_DEXPREOPT := false
+endif
+
 # Enable resolution of startup const strings.
 PRODUCT_SYSTEM_PROPERTIES += \
     dalvik.vm.dex2oat-resolve-startup-strings=true
