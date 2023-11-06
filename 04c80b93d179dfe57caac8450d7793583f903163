@@ -16,6 +16,23 @@
       "message": "(Patchset 2 is a rebase to resolve merge conflicts.)",
       "revId": "04c80b93d179dfe57caac8450d7793583f903163",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "503d13c6_2a4a6677",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-11-06T21:34:05Z",
+      "side": 1,
+      "message": "(default or anything better than a \u0027null\u0027 state)",
+      "revId": "04c80b93d179dfe57caac8450d7793583f903163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
