@@ -37,6 +37,9 @@ ALL_DOCS:=
 # sub-variables.
 ALL_MODULES:=
 
+ALL_MAKE_MODULE_INFO_JSON_MODULES:=
+ALL_SOONG_MODULE_INFO_JSON_MODULES:=
+
 # The relative paths of the non-module targets in the system.
 ALL_NON_MODULES:=
 NON_MODULES_WITHOUT_LICENSE_METADATA:=
