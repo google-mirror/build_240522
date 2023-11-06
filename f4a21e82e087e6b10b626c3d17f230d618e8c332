@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a95ff2_de1f5d56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2023-11-06T21:56:20Z",
+      "side": 1,
+      "message": "ideally, even that could be skipped.",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 38
+      },
+      "revId": "f4a21e82e087e6b10b626c3d17f230d618e8c332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a060b10f_4d1050f4",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2023-11-06T21:56:20Z",
+      "side": 1,
+      "message": "Could we confirm that\u0027s what the framework team wants here? Should we instead make eng builds always default to all properties \"skip\" ?",
+      "range": {
+        "startLine": 131,
+        "startChar": 24,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "f4a21e82e087e6b10b626c3d17f230d618e8c332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
