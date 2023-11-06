@@ -21,7 +21,6 @@ PRODUCT_PACKAGES += \
     am \
     android.hidl.base-V1.0-java \
     android.hidl.manager-V1.0-java \
-    android.hidl.memory@1.0-impl \
     android.system.suspend-service \
     android.test.base \
     android.test.mock \
@@ -315,6 +314,7 @@ PRODUCT_PACKAGES += \
 HIDL_SUPPORT_SERVICES := \
     hwservicemanager \
     android.hidl.allocator@1.0-service \
+    android.hidl.memory@1.0-impl \
 
 # Base modules when shipping api level is less than or equal to 34
 PRODUCT_PACKAGES_SHIPPING_API_LEVEL_34 += \
