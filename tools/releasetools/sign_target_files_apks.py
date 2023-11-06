@@ -162,7 +162,6 @@ import os
 import re
 import shutil
 import stat
-import subprocess
 import sys
 import tempfile
 import zipfile
@@ -171,6 +170,7 @@ from xml.etree import ElementTree
 import add_img_to_target_files
 import apex_utils
 import common
+from payload_signer import PayloadSigner
 
 
 if sys.hexversion < 0x02070000:
@@ -239,6 +239,20 @@ ALLOWED_VENDOR_PARTITIONS = set(["vendor", "odm"])
 
 def IsApexFile(filename):
   return filename.endswith(".apex") or filename.endswith(".capex")
+
+
+def IsOtaPackage(fp):
+  with zipfile.ZipFile(fp) as zfp:
+    if not "payload.bin" in zfp.namelist():
+      return False
+    with zfp.open("payload.bin", "r") as payload:
+      magic = payload.read(4)
+      return magic == b"CrAU"
+
+
+def IsEntryOtaPackage(input_zip, filename):
+  with input_zip.open(filename, "r") as fp:
+    return IsOtaPackage(fp)
 
 
 def GetApexFilename(filename):
@@ -515,6 +529,24 @@ def SignApk(data, keyname, pw, platform_api_level, codename_to_api_level_map,
   return data
 
 
+def SignOtaPackage(input_path, output_path):
+  payload_signer = PayloadSigner(
+      OPTIONS.package_key, OPTIONS.private_key_suffix,
+      None, OPTIONS.payload_signer, OPTIONS.payload_signer_args)
+  with tempfile.NamedTemporaryFile() as unsigned_payload, zipfile.ZipFile(input_path, "r", allowZip64=True) as zfp:
+    with zfp.open("payload.bin") as payload_fp:
+      shutil.copyfileobj(payload_fp, unsigned_payload)
+    signed_payload = payload_signer.SignPayload(unsigned_payload.name)
+  # Copy the input OTA package excluding the payload.bin entry, as we need
+  # to use the signed payload
+  cmd = ["zip2zip", "-i", input_path, "-o", output_path, "-x", "payload.bin"]
+  common.RunAndCheckOutput(cmd)
+  with zipfile.ZipFile(output_path, "a", allowZip64=True, compression=zipfile.ZIP_STORED) as zfp:
+    zfp.write(signed_payload, "payload.bin")
+
+
+
+
 def IsBuildPropFile(filename):
   return filename in (
       "SYSTEM/etc/prop.default",
@@ -541,7 +573,7 @@ def IsBuildPropFile(filename):
         filename.endswith("/prop.default")
 
 
-def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
+def ProcessTargetFiles(input_tf_zip: zipfile.ZipFile, output_tf_zip, misc_info,
                        apk_keys, apex_keys, key_passwords,
                        platform_api_level, codename_to_api_level_map,
                        compressed_extension):
@@ -631,6 +663,14 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
             "        (skipped due to special cert string)" % (name,))
         common.ZipWriteStr(output_tf_zip, out_info, data)
 
+    elif filename.endswith(".zip") and IsEntryOtaPackage(input_tf_zip, filename):
+      logger.info("Re-signing OTA package {}".format(filename))
+      with tempfile.TemporaryFile() as input_ota, tempfile.TemporaryFile() as output_ota:
+        with input_tf_zip.open(filename, "r") as in_fp:
+          shutil.copyfileobj(in_fp, input_ota)
+        SignOtaPackage(input_ota.name, output_ota)
+        common.ZipWrite(output_tf_zip, output_ota, filename,
+                        compress_type=zipfile.ZIP_STORED)
     # System properties.
     elif IsBuildPropFile(filename):
       print("Rewriting %s:" % (filename,))
