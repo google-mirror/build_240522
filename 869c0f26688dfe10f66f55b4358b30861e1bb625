@@ -147,6 +147,30 @@
       },
       "revId": "869c0f26688dfe10f66f55b4358b30861e1bb625",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "144aa996_56f8bf50",
+        "filename": "core/proguard/checknotnull.pgcfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1609189
+      },
+      "writtenOn": "2023-11-07T22:06:40Z",
+      "side": 1,
+      "message": "I think convertchecknotnull generally should be fine for global default...\n\nAssumenosideeffects would strip out error msgs... I think that might not be welcomed by everyone",
+      "parentUuid": "e97e733f_89460667",
+      "range": {
+        "startLine": 5,
+        "startChar": 1,
+        "endLine": 5,
+        "endChar": 20
+      },
+      "revId": "869c0f26688dfe10f66f55b4358b30861e1bb625",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
