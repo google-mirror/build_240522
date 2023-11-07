@@ -16,6 +16,24 @@
       "message": "I don\u0027t know why, but the failing presubmit build installs the android.hidl.memory@1.0-impl.so in system image even after removing it from the base_system.mk.\n```\nFAILED: \nbuild/make/core/artifact_path_requirements.mk:30: warning:  build/make/target/product/aosp_x86_64.mk produces files inside build/make/target/product/generic_system.mks artifact path requirement. \nOffending entries:\nsystem/lib/hw/android.hidl.memory@1.0-impl.so\nsystem/lib64/hw/android.hidl.memory@1.0-impl.so\n```",
       "revId": "4859a6a25010105e23fb92da174212290f16fcc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e85f6bb_7e7369e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-11-07T01:32:23Z",
+      "side": 1,
+      "message": "It still installs them on system/vendor older devices because of \n```\nPRODUCT_PACKAGES_SHIPPING_API_LEVEL_34 +\u003d \\\n    $(HIDL_SUPPORT_SERVICES) \\\n```\nin https://android-review.git.corp.google.com/c/platform/build/+/2818339/1/target/product/base_system.mk\n\nIt looks like it will need to be added to `PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST` like https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:device/google/atv/products/atv_generic_system.mk;drc\u003de93f646f78015f005edf6146360a87db086d7032;l\u003d116",
+      "parentUuid": "10afd607_8d72b3ea",
+      "revId": "4859a6a25010105e23fb92da174212290f16fcc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
