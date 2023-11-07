@@ -22,6 +22,30 @@
       },
       "revId": "8be53e2f94d64107d686b407516b84fb79bceb39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a208d935_3ab936df",
+        "filename": "core/release_config.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-07T23:31:16Z",
+      "side": 1,
+      "message": "yeah. It\u0027s because there are are still files in internal that depend on it. I\u0027ll remove this after renaming those.",
+      "parentUuid": "363fe815_dbd7b5ab",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 18
+      },
+      "revId": "8be53e2f94d64107d686b407516b84fb79bceb39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
