@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc3062c0_883c71dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-11-07T11:21:45Z",
+      "side": 1,
+      "message": "Running without any boot image is not tested, IIRC. I\u0027m worried that developers will hit random bugs if we skip the in-memory boot image generation. I prefer keeping it for now.",
+      "parentUuid": "51a95ff2_de1f5d56",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 38
+      },
+      "revId": "f4a21e82e087e6b10b626c3d17f230d618e8c332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a060b10f_4d1050f4",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-06T21:56:20Z",
       "side": 1,
       "message": "Could we confirm that\u0027s what the framework team wants here? Should we instead make eng builds always default to all properties \"skip\" ?",
+      "range": {
+        "startLine": 131,
+        "startChar": 24,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "f4a21e82e087e6b10b626c3d17f230d618e8c332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75580a8b_9377c513",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-11-07T11:21:45Z",
+      "side": 1,
+      "message": "I\u0027m only adding the support in this CL, and I think that\u0027s what anothermark@ requested (b/309011617). I\u0027ll leave it to him to decide whether or not to enable this by default for eng.",
+      "parentUuid": "a060b10f_4d1050f4",
       "range": {
         "startLine": 131,
         "startChar": 24,
