@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffabec3b_c84cb971",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-11-07T11:48:30Z",
+      "side": 1,
+      "message": "Hi Kevin! Thanks for the contribution, seem like a sensible split to have IMO. It\u0027s been a few years since I worked on this stuff so I think Cole will have to review the code changes. IIUC both the existing macros would continue to function exactly as they do today?\n\nI\u0027ll kick off presubmit to make sure we don\u0027t break the \"happy case\". I feel we\u0027d ideally want to do some manual testing of the unhappy case as well (ensure the build breaks if regressions are added into the _system files). It\u0027s a little annoying how difficult it is to have automated testing in Make to instill some confidence in this artifact-path stuff.",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
