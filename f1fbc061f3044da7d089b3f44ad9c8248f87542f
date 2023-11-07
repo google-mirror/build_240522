@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f303bf5b_c6654fbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-11-07T00:46:31Z",
+      "side": 1,
+      "message": "It looks like this causes builds to fail with:\n```\nFAILED: \nbuild/make/core/artifact_path_requirements.mk:30: warning:  device/google/bramble/aosp_bramble.mk produces files inside build/make/target/product/generic_system.mks artifact path requirement. \nOffending entries:\nsystem/lib/hw/android.hidl.memory@1.0-impl.so\nsystem/lib64/hw/android.hidl.memory@1.0-impl.so\nIn file included from build/make/core/main.mk:1389:\nbuild/make/core/artifact_path_requirements.mk:30: error: Build failed.\n00:27:25 ckati failed with: exit status 1\n```\nhttps://android-build.corp.google.com/artifact/pending/P65081935/aosp_bramble-trunk_staging-userdebug/latest/view/logs%2Fbuild.log\n\nI\u0027m not sure why that it would be different to add these libs from PRODUCT_PACKAGES vs the versioned PRODUCT_PACKAGES..",
+      "revId": "f1fbc061f3044da7d089b3f44ad9c8248f87542f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
