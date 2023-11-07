@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0afce7c4_423da5bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2023-11-07T01:08:08Z",
+      "side": 1,
+      "message": "The only side effect I see is ro.build.fingerprint:\n\n[ro.build.fingerprint]: [Android/sdk_phone64_x86_64/empty:VanillaIceCream/MAIN/eng.rkir.20231106.162012:userdebug/test-keys]\n\nCan we remove \"empty:\" from it?",
+      "revId": "86b6cdcf4f8e6fdddb23075955ac0325cba59772",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
