@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b8aae52_64848ba5",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-11-07T17:03:18Z",
+      "side": 1,
+      "message": "Why is this here? Is the list of modules configurable per-product?\n\nIf not, I think you can re-use aosp/2803674, which I think we\u0027ll want to do anyway and should be submitted soon.",
+      "revId": "d71cabbce2d0b9aaacdfc0f8ca5cb477dfae2021",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
