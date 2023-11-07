@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8512889c_34af433f",
+        "filename": "core/proguard.flags",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-11-07T22:23:08Z",
+      "side": 1,
+      "message": "Sorry, late-breaking nit, `.pgcfg` is the internal convention, can we keep the `.flags` extension to be consistent with other platform flags?",
+      "range": {
+        "startLine": 64,
+        "startChar": 25,
+        "endLine": 64,
+        "endChar": 30
+      },
+      "revId": "0bd4109e598a23d4356274b1ca592459df662b0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
