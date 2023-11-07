@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d178acf_538db97e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-11-07T23:34:35Z",
+      "side": 1,
+      "message": "The file extension change looks reasonable, but I am not too familiar with the release_config stuff. Adding LaMont to reviewer list.",
+      "revId": "a44c7bd1caff0144a116b05918feb3435e231427",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
