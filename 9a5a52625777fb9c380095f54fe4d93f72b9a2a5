@@ -33,6 +33,23 @@
       "message": "Ping on this CL, just needs OWNERS +1.\n\nI think this is non-controversial (maybe we want `next` instead of `trunk_staging` for the default?  I\u0027m fine with changing that if we want, I just want it to be valid).",
       "revId": "9a5a52625777fb9c380095f54fe4d93f72b9a2a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d4d7674_39c38451",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-11-07T20:06:57Z",
+      "side": 1,
+      "message": "Adding other OWNERS here, since this seems quite simple.",
+      "revId": "9a5a52625777fb9c380095f54fe4d93f72b9a2a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
