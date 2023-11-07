@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4596f5e3_6b35ddd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-11-07T21:05:57Z",
+      "side": 1,
+      "message": "Thanks Yifei. I think my preference would be to break this into 3 separate changes and land separately, starting with the least risky (the kotlin debug metadata) and proceeding from there. I realize that\u0027s a bit annoying, but best to proceed a bit more cautiously with global Proguard changes that could each be breaking on their own.",
+      "revId": "869c0f26688dfe10f66f55b4358b30861e1bb625",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fde38cb8_5a848492",
+        "filename": "core/proguard/checknotnull.pgcfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-11-07T21:05:57Z",
+      "side": 1,
+      "message": "Are there any reasons not to use this globally?",
+      "range": {
+        "startLine": 5,
+        "startChar": 1,
+        "endLine": 5,
+        "endChar": 20
+      },
+      "revId": "869c0f26688dfe10f66f55b4358b30861e1bb625",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
