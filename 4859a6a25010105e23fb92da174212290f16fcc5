@@ -34,6 +34,24 @@
       "parentUuid": "10afd607_8d72b3ea",
       "revId": "4859a6a25010105e23fb92da174212290f16fcc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33a4d505_46158e13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-07T02:06:23Z",
+      "side": 1,
+      "message": "`PRODUCT_PACKAGES_SHIPPING_API_LEVEL_34` must not include both system and vendor modules at the same time. If it is for the system modules, it must be added to PRODUCT_PACKAGES from the system make files that are shared all android devices. Otherwise, if it is for vendor modules, it must be added to PRODUCT_PACKAGES outside of the system make files. This is to make system image from aosp generic to all android devices.",
+      "parentUuid": "6e85f6bb_7e7369e9",
+      "revId": "4859a6a25010105e23fb92da174212290f16fcc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
