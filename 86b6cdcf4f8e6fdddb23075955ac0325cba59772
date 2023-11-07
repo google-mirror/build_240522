@@ -52,6 +52,24 @@
       "parentUuid": "fac4a9b5_9ce0fc7c",
       "revId": "86b6cdcf4f8e6fdddb23075955ac0325cba59772",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bba10fdf_98cc2ee1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2023-11-07T01:30:16Z",
+      "side": 1,
+      "message": "ah, I also see \"empty:\" in adb shell.",
+      "parentUuid": "66a6f6a9_38261cfa",
+      "revId": "86b6cdcf4f8e6fdddb23075955ac0325cba59772",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
