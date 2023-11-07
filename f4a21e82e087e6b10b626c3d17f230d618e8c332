@@ -117,6 +117,30 @@
       },
       "revId": "f4a21e82e087e6b10b626c3d17f230d618e8c332",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3fd8354_66622e89",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-11-07T11:27:26Z",
+      "side": 1,
+      "message": "I think it still has a value to keep OVERRIDE_DISABLE_DEXOPT_ALL. One can `export OVERRIDE_DISABLE_DEXOPT_ALL\u003dtrue` locally for userdebug builds.",
+      "parentUuid": "6607b49e_71fec80e",
+      "range": {
+        "startLine": 131,
+        "startChar": 24,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "f4a21e82e087e6b10b626c3d17f230d618e8c332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
