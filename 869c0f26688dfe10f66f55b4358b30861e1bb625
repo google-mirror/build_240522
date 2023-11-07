@@ -171,6 +171,30 @@
       },
       "revId": "869c0f26688dfe10f66f55b4358b30861e1bb625",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f682a392_125438fe",
+        "filename": "core/proguard/checknotnull.pgcfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1609189
+      },
+      "writtenOn": "2023-11-07T22:09:04Z",
+      "side": 1,
+      "message": "Let\u0027s move this to https://android-review.git.corp.google.com/c/platform/build/+/2819900/1\n\nI think it makes sense for this to be on user build, not on userdebug build?",
+      "parentUuid": "144aa996_56f8bf50",
+      "range": {
+        "startLine": 5,
+        "startChar": 1,
+        "endLine": 5,
+        "endChar": 20
+      },
+      "revId": "869c0f26688dfe10f66f55b4358b30861e1bb625",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
