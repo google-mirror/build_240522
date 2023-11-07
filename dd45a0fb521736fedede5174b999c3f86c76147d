@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6303d12_ec3f5d30",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1980115
+      },
+      "writtenOn": "2023-11-07T16:00:49Z",
+      "side": 1,
+      "message": "Discussed offline.",
+      "parentUuid": "3eb69fd3_bbf3c9c7",
+      "range": {
+        "startLine": 74,
+        "startChar": 3,
+        "endLine": 74,
+        "endChar": 37
+      },
+      "revId": "dd45a0fb521736fedede5174b999c3f86c76147d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f1b1624_a4ae9855",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-03T17:35:45Z",
       "side": 1,
       "message": "what does this error look like when a duplicate value is enocuntered?",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 133,
+        "endChar": 2
+      },
+      "revId": "dd45a0fb521736fedede5174b999c3f86c76147d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62d65947_ccb7f71a",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 10
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1980115
+      },
+      "writtenOn": "2023-11-07T16:00:49Z",
+      "side": 1,
+      "message": "error: Conflicting TrendyTeamId for \u003cTest target name\u003e",
+      "parentUuid": "1f1b1624_a4ae9855",
       "range": {
         "startLine": 131,
         "startChar": 1,

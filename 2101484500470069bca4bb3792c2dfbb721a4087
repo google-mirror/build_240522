@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "475d12c8_56d2008b",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1980115
+      },
+      "writtenOn": "2023-11-07T16:00:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c7c94217_be2f9d38",
+      "range": {
+        "startLine": 16,
+        "startChar": 5,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "264cf421_fd95e71e",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1980115
+      },
+      "writtenOn": "2023-11-07T16:00:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "59bb1827_a427e7f4",
+      "range": {
+        "startLine": 16,
+        "startChar": 5,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d6945df_a2541a74",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-11-03T17:35:45Z",
       "side": 1,
       "message": "it\u0027s usage can be replaced with log.Fatal(...)",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 1
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2768e1cb_8cb44cf6",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1980115
+      },
+      "writtenOn": "2023-11-07T16:00:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4d6945df_a2541a74",
       "range": {
         "startLine": 25,
         "startChar": 0,
@@ -95,6 +167,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ba9150cd_74453735",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1980115
+      },
+      "writtenOn": "2023-11-07T16:00:49Z",
+      "side": 1,
+      "message": "map is a reserved keyword. Changing to syncMap.",
+      "parentUuid": "57c7cbba_41988eb9",
+      "range": {
+        "startLine": 30,
+        "startChar": 19,
+        "endLine": 30,
+        "endChar": 39
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "34ec2435_57ba7049",
         "filename": "tools/metadata/generator.go",
         "patchSetId": 9
@@ -106,6 +202,30 @@
       "writtenOn": "2023-11-03T17:35:45Z",
       "side": 1,
       "message": "to confirm: this is intentional, right?",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 13
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d84994b5_7b530223",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1980115
+      },
+      "writtenOn": "2023-11-07T16:00:49Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "34ec2435_57ba7049",
       "range": {
         "startLine": 34,
         "startChar": 2,
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16c8e5b9_cb384df1",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1980115
+      },
+      "writtenOn": "2023-11-07T16:00:49Z",
+      "side": 1,
+      "message": "yes, it does not append the data to the existing file; instead, it overwrites the file with the new data.",
+      "parentUuid": "1767dfb4_ec446e68",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 67
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7754d245_5dedae17",
@@ -152,6 +296,30 @@
       "writtenOn": "2023-11-03T17:35:45Z",
       "side": 1,
       "message": "nit: rename to something more accurate",
+      "range": {
+        "startLine": 54,
+        "startChar": 5,
+        "endLine": 54,
+        "endChar": 16
+      },
+      "revId": "2101484500470069bca4bb3792c2dfbb721a4087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5995e977_33866cdb",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1980115
+      },
+      "writtenOn": "2023-11-07T16:00:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7754d245_5dedae17",
       "range": {
         "startLine": 54,
         "startChar": 5,
