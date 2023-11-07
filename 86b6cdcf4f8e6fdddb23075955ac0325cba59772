@@ -16,6 +16,24 @@
       "message": "The only side effect I see is ro.build.fingerprint:\n\n[ro.build.fingerprint]: [Android/sdk_phone64_x86_64/empty:VanillaIceCream/MAIN/eng.rkir.20231106.162012:userdebug/test-keys]\n\nCan we remove \"empty:\" from it?",
       "revId": "86b6cdcf4f8e6fdddb23075955ac0325cba59772",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fac4a9b5_9ce0fc7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-07T01:23:21Z",
+      "side": 1,
+      "message": "Not really, that originates here: https://cs.android.com/android/platform/superproject/main/+/main:build/make/core/sysprop.mk;l\u003d188;drc\u003d08f6715f376749af109f3753001e73da7f77d043\n\nBTW one other thing to note is that board variables you put in the product config like this won\u0027t respect product inheritance, only product variables do that. Which may be confusing to people.",
+      "parentUuid": "0afce7c4_423da5bd",
+      "revId": "86b6cdcf4f8e6fdddb23075955ac0325cba59772",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
