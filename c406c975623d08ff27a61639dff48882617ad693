@@ -16,6 +16,24 @@
       "message": "In practice, have you looked at the net delta/improvement from these rules across the entire platform? We haven\u0027t really added many other `-assumevalues` rules for known non-null returns, so if the benefit is small, I\u0027m not sure it\u0027s worth even the very small incremental cost of loading in these rules for every single R8 invocation.",
       "revId": "c406c975623d08ff27a61639dff48882617ad693",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ecde684_5f8dae4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1609189
+      },
+      "writtenOn": "2023-11-07T22:30:15Z",
+      "side": 1,
+      "message": "Let me start a run of each on internal side. ag/25267027 does include a rough accounting of all these 3 changes. It\u0027s not as representative.",
+      "parentUuid": "87fb89ca_a707d77c",
+      "revId": "c406c975623d08ff27a61639dff48882617ad693",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
