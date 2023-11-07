@@ -52,6 +52,24 @@
       "parentUuid": "6e85f6bb_7e7369e9",
       "revId": "4859a6a25010105e23fb92da174212290f16fcc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77ca21e4_b5a662a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-11-07T02:15:24Z",
+      "side": 1,
+      "message": "In `base_system.mk` these are system/system_ext files. In `base_vendor.mk` they are vendor files. \nWe would like to add all of the system files to GSI, but NOT add them system images on new devices to \"deprecate\" their inclusion based on the API level the device is targeting. \nThese are HIDL same-process libraries that people dlopen, in this case, that we don\u0027t want to support, but need to be included in older/upgrading devices.\n\nIs there a better way to handle this?",
+      "parentUuid": "33a4d505_46158e13",
+      "revId": "4859a6a25010105e23fb92da174212290f16fcc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
