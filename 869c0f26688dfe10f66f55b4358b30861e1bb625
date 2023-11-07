@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db91007b_b8832315",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1609189
+      },
+      "writtenOn": "2023-11-07T22:04:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d4f1882_a383cc39",
+      "revId": "869c0f26688dfe10f66f55b4358b30861e1bb625",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fde38cb8_5a848492",
@@ -96,6 +114,30 @@
       "writtenOn": "2023-11-07T22:02:13Z",
       "side": 1,
       "message": "I\u0027m just wondering if there\u0027s any reason this should be opt-in, rather the global default. I think it\u0027s probably fine to layer in as a default, as long as targets can additional remove the code entirely with additional `-assumenosideeffects` rules for these checks? I haven\u0027t actually checked to see if there are any ordering issues there.",
+      "parentUuid": "84ba8799_1d1b47d2",
+      "range": {
+        "startLine": 5,
+        "startChar": 1,
+        "endLine": 5,
+        "endChar": 20
+      },
+      "revId": "869c0f26688dfe10f66f55b4358b30861e1bb625",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e97e733f_89460667",
+        "filename": "core/proguard/checknotnull.pgcfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1609189
+      },
+      "writtenOn": "2023-11-07T22:04:03Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "84ba8799_1d1b47d2",
       "range": {
         "startLine": 5,
