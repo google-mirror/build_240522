@@ -70,6 +70,24 @@
       "parentUuid": "33a4d505_46158e13",
       "revId": "4859a6a25010105e23fb92da174212290f16fcc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c5f097f_82114c6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-07T03:42:14Z",
+      "side": 1,
+      "message": "So, I don\u0027t find a better way to conditionally include the files in base_system.mk without using the allowed_list or updating the artifact check macro. Let\u0027s add them to the allowed_list.\n\nBy the way, `hwservicemanager` was added to each generic_system.mk that also need to be added with the base_system.mk together with android.hidl.memory.\nAlso `android.hidl.allocator@1.0-service` is a system_ext file that is for base_system_ext.mk.",
+      "parentUuid": "77ca21e4_b5a662a0",
+      "revId": "4859a6a25010105e23fb92da174212290f16fcc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
