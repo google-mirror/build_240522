@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10afd607_8d72b3ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-07T01:19:29Z",
+      "side": 1,
+      "message": "I don\u0027t know why, but the failing presubmit build installs the android.hidl.memory@1.0-impl.so in system image even after removing it from the base_system.mk.\n```\nFAILED: \nbuild/make/core/artifact_path_requirements.mk:30: warning:  build/make/target/product/aosp_x86_64.mk produces files inside build/make/target/product/generic_system.mks artifact path requirement. \nOffending entries:\nsystem/lib/hw/android.hidl.memory@1.0-impl.so\nsystem/lib64/hw/android.hidl.memory@1.0-impl.so\n```",
+      "revId": "4859a6a25010105e23fb92da174212290f16fcc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
