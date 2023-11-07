@@ -16,6 +16,24 @@
       "message": "Why is this here? Is the list of modules configurable per-product?\n\nIf not, I think you can re-use aosp/2803674, which I think we\u0027ll want to do anyway and should be submitted soon.",
       "revId": "d71cabbce2d0b9aaacdfc0f8ca5cb477dfae2021",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b150ce1_e17c2353",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-11-07T18:09:35Z",
+      "side": 1,
+      "message": "I think reusing aosp/2803674 sounds reasonable here. This list will not vary per product.",
+      "parentUuid": "9b8aae52_64848ba5",
+      "revId": "d71cabbce2d0b9aaacdfc0f8ca5cb477dfae2021",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
