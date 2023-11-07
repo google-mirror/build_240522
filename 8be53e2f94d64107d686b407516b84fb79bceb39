@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "363fe815_dbd7b5ab",
+        "filename": "core/release_config.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-11-07T23:29:39Z",
+      "side": 1,
+      "message": "Why do we need this symlink? Will this be cleaned up later?",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 18
+      },
+      "revId": "8be53e2f94d64107d686b407516b84fb79bceb39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
