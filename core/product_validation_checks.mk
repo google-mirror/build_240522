@@ -38,8 +38,7 @@ known_board_list_variables := \
 escape_starlark_string=$(subst ",\",$(subst \,\\,$(1)))
 product_variable_starlark_value=$(if $(filter $(1),$(_product_list_vars) $(known_board_list_variables)),[$(foreach w,$($(1)),"$(call escape_starlark_string,$(w))", )],"$(call escape_starlark_string,$(1))")
 filename_to_starlark=$(subst -,_,$(subst /,_,$(subst .,_,$(1))))
-_c:=load("//build/make/core/release_config.bzl", "release_config")
-_c+=$(foreach f,$(PRODUCT_VALIDATION_CHECKS),$(newline)load("$(f)", validate_product_variables_$(call filename_to_starlark,$(f)) = "validate_product_variables"))
+_c:=$(foreach f,$(PRODUCT_VALIDATION_CHECKS),$(newline)load("$(f)", validate_product_variables_$(call filename_to_starlark,$(f)) = "validate_product_variables"))
 # TODO: we should freeze the context because it contains mutable lists, so that validation checks can't affect each other
 _c+=$(newline)_ctx = struct(
 _c+=$(newline)product_variables = struct(
