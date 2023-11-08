@@ -50,6 +50,24 @@
       "message": "An additional helpful line in the error message should probably suggest what TARGET_RELEASE value should folks use if they are unsure which one to choose.\n\nEg:\n\nNo release config set for target; please set TARGET_RELEASE, or if building on the command line use \u0027lunch \u003ctarget\u003e-\u003crelease\u003e-\u003cbuild_type\u003e\u0027, where release is one of: $(_all_release_configs). Use \"trunk_staging\" release config if you are unsure which one to set.",
       "revId": "5f5db67ede2df7082f16bf082b74a3093bd153fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7a36ff8_956bf501",
+        "filename": "core/release_config.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-11-08T18:29:07Z",
+      "side": 1,
+      "message": "I\u0027m taking joeo@\u0027s comment of \"Let\u0027s just submit this\" to be also responding to this.  We can certainly put in a follow-up to further expand this message if we want.",
+      "parentUuid": "cf75751b_20bf64b0",
+      "revId": "5f5db67ede2df7082f16bf082b74a3093bd153fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
