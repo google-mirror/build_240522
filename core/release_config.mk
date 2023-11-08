@@ -144,7 +144,7 @@ config_map_files:=
 # Because starlark can't find files with $(wildcard), write an entrypoint starlark script that
 # contains the result of the above wildcards for the starlark code to use.
 filename_to_starlark=$(subst /,_,$(subst .,_,$(1)))
-_c:=load("//build/make/core/release_config.bzl", "release_config")
+_c:=load("//build/make/core/release_config.scl", "release_config")
 _c+=$(newline)def add(d, k, v):
 _c+=$(newline)$(space)d = dict(d)
 _c+=$(newline)$(space)d[k] = v
