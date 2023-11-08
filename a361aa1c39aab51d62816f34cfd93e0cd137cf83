@@ -34,6 +34,24 @@
       "parentUuid": "ffabec3b_c84cb971",
       "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb46774c_3464fc55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903905
+      },
+      "writtenOn": "2023-11-08T00:26:40Z",
+      "side": 1,
+      "message": "\u003e IIUC both the existing macros would continue to function exactly as they do today?\n\nThat\u0027s correct 😊\n\n\u003e They\u0027re extremely confusing errors to most people\n\nI think there is an improvement in error messages with this change -- there is clearer identification of whether the violation is for a boundary or for ownership, and where the violation comes from.\n\n\u003e most of the time they have no recourse to fix them other than adding an exception for certain paths\n\nI think this is well-addressed by the split of responsibilities in the new macros.  Say for (slightly inaccurate) example you want to add Settings (a product artifact) to generic_system.mk, and there is a dependency on libbinder_ndk (a system artifact).  Using require-no-new-artifacts-outside-path, you can add whatever system-based dependency to the system makefile (say, libbinder_ndk to base_system) and then whatever product-based artifact to the product makefile that depends on it (say, Settings to either base_product or generic_system). And then generic_system can use require-no-other-artifacts-inside-path to protect /system and /system_ext without complaining about the presence of Settings inside /product.\n\n\u003e It\u0027s also not really clear why we care about certain makefiles owning certain paths.\n\nI\u0027m not sure if this has a lot of value for Google internally beyond enforcing GSI boundaries (maybe it\u0027s not important to try to enforce boundaries for the \"fundamental\" product makefiles like base_system, media_product, handheld_vendor, etc), but I think it\u0027s a good framework in general for external entities working on custom SSI-based builds.\n\n\u003e There are also bugs that allow you to circumvent artifact path requirements, like b/299166571.\n\nUnfortunately I can\u0027t read the issue, but I think this change also makes artifact path requirements more robust and would expect it to be harder to circumvent with makefile-inheritance-based trickery.",
+      "parentUuid": "d17af274_b76671ec",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
