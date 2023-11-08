@@ -16,6 +16,23 @@
       "message": "In build/soong, it has\nhttps://cs.android.com/android/platform/superproject/main/+/main:build/soong/cc/coverage.go;l\u003d105-112?q\u003dCLANG_COVERAGE%20build%2Fsoong, while we still use build/core for some project, so we need this same feature for Android.mk.",
       "revId": "d7d123ec1d6f1bc0ea1fda2f243f4732050d6909",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91b1df4c_3301261c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905021
+      },
+      "writtenOn": "2023-11-08T01:01:15Z",
+      "side": 1,
+      "message": "Can we merge this change since we are still use build/core project?",
+      "revId": "d7d123ec1d6f1bc0ea1fda2f243f4732050d6909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
