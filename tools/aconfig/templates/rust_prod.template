@@ -9,10 +9,15 @@ impl FlagProvider \{
     /// query flag {flag.name}
     pub fn {flag.name}(&self) -> bool \{
     {{ if flag.readwrite -}}
-        flags_rust::GetServerConfigurableFlag(
-          "aconfig_flags.{flag.device_config_namespace}",
-          "{flag.device_config_flag}",
-          "{flag.default_value}") == "true"
+        if CACHE[{flag.readwrite_idx}] == -1 \{
+            unsafe \{
+                CACHE[{flag.readwrite_idx}] = (flags_rust::GetServerConfigurableFlag(
+                    "aconfig_flags.{flag.device_config_namespace}",
+                    "{flag.device_config_flag}",
+                    "{flag.default_value}") == "true") as i8
+            }
+        }
+        CACHE[{flag.readwrite_idx}] == 1
     {{ -else- }}
         {flag.default_value}
     {{ -endif }}
@@ -23,6 +28,9 @@ impl FlagProvider \{
 
 /// flag provider
 pub static PROVIDER: FlagProvider = FlagProvider;
+
+/// flag value cache
+pub static mut CACHE: [i8; {readwrite_count}] = [-1; {readwrite_count}];
 
 {{ for flag in template_flags }}
 /// query flag {flag.name}

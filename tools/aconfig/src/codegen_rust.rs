@@ -30,12 +30,14 @@ pub fn generate_rust_code<'a, I>(
 where
     I: Iterator<Item = &'a ProtoParsedFlag>,
 {
+    let mut readwrite_count = 0;
     let template_flags: Vec<TemplateParsedFlag> =
-        parsed_flags_iter.map(|pf| TemplateParsedFlag::new(package, pf)).collect();
+        parsed_flags_iter.map(|pf| TemplateParsedFlag::new(package, pf, &mut readwrite_count)).collect();
     let context = TemplateContext {
         package: package.to_string(),
         template_flags,
         modules: package.split('.').map(|s| s.to_string()).collect::<Vec<_>>(),
+        readwrite_count,
     };
     let mut template = TinyTemplate::new();
     template.add_template(
@@ -55,10 +57,12 @@ struct TemplateContext {
     pub package: String,
     pub template_flags: Vec<TemplateParsedFlag>,
     pub modules: Vec<String>,
+    pub readwrite_count: i32,
 }
 
 #[derive(Serialize)]
 struct TemplateParsedFlag {
+    pub readwrite_idx: i32,
     pub readwrite: bool,
     pub default_value: String,
     pub name: String,
@@ -68,8 +72,13 @@ struct TemplateParsedFlag {
 
 impl TemplateParsedFlag {
     #[allow(clippy::nonminimal_bool)]
-    fn new(package: &str, pf: &ProtoParsedFlag) -> Self {
+    fn new(package: &str, pf: &ProtoParsedFlag, rw_count: &mut i32) -> Self {
         let template = TemplateParsedFlag {
+            readwrite_idx: if pf.permission() == ProtoFlagPermission::READ_WRITE {
+                let index = *rw_count; *rw_count += 1; index
+            } else {
+                -1
+            },
             readwrite: pf.permission() == ProtoFlagPermission::READ_WRITE,
             default_value: match pf.state() {
                 ProtoFlagState::ENABLED => "true".to_string(),
@@ -102,10 +111,15 @@ impl FlagProvider {
 
     /// query flag disabled_rw
     pub fn disabled_rw(&self) -> bool {
-        flags_rust::GetServerConfigurableFlag(
-            "aconfig_flags.aconfig_test",
-            "com.android.aconfig.test.disabled_rw",
-            "false") == "true"
+        if CACHE[0] == -1 {
+            unsafe {
+                CACHE[0] = (flags_rust::GetServerConfigurableFlag(
+                    "aconfig_flags.aconfig_test",
+                    "com.android.aconfig.test.disabled_rw",
+                    "false") == "true") as i8
+            }
+        }
+        CACHE[0] == 1
     }
 
     /// query flag enabled_fixed_ro
@@ -120,15 +134,23 @@ impl FlagProvider {
 
     /// query flag enabled_rw
     pub fn enabled_rw(&self) -> bool {
-        flags_rust::GetServerConfigurableFlag(
-            "aconfig_flags.aconfig_test",
-            "com.android.aconfig.test.enabled_rw",
-            "true") == "true"
+        if CACHE[1] == -1 {
+            unsafe {
+                CACHE[1] = (flags_rust::GetServerConfigurableFlag(
+                    "aconfig_flags.aconfig_test",
+                    "com.android.aconfig.test.enabled_rw",
+                    "true") == "true") as i8
+            }
+        }
+        CACHE[1] == 1
     }
 }
 
 /// flag provider
 pub static PROVIDER: FlagProvider = FlagProvider;
+
+/// flag value cache
+pub static mut CACHE: [i8; 2] = [-1; 2];
 
 /// query flag disabled_ro
 #[inline(always)]
