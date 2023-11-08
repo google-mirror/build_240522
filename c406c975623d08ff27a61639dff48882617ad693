@@ -52,6 +52,24 @@
       "parentUuid": "3ecde684_5f8dae4c",
       "revId": "c406c975623d08ff27a61639dff48882617ad693",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cedbc67c_0f5603ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1609189
+      },
+      "writtenOn": "2023-11-08T00:37:51Z",
+      "side": 1,
+      "message": "ag/25303167?checksRunsSelected\u003dBloat%20Buster\u0026tab\u003dchecks for reference. I\u0027ll abandon this change.",
+      "parentUuid": "339874e5_d591f4c7",
+      "revId": "c406c975623d08ff27a61639dff48882617ad693",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
