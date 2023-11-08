@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9def93f1_b1ec3564",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1826738
+      },
+      "writtenOn": "2023-11-08T17:04:19Z",
+      "side": 1,
+      "message": "Is this line meant to be referencing TARGET_BUILD_VARIANT?",
+      "range": {
+        "startLine": 129,
+        "startChar": 16,
+        "endLine": 129,
+        "endChar": 17
+      },
+      "revId": "39132a1f7124bd86e307444a1e9fe805cd37f34c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
