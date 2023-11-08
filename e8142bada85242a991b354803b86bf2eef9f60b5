@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5bcbdc4_ba8f518c",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1314,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2023-11-08T18:54:09Z",
+      "side": 1,
+      "message": "On a side note, most of the (boolean) makefile variables use the empty string for false, and either explicitly check for \"true\" *or* check for non-empty to indicate \"true\".  Explicitly checking for \"false\" is rather uncommon.  On the other hand, that\u0027s not something this change is addressing.",
+      "range": {
+        "startLine": 1314,
+        "startChar": 6,
+        "endLine": 1314,
+        "endChar": 11
+      },
+      "revId": "e8142bada85242a991b354803b86bf2eef9f60b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
