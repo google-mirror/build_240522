@@ -94,6 +94,22 @@ mod tests {
 /// flag provider
 pub struct FlagProvider;
 
+/// flag value cache for disabled_rw
+lazy_static! {
+    static ref CACHED_disabled_rw: bool = flags_rust::GetServerConfigurableFlag(
+        "aconfig_flags.aconfig_test",
+        "com.android.aconfig.test.disabled_rw",
+        "false") == "true";
+}
+
+/// flag value cache for enabled_rw
+lazy_static! {
+    static ref CACHED_enabled_rw: bool = flags_rust::GetServerConfigurableFlag(
+        "aconfig_flags.aconfig_test",
+        "com.android.aconfig.test.enabled_rw",
+        "true") == "true";
+}
+
 impl FlagProvider {
     /// query flag disabled_ro
     pub fn disabled_ro(&self) -> bool {
@@ -102,10 +118,7 @@ impl FlagProvider {
 
     /// query flag disabled_rw
     pub fn disabled_rw(&self) -> bool {
-        flags_rust::GetServerConfigurableFlag(
-            "aconfig_flags.aconfig_test",
-            "com.android.aconfig.test.disabled_rw",
-            "false") == "true"
+        CACHED_disabled_rw
     }
 
     /// query flag enabled_fixed_ro
@@ -120,10 +133,7 @@ impl FlagProvider {
 
     /// query flag enabled_rw
     pub fn enabled_rw(&self) -> bool {
-        flags_rust::GetServerConfigurableFlag(
-            "aconfig_flags.aconfig_test",
-            "com.android.aconfig.test.enabled_rw",
-            "true") == "true"
+        CACHED_enabled_rw
     }
 }
 
