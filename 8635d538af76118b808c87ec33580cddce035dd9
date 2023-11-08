@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8522472_35ab91ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-11-08T20:13:04Z",
+      "side": 1,
+      "message": "This currently uses unnecessary unsafe, and is technically UB as it allows for simultaneous creation of two \u0026mut references to the same static.\n\nI\u0027ve provided 3 alternatives, if none of those work, please contact me with more details on your restrictions and I\u0027ll explain other ways to do caching that don\u0027t require unsafe.",
+      "revId": "8635d538af76118b808c87ec33580cddce035dd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a504339_0d136f1b",
+        "filename": "tools/aconfig/templates/rust_prod.template",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-11-08T20:13:04Z",
+      "side": 1,
+      "message": "Preferred implementation:\n\n```\nlazy_static! {\n  static ref CACHED_{flag.name}: bool \u003d flags_rust::GetServerConfigurableFlag(\n                    \"aconfig_flags.{flag.device_config_namespace}\",\n                    \"{flag.device_config_flag}\",\n                    \"false\") \u003d\u003d \"true\");\n}\n```\n\nThese won\u0027t initialize until first access, and will resolve to the correct bool afterwards.\n\nIf that doesn\u0027t work, consider\n\n```\npub static CACHE: [OnceCell\u003cbool\u003e; {readwrite_count}]\n```\n\n(see the [once_cell crate](https://docs.rs/once_cell/latest/once_cell/sync/struct.OnceCell.html))\n\n\n\nIf you absolutely must roll your own, use `pub static CACHE: [AtomicI8; 2]` or similar.",
+      "revId": "8635d538af76118b808c87ec33580cddce035dd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
