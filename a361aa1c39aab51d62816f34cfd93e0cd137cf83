@@ -52,6 +52,24 @@
       "parentUuid": "d17af274_b76671ec",
       "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a22a2e29_d4a58b16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-08T00:32:14Z",
+      "side": 1,
+      "message": "b/299166571 is that the files installed by adding modules to `PRODUCT_PACKAGES_SHIPPING_API_LEVEL_*` are not checked by artifact path requirements. I briefly tried to fix it in https://android-review.googlesource.com/c/platform/build/+/2737051/3",
+      "parentUuid": "cb46774c_3464fc55",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
