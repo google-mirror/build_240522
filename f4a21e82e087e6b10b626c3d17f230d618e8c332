@@ -141,6 +141,30 @@
       },
       "revId": "f4a21e82e087e6b10b626c3d17f230d618e8c332",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c064bf65_cbe6c37a",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1826738
+      },
+      "writtenOn": "2023-11-08T12:58:09Z",
+      "side": 1,
+      "message": "As per offline conversation, it appears that JIT isn\u0027t actually a major performance overhead, therefore I agree with ngeoffray to skip all by default for eng builds. \n\nI agree there is still some value to keep OVERRIDE_DISABLE_DEXOPT_ALL for userdebug, but I\u0027m also fine with not including it.",
+      "parentUuid": "e3fd8354_66622e89",
+      "range": {
+        "startLine": 131,
+        "startChar": 24,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "f4a21e82e087e6b10b626c3d17f230d618e8c332",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
