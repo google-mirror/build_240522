@@ -16,6 +16,24 @@
       "message": "Is this a revert?",
       "revId": "673f2340b3974f48c0a6538b7d95568ec588a795",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba2bd001_0ce22696",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 3622,
+      "author": {
+        "id": 1946061
+      },
+      "writtenOn": "2023-11-08T22:28:27Z",
+      "side": 1,
+      "message": "post offline discussion and experimentation this change does not seem required",
+      "parentUuid": "3cd04ce4_bcc6bf5e",
+      "revId": "673f2340b3974f48c0a6538b7d95568ec588a795",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
