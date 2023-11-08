@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0d714627_1fccf472",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-11-08T20:28:54Z",
+      "side": 1,
+      "message": "Could this logic be simplified by making it a trunk stable flag?",
+      "revId": "e8142bada85242a991b354803b86bf2eef9f60b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c5bcbdc4_ba8f518c",
         "filename": "core/config.mk",
         "patchSetId": 3
