@@ -88,6 +88,24 @@
       "parentUuid": "a22a2e29_d4a58b16",
       "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "689ddf1a_46f5b0a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2023-11-08T10:09:16Z",
+      "side": 1,
+      "message": "\u003e It\u0027s also not really clear why we care about certain makefiles owning certain paths.\n\nIt\u0027s clear to me 😊 I\u0027d be happy to give you more context about this Cole, ping me if you\u0027re interested.\n\nAside from the original intentions of this split, I think they would also serve as a good base for setting up \"real\" build targets for the various partitions with explicit deps (as opposed to the haphazard staging directory strategy).\n\n\u003e most of the time they have no recourse to fix them other than adding an exception for certain paths\n\nI don\u0027t agree. Our internal builds give a different error message (see `PRODUCT_ARTIFACT_PATH_REQUIREMENT_HINT`) that link to go/artifact-error, which gives more context and recommends reaching out to a mailing list for guidance if necessary (which many people have done). I\u0027m pretty confident the existence of these checks have kept the partition split in makefiles at a good level since it was implemented ~5 years ago. I don\u0027t want to think about what they would have looked like without these checks. They might not be perfect, but they\u0027re a lot better than nothing.",
+      "parentUuid": "8778382b_69e44500",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
