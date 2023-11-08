@@ -16,6 +16,24 @@
       "message": "Doesn\u0027t this need to be `*CACHED_{flag.name}`? This doesn\u0027t seem like it\u0027d compile.",
       "revId": "f0107ac315f89447fd23d82c1e55c74463c37a27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6972bd9d_4cd38c87",
+        "filename": "tools/aconfig/templates/rust_prod.template",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-11-08T23:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2ca15c0_40ce06a4",
+      "revId": "f0107ac315f89447fd23d82c1e55c74463c37a27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
