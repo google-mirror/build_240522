@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4394b297_5f1955d4",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-11-09T19:26:52Z",
+      "side": 1,
+      "message": "`ifeq (,$(filter arm64 x86_64,$(TARGET_ARCH)))`",
+      "revId": "f11ffd0cb003843a9c54ba7d045a3a7b06b1d6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
