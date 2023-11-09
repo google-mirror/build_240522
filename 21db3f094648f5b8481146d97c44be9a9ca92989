@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "00d0d64f_5b59991d",
+        "filename": "core/product_validation_checks.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2065600
+      },
+      "writtenOn": "2023-11-09T21:14:20Z",
+      "side": 1,
+      "message": "# PRODUCT_VALIDATION_CHECKS allows you to enforce that your product config variables follow some\n# rules. To use it, add the paths to starlark configuration language (scl) files in\n# PRODUCT_VALIDATION_CHECKS. A validate_product_variables function in those files will be called\n# with a single \"context\" object.\n#\n# The context object currently 2 attributes:\n#   - product_variables: This has all the product variables. All the variables are either of type\n#                        string or list, more accurate typing (like bool) isn\u0027t known.\n#   - board_variables: This only has a small subset of the board variables, because there isn\u0027t a\n#                      known list of board variables. Feel free to expand the subset if you need a\n#                      new variable.\n#\n# You can then inspect (but not modify) these variables and fail() if they don\u0027t meet your\n# requirements. Example:\n#\n# In a product config file: PRODUCT_VALIDATION_CHECKS +\u003d //path/to/my_validations.scl\n# In my_validations.scl:\n# def validate_product_variables(ctx):\n#     for dir in ctx.board_variables.BOARD_SEPOLICY_DIRS:\n#         if not dir.startswith(\u0027system/sepolicy/\u0027):\n#             fail(\u0027Only sepolicies in system/seplicy are allowed, found: \u0027 + dir)\n\nifdef PRODUCT_VALIDATION_CHECKS\n\n$(if $(filter-out //%.scl,$(PRODUCT_VALIDATION_CHECKS)), \\\n\t$(error All PRODUCT_VALIDATION_CHECKS files must start with // and end with .scl, exceptions: $(filter-out //%.scl,$(PRODUCT_VALIDATION_CHECKS))))\n\nknown_board_variables :\u003d \\\n  BOARD_VENDOR_SEPOLICY_DIRS BOARD_SEPOLICY_DIRS \\\n  SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS \\\n  SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS \\\n\nknown_board_list_variables :\u003d \\\n  BOARD_VENDOR_SEPOLICY_DIRS BOARD_SEPOLICY_DIRS \\\n  SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS \\\n  SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS \\\n\nescape_starlark_string\u003d$(subst \",\\\",$(subst \\,\\\\,$(1)))\nproduct_variable_starlark_value\u003d$(if $(filter $(1),$(_product_list_vars) $(known_board_list_variables)),[$(foreach w,$($(1)),\"$(call escape_starlark_string,$(w))\", )],\"$(call escape_starlark_string,$(1))\")\nfilename_to_starlark\u003d$(subst /,_,$(subst .,_,$(1)))\n_c:\u003dload(\"//build/make/core/release_config.bzl\", \"release_config\")\n_c+\u003d$(foreach f,$(PRODUCT_VALIDATION_CHECKS),$(newline)load(\"$(f)\", validate_product_variables_$(call filename_to_starlark,$(f)) \u003d \"validate_product_variables\"))\n# TODO: we should freeze the context because it contains mutable lists, so that validation checks can\u0027t affect each other\n_c+\u003d$(newline)_ctx \u003d struct(\n_c+\u003d$(newline)product_variables \u003d struct(\n_c+\u003d$(foreach v,$(_product_var_list),$(newline)  $(v) \u003d $(call product_variable_starlark_value,$(v)),)\n_c+\u003d$(newline)),\n_c+\u003d$(newline)board_variables \u003d struct(\n_c+\u003d$(foreach v,$(known_board_variables),$(newline)  $(v) \u003d $(call product_variable_starlark_value,$(v)),)\n_c+\u003d$(newline))\n_c+\u003d$(newline))\n# It\u0027s important that we call the function using keyword arguments, so that if we want to add\n# more arguments in the future it\u0027s easier.\n_c+\u003d$(foreach f,$(PRODUCT_VALIDATION_CHECKS),$(newline)validate_product_variables_$(call filename_to_starlark,$(f))(_ctx))\n_c+\u003d$(newline)variables_to_export_to_make \u003d {}\n$(KATI_file_no_rerun \u003e$(OUT_DIR)/product_validation_checks_entrypoint.scl,$(_c))\nfilename_to_starlark:\u003d\nescape_starlark_string:\u003d\nproduct_variable_starlark_value:\u003d\nknown_board_variables :\u003d\nknown_board_list_variables :\u003d\n\n# Exclude the entrypoint file as a dependency (by passing it as the 2nd argument) so that we don\u0027t\n# rerun kati every build. Even though we\u0027re using KATI_file_no_rerun, product config is run every\n# build, so the file will still be rewritten.\n#\n# We also need to pass --allow_external_entrypoint to rbcrun in case the OUT_DIR is set to something\n# outside of the source tree.\n$(call run-starlark,$(OUT_DIR)/product_validation_checks_entrypoint.scl,$(OUT_DIR)/product_validation_checks_entrypoint.scl,--allow_external_entrypoint)\n\nendif # ifdef PRODUCT_VALIDATION_CHECKS",
+      "revId": "21db3f094648f5b8481146d97c44be9a9ca92989",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b4152016_207c13c2",
         "filename": "core/product_validation_checks.mk",
         "patchSetId": 1
@@ -67,6 +84,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fe0084be_19dee1ec",
+        "filename": "core/product_validation_checks.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2065600
+      },
+      "writtenOn": "2023-11-09T21:14:20Z",
+      "side": 1,
+      "message": "ذكر الآخرين مع",
+      "parentUuid": "7955435d_21400ee4",
+      "range": {
+        "startLine": 13,
+        "startChar": 23,
+        "endLine": 13,
+        "endChar": 38
+      },
+      "revId": "21db3f094648f5b8481146d97c44be9a9ca92989",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bff55263_585ef0ee",
         "filename": "core/product_validation_checks.mk",
         "patchSetId": 1
@@ -102,6 +143,30 @@
       "side": 1,
       "message": "\u003e Fabulous",
       "parentUuid": "bff55263_585ef0ee",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 82
+      },
+      "revId": "21db3f094648f5b8481146d97c44be9a9ca92989",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f289183b_73b44fbc",
+        "filename": "core/product_validation_checks.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2065600
+      },
+      "writtenOn": "2023-11-09T21:14:20Z",
+      "side": 1,
+      "message": "# PRODUCT_VALIDATION_CHECKS allows you to enforce that your product config variables follow some\n# rules. To use it, add the paths to starlark configuration language (scl) files in\n# PRODUCT_VALIDATION_CHECKS. A validate_product_variables function in those files will be called\n# with a single \"context\" object.\n#\n# The context object currently 2 attributes:\n#   - product_variables: This has all the product variables. All the variables are either of type\n#                        string or list, more accurate typing (like bool) isn\u0027t known.\n#   - board_variables: This only has a small subset of the board variables, because there isn\u0027t a\n#                      known list of board variables. Feel free to expand the subset if you need a\n#                      new variable.\n#\n# You can then inspect (but not modify) these variables and fail() if they don\u0027t meet your",
+      "parentUuid": "e457d07c_a510bc8d",
       "range": {
         "startLine": 17,
         "startChar": 0,
