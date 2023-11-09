@@ -16,6 +16,24 @@
       "message": "`ifeq (,$(filter arm64 x86_64,$(TARGET_ARCH)))`",
       "revId": "f11ffd0cb003843a9c54ba7d045a3a7b06b1d6c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c082c533_2a988bba",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-11-09T20:52:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4394b297_5f1955d4",
+      "revId": "f11ffd0cb003843a9c54ba7d045a3a7b06b1d6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
