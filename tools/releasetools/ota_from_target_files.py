@@ -393,18 +393,6 @@ def ModifyVABCCompressionParam(content, algo):
   """
   return ModifyKeyvalueList(content, "virtual_ab_compression_method", algo)
 
-def SetVABCCowVersion(content, cow_version):
-  """ Update virtual_ab_cow_version in dynamic_partitions_info.txt
-  Args:
-    content: The string content of dynamic_partitions_info.txt
-    algo: The cow version be used for VABC. See
-          https://cs.android.com/android/platform/superproject/main/+/main:system/core/fs_mgr/libsnapshot/include/libsnapshot/cow_format.h;l=36
-  Returns:
-    Updated content of dynamic_partitions_info.txt , updated cow version
-  """
-  return ModifyKeyvalueList(content, "virtual_ab_cow_version", cow_version)
-
-
 def UpdatesInfoForSpecialUpdates(content, partitions_filter,
                                  delete_keys=None):
   """ Updates info file for secondary payload generation, partial update, etc.
@@ -1020,6 +1008,8 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
         target_file, vabc_compression_param)
   if OPTIONS.vabc_cow_version:
     target_file = ModifyTargetFilesDynamicPartitionInfo(target_file, "virtual_ab_cow_version", OPTIONS.vabc_cow_version)
+  if OPTIONS.compression_factor:
+    target_file = ModifyTargetFilesDynamicPartitionInfo(target_file, "compression_factor", OPTIONS.compression_factor)
   if OPTIONS.skip_postinstall:
     target_file = GetTargetFilesZipWithoutPostinstallConfig(target_file)
   # Target_file may have been modified, reparse ab_partitions
