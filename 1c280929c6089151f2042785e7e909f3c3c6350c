@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e896bf4d_2bbf78e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-11-09T17:21:34Z",
+      "side": 1,
+      "message": "After looking at the code, I have some more suggestions:\n\n1. It looks like `build/make/core/android_soong_config_vars.mk` is for setting the Soong config, so it\u0027s not suitable for adding ART stuff. Could you try moving your code to `build/make/core/art_config.mk` and see if it works?\n\n2. It\u0027s a bit opaque to module owners that they have to add new APEX boot jars in `default_art_config.mk` and then exclude them by adding some code elsewhere.\n\n  I don\u0027t have a concrete idea of how to improve module owners\u0027 experience. Ideally, module owners only need to edit `default_art_config.mk`. One possible way is to put a static map in `default_art_config.mk`, where the key is the short name of the module and the value is the jar to exclude, something like:\n  \n  ```\n  PRODUCT_APEX_BOOT_JARS_FOR_SOURCE_BUILD_ONLY +\u003d \\\n    mediaprovider:framework-pdf\n  ```\n  \n  And then you can process the map in `build/make/core/art_config.mk` to automatically generate the exclude list.\n  \n  If that is too complicated to implement, please at least add some comments in `default_art_config.mk` to instruct module owners what exactly they should do when they add a jar that is not in the prebuilt.",
+      "revId": "1c280929c6089151f2042785e7e909f3c3c6350c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c78fc551_84468abc",
         "filename": "core/android_soong_config_vars.mk",
         "patchSetId": 1
@@ -31,6 +48,24 @@
       "writtenOn": "2023-11-09T17:06:37Z",
       "side": 1,
       "message": "Can you put the content of the commit message as a comment here too?\n\nIs something like this going to need to be added every time someone creates a new jar in an apex that hasn\u0027t reached the prebuilts yet?",
+      "parentUuid": "c78fc551_84468abc",
+      "revId": "1c280929c6089151f2042785e7e909f3c3c6350c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae1b4a6b_6c1d5799",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-11-09T17:21:34Z",
+      "side": 1,
+      "message": "I see. Since the Soong config is available at a late stage, you have to introduce non-product variables because all product variables are supposed to be read-only at this stage. In this case, I\u0027m okay with adding one or more variables, but please remove the `PRODUCT_` prefix from this one because it\u0027s not really a product variable. (Product variables are those registered in `build/make/core/product.mk` and made read-only.)",
       "parentUuid": "c78fc551_84468abc",
       "revId": "1c280929c6089151f2042785e7e909f3c3c6350c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
