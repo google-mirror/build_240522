@@ -16,6 +16,24 @@
       "message": "@jiakaiz@google.com Regarding your comment in go/stale-mainline-prebuilts, I tried to remove the jar directly from PRODUCT_APEX_BOOT_JARS (in this .mk); however, I got the error around not being able to remove read-only variable.\n\nNote that I need the value from soong variable (from android_soong_config_vars.mk) as part of the condition and it seems that this file is processed after default_art_config.mk or product_config.mk, so I cannot delete the jars from there.",
       "revId": "1c280929c6089151f2042785e7e909f3c3c6350c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "407f83c8_e3b770c4",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-11-09T17:06:37Z",
+      "side": 1,
+      "message": "Can you put the content of the commit message as a comment here too?\n\nIs something like this going to need to be added every time someone creates a new jar in an apex that hasn\u0027t reached the prebuilts yet?",
+      "parentUuid": "c78fc551_84468abc",
+      "revId": "1c280929c6089151f2042785e7e909f3c3c6350c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
