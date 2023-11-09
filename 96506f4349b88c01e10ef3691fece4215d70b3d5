@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18af6dc1_3b9176a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-09T08:39:10Z",
+      "side": 1,
+      "message": "IIRC the Java caching impl reads all flag values in the namespace in a single call to device config. Can we do something similar here?",
+      "revId": "96506f4349b88c01e10ef3691fece4215d70b3d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e77e2d1_32273ba0",
+        "filename": "tools/aconfig/templates/cpp_source_file.template",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-09T08:39:10Z",
+      "side": 1,
+      "message": "unnecessary whitespace change, remove?",
+      "revId": "96506f4349b88c01e10ef3691fece4215d70b3d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
