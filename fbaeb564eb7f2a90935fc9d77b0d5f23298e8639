@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dbf6798_ac028e3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-09T08:45:22Z",
+      "side": 1,
+      "message": "LGTM but I\u0027m wondering if we can optimize this further by calling DeviceConfig only once?\n\nMaybe that needs updating libflags_rust",
+      "revId": "fbaeb564eb7f2a90935fc9d77b0d5f23298e8639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
