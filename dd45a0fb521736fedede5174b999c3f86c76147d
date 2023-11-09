@@ -93,6 +93,30 @@
       },
       "revId": "dd45a0fb521736fedede5174b999c3f86c76147d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f908cffe_3d84fcb1",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 10
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1980115
+      },
+      "writtenOn": "2023-11-09T19:21:28Z",
+      "side": 1,
+      "message": "New error msg: ```error: Conflicting TrendyTeamIds and Locations for Test target: CtsDeviceLockTestCases. Team ID 1: 136, Location 1: packages/modules/DeviceLock/tests/cts/packages/modules/DeviceLock/tests/cts/Android.bp. Team ID 2: 135, Location 2: packages/modules/DeviceLock/tests/cts/packages/modules/DeviceLock/tests/cts/Android.bp```",
+      "parentUuid": "62d65947_ccb7f71a",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 133,
+        "endChar": 2
+      },
+      "revId": "dd45a0fb521736fedede5174b999c3f86c76147d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
