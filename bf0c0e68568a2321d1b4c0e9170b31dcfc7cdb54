@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "882eb275_07f76642",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-11-09T16:53:54Z",
+      "side": 1,
+      "message": "I realized that I need to keep the dexpreopt for the ART boot image because ART tests use it. Please review this CL again.",
+      "revId": "bf0c0e68568a2321d1b4c0e9170b31dcfc7cdb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
