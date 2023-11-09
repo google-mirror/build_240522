@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54b7c7a4_d4602273",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-09T08:46:28Z",
+      "side": 1,
+      "message": "Ooops, just realized that C++ and Rust relies on the sysprop \"wrapper\" around DeviceConfig. Disregard what I said above!",
+      "parentUuid": "18af6dc1_3b9176a4",
+      "revId": "96506f4349b88c01e10ef3691fece4215d70b3d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e77e2d1_32273ba0",
