@@ -94,6 +94,30 @@
       },
       "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "111579ae_4a67cabd",
+        "filename": "target/product/generic_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-11-10T01:29:35Z",
+      "side": 1,
+      "message": "one way to check this could be adding $(error $(PRODUCT_PACKAGES_SHIPPING_API_LEVEL_34)) here\n\nif that\u0027s the case, that\u0027s great!",
+      "parentUuid": "6151197e_d54e5fc8",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 45
+      },
+      "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
