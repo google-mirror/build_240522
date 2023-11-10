@@ -118,6 +118,30 @@
       },
       "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36d7666f_3b025113",
+        "filename": "target/product/generic_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-10T01:50:35Z",
+      "side": 1,
+      "message": "\u003eI don\u0027t think generic_system.mk inherits from base_vendor.mk, so there should not be any vendor modules added to any of the PRODUCT_PACKAGES_SHIPPING_API_LEVEL_* variables by the time we get here, right?\n\nAh, right. Then, I think, it solves the problem.\nCan we remove the allowlist in base_system.mk with this CL?",
+      "parentUuid": "111579ae_4a67cabd",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 45
+      },
+      "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
