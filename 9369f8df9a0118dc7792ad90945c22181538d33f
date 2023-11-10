@@ -46,6 +46,30 @@
       },
       "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab3b13d6_91a7280a",
+        "filename": "target/product/generic_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-10T01:03:25Z",
+      "side": 1,
+      "message": "The artifact check tests the `PRODUCT_PACKAGES` that were added before `require-artifacts-in-path` is called are in the allowed path. So it does matter where the module is added. `generic_system.mk` is for system modules. Vendor modules must not be added in `generic_system.mk`.\nThe correct solution must be splitting `PRODUCT_PACKAGES_SHIPPING_API_LEVEL_*` into system and non-system variables.",
+      "parentUuid": "8e097108_4ccd8de7",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 45
+      },
+      "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
