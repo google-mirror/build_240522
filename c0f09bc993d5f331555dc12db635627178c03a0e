@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "695f1b9d_d26671ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2023-11-10T13:47:31Z",
+      "side": 1,
+      "message": "Will merge after upstream commit https://github.com/llvm/llvm-project/pull/71703",
+      "revId": "c0f09bc993d5f331555dc12db635627178c03a0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
