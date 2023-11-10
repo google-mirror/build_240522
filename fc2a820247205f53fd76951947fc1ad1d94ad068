@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02887f78_78052420",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-10T14:17:05Z",
+      "side": 1,
+      "message": "@joeo@google.com, we are throwing error in case of conflicting team IDs per test module. Wanted to make sure that soong doesn\u0027t support duplicate module names, right?\n\nAs in there can\u0027t be two targets with let\u0027s say name \u003d \"CtsTestName\"",
+      "revId": "fc2a820247205f53fd76951947fc1ad1d94ad068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e372134b_5aec91fb",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-10T14:17:05Z",
+      "side": 1,
+      "message": "nit: Let\u0027s create a const string for this and use that here",
+      "range": {
+        "startLine": 94,
+        "startChar": 25,
+        "endLine": 94,
+        "endChar": 155
+      },
+      "revId": "fc2a820247205f53fd76951947fc1ad1d94ad068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e8ea7ec_8cb53df6",
+        "filename": "tools/metadata/testdata/metadata_test.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-10T14:17:05Z",
+      "side": 1,
+      "message": "Here and elsewhere, please format the file to respect wrap at 72 char length",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 1
+      },
+      "revId": "fc2a820247205f53fd76951947fc1ad1d94ad068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

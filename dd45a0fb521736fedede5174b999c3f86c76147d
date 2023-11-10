@@ -117,6 +117,30 @@
       },
       "revId": "dd45a0fb521736fedede5174b999c3f86c76147d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "107572bb_e7f17a4c",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 10
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-10T14:17:05Z",
+      "side": 1,
+      "message": "Let\u0027s rephrase this to,\n\nConflicting trendy team IDs found for CtsDeviceLockTestCases at:\npackages/modules/DeviceLock/tests/cts/packages/modules/DeviceLock/tests/cts/Android.bp:\u003cline-num-if-possible\u003e,\npackages/modules/DeviceLock/tests/cts/packages/modules/DeviceLock/tests/cts/Android.bp:\u003cline-num-if-possible\u003e",
+      "parentUuid": "f908cffe_3d84fcb1",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 133,
+        "endChar": 2
+      },
+      "revId": "dd45a0fb521736fedede5174b999c3f86c76147d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
