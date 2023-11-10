@@ -70,6 +70,30 @@
       },
       "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6151197e_d54e5fc8",
+        "filename": "target/product/generic_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-11-10T01:13:12Z",
+      "side": 1,
+      "message": "I don\u0027t think `generic_system.mk` inherits from `base_vendor.mk`, so there should not be any vendor modules added to any of the `PRODUCT_PACKAGES_SHIPPING_API_LEVEL_*` variables by the time we get here, right?\n\nIf there were, it would fail to build with this change. I was building aosp_x86_64-trunk_staging-userdebug locally and I see aosp_arm64-trunk_staging-userdebug builds ok with this CL in presubmits.",
+      "parentUuid": "ab3b13d6_91a7280a",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 45
+      },
+      "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
