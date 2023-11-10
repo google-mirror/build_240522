@@ -166,6 +166,30 @@
       },
       "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ebbaded_b7517601",
+        "filename": "target/product/generic_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-10T03:17:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "00e47690_d830b440",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 45
+      },
+      "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
