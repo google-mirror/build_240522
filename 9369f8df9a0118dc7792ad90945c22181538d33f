@@ -22,6 +22,30 @@
       },
       "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e097108_4ccd8de7",
+        "filename": "target/product/generic_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-11-10T00:38:20Z",
+      "side": 1,
+      "message": "Different packages are added to them when building different images as far as I understand. In `build/make/target/product/base_vendor.mk` we add vendor modules to them like we do with `PRODUCT_PACKAGES`, and `base_system.mk` adds the system packages. I think these GSIs that inherit from `base_system.mk` through `handheld_system.mk` and they don\u0027t inherit from `base_vendor.mk`.\n\nIf someone added a vendor package to one of these variables from `base_system.mk` it should be a build failure because of the artifact path requirements.\n\nDoes that sound right? I\u0027m not thaaat familiar with how all of these make files interact.",
+      "parentUuid": "754cf494_ebafa920",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 45
+      },
+      "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
