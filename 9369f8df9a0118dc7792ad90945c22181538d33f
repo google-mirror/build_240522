@@ -142,6 +142,30 @@
       },
       "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00e47690_d830b440",
+        "filename": "target/product/generic_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-11-10T01:57:28Z",
+      "side": 1,
+      "message": "\u003e Can we remove the allowlist in base_system.mk with this CL?\n\nIt doesn\u0027t look like it. The build still fails with the offending system libraries (`system/lib64/hw/android.hidl.memory@1.0-impl.so`). b/299166571 is open to avoid needing to add these to the allowlist.",
+      "parentUuid": "36d7666f_3b025113",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 45
+      },
+      "revId": "9369f8df9a0118dc7792ad90945c22181538d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
