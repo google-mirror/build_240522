@@ -16,6 +16,24 @@
       "message": "I can\u0027t really follow what these CLs are doing, so I used go/compare-target-files to see what it actually changed, and it shows some strange results.  This CL and its parents seems to have removed `system/lib64/hw/android.hidl.memory@1.0-impl.so` and `vendor/lib64/hw/android.hidl.memory@1.0-impl.so` on cuttlefish devices, but added `vendor/lib64/hw/android.hidl.memory@1.0-impl.so` on pixel devices, maybe because it removed it from `vendor/apex/com.android.vndk.current.on_vendor.apex`?  Is that what you expected?",
       "revId": "3ae48f2e666dc560104fb0b341737d026ab75d2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8344cdb_75c25ae2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2023-11-11T01:00:00Z",
+      "side": 1,
+      "message": "I expect `system/lib64/hw/android.hidl.memory@1.0-impl.so` and `vendor/lib64/hw/android.hidl.memory@1.0-impl.so` to be removed from Android V devices (and all future devices), which is only Cuttlefish right now as far as I know. \nWe are deprecating HIDL in V and need to stop including these HIDL pass through services in all V+ devices.\n\nThis also removes the library from the VNDK.\n\nI was not expecting `vendor/lib64/hw/android.hidl.memory@1.0-impl.so` to be added to pixel devices because I figured they would have already had it. I don\u0027t understand why they wouldn\u0027t have it installed when it was added unconditionally to `PRODUCT_PACKAGES` in `base_vendor.mk` before this CL. \nIf those pixel vendor dependencies were on vndk.current, then I guess it makes sense that they need to pull in the vendor variant instead, so I\u0027m not concerned about the change.",
+      "parentUuid": "e65cc8df_54591d57",
+      "revId": "3ae48f2e666dc560104fb0b341737d026ab75d2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
