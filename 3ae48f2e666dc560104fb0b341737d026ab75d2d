@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e65cc8df_54591d57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-11-11T00:48:26Z",
+      "side": 1,
+      "message": "I can\u0027t really follow what these CLs are doing, so I used go/compare-target-files to see what it actually changed, and it shows some strange results.  This CL and its parents seems to have removed `system/lib64/hw/android.hidl.memory@1.0-impl.so` and `vendor/lib64/hw/android.hidl.memory@1.0-impl.so` on cuttlefish devices, but added `vendor/lib64/hw/android.hidl.memory@1.0-impl.so` on pixel devices, maybe because it removed it from `vendor/apex/com.android.vndk.current.on_vendor.apex`?  Is that what you expected?",
+      "revId": "3ae48f2e666dc560104fb0b341737d026ab75d2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
