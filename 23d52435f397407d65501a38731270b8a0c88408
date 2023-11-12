@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d53d5f9e_5d666e48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-11-12T23:43:37Z",
+      "side": 1,
+      "message": "Hi Justin, is there a doc that describes what these properties do?  I think this might be useful for partners (and us) to understand how the different GRF levels are recorded, and what the implications of each are.",
+      "revId": "23d52435f397407d65501a38731270b8a0c88408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
