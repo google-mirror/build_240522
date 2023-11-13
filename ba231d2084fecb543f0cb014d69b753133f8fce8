@@ -16,6 +16,23 @@
       "message": "Nice!",
       "revId": "ba231d2084fecb543f0cb014d69b753133f8fce8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e1e383e_41a2e569",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-11-13T16:51:27Z",
+      "side": 1,
+      "message": "How will mainline module developers know that they need to add their new jar to this list?  Does the build provide a useful error that leads them here?\n\nWhen do jars get removed from this list?",
+      "revId": "ba231d2084fecb543f0cb014d69b753133f8fce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
