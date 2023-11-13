@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9972df0_266fc968",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951966
+      },
+      "writtenOn": "2023-11-13T13:27:17Z",
+      "side": 1,
+      "message": "Thanks Jiakai. This is very helpful. I have adjusted it accordingly.",
+      "parentUuid": "e896bf4d_2bbf78e7",
+      "revId": "1c280929c6089151f2042785e7e909f3c3c6350c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c78fc551_84468abc",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "I see. Since the Soong config is available at a late stage, you have to introduce non-product variables because all product variables are supposed to be read-only at this stage. In this case, I\u0027m okay with adding one or more variables, but please remove the `PRODUCT_` prefix from this one because it\u0027s not really a product variable. (Product variables are those registered in `build/make/core/product.mk` and made read-only.)",
       "parentUuid": "c78fc551_84468abc",
+      "revId": "1c280929c6089151f2042785e7e909f3c3c6350c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab1a0f6_4de04fa7",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1951966
+      },
+      "writtenOn": "2023-11-13T13:27:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae1b4a6b_6c1d5799",
       "revId": "1c280929c6089151f2042785e7e909f3c3c6350c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
