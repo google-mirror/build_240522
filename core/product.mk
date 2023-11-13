@@ -445,7 +445,7 @@ _product_single_value_vars += PRODUCT_CHECK_VENDOR_SEAPP_VIOLATIONS
 
 _product_list_vars += PRODUCT_AFDO_PROFILES
 
-_product_single_value_vars += PRODUCT_NEXT_RELEASE_HIDE_FLAGGED_API
+_product_single_value_vars += PRODUCT_IS_SDK_VARIANT
 
 _product_list_vars += PRODUCT_RELEASE_CONFIG_MAPS
 

@@ -395,7 +395,7 @@ $(call add_json_map, PartitionVarsForBazelMigrationOnlyDoNotUse)
   $(call add_json_list, ProductPackages, $(sort $(PRODUCT_PACKAGES)))
 $(call end_json_map)
 
-$(call add_json_bool, NextReleaseHideFlaggedApi, $(filter true,$(PRODUCT_NEXT_RELEASE_HIDE_FLAGGED_API)))
+$(call add_json_bool, IsSdkVariant, $(filter true,$(PRODUCT_IS_SDK_VARIANT)))
 
 $(call json_end)
 
