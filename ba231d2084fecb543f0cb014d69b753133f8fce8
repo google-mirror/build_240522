@@ -51,6 +51,24 @@
       "parentUuid": "6e1e383e_41a2e569",
       "revId": "ba231d2084fecb543f0cb014d69b753133f8fce8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b920401_c8f8da3e",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-11-13T17:41:26Z",
+      "side": 1,
+      "message": "When will the entries be removed from `PRODUCT_APEX_BOOT_JARS_FOR_SOURCE_BUILD_ONLY`?  Does that happen once the prebuilts are updated to include the jar?  If so, what happens if the prebuilts are updated without removing the entry from this list?",
+      "parentUuid": "f7c0cb5c_91a8f5fc",
+      "revId": "ba231d2084fecb543f0cb014d69b753133f8fce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
