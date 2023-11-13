@@ -104,6 +104,30 @@
       },
       "revId": "fc2a820247205f53fd76951947fc1ad1d94ad068",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abc39511_34376f01",
+        "filename": "tools/metadata/testdata/metadata_test.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1980115
+      },
+      "writtenOn": "2023-11-13T13:46:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4e8ea7ec_8cb53df6",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 1
+      },
+      "revId": "fc2a820247205f53fd76951947fc1ad1d94ad068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

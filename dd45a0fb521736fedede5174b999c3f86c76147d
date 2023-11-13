@@ -141,6 +141,30 @@
       },
       "revId": "dd45a0fb521736fedede5174b999c3f86c76147d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baef2eb9_723db2b1",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 10
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1980115
+      },
+      "writtenOn": "2023-11-13T13:46:22Z",
+      "side": 1,
+      "message": "Done, added teamId as well to the new msg. Adding line number is not possible.",
+      "parentUuid": "107572bb_e7f17a4c",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 133,
+        "endChar": 2
+      },
+      "revId": "dd45a0fb521736fedede5174b999c3f86c76147d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
