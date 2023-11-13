@@ -14,23 +14,44 @@ public final class FeatureFlagsImpl implements FeatureFlags \{
 {{ endfor }}
 {{ endif- }}
 
+{{ if is_read_write- }}
+    private static boolean cached = false;
+
+{{ for flag in flag_elements }}
+    private static boolean {flag.method_name} = {flag.default_value};
+{{ endfor }}
+
+    private void loadAccessors(String namespace) \{
+        try \{
+            Properties properties = DeviceConfig.getProperties(namespace);
+
+            {{ for flag in flag_elements }}
+            {flag.method_name} =
+                properties.getBoolean("{flag.device_config_flag}", {flag.default_value});
+            {{ endfor }}
+        } catch (NullPointerException e) \{
+            throw new RuntimeException(
+                "Cannot read value from namespace " + namespace
+                + " from DeviceConfig. It could be that the code using flag "
+                + "executed before SettingsProvider initialization. Please use "
+                + "fixed read-only flag by adding is_fixed_read_only: true in "
+                + "flag declaration.",
+                e
+            );
+        }
+        cached = true;
+    }
+{{ endif- }}
+
 {{ for flag in flag_elements }}
     @Override
     @UnsupportedAppUsage
     public boolean {flag.method_name}() \{
     {{ -if flag.is_read_write }}
-        if ({flag.properties} == null) \{
-            {flag.properties} =
-                getProperties(
-                    "{flag.device_config_namespace}",
-                    "{flag.device_config_flag}"
-                );
+        if (!cached) \{
+            loadAccessors("{flag.device_config_namespace}");
         }
-        return {flag.properties}
-                .getBoolean(
-                    "{flag.device_config_flag}",
-                    {flag.default_value}
-                );
+        return {flag.method_name};
     {{ else }}
         return {flag.default_value};
     {{ endif- }}
