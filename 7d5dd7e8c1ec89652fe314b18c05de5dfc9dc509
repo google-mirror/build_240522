@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cb52327_34aa26bf",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-11-13T23:44:37Z",
+      "side": 1,
+      "message": "nit, can we call it {namespace}_cached instead? Should it also be static?",
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3724119e_d2ee399d",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-11-13T23:44:37Z",
+      "side": 1,
+      "message": "why \u0027method_name\u0027 instead of \u0027device_config_flag\u0027?",
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
