@@ -16,6 +16,24 @@
       "message": "Hi Justin, is there a doc that describes what these properties do?  I think this might be useful for partners (and us) to understand how the different GRF levels are recorded, and what the implications of each are.",
       "revId": "23d52435f397407d65501a38731270b8a0c88408",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0438d7ba_10f904af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-13T01:10:35Z",
+      "side": 1,
+      "message": "You may refer to go/vfrc-versions-sysprop for the details.\nAlso, please take a look at aosp/2825991 for the trunk_* builds.",
+      "parentUuid": "d53d5f9e_5d666e48",
+      "revId": "23d52435f397407d65501a38731270b8a0c88408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
