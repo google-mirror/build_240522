@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a18b7ac_db7e1dc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-11-13T00:11:27Z",
+      "side": 1,
+      "message": "That\u0027s correct.",
+      "parentUuid": "02887f78_78052420",
+      "revId": "fc2a820247205f53fd76951947fc1ad1d94ad068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e372134b_5aec91fb",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-11-10T14:17:05Z",
       "side": 1,
       "message": "nit: Let\u0027s create a const string for this and use that here",
+      "range": {
+        "startLine": 94,
+        "startChar": 25,
+        "endLine": 94,
+        "endChar": 155
+      },
+      "revId": "fc2a820247205f53fd76951947fc1ad1d94ad068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96cff116_833e94f5",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 16
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-11-13T00:11:27Z",
+      "side": 1,
+      "message": "Not necessary. We do this pattern all over the place.",
+      "parentUuid": "e372134b_5aec91fb",
       "range": {
         "startLine": 94,
         "startChar": 25,
