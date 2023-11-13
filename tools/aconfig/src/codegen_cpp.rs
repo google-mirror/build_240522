@@ -32,8 +32,9 @@ where
     I: Iterator<Item = &'a ProtoParsedFlag>,
 {
     let mut readwrite_count = 0;
-    let class_elements: Vec<ClassElement> =
-        parsed_flags_iter.map(|pf| create_class_element(package, pf, &mut readwrite_count)).collect();
+    let class_elements: Vec<ClassElement> = parsed_flags_iter
+        .map(|pf| create_class_element(package, pf, &mut readwrite_count))
+        .collect();
     let readwrite = readwrite_count > 0;
     let has_fixed_read_only = class_elements.iter().any(|item| item.is_fixed_read_only);
     let header = package.replace('.', "_");
@@ -110,7 +111,9 @@ pub struct ClassElement {
 fn create_class_element(package: &str, pf: &ProtoParsedFlag, rw_count: &mut i32) -> ClassElement {
     ClassElement {
         readwrite_idx: if pf.permission() == ProtoFlagPermission::READ_WRITE {
-            let index = *rw_count; *rw_count += 1; index
+            let index = *rw_count;
+            *rw_count += 1;
+            index
         } else {
             -1
         },
