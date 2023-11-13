@@ -33,6 +33,24 @@
       "message": "How will mainline module developers know that they need to add their new jar to this list?  Does the build provide a useful error that leads them here?\n\nWhen do jars get removed from this list?",
       "revId": "ba231d2084fecb543f0cb014d69b753133f8fce8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7c0cb5c_91a8f5fc",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1951966
+      },
+      "writtenOn": "2023-11-13T17:37:00Z",
+      "side": 1,
+      "message": "- This will be added as part of instruction in go/mainline-java-lib later. Without adding new jar into the list, it will lead to build error (still thinking about the way to effectively include PRODUCT_APEX_BOOT_JARS_FOR_SOURCE_BUILD_ONLY into the message)\n- art_config contains the code that processes this and removes the jar from ApexBootJars.",
+      "parentUuid": "6e1e383e_41a2e569",
+      "revId": "ba231d2084fecb543f0cb014d69b753133f8fce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
