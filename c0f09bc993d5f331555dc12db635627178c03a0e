@@ -16,6 +16,29 @@
       "message": "Will merge after upstream commit https://github.com/llvm/llvm-project/pull/71703",
       "revId": "c0f09bc993d5f331555dc12db635627178c03a0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb08084f_6a6d572a",
+        "filename": "target/product/fullmte.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-11-13T19:51:21Z",
+      "side": 1,
+      "message": "Prefix this with `PRODUCT_` and add this to product.mk to make it a proper product variable.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 33
+      },
+      "revId": "c0f09bc993d5f331555dc12db635627178c03a0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
