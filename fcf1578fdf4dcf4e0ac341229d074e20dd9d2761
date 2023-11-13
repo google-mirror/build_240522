@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b07943_82cfbe01",
+        "filename": "tools/releasetools/merge/merge_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-11-13T19:41:56Z",
+      "side": 1,
+      "message": "`input_zipfile_or_dir` is expected to be a target_files.zip or a directory. Are you sure passing a boot.img here would work?",
+      "range": {
+        "startLine": 219,
+        "startChar": 8,
+        "endLine": 219,
+        "endChar": 28
+      },
+      "revId": "fcf1578fdf4dcf4e0ac341229d074e20dd9d2761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
