@@ -33,6 +33,23 @@
       "message": "why \u0027method_name\u0027 instead of \u0027device_config_flag\u0027?",
       "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f23c7211_486595ff",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 11
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-11-13T23:47:55Z",
+      "side": 1,
+      "message": "nit: the function name is half camel half snake, can we call it something like something like initialize_flag_values_in_{namespace}?",
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
