@@ -2877,12 +2877,12 @@ endef
 # Align STORED entries of a package on 4-byte boundaries to make them easier to mmap.
 #
 define align-package
-$(hide) if ! $(ZIPALIGN) -c -p 4 $@ >/dev/null ; then \
+$(hide) if ! $(ZIPALIGN) -c -P 16 $@ >/dev/null ; then \
   mv $@ $@.unaligned; \
   $(ZIPALIGN) \
     -f \
-    -p \
-    4 \
+    -P \
+    16 \
     $@.unaligned $@.aligned; \
   mv $@.aligned $@; \
   fi
@@ -2891,7 +2891,7 @@ endef
 # Verifies ZIP alignment of a package.
 #
 define check-package-alignment
-$(hide) if ! $(ZIPALIGN) -c -p 4 $@ >/dev/null ; then \
+$(hide) if ! $(ZIPALIGN) -c -P 16 $@ >/dev/null ; then \
     $(call echo-error,$@,Improper package alignment); \
     exit 1; \
   fi
