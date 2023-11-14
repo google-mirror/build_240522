@@ -16,6 +16,23 @@
       "message": "Our current plan (b/307946156#comment36) is to reland this the morning (MTV time) of Monday, Nov 13.",
       "revId": "0229ecfae50a470eff98eb8934694c18d78b7035",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "686480fd_45df0e70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-11-14T14:43:37Z",
+      "side": 1,
+      "message": "Hoping to land this tomorrow (Wednesday) morning.",
+      "revId": "0229ecfae50a470eff98eb8934694c18d78b7035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
