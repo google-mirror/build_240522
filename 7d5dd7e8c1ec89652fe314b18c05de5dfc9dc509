@@ -3,6 +3,63 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78278324_b981a96e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-14T07:46:37Z",
+      "side": 1,
+      "message": "The commit message doesn\u0027t state *why* this change was made.\n\n(Nor does the bug but that\u0027s less important -- the bug isn\u0027t publicly visible and as a developer I don\u0027t want to open bugs to find the information I need when doing `git log`)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 54
+      },
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b88eefa_de42d003",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-14T07:46:37Z",
+      "side": 1,
+      "message": "nit: the text after Test: should ideally be a command line you can copy and paste to execute whatever is needed to verify that this CL actually works. (Imagine you\u0027re an OEM in the process of rebasing onto the latest Android version and you need to bisect a chain of CLs where one is causing an issue).\n\nIf you want to provide additional manual tests you can add more Test lines, e.g. \"Test: manual: verified that ...\"\n\nI propose \"Test: atest aconfig.test\".",
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6911f3f4_c6733747",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-14T07:46:37Z",
+      "side": 1,
+      "message": "nit: no blank lines among the git trailers please.",
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ef0599a_b7f4e8a6",
         "filename": "tools/aconfig/src/codegen_cpp.rs",
         "patchSetId": 11
