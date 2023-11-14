@@ -69,6 +69,24 @@
       "parentUuid": "f7c0cb5c_91a8f5fc",
       "revId": "ba231d2084fecb543f0cb014d69b753133f8fce8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21008b25_25fbc87e",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1951966
+      },
+      "writtenOn": "2023-11-14T10:29:19Z",
+      "side": 1,
+      "message": "Yes, it should be removed after prebuilts are updated to have such jar. Otherwise, this jar won\u0027t be part of classpath and probably leads to some tests failure.",
+      "parentUuid": "2b920401_c8f8da3e",
+      "revId": "ba231d2084fecb543f0cb014d69b753133f8fce8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
