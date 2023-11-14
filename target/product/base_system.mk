@@ -21,7 +21,6 @@ PRODUCT_PACKAGES += \
     am \
     android.hidl.base-V1.0-java \
     android.hidl.manager-V1.0-java \
-    android.hidl.memory@1.0-impl \
     android.system.suspend-service \
     android.test.base \
     android.test.mock \
