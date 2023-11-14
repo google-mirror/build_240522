@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "133108f5_c8ee06de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-14T15:11:20Z",
+      "side": 1,
+      "message": "The later patch sets have overwritten your updates to the commit message.",
+      "parentUuid": "881ad1c1_71bf2b23",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 54
+      },
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b88eefa_de42d003",
         "filename": "/COMMIT_MSG",
         "patchSetId": 11
