@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d7dc6b0_109bbd9b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-14T17:01:30Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "133108f5_c8ee06de",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 54
+      },
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b88eefa_de42d003",
@@ -155,6 +179,54 @@
       "writtenOn": "2023-11-14T07:42:27Z",
       "side": 1,
       "message": "The reformats in this file are valid according to rustfmt, which is the one and only source of truth for how aconfig code should be formatted. I assume this is because of an updated version of rustfmt having landed in the Android prebuilts tree.\n\nI would prefer to see the changes in this file as a separate CL, as \"reformat using newer rustfmt\" is not related to \"cache java codegen\u0027d flags ...\".",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "141c8b86_7f818647",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-14T17:01:30Z",
+      "side": 1,
+      "message": "Fixed, will fmt in another CL.",
+      "parentUuid": "3ef0599a_b7f4e8a6",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cf456dd_f7ac811a",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-14T17:01:30Z",
+      "side": 1,
+      "message": "Ack, fixed. Will fmt in separate CL.",
+      "parentUuid": "3ef0599a_b7f4e8a6",
       "range": {
         "startLine": 35,
         "startChar": 0,
@@ -276,6 +348,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c63003f_f4373425",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-14T17:01:30Z",
+      "side": 1,
+      "message": "Switched to `{namespace}_is_cached`.",
+      "parentUuid": "2cb52327_34aa26bf",
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3724119e_d2ee399d",
@@ -311,6 +401,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c3eec9f_a6d52ce5",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-14T17:01:30Z",
+      "side": 1,
+      "message": "Fixed, stopped generating if read-write. We can\u0027t use device_config_flag though, since that has periods in it; we need something we can use as a valid Java identifier.",
+      "parentUuid": "f23ae78e_754ea730",
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f23c7211_486595ff",
@@ -324,6 +432,24 @@
       "writtenOn": "2023-11-13T23:47:55Z",
       "side": 1,
       "message": "nit: the function name is half camel half snake, can we call it something like something like initialize_flag_values_in_{namespace}?",
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c349f38a_4133b5ac",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 11
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-14T17:01:30Z",
+      "side": 1,
+      "message": "Switched to `load_overrides_{namespace}`.",
+      "parentUuid": "f23c7211_486595ff",
       "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
