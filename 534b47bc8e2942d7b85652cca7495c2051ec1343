@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "483a8aa5_e23b276f",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-11-14T02:00:28Z",
+      "side": 0,
+      "message": "I think I prefer the existing name over `IsSdkVariant`.\n\nThe latter is used in build/soong/cc, and is a module-level qualifier instead of a build-level qualifier https://cs.android.com/search?q\u003dIsSdkVariant\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain",
+      "range": {
+        "startLine": 398,
+        "startChar": 65,
+        "endLine": 398,
+        "endChar": 102
+      },
+      "revId": "534b47bc8e2942d7b85652cca7495c2051ec1343",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3316ae77_a17c59a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-11-14T02:00:28Z",
+      "side": 1,
+      "message": "Is the removal of FlaggedApis in `next` builds specific to sdk builds, or should it be done for all values of `TARGET_PRODUCT`?\n(I dont know the answer, but if it is the latter, we will need one fewer product variable)",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 11,
+        "endChar": 39
+      },
+      "revId": "761fecfc9efb6b2b773ba307c7df82e0a05ba849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe5d4399_827cb0f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2023-11-14T02:00:28Z",
+      "side": 1,
+      "message": "Over",
+      "revId": "761fecfc9efb6b2b773ba307c7df82e0a05ba849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
