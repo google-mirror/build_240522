@@ -271,6 +271,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f23ae78e_754ea730",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-11-14T15:00:12Z",
+      "side": 1,
+      "message": "also we do not need it unless the flag is read-write.",
+      "parentUuid": "3724119e_d2ee399d",
+      "revId": "7d5dd7e8c1ec89652fe314b18c05de5dfc9dc509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f23c7211_486595ff",
         "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
         "patchSetId": 11
