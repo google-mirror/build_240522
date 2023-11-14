@@ -22,6 +22,30 @@
       },
       "revId": "534b47bc8e2942d7b85652cca7495c2051ec1343",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac0f87a4_5717b5e1",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-11-14T18:43:50Z",
+      "side": 0,
+      "message": "The reason for this change is because [`deviceConfig.HideFlaggedApis()`](https://cs.android.com/android/platform/superproject/main/+/main:build/soong/android/config.go;drc\u003d8c4387e478eebe3b3b9fcf28f5a12cea1510890b;l\u003d2124) is currently determined by the two variables: `NextReleaseHideFlaggedApi()` and `ReleaseExposeFlaggedApi()`, which is confusing because the namings are similar. However, the former is currently used to determine if the target product is a sdk variant, while the latter is a build flag that determines if the target release is `next`.\n\n\n\u003e The latter is used in build/soong/cc, and is a module-level qualifier instead of a build-level qualifier\n\nThanks for pointing this out, I was not aware of this. However, since the preexisting variable is a module property(used as `module.IsSdkVariant()`) while the new variable is a product variable (used as `ctx.deviceConfig.IsSdkVariant()`), I do not believe that this would cause confusion.\n\nI\u0027d appreciate it if you can share your thoughts!",
+      "parentUuid": "483a8aa5_e23b276f",
+      "range": {
+        "startLine": 398,
+        "startChar": 65,
+        "endLine": 398,
+        "endChar": 102
+      },
+      "revId": "534b47bc8e2942d7b85652cca7495c2051ec1343",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

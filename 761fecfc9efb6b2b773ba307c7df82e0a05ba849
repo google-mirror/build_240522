@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a3200618_607d5390",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-11-14T18:43:50Z",
+      "side": 1,
+      "message": "Per b/299570421, the removal of the FlaggedApi is specific to SDK builds in `next`. I agree that if we decide in removing FlaggedApi in all `next` builds, we will end up with one less variable. If you believe that it should be excluded in all `next` builds regardless of the product variant, I believe that b/299570421 would be a good location to start off a discussion :)",
+      "parentUuid": "3316ae77_a17c59a2",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 11,
+        "endChar": 39
+      },
+      "revId": "761fecfc9efb6b2b773ba307c7df82e0a05ba849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fe5d4399_827cb0f9",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
