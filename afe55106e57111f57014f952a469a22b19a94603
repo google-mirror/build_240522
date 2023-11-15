@@ -1,5 +1,69 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e12ca50b_f56c756f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-11-15T00:19:15Z",
+      "side": 1,
+      "message": "Sorry for the drive-by, started looking at this code based on some stack sampling data from DF.",
+      "revId": "afe55106e57111f57014f952a469a22b19a94603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d40d7184_acb11def",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 18
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-11-15T00:19:15Z",
+      "side": 1,
+      "message": "Does this end up fetching all flags declared in the file, rather than just flags in this namespace? If so, would be great to extend the test to cover multiple namespaces.",
+      "range": {
+        "startLine": 27,
+        "startChar": 28,
+        "endLine": 27,
+        "endChar": 41
+      },
+      "revId": "afe55106e57111f57014f952a469a22b19a94603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a497a7db_ced14968",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 18
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-11-15T00:19:15Z",
+      "side": 1,
+      "message": "Do we offer any guarantees about thread safety and flag read consistency? I don\u0027t see any barriers or volatile writes that would ensure this write doesn\u0027t get reordered and that other threads see a consistent view of the fetched variables. I think marking the `_is_cached` variable as volatile would resolve this (per Java\u0027s full volatile visibility guarantee). I could be missing something though.",
+      "range": {
+        "startLine": 43,
+        "startChar": 19,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "afe55106e57111f57014f952a469a22b19a94603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
