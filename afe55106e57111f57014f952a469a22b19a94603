@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aade0564_30a85a34",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 18
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-11-15T00:20:27Z",
+      "side": 1,
+      "message": "\u003e If so, would be great to extend the test to cover multiple namespaces.\n\nThat is, after limiting to fetch just the current namespace\u0027s flags.",
+      "parentUuid": "d40d7184_acb11def",
+      "range": {
+        "startLine": 27,
+        "startChar": 28,
+        "endLine": 27,
+        "endChar": 41
+      },
+      "revId": "afe55106e57111f57014f952a469a22b19a94603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a497a7db_ced14968",
         "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
         "patchSetId": 18
