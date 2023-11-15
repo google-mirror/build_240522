@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6c7f6424_e8e26f63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-11-15T18:42:58Z",
+      "side": 1,
+      "message": "Also curious about this, maybe we can explore as a follow-up? If trunk stable flags can also work as a replacement for target-specific settings/configurations, there are probably a few other things we can refactor.",
+      "parentUuid": "0d714627_1fccf472",
+      "revId": "e8142bada85242a991b354803b86bf2eef9f60b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c5bcbdc4_ba8f518c",
         "filename": "core/config.mk",
         "patchSetId": 3
