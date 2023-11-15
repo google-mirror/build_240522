@@ -86,6 +86,30 @@
       },
       "revId": "afe55106e57111f57014f952a469a22b19a94603",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25b0099f_f558a14b",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 18
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-15T07:32:27Z",
+      "side": 1,
+      "message": "The generated classes are explicitly not thread safe for performance reasons, IIRC. @zhidou to confirm the historical reasons behind this.",
+      "parentUuid": "a497a7db_ced14968",
+      "range": {
+        "startLine": 43,
+        "startChar": 19,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "afe55106e57111f57014f952a469a22b19a94603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
