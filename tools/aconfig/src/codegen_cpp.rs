@@ -32,8 +32,7 @@ where
     I: Iterator<Item = &'a ProtoParsedFlag>,
 {
     let mut readwrite_count = 0;
-    let class_elements: Vec<ClassElement> =
-        parsed_flags_iter.map(|pf| create_class_element(package, pf, &mut readwrite_count)).collect();
+    let class_elements: Vec<ClassElement> = parsed_flags_iter.map(|pf| create_class_element(package, pf, &mut readwrite_count)).collect();
     let readwrite = readwrite_count > 0;
     let has_fixed_read_only = class_elements.iter().any(|item| item.is_fixed_read_only);
     let header = package.replace('.', "_");
