@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1cc4e9a_a65512de",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2023-11-15T22:20:42Z",
+      "side": 0,
+      "message": "Any chance we can add a test that covers the multi-namespace scenario?",
+      "range": {
+        "startLine": 292,
+        "startChar": 31,
+        "endLine": 292,
+        "endChar": 53
+      },
+      "revId": "5003ff741a5e57e9bf507de1997adeafa8690930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
