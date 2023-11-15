@@ -322,7 +322,7 @@ mod tests {
         .unwrap();
         let expect_flags_content = EXPECTED_FLAG_COMMON_CONTENT.to_string()
             + r#"
-            private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
+            private static final FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
         }"#;
 
         let expect_featureflagsimpl_content = r#"
