@@ -306,9 +306,9 @@ mod tests {
                 try {
                     Properties properties = DeviceConfig.getProperties("aconfig_test");
                     disabledRw =
-                        properties.getBoolean("com.android.aconfig.test.disabled_rw", false);
+                        properties.getBoolean(Flags.FLAG_DISABLED_RW, false);
                     enabledRw =
-                        properties.getBoolean("com.android.aconfig.test.enabled_rw", true);
+                        properties.getBoolean(Flags.FLAG_ENABLED_RW, true);
                 } catch (NullPointerException e) {
                     throw new RuntimeException(
                         "Cannot read value from namespace aconfig_test "
