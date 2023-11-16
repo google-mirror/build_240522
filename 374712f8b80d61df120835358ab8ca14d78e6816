@@ -16,6 +16,29 @@
       "message": "Adding this feature to Android.mk LGTM.  The change also looks mostly correct to me.  But I\u0027d defer to ccross@ to approve this.",
       "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94ce99b7_97bc3205",
+        "filename": "core/binary.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-11-16T22:11:00Z",
+      "side": 1,
+      "message": "Can we get all these flags from Soong by exporting them in `build/soong/cc/makevars.go`?",
+      "range": {
+        "startLine": 300,
+        "startChar": 18,
+        "endLine": 300,
+        "endChar": 36
+      },
+      "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
