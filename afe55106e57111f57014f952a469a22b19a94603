@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9028497c_390337f5",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 18
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1038763
+      },
+      "writtenOn": "2023-11-16T19:41:39Z",
+      "side": 1,
+      "message": "I believe all these fields should be volatile. It might still happen that something gets read twice, but all threads would see consistent reads (unless device config changes at that exact moment - not sure if that can happen).",
+      "revId": "afe55106e57111f57014f952a469a22b19a94603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d40d7184_acb11def",
         "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
         "patchSetId": 18
