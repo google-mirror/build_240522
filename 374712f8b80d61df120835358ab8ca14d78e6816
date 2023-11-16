@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f57eebc4_c0a2cd95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2023-11-16T21:33:16Z",
+      "side": 1,
+      "message": "Adding this feature to Android.mk LGTM.  The change also looks mostly correct to me.  But I\u0027d defer to ccross@ to approve this.",
+      "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
