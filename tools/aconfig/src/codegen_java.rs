@@ -151,15 +151,12 @@ mod tests {
     import android.compat.annotation.UnsupportedAppUsage;
     /** @hide */
     public interface FeatureFlags {
-        @com.android.aconfig.annotations.AssumeFalseForR8
         @UnsupportedAppUsage
         boolean disabledRo();
         @UnsupportedAppUsage
         boolean disabledRw();
-        @com.android.aconfig.annotations.AssumeTrueForR8
         @UnsupportedAppUsage
         boolean enabledFixedRo();
-        @com.android.aconfig.annotations.AssumeTrueForR8
         @UnsupportedAppUsage
         boolean enabledRo();
         @UnsupportedAppUsage
@@ -183,30 +180,6 @@ mod tests {
         public static final String FLAG_ENABLED_RO = "com.android.aconfig.test.enabled_ro";
         /** @hide */
         public static final String FLAG_ENABLED_RW = "com.android.aconfig.test.enabled_rw";
-
-        @com.android.aconfig.annotations.AssumeFalseForR8
-        @UnsupportedAppUsage
-        public static boolean disabledRo() {
-            return FEATURE_FLAGS.disabledRo();
-        }
-        @UnsupportedAppUsage
-        public static boolean disabledRw() {
-            return FEATURE_FLAGS.disabledRw();
-        }
-        @com.android.aconfig.annotations.AssumeTrueForR8
-        @UnsupportedAppUsage
-        public static boolean enabledFixedRo() {
-            return FEATURE_FLAGS.enabledFixedRo();
-        }
-        @com.android.aconfig.annotations.AssumeTrueForR8
-        @UnsupportedAppUsage
-        public static boolean enabledRo() {
-            return FEATURE_FLAGS.enabledRo();
-        }
-        @UnsupportedAppUsage
-        public static boolean enabledRw() {
-            return FEATURE_FLAGS.enabledRw();
-        }
     "#;
 
     const EXPECTED_FAKEFEATUREFLAGSIMPL_CONTENT: &str = r#"
@@ -286,6 +259,30 @@ mod tests {
         .unwrap();
         let expect_flags_content = EXPECTED_FLAG_COMMON_CONTENT.to_string()
             + r#"
+            @com.android.aconfig.annotations.AssumeFalseForR8
+            @UnsupportedAppUsage
+            public static boolean disabledRo() {
+                return false;
+            }
+            @UnsupportedAppUsage
+            public static boolean disabledRw() {
+                return FEATURE_FLAGS.disabledRw();
+            }
+            @com.android.aconfig.annotations.AssumeTrueForR8
+            @UnsupportedAppUsage
+            public static boolean enabledFixedRo() {
+                return true;
+            }
+            @com.android.aconfig.annotations.AssumeTrueForR8
+            @UnsupportedAppUsage
+            public static boolean enabledRo() {
+                return true;
+            }
+            @UnsupportedAppUsage
+            public static boolean enabledRw() {
+                return FEATURE_FLAGS.enabledRw();
+            }
+
             private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
         }"#;
 
@@ -395,6 +392,27 @@ mod tests {
 
         let expect_flags_content = EXPECTED_FLAG_COMMON_CONTENT.to_string()
             + r#"
+            @UnsupportedAppUsage
+            public static boolean disabledRo() {
+                return FEATURE_FLAGS.disabledRo();
+            }
+            @UnsupportedAppUsage
+            public static boolean disabledRw() {
+                return FEATURE_FLAGS.disabledRw();
+            }
+            @UnsupportedAppUsage
+            public static boolean enabledFixedRo() {
+                return FEATURE_FLAGS.enabledFixedRo();
+            }
+            @UnsupportedAppUsage
+            public static boolean enabledRo() {
+                return FEATURE_FLAGS.enabledRo();
+            }
+            @UnsupportedAppUsage
+            public static boolean enabledRw() {
+                return FEATURE_FLAGS.enabledRw();
+            }
+
             public static void setFeatureFlags(FeatureFlags featureFlags) {
                 Flags.FEATURE_FLAGS = featureFlags;
             }
