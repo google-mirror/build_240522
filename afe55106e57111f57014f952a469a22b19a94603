@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc29f5c8_a10252b2",
+        "filename": "tools/aconfig/src/codegen_java.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1038763
+      },
+      "writtenOn": "2023-11-16T17:39:28Z",
+      "side": 1,
+      "message": "do these need to be volatile if the flag is read from different threads the first time at the same time?",
+      "revId": "afe55106e57111f57014f952a469a22b19a94603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d40d7184_acb11def",
         "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
         "patchSetId": 18
