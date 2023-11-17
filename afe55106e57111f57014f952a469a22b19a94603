@@ -168,6 +168,30 @@
       },
       "revId": "afe55106e57111f57014f952a469a22b19a94603",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0187accd_844c8ddd",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 18
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-17T15:28:25Z",
+      "side": 1,
+      "message": "Yeah, if there is a performance hit, we don\u0027t want to incur that on each caller. Better to have multi-threaded clients add their own layer of protection.\n\nDon\u0027t pay for what you don\u0027t need.",
+      "parentUuid": "b0493a60_644dbe71",
+      "range": {
+        "startLine": 43,
+        "startChar": 19,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "afe55106e57111f57014f952a469a22b19a94603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
