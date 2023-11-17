@@ -104,6 +104,30 @@
       },
       "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c91b84f3_a38568d3",
+        "filename": "core/binary.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1905021
+      },
+      "writtenOn": "2023-11-17T06:04:09Z",
+      "side": 1,
+      "message": "I was thinking there is a coverage.mk file, but there isn\u0027t and native coverage thing is also in binary.mk.\nAlso, I didn\u0027t find any reference to use makevars.go in build/core system.\nWill google provide this feature instead?\n\nTHX",
+      "parentUuid": "4737c2d0_f1daa45f",
+      "range": {
+        "startLine": 300,
+        "startChar": 18,
+        "endLine": 300,
+        "endChar": 36
+      },
+      "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
