@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f59064f_aaff60b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905021
+      },
+      "writtenOn": "2023-11-17T02:07:34Z",
+      "side": 1,
+      "message": "Build and load succeed to enable CLANG_COVERAGE separately and together with SANITIZE_TARGET\u003dhwaddress",
+      "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94ce99b7_97bc3205",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-11-16T22:11:00Z",
       "side": 1,
       "message": "Can we get all these flags from Soong by exporting them in `build/soong/cc/makevars.go`?",
+      "range": {
+        "startLine": 300,
+        "startChar": 18,
+        "endLine": 300,
+        "endChar": 36
+      },
+      "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca4c9d8e_005c2294",
+        "filename": "core/binary.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1905021
+      },
+      "writtenOn": "2023-11-17T02:07:34Z",
+      "side": 1,
+      "message": "I checked build/soong/cc/makevars.go, I think these flags are already in build/core, anyone you think is missing?",
+      "parentUuid": "94ce99b7_97bc3205",
       "range": {
         "startLine": 300,
         "startChar": 18,
