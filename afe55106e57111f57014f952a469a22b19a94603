@@ -144,6 +144,30 @@
       },
       "revId": "afe55106e57111f57014f952a469a22b19a94603",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0493a60_644dbe71",
+        "filename": "tools/aconfig/templates/FeatureFlagsImpl.java.template",
+        "patchSetId": 18
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-11-17T14:07:09Z",
+      "side": 1,
+      "message": "There are performance concerns for thread safety. Do we have any idea of the cost of volatile and memory barrier?\n\nCurrently the following scenario might happen, two flag reads land at the same time, both calls into SettingsProvider via IPC. So we might have more than one IPC. But making this variable volatile will not address this problem. Given that we set the flag to true at the end, it is still possible for the above mentioned scenario to occur. A better way is to make it volatile, and set it to true at start, and then set it to false if exceptions occur.\n\nBut again, to make it volatile or not should really depend on the performance cost of it.",
+      "parentUuid": "25b0099f_f558a14b",
+      "range": {
+        "startLine": 43,
+        "startChar": 19,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "afe55106e57111f57014f952a469a22b19a94603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
