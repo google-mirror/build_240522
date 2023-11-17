@@ -128,6 +128,30 @@
       },
       "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09bb7ad5_94c25b22",
+        "filename": "core/binary.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1905021
+      },
+      "writtenOn": "2023-11-17T06:13:05Z",
+      "side": 1,
+      "message": "I miss understood your points, okay, but since build/soong/cc/coverage.go is maintained by google, I think it needs separate change to export these flags into makevars.go",
+      "parentUuid": "c91b84f3_a38568d3",
+      "range": {
+        "startLine": 300,
+        "startChar": 18,
+        "endLine": 300,
+        "endChar": 36
+      },
+      "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
