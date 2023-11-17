@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81a0fbac_cc4072e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905021
+      },
+      "writtenOn": "2023-11-17T06:38:45Z",
+      "side": 1,
+      "message": "I have a quick look at the build/soong system,\nm.module.GenerateAndroidBuildActions(ctx) get those flags from coverage.go, but it\u0027s not exported to makevars.go. Also these flags in coverage.go is local flags while makevars.go access global vars.\n\nSo I think it\u0027s missing feature which should be solved by google instead. \nWhat do you think @colin?",
+      "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94ce99b7_97bc3205",
