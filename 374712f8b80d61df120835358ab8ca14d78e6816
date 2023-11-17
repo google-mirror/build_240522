@@ -80,6 +80,30 @@
       },
       "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4737c2d0_f1daa45f",
+        "filename": "core/binary.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-11-17T03:39:58Z",
+      "side": 1,
+      "message": "Copying them into build/core makes future maintenance more difficult.  There should be a single copy of the flags in `build/soong/cc/coverage.go`, and then those values can be exported to Make via `makevars.go` and used here.",
+      "parentUuid": "ca4c9d8e_005c2294",
+      "range": {
+        "startLine": 300,
+        "startChar": 18,
+        "endLine": 300,
+        "endChar": 36
+      },
+      "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
