@@ -44,7 +44,7 @@ public:
     {{ -endif }}
 };
 
-extern std::unique_ptr<flag_provider_interface> provider_;
+extern flag_provider_interface *provider_;
 
 {{ for item in class_elements}}
 inline bool {item.flag_name}() \{
