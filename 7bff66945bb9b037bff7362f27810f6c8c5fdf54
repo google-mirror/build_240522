@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20d16866_079652d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-20T17:30:04Z",
+      "side": 1,
+      "message": "Can you add a paragraph on why this was added, please, and what it means to export a flag?\n\nAlso, that the default, if is_exported is omitted, is false.",
+      "revId": "7bff66945bb9b037bff7362f27810f6c8c5fdf54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27ff9087_78361fff",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-20T17:30:04Z",
+      "side": 1,
+      "message": "(Nit: I would have preferred to call this \"exported\" but with \"is_fixed_read_only\" (not too happy about that name) we sort of established that bools should start with \"is_\", so let\u0027s keep as is.)",
+      "range": {
+        "startLine": 43,
+        "startChar": 16,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "7bff66945bb9b037bff7362f27810f6c8c5fdf54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
