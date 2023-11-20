@@ -34,6 +34,24 @@
       "parentUuid": "bdb1d6a9_77599241",
       "revId": "84b14e581a5fee7a330c1506d219a46c3347a627",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aceeba8_4057e09d",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1269,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-20T19:23:42Z",
+      "side": 1,
+      "message": "`$(PRODUCT_PACKAGES_SHIPPING_API_LEVEL_29)` -\u003e `$(call get-product-var,$(1),PRODUCT_PACKAGES_SHIPPING_API_LEVEL_29)`. The `math_gt_or_eq` part remains unchanged.",
+      "parentUuid": "886fbfbe_c7067c0f",
+      "revId": "84b14e581a5fee7a330c1506d219a46c3347a627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
