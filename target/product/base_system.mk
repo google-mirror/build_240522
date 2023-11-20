@@ -52,7 +52,6 @@ PRODUCT_PACKAGES += \
     com.android.btservices \
     com.android.configinfrastructure \
     com.android.conscrypt \
-    com.android.devicelock \
     com.android.extservices \
     com.android.healthfitness \
     com.android.i18n \
@@ -303,6 +302,12 @@ ifneq ($(PRODUCT_NO_DYNAMIC_SYSTEM_UPDATE),true)
     PRODUCT_PACKAGES += \
         DynamicSystemInstallationService \
 
+endif
+
+# Produce does not support Device Lock
+ifneq ($(PRODUCT_NO_DEVICE_LOCK),true)
+    PRODUCT_PACKAGES += \
+        com.android.devicelock
 endif
 
 # VINTF data for system image
