@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eefc5273_64352871",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1947190
+      },
+      "writtenOn": "2023-11-20T06:54:36Z",
+      "side": 1,
+      "message": "Our build can pass by reverting this change only. It is ok to merge this only.",
+      "revId": "a31d6a4d1ec388b4da8b5bbda6efaa6709c9445d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
