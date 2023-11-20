@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3181ceb_620553ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-20T17:38:40Z",
+      "side": 1,
+      "message": "You mean `atest aconfig.test`. Please make sure to run the test instructions locally before uploading -- others rely on them to verify that the CL works.",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 7
+      },
+      "revId": "7bff66945bb9b037bff7362f27810f6c8c5fdf54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27ff9087_78361fff",
         "filename": "tools/aconfig/protos/aconfig.proto",
         "patchSetId": 2
