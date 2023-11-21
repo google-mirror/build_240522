@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d37e0dd_b523d499",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-11-21T00:11:55Z",
+      "side": 1,
+      "message": "go/compare_target_files shows a minimal effect on system image size, 0-90 KB.  I think this is because most JNI libraries for APKs on the system image are stored outside of the APK.",
+      "revId": "c71cf7e1b43f40cddbc890f043af4b2138f42115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
