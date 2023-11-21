@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7608092_700f2b4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-21T07:08:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20d16866_079652d5",
+      "revId": "7bff66945bb9b037bff7362f27810f6c8c5fdf54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3181ceb_620553ad",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28dfb756_f2d0d587",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-21T07:08:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3181ceb_620553ad",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 7
+      },
+      "revId": "7bff66945bb9b037bff7362f27810f6c8c5fdf54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27ff9087_78361fff",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-11-20T17:30:04Z",
       "side": 1,
       "message": "(Nit: I would have preferred to call this \"exported\" but with \"is_fixed_read_only\" (not too happy about that name) we sort of established that bools should start with \"is_\", so let\u0027s keep as is.)",
+      "range": {
+        "startLine": 43,
+        "startChar": 16,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "7bff66945bb9b037bff7362f27810f6c8c5fdf54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75aa4592_d266e254",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-21T07:08:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27ff9087_78361fff",
       "range": {
         "startLine": 43,
         "startChar": 16,
