@@ -182,6 +182,12 @@ ADDITIONAL_SYSTEM_PROPERTIES += ro.treble.enabled=${PRODUCT_FULL_TREBLE}
 $(KATI_obsolete_var PRODUCT_FULL_TREBLE,\
 	Code should be written to work regardless of a device being Treble)
 
+# Set ro.llndk.api_level to show the maximum vendor API level that the LLNDK in
+# the system partition supports.
+ifdef PLATFORM_LLNDK_VERSION
+ADDITIONAL_SYSTEM_PROPERTIES += ro.llndk.api_level=$(PLATFORM_LLNDK_VERSION)
+endif
+
 # Sets ro.actionable_compatible_property.enabled to know on runtime whether the
 # allowed list of actionable compatible properties is enabled or not.
 ADDITIONAL_SYSTEM_PROPERTIES += ro.actionable_compatible_property.enabled=true
