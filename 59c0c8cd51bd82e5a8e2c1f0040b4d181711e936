@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f2afa5c_13ee6978",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-21T11:08:45Z",
+      "side": 1,
+      "message": "I assumed cases of defining the LLNDK api level without setting `RELEASE_BOARD_API_LEVEL` but by setting in target configuration or version defaults.\nHowever, when we have llndk api annotation solution, we can have different configurations for different releases. Then, we don\u0027t need to define PLATFORM_LLNDK_VERSION.",
+      "parentUuid": "26107fe3_89e38f20",
+      "range": {
+        "startLine": 188,
+        "startChar": 53,
+        "endLine": 188,
+        "endChar": 75
+      },
+      "revId": "59c0c8cd51bd82e5a8e2c1f0040b4d181711e936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59dfd930_7a10924e",
         "filename": "core/version_util.mk",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-21T10:41:17Z",
       "side": 1,
       "message": "Perhaps not in this CL, but let\u0027s rename this to RELEASE_VENDOR_API_LEVEL",
+      "range": {
+        "startLine": 179,
+        "startChar": 32,
+        "endLine": 179,
+        "endChar": 55
+      },
+      "revId": "59c0c8cd51bd82e5a8e2c1f0040b4d181711e936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d83733d_38a7d7a6",
+        "filename": "core/version_util.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-21T11:08:45Z",
+      "side": 1,
+      "message": "I avoid the name by intention to avoid confusion with `ro.vendor.api_level` property. But as we use the term \"Vendor API level\" in many places, I agree to rename this release version flag.\nLet me work on it from the following CLs.",
+      "parentUuid": "59dfd930_7a10924e",
       "range": {
         "startLine": 179,
         "startChar": 32,
