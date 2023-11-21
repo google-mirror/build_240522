@@ -34,6 +34,29 @@
       "parentUuid": "4535d5c8_9bed7df6",
       "revId": "0a10f0f5f3f152cae1b01e234cd697c900eb92c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82fcfd22_f708f0c3",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-11-21T11:42:00Z",
+      "side": 1,
+      "message": "this message has to be updated",
+      "range": {
+        "startLine": 581,
+        "startChar": 34,
+        "endLine": 581,
+        "endChar": 67
+      },
+      "revId": "0a10f0f5f3f152cae1b01e234cd697c900eb92c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
