@@ -173,6 +173,17 @@ ifndef PLATFORM_VNDK_VERSION
 endif
 .KATI_READONLY := PLATFORM_VNDK_VERSION
 
+ifdef RELEASE_BOARD_API_LEVEL
+  ifdef RELEASE_BOARD_API_LEVEL_FROZEN
+    # PLATFORM_LLNDK_VERSION is the API level that the LLNDK in the system partition supports.
+    PLATFORM_LLNDK_VERSION := $(RELEASE_BOARD_API_LEVEL)
+  else
+    # Set to the future vendor api level before it is frozen.
+    PLATFORM_LLNDK_VERSION := 1000000
+  endif
+  .KATI_READONLY := PLATFORM_LLNDK_VERSION
+endif
+
 ifndef PLATFORM_SYSTEMSDK_MIN_VERSION
   # This is the oldest version of system SDK that the platform supports. Contrary
   # to the public SDK where platform essentially supports all previous SDK versions,
