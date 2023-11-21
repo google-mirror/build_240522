@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4535d5c8_9bed7df6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-11-21T08:58:59Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be a build-time decision. The test should detect if the vendor impl is old or new by reading sysprops and behave differently.",
+      "revId": "0a10f0f5f3f152cae1b01e234cd697c900eb92c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
