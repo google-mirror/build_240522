@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26107fe3_89e38f20",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-11-21T10:41:17Z",
+      "side": 1,
+      "message": "Why can\u0027t this directly be RELEASE_BOARD_API_LEVEL?",
+      "range": {
+        "startLine": 188,
+        "startChar": 53,
+        "endLine": 188,
+        "endChar": 75
+      },
+      "revId": "59c0c8cd51bd82e5a8e2c1f0040b4d181711e936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59dfd930_7a10924e",
+        "filename": "core/version_util.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-11-21T10:41:17Z",
+      "side": 1,
+      "message": "Perhaps not in this CL, but let\u0027s rename this to RELEASE_VENDOR_API_LEVEL",
+      "range": {
+        "startLine": 179,
+        "startChar": 32,
+        "endLine": 179,
+        "endChar": 55
+      },
+      "revId": "59c0c8cd51bd82e5a8e2c1f0040b4d181711e936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
