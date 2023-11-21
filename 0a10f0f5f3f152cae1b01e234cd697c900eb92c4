@@ -16,6 +16,24 @@
       "message": "This shouldn\u0027t be a build-time decision. The test should detect if the vendor impl is old or new by reading sysprops and behave differently.",
       "revId": "0a10f0f5f3f152cae1b01e234cd697c900eb92c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f953877_0c23456f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-21T11:11:34Z",
+      "side": 1,
+      "message": "This is a build-time test. I guess you\u0027re refering to *TS? That will be added later.",
+      "parentUuid": "4535d5c8_9bed7df6",
+      "revId": "0a10f0f5f3f152cae1b01e234cd697c900eb92c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
