@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "03a7f386_cf992aba",
+        "filename": "core/main.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-22T11:31:31Z",
+      "side": 1,
+      "message": "I kept `ifdef RELEASE_BOARD_API_LEVEL`. Without it, build.prop has `ro.llndk.api_level\u003d` and device shows an empty property.",
+      "parentUuid": "23c2160c_50ad4505",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 28
+      },
+      "revId": "dc7ce8f92a3b8d015ef6146838ece89776adb402",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7a0236e4_410d542c",
         "filename": "core/version_util.mk",
         "patchSetId": 2
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "`ro.board.api_frozen` is in `vendor/build.prop`; while `ro.llndk.api_level` is in `system/build.prop`. So we cannot say llndk is frozen with `ro.board.api_frozen`. (ex. GSI)\n\nThere are 2 options to show llndk is frozen: 1) define `ro.llndk.api_frozen` to show if `ro.llndk.api_level` is finalized.\n2) instead of setting `ro.llndk.api_frozen`, set `ro.llndk.api_level` as `VENDOR_API_LEVEL_FUTURE`. I prefer the latter. With this, we can simply check if `ro.board.api_level` \u003c\u003d `ro.llndk.api_level` or `BOARD_API_LEVEL` \u003c\u003d `PLATFORM_LLNDK_VERSION`.",
       "parentUuid": "c474fc1c_ab7fe57d",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 38
+      },
+      "revId": "dc7ce8f92a3b8d015ef6146838ece89776adb402",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce7bbf6c_397ece3b",
+        "filename": "core/version_util.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-22T11:31:31Z",
+      "side": 1,
+      "message": "Discussed this with Jiyong offline, and removed the complex conditions. Let\u0027s start with a simple definition for 24Q1 and revisit if needed.",
+      "parentUuid": "8d857b3d_40ee3134",
       "range": {
         "startLine": 177,
         "startChar": 0,
