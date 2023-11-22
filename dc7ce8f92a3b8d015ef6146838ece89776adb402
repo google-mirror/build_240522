@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a0236e4_410d542c",
+        "filename": "core/version_util.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-11-22T06:53:58Z",
+      "side": 1,
+      "message": "It may be too late to complain, but feels like RELEASE_LLNDK_FROZEN might sound better in terms that we are freezing API offered by the system.",
+      "range": {
+        "startLine": 177,
+        "startChar": 8,
+        "endLine": 177,
+        "endChar": 38
+      },
+      "revId": "dc7ce8f92a3b8d015ef6146838ece89776adb402",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "572d3383_7d094d01",
+        "filename": "core/version_util.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-11-22T06:53:58Z",
+      "side": 1,
+      "message": "nit: WDYT about define this as common variable for future usage?",
+      "range": {
+        "startLine": 182,
+        "startChar": 30,
+        "endLine": 182,
+        "endChar": 37
+      },
+      "revId": "dc7ce8f92a3b8d015ef6146838ece89776adb402",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
