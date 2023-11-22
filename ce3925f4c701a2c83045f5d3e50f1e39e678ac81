@@ -131,6 +131,30 @@
       },
       "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2915b600_e0126fce",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-22T14:56:49Z",
+      "side": 1,
+      "message": "If we allow empty values for that temporary case would we wanna encode it with an `Option`, so the case gets handled explicitly?",
+      "parentUuid": "25a3ac68_8f1c3b51",
+      "range": {
+        "startLine": 45,
+        "startChar": 76,
+        "endLine": 45,
+        "endChar": 77
+      },
+      "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
