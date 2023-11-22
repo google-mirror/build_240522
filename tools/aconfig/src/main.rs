@@ -42,6 +42,7 @@ fn cli() -> Command {
         .subcommand(
             Command::new("create-cache")
                 .arg(Arg::new("package").long("package").required(true))
+                .arg(Arg::new("container").long("container").default_value(""))
                 .arg(Arg::new("declarations").long("declarations").action(ArgAction::Append))
                 .arg(Arg::new("values").long("values").action(ArgAction::Append))
                 .arg(
@@ -167,12 +168,19 @@ fn main() -> Result<()> {
     match matches.subcommand() {
         Some(("create-cache", sub_matches)) => {
             let package = get_required_arg::<String>(sub_matches, "package")?;
+            let container = get_required_arg::<String>(sub_matches, "container")?;
             let declarations = open_zero_or_more_files(sub_matches, "declarations")?;
             let values = open_zero_or_more_files(sub_matches, "values")?;
             let default_permission =
                 get_required_arg::<protos::ProtoFlagPermission>(sub_matches, "default-permission")?;
-            let output = commands::parse_flags(package, declarations, values, *default_permission)
-                .context("failed to create cache")?;
+            let output = commands::parse_flags(
+                package,
+                container,
+                declarations,
+                values,
+                *default_permission,
+            )
+            .context("failed to create cache")?;
             let path = get_required_arg::<String>(sub_matches, "cache")?;
             write_output_to_file_or_stdout(path, &output)?;
         }
