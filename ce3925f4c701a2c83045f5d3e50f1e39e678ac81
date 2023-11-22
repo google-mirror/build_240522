@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74b9131b_6d1ebc33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-22T14:23:48Z",
+      "side": 1,
+      "message": "Container is probably better than shippable unit, but I\u0027m 100% not sold on the name.\n\nI don\u0027t want to drag out the bike-shedding too long, but some ideas:\n\n- C has \"compilation units\". Should we have \"build units\"?\n- That\u0027s all I have. Naming is hard! :)",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6e76c28_23104893",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-22T14:23:48Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 9,
+        "startChar": 190,
+        "endLine": 9,
+        "endChar": 197
+      },
+      "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c551c43_531d3ee2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-22T14:23:48Z",
+      "side": 1,
+      "message": "s/is a software/is software/",
+      "range": {
+        "startLine": 9,
+        "startChar": 12,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1204c27b_11af298a",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-22T14:23:48Z",
+      "side": 1,
+      "message": "Missing verification of container field in protos.rs. It should appear in the flag_declarations and parsed_flag calls to ensure_required_fields!().\n\nConsider adding a protos::is_valid_container method to check that the string looks correct (empty, or matching [a-z.]+).",
+      "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "048b9007_961ccdbd",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-22T14:23:48Z",
+      "side": 1,
+      "message": "rename to `test_parse_flags_package_mismatch_between_declaration_and_command_line`? similar for the test below",
+      "range": {
+        "startLine": 403,
+        "startChar": 7,
+        "endLine": 403,
+        "endChar": 40
+      },
+      "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a3ac68_8f1c3b51",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-22T14:23:48Z",
+      "side": 1,
+      "message": "Empty values make no sense. Do we allow this temporarily while updating the existing aconfig declarations? If so, please state this as a comment here and in the commit message and file a bug to convert existing declarations replace `.default_value(\"\")` with `.required(true)`.\n\nOr better, update all declarations in the same gerrit topic.\n\nOr better, split this CL in two: the first adds the container field to the proto (but doesn\u0027t act on it), the second does the rest. Commit the first CL, then clean up the declarations in separate CLs, and then commit the second CL.",
+      "range": {
+        "startLine": 45,
+        "startChar": 76,
+        "endLine": 45,
+        "endChar": 77
+      },
+      "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
