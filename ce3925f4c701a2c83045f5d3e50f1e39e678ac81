@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a691d291_c0b2bb0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-11-22T21:40:49Z",
+      "side": 1,
+      "message": "The \u003cthing\u003e must have two attributes:\n* It\u0027s shipped/installed as a monolith\n* It\u0027s built as a monolith (i.e. with the same build environment)\n\nBoth are necessary, but \"shippable unit\" and \"build unit\" only allude to one of the aspects. Container doesn\u0027t allude to either, which is not great, but at least it\u0027s not potentially misleading for only describing 50% of the nature of the \u003cthing\u003e. So I like container well enough (credit for the name goes to joeo@google.com).\n\nLeaving this comment open for now and let\u0027s see if we fish any better ideas.",
+      "parentUuid": "74b9131b_6d1ebc33",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6e76c28_23104893",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -60,6 +84,54 @@
       "writtenOn": "2023-11-22T14:23:48Z",
       "side": 1,
       "message": "s/is a software/is software/",
+      "range": {
+        "startLine": 9,
+        "startChar": 12,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f099402_98f01363",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-11-22T21:40:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6e76c28_23104893",
+      "range": {
+        "startLine": 9,
+        "startChar": 190,
+        "endLine": 9,
+        "endChar": 197
+      },
+      "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34715485_aaec3ab3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-11-22T21:40:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c551c43_531d3ee2",
       "range": {
         "startLine": 9,
         "startChar": 12,
