@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e69879d4_806b0ec4",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-22T05:09:00Z",
+      "side": 1,
+      "message": "I didn\u0027t mean unsetting `RELEASE_BOARD_API_LEVEL` but setting the value to a different value than `RELEASE_BOARD_API_LEVEL`.\n\nI think we need to set the value to VENDOR_VERSION_MAX before vFRC, and set to RELEASE_BOARD_API_LEVEL with vFRC to make `ro.llndk.api_level \u003e\u003d ro.board.api_level` condition work.\n\nLet me update the version_util.mk.",
+      "parentUuid": "306db3a2_c61ee104",
+      "range": {
+        "startLine": 188,
+        "startChar": 53,
+        "endLine": 188,
+        "endChar": 75
+      },
+      "revId": "59c0c8cd51bd82e5a8e2c1f0040b4d181711e936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "338c10a7_b4d790ec",
         "filename": "core/main.mk",
         "patchSetId": 1
@@ -85,6 +109,24 @@
       "writtenOn": "2023-11-21T13:21:03Z",
       "side": 1,
       "message": "I think we need a ro.llndk.api_frozen to compliment ro.llndk.api_level.\nI explain the subtle differences in the doc.",
+      "revId": "59c0c8cd51bd82e5a8e2c1f0040b4d181711e936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d9892ba_b679c7d9",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-22T05:09:00Z",
+      "side": 1,
+      "message": "I changed the ro.llndk.api_level versioning that will work without defining ro.llndk.api_frozen.",
+      "parentUuid": "338c10a7_b4d790ec",
       "revId": "59c0c8cd51bd82e5a8e2c1f0040b4d181711e936",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
