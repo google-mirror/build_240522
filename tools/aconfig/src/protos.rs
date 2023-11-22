@@ -111,10 +111,15 @@ pub mod flag_declarations {
 
     pub fn verify_fields(pdf: &ProtoFlagDeclarations) -> Result<()> {
         ensure_required_fields!("flag declarations", pdf, "package");
+        // ensure_required_fields!("flag declarations", pdf, "container");
 
         ensure!(
             codegen::is_valid_package_ident(pdf.package()),
             "bad flag declarations: bad package"
+        );
+        ensure!(
+            codegen::is_valid_container_ident(pdf.container()),
+            "bad flag declarations: bad container"
         );
         for flag_declaration in pdf.flag.iter() {
             super::flag_declaration::verify_fields(flag_declaration)?;
@@ -207,6 +212,10 @@ pub mod parsed_flag {
         );
 
         ensure!(codegen::is_valid_package_ident(pf.package()), "bad parsed flag: bad package");
+        ensure!(
+            codegen::is_valid_container_ident(pf.container()),
+            "bad parsed flag: bad container"
+        );
         ensure!(codegen::is_valid_name_ident(pf.name()), "bad parsed flag: bad name");
         ensure!(codegen::is_valid_name_ident(pf.namespace()), "bad parsed flag: bad namespace");
         ensure!(!pf.description().is_empty(), "bad parsed flag: empty description");
