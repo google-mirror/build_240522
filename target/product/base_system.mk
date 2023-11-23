@@ -95,7 +95,6 @@ PRODUCT_PACKAGES += \
     framework-minus-apex \
     framework-minus-apex-install-dependencies \
     framework-nfc \
-    framework-res \
     framework-sysconfig.xml \
     fsck.erofs \
     fsck_msdos \
