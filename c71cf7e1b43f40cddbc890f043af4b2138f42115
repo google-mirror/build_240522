@@ -33,6 +33,29 @@
       "message": "Let\u0027s verify the app-compat tests are passing with the apksig change before merging.",
       "revId": "c71cf7e1b43f40cddbc890f043af4b2138f42115",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c1c331d_271d2444",
+        "filename": "core/definitions.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2895,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-11-23T00:07:15Z",
+      "side": 1,
+      "message": "This breaks the build when you have prebuilt APKs that are presigned and shouldn\u0027t be altered (based on SDK version) yet are 4kb page aligned.",
+      "range": {
+        "startLine": 2895,
+        "startChar": 0,
+        "endLine": 2895,
+        "endChar": 58
+      },
+      "revId": "c71cf7e1b43f40cddbc890f043af4b2138f42115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
