@@ -96,7 +96,6 @@ PRODUCT_PACKAGES += \
     framework-graphics \
     framework-minus-apex \
     framework-minus-apex-install-dependencies \
-    framework-res \
     framework-sysconfig.xml \
     fsck.erofs \
     fsck_msdos \
