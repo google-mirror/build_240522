@@ -2077,3 +2077,30 @@ set_global_paths
 source_vendorsetup
 addcompletions
 
+current_directory=$(pwd)
+echo "Current working directory: $current_directory"
+
+export RBE_CXX_EXEC_STRATEGY="remote_local_fallback"
+export USE_RBE=true
+export RBE_use_gce_credentials=true
+export NINJA_REMOTE_NUM_JOBS=500
+export RBE_reproxy_wait_seconds=20
+export RBE_shutdown_proxy=true
+# export RBE_proxy_log_dir="/buildbot/dist_dirs/git_master-build-rbe-testing-linux-aosp_bramble-userdebug_live-compression/11139734/logs"
+export RBE_grpc_keepalive_time="30s"
+export RBE_grpc_keepalive_permit_without_stream=false
+export RBE_invocation_id="aosp-master-art-art-host-x86_64-87654321"
+# export RBE_instance="projects/android-build-farm/instances/default_instance"
+export RBE_instance="projects/rbe-android-ci/instances/default_instance"
+export RBE_service="remotebuildexecution.googleapis.com:443"
+export RBE_DIR="prebuilts/remoteexecution-client/live"
+
+export RBE_compare=true
+export RBE_num_local_reruns=1
+export RBE_num_remote_reruns=1
+# export USE_RBE="true"
+echo "============================= env test log output ======================"
+current_directory=$(pwd)
+echo "Current working directory: $current_directory"
+echo "$dist_dir : dist_dir"
+echo "============================= env test log output ======================"
