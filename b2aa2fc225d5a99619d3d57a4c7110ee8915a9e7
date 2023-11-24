@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "409581b2_6fa11e17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-24T08:46:15Z",
+      "side": 1,
+      "message": "This line is too long. Break it at the appropriate width, e.g. by `Vgw` in vim",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 1
+      },
+      "revId": "b2aa2fc225d5a99619d3d57a4c7110ee8915a9e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cbef18c_54394d2f",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-24T08:46:15Z",
+      "side": 1,
+      "message": "If we were planning to allow \"not defined\" as a valid value for a longer period of time, absolutely +1 to Ted\u0027s suggestion to use Option\u003cString\u003e instead of treating \"\" in a special way.\n\nIt\u0027s still worth considering Option\u003cString\u003e temporarily because it is cleaner and much more obvious than using a special value to mean something secret.\n\nSo tl;dr: switch representation to Option\u003cString\u003e, and map \"\" to None when parsing the flag_declaration.",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 99,
+        "endChar": 72
+      },
+      "revId": "b2aa2fc225d5a99619d3d57a4c7110ee8915a9e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5311ac84_abf07392",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-24T08:46:15Z",
+      "side": 1,
+      "message": "Note to self: at some point soon we need to allow custom formats ala `git log --format\u003d`.\n\nAnd in a follow-up CL to that, we need to teach dump() to `--filter\u003d` to limit the output to e.g. only exported flags.",
+      "range": {
+        "startLine": 270,
+        "startChar": 8,
+        "endLine": 270,
+        "endChar": 24
+      },
+      "revId": "b2aa2fc225d5a99619d3d57a4c7110ee8915a9e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
