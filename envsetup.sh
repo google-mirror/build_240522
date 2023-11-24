@@ -2077,3 +2077,49 @@ set_global_paths
 source_vendorsetup
 addcompletions
 
+current_directory=$(pwd)
+echo "Current working directory: $current_directory"
+
+
+export RBE_CXX_EXEC_STRATEGY="remote_local_fallback"
+# export RBE_JAVAC_EXEC_STRATEGY="remote_local_fallback"
+# export RBE_R8_EXEC_STRATEGY="remote_local_fallback"
+# export RBE_D8_EXEC_STRATEGY="remote_local_fallback"
+# export RBE_CXX_LINKS_EXEC_STRATEGY="remote_local_fallback"
+# export RBE_TURBINE_EXEC_STRATEGY="remote_local_fallback"
+# export RBE_JAR_EXEC_STRATEGY="remote_local_fallback"
+# export RBE_ZIP_EXEC_STRATEGY="remote_local_fallback"
+
+export USE_RBE=true
+export RBE_use_gce_credentials=true
+export NINJA_REMOTE_NUM_JOBS=500
+export RBE_reproxy_wait_seconds=20
+export RBE_shutdown_proxy=true
+# /buildbot/dist_dirs/aosp-android12-tests-dev-linux-test_suites_arm64/11111558/logs
+export RBE_proxy_log_dir="/buildbot/dist_dirs/aosp-master-art-linux-art-host-x86_64/$BUILD_NUMBER/logs"
+# export RBE_proxy_log_dir=out/logs
+# export RBE_output_dir=out/logs
+# export RBE_log_path=out/logs
+# export RBE_log_dir=out/logs
+export RBE_grpc_keepalive_time="30s"
+export RBE_grpc_keepalive_permit_without_stream=false
+export RBE_invocation_id="aosp-master-art-art-host-x86_64-87654321"
+export RBE_instance="projects/android-build-farm/instances/default_instance"
+
+# export RBE_instance="projects/rbe-android-ci/instances/default_instance"
+export RBE_service="remotebuildexecution.googleapis.com:443"
+export RBE_DIR="prebuilts/remoteexecution-client/live"
+
+# export RBE_compare=true
+# export RBE_num_local_reruns=1
+# export RBE_num_remote_reruns=1
+# export USE_RBE="true"
+echo "============================= env test log output ======================"
+current_directory=$(pwd)
+echo "Current working directory: $current_directory"
+echo "$dist_dir : dist_dir"
+echo "$BUILD_NUMBER : build number"
+echo "$RBE_proxy_log_dir : RBE_proxy_log_dir"
+echo "============================= env test log output ======================"
+# lunch aosp_oriole-trunk_staging-userdebug
+# m nothing
