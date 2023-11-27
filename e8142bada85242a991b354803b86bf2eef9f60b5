@@ -57,6 +57,30 @@
       },
       "revId": "e8142bada85242a991b354803b86bf2eef9f60b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07529b8a_27040782",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 1314,
+      "author": {
+        "id": 1969256
+      },
+      "writtenOn": "2023-11-27T19:29:59Z",
+      "side": 1,
+      "message": "Updated to check for empty string, thank you for the suggestsions",
+      "parentUuid": "c5bcbdc4_ba8f518c",
+      "range": {
+        "startLine": 1314,
+        "startChar": 6,
+        "endLine": 1314,
+        "endChar": 11
+      },
+      "revId": "e8142bada85242a991b354803b86bf2eef9f60b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
