@@ -181,7 +181,7 @@ class DynamicPartitionSizeChecker(object):
 
     # Retrofit dynamic partitions: 1 slot per "super", 2 "super"s on the device
     if dap == Dap.RDAP:
-      if slot != DeviceType.AB:
+      if slot != DeviceType.AB and slot != DeviceType.NONE:
         raise RuntimeError("Device with retrofit dynamic partitions must use "
                            "regular (non-Virtual) A/B")
       return 1
