@@ -124,6 +124,24 @@
       "parentUuid": "689ddf1a_46f5b0a9",
       "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3932e818_145ddb85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903905
+      },
+      "writtenOn": "2023-11-27T18:28:17Z",
+      "side": 1,
+      "message": "Gentle post-holiday ping 😊",
+      "parentUuid": "08e113e3_c45018de",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
