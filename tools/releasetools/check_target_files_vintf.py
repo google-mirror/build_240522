@@ -165,6 +165,8 @@ def CheckVintfFromExtractedTargetFiles(input_tmp, info_dict=None):
     logger.info("stdout: %s", out)
     logger.info("stderr: %s", err)
 
+  CleanupApexDirectory(dirmap)
+
   return success
 
 
@@ -232,6 +234,14 @@ def PrepareApexDirectory(inp, dirmap):
   if '/vendor' in dirmap:
       cmd += ['--vendor_path', dirmap['/vendor']]
   common.RunAndCheckOutput(cmd)
+
+
+def CleanupApexDirectory(dirmap):
+  """
+  Clean up /apex directory after running checkvintf
+  """
+  apex_dir = dirmap['/apex']
+  shutil.rmtree(apex_dir, ignore_errors=True)
 
 
 def CheckVintfFromTargetFiles(inp, info_dict=None):
