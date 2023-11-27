@@ -63,7 +63,8 @@ fn cli() -> Command {
                         .long("mode")
                         .value_parser(EnumValueParser::<commands::CodegenMode>::new())
                         .default_value("production"),
-                ),
+                )
+                .arg(Arg::new("exported").long("exported").required(false)),
         )
         .subcommand(
             Command::new("create-cpp-lib")
