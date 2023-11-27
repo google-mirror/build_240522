@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0b08b0c3_b4e9f976",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-11-27T07:55:58Z",
+      "side": 1,
+      "message": "And thank you Po for the fix!",
+      "revId": "b9d16641d8f13529b3334f4b9c52ef3d6e771dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "462af2d1_95fb275a",
         "filename": "tools/releasetools/check_target_files_vintf.py",
         "patchSetId": 2
