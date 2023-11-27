@@ -80,6 +80,30 @@
       },
       "revId": "b9d16641d8f13529b3334f4b9c52ef3d6e771dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa03a55_14462bb6",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-11-27T08:37:22Z",
+      "side": 1,
+      "message": "Thank you!",
+      "parentUuid": "3570ee5f_1165e086",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 47
+      },
+      "revId": "b9d16641d8f13529b3334f4b9c52ef3d6e771dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
