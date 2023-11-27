@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ea1daa3_9df8c377",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-11-27T20:39:06Z",
+      "side": 1,
+      "message": "This should probably be a new value of the \"mode\" parameter. The exported mode codegen is mutually exclusive with the production (which maybe needs a new name to reflect that it\u0027s the un-exported/native/internal codegen) and the test mode codegen.",
+      "revId": "c0ca95dc76765eeea277b04d3a03729c0d10db17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
