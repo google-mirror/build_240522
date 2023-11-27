@@ -45,6 +45,7 @@ where
         match codegen_mode {
             CodegenMode::Production => include_str!("../templates/rust_prod.template"),
             CodegenMode::Test => include_str!("../templates/rust_test.template"),
+            CodegenMode::Exported => panic!("exported mode not yet supported for rust"),
         },
     )?;
     let contents = template.render("rust_code_gen", &context)?;
@@ -115,6 +116,13 @@ lazy_static::lazy_static! {
         "aconfig_flags.aconfig_test",
         "com.android.aconfig.test.enabled_rw",
         "true") == "true";
+
+    /// flag value cache for exported_flag
+    static ref CACHED_exported_flag: bool = flags_rust::GetServerConfigurableFlag(
+        "aconfig_flags.aconfig_test",
+        "com.android.aconfig.test.exported_flag",
+        "false") == "true";
+
 }
 
 impl FlagProvider {
@@ -146,6 +154,11 @@ impl FlagProvider {
     /// query flag enabled_rw
     pub fn enabled_rw(&self) -> bool {
         *CACHED_enabled_rw
+    }
+
+    /// query flag exported_flag
+    pub fn exported_flag(&self) -> bool {
+        *CACHED_exported_flag
     }
 }
 
@@ -186,6 +199,12 @@ pub fn enabled_ro() -> bool {
 #[inline(always)]
 pub fn enabled_rw() -> bool {
     PROVIDER.enabled_rw()
+}
+
+/// query flag exported_flag
+#[inline(always)]
+pub fn exported_flag() -> bool {
+    PROVIDER.exported_flag()
 }
 "#;
 
@@ -282,6 +301,22 @@ impl FlagProvider {
         self.overrides.insert("enabled_rw", val);
     }
 
+    /// query flag exported_flag
+    pub fn exported_flag(&self) -> bool {
+        self.overrides.get("exported_flag").copied().unwrap_or(
+            flags_rust::GetServerConfigurableFlag(
+                "aconfig_flags.aconfig_test",
+                "com.android.aconfig.test.exported_flag",
+                "false") == "true"
+        )
+    }
+
+    /// set flag exported_flag
+    pub fn set_exported_flag(&mut self, val: bool) {
+        self.overrides.insert("exported_flag", val);
+    }
+
+
     /// clear all flag overrides
     pub fn reset_flags(&mut self) {
         self.overrides.clear();
@@ -365,6 +400,18 @@ pub fn set_enabled_rw(val: bool) {
     PROVIDER.lock().unwrap().set_enabled_rw(val);
 }
 
+/// query flag exported_flag
+#[inline(always)]
+pub fn exported_flag() -> bool {
+    PROVIDER.lock().unwrap().exported_flag()
+}
+
+/// set flag exported_flag
+#[inline(always)]
+pub fn set_exported_flag(val: bool) {
+    PROVIDER.lock().unwrap().set_exported_flag(val);
+}
+
 /// clear all flag override
 pub fn reset_flags() {
     PROVIDER.lock().unwrap().reset_flags()
@@ -383,6 +430,7 @@ pub fn reset_flags() {
                 match mode {
                     CodegenMode::Production => PROD_EXPECTED,
                     CodegenMode::Test => TEST_EXPECTED,
+                    CodegenMode::Exported => panic!("exported mode not yet supported for rust"),
                 },
                 &String::from_utf8(generated.contents).unwrap()
             )
