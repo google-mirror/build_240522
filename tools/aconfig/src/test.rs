@@ -149,6 +149,27 @@ parsed_flag {
   is_fixed_read_only: false
   is_exported: false
 }
+parsed_flag {
+  package: "com.android.aconfig.test"
+  name: "exported_flag"
+  namespace: "aconfig_test"
+  description: "This flag is exported"
+  bug: "111"
+  state: DISABLED
+  permission: READ_WRITE
+  trace {
+    source: "tests/test.aconfig"
+    state: DISABLED
+    permission: READ_WRITE
+  }
+  trace {
+    source: "tests/first.values"
+    state: DISABLED
+    permission: READ_WRITE
+  }
+  is_fixed_read_only: false
+  is_exported: true
+}
 "#;
 
     pub fn parse_test_flags() -> ProtoParsedFlags {
