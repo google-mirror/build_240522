@@ -165,6 +165,11 @@ def CheckVintfFromExtractedTargetFiles(input_tmp, info_dict=None):
     logger.info("stdout: %s", out)
     logger.info("stderr: %s", err)
 
+  # Delete /apex directory after running checkvintf
+  if '/apex' in dirmap:
+    apex_dir = dirmap['/apex']
+    shutil.rmtree(apex_dir, ignore_errors=True)
+
   return success
 
 
