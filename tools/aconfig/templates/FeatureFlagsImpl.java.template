@@ -15,7 +15,9 @@ public final class FeatureFlagsImpl implements FeatureFlags \{
 
 {{ for flag in flag_elements }}
 {{- if flag.is_read_write }}
+{{- if flag.should_generate_getter }}
     private static boolean {flag.method_name} = {flag.default_value};
+{{- endif- }}
 {{- endif- }}
 {{ endfor }}
 
@@ -26,8 +28,10 @@ public final class FeatureFlagsImpl implements FeatureFlags \{
 
             {{- for flag in namespace_with_flags.flags }}
             {{- if flag.is_read_write }}
+            {{- if flag.should_generate_getter }}
             {flag.method_name} =
                 properties.getBoolean("{flag.device_config_flag}", {flag.default_value});
+            {{- endif- }}
             {{- endif- }}
             {{ endfor }}
         } catch (NullPointerException e) \{
@@ -46,6 +50,7 @@ public final class FeatureFlagsImpl implements FeatureFlags \{
 {{ endif- }}
 
 {{ for flag in flag_elements }}
+{{ if flag.should_generate_getter }}
     @Override
     @UnsupportedAppUsage
     public boolean {flag.method_name}() \{
@@ -58,6 +63,7 @@ public final class FeatureFlagsImpl implements FeatureFlags \{
         return {flag.default_value};
     {{ endif- }}
     }
+{{ endif }}
 {{ endfor }}
 }
 {{ else }}

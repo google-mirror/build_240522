@@ -28,12 +28,13 @@ pub fn generate_java_code<'a, I>(
     package: &str,
     parsed_flags_iter: I,
     codegen_mode: CodegenMode,
+    exported: bool,
 ) -> Result<Vec<OutputFile>>
 where
     I: Iterator<Item = &'a ProtoParsedFlag>,
 {
     let flag_elements: Vec<FlagElement> =
-        parsed_flags_iter.map(|pf| create_flag_element(package, pf)).collect();
+        parsed_flags_iter.map(|pf| create_flag_element(package, pf, exported)).collect();
     let namespace_flags = gen_flags_by_namespace(&flag_elements);
     let properties_set: BTreeSet<String> =
         flag_elements.iter().map(|fe| format_property_name(&fe.device_config_namespace)).collect();
@@ -120,11 +121,13 @@ struct FlagElement {
     pub is_read_write: bool,
     pub method_name: String,
     pub properties: String,
+    pub should_generate_getter: bool,
 }
 
-fn create_flag_element(package: &str, pf: &ProtoParsedFlag) -> FlagElement {
+fn create_flag_element(package: &str, pf: &ProtoParsedFlag, exported: bool) -> FlagElement {
     let device_config_flag = codegen::create_device_config_ident(package, pf.name())
         .expect("values checked at flag parse time");
+    let flag_is_exported = pf.is_exported.unwrap_or(false);
     FlagElement {
         default_value: pf.state() == ProtoFlagState::ENABLED,
         device_config_namespace: pf.namespace().to_string(),
@@ -133,6 +136,7 @@ fn create_flag_element(package: &str, pf: &ProtoParsedFlag) -> FlagElement {
         is_read_write: pf.permission() == ProtoFlagPermission::READ_WRITE,
         method_name: format_java_method_name(pf.name()),
         properties: format_property_name(pf.namespace()),
+        should_generate_getter: !exported || flag_is_exported,
     }
 }
 
@@ -188,6 +192,8 @@ mod tests {
         boolean enabledRo();
         @UnsupportedAppUsage
         boolean enabledRw();
+        @UnsupportedAppUsage
+        boolean exportedFlag();
     }
     "#;
 
@@ -209,6 +215,8 @@ mod tests {
         public static final String FLAG_ENABLED_RO = "com.android.aconfig.test.enabled_ro";
         /** @hide */
         public static final String FLAG_ENABLED_RW = "com.android.aconfig.test.enabled_rw";
+        /** @hide */
+        public static final String FLAG_EXPORTED_FLAG = "com.android.aconfig.test.exported_flag";
 
         @com.android.aconfig.annotations.AssumeFalseForR8
         @UnsupportedAppUsage
@@ -236,6 +244,10 @@ mod tests {
         @UnsupportedAppUsage
         public static boolean enabledRw() {
             return FEATURE_FLAGS.enabledRw();
+        }
+        @UnsupportedAppUsage
+        public static boolean exportedFlag() {
+            return FEATURE_FLAGS.exportedFlag();
         }
     "#;
 
@@ -280,6 +292,11 @@ mod tests {
         public boolean enabledRw() {
             return getValue(Flags.FLAG_ENABLED_RW);
         }
+        @Override
+        @UnsupportedAppUsage
+        public boolean exportedFlag() {
+            return getValue(Flags.FLAG_EXPORTED_FLAG);
+        }
         public void setFlag(String flagName, boolean value) {
             if (!this.mFlagMap.containsKey(flagName)) {
                 throw new IllegalArgumentException("no such flag " + flagName);
@@ -305,7 +322,8 @@ mod tests {
                 Map.entry(Flags.FLAG_DISABLED_RW_IN_OTHER_NAMESPACE, false),
                 Map.entry(Flags.FLAG_ENABLED_FIXED_RO, false),
                 Map.entry(Flags.FLAG_ENABLED_RO, false),
-                Map.entry(Flags.FLAG_ENABLED_RW, false)
+                Map.entry(Flags.FLAG_ENABLED_RW, false),
+                Map.entry(Flags.FLAG_EXPORTED_FLAG, false)
             )
         );
     }
@@ -318,6 +336,7 @@ mod tests {
             crate::test::TEST_PACKAGE,
             parsed_flags.parsed_flag.iter(),
             CodegenMode::Production,
+            false,
         )
         .unwrap();
         let expect_flags_content = EXPECTED_FLAG_COMMON_CONTENT.to_string()
@@ -338,6 +357,7 @@ mod tests {
             private static boolean disabledRw = false;
             private static boolean disabledRwInOtherNamespace = false;
             private static boolean enabledRw = true;
+            private static boolean exportedFlag = false;
 
 
             private void load_overrides_aconfig_test() {
@@ -347,6 +367,8 @@ mod tests {
                         properties.getBoolean("com.android.aconfig.test.disabled_rw", false);
                     enabledRw =
                         properties.getBoolean("com.android.aconfig.test.enabled_rw", true);
+                    exportedFlag =
+                        properties.getBoolean("com.android.aconfig.test.exported_flag", false);
                 } catch (NullPointerException e) {
                     throw new RuntimeException(
                         "Cannot read value from namespace aconfig_test "
@@ -418,6 +440,14 @@ mod tests {
                 }
                 return enabledRw;
             }
+            @Override
+            @UnsupportedAppUsage
+            public boolean exportedFlag() {
+                if (!aconfig_test_is_cached) {
+                    load_overrides_aconfig_test();
+                }
+                return exportedFlag;
+            }
         }
         "#;
         let mut file_set = HashMap::from([
@@ -449,12 +479,210 @@ mod tests {
     }
 
     #[test]
+    fn test_generate_java_code_production_exported() {
+        let parsed_flags = crate::test::parse_test_flags();
+        let generated_files = generate_java_code(
+            crate::test::TEST_PACKAGE,
+            parsed_flags.parsed_flag.iter(),
+            CodegenMode::Production,
+            true,
+        )
+        .unwrap();
+
+        let expect_flags_content = r#"
+        package com.android.aconfig.test;
+        // TODO(b/303773055): Remove the annotation after access issue is resolved.
+        import android.compat.annotation.UnsupportedAppUsage;
+        /** @hide */
+        public final class Flags {
+            /** @hide */
+            public static final String FLAG_DISABLED_RW = "com.android.aconfig.test.disabled_rw";
+            /** @hide */
+            public static final String FLAG_EXPORTED_FLAG = "com.android.aconfig.test.exported_flag";
+
+            @UnsupportedAppUsage
+            public static boolean disabledRw() {
+                return FEATURE_FLAGS.disabledRw();
+            }
+            @UnsupportedAppUsage
+            public static boolean exportedFlag() {
+                return FEATURE_FLAGS.exportedFlag();
+            }
+            private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
+        }
+        "#;
+
+        let expect_feature_flags_content = r#"
+        package com.android.aconfig.test;
+        // TODO(b/303773055): Remove the annotation after access issue is resolved.
+        import android.compat.annotation.UnsupportedAppUsage;
+        /** @hide */
+        public interface FeatureFlags {
+            @UnsupportedAppUsage
+            boolean disabledRw();
+            @UnsupportedAppUsage
+            boolean exportedFlag();
+        }
+        "#;
+
+        let expect_feature_flags_impl_content = r#"
+        package com.android.aconfig.test;
+        // TODO(b/303773055): Remove the annotation after access issue is resolved.
+        import android.compat.annotation.UnsupportedAppUsage;
+        import android.provider.DeviceConfig;
+        import android.provider.DeviceConfig.Properties;
+        /** @hide */
+        public final class FeatureFlagsImpl implements FeatureFlags {
+            private static boolean aconfig_test_is_cached = false;
+            private static boolean other_namespace_is_cached = false;
+            private static boolean disabledRw = false;
+            private static boolean exportedFlag = false;
+
+
+            private void load_overrides_aconfig_test() {
+                try {
+                    Properties properties = DeviceConfig.getProperties("aconfig_test");
+                    disabledRw =
+                        properties.getBoolean("com.android.aconfig.test.disabled_rw", false);
+                    exportedFlag =
+                        properties.getBoolean("com.android.aconfig.test.exported_flag", false);
+                } catch (NullPointerException e) {
+                    throw new RuntimeException(
+                        "Cannot read value from namespace aconfig_test "
+                        + "from DeviceConfig. It could be that the code using flag "
+                        + "executed before SettingsProvider initialization. Please use "
+                        + "fixed read-only flag by adding is_fixed_read_only: true in "
+                        + "flag declaration.",
+                        e
+                    );
+                }
+                aconfig_test_is_cached = true;
+            }
+
+            private void load_overrides_other_namespace() {
+                try {
+                    Properties properties = DeviceConfig.getProperties("other_namespace");
+                } catch (NullPointerException e) {
+                    throw new RuntimeException(
+                        "Cannot read value from namespace other_namespace "
+                        + "from DeviceConfig. It could be that the code using flag "
+                        + "executed before SettingsProvider initialization. Please use "
+                        + "fixed read-only flag by adding is_fixed_read_only: true in "
+                        + "flag declaration.",
+                        e
+                    );
+                }
+                other_namespace_is_cached = true;
+            }
+ 
+            @Override
+            @UnsupportedAppUsage
+            public boolean disabledRw() {
+                if (!aconfig_test_is_cached) {
+                    load_overrides_aconfig_test();
+                }
+                return disabledRw;
+            }
+            
+            @Override
+            @UnsupportedAppUsage
+            public boolean exportedFlag() {
+                if (!aconfig_test_is_cached) {
+                    load_overrides_aconfig_test();
+                }
+                return exportedFlag;
+            }
+        }"#;
+
+        let expect_fake_feature_flags_impl_content = r#"
+        package com.android.aconfig.test;
+        // TODO(b/303773055): Remove the annotation after access issue is resolved.
+        import android.compat.annotation.UnsupportedAppUsage;
+        import java.util.HashMap;
+        import java.util.Map;
+        /** @hide */
+        public class FakeFeatureFlagsImpl implements FeatureFlags {
+            public FakeFeatureFlagsImpl() {
+                resetAll();
+            }
+            @Override
+            @UnsupportedAppUsage
+            public boolean disabledRw() {
+                return getValue(Flags.FLAG_DISABLED_RW);
+            }
+            @Override
+            @UnsupportedAppUsage
+            public boolean exportedFlag() {
+                return getValue(Flags.FLAG_EXPORTED_FLAG);
+            }
+            public void setFlag(String flagName, boolean value) {
+                if (!this.mFlagMap.containsKey(flagName)) {
+                    throw new IllegalArgumentException("no such flag " + flagName);
+                }
+                this.mFlagMap.put(flagName, value);
+            }
+            public void resetAll() {
+                for (Map.Entry entry : mFlagMap.entrySet()) {
+                    entry.setValue(null);
+                }
+            }
+            private boolean getValue(String flagName) {
+                Boolean value = this.mFlagMap.get(flagName);
+                if (value == null) {
+                    throw new IllegalArgumentException(flagName + " is not set");
+                }
+                return value;
+            }
+            private Map<String, Boolean> mFlagMap = new HashMap<>(
+                Map.ofEntries(
+                    Map.entry(Flags.FLAG_DISABLED_RO, false),
+                    Map.entry(Flags.FLAG_DISABLED_RW, false),
+                    Map.entry(Flags.FLAG_DISABLED_RW_IN_OTHER_NAMESPACE, false),
+                    Map.entry(Flags.FLAG_ENABLED_FIXED_RO, false),
+                    Map.entry(Flags.FLAG_ENABLED_RO, false),
+                    Map.entry(Flags.FLAG_ENABLED_RW, false),
+                    Map.entry(Flags.FLAG_EXPORTED_FLAG, false)
+                )
+            );
+        }
+    "#;
+
+        let mut file_set = HashMap::from([
+            ("com/android/aconfig/test/Flags.java", expect_flags_content),
+            ("com/android/aconfig/test/FeatureFlags.java", expect_feature_flags_content),
+            ("com/android/aconfig/test/FeatureFlagsImpl.java", expect_feature_flags_impl_content),
+            (
+                "com/android/aconfig/test/FakeFeatureFlagsImpl.java",
+                expect_fake_feature_flags_impl_content,
+            ),
+        ]);
+
+        for file in generated_files {
+            let file_path = file.path.to_str().unwrap();
+            assert!(file_set.contains_key(file_path), "Cannot find {}", file_path);
+            assert_eq!(
+                None,
+                crate::test::first_significant_code_diff(
+                    file_set.get(file_path).unwrap(),
+                    &String::from_utf8(file.contents).unwrap()
+                ),
+                "File {} content is not correct",
+                file_path
+            );
+            file_set.remove(file_path);
+        }
+
+        assert!(file_set.is_empty());
+    }
+
+    #[test]
     fn test_generate_java_code_test() {
         let parsed_flags = crate::test::parse_test_flags();
         let generated_files = generate_java_code(
             crate::test::TEST_PACKAGE,
             parsed_flags.parsed_flag.iter(),
             CodegenMode::Test,
+            false,
         )
         .unwrap();
 
@@ -508,6 +736,12 @@ mod tests {
             @Override
             @UnsupportedAppUsage
             public boolean enabledRw() {
+                throw new UnsupportedOperationException(
+                    "Method is not implemented.");
+            }
+            @Override
+            @UnsupportedAppUsage
+            public boolean exportedFlag() {
                 throw new UnsupportedOperationException(
                     "Method is not implemented.");
             }
