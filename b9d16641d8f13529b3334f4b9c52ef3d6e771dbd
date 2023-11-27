@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f383059_003c5b6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-11-27T07:50:28Z",
+      "side": 1,
+      "message": "Hey Deyao, can this be a proper fix for what we\u0027ve seen a few time like b/296557347?",
+      "revId": "b9d16641d8f13529b3334f4b9c52ef3d6e771dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
