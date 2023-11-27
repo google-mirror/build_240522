@@ -169,6 +169,8 @@ public:
     virtual bool enabled_ro() = 0;
 
     virtual bool enabled_rw() = 0;
+
+    virtual bool exported_flag() = 0;
 };
 
 extern std::unique_ptr<flag_provider_interface> provider_;
@@ -197,6 +199,10 @@ inline bool enabled_rw() {
     return provider_->enabled_rw();
 }
 
+inline bool exported_flag() {
+    return provider_->exported_flag();
+}
+
 }
 
 extern "C" {
@@ -213,6 +219,8 @@ bool com_android_aconfig_test_enabled_fixed_ro();
 bool com_android_aconfig_test_enabled_ro();
 
 bool com_android_aconfig_test_enabled_rw();
+
+bool com_android_aconfig_test_exported_flag();
 
 #ifdef __cplusplus
 } // extern "C"
@@ -256,6 +264,10 @@ public:
     virtual bool enabled_rw() = 0;
 
     virtual void enabled_rw(bool val) = 0;
+
+    virtual bool exported_flag() = 0;
+
+    virtual void exported_flag(bool val) = 0;
 
     virtual void reset_flags() {}
 };
@@ -310,6 +322,14 @@ inline void enabled_rw(bool val) {
     provider_->enabled_rw(val);
 }
 
+inline bool exported_flag() {
+    return provider_->exported_flag();
+}
+
+inline void exported_flag(bool val) {
+    provider_->exported_flag(val);
+}
+
 inline void reset_flags() {
     return provider_->reset_flags();
 }
@@ -342,6 +362,10 @@ void set_com_android_aconfig_test_enabled_ro(bool val);
 bool com_android_aconfig_test_enabled_rw();
 
 void set_com_android_aconfig_test_enabled_rw(bool val);
+
+bool com_android_aconfig_test_exported_flag();
+
+void set_com_android_aconfig_test_exported_flag(bool val);
 
 void com_android_aconfig_test_reset_flags();
 
@@ -405,8 +429,18 @@ namespace com::android::aconfig::test {
                 return cache_[2];
             }
 
+            virtual bool exported_flag() override {
+                if (cache_[3] == -1) {
+                    cache_[3] = server_configurable_flags::GetServerConfigurableFlag(
+                        "aconfig_flags.aconfig_test",
+                        "com.android.aconfig.test.exported_flag",
+                        "false") == "true";
+                }
+                return cache_[3];
+            }
+
     private:
-        std::vector<int8_t> cache_ = std::vector<int8_t>(3, -1);
+        std::vector<int8_t> cache_ = std::vector<int8_t>(4, -1);
     };
 
     std::unique_ptr<flag_provider_interface> provider_ =
@@ -435,6 +469,10 @@ bool com_android_aconfig_test_enabled_ro() {
 
 bool com_android_aconfig_test_enabled_rw() {
     return com::android::aconfig::test::enabled_rw();
+}
+
+bool com_android_aconfig_test_exported_flag() {
+    return com::android::aconfig::test::exported_flag();
 }
 
 "#;
@@ -543,6 +581,22 @@ namespace com::android::aconfig::test {
                 overrides_["enabled_rw"] = val;
             }
 
+            virtual bool exported_flag() override {
+                auto it = overrides_.find("exported_flag");
+                  if (it != overrides_.end()) {
+                      return it->second;
+                } else {
+                  return server_configurable_flags::GetServerConfigurableFlag(
+                      "aconfig_flags.aconfig_test",
+                      "com.android.aconfig.test.exported_flag",
+                      "false") == "true";
+                }
+            }
+
+            virtual void exported_flag(bool val) override {
+                overrides_["exported_flag"] = val;
+            }
+
             virtual void reset_flags() override {
                 overrides_.clear();
             }
@@ -607,6 +661,15 @@ void set_com_android_aconfig_test_enabled_rw(bool val) {
     com::android::aconfig::test::enabled_rw(val);
 }
 
+
+bool com_android_aconfig_test_exported_flag() {
+    return com::android::aconfig::test::exported_flag();
+}
+
+void set_com_android_aconfig_test_exported_flag(bool val) {
+    com::android::aconfig::test::exported_flag(val);
+}
+
 void com_android_aconfig_test_reset_flags() {
      com::android::aconfig::test::reset_flags();
 }
@@ -634,6 +697,7 @@ void com_android_aconfig_test_reset_flags() {
                 match mode {
                     CodegenMode::Production => EXPORTED_PROD_HEADER_EXPECTED,
                     CodegenMode::Test => EXPORTED_TEST_HEADER_EXPECTED,
+                    CodegenMode::Exported => panic!("exported mode not yet supported for cpp")
                 },
                 generated_files_map.get(&target_file_path).unwrap()
             )
@@ -647,6 +711,7 @@ void com_android_aconfig_test_reset_flags() {
                 match mode {
                     CodegenMode::Production => PROD_SOURCE_FILE_EXPECTED,
                     CodegenMode::Test => TEST_SOURCE_FILE_EXPECTED,
+                    CodegenMode::Exported => panic!("exported mode not yet supported for cpp")
                 },
                 generated_files_map.get(&target_file_path).unwrap()
             )
