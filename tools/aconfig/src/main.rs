@@ -63,7 +63,8 @@ fn cli() -> Command {
                         .long("mode")
                         .value_parser(EnumValueParser::<commands::CodegenMode>::new())
                         .default_value("production"),
-                ),
+                )
+                .arg(Arg::new("exported").long("exported").required(false)),
         )
         .subcommand(
             Command::new("create-cpp-lib")
@@ -179,8 +180,8 @@ fn main() -> Result<()> {
         Some(("create-java-lib", sub_matches)) => {
             let cache = open_single_file(sub_matches, "cache")?;
             let mode = get_required_arg::<CodegenMode>(sub_matches, "mode")?;
-            let generated_files =
-                commands::create_java_lib(cache, *mode).context("failed to create java lib")?;
+            let generated_files = commands::create_java_lib(cache, *mode)
+                .context("failed to create java lib")?;
             let dir = PathBuf::from(get_required_arg::<String>(sub_matches, "out")?);
             generated_files
                 .iter()
