@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eeca8264_e6f0194c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-28T16:45:49Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "b13f0c72_6752ef81",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "cbf00432faa0a2f706555f5b332ce17a9b1d875e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54a2a0c4_be9ad628",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-28T11:23:18Z",
       "side": 1,
       "message": "Can you add something about modes, and how `exported` is another mode like `test` and `production` please?",
+      "range": {
+        "startLine": 9,
+        "startChar": 41,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "cbf00432faa0a2f706555f5b332ce17a9b1d875e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b6da4e4_e677f12f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-28T16:45:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54a2a0c4_be9ad628",
       "range": {
         "startLine": 9,
         "startChar": 41,
