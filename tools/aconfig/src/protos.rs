@@ -31,7 +31,9 @@
 mod auto_generated {
     pub use aconfig_protos::aconfig::Flag_declaration as ProtoFlagDeclaration;
     pub use aconfig_protos::aconfig::Flag_declarations as ProtoFlagDeclarations;
+    pub use aconfig_protos::aconfig::Flag_metadata as ProtoFlagMetadata;
     pub use aconfig_protos::aconfig::Flag_permission as ProtoFlagPermission;
+    pub use aconfig_protos::aconfig::Flag_purpose as ProtoFlagPurpose;
     pub use aconfig_protos::aconfig::Flag_state as ProtoFlagState;
     pub use aconfig_protos::aconfig::Flag_value as ProtoFlagValue;
     pub use aconfig_protos::aconfig::Flag_values as ProtoFlagValues;
@@ -49,7 +51,9 @@ mod auto_generated {
     include!(concat!(env!("OUT_DIR"), "/aconfig_proto/mod.rs"));
     pub use aconfig::Flag_declaration as ProtoFlagDeclaration;
     pub use aconfig::Flag_declarations as ProtoFlagDeclarations;
+    pub use aconfig::Flag_metadata as ProtoFlagMetadata;
     pub use aconfig::Flag_permission as ProtoFlagPermission;
+    pub use aconfig::Flag_purpose as ProtoFlagPurpose;
     pub use aconfig::Flag_state as ProtoFlagState;
     pub use aconfig::Flag_value as ProtoFlagValue;
     pub use aconfig::Flag_values as ProtoFlagValues;
@@ -176,6 +180,37 @@ pub mod flag_permission {
     }
 }
 
+// pub mod flag_purpose {
+//     use super::*;
+//     use anyhow::bail;
+//
+//     pub fn parse_from_str(permission: &str) -> Result<ProtoFlagPurpose> {
+//         match permission.to_ascii_lowercase().as_str() {
+//             "unspecified" => Ok(ProtoFlagPurpose::PURPOSE_UNSPECIFIED),
+//             "feature" => Ok(ProtoFlagPurpose::PURPOSE_FEATURE),
+//             "bugfix" => Ok(ProtoFlagPurpose::PURPOSE_BUGFIX),
+//             _ => bail!("Purpose needs to be unspecified, feature or bugfix."),
+//         }
+//     }
+//
+//     pub fn to_string(permission: &ProtoFlagPurpose) -> &str {
+//         match permission {
+//             ProtoFlagPurpose::PURPOSE_UNSPECIFIED => "unspecified",
+//             ProtoFlagPurpose::PURPOSE_FEATURE => "feature",
+//             ProtoFlagPurpose::PURPOSE_BUGFIX => "bugfix",
+//         }
+//     }
+// }
+
+// pub mod flag_metadata {
+//     use super::*;
+//
+//     pub fn try_from_binary_proto(bytes: &[u8]) -> anyhow::Result<ProtoFlagMetadata> {
+//         let message: ProtoFlagMetadata = protobuf::Message::parse_from_bytes(bytes)?;
+//         Ok(message)
+//     }
+// }
+
 pub mod tracepoint {
     use super::*;
     use anyhow::ensure;
@@ -210,6 +245,7 @@ pub mod parsed_flag {
         ensure!(codegen::is_valid_name_ident(pf.name()), "bad parsed flag: bad name");
         ensure!(codegen::is_valid_name_ident(pf.namespace()), "bad parsed flag: bad namespace");
         ensure!(!pf.description().is_empty(), "bad parsed flag: empty description");
+        //ensure!(!pf.metadata., "bad parsed flag: empty metadata");
         ensure!(!pf.trace.is_empty(), "bad parsed flag: empty trace");
         for tp in pf.trace.iter() {
             super::tracepoint::verify_fields(tp)?;
