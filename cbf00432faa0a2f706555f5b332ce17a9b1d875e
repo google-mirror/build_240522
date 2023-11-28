@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b13f0c72_6752ef81",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-28T11:23:18Z",
+      "side": 1,
+      "message": "nit: commit in aconfig should start with \"aconfig: ...\" to make them stand out when doing `git log`.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "cbf00432faa0a2f706555f5b332ce17a9b1d875e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a2a0c4_be9ad628",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-28T11:23:18Z",
+      "side": 1,
+      "message": "Can you add something about modes, and how `exported` is another mode like `test` and `production` please?",
+      "range": {
+        "startLine": 9,
+        "startChar": 41,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "cbf00432faa0a2f706555f5b332ce17a9b1d875e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01620e01_6a77b186",
+        "filename": "tools/aconfig/src/codegen_rust.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-28T11:23:18Z",
+      "side": 1,
+      "message": "Use `todo!` instead of `panic!` for this.\n\nIs the plan to fix this in a follow-up CL, will you be working on it and when do you expect it to be done? Add the CL number to the TODO comment please, and update the commit message to say \"this only implements exported mode for java, follow-up CLs will add support in C++ and Rust\".\n\nSame todo! comment for the C++ code.",
+      "range": {
+        "startLine": 48,
+        "startChar": 37,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "cbf00432faa0a2f706555f5b332ce17a9b1d875e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "170594b7_c4c4fb07",
+        "filename": "tools/aconfig/tests/test.aconfig",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-28T11:23:18Z",
+      "side": 1,
+      "message": "`disabled_rw_exported` to follow the naming convention of the other flags?",
+      "range": {
+        "startLine": 64,
+        "startChar": 11,
+        "endLine": 64,
+        "endChar": 24
+      },
+      "revId": "cbf00432faa0a2f706555f5b332ce17a9b1d875e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
