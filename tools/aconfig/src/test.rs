@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2023 The Android Open Source Project
  *
@@ -43,6 +44,9 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
+  metadata {
+    purpose: PURPOSE_UNSPECIFIED
+  }
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -59,6 +63,9 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: true
+  metadata {
+    purpose: PURPOSE_UNSPECIFIED
+  }
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -80,6 +87,9 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
+  metadata {
+    purpose: PURPOSE_UNSPECIFIED
+  }
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -101,6 +111,9 @@ parsed_flag {
   }
   is_fixed_read_only: true
   is_exported: false
+  metadata {
+    purpose: PURPOSE_UNSPECIFIED
+  }
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -127,6 +140,9 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -148,6 +164,9 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
+  metadata {
+    purpose: PURPOSE_UNSPECIFIED
+  }
 }
 "#;
 
