@@ -33,6 +33,24 @@
       "message": "I think, but am not 100% sure, that this may have broken \"eng\" builds for Go, TV, and Wear.\n\nPlease see https://googleplex-android-review.git.corp.google.com/q/topic:%22b_313505540%22 for a proposed fix.",
       "revId": "bf0c0e68568a2321d1b4c0e9170b31dcfc7cdb54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6056ada8_8bf84055",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-11-28T21:14:02Z",
+      "side": 1,
+      "message": "Hi, thanks for reaching out. I already created fixes https://android-review.git.corp.google.com/q/topic:%22disable-art-service-dexopt%22, https://android-review.git.corp.google.com/q/topic:%22remove-preopt-extracted-apk%22) and they are under review.",
+      "parentUuid": "8b6f81ed_28709852",
+      "revId": "bf0c0e68568a2321d1b4c0e9170b31dcfc7cdb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
