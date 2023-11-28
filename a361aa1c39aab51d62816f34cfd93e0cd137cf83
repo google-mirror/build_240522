@@ -177,6 +177,24 @@
       "message": "isn\u0027t `_nmp_all_visited_parents` going to just be cleared immediately after this due to the recursive call?",
       "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a36e7696_c9f03599",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1903905
+      },
+      "writtenOn": "2023-11-28T01:05:15Z",
+      "side": 1,
+      "message": "Ah yeah good catch, missed this in a refactor.",
+      "parentUuid": "19073ca0_0a292c81",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
