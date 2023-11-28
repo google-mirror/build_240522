@@ -118,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aad9bea3_9f70309e",
+        "filename": "tools/aconfig/src/codegen_rust.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-28T17:22:58Z",
+      "side": 1,
+      "message": "Switched to `todo!`, added CL to `todo!` panic message, and added note to commit message. AFAIK, Rust and C++ `exported` support aren\u0027t prioritized for December, but perhaps after the holidays it\u0027ll get picked up, will defer to @opg@google.com on that.",
+      "parentUuid": "01620e01_6a77b186",
+      "range": {
+        "startLine": 48,
+        "startChar": 37,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "cbf00432faa0a2f706555f5b332ce17a9b1d875e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "170594b7_c4c4fb07",
