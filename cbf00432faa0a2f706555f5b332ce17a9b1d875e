@@ -139,6 +139,30 @@
       },
       "revId": "cbf00432faa0a2f706555f5b332ce17a9b1d875e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "749b29b6_fff86c1c",
+        "filename": "tools/aconfig/tests/test.aconfig",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-28T17:14:51Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "170594b7_c4c4fb07",
+      "range": {
+        "startLine": 64,
+        "startChar": 11,
+        "endLine": 64,
+        "endChar": 24
+      },
+      "revId": "cbf00432faa0a2f706555f5b332ce17a9b1d875e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
