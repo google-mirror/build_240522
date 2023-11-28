@@ -41,7 +41,21 @@ message flag_declaration {
   repeated string bug = 4;
   optional bool is_fixed_read_only = 5;
   optional bool is_exported = 6;
+  optional flag_metadata metadata = 7;
 };
+
+// See go/aconfig-metadata.
+message flag_metadata {
+  enum flag_purpose {
+    PURPOSE_UNSPECIFIED = 0;
+    PURPOSE_BUGFIX = 1;
+    PURPOSE_FEATURE = 2;
+  }
+  optional flag_purpose purpose = 1;
+
+  // To be added in the future: form_factor (phone vs watch).
+  // Also further information such as whether the flag is for Mainline.
+}
 
 message flag_declarations {
   optional string package = 1;
@@ -79,7 +93,7 @@ message parsed_flag {
   repeated tracepoint trace = 8;
   optional bool is_fixed_read_only = 9;
   optional bool is_exported = 10;
-
+  optional flag_metadata metadata = 11;
 }
 
 message parsed_flags {
