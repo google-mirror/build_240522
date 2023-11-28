@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c777211_33983450",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-11-28T17:11:41Z",
+      "side": 1,
+      "message": "Real fix should be using a temporary directory here, instead of re-using the input dir.",
+      "revId": "344cf29137504a8d2cc14bb26a0c15add93858a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
