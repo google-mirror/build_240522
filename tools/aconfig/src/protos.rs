@@ -30,6 +30,8 @@
 #[cfg(not(feature = "cargo"))]
 mod auto_generated {
     pub use aconfig_protos::aconfig::Flag_declaration as ProtoFlagDeclaration;
+    pub use aconfig_protos::aconfig::Flag_metadata as ProtoFlagMetadata;
+    pub use aconfig_protos::aconfig::Flag_purpose as ProtoFlagPurpose;
     pub use aconfig_protos::aconfig::Flag_declarations as ProtoFlagDeclarations;
     pub use aconfig_protos::aconfig::Flag_permission as ProtoFlagPermission;
     pub use aconfig_protos::aconfig::Flag_state as ProtoFlagState;
@@ -48,6 +50,8 @@ mod auto_generated {
     // Android tool-chain, we allow it
     include!(concat!(env!("OUT_DIR"), "/aconfig_proto/mod.rs"));
     pub use aconfig::Flag_declaration as ProtoFlagDeclaration;
+    pub use aconfig::Flag_metadata as ProtoFlagMetadata;
+    pub use aconfig::Flag_purpose as ProtoFlagPurpose;
     pub use aconfig::Flag_declarations as ProtoFlagDeclarations;
     pub use aconfig::Flag_permission as ProtoFlagPermission;
     pub use aconfig::Flag_state as ProtoFlagState;
@@ -65,8 +69,8 @@ use anyhow::Result;
 use paste::paste;
 
 fn try_from_text_proto<T>(s: &str) -> Result<T>
-where
-    T: protobuf::MessageFull,
+    where
+        T: protobuf::MessageFull,
 {
     protobuf::text_format::parse_from_str(s).map_err(|e| e.into())
 }
@@ -176,6 +180,37 @@ pub mod flag_permission {
     }
 }
 
+// pub mod flag_purpose {
+//     use super::*;
+//     use anyhow::bail;
+//
+//     pub fn parse_from_str(permission: &str) -> Result<ProtoFlagPurpose> {
+//         match permission.to_ascii_lowercase().as_str() {
+//             "unspecified" => Ok(ProtoFlagPurpose::PURPOSE_UNSPECIFIED),
+//             "feature" => Ok(ProtoFlagPurpose::PURPOSE_FEATURE),
+//             "bugfix" => Ok(ProtoFlagPurpose::PURPOSE_BUGFIX),
+//             _ => bail!("Purpose needs to be unspecified, feature or bugfix."),
+//         }
+//     }
+//
+//     pub fn to_string(permission: &ProtoFlagPurpose) -> &str {
+//         match permission {
+//             ProtoFlagPurpose::PURPOSE_UNSPECIFIED => "unspecified",
+//             ProtoFlagPurpose::PURPOSE_FEATURE => "feature",
+//             ProtoFlagPurpose::PURPOSE_BUGFIX => "bugfix",
+//         }
+//     }
+// }
+
+// pub mod flag_metadata {
+//     use super::*;
+//
+//     pub fn try_from_binary_proto(bytes: &[u8]) -> anyhow::Result<ProtoFlagMetadata> {
+//         let message: ProtoFlagMetadata = protobuf::Message::parse_from_bytes(bytes)?;
+//         Ok(message)
+//     }
+// }
+
 pub mod tracepoint {
     use super::*;
     use anyhow::ensure;
@@ -210,6 +245,7 @@ pub mod parsed_flag {
         ensure!(codegen::is_valid_name_ident(pf.name()), "bad parsed flag: bad name");
         ensure!(codegen::is_valid_name_ident(pf.namespace()), "bad parsed flag: bad namespace");
         ensure!(!pf.description().is_empty(), "bad parsed flag: empty description");
+        //ensure!(!pf.metadata., "bad parsed flag: empty metadata");
         ensure!(!pf.trace.is_empty(), "bad parsed flag: empty trace");
         for tp in pf.trace.iter() {
             super::tracepoint::verify_fields(tp)?;
@@ -319,7 +355,7 @@ flag {
 }
 "#,
         )
-        .unwrap();
+            .unwrap();
         assert_eq!(flag_declarations.package(), "com.foo.bar");
         let first = flag_declarations.flag.iter().find(|pf| pf.name() == "first").unwrap();
         assert_eq!(first.name(), "first");
@@ -351,7 +387,7 @@ flag {
 }
 "#,
         )
-        .unwrap_err();
+            .unwrap_err();
         assert_eq!(format!("{:?}", error), "bad flag declarations: missing package");
 
         // bad input: missing namespace in flag declaration
@@ -369,7 +405,7 @@ flag {
 }
 "#,
         )
-        .unwrap_err();
+            .unwrap_err();
         assert_eq!(format!("{:?}", error), "bad flag declaration: missing namespace");
 
         // bad input: bad package name in flag declarations
@@ -388,7 +424,7 @@ flag {
 }
 "#,
         )
-        .unwrap_err();
+            .unwrap_err();
         assert!(format!("{:?}", error).contains("bad flag declarations: bad package"));
 
         // bad input: bad name in flag declaration
@@ -407,7 +443,7 @@ flag {
 }
 "#,
         )
-        .unwrap_err();
+            .unwrap_err();
         assert!(format!("{:?}", error).contains("bad flag declaration: bad name"));
 
         // bad input: no bug entries in flag declaration
@@ -421,7 +457,7 @@ flag {
 }
 "#,
         )
-        .unwrap_err();
+            .unwrap_err();
         assert!(format!("{:?}", error).contains("bad flag declaration: exactly one bug required"));
 
         // bad input: multiple bug entries in flag declaration
@@ -437,7 +473,7 @@ flag {
 }
 "#,
         )
-        .unwrap_err();
+            .unwrap_err();
         assert!(format!("{:?}", error).contains("bad flag declaration: exactly one bug required"));
     }
 
@@ -460,7 +496,7 @@ flag_value {
 }
 "#,
         )
-        .unwrap();
+            .unwrap();
         let first = flag_values.flag_value.iter().find(|fv| fv.name() == "first").unwrap();
         assert_eq!(first.package(), "com.first");
         assert_eq!(first.name(), "first");
@@ -483,7 +519,7 @@ flag_value {
 }
 "#,
         )
-        .unwrap_err();
+            .unwrap_err();
         assert!(format!("{:?}", error).contains("bad flag value: bad package"));
 
         // bad input: bad name in flag value
@@ -497,7 +533,7 @@ flag_value {
 }
 "#,
         )
-        .unwrap_err();
+            .unwrap_err();
         assert!(format!("{:?}", error).contains("bad flag value: bad name"));
 
         // bad input: missing state in flag value
@@ -510,7 +546,7 @@ flag_value {
 }
 "#,
         )
-        .unwrap_err();
+            .unwrap_err();
         assert_eq!(format!("{:?}", error), "bad flag value: missing state");
 
         // bad input: missing permission in flag value
@@ -523,7 +559,7 @@ flag_value {
 }
 "#,
         )
-        .unwrap_err();
+            .unwrap_err();
         assert_eq!(format!("{:?}", error), "bad flag value: missing permission");
     }
 
