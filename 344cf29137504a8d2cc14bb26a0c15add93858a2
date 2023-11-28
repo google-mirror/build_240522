@@ -16,6 +16,24 @@
       "message": "Real fix should be using a temporary directory here, instead of re-using the input dir.",
       "revId": "344cf29137504a8d2cc14bb26a0c15add93858a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce3d5c68_e3e426af",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-11-28T17:12:13Z",
+      "side": 1,
+      "message": "```\n  apex_dir \u003d common.MakeTempDir(\"APEX\")\n  # checkvintf needs /apex dirmap\n  dirmap[\u0027/apex\u0027] \u003d apex_dir\n\n  # Always create /apex directory for dirmap\n  os.makedirs(apex_dir, exist_ok\u003dTrue)\n```",
+      "parentUuid": "2c777211_33983450",
+      "revId": "344cf29137504a8d2cc14bb26a0c15add93858a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
