@@ -87,6 +87,24 @@
       "tag": "mailMessageId\u003d\u003cCAOye\u003d2H2mDh6xZV5schib7R_qJzWGW63Ozbb5Ej-aR2Orgwwgw@mail.gmail.com\u003e",
       "revId": "bf0c0e68568a2321d1b4c0e9170b31dcfc7cdb54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11110305_ff8b0ab9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2023-11-28T21:56:50Z",
+      "side": 1,
+      "message": "One error (which I suspect also hits ATV and Wear, along with Go):\n\n```\nerror: found duplicate sysprop assignments:\npm.dexopt.shared\u003dquicken\npm.dexopt.shared\u003dskip\n```\n\nThat completely makes sense given this code and the contents of `build/make/target/board/go_defaults_common.prop` (a `.prop` file which ATV and Wear also use).\n\n-----\n\nThe other error is from `WITH_DEXPREOPT_ART_BOOT_IMG_ONLY` now needing to be another in a growing list of exceptions for go/ag/25493605.",
+      "parentUuid": "a4559163_d05eb35f",
+      "revId": "bf0c0e68568a2321d1b4c0e9170b31dcfc7cdb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
