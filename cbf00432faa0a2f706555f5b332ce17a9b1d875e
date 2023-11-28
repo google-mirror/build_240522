@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1f1ab56_2479dba6",
+        "filename": "tools/aconfig/src/codegen_rust.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-28T23:29:42Z",
+      "side": 1,
+      "message": "The convention for Android TODO comments is to reference the bug that tracks the change to be made. Please replace the aosp/\u003cid\u003e url with a b/\u003csomething\u003e.",
+      "parentUuid": "aad9bea3_9f70309e",
+      "range": {
+        "startLine": 48,
+        "startChar": 37,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "cbf00432faa0a2f706555f5b332ce17a9b1d875e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "170594b7_c4c4fb07",
         "filename": "tools/aconfig/tests/test.aconfig",
         "patchSetId": 10
