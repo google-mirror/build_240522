@@ -31,6 +31,8 @@
 mod auto_generated {
     pub use aconfig_protos::aconfig::Flag_declaration as ProtoFlagDeclaration;
     pub use aconfig_protos::aconfig::Flag_declarations as ProtoFlagDeclarations;
+    pub use aconfig_protos::aconfig::Flag_metadata as ProtoFlagMetadata;
+    pub use aconfig_protos::aconfig::flag_metadata::Flag_purpose as ProtoFlagPurpose;
     pub use aconfig_protos::aconfig::Flag_permission as ProtoFlagPermission;
     pub use aconfig_protos::aconfig::Flag_state as ProtoFlagState;
     pub use aconfig_protos::aconfig::Flag_value as ProtoFlagValue;
@@ -49,6 +51,8 @@ mod auto_generated {
     include!(concat!(env!("OUT_DIR"), "/aconfig_proto/mod.rs"));
     pub use aconfig::Flag_declaration as ProtoFlagDeclaration;
     pub use aconfig::Flag_declarations as ProtoFlagDeclarations;
+    pub use aconfig::Flag_metadata as ProtoFlagMetadata;
+    pub use aconfig::flag_metadata::Flag_purpose as ProtoFlagPurpose;
     pub use aconfig::Flag_permission as ProtoFlagPermission;
     pub use aconfig::Flag_state as ProtoFlagState;
     pub use aconfig::Flag_value as ProtoFlagValue;
