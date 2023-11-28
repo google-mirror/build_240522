@@ -16,6 +16,24 @@
       "message": "remove unnecessary formatting change",
       "revId": "8faa4a588001cad91b98a7577373745752a29971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f70e767_df0be6f0",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2023-11-28T02:10:06Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "d5b696dd_21d4ce7c",
+      "revId": "8faa4a588001cad91b98a7577373745752a29971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
