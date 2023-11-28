@@ -44,6 +44,9 @@ parsed_flag {
   is_fixed_read_only: false
   is_exported: false
   container: "system"
+  metadata {
+    purpose: PURPOSE_UNSPECIFIED
+  }
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -83,6 +86,11 @@ parsed_flag {
   is_fixed_read_only: false
   is_exported: true
   container: "system"
+=======
+  metadata {
+    purpose: PURPOSE_UNSPECIFIED
+  }
+>>>>>>> 9349ea0bdf (Add metadata to aconfig)
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -104,7 +112,13 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
+<<<<<<< HEAD
   container: "system"
+=======
+  metadata {
+    purpose: PURPOSE_UNSPECIFIED
+  }
+>>>>>>> 9349ea0bdf (Add metadata to aconfig)
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -126,7 +140,13 @@ parsed_flag {
   }
   is_fixed_read_only: true
   is_exported: false
+<<<<<<< HEAD
   container: "system"
+=======
+  metadata {
+    purpose: PURPOSE_UNSPECIFIED
+  }
+>>>>>>> 9349ea0bdf (Add metadata to aconfig)
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -153,7 +173,13 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
+<<<<<<< HEAD
   container: "system"
+=======
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+>>>>>>> 9349ea0bdf (Add metadata to aconfig)
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -175,7 +201,13 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
+<<<<<<< HEAD
   container: "system"
+=======
+  metadata {
+    purpose: PURPOSE_UNSPECIFIED
+  }
+>>>>>>> 9349ea0bdf (Add metadata to aconfig)
 }
 "#;
 
