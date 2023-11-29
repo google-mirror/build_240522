@@ -25,6 +25,7 @@ use crate::codegen_java::generate_java_code;
 use crate::codegen_rust::generate_rust_code;
 use crate::protos::{
     ProtoFlagPermission, ProtoFlagState, ProtoParsedFlag, ProtoParsedFlags, ProtoTracepoint,
+    ProtoPackageContainer
 };
 
 pub struct Input {
@@ -54,6 +55,7 @@ pub struct OutputFile {
 
 pub const DEFAULT_FLAG_STATE: ProtoFlagState = ProtoFlagState::DISABLED;
 pub const DEFAULT_FLAG_PERMISSION: ProtoFlagPermission = ProtoFlagPermission::READ_WRITE;
+pub const DEFAULT_PACKAGE_CONTAINER: ProtoPackageContainer = ProtoPackageContainer::PLATFORM_SYSTEM;
 
 pub fn parse_flags(
     package: &str,
@@ -72,6 +74,11 @@ pub fn parse_flags(
 
         let flag_declarations = crate::protos::flag_declarations::try_from_text_proto(&contents)
             .with_context(|| input.error_context())?;
+        let package_container = if flag_declarations.has_container() {
+            flag_declarations.container()
+        } else {
+            DEFAULT_PACKAGE_CONTAINER
+        };
         ensure!(
             package == flag_declarations.package(),
             "failed to parse {}: expected package {}, got {}",
@@ -104,6 +111,7 @@ pub fn parse_flags(
             tracepoint.set_state(DEFAULT_FLAG_STATE);
             tracepoint.set_permission(flag_permission);
             parsed_flag.trace.push(tracepoint);
+            parsed_flag.set_container(package_container);
 
             // verify ParsedFlag looks reasonable
             crate::protos::parsed_flag::verify_fields(&parsed_flag)?;

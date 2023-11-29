@@ -43,6 +43,7 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
+  container: PLATFORM_SYSTEM
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -59,6 +60,7 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: true
+  container: PLATFORM_SYSTEM
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -80,6 +82,7 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
+  container: PLATFORM_SYSTEM
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -101,6 +104,7 @@ parsed_flag {
   }
   is_fixed_read_only: true
   is_exported: false
+  container: PLATFORM_SYSTEM
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -127,6 +131,7 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
+  container: PLATFORM_SYSTEM
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -148,6 +153,7 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
+  container: PLATFORM_SYSTEM
 }
 "#;
 

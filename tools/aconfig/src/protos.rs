@@ -38,6 +38,7 @@ mod auto_generated {
     pub use aconfig_protos::aconfig::Parsed_flag as ProtoParsedFlag;
     pub use aconfig_protos::aconfig::Parsed_flags as ProtoParsedFlags;
     pub use aconfig_protos::aconfig::Tracepoint as ProtoTracepoint;
+    pub use aconfig_protos::aconfig::Package_container as ProtoPackageContainer;
 }
 
 // ---- When building with cargo ----
@@ -56,6 +57,7 @@ mod auto_generated {
     pub use aconfig::Parsed_flag as ProtoParsedFlag;
     pub use aconfig::Parsed_flags as ProtoParsedFlags;
     pub use aconfig::Tracepoint as ProtoTracepoint;
+    pub use aconfig::Package_container as ProtoPackageContainer;
 }
 
 // ---- Common for both the Android tool-chain and cargo ----
