@@ -16,6 +16,24 @@
       "message": "I assume cargo fmt will catch this superflous additional blank line",
       "revId": "f162e09c004001771b41d0fba8086e64486cf13e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f22af1e1_b33f6e75",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-29T15:44:54Z",
+      "side": 1,
+      "message": "Removed the empty line.",
+      "parentUuid": "afa60170_ca7b1e80",
+      "revId": "f162e09c004001771b41d0fba8086e64486cf13e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
