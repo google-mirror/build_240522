@@ -286,6 +286,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06fa154d_40ca4c52",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1903905
+      },
+      "writtenOn": "2023-11-29T01:19:51Z",
+      "side": 1,
+      "message": "Very fair, will do!",
+      "parentUuid": "c1a174b3_2d8f6012",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ebd9d5d_4e8c9ea4",
         "filename": "core/artifact_path_requirements.mk",
         "patchSetId": 3
@@ -297,6 +315,30 @@
       "writtenOn": "2023-11-29T01:08:22Z",
       "side": 1,
       "message": "Is a \"derived product\" a child or parent product? What does \"override them away\" mean?",
+      "range": {
+        "startLine": 83,
+        "startChar": 45,
+        "endLine": 83,
+        "endChar": 84
+      },
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a35ca2af_de345c4f",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1903905
+      },
+      "writtenOn": "2023-11-29T01:19:51Z",
+      "side": 1,
+      "message": "Derived \u003d\u003d child.  Imagine /system/FooStub.apk in base.mk and /system_ext/Foo.apk in derived.mk, where derived.mk has $(call require-no-new-artifacts-outside-path, /system_ext), and Foo overides FooStub -- now derived.mk and products that inherit it will not have /system/FooStub.apk in the system image, so having /system/FooStub.apk be a strict exception will cause a build error.\n\nBeyond replacing \"derived\" with \"child\", do you have suggestions on a better way to phrase this?",
+      "parentUuid": "2ebd9d5d_4e8c9ea4",
       "range": {
         "startLine": 83,
         "startChar": 45,
