@@ -102,6 +102,7 @@ fn cli() -> Command {
         .subcommand(
             Command::new("dump")
                 .arg(Arg::new("cache").long("cache").action(ArgAction::Append))
+                .arg(Arg::new("files").action(ArgAction::Append))
                 .arg(
                     Arg::new("format")
                         .long("format")
@@ -237,7 +238,8 @@ fn main() -> Result<()> {
             write_output_to_file_or_stdout(path, &output)?;
         }
         Some(("dump", sub_matches)) => {
-            let input = open_zero_or_more_files(sub_matches, "cache")?;
+            let mut input = open_zero_or_more_files(sub_matches, "cache")?;
+            input.append(&mut open_zero_or_more_files(sub_matches, "files")?);
             let format = get_required_arg::<DumpFormat>(sub_matches, "format")
                 .context("failed to dump previously parsed flags")?;
             let dedup = get_required_arg::<bool>(sub_matches, "dedup")?;
