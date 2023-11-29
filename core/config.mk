@@ -436,16 +436,16 @@ endif
 
 # Boolean variable determining if AOSP is page size agnostic. This means
 # that AOSP can use a kernel configured with 4k/16k/64k PAGE SIZES.
-TARGET_PAGE_SIZE_AGNOSTIC := false
-ifdef PRODUCT_PAGE_SIZE_AGNOSTIC
-  TARGET_PAGE_SIZE_AGNOSTIC := $(PRODUCT_PAGE_SIZE_AGNOSTIC)
-  ifeq ($(TARGET_PAGE_SIZE_AGNOSTIC),true)
+TARGET_PRODUCT_NO_PAGE_SIZE := false
+ifdef PRODUCT_NO_PAGE_SIZE
+  TARGET_PRODUCT_NO_PAGE_SIZE := $(PRODUCT_NO_PAGE_SIZE)
+  ifeq ($(TARGET_PRODUCT_NO_PAGE_SIZE),true)
       ifneq ($(TARGET_MAX_PAGE_SIZE_SUPPORTED),65536)
           $(error TARGET_MAX_PAGE_SIZE_SUPPORTED has to be 65536 to support page size agnostic)
       endif
   endif
 endif
-.KATI_READONLY := TARGET_PAGE_SIZE_AGNOSTIC
+.KATI_READONLY := TARGET_PRODUCT_NO_PAGE_SIZE
 
 # Pruned directory options used when using findleaves.py
 # See envsetup.mk for a description of SCAN_EXCLUDE_DIRS
