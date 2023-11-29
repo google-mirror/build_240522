@@ -1150,6 +1150,13 @@ endif
 ifdef LOCAL_TEST_OPTIONS_TAGS
 ALL_MODULES.$(my_register_name).TEST_OPTIONS_TAGS := $(LOCAL_TEST_OPTIONS_TAGS)
 endif
+ifdef LOCAL_TEAM
+ALL_MODULES.$(my_register_name).TEAM := $(LOCAL_TEAM)
+endif
+ifdef LOCAL_TRENDY_TEAM_ID
+ALL_MODULES.$(my_register_name).TRENDY_TEAM_ID := $(LOCAL_TRENDY_TEAM_ID)
+endif
+
 test_config :=
 
 INSTALLABLE_FILES.$(LOCAL_INSTALLED_MODULE).MODULE := $(my_register_name)

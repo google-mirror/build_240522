@@ -27,6 +27,8 @@ $(MODULE_INFO_JSON):
 			'"classes_jar": [$(KATI_foreach_sep w,$(COMMA) ,$(sort $(ALL_MODULES.$(m).CLASSES_JAR)),"$(w)")],' \
 			'"test_mainline_modules": [$(KATI_foreach_sep w,$(COMMA) ,$(sort $(ALL_MODULES.$(m).TEST_MAINLINE_MODULES)),"$(w)")],' \
 			'"is_unit_test": "$(ALL_MODULES.$(m).IS_UNIT_TEST)"$(COMMA)' \
+			'"test_owner": "$(ALL_MODULES.$(m).TEAM)"$(COMMA)' \
+			'"trendy_team_id": "$(ALL_MODULES.$(m).TRENDY_TEAM_ID)"$(COMMA)' \
 			'"test_options_tags": [$(KATI_foreach_sep w,$(COMMA) ,$(sort $(ALL_MODULES.$(m).TEST_OPTIONS_TAGS)),"$(w)")],' \
 			'"data": [$(KATI_foreach_sep w,$(COMMA) ,$(sort $(ALL_MODULES.$(m).TEST_DATA)),"$(w)")],' \
 			'"runtime_dependencies": [$(KATI_foreach_sep w,$(COMMA) ,$(sort $(ALL_MODULES.$(m).LOCAL_RUNTIME_LIBRARIES)),"$(w)")],' \
