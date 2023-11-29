@@ -164,6 +164,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0b7ecc8_ab08b612",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-29T01:08:22Z",
+      "side": 1,
+      "message": "`PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS` is supposed to provide a global switch to turn off artifact path requirements for the whole product. Why are we making it per-makefile?",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd9a7190_1150b0d0",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-29T01:08:22Z",
+      "side": 1,
+      "message": "Please document this function",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19073ca0_0a292c81",
         "filename": "core/artifact_path_requirements.mk",
         "patchSetId": 3
@@ -193,6 +227,80 @@
       "side": 1,
       "message": "Ah yeah good catch, missed this in a refactor.",
       "parentUuid": "19073ca0_0a292c81",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1a174b3_2d8f6012",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-29T01:08:22Z",
+      "side": 1,
+      "message": "This evaluating a variable without calling it is an interesting trick that I didn\u0027t know about before, but I think it would be clearer if we just always called variables that are used as functions. Especially in cases like this where you\u0027re mixing the trick with a standard call.\n\nSame in product.mk",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ebd9d5d_4e8c9ea4",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-29T01:08:22Z",
+      "side": 1,
+      "message": "Is a \"derived product\" a child or parent product? What does \"override them away\" mean?",
+      "range": {
+        "startLine": 83,
+        "startChar": 45,
+        "endLine": 83,
+        "endChar": 84
+      },
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2dba795_8eca1efc",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-29T01:08:22Z",
+      "side": 1,
+      "message": "Similarly to `PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS`, this used to be a global variable. Simply changing it to be scoped won\u0027t work for existing makefiles like this one, that set it but don\u0027t call `require-artifacts-in-path`: https://cs.android.com/android/platform/superproject/main/+/main:build/make/target/product/runtime_libart.mk;l\u003d196;drc\u003dbf0c0e68568a2321d1b4c0e9170b31dcfc7cdb54",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "774ab538_184f63cb",
+        "filename": "core/product.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-29T01:08:22Z",
+      "side": 1,
+      "message": "Is there a need for this functionality? This seems like it enables laziness instead of properly ensuring all your files, even from within inherited makefiles, are within your boundaries.",
       "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
