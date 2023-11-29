@@ -399,6 +399,24 @@
       "message": "Is there a need for this functionality? This seems like it enables laziness instead of properly ensuring all your files, even from within inherited makefiles, are within your boundaries.",
       "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42b9520a_1a29b01e",
+        "filename": "core/product.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1903905
+      },
+      "writtenOn": "2023-11-29T01:30:40Z",
+      "side": 1,
+      "message": "There is -- in fact I think this is the common case!  It\u0027s a consequence of the hierarchy outlined in the commit message, where e.g. you need the product partition makefile to inherit the system partition makefile but also ensure the things you add directly to the product partition makefile always only actually contribute to the product partition.  If you set it up so that product doesn\u0027t inherit system, inevitably your product-specific packages pull in a dependency from system that by all means should be assumed to be part of the system image and not listed as an exception in the product partition makefile.  Note that it will still yell at you if your product-specific package requires a system dependency that is *not* listed in the system partition makefile.",
+      "parentUuid": "774ab538_184f63cb",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
