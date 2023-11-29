@@ -34,6 +34,24 @@
       "parentUuid": "2c777211_33983450",
       "revId": "344cf29137504a8d2cc14bb26a0c15add93858a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "987eb27a_f5aed977",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-11-29T01:05:04Z",
+      "side": 1,
+      "message": "Thanks. Yeah I agree this is better. Do we need to remove the directory created by `common.MakeTempDir()`?",
+      "parentUuid": "ce3d5c68_e3e426af",
+      "revId": "344cf29137504a8d2cc14bb26a0c15add93858a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
