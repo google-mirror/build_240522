@@ -288,26 +288,19 @@ ifeq ($(NATIVE_COVERAGE),true)
   endif
 endif
 
+ifeq ($(BOARD_API_LEVEL),)
+  my_cflags += -D__ANDROID_VENDOR_API__=$(PLATFORM_SDK_VERSION)
+else
+  my_cflags += -D__ANDROID_VENDOR_API__=$(BOARD_API_LEVEL)
+endif
+
 ifneq ($(LOCAL_USE_VNDK),)
-  # Required VNDK version for vendor modules is BOARD_VNDK_VERSION.
-  my_api_level := $(BOARD_VNDK_VERSION)
-  ifeq ($(my_api_level),current)
-    # Build with current PLATFORM_VNDK_VERSION.
-    # If PLATFORM_VNDK_VERSION has a CODENAME, it will return
-    # __ANDROID_API_FUTURE__.
-    my_api_level := $(call codename-or-sdk-to-sdk,$(PLATFORM_VNDK_VERSION))
-  else
-    # Build with current BOARD_VNDK_VERSION.
-    my_api_level := $(call codename-or-sdk-to-sdk,$(BOARD_VNDK_VERSION))
-  endif
   my_cflags += -D__ANDROID_VNDK__
   ifneq ($(LOCAL_USE_VNDK_VENDOR),)
-    # Vendor modules have LOCAL_USE_VNDK_VENDOR when
-    # BOARD_VNDK_VERSION is defined.
+    # Vendor modules have LOCAL_USE_VNDK_VENDOR
     my_cflags += -D__ANDROID_VENDOR__
   else ifneq ($(LOCAL_USE_VNDK_PRODUCT),)
-    # Product modules have LOCAL_USE_VNDK_PRODUCT when
-    # PRODUCT_PRODUCT_VNDK_VERSION is defined.
+    # Product modules have LOCAL_USE_VNDK_PRODUCT
     my_cflags += -D__ANDROID_PRODUCT__
   endif
 endif
