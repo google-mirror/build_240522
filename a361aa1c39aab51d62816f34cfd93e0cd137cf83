@@ -217,6 +217,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2126fdcc_e733aecd",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1903905
+      },
+      "writtenOn": "2023-11-29T01:37:38Z",
+      "side": 1,
+      "message": "Indeed, I assumed this to be because the previous implementation didn\u0027t account for inheritance at all.  I tried both ways and found this way to give better error messages.  This makes sense to me -- individual products should be able to specify that they enforce a boundary.  Boundary violations in child products can be ignored by setting the variable to false.",
+      "parentUuid": "4fec22df_571bc623",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd9a7190_1150b0d0",
         "filename": "core/artifact_path_requirements.mk",
         "patchSetId": 3
