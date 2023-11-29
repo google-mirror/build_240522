@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ae2d8a_6496054b",
+        "filename": "tools/metadata/generator.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2023-11-29T18:27:39Z",
+      "side": 1,
+      "message": "Let also add,\n\nMultiple-ownership is general is discouraged though as it make infrastructure around android relying on this information pick up a random value when it needs only 1",
+      "range": {
+        "startLine": 185,
+        "startChar": 7,
+        "endLine": 185,
+        "endChar": 121
+      },
+      "revId": "7b1d2ac29b19f1dc934bd2501a61a59b6f7be859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
