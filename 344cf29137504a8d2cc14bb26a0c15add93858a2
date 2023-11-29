@@ -88,6 +88,24 @@
       "parentUuid": "a5936ba9_9e69759e",
       "revId": "344cf29137504a8d2cc14bb26a0c15add93858a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61be6441_2fdf2300",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-11-29T01:15:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edd78067_538b72de",
+      "revId": "344cf29137504a8d2cc14bb26a0c15add93858a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
