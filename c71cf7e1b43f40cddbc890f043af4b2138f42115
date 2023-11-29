@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92eb8786_8335baa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-11-29T22:14:38Z",
+      "side": 1,
+      "message": "Not sure doing that will not cause any problems. It\u0027s better to wait for entire topic to be submitted when it\u0027s ready to be submitted.",
+      "parentUuid": "ffe96ebb_bebd35ca",
+      "revId": "c71cf7e1b43f40cddbc890f043af4b2138f42115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c1c331d_271d2444",
         "filename": "core/definitions.mk",
         "patchSetId": 2
