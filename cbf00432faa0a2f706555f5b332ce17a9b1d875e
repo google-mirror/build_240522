@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "836f2cd2_7f414dc1",
+        "filename": "tools/aconfig/src/codegen_rust.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-29T15:17:59Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "f1f1ab56_2479dba6",
+      "range": {
+        "startLine": 48,
+        "startChar": 37,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "cbf00432faa0a2f706555f5b332ce17a9b1d875e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "170594b7_c4c4fb07",
