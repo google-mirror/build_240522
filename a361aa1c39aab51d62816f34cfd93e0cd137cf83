@@ -199,6 +199,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4fec22df_571bc623",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-29T01:16:00Z",
+      "side": 1,
+      "message": "It\u0027s a product variable, but the [previous implementation was just accessing it\u0027s final value](https://cs.android.com/android/platform/superproject/main/+/main:build/make/core/artifact_path_requirements.mk;l\u003d53;drc\u003dd8cde776070d0a2b592d5b53dac5c188b73a671b), not it\u0027s value at the point of intermediate makefiles.",
+      "parentUuid": "b58f9951_92f0a0da",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd9a7190_1150b0d0",
         "filename": "core/artifact_path_requirements.mk",
         "patchSetId": 3
