@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afa60170_ca7b1e80",
+        "filename": "tools/aconfig/src/codegen_cpp.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-11-29T15:39:06Z",
+      "side": 1,
+      "message": "I assume cargo fmt will catch this superflous additional blank line",
+      "revId": "f162e09c004001771b41d0fba8086e64486cf13e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
