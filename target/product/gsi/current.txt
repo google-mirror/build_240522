@@ -58,6 +58,7 @@ VNDK-SP: libunwindstack.so
 VNDK-SP: libutils.so
 VNDK-SP: libutilscallstack.so
 VNDK-SP: libz.so
+VNDK-SP: libzstd.so
 VNDK-core: android.frameworks.cameraservice.common-V1-ndk.so
 VNDK-core: android.frameworks.cameraservice.device-V1-ndk.so
 VNDK-core: android.frameworks.cameraservice.service-V1-ndk.so
@@ -207,3 +208,4 @@ VNDK-product: libxml2.so
 VNDK-product: libyuv.so
 VNDK-product: libz.so
 VNDK-product: libziparchive.so
+VNDK-product: libzstd.so
