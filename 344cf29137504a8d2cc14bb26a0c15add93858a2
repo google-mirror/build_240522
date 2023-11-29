@@ -52,6 +52,24 @@
       "parentUuid": "ce3d5c68_e3e426af",
       "revId": "344cf29137504a8d2cc14bb26a0c15add93858a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5936ba9_9e69759e",
+        "filename": "tools/releasetools/check_target_files_vintf.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-11-29T01:06:50Z",
+      "side": 1,
+      "message": "common.MakeTempDir() automatically cleans up the dir on program exit, but doesn\u0027t hurt to clean up earlier than that.",
+      "parentUuid": "987eb27a_f5aed977",
+      "revId": "344cf29137504a8d2cc14bb26a0c15add93858a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
