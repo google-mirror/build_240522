@@ -179,6 +179,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b58f9951_92f0a0da",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1903905
+      },
+      "writtenOn": "2023-11-29T01:12:05Z",
+      "side": 1,
+      "message": "It is already per-makefile: https://cs.android.com/android/platform/superproject/+/master:build/make/core/product.mk;l\u003d290;drc\u003daa9a4a490783f114f224716526cae5c16e0d4a13",
+      "parentUuid": "e0b7ecc8_ab08b612",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd9a7190_1150b0d0",
@@ -284,6 +302,24 @@
       "writtenOn": "2023-11-29T01:08:22Z",
       "side": 1,
       "message": "Similarly to `PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS`, this used to be a global variable. Simply changing it to be scoped won\u0027t work for existing makefiles like this one, that set it but don\u0027t call `require-artifacts-in-path`: https://cs.android.com/android/platform/superproject/main/+/main:build/make/target/product/runtime_libart.mk;l\u003d196;drc\u003dbf0c0e68568a2321d1b4c0e9170b31dcfc7cdb54",
+      "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ca2f878_c1485b84",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1903905
+      },
+      "writtenOn": "2023-11-29T01:12:05Z",
+      "side": 1,
+      "message": "This is also already a per-product-makefile variable: https://cs.android.com/android/platform/superproject/+/master:build/make/core/product.mk;l\u003d294;drc\u003daa9a4a490783f114f224716526cae5c16e0d4a13",
+      "parentUuid": "f2dba795_8eca1efc",
       "revId": "a361aa1c39aab51d62816f34cfd93e0cd137cf83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
