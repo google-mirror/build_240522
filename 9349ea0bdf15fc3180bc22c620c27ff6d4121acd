@@ -75,6 +75,30 @@
       },
       "revId": "9349ea0bdf15fc3180bc22c620c27ff6d4121acd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "626f17e7_15787f64",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1320214
+      },
+      "writtenOn": "2023-11-30T19:21:55Z",
+      "side": 1,
+      "message": "This much (that we\u0027re adding form factors to the metadata) has been signed off by jham and amhk and joeo as part of go/aconfig-metadata. We still need a discussion on the details though.",
+      "parentUuid": "66759102_10d04463",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 61
+      },
+      "revId": "9349ea0bdf15fc3180bc22c620c27ff6d4121acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
