@@ -22,6 +22,30 @@
       },
       "revId": "4605c0ec76f9b27741814090bf1841835384f8d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdd93606_7eff9ca8",
+        "filename": "core/binary.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1586,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-30T02:22:41Z",
+      "side": 0,
+      "message": "No. That must came from the sdk api level (line#199) for all image variant modules. We had replaced it with the BOARD_VNDK_VERSION for the vendor variant in case `BOARD_VNDK_VERSION !\u003d current`. But we don\u0027t use the sdk version for vendor and keep the sdk version as it was.",
+      "parentUuid": "76ed5c3e_062507dd",
+      "range": {
+        "startLine": 1586,
+        "startChar": 56,
+        "endLine": 1586,
+        "endChar": 68
+      },
+      "revId": "4605c0ec76f9b27741814090bf1841835384f8d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
