@@ -46,6 +46,30 @@
       },
       "revId": "4605c0ec76f9b27741814090bf1841835384f8d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6329db0a_6d13a6f7",
+        "filename": "core/binary.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1586,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2023-11-30T02:24:09Z",
+      "side": 0,
+      "message": "Ah OK. I thought we removed all definitions for my_api_level.",
+      "parentUuid": "bdd93606_7eff9ca8",
+      "range": {
+        "startLine": 1586,
+        "startChar": 56,
+        "endLine": 1586,
+        "endChar": 68
+      },
+      "revId": "4605c0ec76f9b27741814090bf1841835384f8d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
