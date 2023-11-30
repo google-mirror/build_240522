@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d4435f5_7c78dfa8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-11-30T23:46:35Z",
+      "side": 1,
+      "message": "We don\u0027t support this, and there is no existing code in AOSP that would make this work. Even if there was another CL in this topic to add full support, I\u0027d be hesitant to take it, since we wouldn\u0027t be able to support it.",
+      "parentUuid": "71d1faa6_dd2c1d1f",
+      "revId": "0d5c225d4cab81167a3a1d504c7548dde0046dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85644127_90548495",
         "filename": "tools/releasetools/check_partition_sizes.py",
         "patchSetId": 2
