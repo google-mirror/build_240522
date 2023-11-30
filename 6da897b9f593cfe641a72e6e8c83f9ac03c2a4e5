@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "690b0c1a_2eb336e7",
+        "filename": "core/binary.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-11-30T04:12:50Z",
+      "side": 1,
+      "message": "This case shouldn\u0027t happen, or we just skip defining `__ANDROID_VENDOR_API__` for this case.",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 67
+      },
+      "revId": "6da897b9f593cfe641a72e6e8c83f9ac03c2a4e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
