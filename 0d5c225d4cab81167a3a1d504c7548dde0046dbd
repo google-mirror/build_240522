@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71d1faa6_dd2c1d1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-30T23:29:13Z",
+      "side": 1,
+      "message": "@dvander@google.com to confirm that RDAP on non-A/B is supported / not supported.",
+      "parentUuid": "939d2906_44b9435d",
+      "revId": "0d5c225d4cab81167a3a1d504c7548dde0046dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85644127_90548495",
         "filename": "tools/releasetools/check_partition_sizes.py",
         "patchSetId": 2
