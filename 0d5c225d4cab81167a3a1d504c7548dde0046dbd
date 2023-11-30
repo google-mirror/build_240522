@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "939d2906_44b9435d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-30T23:27:49Z",
+      "side": 1,
+      "message": "Is there a reason why you need to support Retrofit DAP on non-A/B devices? I think the support for retrofit DAP is only in a minimally working state so that it works on Pixel 3 series (IIRC), and there are a few other places in liblp\u0027s code to fix so RDAP works for non-A/B. We don\u0027t intend to support or test RDAP on non-A/B.\n\nDo you already have a device using RDAP on non-A/B, or is this CL part of the development for such efforts?",
+      "revId": "0d5c225d4cab81167a3a1d504c7548dde0046dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85644127_90548495",
         "filename": "tools/releasetools/check_partition_sizes.py",
         "patchSetId": 2
