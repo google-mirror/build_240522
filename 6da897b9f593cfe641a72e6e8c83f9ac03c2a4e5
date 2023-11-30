@@ -46,6 +46,30 @@
       },
       "revId": "6da897b9f593cfe641a72e6e8c83f9ac03c2a4e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da204d23_72ae049b",
+        "filename": "core/binary.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-11-30T05:57:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "76ba3620_fb8ea331",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 67
+      },
+      "revId": "6da897b9f593cfe641a72e6e8c83f9ac03c2a4e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
