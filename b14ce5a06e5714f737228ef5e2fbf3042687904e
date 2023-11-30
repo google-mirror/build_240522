@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba8639c6_51f5431e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-11-30T21:01:15Z",
+      "side": 1,
+      "message": "Looks like there are a couple failing unit tests, I think you just need to update this textproto: https://cs.android.com/android/platform/superproject/main/+/main:build/make/tools/aconfig/src/test.rs;l\u003d26",
+      "revId": "b14ce5a06e5714f737228ef5e2fbf3042687904e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
