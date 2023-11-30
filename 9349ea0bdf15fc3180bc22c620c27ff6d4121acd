@@ -52,6 +52,29 @@
       "parentUuid": "3c0f0001_7ca03413",
       "revId": "9349ea0bdf15fc3180bc22c620c27ff6d4121acd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66759102_10d04463",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-11-30T19:18:19Z",
+      "side": 1,
+      "message": "Let\u0027s review this separately (in the CL which actually adds it).",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 61
+      },
+      "revId": "9349ea0bdf15fc3180bc22c620c27ff6d4121acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
