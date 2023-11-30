@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85644127_90548495",
+        "filename": "tools/releasetools/check_partition_sizes.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-30T23:25:05Z",
+      "side": 1,
+      "message": "Please update the error message too.",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 55
+      },
+      "revId": "0d5c225d4cab81167a3a1d504c7548dde0046dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
