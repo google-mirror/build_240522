@@ -22,6 +22,30 @@
       },
       "revId": "6da897b9f593cfe641a72e6e8c83f9ac03c2a4e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76ba3620_fb8ea331",
+        "filename": "core/binary.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-11-30T05:47:32Z",
+      "side": 1,
+      "message": "This is required to support UDC target. I left a comment for a TODO.",
+      "parentUuid": "690b0c1a_2eb336e7",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 67
+      },
+      "revId": "6da897b9f593cfe641a72e6e8c83f9ac03c2a4e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
