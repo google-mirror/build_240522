@@ -16,6 +16,24 @@
       "message": "Will this impact the revert of GKI build rules?\n\nJust want to check if we should hold off this.",
       "revId": "e6372eee91c18ac1ba584193bc4199558e09e992",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d1ffca4_3383a2c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2023-12-01T09:00:53Z",
+      "side": 1,
+      "message": "no they are independent and they are both removing unused code. so there should be no impact, other that the special case with GSI....",
+      "parentUuid": "a7620f5f_4d8cfc08",
+      "revId": "e6372eee91c18ac1ba584193bc4199558e09e992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
