@@ -29,6 +29,8 @@ mod codegen_cpp;
 mod codegen_java;
 mod codegen_rust;
 mod commands;
+mod create_storage;
+mod package_table;
 mod protos;
 
 #[cfg(test)]
@@ -107,6 +109,12 @@ fn cli() -> Command {
                         .default_value("text"),
                 )
                 .arg(Arg::new("out").long("out").default_value("-")),
+        )
+        .subcommand(
+            Command::new("create-storage")
+                .arg(Arg::new("container").long("container").required(true))
+                .arg(Arg::new("cache").long("cache").required(true))
+                .arg(Arg::new("out").long("out").required(true)),
         )
 }
 
@@ -225,6 +233,16 @@ fn main() -> Result<()> {
             let output = commands::dump_parsed_flags(input, *format)?;
             let path = get_required_arg::<String>(sub_matches, "out")?;
             write_output_to_file_or_stdout(path, &output)?;
+        }
+        Some(("create-storage", sub_matches)) => {
+            let cache = open_zero_or_more_files(sub_matches, "cache")?;
+            let container = get_required_arg::<String>(sub_matches, "container")?;
+            let dir = PathBuf::from(get_required_arg::<String>(sub_matches, "out")?);
+            let generated_files = commands::create_storage(cache, container)
+                .context("failed to create storage files")?;
+            generated_files
+                .iter()
+                .try_for_each(|file| write_output_file_realtive_to_dir(&dir, file))?;
         }
         _ => unreachable!(),
     }
