@@ -169,6 +169,30 @@
       },
       "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c597142_9185ca10",
+        "filename": "core/binary.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 3160636
+      },
+      "writtenOn": "2023-12-01T23:25:56Z",
+      "side": 1,
+      "message": "@ccross@android.com\nColin, please find the update on this gerrit along with 2852912 which replace these flags with vars.",
+      "parentUuid": "09bb7ad5_94c25b22",
+      "range": {
+        "startLine": 300,
+        "startChar": 18,
+        "endLine": 300,
+        "endChar": 36
+      },
+      "revId": "374712f8b80d61df120835358ab8ca14d78e6816",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
