@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7620f5f_4d8cfc08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2023-12-01T08:15:44Z",
+      "side": 1,
+      "message": "Will this impact the revert of GKI build rules?\n\nJust want to check if we should hold off this.",
+      "revId": "e6372eee91c18ac1ba584193bc4199558e09e992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
