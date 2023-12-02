@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58064fc6_8c6ee24c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121894
+      },
+      "writtenOn": "2023-12-02T00:43:42Z",
+      "side": 1,
+      "message": "Also add an OWNER file with us so we can iterate on this repo",
+      "revId": "d911eb3d7c92da86e0753c58ca4847199bc1b2d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
