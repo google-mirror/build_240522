@@ -16,6 +16,24 @@
       "message": "Looks like there are a couple failing unit tests, I think you just need to update this textproto: https://cs.android.com/android/platform/superproject/main/+/main:build/make/tools/aconfig/src/test.rs;l\u003d26",
       "revId": "b14ce5a06e5714f737228ef5e2fbf3042687904e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcf8cea2_5f88ac1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1320214
+      },
+      "writtenOn": "2023-12-04T15:29:16Z",
+      "side": 1,
+      "message": "Thanks! This was already updated when I sent out the review. I guess the presubmit was outdated. Passing now.",
+      "parentUuid": "ba8639c6_51f5431e",
+      "revId": "b14ce5a06e5714f737228ef5e2fbf3042687904e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
