@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b823014_ed3f67df",
+        "filename": "tools/build_scripts/OWNERS",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-12-04T18:42:04Z",
+      "side": 1,
+      "message": "For something as generic as \"build scripts\", please `include platform/build/soong:/OWNERS`",
+      "revId": "996b728d28c7ce1a714cf607bebe80f27628bf9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "805dba2a_502f1f03",
+        "filename": "tools/build_scripts/build_targets.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-12-04T18:42:04Z",
+      "side": 1,
+      "message": "Why? Is this adding anything of value?",
+      "revId": "996b728d28c7ce1a714cf607bebe80f27628bf9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
