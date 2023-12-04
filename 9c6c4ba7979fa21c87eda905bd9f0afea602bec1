@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b12ee974_dce53c01",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 11
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-04T15:48:34Z",
+      "side": 1,
+      "message": "Yes, we\u0027ll likely need the concept of flags which don\u0027t belong to a single container. And when we add support for that, I agree that an explicit special keyword may be more clear than the absence of container.\n\nIn any case we can make that decision later, and from a proto definition perspective, the field would be `optional` either way.",
+      "parentUuid": "80037611_8ff86cac",
+      "range": {
+        "startLine": 83,
+        "startChar": 18,
+        "endLine": 83,
+        "endChar": 27
+      },
+      "revId": "9c6c4ba7979fa21c87eda905bd9f0afea602bec1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ccb73bd_cbf54663",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "014edc03_2656007e",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-04T15:48:34Z",
+      "side": 1,
+      "message": "Soon the container will also be used by codegen. DeviceConfig (or its successor) may require clients to indicate the host container for each flag.\nDo you prefer to move this to protos.rs in the interim?",
+      "parentUuid": "8ccb73bd_cbf54663",
+      "range": {
+        "startLine": 41,
+        "startChar": 7,
+        "endLine": 41,
+        "endChar": 31
+      },
+      "revId": "9c6c4ba7979fa21c87eda905bd9f0afea602bec1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68ef0703_ccd5aff0",
         "filename": "tools/aconfig/src/commands.rs",
         "patchSetId": 11
@@ -60,6 +108,30 @@
       "writtenOn": "2023-12-04T14:31:26Z",
       "side": 1,
       "message": "If container is None, parsed_flag will be set to \"\" (not to None), because the protobuf library we use doesn\u0027t represent `optional String` as `Option\u003cString\u003e` but instead as `String` where a None value is \"\".\n\nI don\u0027t agree with that design but I don\u0027t think it\u0027s worth fighting the library, especially not after we removed the wrapper classes and use the lib\u0027s auto-generated classes directly.\n\nPart of the reason I wanted to move to Option was to keep the special meaning of \"\" from seeping into the codebase but because parsed_flag can\u0027t use Option, there is little value in any of this. As for the container parameter to this function, I don\u0027t know which is best: Option or String with special meaning for \"\" -- I\u0027m leaning towards the latter.\n\nSo tl;dr: remove all the changes related to Optionm accept that \"\" means \"no container\" and move one.\n\nSorry for the confusion and additional work.",
+      "range": {
+        "startLine": 104,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 13
+      },
+      "revId": "9c6c4ba7979fa21c87eda905bd9f0afea602bec1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e2b144c_3e6dd953",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-04T15:48:34Z",
+      "side": 1,
+      "message": "If container is None, yes, parsed_flag would be _read as_ \"\", but `has_container()` would be false, so the semantics are \"container is missing\", not \"container is present, its name is: empty string\". Which I think addresses your earlier point, and I agree it makes this more readable and easier to reason about.",
+      "parentUuid": "68ef0703_ccd5aff0",
       "range": {
         "startLine": 104,
         "startChar": 12,
