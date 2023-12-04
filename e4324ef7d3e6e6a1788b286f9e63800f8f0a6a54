@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e264d4f_ce67eeed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-04T04:17:27Z",
+      "side": 1,
+      "message": "Related patch in internal: ag/25535487",
+      "revId": "e4324ef7d3e6e6a1788b286f9e63800f8f0a6a54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
