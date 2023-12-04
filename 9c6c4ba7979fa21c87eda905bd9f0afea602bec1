@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21147b99_c1b66fa5",
+        "filename": "tools/aconfig/src/codegen.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-04T19:29:40Z",
+      "side": 1,
+      "message": "Right. Then it\u0027s fine to keep the check in this file.",
+      "parentUuid": "014edc03_2656007e",
+      "range": {
+        "startLine": 41,
+        "startChar": 7,
+        "endLine": 41,
+        "endChar": 31
+      },
+      "revId": "9c6c4ba7979fa21c87eda905bd9f0afea602bec1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68ef0703_ccd5aff0",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "If container is None, yes, parsed_flag would be _read as_ \"\", but `has_container()` would be false, so the semantics are \"container is missing\", not \"container is present, its name is: empty string\". Which I think addresses your earlier point, and I agree it makes this more readable and easier to reason about.",
       "parentUuid": "68ef0703_ccd5aff0",
+      "range": {
+        "startLine": 104,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 13
+      },
+      "revId": "9c6c4ba7979fa21c87eda905bd9f0afea602bec1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88cfd28b_f3900653",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-04T19:29:40Z",
+      "side": 1,
+      "message": "Ah yes, the has_* methods. Thanks for reminding me. (I\u0027m pretty unhappy with the protobuf library\u0027s choice of generated code...)",
+      "parentUuid": "1e2b144c_3e6dd953",
       "range": {
         "startLine": 104,
         "startChar": 12,
