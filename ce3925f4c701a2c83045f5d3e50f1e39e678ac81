@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa40ae82_fdb5c8df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-04T12:13:35Z",
+      "side": 1,
+      "message": "Settling on container, resolving.",
+      "parentUuid": "a691d291_c0b2bb0b",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6e76c28_23104893",
@@ -285,6 +309,30 @@
       "side": 1,
       "message": "+1 to `Option`",
       "parentUuid": "2915b600_e0126fce",
+      "range": {
+        "startLine": 45,
+        "startChar": 76,
+        "endLine": 45,
+        "endChar": 77
+      },
+      "revId": "ce3925f4c701a2c83045f5d3e50f1e39e678ac81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "122df5bf_d3aac90b",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-04T12:13:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6baa4c8_30f37df0",
       "range": {
         "startLine": 45,
         "startChar": 76,
