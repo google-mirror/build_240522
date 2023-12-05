@@ -22,6 +22,30 @@
       },
       "revId": "6befb342fd9d1442ed95100f0d61c3a800cd6710",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddd8eaf4_a5e5fcab",
+        "filename": "tools/aconfig/src/protos.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-12-05T19:12:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "acc345fc_769e7b0b",
+      "range": {
+        "startLine": 284,
+        "startChar": 57,
+        "endLine": 285,
+        "endChar": 32
+      },
+      "revId": "6befb342fd9d1442ed95100f0d61c3a800cd6710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
