@@ -16,6 +16,24 @@
       "message": "Related patch in internal: ag/25535487",
       "revId": "e4324ef7d3e6e6a1788b286f9e63800f8f0a6a54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7075bee4_93807bf3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-05T02:22:36Z",
+      "side": 1,
+      "message": "Add related document for FYI, go/verify-microdroid-vendor-journey",
+      "parentUuid": "2e264d4f_ce67eeed",
+      "revId": "e4324ef7d3e6e6a1788b286f9e63800f8f0a6a54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
