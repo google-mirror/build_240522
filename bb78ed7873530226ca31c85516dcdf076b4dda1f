@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fed98973_afd1f0d2",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-05T12:23:38Z",
+      "side": 1,
+      "message": "I don\u0027t like how this introduces inconsistency in aconfig\u0027s command line handling. Sure it\u0027s annoying to write by hand or additional work in Soong, but naming each argument will make debugging a failing aconfig command easier even if you aren\u0027t familiar with aconfig. Also it sidesteps any confusion about what `aconfig dump --cache a b` means.",
+      "range": {
+        "startLine": 103,
+        "startChar": 17,
+        "endLine": 103,
+        "endChar": 65
+      },
+      "revId": "bb78ed7873530226ca31c85516dcdf076b4dda1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
