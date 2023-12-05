@@ -34,6 +34,29 @@
       "parentUuid": "2e264d4f_ce67eeed",
       "revId": "e4324ef7d3e6e6a1788b286f9e63800f8f0a6a54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "357b3448_5f2ec33a",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4655,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-12-05T02:22:47Z",
+      "side": 1,
+      "message": "Why is this needed? Doesn\u0027t avbtool accept relative path?",
+      "range": {
+        "startLine": 4655,
+        "startChar": 67,
+        "endLine": 4655,
+        "endChar": 76
+      },
+      "revId": "e4324ef7d3e6e6a1788b286f9e63800f8f0a6a54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
