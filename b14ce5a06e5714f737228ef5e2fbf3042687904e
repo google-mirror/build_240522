@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2eaf884_76b2b973",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-05T09:20:55Z",
+      "side": 1,
+      "message": "Can you elaborate a bit on what the metadata can be used for, if it\u0027s required, etc, please? (The go link is nice but doesn\u0027t help if you work on AOSP but don\u0027t have access to google internal docs.)",
+      "revId": "b14ce5a06e5714f737228ef5e2fbf3042687904e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ba8639c6_51f5431e",
@@ -32,6 +49,69 @@
       "side": 1,
       "message": "Thanks! This was already updated when I sent out the review. I guess the presubmit was outdated. Passing now.",
       "parentUuid": "ba8639c6_51f5431e",
+      "revId": "b14ce5a06e5714f737228ef5e2fbf3042687904e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28574b11_fd3112eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-05T09:20:55Z",
+      "side": 1,
+      "message": "Code LGTM overall. `atest aconfig.test` fails on\n\n```\n    FAILED  aconfig.test.commands::tests::test_dump_protobuf_format (0.1s)\n    FAILED  aconfig.test.commands::tests::test_dump_textproto_format (0.1s)\n```",
+      "revId": "b14ce5a06e5714f737228ef5e2fbf3042687904e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1043429f_3e144566",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-05T09:20:55Z",
+      "side": 1,
+      "message": "Don\u0027t reference internal docs in AOSP code.",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 27
+      },
+      "revId": "b14ce5a06e5714f737228ef5e2fbf3042687904e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aec712d9_1777249a",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-05T09:20:55Z",
+      "side": 1,
+      "message": "Planned follow-up CLs should be on the format of \"TODO(bug-number): \u003cdescription of work to be done\u003e\"",
+      "range": {
+        "startLine": 57,
+        "startChar": 5,
+        "endLine": 57,
+        "endChar": 60
+      },
       "revId": "b14ce5a06e5714f737228ef5e2fbf3042687904e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
