@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "edd829a8_4b55b4f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1320214
+      },
+      "writtenOn": "2023-12-05T22:24:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2eaf884_76b2b973",
+      "revId": "b14ce5a06e5714f737228ef5e2fbf3042687904e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ba8639c6_51f5431e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
@@ -93,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcdf166f_f498aaa7",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1320214
+      },
+      "writtenOn": "2023-12-05T22:24:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1043429f_3e144566",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 27
+      },
+      "revId": "b14ce5a06e5714f737228ef5e2fbf3042687904e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aec712d9_1777249a",
@@ -106,6 +148,30 @@
       "writtenOn": "2023-12-05T09:20:55Z",
       "side": 1,
       "message": "Planned follow-up CLs should be on the format of \"TODO(bug-number): \u003cdescription of work to be done\u003e\"",
+      "range": {
+        "startLine": 57,
+        "startChar": 5,
+        "endLine": 57,
+        "endChar": 60
+      },
+      "revId": "b14ce5a06e5714f737228ef5e2fbf3042687904e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1990ec91_d713011c",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1320214
+      },
+      "writtenOn": "2023-12-05T22:24:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aec712d9_1777249a",
       "range": {
         "startLine": 57,
         "startChar": 5,
