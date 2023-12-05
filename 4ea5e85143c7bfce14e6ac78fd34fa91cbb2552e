@@ -16,6 +16,24 @@
       "message": "Do we know that this isn\u0027t going to break tools like `atest` that depend on `module-info.json`, and would now have to accept missing fields?",
       "revId": "4ea5e85143c7bfce14e6ac78fd34fa91cbb2552e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b48ceef_9108d7df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-12-05T00:28:40Z",
+      "side": 1,
+      "message": "I already fixed `atest` with aosp/2837179 and aosp/2853668.  `aidegen` and ASfP both worked fine.",
+      "parentUuid": "4c9c1e65_ebf0b441",
+      "revId": "4ea5e85143c7bfce14e6ac78fd34fa91cbb2552e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
