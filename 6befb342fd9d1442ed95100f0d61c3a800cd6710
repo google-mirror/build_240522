@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acc345fc_769e7b0b",
+        "filename": "tools/aconfig/src/protos.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-05T12:38:41Z",
+      "side": 1,
+      "message": "This is the truly important part. Thanks for calling it out!",
+      "range": {
+        "startLine": 284,
+        "startChar": 57,
+        "endLine": 285,
+        "endChar": 32
+      },
+      "revId": "6befb342fd9d1442ed95100f0d61c3a800cd6710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
