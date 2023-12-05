@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e45fac1_459bacfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-12-05T21:21:25Z",
+      "side": 1,
+      "message": "We can verify this change by running:\n\n```\n $ source build/envsetup.sh\n $ lunch aosp_cf_arm64_phone_pgagnostic-trunk-userdebug\n $ get_build_var TARGET_NO_BIONIC_PAGE_SIZE_MACRO\n true\n```",
+      "revId": "23750c1f30406d15e8b960f45e53860928796074",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf774e0d_07ebc057",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-12-05T21:21:25Z",
+      "side": 1,
+      "message": "we need to update `DevicePageSizeAgnostic` variable too.",
+      "range": {
+        "startLine": 162,
+        "startChar": 22,
+        "endLine": 162,
+        "endChar": 44
+      },
+      "revId": "23750c1f30406d15e8b960f45e53860928796074",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
