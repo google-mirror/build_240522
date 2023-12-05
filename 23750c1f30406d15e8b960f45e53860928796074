@@ -39,6 +39,30 @@
       },
       "revId": "23750c1f30406d15e8b960f45e53860928796074",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8d36c32_1713e4a0",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2023-12-05T21:26:03Z",
+      "side": 1,
+      "message": "This is done in a follow up CL.",
+      "parentUuid": "bf774e0d_07ebc057",
+      "range": {
+        "startLine": 162,
+        "startChar": 22,
+        "endLine": 162,
+        "endChar": 44
+      },
+      "revId": "23750c1f30406d15e8b960f45e53860928796074",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
