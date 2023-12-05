@@ -81,6 +81,30 @@
       },
       "revId": "e4324ef7d3e6e6a1788b286f9e63800f8f0a6a54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0979e170_2fa36412",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4655,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-05T03:18:57Z",
+      "side": 1,
+      "message": "Removed `TOP_DIR`, to switch as relative path. It works.",
+      "parentUuid": "07ae201b_46f294c1",
+      "range": {
+        "startLine": 4655,
+        "startChar": 67,
+        "endLine": 4655,
+        "endChar": 76
+      },
+      "revId": "e4324ef7d3e6e6a1788b286f9e63800f8f0a6a54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
