@@ -16,6 +16,24 @@
       "message": "Can you add a brief description of what storage files are and what they will be used for, please? Item 1 below assumes that knowledge.",
       "revId": "62fa44386ae5d78ac25261818668b8d80f61c6e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00b117ce_7e074249",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-05T14:28:18Z",
+      "side": 1,
+      "message": "added a brief description",
+      "parentUuid": "09e38def_23aa81a7",
+      "revId": "62fa44386ae5d78ac25261818668b8d80f61c6e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
