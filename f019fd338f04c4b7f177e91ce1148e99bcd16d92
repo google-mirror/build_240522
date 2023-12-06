@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b07b9ef_62ffb65f",
+        "filename": "tools/aconfig/src/create_storage.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-06T20:12:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8de0ed51_4f4f0ebb",
+      "revId": "f019fd338f04c4b7f177e91ce1148e99bcd16d92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f17975b0_00344859",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56f9f0ef_2edcd459",
+        "filename": "tools/aconfig/src/create_storage.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-06T20:12:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f17975b0_00344859",
+      "revId": "f019fd338f04c4b7f177e91ce1148e99bcd16d92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36e2534b_519ac867",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-12-06T19:31:31Z",
       "side": 1,
       "message": "Can this be a slice instead, a `\u0026\u0027a [FlagPackage\u003c\u0027a\u003e]`?",
+      "revId": "f019fd338f04c4b7f177e91ce1148e99bcd16d92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49d74952_eceabc71",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-06T20:12:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36e2534b_519ac867",
       "revId": "f019fd338f04c4b7f177e91ce1148e99bcd16d92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
