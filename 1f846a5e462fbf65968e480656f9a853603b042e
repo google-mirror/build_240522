@@ -46,6 +46,30 @@
       },
       "revId": "1f846a5e462fbf65968e480656f9a853603b042e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "851ea1c1_61b2db4d",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-12-06T03:48:44Z",
+      "side": 1,
+      "message": "You\u0027re right. I guess we can start with this. It\u0027d be a pretty easy change in aconfig later depending on what they do in aapt2.",
+      "parentUuid": "4e07621d_607203c0",
+      "range": {
+        "startLine": 303,
+        "startChar": 20,
+        "endLine": 303,
+        "endChar": 66
+      },
+      "revId": "1f846a5e462fbf65968e480656f9a853603b042e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
