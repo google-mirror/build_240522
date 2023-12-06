@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a856b01a_2be7dbb0",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-12-06T21:39:24Z",
+      "side": 1,
+      "message": "What if we implement a nice `Debug` trait for `PackageTable` that prints out the table with pretty ASCII art? Could be nice to then see how an example table runs.",
+      "revId": "41983c3e4552bc2e2db075083315592032f9aba2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2bf18ae9_f76f3373",
         "filename": "tools/aconfig/src/package_table.rs",
         "patchSetId": 13
