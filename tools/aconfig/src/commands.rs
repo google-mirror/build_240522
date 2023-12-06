@@ -249,6 +249,7 @@ pub enum DumpFormat {
     Verbose,
     Protobuf,
     Textproto,
+    Map,
 }
 
 pub fn dump_parsed_flags(mut input: Vec<Input>, format: DumpFormat) -> Result<Vec<u8>> {
@@ -292,6 +293,17 @@ pub fn dump_parsed_flags(mut input: Vec<Input>, format: DumpFormat) -> Result<Ve
         DumpFormat::Textproto => {
             let s = protobuf::text_format::print_to_string_pretty(&parsed_flags);
             output.extend_from_slice(s.as_bytes());
+        }
+        DumpFormat::Map => {
+            for parsed_flag in parsed_flags.parsed_flag.into_iter() {
+                let line = format!(
+                    "{}.{}={:?}\n",
+                    parsed_flag.package(),
+                    parsed_flag.name(),
+                    parsed_flag.state() == ProtoFlagState::ENABLED
+                );
+                output.extend_from_slice(line.as_bytes());
+            }
         }
     }
     Ok(output)
