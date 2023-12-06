@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f87d7090_698ff692",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-12-06T21:54:19Z",
+      "side": 1,
+      "message": "Could we add some docstrings also? Could be a follow-up CL.",
+      "revId": "41983c3e4552bc2e2db075083315592032f9aba2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "591c04d7_f188f6aa",
         "filename": "tools/aconfig/src/package_table.rs",
         "patchSetId": 13
