@@ -16,6 +16,23 @@
       "message": "WDYT of making this an `Option` instead of using 0 as a special value?",
       "revId": "41983c3e4552bc2e2db075083315592032f9aba2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bf18ae9_f76f3373",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-12-06T21:21:36Z",
+      "side": 1,
+      "message": "Discussed offline, shall we make this an `Option` as well?",
+      "revId": "41983c3e4552bc2e2db075083315592032f9aba2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
