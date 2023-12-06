@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49fa1e12_f37906c6",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-06T21:41:47Z",
+      "side": 1,
+      "message": "yes, i intend to create another serialization to string for test. but it will be implemented inside mod test {...}",
+      "parentUuid": "a856b01a_2be7dbb0",
+      "revId": "41983c3e4552bc2e2db075083315592032f9aba2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bf18ae9_f76f3373",
