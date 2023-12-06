@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86823354_c711c19c",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2023-12-06T01:22:44Z",
+      "side": 1,
+      "message": "Should this be the whole state or (including read/write) or just the boolean?",
+      "range": {
+        "startLine": 303,
+        "startChar": 20,
+        "endLine": 303,
+        "endChar": 66
+      },
+      "revId": "1f846a5e462fbf65968e480656f9a853603b042e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
