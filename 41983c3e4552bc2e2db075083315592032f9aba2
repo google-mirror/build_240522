@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60dab9b2_f6605cdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-12-06T21:46:26Z",
+      "side": 1,
+      "message": "So cool! LGTM, with the switches to `Option`. I think the `Debug` impl is a good idea, but fine with submitting this without, or if we want to do it in a follow-up CL. I think it\u0027s a good idea to do it next to the trait definition as opposed to in the test module, so we can debug here easily.",
+      "revId": "41983c3e4552bc2e2db075083315592032f9aba2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "591c04d7_f188f6aa",
