@@ -22,6 +22,30 @@
       },
       "revId": "1f846a5e462fbf65968e480656f9a853603b042e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e07621d_607203c0",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2023-12-06T01:29:49Z",
+      "side": 1,
+      "message": "Based on the [feature request](https://docs.google.com/document/d/1YB3HAczI3WYFid5MeCy-8g_qLQGg1Q1GDj6cFWSwwyA/edit?disco\u003dAAAA9ToFPts), I believe that exposing just the boolean value makes sense.\n\nHowever, I am bit unclear about the boolean logic here, whether if enabled/disabled is the only dimension that determines the boolean value (i.e. is the flag value `true` only when it is \"enabled\", or should it be `true` when \"disabled\" but \"read \u0026 write\" as well?).",
+      "parentUuid": "86823354_c711c19c",
+      "range": {
+        "startLine": 303,
+        "startChar": 20,
+        "endLine": 303,
+        "endChar": 66
+      },
+      "revId": "1f846a5e462fbf65968e480656f9a853603b042e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
