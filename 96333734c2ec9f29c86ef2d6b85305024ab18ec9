@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aabb410_a447fb46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-07T15:59:39Z",
+      "side": 1,
+      "message": "I would like to take a stab at reviewing this CL if you don\u0027t mind. Can do so tomorrow.\n\nAlso there are some open comments.",
+      "revId": "96333734c2ec9f29c86ef2d6b85305024ab18ec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
