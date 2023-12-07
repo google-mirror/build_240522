@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f767f347_0c219182",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-07T14:34:30Z",
+      "side": 1,
+      "message": "will do in the follow up cl",
+      "parentUuid": "f87d7090_698ff692",
+      "revId": "41983c3e4552bc2e2db075083315592032f9aba2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "591c04d7_f188f6aa",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-12-06T21:16:37Z",
       "side": 1,
       "message": "WDYT of making this an `Option` instead of using 0 as a special value?",
+      "revId": "41983c3e4552bc2e2db075083315592032f9aba2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d2291f9_ee863742",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-07T14:34:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "591c04d7_f188f6aa",
       "revId": "41983c3e4552bc2e2db075083315592032f9aba2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -105,6 +141,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1823446a_ad320a24",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-07T14:34:30Z",
+      "side": 1,
+      "message": "sure, will add that in the next cl",
+      "parentUuid": "8f870fd6_ad82615b",
+      "revId": "41983c3e4552bc2e2db075083315592032f9aba2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bf18ae9_f76f3373",
@@ -118,6 +172,24 @@
       "writtenOn": "2023-12-06T21:21:36Z",
       "side": 1,
       "message": "Discussed offline, shall we make this an `Option` as well?",
+      "revId": "41983c3e4552bc2e2db075083315592032f9aba2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ac374d_de96aaa4",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-07T14:34:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bf18ae9_f76f3373",
       "revId": "41983c3e4552bc2e2db075083315592032f9aba2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
