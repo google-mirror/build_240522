@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7ae8c9c_5e4268f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-07T21:26:42Z",
+      "side": 1,
+      "message": "This hashtable",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 20
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f314ce4b_1af368a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-07T21:26:42Z",
+      "side": 1,
+      "message": "daemon",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 26,
+        "endChar": 14
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb147d2a_6013667f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-07T21:26:42Z",
+      "side": 1,
+      "message": "Could we include in this CL only the high-level things that we want to agree on first, and include unit tests for those? Generally I\u0027d rather not merge code without its unit tests.",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ac86e15_fbf73727",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-07T21:26:42Z",
+      "side": 1,
+      "message": "nit: please add a Bug: and Test: lines",
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "333a8385_25bce391",
+        "filename": "tools/aconfig/OWNERS",
+        "patchSetId": 17
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-07T21:26:42Z",
+      "side": 1,
+      "message": "nit: Sort alphabetically",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 17
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "078bcf2c_0bd2a3f7",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-07T21:26:42Z",
+      "side": 1,
+      "message": "Is this necessary? The container argument is not Option\u003c\u0026str\u003e, it\u0027s \u0026str.",
+      "range": {
+        "startLine": 220,
+        "startChar": 52,
+        "endLine": 220,
+        "endChar": 56
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4a405c7_50fc22a4",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-07T21:26:42Z",
+      "side": 1,
+      "message": "In which scenario will there be flags from a different container?",
+      "range": {
+        "startLine": 220,
+        "startChar": 9,
+        "endLine": 220,
+        "endChar": 15
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
