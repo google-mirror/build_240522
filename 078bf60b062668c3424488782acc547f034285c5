@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b827235_5048ce4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-07T18:39:36Z",
+      "side": 1,
+      "message": "I added more description to the commit message.",
+      "parentUuid": "bf1152e5_4559ec57",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 8
+      },
+      "revId": "078bf60b062668c3424488782acc547f034285c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc8db15a_ffc9edad",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faeee503_7a8f9224",
+        "filename": "tools/aconfig/src/create_storage.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-07T18:39:36Z",
+      "side": 1,
+      "message": "It will eventually be 3 files, I\u0027m splitting the change into multiple cls.",
+      "parentUuid": "bc8db15a_ffc9edad",
+      "range": {
+        "startLine": 120,
+        "startChar": 4,
+        "endLine": 120,
+        "endChar": 32
+      },
+      "revId": "078bf60b062668c3424488782acc547f034285c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50d10eef_b4a0215b",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-12-07T15:59:39Z",
       "side": 1,
       "message": "I\u0027d rather return Results everywhere instead of forcing a crash via expect(), even if the only error handling we do today is crash in main (instead of here), if for no other reason than to make it possible for unit tests to verify the error case.",
+      "range": {
+        "startLine": 100,
+        "startChar": 57,
+        "endLine": 100,
+        "endChar": 63
+      },
+      "revId": "078bf60b062668c3424488782acc547f034285c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a251fcb4_41db7c3f",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-07T18:39:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50d10eef_b4a0215b",
       "range": {
         "startLine": 100,
         "startChar": 57,
