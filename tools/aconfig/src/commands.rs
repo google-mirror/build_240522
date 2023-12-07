@@ -24,7 +24,8 @@ use crate::codegen_cpp::generate_cpp_code;
 use crate::codegen_java::generate_java_code;
 use crate::codegen_rust::generate_rust_code;
 use crate::protos::{
-    ProtoFlagPermission, ProtoFlagState, ProtoParsedFlag, ProtoParsedFlags, ProtoTracepoint,
+    ParsedFlagExt, ProtoFlagPermission, ProtoFlagState, ProtoParsedFlag, ProtoParsedFlags,
+    ProtoTracepoint,
 };
 
 pub struct Input {
@@ -220,10 +221,9 @@ pub fn create_device_config_defaults(mut input: Input) -> Result<Vec<u8>> {
         .filter(|pf| pf.permission() == ProtoFlagPermission::READ_WRITE)
     {
         let line = format!(
-            "{}:{}.{}={}\n",
+            "{}:{}={}\n",
             parsed_flag.namespace(),
-            parsed_flag.package(),
-            parsed_flag.name(),
+            parsed_flag.fully_qualified_name(),
             match parsed_flag.state() {
                 ProtoFlagState::ENABLED => "enabled",
                 ProtoFlagState::DISABLED => "disabled",
@@ -243,9 +243,8 @@ pub fn create_device_config_sysprops(mut input: Input) -> Result<Vec<u8>> {
         .filter(|pf| pf.permission() == ProtoFlagPermission::READ_WRITE)
     {
         let line = format!(
-            "persist.device_config.{}.{}={}\n",
-            parsed_flag.package(),
-            parsed_flag.name(),
+            "persist.device_config.{}={}\n",
+            parsed_flag.fully_qualified_name(),
             match parsed_flag.state() {
                 ProtoFlagState::ENABLED => "true",
                 ProtoFlagState::DISABLED => "false",
@@ -264,7 +263,11 @@ pub enum DumpFormat {
     Textproto,
 }
 
-pub fn dump_parsed_flags(mut input: Vec<Input>, format: DumpFormat, dedup: bool) -> Result<Vec<u8>> {
+pub fn dump_parsed_flags(
+    mut input: Vec<Input>,
+    format: DumpFormat,
+    dedup: bool,
+) -> Result<Vec<u8>> {
     let individually_parsed_flags: Result<Vec<ProtoParsedFlags>> =
         input.iter_mut().map(|i| i.try_parse_flags()).collect();
     let parsed_flags: ProtoParsedFlags =
@@ -275,9 +278,8 @@ pub fn dump_parsed_flags(mut input: Vec<Input>, format: DumpFormat, dedup: bool)
         DumpFormat::Text => {
             for parsed_flag in parsed_flags.parsed_flag.into_iter() {
                 let line = format!(
-                    "{}.{} [{}]: {:?} + {:?}\n",
-                    parsed_flag.package(),
-                    parsed_flag.name(),
+                    "{} [{}]: {:?} + {:?}\n",
+                    parsed_flag.fully_qualified_name(),
                     parsed_flag.container(),
                     parsed_flag.permission(),
                     parsed_flag.state()
@@ -290,9 +292,8 @@ pub fn dump_parsed_flags(mut input: Vec<Input>, format: DumpFormat, dedup: bool)
                 let sources: Vec<_> =
                     parsed_flag.trace.iter().map(|tracepoint| tracepoint.source()).collect();
                 let line = format!(
-                    "{}.{} [{}]: {:?} + {:?} ({})\n",
-                    parsed_flag.package(),
-                    parsed_flag.name(),
+                    "{} [{}]: {:?} + {:?} ({})\n",
+                    parsed_flag.fully_qualified_name(),
                     parsed_flag.container(),
                     parsed_flag.permission(),
                     parsed_flag.state(),

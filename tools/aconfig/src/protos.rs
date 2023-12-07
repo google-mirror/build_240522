@@ -304,7 +304,17 @@ pub mod parsed_flags {
     }
 
     fn create_sorting_key(pf: &ProtoParsedFlag) -> String {
-        format!("{}.{}", pf.package(), pf.name())
+        pf.fully_qualified_name()
+    }
+}
+
+pub trait ParsedFlagExt {
+    fn fully_qualified_name(&self) -> String;
+}
+
+impl ParsedFlagExt for ProtoParsedFlag {
+    fn fully_qualified_name(&self) -> String {
+        format!("{}.{}", self.package(), self.name())
     }
 }
 
@@ -938,11 +948,13 @@ parsed_flag {
         assert_eq!(format!("{:?}", error), "bad parsed flags: duplicate flag com.first.first (defined in flags.declarations and flags.declarations)");
 
         // two conflicting flags with dedup disabled
-        let error = parsed_flags::merge(vec![second.clone(), second_duplicate.clone()], false).unwrap_err();
+        let error =
+            parsed_flags::merge(vec![second.clone(), second_duplicate.clone()], false).unwrap_err();
         assert_eq!(format!("{:?}", error), "bad parsed flags: duplicate flag com.second.second (defined in flags.declarations and duplicate/flags.declarations)");
 
         // two conflicting flags with dedup enabled
-        let error = parsed_flags::merge(vec![second.clone(), second_duplicate.clone()], true).unwrap_err();
+        let error =
+            parsed_flags::merge(vec![second.clone(), second_duplicate.clone()], true).unwrap_err();
         assert_eq!(format!("{:?}", error), "bad parsed flags: duplicate flag com.second.second (defined in flags.declarations and duplicate/flags.declarations)");
 
         // valid cases
@@ -950,10 +962,22 @@ parsed_flag {
         assert!(parsed_flags::merge(vec![], true).unwrap().parsed_flag.is_empty());
         assert_eq!(first, parsed_flags::merge(vec![first.clone()], false).unwrap());
         assert_eq!(first, parsed_flags::merge(vec![first.clone()], true).unwrap());
-        assert_eq!(expected, parsed_flags::merge(vec![first.clone(), second.clone()], false).unwrap());
-        assert_eq!(expected, parsed_flags::merge(vec![first.clone(), second.clone()], true).unwrap());
-        assert_eq!(expected, parsed_flags::merge(vec![second.clone(), first.clone()], false).unwrap());
-        assert_eq!(expected, parsed_flags::merge(vec![second.clone(), first.clone()], true).unwrap());
+        assert_eq!(
+            expected,
+            parsed_flags::merge(vec![first.clone(), second.clone()], false).unwrap()
+        );
+        assert_eq!(
+            expected,
+            parsed_flags::merge(vec![first.clone(), second.clone()], true).unwrap()
+        );
+        assert_eq!(
+            expected,
+            parsed_flags::merge(vec![second.clone(), first.clone()], false).unwrap()
+        );
+        assert_eq!(
+            expected,
+            parsed_flags::merge(vec![second.clone(), first.clone()], true).unwrap()
+        );
 
         // two identical flags with dedup enabled
         assert_eq!(first, parsed_flags::merge(vec![first.clone(), first.clone()], true).unwrap());
