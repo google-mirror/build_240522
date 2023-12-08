@@ -740,6 +740,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e197b785_ae8aa0a8",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-08T14:18:43Z",
+      "side": 1,
+      "message": "+1 I am not sure how building system will call this code. Especially currently system/ and vendor/ will be built together, it seems there is no way to differentiate these two",
+      "parentUuid": "4ca8c61e_80468e4a",
+      "range": {
+        "startLine": 117,
+        "startChar": 49,
+        "endLine": 117,
+        "endChar": 58
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56e19aaa_05e5ecad",
         "filename": "tools/aconfig/src/package_table.rs",
         "patchSetId": 17
