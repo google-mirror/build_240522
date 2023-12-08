@@ -64,4 +64,11 @@ public final class AconfigTest {
         fakeFeatureFlags.setFlag(FLAG_ENABLED_RW, false);
         assertFalse(fakeFeatureFlags.enabledRw());
     }
+  
+    @Test
+    public void testExportedFlag() {
+        FakeFeatureFlagsImpl fakeFeatureFlags = new FakeFeatureFlagsImpl();
+        fakeFeatureFlags.setFlag(FLAG_ENABLED_RW, false);
+        assertFalse(fakeFeatureFlags.enabledRw());
+    }
 }
