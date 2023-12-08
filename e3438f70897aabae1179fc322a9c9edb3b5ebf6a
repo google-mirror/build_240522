@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b04e1a27_f3283040",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "What\u0027s a package id? The fully qualified name `\u003cpackage\u003e.\u003cname\u003e`? Something else?",
+      "range": {
+        "startLine": 12,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b7ae8c9c_5e4268f2",
         "filename": "/COMMIT_MSG",
         "patchSetId": 17
@@ -19,6 +42,98 @@
         "startChar": 0,
         "endLine": 17,
         "endChar": 20
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f43d226_96c47e2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "What\u0027s a value file? The text doesn\u0027t define this.",
+      "range": {
+        "startLine": 17,
+        "startChar": 63,
+        "endLine": 18,
+        "endChar": 4
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb80e262_4883f2d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "Is \"package id\" different from \"package name\" (a string)? If so, please define it.",
+      "range": {
+        "startLine": 18,
+        "startChar": 65,
+        "endLine": 19,
+        "endChar": 2
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32df1e17_5e3b02bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "How does this impact build performance? If \"everything on the system partition\" is part of the same container, any change to any flag declaration for any of the targets that install onto /system will trigger a re-compilation of the storage.map file? This is contrary to our goal of separating the aconfig libs as much as possible.\n\nMaybe I\u0027m missing something?",
+      "range": {
+        "startLine": 22,
+        "startChar": 46,
+        "endLine": 22,
+        "endChar": 55
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0f466c1_cf7eea95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "Is the following correct, and more stringent?\n\nEach container contains exactly one package.map.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 56
       },
       "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -49,6 +164,190 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0507f08e_2cf3d3f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 32,
+        "startChar": 26,
+        "endLine": 32,
+        "endChar": 36
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6753027_513b9cb2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "Above you state that each container contains no more than one container, and `commands::create_storage` accepts a single `container` parameter. Do you mean `storage file` instead? Or do storage files refer to package.map *and* upcoming files? If so, please define the concept of storage files earlier in the commit message, e.g.\n\nStorage files is a collective term for package.map (added in this CL), flag.map and flag.val (to be added in a follow-up CL)",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a1f18ae_09d7370a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "sorts",
+      "range": {
+        "startLine": 40,
+        "startChar": 9,
+        "endLine": 40,
+        "endChar": 13
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2646961_32abdd0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "passes",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 4
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bc822be_bd661aca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "Will this struct be re-used in the client parsing lib? Should we move it into a separate soong module (not necessarily in this CL)?",
+      "range": {
+        "startLine": 43,
+        "startChar": 52,
+        "endLine": 43,
+        "endChar": 64
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42d00355_d9053748",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 43,
+        "startChar": 52,
+        "endLine": 43,
+        "endChar": 64
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9311096c_d6a455bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "libandroidfw (the Android resource lookup code) encodes resources (resoures.arcs) in big or small Endian -- forget which one, but it\u0027s the one used on most devices, so that on the majority of devices there is no conversion overhead.\n\nHave you checked that big endian is the right choice?",
+      "range": {
+        "startLine": 50,
+        "startChar": 16,
+        "endLine": 50,
+        "endChar": 35
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1183802_3b386f33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 54,
+        "startChar": 30,
+        "endLine": 54,
+        "endChar": 34
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb147d2a_6013667f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 17
@@ -65,6 +364,53 @@
         "startChar": 8,
         "endLine": 55,
         "endChar": 16
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdad145b_bfeaad19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "+1, do not merge without unit tests. They are necessary to prove the code does what we think it does, and helps bisect future errors.",
+      "parentUuid": "bb147d2a_6013667f",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c2bc16f_d6fcf352",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "nit: CLs",
+      "range": {
+        "startLine": 58,
+        "startChar": 69,
+        "endLine": 58,
+        "endChar": 72
       },
       "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -89,6 +435,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "370cfb73_ba37c20d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "Actually not a nit. Those lines are needed, especially the Test: line(s).",
+      "parentUuid": "7ac86e15_fbf73727",
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5322dd69_1cab0ad7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "Echoing what others have said in go/aconfig_flag_storage I would prefer if we didn\u0027t invent a new file format, at least not in the initial iteration.\n\nI would prefer if we build the solution on an existing file format, and land the IPC / client libs / etc first. Once we have something that is working we can experiment with a custom file format -- and using performance measurements to motivate the maintenance cost of a custom file format (or not, which is also a valid outcome).",
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "333a8385_25bce391",
         "filename": "tools/aconfig/OWNERS",
         "patchSetId": 17
@@ -105,6 +486,52 @@
         "startChar": 0,
         "endLine": 6,
         "endChar": 17
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23802074_18ce1bc9",
+        "filename": "tools/aconfig/OWNERS",
+        "patchSetId": 17
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "the change to OWNERS is unrelated to the storage stuff; please extract the OWNERS change to a separate CL",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 6
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93e44b73_d541a2f5",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "Please don\u0027t use expect, return an Err instead -- expect prevents effective unit testing.",
+      "range": {
+        "startLine": 219,
+        "startChar": 49,
+        "endLine": 219,
+        "endChar": 55
       },
       "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -151,6 +578,52 @@
         "startChar": 9,
         "endLine": 220,
         "endChar": 15
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79048284_719db896",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "This should probably be implemented as a ProtoParsedFlagsExt function instead, but because `find_unique_package` isn\u0027t I\u0027m OK with this for now -- we can make that syntactic sugar change in a follow-up CL.",
+      "range": {
+        "startLine": 336,
+        "startChar": 3,
+        "endLine": 336,
+        "endChar": 24
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcef805f_1df8c97f",
+        "filename": "tools/aconfig/src/create_storage.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "I would like create_storage.rs and package_table.rs to be moved into a separate subdir, similarly to how the codegen code was moved in aosp/2863041",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
       },
       "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -220,6 +693,29 @@
         "startChar": 0,
         "endLine": 122,
         "endChar": 1
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ca8c61e_80468e4a",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:22:23Z",
+      "side": 1,
+      "message": "How will we handle code that uses flags, but is used in multiple containers, e.g. libprotobuf? In other discussions those soong modules will have a container that explicitly call out that they\u0027re shared.\n\nAssuming their container values will be \"shared\", will those flags not be part of any storage file? Is the right thing when building the storage files for e.g. \"system\" to include \"system\" AND \"shared\" flags?",
+      "range": {
+        "startLine": 117,
+        "startChar": 49,
+        "endLine": 117,
+        "endChar": 58
       },
       "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
