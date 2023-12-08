@@ -34,6 +34,8 @@ where
 {
     let flag_elements: Vec<FlagElement> =
         parsed_flags_iter.map(|pf| create_flag_element(package, pf)).collect();
+    let exported_flag_elements =
+        flag_elements.iter().filter(|elem| elem.exported).cloned().collect();
     let namespace_flags = gen_flags_by_namespace(&flag_elements);
     let properties_set: BTreeSet<String> =
         flag_elements.iter().map(|fe| format_property_name(&fe.device_config_namespace)).collect();
@@ -42,6 +44,7 @@ where
     let library_exported = codegen_mode == CodegenMode::Exported;
     let context = Context {
         flag_elements,
+        exported_flag_elements,
         namespace_flags,
         is_test_mode,
         is_read_write,
@@ -100,6 +103,7 @@ fn gen_flags_by_namespace(flags: &[FlagElement]) -> Vec<NamespaceFlags> {
 #[derive(Serialize)]
 struct Context {
     pub flag_elements: Vec<FlagElement>,
+    pub exported_flag_elements: Vec<FlagElement>,
     pub namespace_flags: Vec<NamespaceFlags>,
     pub is_test_mode: bool,
     pub is_read_write: bool,
@@ -655,14 +659,8 @@ mod tests {
             }
             private Map<String, Boolean> mFlagMap = new HashMap<>(
                 Map.ofEntries(
-                    Map.entry(Flags.FLAG_DISABLED_RO, false),
-                    Map.entry(Flags.FLAG_DISABLED_RW, false),
                     Map.entry(Flags.FLAG_DISABLED_RW_EXPORTED, false),
-                    Map.entry(Flags.FLAG_DISABLED_RW_IN_OTHER_NAMESPACE, false),
-                    Map.entry(Flags.FLAG_ENABLED_FIXED_RO, false),
-                    Map.entry(Flags.FLAG_ENABLED_RO, false),
-                    Map.entry(Flags.FLAG_ENABLED_RO_EXPORTED, false),
-                    Map.entry(Flags.FLAG_ENABLED_RW, false)
+                    Map.entry(Flags.FLAG_ENABLED_RO_EXPORTED, false)
                 )
             );
         }
