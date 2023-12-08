@@ -611,6 +611,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea960a93_80c92356",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T16:26:16Z",
+      "side": 1,
+      "message": "Will absolutely add unit tests and send in another patch for review later",
+      "parentUuid": "fdad145b_bfeaad19",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c2bc16f_d6fcf352",
         "filename": "/COMMIT_MSG",
         "patchSetId": 17
@@ -737,6 +761,30 @@
       "writtenOn": "2023-12-08T12:22:23Z",
       "side": 1,
       "message": "the change to OWNERS is unrelated to the storage stuff; please extract the OWNERS change to a separate CL",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 6
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ab5c96_e5386d79",
+        "filename": "tools/aconfig/OWNERS",
+        "patchSetId": 17
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T16:26:16Z",
+      "side": 1,
+      "message": "Will do",
+      "parentUuid": "23802074_18ce1bc9",
       "range": {
         "startLine": 6,
         "startChar": 0,
@@ -887,6 +935,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0290c1f3_b4c1985d",
+        "filename": "tools/aconfig/src/create_storage.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T16:26:16Z",
+      "side": 1,
+      "message": "later in flag.map, we don\u0027t have to use package.flag_name string to represent a flag, rather we can use flag_id.flag_name as a much shorter string. Otherwise, we will repeatedly store package name in the flag.map.",
+      "parentUuid": "93a1cb52_5864f889",
+      "range": {
+        "startLine": 63,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 22
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e102fcc3_62417d74",
         "filename": "tools/aconfig/src/create_storage.rs",
         "patchSetId": 17
@@ -898,6 +970,30 @@
       "writtenOn": "2023-12-08T00:30:36Z",
       "side": 1,
       "message": "in the doc it shows the mode goes first and then the value follows.",
+      "range": {
+        "startLine": 95,
+        "startChar": 35,
+        "endLine": 95,
+        "endChar": 80
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ed09f8a_38974a09",
+        "filename": "tools/aconfig/src/create_storage.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T16:26:16Z",
+      "side": 1,
+      "message": "It will probably be value first as the value is probably we access most of the time. I\u0027ll fix the doc.",
+      "parentUuid": "e102fcc3_62417d74",
       "range": {
         "startLine": 95,
         "startChar": 35,
@@ -1086,6 +1182,30 @@
       "writtenOn": "2023-12-08T00:30:36Z",
       "side": 1,
       "message": "The offset is changed in 125",
+      "range": {
+        "startLine": 121,
+        "startChar": 12,
+        "endLine": 121,
+        "endChar": 18
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60a60835_0290fcfb",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T16:26:16Z",
+      "side": 1,
+      "message": "After this line, the offset now points one byte more than the end of current node, or the start of next node. So if I want current node to point to the next node. I set the next_offset field to this offset.",
+      "parentUuid": "ecb4691f_ce84b4b3",
       "range": {
         "startLine": 121,
         "startChar": 12,
