@@ -19,7 +19,6 @@
 
 using namespace com::android::aconfig::test;
 
-
 TEST(AconfigTest, TestDisabledReadOnlyFlag) {
   ASSERT_FALSE(com_android_aconfig_test_disabled_ro());
   ASSERT_FALSE(provider_->disabled_ro());
@@ -54,6 +53,24 @@ TEST(AconfigTest, TestEnabledFixedReadOnlyFlag) {
   ASSERT_FALSE(com_android_aconfig_test_enabled_fixed_ro());
   ASSERT_FALSE(provider_->enabled_fixed_ro());
   ASSERT_FALSE(enabled_fixed_ro());
+}
+
+TEST(AconfigTest, OverrideFlagValue) {
+  ASSERT_FALSE(disabled_ro());
+  disabled_ro(true);
+  ASSERT_TRUE(disabled_ro());
+}
+
+TEST(AconfigTest, ResetFlagValue) {
+  ASSERT_FALSE(disabled_ro());
+  ASSERT_FALSE(enabled_ro());
+  disabled_ro(true);
+  enabled_ro(true);
+  ASSERT_TRUE(disabled_ro());
+  ASSERT_TRUE(enabled_ro());
+  reset_flags();
+  ASSERT_FALSE(disabled_ro());
+  ASSERT_FALSE(enabled_ro());
 }
 
 int main(int argc, char** argv) {
