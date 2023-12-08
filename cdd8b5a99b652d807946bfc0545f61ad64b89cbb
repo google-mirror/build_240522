@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0120b4a1_8eb18133",
+        "filename": "tools/aconfig/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-08T19:07:38Z",
+      "side": 1,
+      "message": "Please sort alphabetically",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 6
+      },
+      "revId": "cdd8b5a99b652d807946bfc0545f61ad64b89cbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
