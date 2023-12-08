@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8fdb796_1136a2d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T15:30:21Z",
+      "side": 1,
+      "message": "The package id is just an integer to represent a package within a container, so later on we are referring to a package, we can just use an int instead of the package string.",
+      "parentUuid": "b04e1a27_f3283040",
+      "range": {
+        "startLine": 12,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b7ae8c9c_5e4268f2",
         "filename": "/COMMIT_MSG",
         "patchSetId": 17
@@ -72,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fac55891_d773049a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T15:30:21Z",
+      "side": 1,
+      "message": "Sorry about insufficient description. The value file can be understood as an array of flag values in a file.",
+      "parentUuid": "6f43d226_96c47e2b",
+      "range": {
+        "startLine": 17,
+        "startChar": 63,
+        "endLine": 18,
+        "endChar": 4
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb80e262_4883f2d6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 17
@@ -83,6 +131,30 @@
       "writtenOn": "2023-12-08T12:22:23Z",
       "side": 1,
       "message": "Is \"package id\" different from \"package name\" (a string)? If so, please define it.",
+      "range": {
+        "startLine": 18,
+        "startChar": 65,
+        "endLine": 19,
+        "endChar": 2
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62cf8dc2_8bcaa09f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T15:30:21Z",
+      "side": 1,
+      "message": "The package id is just an integer to represent a package within a container, so later on we are referring to a package, we can just use an int instead of the package string.",
+      "parentUuid": "cb80e262_4883f2d6",
       "range": {
         "startLine": 18,
         "startChar": 65,
@@ -129,6 +201,54 @@
       "writtenOn": "2023-12-08T12:22:23Z",
       "side": 1,
       "message": "Is the following correct, and more stringent?\n\nEach container contains exactly one package.map.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 56
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "282569eb_8c1d92af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T15:30:21Z",
+      "side": 1,
+      "message": "Yes, the storage map files will be recompiled. This is really a design trade off between build time and run time performance. I\u0027ll share you with the doc describing this tradeoff. Not sure if aosp review board is the right place to share internal files.",
+      "parentUuid": "32df1e17_5e3b02bd",
+      "range": {
+        "startLine": 22,
+        "startChar": 46,
+        "endLine": 22,
+        "endChar": 55
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3e71252_bcb82244",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T15:30:21Z",
+      "side": 1,
+      "message": "Yes it is.",
+      "parentUuid": "e0f466c1_cf7eea95",
       "range": {
         "startLine": 22,
         "startChar": 0,
@@ -198,6 +318,30 @@
       "writtenOn": "2023-12-08T12:22:23Z",
       "side": 1,
       "message": "Above you state that each container contains no more than one container, and `commands::create_storage` accepts a single `container` parameter. Do you mean `storage file` instead? Or do storage files refer to package.map *and* upcoming files? If so, please define the concept of storage files earlier in the commit message, e.g.\n\nStorage files is a collective term for package.map (added in this CL), flag.map and flag.val (to be added in a follow-up CL)",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2bf8edd_0e502a96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T15:30:21Z",
+      "side": 1,
+      "message": "Thanks will do",
+      "parentUuid": "a6753027_513b9cb2",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -302,6 +446,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dde76271_8e9ed6c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T15:30:21Z",
+      "side": 1,
+      "message": "Yes, it will be reused for flag.map and flag.val creation",
+      "parentUuid": "8bc822be_bd661aca",
+      "range": {
+        "startLine": 43,
+        "startChar": 52,
+        "endLine": 43,
+        "endChar": 64
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9311096c_d6a455bb",
         "filename": "/COMMIT_MSG",
         "patchSetId": 17
@@ -313,6 +481,30 @@
       "writtenOn": "2023-12-08T12:22:23Z",
       "side": 1,
       "message": "libandroidfw (the Android resource lookup code) encodes resources (resoures.arcs) in big or small Endian -- forget which one, but it\u0027s the one used on most devices, so that on the majority of devices there is no conversion overhead.\n\nHave you checked that big endian is the right choice?",
+      "range": {
+        "startLine": 50,
+        "startChar": 16,
+        "endLine": 50,
+        "endChar": 35
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d61c020_7f270150",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T15:30:21Z",
+      "side": 1,
+      "message": "Thanks for the reminding, I will look into this. I\u0027m under the assumption is that as long as I parse this bytes using the same endian, it should be fine. I think I\u0027m directly casting the memory bytes to u32, rather it is parsed. So we can have cross platform compatibility.",
+      "parentUuid": "9311096c_d6a455bb",
       "range": {
         "startLine": 50,
         "startChar": 16,
@@ -764,6 +956,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e20244c1_ba08f639",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T15:30:21Z",
+      "side": 1,
+      "message": "I think in the unbundled apex/apk design, for shared libs, we assign their container designation as a part of platform by default, in this case, \"system\" and all of their flags have to be exported. So other containers access it via external flag access syntax.",
+      "parentUuid": "e197b785_ae8aa0a8",
+      "range": {
+        "startLine": 117,
+        "startChar": 49,
+        "endLine": 117,
+        "endChar": 58
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56e19aaa_05e5ecad",
         "filename": "tools/aconfig/src/package_table.rs",
         "patchSetId": 17
@@ -799,6 +1015,30 @@
       "side": 1,
       "message": "Is PackageTableNode intended to be written to disk in binary form and later be \"deserialized\" by pointing to mmapped memory? If so you may want to look into C repr (http:://doc.rust-lang.org/nomicon/other-reprs.html#reprc) to guarantee the struct layout.\n\nAlso see https://doc.rust-lang.org/std/option/index.html#representation.",
       "parentUuid": "56e19aaa_05e5ecad",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 19
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37525a79_7edf8429",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-08T15:30:21Z",
+      "side": 1,
+      "message": "In the serialization, we use unwrap_or(0) call, so if it is none, then a value of 0 will be serialized as u32.\n\nThanks Marten for the info. We later do want to deserialize back into memory.",
+      "parentUuid": "6ac87a9d_87df9469",
       "range": {
         "startLine": 59,
         "startChar": 8,
