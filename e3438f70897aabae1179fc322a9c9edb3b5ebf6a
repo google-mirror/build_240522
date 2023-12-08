@@ -517,6 +517,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fefe4780_a3375995",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T16:00:59Z",
+      "side": 1,
+      "message": "You\u0027ll be fine as long as you explicitly use the same endian across the board, but on systems that are already big endian, casting to big endian is / should be a no op and after optimization the cost is zero. We want to make sure we pick the right endianness for the majority of the devices out there, so we don\u0027t pay any conversion overhead on those devices.",
+      "parentUuid": "5d61c020_7f270150",
+      "range": {
+        "startLine": 50,
+        "startChar": 16,
+        "endLine": 50,
+        "endChar": 35
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1183802_3b386f33",
         "filename": "/COMMIT_MSG",
         "patchSetId": 17
