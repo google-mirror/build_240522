@@ -957,6 +957,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c11f8e26_68411294",
+        "filename": "tools/aconfig/src/create_storage.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-08T19:09:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0290c1f3_b4c1985d",
+      "range": {
+        "startLine": 63,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 22
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e102fcc3_62417d74",
@@ -994,6 +1018,30 @@
       "side": 1,
       "message": "It will probably be value first as the value is probably we access most of the time. I\u0027ll fix the doc.",
       "parentUuid": "e102fcc3_62417d74",
+      "range": {
+        "startLine": 95,
+        "startChar": 35,
+        "endLine": 95,
+        "endChar": 80
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a20f20_42288255",
+        "filename": "tools/aconfig/src/create_storage.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-08T19:09:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1ed09f8a_38974a09",
       "range": {
         "startLine": 95,
         "startChar": 35,
@@ -1206,6 +1254,30 @@
       "side": 1,
       "message": "After this line, the offset now points one byte more than the end of current node, or the start of next node. So if I want current node to point to the next node. I set the next_offset field to this offset.",
       "parentUuid": "ecb4691f_ce84b4b3",
+      "range": {
+        "startLine": 121,
+        "startChar": 12,
+        "endLine": 121,
+        "endChar": 18
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83dff3e9_87323007",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-08T19:09:06Z",
+      "side": 1,
+      "message": "oh I see the line 83 about set to 0.",
+      "parentUuid": "60a60835_0290fcfb",
       "range": {
         "startLine": 121,
         "startChar": 12,
