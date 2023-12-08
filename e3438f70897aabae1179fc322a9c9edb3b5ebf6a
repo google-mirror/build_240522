@@ -763,6 +763,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ac87a9d_87df9469",
+        "filename": "tools/aconfig/src/package_table.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:39:42Z",
+      "side": 1,
+      "message": "Is PackageTableNode intended to be written to disk in binary form and later be \"deserialized\" by pointing to mmapped memory? If so you may want to look into C repr (http:://doc.rust-lang.org/nomicon/other-reprs.html#reprc) to guarantee the struct layout.\n\nAlso see https://doc.rust-lang.org/std/option/index.html#representation.",
+      "parentUuid": "56e19aaa_05e5ecad",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 19
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecb4691f_ce84b4b3",
         "filename": "tools/aconfig/src/package_table.rs",
         "patchSetId": 17
