@@ -468,6 +468,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0ec08bc_b26871ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-08T12:24:34Z",
+      "side": 1,
+      "message": "I forgot to add: I haven\u0027t reviewed create_storage.rs and package_table.rs. I think we first need to decide on how to land the new feature. I vote for using an existing file format, and getting the rest of the solution in place. Once that has landed, we can look into optimizing the file format (or another part of the solution -- without measurements who knows where the bottlenecks will be?)",
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "333a8385_25bce391",
