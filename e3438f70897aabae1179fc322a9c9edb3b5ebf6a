@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e74d538_c00ea085",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T16:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8fdb796_1136a2d4",
+      "range": {
+        "startLine": 12,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7ae8c9c_5e4268f2",
@@ -118,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "843f53ab_0d9cbb69",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T16:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fac55891_d773049a",
+      "range": {
+        "startLine": 17,
+        "startChar": 63,
+        "endLine": 18,
+        "endChar": 4
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb80e262_4883f2d6",
@@ -155,6 +203,30 @@
       "side": 1,
       "message": "The package id is just an integer to represent a package within a container, so later on we are referring to a package, we can just use an int instead of the package string.",
       "parentUuid": "cb80e262_4883f2d6",
+      "range": {
+        "startLine": 18,
+        "startChar": 65,
+        "endLine": 19,
+        "endChar": 2
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16bf0f0f_44141da6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T16:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62cf8dc2_8bcaa09f",
       "range": {
         "startLine": 18,
         "startChar": 65,
@@ -259,6 +331,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbb48a79_be718995",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T16:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "282569eb_8c1d92af",
+      "range": {
+        "startLine": 22,
+        "startChar": 46,
+        "endLine": 22,
+        "endChar": 55
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9574de3a_873f3711",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T16:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3e71252_bcb82244",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 56
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f314ce4b_1af368a6",
@@ -295,6 +415,30 @@
       "writtenOn": "2023-12-08T12:22:23Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 32,
+        "startChar": 26,
+        "endLine": 32,
+        "endChar": 36
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0999f2fc_c35453c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T16:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0507f08e_2cf3d3f8",
       "range": {
         "startLine": 32,
         "startChar": 26,
@@ -342,6 +486,30 @@
       "side": 1,
       "message": "Thanks will do",
       "parentUuid": "a6753027_513b9cb2",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68119165_0cf71648",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T16:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2bf8edd_0e502a96",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -458,6 +626,30 @@
       "side": 1,
       "message": "Yes, it will be reused for flag.map and flag.val creation",
       "parentUuid": "8bc822be_bd661aca",
+      "range": {
+        "startLine": 43,
+        "startChar": 52,
+        "endLine": 43,
+        "endChar": 64
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50739d36_5740e192",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T16:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dde76271_8e9ed6c3",
       "range": {
         "startLine": 43,
         "startChar": 52,
@@ -633,6 +825,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ad863cc_7f0e12d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T16:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea960a93_80c92356",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c2bc16f_d6fcf352",
@@ -687,6 +903,24 @@
       "side": 1,
       "message": "Actually not a nit. Those lines are needed, especially the Test: line(s).",
       "parentUuid": "7ac86e15_fbf73727",
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce752051_930f5c46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T16:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "370cfb73_ba37c20d",
       "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -795,6 +1029,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50a060d4_0b8450fe",
+        "filename": "tools/aconfig/OWNERS",
+        "patchSetId": 17
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T16:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43ab5c96_e5386d79",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 6
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93e44b73_d541a2f5",
@@ -808,6 +1066,30 @@
       "writtenOn": "2023-12-08T12:22:23Z",
       "side": 1,
       "message": "Please don\u0027t use expect, return an Err instead -- expect prevents effective unit testing.",
+      "range": {
+        "startLine": 219,
+        "startChar": 49,
+        "endLine": 219,
+        "endChar": 55
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68975716_ce4cb6f2",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T16:52:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93e44b73_d541a2f5",
       "range": {
         "startLine": 219,
         "startChar": 49,
