@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7674914_756b15cc",
+        "filename": "tools/aconfig/src/codegen/java.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-11T10:24:04Z",
+      "side": 1,
+      "message": "This flag was exported as part of 0b9d289e2a8fe6262421e9a5483558c2023679dd. @opg, can you make this flag not exported so the naming convention matches again? If needed, feel free to add another flag that *is* exported.",
+      "range": {
+        "startLine": 641,
+        "startChar": 36,
+        "endLine": 641,
+        "endChar": 52
+      },
+      "revId": "9792a0c558a0288fcc3f3d1e30715e5e22a02158",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "912d3293_188be5c6",
+        "filename": "tools/aconfig/tests/test2.aconfig",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-11T10:24:04Z",
+      "side": 1,
+      "message": "Is there a better name than \"test2\"? (I don\u0027t have any suggestions: naming is hard. If you don\u0027t either, I\u0027m OK but not thrilled by test2 and don\u0027t think it\u0027s a blocker for merging this.)",
+      "range": {
+        "startLine": 1,
+        "startChar": 30,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "9792a0c558a0288fcc3f3d1e30715e5e22a02158",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
