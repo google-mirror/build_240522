@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8759aa35_f6df2ea7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T13:22:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "626d0041_dfaf557d",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 24
+      },
+      "revId": "e8501ea76c0c39bc11c88459a12f97de513e3377",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "151934fb_8dd2e240",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 8
@@ -81,6 +105,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "015e7be2_654575c3",
+        "filename": "tools/aconfig/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T13:22:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79041444_6ded8c44",
+      "range": {
+        "startLine": 178,
+        "startChar": 28,
+        "endLine": 178,
+        "endChar": 40
+      },
+      "revId": "e8501ea76c0c39bc11c88459a12f97de513e3377",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cedbe835_2449389d",
@@ -94,6 +142,24 @@
       "writtenOn": "2023-12-11T10:33:43Z",
       "side": 1,
       "message": "Double blank lines. Remove one.",
+      "revId": "e8501ea76c0c39bc11c88459a12f97de513e3377",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5db964ae_7c206e4c",
+        "filename": "tools/aconfig/tests/aconfig_test.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T13:22:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cedbe835_2449389d",
       "revId": "e8501ea76c0c39bc11c88459a12f97de513e3377",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
