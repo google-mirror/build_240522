@@ -141,6 +141,30 @@
       },
       "revId": "9792a0c558a0288fcc3f3d1e30715e5e22a02158",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e12adbf_202e9944",
+        "filename": "tools/aconfig/tests/test2.aconfig",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-12-11T19:23:23Z",
+      "side": 1,
+      "message": "Renamed to `test.exported`, to communicate that this set of flags is used specifically to test `exported` functionality.",
+      "parentUuid": "94107e62_c9d462fe",
+      "range": {
+        "startLine": 1,
+        "startChar": 30,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "9792a0c558a0288fcc3f3d1e30715e5e22a02158",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
