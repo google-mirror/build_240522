@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "626d0041_dfaf557d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-11T10:33:43Z",
+      "side": 1,
+      "message": "This is incorrect. Should be `atest aconfig.test.cpp and aconfig.test.cpp_test_variant`.",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 24
+      },
+      "revId": "e8501ea76c0c39bc11c88459a12f97de513e3377",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79041444_6ded8c44",
+        "filename": "tools/aconfig/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-11T10:33:43Z",
+      "side": 1,
+      "message": "I would prefer to limit the number of aconfig test targets. Why can\u0027t this be part of the aconfig.test.cpp binary? (I\u0027m guessing conflicting symbols? Please state this is the commit message.)\n\nIf we keep this as a separate binary: aconfig refers to production|test|exported as the codegen \"mode\". Rename to test_mode?",
+      "range": {
+        "startLine": 178,
+        "startChar": 28,
+        "endLine": 178,
+        "endChar": 40
+      },
+      "revId": "e8501ea76c0c39bc11c88459a12f97de513e3377",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cedbe835_2449389d",
+        "filename": "tools/aconfig/tests/aconfig_test.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-11T10:33:43Z",
+      "side": 1,
+      "message": "Double blank lines. Remove one.",
+      "revId": "e8501ea76c0c39bc11c88459a12f97de513e3377",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
