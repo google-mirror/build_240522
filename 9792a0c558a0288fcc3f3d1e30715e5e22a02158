@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32ea7158_549775ca",
+        "filename": "tools/aconfig/src/codegen/java.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-12-11T19:22:43Z",
+      "side": 1,
+      "message": "Rebased and naming convention is now fixed.",
+      "parentUuid": "c41c2c8d_17085361",
+      "range": {
+        "startLine": 641,
+        "startChar": 36,
+        "endLine": 641,
+        "endChar": 52
+      },
+      "revId": "9792a0c558a0288fcc3f3d1e30715e5e22a02158",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "912d3293_188be5c6",
