@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c41c2c8d_17085361",
+        "filename": "tools/aconfig/src/codegen/java.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-11T15:33:33Z",
+      "side": 1,
+      "message": "Done in aosp/2868794 - apologies for the merge conflicts!",
+      "parentUuid": "a7674914_756b15cc",
+      "range": {
+        "startLine": 641,
+        "startChar": 36,
+        "endLine": 641,
+        "endChar": 52
+      },
+      "revId": "9792a0c558a0288fcc3f3d1e30715e5e22a02158",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "912d3293_188be5c6",
         "filename": "tools/aconfig/tests/test2.aconfig",
         "patchSetId": 11
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-11T10:24:04Z",
       "side": 1,
       "message": "Is there a better name than \"test2\"? (I don\u0027t have any suggestions: naming is hard. If you don\u0027t either, I\u0027m OK but not thrilled by test2 and don\u0027t think it\u0027s a blocker for merging this.)",
+      "range": {
+        "startLine": 1,
+        "startChar": 30,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "9792a0c558a0288fcc3f3d1e30715e5e22a02158",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55a50590_2a7a733b",
+        "filename": "tools/aconfig/tests/test2.aconfig",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-11T15:33:33Z",
+      "side": 1,
+      "message": "Also, why is this needed? There are exported and non-exported flags in com.android.aconfig.test",
+      "parentUuid": "912d3293_188be5c6",
       "range": {
         "startLine": 1,
         "startChar": 30,
