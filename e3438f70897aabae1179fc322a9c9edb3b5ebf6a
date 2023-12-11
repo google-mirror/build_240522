@@ -1340,6 +1340,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "047e28f8_6c2bdc4c",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T17:03:39Z",
+      "side": 1,
+      "message": "It is guarding a case where in an aconfig cache (a vector of parsed flag proto), that we could have different container designations. It won\u0027t happen today, as each aconfig cache is generated from an aconfig declartion which has a unique container designation. But in a hypothetical world, say build system combines different caches into one, then this could happen.",
+      "parentUuid": "078bcf2c_0bd2a3f7",
+      "range": {
+        "startLine": 220,
+        "startChar": 52,
+        "endLine": 220,
+        "endChar": 56
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12c54573_75e6a64b",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T17:03:39Z",
+      "side": 1,
+      "message": "For example, we are building \"product\" partition, it uses exported flags defined in \"system\" partition. Then the code in \"product\" partition will link against a flag lib backed by an aconfig file with a \"system\" container designation. The build system sees this aconfig file as being used to build \"product\", thus feeding the aconfig cache files to this command.\n\nThe alternative would be to have build system scan thru the list of aconfig cache files and only feed the set that is relevant. But this seems to be only need by storage creation and is easier to handle in aconfig binary probably.",
+      "parentUuid": "b4a405c7_50fc22a4",
+      "range": {
+        "startLine": 220,
+        "startChar": 9,
+        "endLine": 220,
+        "endChar": 15
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79048284_719db896",
         "filename": "tools/aconfig/src/commands.rs",
         "patchSetId": 17
@@ -1374,6 +1422,30 @@
       "writtenOn": "2023-12-08T12:22:23Z",
       "side": 1,
       "message": "I would like create_storage.rs and package_table.rs to be moved into a separate subdir, similarly to how the codegen code was moved in aosp/2863041",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "607d1afd_72a3bb3d",
+        "filename": "tools/aconfig/src/create_storage.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T17:03:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcef805f_1df8c97f",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -1539,6 +1611,30 @@
       "writtenOn": "2023-12-08T00:43:06Z",
       "side": 1,
       "message": "Please add tests for these two new files",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 1
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a7a2f1_c3e59c4c",
+        "filename": "tools/aconfig/src/create_storage.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T17:03:39Z",
+      "side": 1,
+      "message": "I split the change into two parts. Added a unit test for the first part which is FlagPackage creation.",
+      "parentUuid": "20ccf33c_493b4dc2",
       "range": {
         "startLine": 122,
         "startChar": 0,
