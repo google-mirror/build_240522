@@ -93,6 +93,30 @@
       },
       "revId": "9792a0c558a0288fcc3f3d1e30715e5e22a02158",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94107e62_c9d462fe",
+        "filename": "tools/aconfig/tests/test2.aconfig",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-12-11T17:49:47Z",
+      "side": 1,
+      "message": "I\u0027m testing that a flag can be accessed if it\u0027s `exported` when the library is also marked as `mode: \"exported\"`. What I ran into here is, the test target takes `aconfig_test_java_library` as a static_lib, which is not an exported library. So `enabled_ro_exported` will be accessible, but it won\u0027t be exercising the codepath where it\u0027s marked as exported and the library is as well. I considered creating a `aconfig_test_java_library_exported` target using the same aconfig definitions, and adding that as an additional static_lib, but then it\u0027s not clear to me which flag is being referenced in `import static com.android.aconfig.test.Flags.enabledRoExported;`; is it from `aconfig_test_java_library` or  `aconfig_test_java_library_exported`? Is it exercising the exported \u0026\u0026 exported library codepath?",
+      "parentUuid": "55a50590_2a7a733b",
+      "range": {
+        "startLine": 1,
+        "startChar": 30,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "9792a0c558a0288fcc3f3d1e30715e5e22a02158",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
