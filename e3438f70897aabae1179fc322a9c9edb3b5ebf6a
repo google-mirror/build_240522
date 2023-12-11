@@ -851,6 +851,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3efa9cd7_42ddf120",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T18:51:46Z",
+      "side": 1,
+      "message": "I checked, it seems android is always little endian. will move to little endian encoding.\n\nhttps://developer.android.com/ndk/guides/abis#:~:text\u003dAndroid%20is%20always%20little%2Dendian,registers%20when%20it%20calls%20functions.",
+      "parentUuid": "fefe4780_a3375995",
+      "range": {
+        "startLine": 50,
+        "startChar": 16,
+        "endLine": 50,
+        "endChar": 35
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1183802_3b386f33",
