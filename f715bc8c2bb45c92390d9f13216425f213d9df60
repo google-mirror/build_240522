@@ -34,6 +34,40 @@
       "parentUuid": "70692700_1eb7bb0d",
       "revId": "f715bc8c2bb45c92390d9f13216425f213d9df60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05cf8f64_777e9104",
+        "filename": "tools/aconfig/src/codegen/java.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T21:41:57Z",
+      "side": 1,
+      "message": "Also, can we check if the number of flags to be exported is not 0",
+      "revId": "f715bc8c2bb45c92390d9f13216425f213d9df60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e44dded4_fb689bf8",
+        "filename": "tools/aconfig/src/codegen/java.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T21:41:57Z",
+      "side": 1,
+      "message": "is_test_mode and library_exported are mutually exclusive, can we consolidate these two fields into one?",
+      "revId": "f715bc8c2bb45c92390d9f13216425f213d9df60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
