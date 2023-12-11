@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8360b279_28cde906",
+        "filename": "tools/aconfig/src/codegen/java.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-11T21:50:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e1c649dc_3801e865",
+      "revId": "f715bc8c2bb45c92390d9f13216425f213d9df60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05cf8f64_777e9104",
