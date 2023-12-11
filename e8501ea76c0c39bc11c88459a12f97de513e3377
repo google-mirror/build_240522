@@ -24,6 +24,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "151934fb_8dd2e240",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-11T10:38:07Z",
+      "side": 1,
+      "message": "The tests don\u0027t pass:\n\n```\n$ atest aconfig.test.cpp aconfig.test.cpp_test_variant\n...\n[7/7] AconfigTest#ResetFlagValue: FAILED (0ms)\n\nSTACKTRACE:\nbuild/make/tools/aconfig/tests/aconfig_test_test_variant.cpp:65: Failure\nValue of: disabled_ro()\n  Actual: true\nExpected: false\n```",
+      "revId": "e8501ea76c0c39bc11c88459a12f97de513e3377",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79041444_6ded8c44",
