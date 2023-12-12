@@ -159,6 +159,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "781fa422_dd18ea7b",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 30
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-12T21:47:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "720570fd_02ceeb1b",
+      "range": {
+        "startLine": 27,
+        "startChar": 8,
+        "endLine": 27,
+        "endChar": 21
+      },
+      "revId": "b69ebca9cb21fddcf3f72e9fe414089993f6bb9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cfd3a96_8a1f98e8",
