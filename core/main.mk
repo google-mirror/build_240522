@@ -370,6 +370,10 @@ endif
 ADDITIONAL_PRODUCT_PROPERTIES += \
     ro.product.cpu.pagesize.max=$(TARGET_MAX_PAGE_SIZE_SUPPORTED)
 
+ifdef PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO
+ADDITIONAL_PRODUCT_PROPERTIES += ro.product.build.no_bionic_page_size_macro=true
+endif
+
 # -----------------------------------------------------------------
 ###
 ### In this section we set up the things that are different
