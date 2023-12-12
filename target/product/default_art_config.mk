@@ -88,6 +88,13 @@ PRODUCT_APEX_BOOT_JARS := \
     com.android.virt:framework-virtualization \
     com.android.wifi:framework-wifi \
 
+# When we release crashrecovery module
+ifeq ($(RELEASE_CRASHRECOVERY_MODULE),true)
+  PRODUCT_APEX_BOOT_JARS += \
+        com.android.crashrecovery:framework-crashrecovery \
+
+endif
+
 # TODO(b/308174306): Adjust this after multiple prebuilts version is supported.
 # APEX boot jars that are not in prebuilt apexes.
 # Keep the list sorted by module names and then library names.
@@ -108,6 +115,13 @@ PRODUCT_APEX_SYSTEM_SERVER_JARS := \
     com.android.ondevicepersonalization:service-ondevicepersonalization \
     com.android.permission:service-permission \
     com.android.rkpd:service-rkp \
+
+# When we release crashrecovery module
+ifeq ($(RELEASE_CRASHRECOVERY_MODULE),true)
+  PRODUCT_APEX_SYSTEM_SERVER_JARS += \
+        com.android.crashrecovery:service-crashrecovery \
+
+endif
 
 # Use $(wildcard) to avoid referencing the profile in thin manifests that don't have the
 # art project.
