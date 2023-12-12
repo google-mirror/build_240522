@@ -368,6 +368,30 @@
       },
       "revId": "b69ebca9cb21fddcf3f72e9fe414089993f6bb9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2baa02c_9d208bfc",
+        "filename": "tools/aconfig/tests/storage_test_2.aconfig",
+        "patchSetId": 30
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-12T20:54:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b1770f3_bceae195",
+      "range": {
+        "startLine": 1,
+        "startChar": 38,
+        "endLine": 1,
+        "endChar": 44
+      },
+      "revId": "b69ebca9cb21fddcf3f72e9fe414089993f6bb9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
