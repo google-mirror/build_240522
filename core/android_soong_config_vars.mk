@@ -196,3 +196,6 @@ else
 $(call add_soong_config_var_value,ANDROID,include_nonpublic_framework_api,true)
 endif
 
+# Add crashrecovery build flag to soong
+$(call add_soong_config_var_value,ANDROID,release_crashrecovery_module,$(RELEASE_CRASHRECOVERY_MODULE))
+$(call add_soong_config_var_value,AUTO,release_crashrecovery_module,$(RELEASE_CRASHRECOVERY_MODULE))
