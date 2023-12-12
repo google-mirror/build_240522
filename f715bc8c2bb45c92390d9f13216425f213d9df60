@@ -86,6 +86,24 @@
       "message": "is_test_mode and library_exported are mutually exclusive, can we consolidate these two fields into one?",
       "revId": "f715bc8c2bb45c92390d9f13216425f213d9df60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc9aad0_1ab7a41a",
+        "filename": "tools/aconfig/src/codegen/java.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-12T14:20:15Z",
+      "side": 1,
+      "message": "We can probably address this in another cl.",
+      "parentUuid": "e44dded4_fb689bf8",
+      "revId": "f715bc8c2bb45c92390d9f13216425f213d9df60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
