@@ -1434,6 +1434,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a414f1f6_f35676b7",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-12T19:09:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "12c54573_75e6a64b",
+      "range": {
+        "startLine": 220,
+        "startChar": 9,
+        "endLine": 220,
+        "endChar": 15
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79048284_719db896",
@@ -1802,6 +1826,30 @@
       "side": 1,
       "message": "I think in the unbundled apex/apk design, for shared libs, we assign their container designation as a part of platform by default, in this case, \"system\" and all of their flags have to be exported. So other containers access it via external flag access syntax.",
       "parentUuid": "e197b785_ae8aa0a8",
+      "range": {
+        "startLine": 117,
+        "startChar": 49,
+        "endLine": 117,
+        "endChar": 58
+      },
+      "revId": "e3438f70897aabae1179fc322a9c9edb3b5ebf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aa4c57e_ad2a2427",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2023-12-12T19:09:49Z",
+      "side": 1,
+      "message": "There\u0027s a subtle difference in the semantics of the `container` param for the `create-cache` command, and for the `create-storage` command. In `create-cache`, it conveys the container that the flag package belongs to (i.e. the container specified in the flag\u0027s declaration). But for `create-storage`, it presumably conveys the container that this storage file is being built for.\n\nMaybe worth adding a help string to this argument (and a TODO to add help strings to other arguments). E.g. something along these lines:\n\n.arg(Arg::new(\"container\").long(\"container\").required(true).help(\"The target container for the generated storage file.\")",
+      "parentUuid": "e20244c1_ba08f639",
       "range": {
         "startLine": 117,
         "startChar": 49,
