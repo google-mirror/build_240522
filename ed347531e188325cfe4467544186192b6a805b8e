@@ -345,6 +345,29 @@
       "message": "Thanks for informative commit msg!",
       "revId": "ed347531e188325cfe4467544186192b6a805b8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15a8279e_211d6d59",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 29
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-12T19:45:25Z",
+      "side": 1,
+      "message": "Return an Err instead of crashing via `expect` please.\n\nTip: you can collect to a Result\u003cVec\u003c...\u003e\u003e, e.g.\n\n```\nlet stuff: Vec\u003c_\u003e \u003d something.into_iter().map(|x| x.some_operation_that_returns_a_result()).collect::\u003cResult\u003cVec\u003c_\u003e\u003e\u003e()?;\n```\n\nThis will return a Vec if all items could be parsed / whatever operation you peform in map, and exit from the function with an Err if there was any error.",
+      "range": {
+        "startLine": 225,
+        "startChar": 49,
+        "endLine": 225,
+        "endChar": 55
+      },
+      "revId": "ed347531e188325cfe4467544186192b6a805b8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
