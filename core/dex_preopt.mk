@@ -151,6 +151,22 @@ $(system_server_zip): $(system_server_jars) $(apex_system_server_jars) $(apex_st
 
 $(call dist-for-goals, droidcore, $(system_server_zip))
 
+# A zip containing ART binaries and ART bootclasspath jars.
+# At the time of writing, this is only for Compiler Explorer (https://godbolt.org).
+art_release_zip_boot_jars=$(filter-out jacocoagent,$(foreach f,$(ART_APEX_JARS),$(call word-colon,2,$(f))))
+art_release_zip_boot_jars_files=$(foreach jar,$(art_release_zip_boot_jars), $(HOST_OUT)/apex/com.android.art/javalib/$(jar).jar)
+art_release_zip := $(PRODUCT_OUT)/art_release.zip
+$(art_release_zip): PRIVATE_BOOT_JARS_FILES := $(art_release_zip_boot_jars_files)
+$(art_release_zip): $(SOONG_ZIP) $(MERGE_ZIPS) $(art_release_zip_boot_jars_files) $(OUT_DIR)/soong/mainline-sdks/art-module-host-exports-current.zip
+	@echo "Create ART release package: $@"
+	rm -f $@
+	$(SOONG_ZIP) -o $@.tmp \
+	  -P bootjars -j $(addprefix -f ,$(PRIVATE_BOOT_JARS_FILES))
+	$(MERGE_ZIPS) $@ $@.tmp $(OUT_DIR)/soong/mainline-sdks/art-module-host-exports-current.zip
+	rm -f $@.tmp
+
+$(call dist-for-goals, droidcore, $(art_release_zip))
+
 endif  #ART_MODULE_BUILD_FROM_SOURCE || MODULE_BUILD_FROM_SOURCE
 endif  #PRODUCT_USES_DEFAULT_ART_CONFIG
 endif  #WITH_DEXPREOPT_ART_BOOT_IMG_ONLY
