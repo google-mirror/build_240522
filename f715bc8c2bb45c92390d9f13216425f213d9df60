@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88c89c73_cb41b788",
+        "filename": "tools/aconfig/src/codegen/java.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-12-12T19:01:32Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "05cf8f64_777e9104",
+      "revId": "f715bc8c2bb45c92390d9f13216425f213d9df60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e44dded4_fb689bf8",
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "We can probably address this in another cl.",
       "parentUuid": "e44dded4_fb689bf8",
+      "revId": "f715bc8c2bb45c92390d9f13216425f213d9df60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb2417a_ca6d7331",
+        "filename": "tools/aconfig/src/codegen/java.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-12-12T19:01:32Z",
+      "side": 1,
+      "message": "I think how the data is threaded to the templates can be simplified, will address in follow-up CL.",
+      "parentUuid": "8fc9aad0_1ab7a41a",
       "revId": "f715bc8c2bb45c92390d9f13216425f213d9df60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
