@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed6bf38c_8a11e127",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-12-12T18:32:06Z",
+      "side": 1,
+      "message": "This will break builds where `$OUT_DIR` !\u003d `out`.  This path should be exported by Soong for reuse here  by `AndroidMkEntries` or `MakeVars`.",
+      "range": {
+        "startLine": 160,
+        "startChar": 82,
+        "endLine": 160,
+        "endChar": 85
+      },
+      "revId": "c0301f1a05c6a8116b386fd9b31144d51a0ebf3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
