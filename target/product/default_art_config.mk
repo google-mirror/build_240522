@@ -87,6 +87,13 @@ PRODUCT_APEX_BOOT_JARS := \
     com.android.virt:framework-virtualization \
     com.android.wifi:framework-wifi \
 
+<<<<<<< PATCH SET (db9a6e Revert^2 "[CrashRecovery] Add module to BCP and SSCP")
+# When we release crashrecovery module
+ifeq ($(RELEASE_CRASHRECOVERY_MODULE),true)
+  PRODUCT_APEX_BOOT_JARS += \
+        com.android.crashrecovery:framework-crashrecovery \
+
+=======
 # Check if the build supports NFC apex or not
 ifeq ($(RELEASE_PACKAGE_NFC_STACK),NfcNci)
     PRODUCT_BOOT_JARS += \
@@ -94,6 +101,7 @@ ifeq ($(RELEASE_PACKAGE_NFC_STACK),NfcNci)
 else
     PRODUCT_APEX_BOOT_JARS := \
         com.android.nfcservices:framework-nfc
+>>>>>>> BASE      (0562b3 Merge "Remove unnecessary calling of PayloadGenerator" into )
 endif
 
 # TODO(b/308174306): Adjust this after multiple prebuilts version is supported.
@@ -116,6 +124,13 @@ PRODUCT_APEX_SYSTEM_SERVER_JARS := \
     com.android.ondevicepersonalization:service-ondevicepersonalization \
     com.android.permission:service-permission \
     com.android.rkpd:service-rkp \
+
+# When we release crashrecovery module
+ifeq ($(RELEASE_CRASHRECOVERY_MODULE),true)
+  PRODUCT_APEX_SYSTEM_SERVER_JARS += \
+        com.android.crashrecovery:service-crashrecovery \
+
+endif
 
 # Use $(wildcard) to avoid referencing the profile in thin manifests that don't have the
 # art project.
