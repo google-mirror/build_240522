@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4aca43e_a4c86845",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-12-13T20:28:58Z",
+      "side": 1,
+      "message": "Now that I think about this, we can\u0027t test `/system/bin/init` because VTS is run with a GSI image which won\u0027t reflect how the vendor builds Android for their device. That means the vts test `InitMaxPageSizeTest` is actually not doing what we want @kaleshsingh@google.com.\n\n@enh@google.com, while it\u0027s true partners could cheat on this test by just setting the build property and not actually defining `PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO`, the idea of this test is to incentivize partners to switch to a page agnostic build for V to setup for shipping a 16k page device later. Thoughts @smoreland@google.com?",
+      "parentUuid": "c5065445_f8706e4e",
+      "revId": "850a2e8e2fc2fb6870d3e00121ba5e35a6ac740f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ce602c1_72ed1507",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
