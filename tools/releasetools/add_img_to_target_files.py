@@ -312,6 +312,7 @@ def AddSystemOther(output_zip):
     return
 
   CreateImage(OPTIONS.input_tmp, OPTIONS.info_dict, "system_other", img)
+  return img.name
 
 
 def AddVendor(output_zip, recovery_img=None, boot_img=None):
