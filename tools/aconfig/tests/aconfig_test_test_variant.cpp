@@ -62,6 +62,7 @@ TEST(AconfigTest, OverrideFlagValue) {
 }
 
 TEST(AconfigTest, ResetFlagValue) {
+  reset_flags();
   ASSERT_FALSE(disabled_ro());
   ASSERT_FALSE(enabled_ro());
   disabled_ro(true);
