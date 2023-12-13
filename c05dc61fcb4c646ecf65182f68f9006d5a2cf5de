@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12341494_e5dafc1f",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-13T22:21:24Z",
+      "side": 1,
+      "message": "maybe move these three helper functions to a test.rs?",
+      "range": {
+        "startLine": 132,
+        "startChar": 11,
+        "endLine": 132,
+        "endChar": 25
+      },
+      "revId": "c05dc61fcb4c646ecf65182f68f9006d5a2cf5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5768d682_0c899a2d",
         "filename": "tools/aconfig/src/storage/package_table.rs",
         "patchSetId": 10
@@ -37,6 +60,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c94b7a6_59fa274f",
+        "filename": "tools/aconfig/src/storage/package_table.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-13T22:21:24Z",
+      "side": 1,
+      "message": "Will there be any issue to set 0 here, since it will be set as 0 when do as_bytes. But will be easier to read.",
+      "range": {
+        "startLine": 73,
+        "startChar": 25,
+        "endLine": 73,
+        "endChar": 29
+      },
+      "revId": "c05dc61fcb4c646ecf65182f68f9006d5a2cf5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32f63242_5e90fce5",
         "filename": "tools/aconfig/src/storage/package_table.rs",
         "patchSetId": 10
@@ -48,6 +94,29 @@
       "writtenOn": "2023-12-13T16:14:42Z",
       "side": 1,
       "message": "Replace with `Self`.",
+      "revId": "c05dc61fcb4c646ecf65182f68f9006d5a2cf5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c4ccc2e_7e09be71",
+        "filename": "tools/aconfig/src/storage/package_table.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-13T22:21:24Z",
+      "side": 1,
+      "message": "could you add another package \"com.android.aconfig.storage.test_4\", it should be in the same node as \"com.android.aconfig.storage.test_1\". So we can test the case of chaining",
+      "range": {
+        "startLine": 201,
+        "startChar": 7,
+        "endLine": 201,
+        "endChar": 26
+      },
       "revId": "c05dc61fcb4c646ecf65182f68f9006d5a2cf5de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
