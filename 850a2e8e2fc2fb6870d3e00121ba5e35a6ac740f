@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ce602c1_72ed1507",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-12-13T18:08:02Z",
+      "side": 1,
+      "message": "No strong objection, but it seems a little roundabout to add a property just to propagate a build flag that otherwise doesn\u0027t affect anything at runtime.  It would be fairly easy for the property to become disconnected from the compiler flag accidentally.\n\nYou\u0027re already parsing the init ELF data, it might be a little hacky and I\u0027m not sure Elliott would agree, but you could use `#ifdef __BIONIC_NO_PAGE_SIZE_MACRO` to add a symbol to the init or libc binary, and then your VTS test would be checking that the flag was getting to the compiler.",
+      "revId": "850a2e8e2fc2fb6870d3e00121ba5e35a6ac740f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
