@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5907183_2e3846e8",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-12-13T08:59:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71e8e31c_a4ec06e9",
+      "range": {
+        "startLine": 893,
+        "startChar": 53,
+        "endLine": 893,
+        "endChar": 55
+      },
+      "revId": "b6f8607faa463cb3e366d302f62850670f08d7b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b4224bd_dffa8e64",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cf330f2_c888f5f7",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-12-13T08:59:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b4224bd_dffa8e64",
+      "range": {
+        "startLine": 894,
+        "startChar": 43,
+        "endLine": 894,
+        "endChar": 51
+      },
+      "revId": "b6f8607faa463cb3e366d302f62850670f08d7b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80a600a3_a136ec67",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-12-13T08:18:32Z",
       "side": 1,
       "message": "Why don\u0027t you use a build config variable for trunk stable configs?",
+      "range": {
+        "startLine": 898,
+        "startChar": 17,
+        "endLine": 898,
+        "endChar": 25
+      },
+      "revId": "b6f8607faa463cb3e366d302f62850670f08d7b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc7caae7_5f330713",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-12-13T08:59:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80a600a3_a136ec67",
       "range": {
         "startLine": 898,
         "startChar": 17,
