@@ -35,6 +35,8 @@ ifeq ($(TARGET_IS_64_BIT)|$(TARGET_2ND_ARCH),true|)
 check-vndk-list: ;
 else ifeq ($(TARGET_SKIP_CURRENT_VNDK),true)
 check-vndk-list: ;
+else ifneq ($(KEEP_VNDK),true)
+check-vndk-list: ;
 else
 check-vndk-list: $(check-vndk-list-timestamp)
 ifneq ($(SKIP_ABI_CHECKS),true)
