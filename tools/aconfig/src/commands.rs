@@ -66,6 +66,7 @@ pub fn parse_flags(
     default_permission: ProtoFlagPermission,
 ) -> Result<Vec<u8>> {
     let mut parsed_flags = ProtoParsedFlags::new();
+    let mut flag_id_to_assign = 0;
 
     for mut input in declarations {
         let mut contents = String::new();
@@ -125,6 +126,9 @@ pub fn parse_flags(
             let purpose = flag_declaration.metadata.purpose();
             metadata.set_purpose(purpose);
             parsed_flag.metadata = Some(metadata).into();
+
+            parsed_flag.set_id(flag_id_to_assign);
+            flag_id_to_assign += 1;
 
             // verify ParsedFlag looks reasonable
             crate::protos::parsed_flag::verify_fields(&parsed_flag)?;

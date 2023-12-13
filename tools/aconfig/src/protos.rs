@@ -212,7 +212,8 @@ pub mod parsed_flag {
             "namespace",
             "description",
             "state",
-            "permission"
+            "permission",
+            "id"
         );
 
         ensure!(codegen::is_valid_package_ident(pf.package()), "bad parsed flag: bad package");
@@ -626,6 +627,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 0
 }
 parsed_flag {
     package: "com.second"
@@ -647,6 +649,7 @@ parsed_flag {
     }
     is_fixed_read_only: true
     container: "system"
+    id: 1
 }
 "#;
         let parsed_flags = try_from_binary_proto_from_text_proto(text_proto).unwrap();
@@ -659,6 +662,7 @@ parsed_flag {
         assert_eq!(second.bug, vec!["SOME_BUG"]);
         assert_eq!(second.state(), ProtoFlagState::ENABLED);
         assert_eq!(second.permission(), ProtoFlagPermission::READ_ONLY);
+        assert_eq!(second.id(), 1);
         assert_eq!(2, second.trace.len());
         assert_eq!(second.trace[0].source(), "flags.declarations");
         assert_eq!(second.trace[0].state(), ProtoFlagState::DISABLED);
@@ -672,6 +676,26 @@ parsed_flag {
         let parsed_flags = try_from_binary_proto_from_text_proto("").unwrap();
         assert!(parsed_flags.parsed_flag.is_empty());
 
+        // bad input: missing flag id
+        let text_proto = r#"
+parsed_flag {
+    package: "com.first"
+    name: "first"
+    namespace: "first_ns"
+    description: "This is the description of the first flag."
+    state: DISABLED
+    permission: READ_ONLY
+    container: "system"
+    trace {
+        source: "flags.declarations"
+        state: DISABLED
+        permission: READ_ONLY
+    }
+}
+"#;
+        let error = try_from_binary_proto_from_text_proto(text_proto).unwrap_err();
+        assert_eq!(format!("{:?}", error), "bad parsed flag: missing id");
+
         // bad input: empty trace
         let text_proto = r#"
 parsed_flag {
@@ -682,6 +706,7 @@ parsed_flag {
     state: DISABLED
     permission: READ_ONLY
     container: "system"
+    id: 0
 }
 "#;
         let error = try_from_binary_proto_from_text_proto(text_proto).unwrap_err();
@@ -701,6 +726,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 0
 }
 "#;
         let error = try_from_binary_proto_from_text_proto(text_proto).unwrap_err();
@@ -722,6 +748,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 0
 }
 parsed_flag {
     package: "aaa.aaa"
@@ -737,6 +764,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 1
 }
 "#;
         let error = try_from_binary_proto_from_text_proto(text_proto).unwrap_err();
@@ -761,6 +789,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 0
 }
 parsed_flag {
     package: "com.foo"
@@ -776,6 +805,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 1
 }
 "#;
         let error = try_from_binary_proto_from_text_proto(text_proto).unwrap_err();
@@ -800,6 +830,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 0
 }
 parsed_flag {
     package: "com.foo"
@@ -815,6 +846,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 1
 }
 "#;
         let error = try_from_binary_proto_from_text_proto(text_proto).unwrap_err();
@@ -843,6 +875,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 0
 }
 "#;
         let parsed_flags = try_from_binary_proto_from_text_proto(text_proto).unwrap();
@@ -870,6 +903,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 0
 }
 parsed_flag {
     package: "com.second"
@@ -885,6 +919,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 1
 }
 "#;
         let expected = try_from_binary_proto_from_text_proto(text_proto).unwrap();
@@ -904,6 +939,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 0
 }
 "#;
         let first = try_from_binary_proto_from_text_proto(text_proto).unwrap();
@@ -923,6 +959,7 @@ parsed_flag {
         permission: READ_ONLY
     }
     container: "system"
+    id: 1
 }
 "#;
         let second = try_from_binary_proto_from_text_proto(text_proto).unwrap();
@@ -941,6 +978,7 @@ parsed_flag {
         state: DISABLED
         permission: READ_ONLY
     }
+    id: 1
 }
 "#;
         let second_duplicate = try_from_binary_proto_from_text_proto(text_proto).unwrap();
