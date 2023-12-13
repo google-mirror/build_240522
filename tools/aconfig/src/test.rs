@@ -47,6 +47,7 @@ parsed_flag {
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
+  id: 2
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -67,6 +68,7 @@ parsed_flag {
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
+  id: 3
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -92,6 +94,7 @@ parsed_flag {
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
+  id: 7
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -117,6 +120,7 @@ parsed_flag {
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
+  id: 5
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -142,6 +146,7 @@ parsed_flag {
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
+  id: 4
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -172,6 +177,7 @@ parsed_flag {
   metadata {
     purpose: PURPOSE_BUGFIX
   }
+  id: 0
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -197,6 +203,7 @@ parsed_flag {
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
+  id: 6
 }
 parsed_flag {
   package: "com.android.aconfig.test"
@@ -222,6 +229,7 @@ parsed_flag {
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
+  id: 1
 }
 "#;
 

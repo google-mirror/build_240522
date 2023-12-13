@@ -97,6 +97,7 @@ message parsed_flag {
   optional bool is_exported = 10;
   optional string container = 11;
   optional flag_metadata metadata = 12;
+  optional uint32 id = 13;
 }
 
 message parsed_flags {
