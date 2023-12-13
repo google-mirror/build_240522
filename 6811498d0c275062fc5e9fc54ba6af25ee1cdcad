@@ -33,6 +33,24 @@
       "message": "This is pretty cool, I love compiler explorer!\n\nI rewrote this cl in soong, do you mind using that instead? aosp/2871715",
       "revId": "6811498d0c275062fc5e9fc54ba6af25ee1cdcad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d07b588_0a1ba4dd",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2023-12-13T13:52:35Z",
+      "side": 1,
+      "message": "I\u0027m glad that you like compiler explorer! kevinjeon@ is working on it. If you are interested, you can try the prototype at http://samoyed.c.googlers.com:10240/.\n\nThanks for rewriting this in Soong. It\u0027s good to know that this can be achieved purely in Soong. Makefile is hard to write and also hard to read. I hope we can get rid of all these Make rules eventually. Let\u0027s move the discussion to your CL. I\u0027ll abandon this one once your CL is okay.",
+      "parentUuid": "fd3cfa86_f0ccebe6",
+      "revId": "6811498d0c275062fc5e9fc54ba6af25ee1cdcad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
