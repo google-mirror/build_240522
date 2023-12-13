@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71e8e31c_a4ec06e9",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-12-13T08:18:32Z",
+      "side": 1,
+      "message": "Let\u0027s be more specific to say it as YYYYMM.",
+      "range": {
+        "startLine": 893,
+        "startChar": 53,
+        "endLine": 893,
+        "endChar": 55
+      },
+      "revId": "b6f8607faa463cb3e366d302f62850670f08d7b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b4224bd_dffa8e64",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-12-13T08:18:32Z",
+      "side": 1,
+      "message": "Can we set 1000000.0? I am setting the future version as 1000000 in the other places.",
+      "range": {
+        "startLine": 894,
+        "startChar": 43,
+        "endLine": 894,
+        "endChar": 51
+      },
+      "revId": "b6f8607faa463cb3e366d302f62850670f08d7b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80a600a3_a136ec67",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2023-12-13T08:18:32Z",
+      "side": 1,
+      "message": "Why don\u0027t you use a build config variable for trunk stable configs?",
+      "range": {
+        "startLine": 898,
+        "startChar": 17,
+        "endLine": 898,
+        "endChar": 25
+      },
+      "revId": "b6f8607faa463cb3e366d302f62850670f08d7b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
