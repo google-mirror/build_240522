@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1dccff1_2afcf7a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-12-13T22:34:41Z",
+      "side": 1,
+      "message": "Hey. I actually like Colin\u0027s suggestion. It\u0027s not about preventing people from faking it, but it\u0027s that a system property is really easy to fake. If someone sees a test failing because the property set is false, they might just add that property to system/build.prop without realizing what they really need to do.\n\nHowever, they probably wouldn\u0027t fork bionic or init to add the extra symbol on accident.\n\nWe don\u0027t need to make sure nobody does this, but we want to give an early and clear signal to partners of what they should do.",
+      "parentUuid": "d4aca43e_a4c86845",
+      "revId": "850a2e8e2fc2fb6870d3e00121ba5e35a6ac740f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ce602c1_72ed1507",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
