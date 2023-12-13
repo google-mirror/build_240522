@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ac21e16_2e37cbd9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-13T20:04:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5412142_f4bc1772",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "20adbb6bd788c80c48a2094f09df6d6d46703cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f426ad5_2fd71aa6",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-13T19:11:25Z",
       "side": 1,
       "message": "atest accepts multiple targets in the same line so \"atest aconfig.test aconfig.test.java ...\" does the same as the above, but faster because it doesn\u0027t have to spin up atest for every target.\n\nI\u0027m also OK with just `atest` now that we have a TEST_MAPPING in place, as that will run the above tests plus two additional ones.",
+      "range": {
+        "startLine": 13,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 63
+      },
+      "revId": "20adbb6bd788c80c48a2094f09df6d6d46703cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad844a12_52e2bc79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-13T20:04:04Z",
+      "side": 1,
+      "message": "Yes agree. I will check the TEST_MAPPING thing.",
+      "parentUuid": "1f426ad5_2fd71aa6",
       "range": {
         "startLine": 13,
         "startChar": 6,
@@ -83,6 +131,30 @@
       "writtenOn": "2023-12-13T19:11:25Z",
       "side": 1,
       "message": "I don\u0027t understand why this change was made. AconfigTest::SetUp is called before every TEST_F, so `reset_flags` is called before the test. Revert back to `TEST_F` and remove the call to reset_flags?",
+      "range": {
+        "startLine": 72,
+        "startChar": 2,
+        "endLine": 72,
+        "endChar": 13
+      },
+      "revId": "20adbb6bd788c80c48a2094f09df6d6d46703cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3571a5c_1d2d60c2",
+        "filename": "tools/aconfig/tests/aconfig_test_test_variant.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-13T20:04:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17fea977_b4a871fe",
       "range": {
         "startLine": 72,
         "startChar": 2,
