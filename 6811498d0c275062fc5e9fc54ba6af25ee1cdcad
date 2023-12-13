@@ -16,6 +16,23 @@
       "message": "Cole, PTAL",
       "revId": "6811498d0c275062fc5e9fc54ba6af25ee1cdcad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd3cfa86_f0ccebe6",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-12-13T01:23:14Z",
+      "side": 1,
+      "message": "This is pretty cool, I love compiler explorer!\n\nI rewrote this cl in soong, do you mind using that instead? aosp/2871715",
+      "revId": "6811498d0c275062fc5e9fc54ba6af25ee1cdcad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
