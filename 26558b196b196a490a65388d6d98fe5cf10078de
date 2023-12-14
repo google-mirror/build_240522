@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4418618_fcbb0ebd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2023-12-14T15:07:56Z",
+      "side": 1,
+      "message": "Thanks for the patch! Please prefix the commit message with \"aconfig: \". Other than that, LGTM.",
+      "revId": "26558b196b196a490a65388d6d98fe5cf10078de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
