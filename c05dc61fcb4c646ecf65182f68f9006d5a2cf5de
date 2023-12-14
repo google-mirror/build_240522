@@ -119,6 +119,30 @@
       },
       "revId": "c05dc61fcb4c646ecf65182f68f9006d5a2cf5de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2388bedc_91a25489",
+        "filename": "tools/aconfig/src/storage/package_table.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-14T00:15:41Z",
+      "side": 1,
+      "message": "A good catch! Will do!",
+      "parentUuid": "9c4ccc2e_7e09be71",
+      "range": {
+        "startLine": 201,
+        "startChar": 7,
+        "endLine": 201,
+        "endChar": 26
+      },
+      "revId": "c05dc61fcb4c646ecf65182f68f9006d5a2cf5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
