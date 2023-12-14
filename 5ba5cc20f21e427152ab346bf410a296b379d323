@@ -46,6 +46,30 @@
       },
       "revId": "5ba5cc20f21e427152ab346bf410a296b379d323",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c60baf5_3b508d38",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-14T20:48:06Z",
+      "side": 1,
+      "message": "Those are valid concerns but I am still reluctant to encoding the ID in the public API and committing to that field for ever and ever. What if the storage solution changes in the next 6 months?\n\nCan you describe the scenarios where things can potentially go wrong if we don\u0027t encode the id in the proto, please?",
+      "parentUuid": "bffa118e_b6e72da8",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 26
+      },
+      "revId": "5ba5cc20f21e427152ab346bf410a296b379d323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
