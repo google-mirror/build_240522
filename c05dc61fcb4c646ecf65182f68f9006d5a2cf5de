@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39aad028_b2f4b9ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-14T08:37:56Z",
+      "side": 1,
+      "message": "(Two drive-by comments, I haven\u0027t reviewed this in detail yet.)",
+      "revId": "c05dc61fcb4c646ecf65182f68f9006d5a2cf5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12341494_e5dafc1f",
@@ -19,6 +36,53 @@
         "startChar": 11,
         "endLine": 132,
         "endChar": 25
+      },
+      "revId": "c05dc61fcb4c646ecf65182f68f9006d5a2cf5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10777fdc_1b434912",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-14T08:37:56Z",
+      "side": 1,
+      "message": "My opinion is that if the functions are only used in this file\u0027s test module, they should stay here. If in the future other test modules need them we can move them to a common place (i.e. test.rs).",
+      "parentUuid": "12341494_e5dafc1f",
+      "range": {
+        "startLine": 132,
+        "startChar": 11,
+        "endLine": 132,
+        "endChar": 25
+      },
+      "revId": "c05dc61fcb4c646ecf65182f68f9006d5a2cf5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05e69ded_43e2da6c",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-14T08:37:56Z",
+      "side": 1,
+      "message": "Inconsistent: this function returns a result but you unwrap here?\n\nIf the function is only for testing: change return type to u32 and unwrap everywhere. If the function is used outside testing: return Result and avoid unwrap and expect.",
+      "range": {
+        "startLine": 133,
+        "startChar": 70,
+        "endLine": 133,
+        "endChar": 76
       },
       "revId": "c05dc61fcb4c646ecf65182f68f9006d5a2cf5de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
