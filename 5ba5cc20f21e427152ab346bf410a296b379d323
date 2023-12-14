@@ -22,6 +22,30 @@
       },
       "revId": "5ba5cc20f21e427152ab346bf410a296b379d323",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bffa118e_b6e72da8",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-14T14:41:20Z",
+      "side": 1,
+      "message": "The flag id is used at two locations in the build system. First, the codegen uses it, it uses flag id to know where within package is this flag stored. Then it is used by storage mechanism to create flag value files in this order. It is crucial to have these two orders match exactly.\n\nCan we runtime assign id at both locations: yes. But the biggest fear is two sources of truth and they may silently diverge and it is hard to detect that. Rather it is much more robust to have it created as a part of cache, thus single source of truth, and strict consistency between codegen and storage creation.",
+      "parentUuid": "6e93b078_b5f41d36",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 26
+      },
+      "revId": "5ba5cc20f21e427152ab346bf410a296b379d323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
