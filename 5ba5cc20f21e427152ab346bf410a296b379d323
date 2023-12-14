@@ -94,6 +94,30 @@
       },
       "revId": "5ba5cc20f21e427152ab346bf410a296b379d323",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8186280_00ec1cff",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-14T21:18:50Z",
+      "side": 1,
+      "message": "Just curious, what is the concern of adding it to the proto. I understand that once it is added, we would keep it there forever. So it might make the files that contain parsed flags larger. Are there other concerns?",
+      "parentUuid": "350c8e86_542f8497",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 26
+      },
+      "revId": "5ba5cc20f21e427152ab346bf410a296b379d323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
