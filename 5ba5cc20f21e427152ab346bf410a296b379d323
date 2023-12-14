@@ -70,6 +70,30 @@
       },
       "revId": "5ba5cc20f21e427152ab346bf410a296b379d323",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "350c8e86_542f8497",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-14T21:12:29Z",
+      "side": 1,
+      "message": "For example, assuming we are not adding this id field. During codegen, say we assign flag ids in a way that foo is 0 and bar is 1. So the generated code expects foo\u0027s value is before bar\u0027s value. But during storage file creation, we assigned foo to flag id 1 and bar to flag id 0. So bar is value appeared before foo\u0027s value in storage file. Then the generated code for foo is actually getting bar\u0027s value.\n\nSuch errors are silent and hard to guard and debug. If we have the id predetermined in the cache, and both codegen and storage creation are depending on the cache files, consistency can be ensured.",
+      "parentUuid": "5c60baf5_3b508d38",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 26
+      },
+      "revId": "5ba5cc20f21e427152ab346bf410a296b379d323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
