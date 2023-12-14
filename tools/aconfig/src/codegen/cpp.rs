@@ -31,9 +31,11 @@ pub fn generate_cpp_code<I>(
 where
     I: Iterator<Item = ProtoParsedFlag>,
 {
+    let p_parsed_flags = codegen::process_parsed_flags(parsed_flags_iter, codegen_mode);
     let mut readwrite_count = 0;
-    let class_elements: Vec<ClassElement> = parsed_flags_iter
-        .map(|pf| create_class_element(package, &pf, &mut readwrite_count))
+    let class_elements: Vec<ClassElement> = p_parsed_flags
+        .iter()
+        .map(|pf| create_class_element(package, pf, &mut readwrite_count))
         .collect();
     let readwrite = readwrite_count > 0;
     let has_fixed_read_only = class_elements.iter().any(|item| item.is_fixed_read_only);
@@ -49,7 +51,9 @@ where
         has_fixed_read_only,
         readwrite,
         readwrite_count,
-        for_test: codegen_mode == CodegenMode::Test,
+        is_test_mode: codegen_mode == CodegenMode::Test,
+        is_prod_mode: codegen_mode == CodegenMode::Production,
+        is_exported_mode: codegen_mode == CodegenMode::Exported,
         class_elements,
     };
 
@@ -92,7 +96,9 @@ pub struct Context<'a> {
     pub has_fixed_read_only: bool,
     pub readwrite: bool,
     pub readwrite_count: i32,
-    pub for_test: bool,
+    pub is_test_mode: bool,
+    pub is_prod_mode: bool,
+    pub is_exported_mode: bool,
     pub class_elements: Vec<ClassElement>,
 }
 
@@ -149,6 +155,10 @@ mod tests {
 #define COM_ANDROID_ACONFIG_TEST_ENABLED_FIXED_RO true
 #endif
 
+#ifndef COM_ANDROID_ACONFIG_TEST_ENABLED_FIXED_RO_EXPORTED
+#define COM_ANDROID_ACONFIG_TEST_ENABLED_FIXED_RO_EXPORTED true
+#endif
+
 #ifdef __cplusplus
 
 #include <memory>
@@ -168,6 +178,8 @@ public:
     virtual bool disabled_rw_in_other_namespace() = 0;
 
     virtual bool enabled_fixed_ro() = 0;
+
+    virtual bool enabled_fixed_ro_exported() = 0;
 
     virtual bool enabled_ro() = 0;
 
@@ -198,6 +210,10 @@ inline bool enabled_fixed_ro() {
     return COM_ANDROID_ACONFIG_TEST_ENABLED_FIXED_RO;
 }
 
+inline bool enabled_fixed_ro_exported() {
+    return COM_ANDROID_ACONFIG_TEST_ENABLED_FIXED_RO_EXPORTED;
+}
+
 inline bool enabled_ro() {
     return true;
 }
@@ -224,6 +240,8 @@ bool com_android_aconfig_test_disabled_rw_exported();
 bool com_android_aconfig_test_disabled_rw_in_other_namespace();
 
 bool com_android_aconfig_test_enabled_fixed_ro();
+
+bool com_android_aconfig_test_enabled_fixed_ro_exported();
 
 bool com_android_aconfig_test_enabled_ro();
 
@@ -269,6 +287,10 @@ public:
     virtual bool enabled_fixed_ro() = 0;
 
     virtual void enabled_fixed_ro(bool val) = 0;
+
+    virtual bool enabled_fixed_ro_exported() = 0;
+
+    virtual void enabled_fixed_ro_exported(bool val) = 0;
 
     virtual bool enabled_ro() = 0;
 
@@ -327,6 +349,14 @@ inline void enabled_fixed_ro(bool val) {
     provider_->enabled_fixed_ro(val);
 }
 
+inline bool enabled_fixed_ro_exported() {
+    return provider_->enabled_fixed_ro_exported();
+}
+
+inline void enabled_fixed_ro_exported(bool val) {
+    provider_->enabled_fixed_ro_exported(val);
+}
+
 inline bool enabled_ro() {
     return provider_->enabled_ro();
 }
@@ -380,6 +410,10 @@ bool com_android_aconfig_test_enabled_fixed_ro();
 
 void set_com_android_aconfig_test_enabled_fixed_ro(bool val);
 
+bool com_android_aconfig_test_enabled_fixed_ro_exported();
+
+void set_com_android_aconfig_test_enabled_fixed_ro_exported(bool val);
+
 bool com_android_aconfig_test_enabled_ro();
 
 void set_com_android_aconfig_test_enabled_ro(bool val);
@@ -400,6 +434,56 @@ void com_android_aconfig_test_reset_flags();
 #endif
 
 
+"#;
+
+    const EXPORTED_EXPORTED_HEADER_EXPECTED: &str = r#"
+#pragma once
+
+#ifdef __cplusplus
+
+#include <memory>
+
+namespace com::android::aconfig::test {
+
+class flag_provider_interface {
+public:
+    virtual ~flag_provider_interface() = default;
+
+    virtual bool disabled_rw_exported() = 0;
+
+    virtual bool enabled_fixed_ro_exported() = 0;
+
+    virtual bool enabled_ro_exported() = 0;
+};
+
+extern std::unique_ptr<flag_provider_interface> provider_;
+
+inline bool disabled_rw_exported() {
+    return provider_->disabled_rw_exported();
+}
+
+inline bool enabled_fixed_ro_exported() {
+    return provider_->enabled_fixed_ro_exported();
+}
+
+inline bool enabled_ro_exported() {
+    return provider_->enabled_ro_exported();
+}
+
+}
+
+extern "C" {
+#endif // __cplusplus
+
+bool com_android_aconfig_test_disabled_rw_exported();
+
+bool com_android_aconfig_test_enabled_fixed_ro_exported();
+
+bool com_android_aconfig_test_enabled_ro_exported();
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 "#;
 
     const PROD_SOURCE_FILE_EXPECTED: &str = r#"
@@ -450,6 +534,10 @@ namespace com::android::aconfig::test {
                 return COM_ANDROID_ACONFIG_TEST_ENABLED_FIXED_RO;
             }
 
+            virtual bool enabled_fixed_ro_exported() override {
+                return COM_ANDROID_ACONFIG_TEST_ENABLED_FIXED_RO_EXPORTED;
+            }
+
             virtual bool enabled_ro() override {
                 return true;
             }
@@ -494,6 +582,10 @@ bool com_android_aconfig_test_disabled_rw_in_other_namespace() {
 
 bool com_android_aconfig_test_enabled_fixed_ro() {
     return COM_ANDROID_ACONFIG_TEST_ENABLED_FIXED_RO;
+}
+
+bool com_android_aconfig_test_enabled_fixed_ro_exported() {
+    return COM_ANDROID_ACONFIG_TEST_ENABLED_FIXED_RO_EXPORTED;
 }
 
 bool com_android_aconfig_test_enabled_ro() {
@@ -601,6 +693,19 @@ namespace com::android::aconfig::test {
                 overrides_["enabled_fixed_ro"] = val;
             }
 
+            virtual bool enabled_fixed_ro_exported() override {
+                auto it = overrides_.find("enabled_fixed_ro_exported");
+                  if (it != overrides_.end()) {
+                      return it->second;
+                } else {
+                  return true;
+                }
+            }
+
+            virtual void enabled_fixed_ro_exported(bool val) override {
+                overrides_["enabled_fixed_ro_exported"] = val;
+            }
+
             virtual bool enabled_ro() override {
                 auto it = overrides_.find("enabled_ro");
                   if (it != overrides_.end()) {
@@ -697,6 +802,13 @@ void set_com_android_aconfig_test_enabled_fixed_ro(bool val) {
     com::android::aconfig::test::enabled_fixed_ro(val);
 }
 
+bool com_android_aconfig_test_enabled_fixed_ro_exported() {
+    return com::android::aconfig::test::enabled_fixed_ro_exported();
+}
+
+void set_com_android_aconfig_test_enabled_fixed_ro_exported(bool val) {
+    com::android::aconfig::test::enabled_fixed_ro_exported(val);
+}
 
 bool com_android_aconfig_test_enabled_ro() {
     return com::android::aconfig::test::enabled_ro();
@@ -848,6 +960,66 @@ bool com_android_aconfig_test_enabled_ro() {
 }
 "#;
 
+    const EXPORTED_SOURCE_FILE_EXPECTED: &str = r#"
+#include "com_android_aconfig_test.h"
+#include <server_configurable_flags/get_flags.h>
+#include <vector>
+
+namespace com::android::aconfig::test {
+
+    class flag_provider : public flag_provider_interface {
+        public:
+            virtual bool disabled_rw_exported() override {
+                if (cache_[0] == -1) {
+                    cache_[0] = server_configurable_flags::GetServerConfigurableFlag(
+                        "aconfig_flags.aconfig_test",
+                        "com.android.aconfig.test.disabled_rw_exported",
+                        "false") == "true";
+                }
+                return cache_[0];
+            }
+
+            virtual bool enabled_fixed_ro_exported() override {
+                if (cache_[1] == -1) {
+                    cache_[1] = server_configurable_flags::GetServerConfigurableFlag(
+                        "aconfig_flags.aconfig_test",
+                        "com.android.aconfig.test.enabled_fixed_ro_exported",
+                        "false") == "true";
+                }
+                return cache_[1];
+            }
+
+            virtual bool enabled_ro_exported() override {
+                if (cache_[2] == -1) {
+                    cache_[2] = server_configurable_flags::GetServerConfigurableFlag(
+                        "aconfig_flags.aconfig_test",
+                        "com.android.aconfig.test.enabled_ro_exported",
+                        "false") == "true";
+                }
+                return cache_[2];
+            }
+
+    private:
+        std::vector<int8_t> cache_ = std::vector<int8_t>(3, -1);
+    };
+
+    std::unique_ptr<flag_provider_interface> provider_ =
+        std::make_unique<flag_provider>();
+}
+
+bool com_android_aconfig_test_disabled_rw_exported() {
+    return com::android::aconfig::test::disabled_rw_exported();
+}
+
+bool com_android_aconfig_test_enabled_fixed_ro_exported() {
+    return com::android::aconfig::test::enabled_fixed_ro_exported();
+}
+
+bool com_android_aconfig_test_enabled_ro_exported() {
+    return com::android::aconfig::test::enabled_ro_exported();
+}
+"#;
+
     fn test_generate_cpp_code(
         parsed_flags: ProtoParsedFlags,
         mode: CodegenMode,
@@ -908,6 +1080,17 @@ bool com_android_aconfig_test_enabled_ro() {
             CodegenMode::Test,
             EXPORTED_TEST_HEADER_EXPECTED,
             TEST_SOURCE_FILE_EXPECTED,
+        );
+    }
+
+    #[test]
+    fn test_generate_cpp_code_for_exported() {
+        let parsed_flags = crate::test::parse_test_flags();
+        test_generate_cpp_code(
+            parsed_flags,
+            CodegenMode::Exported,
+            EXPORTED_EXPORTED_HEADER_EXPECTED,
+            EXPORTED_SOURCE_FILE_EXPECTED,
         );
     }
 
