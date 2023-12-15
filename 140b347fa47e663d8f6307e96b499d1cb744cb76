@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2835047a_1cf3150f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-15T15:32:36Z",
+      "side": 1,
+      "message": "This seems not supported in this cl",
+      "range": {
+        "startLine": 22,
+        "startChar": 24,
+        "endLine": 22,
+        "endChar": 25
+      },
+      "revId": "140b347fa47e663d8f6307e96b499d1cb744cb76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
