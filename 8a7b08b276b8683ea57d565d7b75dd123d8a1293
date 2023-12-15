@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38e9bb15_e9978a09",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-12-15T17:03:14Z",
+      "side": 1,
+      "message": "Error information should be kept right when exception is thrown. Users should not need to look back in logs to see what went wrong. Raise an exception right here when an error is first detected, with details such as pre/post timestamp.",
+      "revId": "8a7b08b276b8683ea57d565d7b75dd123d8a1293",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c05bef23_6c256b0e",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-12-15T17:03:14Z",
+      "side": 1,
+      "message": "exceptions should be informative and actionable. We need to tell developers why exactly this request failed, which partition violated the downgrade policy, and what are the specific values involved.",
+      "revId": "8a7b08b276b8683ea57d565d7b75dd123d8a1293",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
