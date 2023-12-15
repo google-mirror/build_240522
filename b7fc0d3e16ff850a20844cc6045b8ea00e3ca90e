@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56937d19_831badf6",
+        "filename": "tools/aconfig/src/codegen/rust.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-15T14:28:28Z",
+      "side": 1,
+      "message": "From my experience Rust prefers `\u0026str` instead of `String` as function arguments; maybe to make the functions as generic as possible (more things can be converted to a \u0026str than to a String).\n\nIn the current implementation, yes it\u0027s silly how we create a String, use it to pass in a \u0026str, and immediately create a new String from the \u0026str, but the tiny performance hit doesn\u0027t outweigh the benefits of following established Rust patterns IMO.",
+      "parentUuid": "cc085324_16a63f3f",
+      "revId": "b7fc0d3e16ff850a20844cc6045b8ea00e3ca90e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "171a40f4_28b8937a",
         "filename": "tools/aconfig/src/commands.rs",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2023-12-15T13:33:15Z",
       "side": 1,
       "message": "package is already \u0026str, why converting it String and then back to \u0026str?",
+      "revId": "b7fc0d3e16ff850a20844cc6045b8ea00e3ca90e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2ff792c_1ff5b3b1",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-15T14:28:28Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "171a40f4_28b8937a",
       "revId": "b7fc0d3e16ff850a20844cc6045b8ea00e3ca90e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
