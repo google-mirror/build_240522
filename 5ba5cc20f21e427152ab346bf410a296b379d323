@@ -118,6 +118,30 @@
       },
       "revId": "5ba5cc20f21e427152ab346bf410a296b379d323",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53f3f69c_84963ba8",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-15T08:20:32Z",
+      "side": 1,
+      "message": "My concern about adding the field to the proto is I don\u0027t think it is part of the public API surface of aconfig parsed flags. I doesn\u0027t make sense for an external client, like flag flipper or gantry, to know about this field.\n\nThe public API already has its flaws: I don\u0027t like that namespace is part of it. Adding another \"private\" field wouldn\u0027t be the end of the world, just a step in the wrong direction.\n\nI feel the ID assignment is solved by running the same sorting logic on the cache input. The real danger is if the build passes in different cache files, but codegen and create-storage both only accept a single cache file, not multiple ones like the dump command. Am I missing some other aconfig invocation where something like \"id \u003d\u003d index of flags sorted by fully qualified name\" won\u0027t work?",
+      "parentUuid": "c8186280_00ec1cff",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 26
+      },
+      "revId": "5ba5cc20f21e427152ab346bf410a296b379d323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
