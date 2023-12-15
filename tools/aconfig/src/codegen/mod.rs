@@ -165,7 +165,7 @@ mod tests {
         let parsed_flags = crate::test::parse_test_flags();
         let p_parsed_flags =
             process_parsed_flags(parsed_flags.parsed_flag.into_iter(), CodegenMode::Exported);
-        assert_eq!(2, p_parsed_flags.len());
+        assert_eq!(3, p_parsed_flags.len());
         for flag in p_parsed_flags.iter() {
             assert_eq!(ProtoFlagState::DISABLED, flag.state());
             assert_eq!(ProtoFlagPermission::READ_WRITE, flag.permission());
