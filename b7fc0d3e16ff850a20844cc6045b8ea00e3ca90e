@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc085324_16a63f3f",
+        "filename": "tools/aconfig/src/codegen/rust.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-15T13:33:15Z",
+      "side": 1,
+      "message": "why not pass by value for package as well, line 37 is converting it to String anyway.",
+      "revId": "b7fc0d3e16ff850a20844cc6045b8ea00e3ca90e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "171a40f4_28b8937a",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-15T13:33:15Z",
+      "side": 1,
+      "message": "package is already \u0026str, why converting it String and then back to \u0026str?",
+      "revId": "b7fc0d3e16ff850a20844cc6045b8ea00e3ca90e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
