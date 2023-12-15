@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c520ce1_e5017633",
+        "filename": "tools/aconfig/src/dump.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-15T15:29:06Z",
+      "side": 1,
+      "message": "I was initially toying with the idea of using tinytemplate for the format, but chose not to because\n\n- I don\u0027t want to tie aconfig too tightly to tinytemplate; I\u0027m not super thrilled with how the code templates read and we might want to remove the dependency at some point\n\n- I don\u0027t want to add the ability to `if {{ things }}`",
+      "range": {
+        "startLine": 104,
+        "startChar": 18,
+        "endLine": 104,
+        "endChar": 24
+      },
+      "revId": "ee58f98cc0333be170c1c70f7b22eb61fcfd88cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
