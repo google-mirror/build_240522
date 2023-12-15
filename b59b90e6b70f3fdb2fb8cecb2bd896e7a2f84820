@@ -16,6 +16,24 @@
       "message": "Can we add an help here to explain this is an \"or\" condition of filters, not \"and\".",
       "revId": "b59b90e6b70f3fdb2fb8cecb2bd896e7a2f84820",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c20bce5_86470068",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-15T14:28:53Z",
+      "side": 1,
+      "message": "Sure, I can add a `.help(...)` to the arg. (We should really add help strings to *all* aconfig arguments, but not in this CL.)",
+      "parentUuid": "6ab0717f_ac7f2843",
+      "revId": "b59b90e6b70f3fdb2fb8cecb2bd896e7a2f84820",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
