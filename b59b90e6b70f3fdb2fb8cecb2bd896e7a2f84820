@@ -34,6 +34,24 @@
       "parentUuid": "6ab0717f_ac7f2843",
       "revId": "b59b90e6b70f3fdb2fb8cecb2bd896e7a2f84820",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93da952d_b58d4e63",
+        "filename": "tools/aconfig/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-15T14:34:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c20bce5_86470068",
+      "revId": "b59b90e6b70f3fdb2fb8cecb2bd896e7a2f84820",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
