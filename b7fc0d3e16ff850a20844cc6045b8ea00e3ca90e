@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e060bff_bf8cd868",
+        "filename": "tools/aconfig/src/codegen/rust.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-15T14:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56937d19_831badf6",
+      "revId": "b7fc0d3e16ff850a20844cc6045b8ea00e3ca90e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "171a40f4_28b8937a",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "See above.",
       "parentUuid": "171a40f4_28b8937a",
+      "revId": "b7fc0d3e16ff850a20844cc6045b8ea00e3ca90e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8e5d149_c52ae68b",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-15T14:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2ff792c_1ff5b3b1",
       "revId": "b7fc0d3e16ff850a20844cc6045b8ea00e3ca90e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
