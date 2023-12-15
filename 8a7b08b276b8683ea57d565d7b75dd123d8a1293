@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a69da14_85b55b2d",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2023-12-15T19:09:16Z",
+      "side": 1,
+      "message": "Yes, I agree.\nOne thing that is also annoying is to only see the first of several errors, if there are several that are very closely related.\nI am thinking to put all the downgrade partitions/timestamps (and property) in a list, and dump them all in the runtime-error at line 416.",
+      "parentUuid": "38e9bb15_e9978a09",
+      "revId": "8a7b08b276b8683ea57d565d7b75dd123d8a1293",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c05bef23_6c256b0e",
         "filename": "tools/releasetools/ota_utils.py",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2023-12-15T17:03:14Z",
       "side": 1,
       "message": "exceptions should be informative and actionable. We need to tell developers why exactly this request failed, which partition violated the downgrade policy, and what are the specific values involved.",
+      "revId": "8a7b08b276b8683ea57d565d7b75dd123d8a1293",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeba16de_27060648",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2023-12-15T19:09:16Z",
+      "side": 1,
+      "message": "In this case it would mean dump all the partitions/timestamps (and property), so would be similar to previous comment.",
+      "parentUuid": "c05bef23_6c256b0e",
       "revId": "8a7b08b276b8683ea57d565d7b75dd123d8a1293",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
