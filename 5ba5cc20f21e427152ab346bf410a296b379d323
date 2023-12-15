@@ -166,6 +166,30 @@
       },
       "revId": "5ba5cc20f21e427152ab346bf410a296b379d323",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6998c755_3728135f",
+        "filename": "tools/aconfig/protos/aconfig.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-15T13:25:53Z",
+      "side": 1,
+      "message": "Codegen would take a single cache file, storage creation takes multiple cache files (all the cache files for a container). Would a simple sorting logic work? I think so. But really it is the other side of the coin, what if we somehow mess it up, how do we prevent that.\n\nIs it a significant effort to add a private proto? If not, I can look into that.",
+      "parentUuid": "1a43f07d_31aeee47",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 26
+      },
+      "revId": "5ba5cc20f21e427152ab346bf410a296b379d323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
