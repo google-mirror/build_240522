@@ -463,6 +463,11 @@ PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
 PRODUCT_COPY_FILES += $(call add-to-product-copy-files-if-exists,\
     frameworks/base/config/dirty-image-objects:system/etc/dirty-image-objects)
 
+# Proguard map IDs for optimized/obfuscated targets are generally useful, so
+# enable them by default. Targets can opt out by overriding these values.
+PRODUCT_PROGUARD_MAP_IDS_ENABLED := true
+PRODUCT_PROGUARD_MAP_IDS_PREFIX := go/retraceme
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/runtime_libart.mk)
 
 # Use "image" APEXes always.

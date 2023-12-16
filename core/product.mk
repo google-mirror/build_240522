@@ -455,6 +455,17 @@ _product_list_vars += PRODUCT_VALIDATION_CHECKS
 
 _product_single_value_vars += PRODUCT_BUILD_FROM_SOURCE_STUB
 
+# If set, enables hash-based map IDs for source file attributes in
+# optimized/obfuscated Java targets. An optional prefix can be set to include
+# in the source file output. In practice, this changes an optimized/obfuscated
+# stack frame in a crash stack from something like:
+#   `at com.android.a(Unknown Source:3)`
+# to
+#   `at com.android.a(${PREFIX} ${HASH}:3)`
+# where ${PREFIX} is the configured prefix and ${HASH} is the mapping file hash.
+_product_single_value_vars += PRODUCT_PROGUARD_MAP_IDS_ENABLED
+_product_single_value_vars += PRODUCT_PROGUARD_MAP_IDS_PREFIX
+
 .KATI_READONLY := _product_single_value_vars _product_list_vars
 _product_var_list :=$= $(_product_single_value_vars) $(_product_list_vars)
 
