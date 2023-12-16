@@ -91,8 +91,6 @@ function finalize_aidl_vndk_sdk_resources() {
     cp "$top/development/vndk/tools/definition-tool/datasets/vndk-lib-extra-list-current.txt" \
        "$top/development/vndk/tools/definition-tool/datasets/vndk-lib-extra-list-$FINAL_PLATFORM_SDK_VERSION.txt"
 
-    AIDL_TRANSITIVE_FREEZE=true $m aidl-freeze-api create_reference_dumps
-
     # Generate ABI dumps
     ANDROID_BUILD_TOP="$top" out/host/linux-x86/bin/create_reference_dumps
 
@@ -117,8 +115,6 @@ function finalize_aidl_vndk_sdk_resources() {
     local version_defaults="$top/build/make/core/version_defaults.mk"
     sed -i -e "s/PLATFORM_SDK_VERSION := .*/PLATFORM_SDK_VERSION := ${FINAL_PLATFORM_SDK_VERSION}/g" $version_defaults
     sed -i -e "s/PLATFORM_VERSION_LAST_STABLE := .*/PLATFORM_VERSION_LAST_STABLE := ${FINAL_PLATFORM_VERSION}/g" $version_defaults
-    sed -i -e "s/sepolicy_major_vers := .*/sepolicy_major_vers := ${FINAL_PLATFORM_SDK_VERSION}/g" "$top/build/make/core/config.mk"
-    cp "$top/build/make/target/product/gsi/current.txt" "$top/build/make/target/product/gsi/$FINAL_PLATFORM_SDK_VERSION.txt"
 
     # build/bazel
     local codename_version="\"${FINAL_PLATFORM_CODENAME}\": ${FINAL_PLATFORM_SDK_VERSION}"
