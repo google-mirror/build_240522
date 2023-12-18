@@ -1,5 +1,6 @@
 # Build System Changes for Android.mk/Android.bp Writers
 
+
 ## Soong genrules are now sandboxed
 
 Previously, soong genrules could access any files in the source tree, without specifying them as
