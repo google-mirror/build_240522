@@ -16,6 +16,24 @@
       "message": "Can we write out the match statements explicitly? That way, if another codegen mode gets updated, the compiler tells that this site needs to be updated",
       "revId": "0871da4921f715b6fb8c7e7bfa59af01a98e15f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c7ddef1_f0e9e2ce",
+        "filename": "tools/aconfig/src/codegen/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-18T18:22:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9169131_59da05d3",
+      "revId": "0871da4921f715b6fb8c7e7bfa59af01a98e15f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
