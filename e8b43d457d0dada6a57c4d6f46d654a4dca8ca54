@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c36bca7_351bd8d5",
+        "filename": "tools/aconfig/tests/aconfig_exported_mode_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-18T18:01:52Z",
+      "side": 1,
+      "message": "I don\u0027t think these TODOs are valid here. Exported flag default values are not impacted by aconfig value files.",
+      "revId": "e8b43d457d0dada6a57c4d6f46d654a4dca8ca54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
