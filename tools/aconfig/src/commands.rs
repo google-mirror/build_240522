@@ -1,18 +1,18 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright (C) 2023 The Android Open Source Project
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
 use anyhow::{bail, ensure, Context, Result};
 use clap::ValueEnum;
@@ -216,12 +216,11 @@ pub fn create_cpp_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Vec
 
 pub fn create_rust_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<OutputFile> {
     let parsed_flags = input.try_parse_flags()?;
-    let filtered_parsed_flags = filter_parsed_flags(parsed_flags, codegen_mode);
-    let Some(package) = find_unique_package(&filtered_parsed_flags) else {
+    let Some(package) = find_unique_package(&parsed_flags.parsed_flag) else {
         bail!("no parsed flags, or the parsed flags use different packages");
     };
     let package = package.to_string();
-    generate_rust_code(&package, filtered_parsed_flags.into_iter(), codegen_mode)
+    generate_rust_code(&package, parsed_flags.parsed_flag.into_iter(), codegen_mode)
 }
 
 pub fn create_storage(caches: Vec<Input>, container: &str) -> Result<Vec<OutputFile>> {
