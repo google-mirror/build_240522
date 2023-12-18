@@ -34,6 +34,24 @@
       "parentUuid": "8c36bca7_351bd8d5",
       "revId": "e8b43d457d0dada6a57c4d6f46d654a4dca8ca54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f987342_63a6fcd1",
+        "filename": "tools/aconfig/tests/aconfig_exported_mode_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-18T22:39:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c055b186_e75b0ce6",
+      "revId": "e8b43d457d0dada6a57c4d6f46d654a4dca8ca54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
