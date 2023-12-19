@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "885d2389_390e0e20",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-19T12:59:57Z",
+      "side": 0,
+      "message": "See comment in earlier CL about keeping the filtering / modification of the parsed flags in commands.rs.",
+      "range": {
+        "startLine": 219,
+        "startChar": 32,
+        "endLine": 219,
+        "endChar": 51
+      },
+      "revId": "5dabb9e17cf44239eee126a17e9e02bc05367078",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
