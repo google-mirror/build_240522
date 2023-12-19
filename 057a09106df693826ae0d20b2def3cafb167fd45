@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5b0b806_c57254e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-19T15:33:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "919d1de8_8501785a",
+      "range": {
+        "startLine": 16,
+        "startChar": 34,
+        "endLine": 16,
+        "endChar": 46
+      },
+      "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edf1f22e_36ab17e5",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-19T10:14:17Z",
       "side": 1,
       "message": "typo\n\ntip: `:set spell` in vim (or equivalent in other editors) to catch typos in the commit message",
+      "range": {
+        "startLine": 20,
+        "startChar": 14,
+        "endLine": 20,
+        "endChar": 20
+      },
+      "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6616448_946cfdc8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-19T15:33:27Z",
+      "side": 1,
+      "message": "thanks for the tip, I use doom emacs. I\u0027ll look into that.",
+      "parentUuid": "edf1f22e_36ab17e5",
       "range": {
         "startLine": 20,
         "startChar": 14,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cc6d9ea_03f207bf",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-19T15:33:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "928046b8_3ed5faa5",
+      "range": {
+        "startLine": 47,
+        "startChar": 63,
+        "endLine": 47,
+        "endChar": 66
+      },
+      "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "247768e9_b3f4e224",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-12-19T10:14:17Z",
       "side": 1,
       "message": "Remove unnecessary explicit lifetime",
+      "range": {
+        "startLine": 85,
+        "startChar": 35,
+        "endLine": 85,
+        "endChar": 37
+      },
+      "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d428a507_5b69618f",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-19T15:33:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "247768e9_b3f4e224",
       "range": {
         "startLine": 85,
         "startChar": 35,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5cc0c3a_e0845dd0",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-19T15:33:27Z",
+      "side": 1,
+      "message": "The only values allowed are 0 and 1 for boolean.",
+      "parentUuid": "044ed69a_6cd7cade",
+      "range": {
+        "startLine": 97,
+        "startChar": 63,
+        "endLine": 97,
+        "endChar": 68
+      },
+      "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cbecbf2_480b554e",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-12-19T10:14:17Z",
       "side": 1,
       "message": "what does status mean?",
+      "range": {
+        "startLine": 98,
+        "startChar": 66,
+        "endLine": 98,
+        "endChar": 72
+      },
+      "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa21de9_e3fa7d0d",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-19T15:33:27Z",
+      "side": 1,
+      "message": "the status are different mode of a flag. For instance, if a flag is blocking any server side override, if a flag has been server side pushed. Should the flag value be sticky thru container update and etc.",
+      "parentUuid": "7cbecbf2_480b554e",
       "range": {
         "startLine": 98,
         "startChar": 66,
@@ -179,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3cf4d91_cbc91def",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-19T15:33:27Z",
+      "side": 1,
+      "message": "it is iterating over a vector of parsed_flags (caches), therefore parsed_flags_vec_iter to differentiate from the case we are iterating over one parsed_flags.",
+      "parentUuid": "5c9540a6_c1a0652e",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 25
+      },
+      "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecc21734_dab2295b",
@@ -192,6 +360,30 @@
       "writtenOn": "2023-12-19T10:14:17Z",
       "side": 1,
       "message": "I prefer `read_...` and `eat_...` when the stream offset is updated; u32_from_bytes sounds like a pure function. Can we rename this `read_u32_from_bytes` please? Similar for `str_from_bytes`.",
+      "range": {
+        "startLine": 132,
+        "startChar": 11,
+        "endLine": 132,
+        "endChar": 25
+      },
+      "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3570f5b9_beda9738",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-19T15:33:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecc21734_dab2295b",
       "range": {
         "startLine": 132,
         "startChar": 11,
@@ -239,6 +431,30 @@
       "side": 1,
       "message": "Looks like this is safe, and the order is guaranteed: http://doc.rust-lang.org/reference/expressions.html?highlight\u003devaluation%20order#evaluation-order-of-operands",
       "parentUuid": "cd7710b4_9010e41e",
+      "range": {
+        "startLine": 164,
+        "startChar": 16,
+        "endLine": 166,
+        "endChar": 61
+      },
+      "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fac2584_100eb261",
+        "filename": "tools/aconfig/src/storage/package_table.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-19T15:33:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77b95193_2bb7e483",
       "range": {
         "startLine": 164,
         "startChar": 16,
