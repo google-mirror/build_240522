@@ -253,6 +253,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb82ce65_5b53d28d",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-19T15:44:48Z",
+      "side": 1,
+      "message": "Can you state that in the comment please?",
+      "parentUuid": "f5cc0c3a_e0845dd0",
+      "range": {
+        "startLine": 97,
+        "startChar": 63,
+        "endLine": 97,
+        "endChar": 68
+      },
+      "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cbecbf2_480b554e",
@@ -290,6 +314,30 @@
       "side": 1,
       "message": "the status are different mode of a flag. For instance, if a flag is blocking any server side override, if a flag has been server side pushed. Should the flag value be sticky thru container update and etc.",
       "parentUuid": "7cbecbf2_480b554e",
+      "range": {
+        "startLine": 98,
+        "startChar": 66,
+        "endLine": 98,
+        "endChar": 72
+      },
+      "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d373bbe_48f80092",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-19T15:44:48Z",
+      "side": 1,
+      "message": "Ah, I haven\u0027t seen that enum defined anywhere. Is it slated for an upcoming CL? Can you say something in the comment about this pleasE?",
+      "parentUuid": "0aa21de9_e3fa7d0d",
       "range": {
         "startLine": 98,
         "startChar": 66,
