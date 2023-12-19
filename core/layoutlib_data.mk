@@ -151,3 +151,7 @@ $(LAYOUTLIB_SBOM)/framework_res.jar.spdx.json: $(LAYOUTLIB_SBOM)/layoutlib.spdx.
 	$(GEN_SBOM_FRAMEWORK_RES) --output_file $(LAYOUTLIB_SBOM)/framework_res.jar.spdx.json --layoutlib_sbom $(LAYOUTLIB_SBOM)/layoutlib.spdx.json
 
 $(call dist-for-goals,layoutlib,$(LAYOUTLIB_SBOM)/framework_res.jar.spdx.json:layoutlib_native/sbom/framework_res.jar.spdx.json)
+
+ifeq ($(HOST_OS),darwin)
+  $(info ============$(_layoutlib_files_disted_by_soong))
+endif
