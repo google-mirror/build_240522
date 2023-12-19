@@ -16,6 +16,24 @@
       "message": "nit: This can be `Self` also",
       "revId": "603f45d9c2cd174e5d93cff81b133f86f318a2b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5de80c8_58ee234a",
+        "filename": "tools/aconfig/src/storage/package_table.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-19T17:20:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d728f77_a49b3574",
+      "revId": "603f45d9c2cd174e5d93cff81b133f86f318a2b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
