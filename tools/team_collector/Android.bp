@@ -1,0 +1,14 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+blueprint_go_binary {
+    name: "team-collector",
+    deps: [
+            "soong-android_team_proto",
+            "golang-protobuf-proto",
+        ],
+    srcs: [
+        "team_collector.go",
+    ]
+}
