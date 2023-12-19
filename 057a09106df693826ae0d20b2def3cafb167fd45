@@ -223,6 +223,30 @@
       },
       "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b95193_2bb7e483",
+        "filename": "tools/aconfig/src/storage/package_table.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-19T11:53:06Z",
+      "side": 1,
+      "message": "Looks like this is safe, and the order is guaranteed: http://doc.rust-lang.org/reference/expressions.html?highlight\u003devaluation%20order#evaluation-order-of-operands",
+      "parentUuid": "cd7710b4_9010e41e",
+      "range": {
+        "startLine": 164,
+        "startChar": 16,
+        "endLine": 166,
+        "endChar": 61
+      },
+      "revId": "057a09106df693826ae0d20b2def3cafb167fd45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
