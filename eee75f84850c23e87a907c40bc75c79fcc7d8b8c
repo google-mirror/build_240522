@@ -16,6 +16,24 @@
       "message": "Also include `aconfig.test` please (because of the updated unit tests in rust.rs)",
       "revId": "eee75f84850c23e87a907c40bc75c79fcc7d8b8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0759401a_cda953a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-19T16:59:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "040a3a7d_21766c01",
+      "revId": "eee75f84850c23e87a907c40bc75c79fcc7d8b8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
