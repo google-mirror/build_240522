@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "deff00a2_edd9bec9",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-19T15:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c014d87_ba31daf3",
+      "range": {
+        "startLine": 119,
+        "startChar": 48,
+        "endLine": 119,
+        "endChar": 49
+      },
+      "revId": "0fe7c91d4728f0628f92f95db40316f382598f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06c66aff_68bf5e6a",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-19T15:44:48Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 175,
+        "startChar": 62,
+        "endLine": 175,
+        "endChar": 68
+      },
+      "revId": "0fe7c91d4728f0628f92f95db40316f382598f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b222ee3b_fe6420d4",
+        "filename": "tools/aconfig/src/storage/package_table.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-19T15:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06c66aff_68bf5e6a",
       "range": {
         "startLine": 175,
         "startChar": 62,
