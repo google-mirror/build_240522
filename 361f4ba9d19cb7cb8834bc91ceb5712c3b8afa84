@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c05c430_f4015f29",
+        "filename": "tools/aconfig/src/codegen/cpp.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-19T16:01:09Z",
+      "side": 1,
+      "message": "yes, we can switch to other template tools later.",
+      "parentUuid": "f66a89eb_ed9ca2ab",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 64
+      },
+      "revId": "361f4ba9d19cb7cb8834bc91ceb5712c3b8afa84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45c1bfc7_b1689a0d",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82443568_1f1fc841",
+        "filename": "tools/aconfig/src/codegen/mod.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-19T16:01:09Z",
+      "side": 1,
+      "message": "Yes, I will move it in the future cl",
+      "parentUuid": "45c1bfc7_b1689a0d",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 32
+      },
+      "revId": "361f4ba9d19cb7cb8834bc91ceb5712c3b8afa84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d67e2ae_8f00cdd3",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-12-19T12:54:21Z",
       "side": 1,
       "message": "process feels a bit generic; how about `modify_parsed_flags_based_on_mode` or something similar?",
+      "range": {
+        "startLine": 57,
+        "startChar": 7,
+        "endLine": 57,
+        "endChar": 27
+      },
+      "revId": "361f4ba9d19cb7cb8834bc91ceb5712c3b8afa84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "772f2d54_255da81b",
+        "filename": "tools/aconfig/src/codegen/mod.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-19T16:01:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d67e2ae_8f00cdd3",
       "range": {
         "startLine": 57,
         "startChar": 7,
