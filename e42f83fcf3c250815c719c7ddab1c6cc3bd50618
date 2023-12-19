@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aae2fa6d_c434f317",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4607,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-12-19T02:13:28Z",
+      "side": 1,
+      "message": "avbtool should be invoked as an action",
+      "range": {
+        "startLine": 4607,
+        "startChar": 33,
+        "endLine": 4607,
+        "endChar": 40
+      },
+      "revId": "e42f83fcf3c250815c719c7ddab1c6cc3bd50618",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
