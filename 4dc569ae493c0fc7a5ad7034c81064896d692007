@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c14d856_a55d2b58",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-19T12:54:21Z",
+      "side": 0,
+      "message": "I liked having the filtering done in commands.rs:\n\n- it\u0027s consistent with how dump does it\n- it keeps any filtering / modification under the control of commands; the codegen only needs to trust its input is correct and focus on generating the code\n\nCan you move process_parsed_flags to this file instead please?",
+      "range": {
+        "startLine": 210,
+        "startChar": 32,
+        "endLine": 210,
+        "endChar": 51
+      },
+      "revId": "4dc569ae493c0fc7a5ad7034c81064896d692007",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
