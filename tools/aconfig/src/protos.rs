@@ -30,6 +30,7 @@
 #[cfg(not(feature = "cargo"))]
 mod auto_generated {
     pub use aconfig_protos::aconfig::flag_metadata::Flag_purpose as ProtoFlagPurpose;
+    pub use aconfig_protos::aconfig::internal::Cache as ProtoCache;
     pub use aconfig_protos::aconfig::Flag_declaration as ProtoFlagDeclaration;
     pub use aconfig_protos::aconfig::Flag_declarations as ProtoFlagDeclarations;
     pub use aconfig_protos::aconfig::Flag_metadata as ProtoFlagMetadata;
@@ -60,6 +61,7 @@ mod auto_generated {
     pub use aconfig::Parsed_flag as ProtoParsedFlag;
     pub use aconfig::Parsed_flags as ProtoParsedFlags;
     pub use aconfig::Tracepoint as ProtoTracepoint;
+    pub use internal::Cache as ProtoCache;
 }
 
 // ---- Common for both the Android tool-chain and cargo ----
@@ -249,18 +251,18 @@ pub mod parsed_flag {
     }
 }
 
-pub mod parsed_flags {
+pub mod cache {
     use super::*;
     use anyhow::bail;
     use std::cmp::Ordering;
 
-    pub fn try_from_binary_proto(bytes: &[u8]) -> Result<ProtoParsedFlags> {
-        let message: ProtoParsedFlags = protobuf::Message::parse_from_bytes(bytes)?;
+    pub fn try_from_binary_proto(bytes: &[u8]) -> Result<ProtoCache> {
+        let message: ProtoCache = protobuf::Message::parse_from_bytes(bytes)?;
         verify_fields(&message)?;
         Ok(message)
     }
 
-    pub fn verify_fields(pf: &ProtoParsedFlags) -> Result<()> {
+    pub fn verify_fields(pf: &ProtoCache) -> Result<()> {
         use crate::protos::parsed_flag::path_to_declaration;
 
         let mut previous: Option<&ProtoParsedFlag> = None;
@@ -287,9 +289,9 @@ pub mod parsed_flags {
         Ok(())
     }
 
-    pub fn merge(parsed_flags: Vec<ProtoParsedFlags>, dedup: bool) -> Result<ProtoParsedFlags> {
-        let mut merged = ProtoParsedFlags::new();
-        for mut pfs in parsed_flags.into_iter() {
+    pub fn merge(caches: Vec<ProtoCache>, dedup: bool) -> Result<ProtoCache> {
+        let mut merged = ProtoCache::new();
+        for mut pfs in caches.into_iter() {
             merged.parsed_flag.append(&mut pfs.parsed_flag);
         }
         merged.parsed_flag.sort_by_cached_key(create_sorting_key);
@@ -303,8 +305,46 @@ pub mod parsed_flags {
         Ok(merged)
     }
 
-    pub fn sort_parsed_flags(pf: &mut ProtoParsedFlags) {
+    pub fn sort_parsed_flags(pf: &mut ProtoCache) {
         pf.parsed_flag.sort_by_key(create_sorting_key);
+    }
+
+    fn create_sorting_key(pf: &ProtoParsedFlag) -> String {
+        pf.fully_qualified_name()
+    }
+}
+
+// FIXME: unify parsed_flag verification between parsed_flags and cache
+pub mod parsed_flags {
+    use super::*;
+    use anyhow::bail;
+    use std::cmp::Ordering;
+
+    pub fn verify_fields(pf: &ProtoParsedFlags) -> Result<()> {
+        use crate::protos::parsed_flag::path_to_declaration;
+
+        let mut previous: Option<&ProtoParsedFlag> = None;
+        for parsed_flag in pf.parsed_flag.iter() {
+            if let Some(prev) = previous {
+                let a = create_sorting_key(prev);
+                let b = create_sorting_key(parsed_flag);
+                match a.cmp(&b) {
+                    Ordering::Less => {}
+                    Ordering::Equal => bail!(
+                        "bad parsed flags: duplicate flag {} (defined in {} and {})",
+                        a,
+                        path_to_declaration(prev),
+                        path_to_declaration(parsed_flag)
+                    ),
+                    Ordering::Greater => {
+                        bail!("bad parsed flags: not sorted: {} comes before {}", a, b)
+                    }
+                }
+            }
+            super::parsed_flag::verify_fields(parsed_flag)?;
+            previous = Some(parsed_flag);
+        }
+        Ok(())
     }
 
     fn create_sorting_key(pf: &ProtoParsedFlag) -> String {

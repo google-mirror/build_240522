@@ -25,8 +25,8 @@ use crate::codegen::rust::generate_rust_code;
 use crate::codegen::CodegenMode;
 use crate::dump::{DumpFormat, DumpPredicate};
 use crate::protos::{
-    ParsedFlagExt, ProtoFlagMetadata, ProtoFlagPermission, ProtoFlagState, ProtoParsedFlag,
-    ProtoParsedFlags, ProtoTracepoint,
+    ParsedFlagExt, ProtoCache, ProtoFlagMetadata, ProtoFlagPermission, ProtoFlagState,
+    ProtoParsedFlag, ProtoParsedFlags, ProtoTracepoint,
 };
 use crate::storage::generate_storage_files;
 
@@ -36,13 +36,12 @@ pub struct Input {
 }
 
 impl Input {
-    fn try_parse_flags(&mut self) -> Result<ProtoParsedFlags> {
+    fn try_parse_cache(&mut self) -> Result<ProtoCache> {
         let mut buffer = Vec::new();
         self.reader
             .read_to_end(&mut buffer)
             .with_context(|| format!("failed to read {}", self.source))?;
-        crate::protos::parsed_flags::try_from_binary_proto(&buffer)
-            .with_context(|| self.error_context())
+        crate::protos::cache::try_from_binary_proto(&buffer).with_context(|| self.error_context())
     }
 
     fn error_context(&self) -> String {
@@ -58,14 +57,14 @@ pub struct OutputFile {
 pub const DEFAULT_FLAG_STATE: ProtoFlagState = ProtoFlagState::DISABLED;
 pub const DEFAULT_FLAG_PERMISSION: ProtoFlagPermission = ProtoFlagPermission::READ_WRITE;
 
-pub fn parse_flags(
+pub fn create_cache(
     package: &str,
     container: Option<&str>,
     declarations: Vec<Input>,
     values: Vec<Input>,
     default_permission: ProtoFlagPermission,
 ) -> Result<Vec<u8>> {
-    let mut parsed_flags = ProtoParsedFlags::new();
+    let mut cache = ProtoCache::new();
 
     for mut input in declarations {
         let mut contents = String::new();
@@ -131,14 +130,14 @@ pub fn parse_flags(
 
             // verify ParsedFlag can be added
             ensure!(
-                parsed_flags.parsed_flag.iter().all(|other| other.name() != parsed_flag.name()),
+                cache.parsed_flag.iter().all(|other| other.name() != parsed_flag.name()),
                 "failed to declare flag {} from {}: flag already declared",
                 parsed_flag.name(),
                 input.source
             );
 
             // add ParsedFlag to ParsedFlags
-            parsed_flags.parsed_flag.push(parsed_flag);
+            cache.parsed_flag.push(parsed_flag);
         }
     }
 
@@ -154,7 +153,7 @@ pub fn parse_flags(
             crate::protos::flag_value::verify_fields(&flag_value)
                 .with_context(|| input.error_context())?;
 
-            let Some(parsed_flag) = parsed_flags
+            let Some(parsed_flag) = cache
                 .parsed_flag
                 .iter_mut()
                 .find(|pf| pf.package() == flag_value.package() && pf.name() == flag_value.name())
@@ -180,17 +179,17 @@ pub fn parse_flags(
         }
     }
 
-    // Create a sorted parsed_flags
-    crate::protos::parsed_flags::sort_parsed_flags(&mut parsed_flags);
-    crate::protos::parsed_flags::verify_fields(&parsed_flags)?;
+    // Create a sorted cache
+    crate::protos::cache::sort_parsed_flags(&mut cache);
+    crate::protos::cache::verify_fields(&cache)?;
     let mut output = Vec::new();
-    parsed_flags.write_to_vec(&mut output)?;
+    cache.write_to_vec(&mut output)?;
     Ok(output)
 }
 
 pub fn create_java_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Vec<OutputFile>> {
-    let parsed_flags = input.try_parse_flags()?;
-    let filtered_parsed_flags = filter_parsed_flags(parsed_flags, codegen_mode);
+    let cache = input.try_parse_cache()?;
+    let filtered_parsed_flags = filter_parsed_flags(cache.parsed_flag, codegen_mode);
     let Some(package) = find_unique_package(&filtered_parsed_flags) else {
         bail!("no parsed flags, or the parsed flags use different packages");
     };
@@ -199,8 +198,9 @@ pub fn create_java_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Ve
 }
 
 pub fn create_cpp_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Vec<OutputFile>> {
-    let parsed_flags = input.try_parse_flags()?;
-    let modified_parsed_flags = modify_parsed_flags_based_on_mode(parsed_flags, codegen_mode);
+    let cache = input.try_parse_cache()?;
+    let modified_parsed_flags =
+        modify_parsed_flags_based_on_mode(cache.parsed_flag.into_iter(), codegen_mode);
     let Some(package) = find_unique_package(&modified_parsed_flags) else {
         bail!("no parsed flags, or the parsed flags use different packages");
     };
@@ -209,8 +209,9 @@ pub fn create_cpp_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Vec
 }
 
 pub fn create_rust_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<OutputFile> {
-    let parsed_flags = input.try_parse_flags()?;
-    let modified_parsed_flags = modify_parsed_flags_based_on_mode(parsed_flags, codegen_mode);
+    let cache = input.try_parse_cache()?;
+    let modified_parsed_flags =
+        modify_parsed_flags_based_on_mode(cache.parsed_flag.into_iter(), codegen_mode);
     let Some(package) = find_unique_package(&modified_parsed_flags) else {
         bail!("no parsed flags, or the parsed flags use different packages");
     };
@@ -218,21 +219,22 @@ pub fn create_rust_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Ou
     generate_rust_code(&package, modified_parsed_flags.into_iter(), codegen_mode)
 }
 
-pub fn create_storage(caches: Vec<Input>, container: &str) -> Result<Vec<OutputFile>> {
-    let parsed_flags_vec: Vec<ProtoParsedFlags> = caches
+pub fn create_storage(inputs: Vec<Input>, container: &str) -> Result<Vec<OutputFile>> {
+    let parsed_flags: Vec<ProtoParsedFlags> = inputs
         .into_iter()
-        .map(|mut input| input.try_parse_flags())
+        .map(|mut input| input.try_parse_cache())
         .collect::<Result<Vec<_>>>()?
         .into_iter()
-        .filter(|pfs| find_unique_container(pfs) == Some(container))
+        .filter(|cache| find_unique_container(cache) == Some(container))
+        .map(|cache| ProtoParsedFlags { parsed_flag: cache.parsed_flag, ..Default::default() })
         .collect();
-    generate_storage_files(container, parsed_flags_vec.iter())
+    generate_storage_files(container, parsed_flags.iter())
 }
 
 pub fn create_device_config_defaults(mut input: Input) -> Result<Vec<u8>> {
-    let parsed_flags = input.try_parse_flags()?;
+    let cache = input.try_parse_cache()?;
     let mut output = Vec::new();
-    for parsed_flag in parsed_flags
+    for parsed_flag in cache
         .parsed_flag
         .into_iter()
         .filter(|pf| pf.permission() == ProtoFlagPermission::READ_WRITE)
@@ -252,9 +254,9 @@ pub fn create_device_config_defaults(mut input: Input) -> Result<Vec<u8>> {
 }
 
 pub fn create_device_config_sysprops(mut input: Input) -> Result<Vec<u8>> {
-    let parsed_flags = input.try_parse_flags()?;
+    let cache = input.try_parse_cache()?;
     let mut output = Vec::new();
-    for parsed_flag in parsed_flags
+    for parsed_flag in cache
         .parsed_flag
         .into_iter()
         .filter(|pf| pf.permission() == ProtoFlagPermission::READ_WRITE)
@@ -272,16 +274,15 @@ pub fn create_device_config_sysprops(mut input: Input) -> Result<Vec<u8>> {
     Ok(output)
 }
 
-pub fn dump_parsed_flags(
+pub fn dump_cache(
     mut input: Vec<Input>,
     format: DumpFormat,
     filters: &[&str],
     dedup: bool,
 ) -> Result<Vec<u8>> {
-    let individually_parsed_flags: Result<Vec<ProtoParsedFlags>> =
-        input.iter_mut().map(|i| i.try_parse_flags()).collect();
-    let parsed_flags: ProtoParsedFlags =
-        crate::protos::parsed_flags::merge(individually_parsed_flags?, dedup)?;
+    let individually_parsed_flags: Result<Vec<ProtoCache>> =
+        input.iter_mut().map(|i| i.try_parse_cache()).collect();
+    let cache: ProtoCache = crate::protos::cache::merge(individually_parsed_flags?, dedup)?;
     let filters: Vec<Box<DumpPredicate>> = if filters.is_empty() {
         vec![Box::new(|_| true)]
     } else {
@@ -291,7 +292,7 @@ pub fn dump_parsed_flags(
             .collect::<Result<Vec<_>>>()?
     };
     crate::dump::dump_parsed_flags(
-        parsed_flags.parsed_flag.into_iter().filter(|flag| filters.iter().any(|p| p(flag))),
+        cache.parsed_flag.into_iter().filter(|flag| filters.iter().any(|p| p(flag))),
         format,
     )
 }
@@ -306,7 +307,7 @@ fn find_unique_package(parsed_flags: &[ProtoParsedFlag]) -> Option<&str> {
     Some(package)
 }
 
-fn find_unique_container(parsed_flags: &ProtoParsedFlags) -> Option<&str> {
+fn find_unique_container(parsed_flags: &ProtoCache) -> Option<&str> {
     let Some(container) = parsed_flags.parsed_flag.first().map(|pf| pf.container()) else {
         return None;
     };
@@ -316,22 +317,24 @@ fn find_unique_container(parsed_flags: &ProtoParsedFlags) -> Option<&str> {
     Some(container)
 }
 
+// FIXME: should be a member on ProtoCacheExt to modify cache in-place
 fn filter_parsed_flags(
-    parsed_flags: ProtoParsedFlags,
+    parsed_flags: Vec<ProtoParsedFlag>,
     codegen_mode: CodegenMode,
 ) -> Vec<ProtoParsedFlag> {
     match codegen_mode {
-        CodegenMode::Exported => {
-            parsed_flags.parsed_flag.into_iter().filter(|pf| pf.is_exported()).collect()
-        }
-        _ => parsed_flags.parsed_flag,
+        CodegenMode::Exported => parsed_flags.into_iter().filter(|pf| pf.is_exported()).collect(),
+        _ => parsed_flags,
     }
 }
 
-pub fn modify_parsed_flags_based_on_mode(
-    parsed_flags: ProtoParsedFlags,
+pub fn modify_parsed_flags_based_on_mode<I>(
+    iter: I,
     codegen_mode: CodegenMode,
-) -> Vec<ProtoParsedFlag> {
+) -> Vec<ProtoParsedFlag>
+where
+    I: Iterator<Item = ProtoParsedFlag>,
+{
     fn exported_mode_flag_modifier(mut parsed_flag: ProtoParsedFlag) -> ProtoParsedFlag {
         parsed_flag.set_state(ProtoFlagState::DISABLED);
         parsed_flag.set_permission(ProtoFlagPermission::READ_WRITE);
@@ -340,15 +343,10 @@ pub fn modify_parsed_flags_based_on_mode(
     }
 
     match codegen_mode {
-        CodegenMode::Exported => parsed_flags
-            .parsed_flag
-            .into_iter()
-            .filter(|pf| pf.is_exported())
-            .map(exported_mode_flag_modifier)
-            .collect(),
-        CodegenMode::Production | CodegenMode::Test => {
-            parsed_flags.parsed_flag.into_iter().collect()
+        CodegenMode::Exported => {
+            iter.filter(|pf| pf.is_exported()).map(exported_mode_flag_modifier).collect()
         }
+        CodegenMode::Production | CodegenMode::Test => iter.into_iter().collect(),
     }
 }
 
@@ -359,7 +357,7 @@ mod tests {
 
     #[test]
     fn test_parse_flags() {
-        let parsed_flags = crate::test::parse_test_flags(); // calls parse_flags
+        let parsed_flags = crate::test::parse_test_flags(); // calls create_cache
         crate::protos::parsed_flags::verify_fields(&parsed_flags).unwrap();
 
         let enabled_ro =
@@ -422,7 +420,7 @@ mod tests {
             vec![Input { source: "momery".to_string(), reader: Box::new(first_flag.as_bytes()) }];
         let value: Vec<Input> = vec![];
 
-        let flags_bytes = crate::commands::parse_flags(
+        let flags_bytes = crate::commands::create_cache(
             "com.first",
             None,
             declaration,
@@ -455,7 +453,7 @@ mod tests {
 
         let value: Vec<Input> = vec![];
 
-        let error = crate::commands::parse_flags(
+        let error = crate::commands::create_cache(
             "com.argument.package",
             Some("first.container"),
             declaration,
@@ -486,7 +484,7 @@ mod tests {
 
         let value: Vec<Input> = vec![];
 
-        let error = crate::commands::parse_flags(
+        let error = crate::commands::create_cache(
             "com.first",
             Some("argument.container"),
             declaration,
@@ -528,7 +526,7 @@ mod tests {
             source: "memory".to_string(),
             reader: Box::new(first_flag_value.as_bytes()),
         }];
-        let error = crate::commands::parse_flags(
+        let error = crate::commands::create_cache(
             "com.first",
             Some("com.first.container"),
             declaration,
@@ -562,7 +560,7 @@ mod tests {
         }];
         let value: Vec<Input> = vec![];
 
-        let flags_bytes = crate::commands::parse_flags(
+        let flags_bytes = crate::commands::create_cache(
             "com.first",
             None,
             declaration,
@@ -596,7 +594,7 @@ mod tests {
     #[test]
     fn test_dump() {
         let input = parse_test_flags_as_input();
-        let bytes = dump_parsed_flags(
+        let bytes = dump_cache(
             vec![input],
             DumpFormat::Custom("{fully_qualified_name}".to_string()),
             &[],
@@ -611,8 +609,7 @@ mod tests {
     fn test_dump_textproto_format_dedup() {
         let input = parse_test_flags_as_input();
         let input2 = parse_test_flags_as_input();
-        let bytes =
-            dump_parsed_flags(vec![input, input2], DumpFormat::Textproto, &[], true).unwrap();
+        let bytes = dump_cache(vec![input, input2], DumpFormat::Textproto, &[], true).unwrap();
         let text = std::str::from_utf8(&bytes).unwrap();
         assert_eq!(
             None,
@@ -626,7 +623,7 @@ mod tests {
     #[test]
     fn test_filter_parsed_flags() {
         let mut input = parse_test_flags_as_input();
-        let parsed_flags = input.try_parse_flags().unwrap();
+        let parsed_flags = input.try_parse_cache().unwrap();
 
         let filtered_parsed_flags =
             filter_parsed_flags(parsed_flags.clone(), CodegenMode::Exported);
