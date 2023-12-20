@@ -1,7 +1,7 @@
 use protobuf_codegen::Codegen;
 
 fn main() {
-    let proto_files = vec!["protos/aconfig.proto"];
+    let proto_files = vec!["protos/aconfig.proto", "protos/internal.proto"];
 
     // tell cargo to only re-run the build script if any of the proto files has changed
     for path in &proto_files {

@@ -210,7 +210,7 @@ fn main() -> Result<()> {
             let values = open_zero_or_more_files(sub_matches, "values")?;
             let default_permission =
                 get_required_arg::<protos::ProtoFlagPermission>(sub_matches, "default-permission")?;
-            let output = commands::parse_flags(
+            let output = commands::create_cache(
                 package,
                 container,
                 declarations,
@@ -273,7 +273,7 @@ fn main() -> Result<()> {
                 .map(String::as_ref)
                 .collect::<Vec<_>>();
             let dedup = get_required_arg::<bool>(sub_matches, "dedup")?;
-            let output = commands::dump_parsed_flags(input, format.clone(), &filters, *dedup)?;
+            let output = commands::dump_cache(input, format.clone(), &filters, *dedup)?;
             let path = get_required_arg::<String>(sub_matches, "out")?;
             write_output_to_file_or_stdout(path, &output)?;
         }
