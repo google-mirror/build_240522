@@ -682,8 +682,8 @@ mod tests {
 
         let mut parsed_flags = crate::test::parse_test_flags();
         parsed_flags.parsed_flag.retain_mut(|pf| pf.is_exported());
-        let error =
-            modify_parsed_flags_based_on_mode(parsed_flags, CodegenMode::ForceReadOnly).unwrap_err();
+        let error = modify_parsed_flags_based_on_mode(parsed_flags, CodegenMode::ForceReadOnly)
+            .unwrap_err();
         assert_eq!(
             "force_read_only library contains no force_read_only flags",
             format!("{:?}", error)
