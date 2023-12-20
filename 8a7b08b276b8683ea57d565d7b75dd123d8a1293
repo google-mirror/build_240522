@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b9671c1_6f8cd150",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2023-12-20T08:00:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a69da14_85b55b2d",
+      "revId": "8a7b08b276b8683ea57d565d7b75dd123d8a1293",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c05bef23_6c256b0e",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "In this case it would mean dump all the partitions/timestamps (and property), so would be similar to previous comment.",
       "parentUuid": "c05bef23_6c256b0e",
+      "revId": "8a7b08b276b8683ea57d565d7b75dd123d8a1293",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52212cfb_c088d1a7",
+        "filename": "tools/releasetools/ota_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2023-12-20T08:00:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeba16de_27060648",
       "revId": "8a7b08b276b8683ea57d565d7b75dd123d8a1293",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
