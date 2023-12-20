@@ -46,6 +46,30 @@
       },
       "revId": "8bab859f8480962d790e1e47a644e66df4989307",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc2ac038_6e6e8f71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-20T18:35:11Z",
+      "side": 1,
+      "message": "Thanks. Can you add that to the commit message please?",
+      "parentUuid": "ccb8669a_28687786",
+      "range": {
+        "startLine": 10,
+        "startChar": 12,
+        "endLine": 10,
+        "endChar": 20
+      },
+      "revId": "8bab859f8480962d790e1e47a644e66df4989307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
