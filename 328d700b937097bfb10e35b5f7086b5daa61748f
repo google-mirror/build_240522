@@ -22,6 +22,30 @@
       },
       "revId": "328d700b937097bfb10e35b5f7086b5daa61748f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50ed2a91_57446c06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-20T18:15:23Z",
+      "side": 1,
+      "message": "Agree we should document this. I\u0027d prefer if this was stored as part of the --help strings of aconfig, of which I\u0027ve only added one so far, and even that one needs to be improved!\n\nIt\u0027ll be handled in some future CL!",
+      "parentUuid": "2cee1809_dbf473e0",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "328d700b937097bfb10e35b5f7086b5daa61748f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
