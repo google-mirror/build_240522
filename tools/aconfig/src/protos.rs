@@ -40,6 +40,7 @@ mod auto_generated {
     pub use aconfig_protos::aconfig::Parsed_flag as ProtoParsedFlag;
     pub use aconfig_protos::aconfig::Parsed_flags as ProtoParsedFlags;
     pub use aconfig_protos::aconfig::Tracepoint as ProtoTracepoint;
+    pub use aconfig_protos::internal::Cache as ProtoCache;
 }
 
 // ---- When building with cargo ----
@@ -60,6 +61,7 @@ mod auto_generated {
     pub use aconfig::Parsed_flag as ProtoParsedFlag;
     pub use aconfig::Parsed_flags as ProtoParsedFlags;
     pub use aconfig::Tracepoint as ProtoTracepoint;
+    pub use internal::Cache as ProtoCache;
 }
 
 // ---- Common for both the Android tool-chain and cargo ----
@@ -83,6 +85,40 @@ macro_rules! ensure_required_fields {
         }
         )+
     };
+}
+
+// Both ProtoCache and ProtoParsedFlags enforce the same restrictions
+fn verify_parsed_flags<'a, I>(iter: I) -> Result<()>
+where
+    I: Iterator<Item = &'a ProtoParsedFlag>,
+{
+    use anyhow::bail;
+    use std::cmp::Ordering;
+
+    let create_sorting_key = |pf: &ProtoParsedFlag| pf.fully_qualified_name();
+
+    let mut previous: Option<&ProtoParsedFlag> = None;
+    for parsed_flag in iter {
+        if let Some(prev) = previous {
+            let a = create_sorting_key(prev);
+            let b = create_sorting_key(parsed_flag);
+            match a.cmp(&b) {
+                Ordering::Less => {}
+                Ordering::Equal => bail!(
+                    "bad parsed flags: duplicate flag {} (defined in {} and {})",
+                    a,
+                    parsed_flag::path_to_declaration(prev),
+                    parsed_flag::path_to_declaration(parsed_flag)
+                ),
+                Ordering::Greater => {
+                    bail!("bad parsed flags: not sorted: {} comes before {}", a, b)
+                }
+            }
+        }
+        parsed_flag::verify_fields(parsed_flag)?;
+        previous = Some(parsed_flag);
+    }
+    Ok(())
 }
 
 pub mod flag_declaration {
@@ -249,47 +285,22 @@ pub mod parsed_flag {
     }
 }
 
-pub mod parsed_flags {
+pub mod cache {
     use super::*;
-    use anyhow::bail;
-    use std::cmp::Ordering;
 
-    pub fn try_from_binary_proto(bytes: &[u8]) -> Result<ProtoParsedFlags> {
-        let message: ProtoParsedFlags = protobuf::Message::parse_from_bytes(bytes)?;
+    pub fn try_from_binary_proto(bytes: &[u8]) -> Result<ProtoCache> {
+        let message: ProtoCache = protobuf::Message::parse_from_bytes(bytes)?;
         verify_fields(&message)?;
         Ok(message)
     }
 
-    pub fn verify_fields(pf: &ProtoParsedFlags) -> Result<()> {
-        use crate::protos::parsed_flag::path_to_declaration;
-
-        let mut previous: Option<&ProtoParsedFlag> = None;
-        for parsed_flag in pf.parsed_flag.iter() {
-            if let Some(prev) = previous {
-                let a = create_sorting_key(prev);
-                let b = create_sorting_key(parsed_flag);
-                match a.cmp(&b) {
-                    Ordering::Less => {}
-                    Ordering::Equal => bail!(
-                        "bad parsed flags: duplicate flag {} (defined in {} and {})",
-                        a,
-                        path_to_declaration(prev),
-                        path_to_declaration(parsed_flag)
-                    ),
-                    Ordering::Greater => {
-                        bail!("bad parsed flags: not sorted: {} comes before {}", a, b)
-                    }
-                }
-            }
-            super::parsed_flag::verify_fields(parsed_flag)?;
-            previous = Some(parsed_flag);
-        }
-        Ok(())
+    pub fn verify_fields(cache: &ProtoCache) -> Result<()> {
+        verify_parsed_flags(cache.parsed_flag.iter())
     }
 
-    pub fn merge(parsed_flags: Vec<ProtoParsedFlags>, dedup: bool) -> Result<ProtoParsedFlags> {
-        let mut merged = ProtoParsedFlags::new();
-        for mut pfs in parsed_flags.into_iter() {
+    pub fn merge(caches: Vec<ProtoCache>, dedup: bool) -> Result<ProtoCache> {
+        let mut merged = ProtoCache::new();
+        for mut pfs in caches.into_iter() {
             merged.parsed_flag.append(&mut pfs.parsed_flag);
         }
         merged.parsed_flag.sort_by_cached_key(create_sorting_key);
@@ -303,12 +314,21 @@ pub mod parsed_flags {
         Ok(merged)
     }
 
-    pub fn sort_parsed_flags(pf: &mut ProtoParsedFlags) {
+    pub fn sort_parsed_flags(pf: &mut ProtoCache) {
         pf.parsed_flag.sort_by_key(create_sorting_key);
     }
 
     fn create_sorting_key(pf: &ProtoParsedFlag) -> String {
         pf.fully_qualified_name()
+    }
+}
+
+pub mod parsed_flags {
+    use super::*;
+
+    #[allow(dead_code)]
+    pub fn verify_fields(pf: &ProtoParsedFlags) -> Result<()> {
+        verify_parsed_flags(pf.parsed_flag.iter())
     }
 }
 
@@ -599,13 +619,13 @@ flag_value {
         assert_eq!(format!("{:?}", error), "bad flag value: missing permission");
     }
 
-    fn try_from_binary_proto_from_text_proto(text_proto: &str) -> Result<ProtoParsedFlags> {
+    fn try_from_binary_proto_from_text_proto(text_proto: &str) -> Result<ProtoCache> {
         use protobuf::Message;
 
-        let parsed_flags: ProtoParsedFlags = try_from_text_proto(text_proto)?;
+        let cache: ProtoCache = try_from_text_proto(text_proto)?;
         let mut binary_proto = Vec::new();
-        parsed_flags.write_to_vec(&mut binary_proto)?;
-        parsed_flags::try_from_binary_proto(&binary_proto)
+        cache.write_to_vec(&mut binary_proto)?;
+        cache::try_from_binary_proto(&binary_proto)
     }
 
     #[test]
@@ -948,42 +968,29 @@ parsed_flag {
         // bad cases
 
         // two of the same flag with dedup disabled
-        let error = parsed_flags::merge(vec![first.clone(), first.clone()], false).unwrap_err();
+        let error = cache::merge(vec![first.clone(), first.clone()], false).unwrap_err();
         assert_eq!(format!("{:?}", error), "bad parsed flags: duplicate flag com.first.first (defined in flags.declarations and flags.declarations)");
 
         // two conflicting flags with dedup disabled
         let error =
-            parsed_flags::merge(vec![second.clone(), second_duplicate.clone()], false).unwrap_err();
+            cache::merge(vec![second.clone(), second_duplicate.clone()], false).unwrap_err();
         assert_eq!(format!("{:?}", error), "bad parsed flags: duplicate flag com.second.second (defined in flags.declarations and duplicate/flags.declarations)");
 
         // two conflicting flags with dedup enabled
-        let error =
-            parsed_flags::merge(vec![second.clone(), second_duplicate.clone()], true).unwrap_err();
+        let error = cache::merge(vec![second.clone(), second_duplicate.clone()], true).unwrap_err();
         assert_eq!(format!("{:?}", error), "bad parsed flags: duplicate flag com.second.second (defined in flags.declarations and duplicate/flags.declarations)");
 
         // valid cases
-        assert!(parsed_flags::merge(vec![], false).unwrap().parsed_flag.is_empty());
-        assert!(parsed_flags::merge(vec![], true).unwrap().parsed_flag.is_empty());
-        assert_eq!(first, parsed_flags::merge(vec![first.clone()], false).unwrap());
-        assert_eq!(first, parsed_flags::merge(vec![first.clone()], true).unwrap());
-        assert_eq!(
-            expected,
-            parsed_flags::merge(vec![first.clone(), second.clone()], false).unwrap()
-        );
-        assert_eq!(
-            expected,
-            parsed_flags::merge(vec![first.clone(), second.clone()], true).unwrap()
-        );
-        assert_eq!(
-            expected,
-            parsed_flags::merge(vec![second.clone(), first.clone()], false).unwrap()
-        );
-        assert_eq!(
-            expected,
-            parsed_flags::merge(vec![second.clone(), first.clone()], true).unwrap()
-        );
+        assert!(cache::merge(vec![], false).unwrap().parsed_flag.is_empty());
+        assert!(cache::merge(vec![], true).unwrap().parsed_flag.is_empty());
+        assert_eq!(first, cache::merge(vec![first.clone()], false).unwrap());
+        assert_eq!(first, cache::merge(vec![first.clone()], true).unwrap());
+        assert_eq!(expected, cache::merge(vec![first.clone(), second.clone()], false).unwrap());
+        assert_eq!(expected, cache::merge(vec![first.clone(), second.clone()], true).unwrap());
+        assert_eq!(expected, cache::merge(vec![second.clone(), first.clone()], false).unwrap());
+        assert_eq!(expected, cache::merge(vec![second.clone(), first.clone()], true).unwrap());
 
         // two identical flags with dedup enabled
-        assert_eq!(first, parsed_flags::merge(vec![first.clone(), first.clone()], true).unwrap());
+        assert_eq!(first, cache::merge(vec![first.clone(), first.clone()], true).unwrap());
     }
 }

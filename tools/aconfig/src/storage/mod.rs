@@ -22,7 +22,7 @@ use std::hash::{Hash, Hasher};
 use std::path::PathBuf;
 
 use crate::commands::OutputFile;
-use crate::protos::{ProtoParsedFlag, ProtoParsedFlags};
+use crate::protos::{ProtoCache, ProtoParsedFlag};
 use crate::storage::package_table::PackageTable;
 
 pub const FILE_VERSION: u32 = 1;
@@ -78,7 +78,7 @@ impl<'a> FlagPackage<'a> {
 
 pub fn group_flags_by_package<'a, I>(parsed_flags_vec_iter: I) -> Vec<FlagPackage<'a>>
 where
-    I: Iterator<Item = &'a ProtoParsedFlags>,
+    I: Iterator<Item = &'a ProtoCache>,
 {
     // group flags by package
     let mut packages: Vec<FlagPackage<'a>> = Vec::new();
@@ -110,7 +110,7 @@ pub fn generate_storage_files<'a, I>(
     parsed_flags_vec_iter: I,
 ) -> Result<Vec<OutputFile>>
 where
-    I: Iterator<Item = &'a ProtoParsedFlags>,
+    I: Iterator<Item = &'a ProtoCache>,
 {
     let packages = group_flags_by_package(parsed_flags_vec_iter);
 
@@ -143,7 +143,7 @@ mod tests {
         Ok(val)
     }
 
-    pub fn parse_all_test_flags() -> Vec<ProtoParsedFlags> {
+    pub fn parse_all_test_caches() -> Vec<ProtoCache> {
         let aconfig_files = [
             (
                 "com.android.aconfig.storage.test_1",
@@ -170,7 +170,7 @@ mod tests {
         aconfig_files
             .into_iter()
             .map(|(pkg, file, content)| {
-                let bytes = crate::commands::parse_flags(
+                let bytes = crate::commands::create_cache(
                     pkg,
                     Some("system"),
                     vec![Input {
@@ -181,14 +181,14 @@ mod tests {
                     crate::commands::DEFAULT_FLAG_PERMISSION,
                 )
                 .unwrap();
-                crate::protos::parsed_flags::try_from_binary_proto(&bytes).unwrap()
+                crate::protos::cache::try_from_binary_proto(&bytes).unwrap()
             })
             .collect()
     }
 
     #[test]
     fn test_flag_package() {
-        let caches = parse_all_test_flags();
+        let caches = parse_all_test_caches();
         let packages = group_flags_by_package(caches.iter());
 
         for pkg in packages.iter() {

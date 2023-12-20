@@ -1,0 +1,15 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_protobuf {
+    name: "libaconfig_protos",
+    protos: [
+        "aconfig.proto",
+        "internal.proto",
+    ],
+    crate_name: "aconfig_protos",
+    source_stem: "aconfig_protos",
+    host_supported: true,
+}
+

@@ -198,11 +198,11 @@ fn create_filter_predicate_single(filter: &str) -> Result<Box<DumpPredicate>> {
 mod tests {
     use super::*;
     use crate::protos::ProtoParsedFlags;
-    use crate::test::parse_test_flags;
+    use crate::test::create_test_cache;
     use protobuf::Message;
 
     fn parse_enabled_ro_flag() -> ProtoParsedFlag {
-        parse_test_flags().parsed_flag.into_iter().find(|pf| pf.name() == "enabled_ro").unwrap()
+        create_test_cache().parsed_flag.into_iter().find(|pf| pf.name() == "enabled_ro").unwrap()
     }
 
     #[test]
@@ -224,17 +224,17 @@ mod tests {
         .unwrap()
         .write_to_bytes()
         .unwrap();
-        let parsed_flags = parse_test_flags();
+        let cache = create_test_cache();
         let actual =
-            dump_parsed_flags(parsed_flags.parsed_flag.into_iter(), DumpFormat::Protobuf).unwrap();
+            dump_parsed_flags(cache.parsed_flag.into_iter(), DumpFormat::Protobuf).unwrap();
         assert_eq!(expected, actual);
     }
 
     #[test]
     fn test_dump_parsed_flags_textproto_format() {
-        let parsed_flags = parse_test_flags();
+        let cache = create_test_cache();
         let bytes =
-            dump_parsed_flags(parsed_flags.parsed_flag.into_iter(), DumpFormat::Textproto).unwrap();
+            dump_parsed_flags(cache.parsed_flag.into_iter(), DumpFormat::Textproto).unwrap();
         let text = std::str::from_utf8(&bytes).unwrap();
         assert_eq!(crate::test::TEST_FLAGS_TEXTPROTO.trim(), text.trim());
     }
@@ -243,12 +243,10 @@ mod tests {
     fn test_dump_parsed_flags_custom_format() {
         macro_rules! assert_dump_parsed_flags_custom_format_contains {
             ($format:expr, $expected:expr) => {
-                let parsed_flags = parse_test_flags();
-                let bytes = dump_parsed_flags(
-                    parsed_flags.parsed_flag.into_iter(),
-                    $format.try_into().unwrap(),
-                )
-                .unwrap();
+                let cache = create_test_cache();
+                let bytes =
+                    dump_parsed_flags(cache.parsed_flag.into_iter(), $format.try_into().unwrap())
+                        .unwrap();
                 let text = std::str::from_utf8(&bytes).unwrap();
                 assert!(text.contains($expected));
             };
@@ -299,9 +297,9 @@ mod tests {
     fn test_create_filter_predicate() {
         macro_rules! assert_create_filter_predicate {
             ($filter:expr, $expected:expr) => {
-                let parsed_flags = parse_test_flags();
+                let cache = create_test_cache();
                 let predicate = create_filter_predicate($filter).unwrap();
-                let mut filtered_flags: Vec<String> = parsed_flags
+                let mut filtered_flags: Vec<String> = cache
                     .parsed_flag
                     .into_iter()
                     .filter(predicate)

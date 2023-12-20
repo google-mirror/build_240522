@@ -17,7 +17,7 @@
 #[cfg(test)]
 pub mod test_utils {
     use crate::commands::Input;
-    use crate::protos::ProtoParsedFlags;
+    use crate::protos::ProtoCache;
     use itertools;
 
     pub const TEST_PACKAGE: &str = "com.android.aconfig.test";
@@ -250,8 +250,8 @@ parsed_flag {
 }
 "#;
 
-    pub fn parse_read_only_test_flags() -> ProtoParsedFlags {
-        let bytes = crate::commands::parse_flags(
+    pub fn create_test_cache_read_only_flags() -> ProtoCache {
+        let bytes = crate::commands::create_cache(
             "com.android.aconfig.test",
             Some("system"),
             vec![Input {
@@ -265,11 +265,11 @@ parsed_flag {
             crate::commands::DEFAULT_FLAG_PERMISSION,
         )
         .unwrap();
-        crate::protos::parsed_flags::try_from_binary_proto(&bytes).unwrap()
+        crate::protos::cache::try_from_binary_proto(&bytes).unwrap()
     }
 
-    pub fn parse_test_flags() -> ProtoParsedFlags {
-        let bytes = crate::commands::parse_flags(
+    pub fn create_test_cache() -> ProtoCache {
+        let bytes = crate::commands::create_cache(
             "com.android.aconfig.test",
             Some("system"),
             vec![Input {
@@ -289,7 +289,7 @@ parsed_flag {
             crate::commands::DEFAULT_FLAG_PERMISSION,
         )
         .unwrap();
-        crate::protos::parsed_flags::try_from_binary_proto(&bytes).unwrap()
+        crate::protos::cache::try_from_binary_proto(&bytes).unwrap()
     }
 
     pub fn first_significant_code_diff(a: &str, b: &str) -> Option<String> {

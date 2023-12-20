@@ -140,7 +140,6 @@ fn create_class_element(package: &str, pf: &ProtoParsedFlag, rw_count: &mut i32)
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::protos::ProtoParsedFlags;
     use std::collections::HashMap;
 
     const EXPORTED_PROD_HEADER_EXPECTED: &str = r#"
@@ -1021,14 +1020,16 @@ bool com_android_aconfig_test_enabled_ro() {
 }
 "#;
 
-    fn test_generate_cpp_code(
-        parsed_flags: ProtoParsedFlags,
+    fn test_generate_cpp_code<I>(
+        iter: I,
         mode: CodegenMode,
         expected_header: &str,
         expected_src: &str,
-    ) {
+    ) where
+        I: Iterator<Item = ProtoParsedFlag>,
+    {
         let modified_parsed_flags =
-            crate::commands::modify_parsed_flags_based_on_mode(parsed_flags, mode).unwrap();
+            crate::commands::modify_parsed_flags_based_on_mode(iter, mode).unwrap();
         let generated =
             generate_cpp_code(crate::test::TEST_PACKAGE, modified_parsed_flags.into_iter(), mode)
                 .unwrap();
@@ -1063,9 +1064,9 @@ bool com_android_aconfig_test_enabled_ro() {
 
     #[test]
     fn test_generate_cpp_code_for_prod() {
-        let parsed_flags = crate::test::parse_test_flags();
+        let cache = crate::test::create_test_cache();
         test_generate_cpp_code(
-            parsed_flags,
+            cache.parsed_flag.into_iter(),
             CodegenMode::Production,
             EXPORTED_PROD_HEADER_EXPECTED,
             PROD_SOURCE_FILE_EXPECTED,
@@ -1074,9 +1075,9 @@ bool com_android_aconfig_test_enabled_ro() {
 
     #[test]
     fn test_generate_cpp_code_for_test() {
-        let parsed_flags = crate::test::parse_test_flags();
+        let cache = crate::test::create_test_cache();
         test_generate_cpp_code(
-            parsed_flags,
+            cache.parsed_flag.into_iter(),
             CodegenMode::Test,
             EXPORTED_TEST_HEADER_EXPECTED,
             TEST_SOURCE_FILE_EXPECTED,
@@ -1085,9 +1086,9 @@ bool com_android_aconfig_test_enabled_ro() {
 
     #[test]
     fn test_generate_cpp_code_for_exported() {
-        let parsed_flags = crate::test::parse_test_flags();
+        let cache = crate::test::create_test_cache();
         test_generate_cpp_code(
-            parsed_flags,
+            cache.parsed_flag.into_iter(),
             CodegenMode::Exported,
             EXPORTED_EXPORTED_HEADER_EXPECTED,
             EXPORTED_SOURCE_FILE_EXPECTED,
@@ -1096,9 +1097,9 @@ bool com_android_aconfig_test_enabled_ro() {
 
     #[test]
     fn test_generate_cpp_code_for_read_only_prod() {
-        let parsed_flags = crate::test::parse_read_only_test_flags();
+        let cache = crate::test::create_test_cache_read_only_flags();
         test_generate_cpp_code(
-            parsed_flags,
+            cache.parsed_flag.into_iter(),
             CodegenMode::Production,
             READ_ONLY_EXPORTED_PROD_HEADER_EXPECTED,
             READ_ONLY_PROD_SOURCE_FILE_EXPECTED,
