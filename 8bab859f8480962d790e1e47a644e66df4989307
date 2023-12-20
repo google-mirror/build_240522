@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f2c8538_05680b72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-20T18:18:28Z",
+      "side": 1,
+      "message": "What does chaining mean in this context?",
+      "range": {
+        "startLine": 10,
+        "startChar": 12,
+        "endLine": 10,
+        "endChar": 20
+      },
+      "revId": "8bab859f8480962d790e1e47a644e66df4989307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
