@@ -634,9 +634,10 @@ pub fn enabled_rw() -> bool {
 "#;
 
     fn test_generate_rust_code(mode: CodegenMode) {
-        let parsed_flags = crate::test::parse_test_flags();
+        let cache = crate::test::create_test_cache();
         let modified_parsed_flags =
-            crate::commands::modify_parsed_flags_based_on_mode(parsed_flags, mode).unwrap();
+            crate::commands::modify_parsed_flags_based_on_mode(cache.parsed_flag.into_iter(), mode)
+                .unwrap();
         let generated =
             generate_rust_code(crate::test::TEST_PACKAGE, modified_parsed_flags.into_iter(), mode)
                 .unwrap();

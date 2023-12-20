@@ -39,14 +39,6 @@ python_library_host {
 
 // host binary: aconfig
 
-rust_protobuf {
-    name: "libaconfig_protos",
-    protos: ["protos/aconfig.proto"],
-    crate_name: "aconfig_protos",
-    source_stem: "aconfig_protos",
-    host_supported: true,
-}
-
 rust_defaults {
     name: "aconfig.defaults",
     edition: "2021",

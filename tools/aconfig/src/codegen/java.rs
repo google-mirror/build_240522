@@ -365,10 +365,11 @@ mod tests {
 
     #[test]
     fn test_generate_java_code_production() {
-        let parsed_flags = crate::test::parse_test_flags();
+        let cache = crate::test::create_test_cache();
         let mode = CodegenMode::Production;
         let modified_parsed_flags =
-            crate::commands::modify_parsed_flags_based_on_mode(parsed_flags, mode).unwrap();
+            crate::commands::modify_parsed_flags_based_on_mode(cache.parsed_flag.into_iter(), mode)
+                .unwrap();
         let generated_files =
             generate_java_code(crate::test::TEST_PACKAGE, modified_parsed_flags.into_iter(), mode)
                 .unwrap();
@@ -523,10 +524,11 @@ mod tests {
 
     #[test]
     fn test_generate_java_code_exported() {
-        let parsed_flags = crate::test::parse_test_flags();
+        let cache = crate::test::create_test_cache();
         let mode = CodegenMode::Exported;
         let modified_parsed_flags =
-            crate::commands::modify_parsed_flags_based_on_mode(parsed_flags, mode).unwrap();
+            crate::commands::modify_parsed_flags_based_on_mode(cache.parsed_flag.into_iter(), mode)
+                .unwrap();
         let generated_files =
             generate_java_code(crate::test::TEST_PACKAGE, modified_parsed_flags.into_iter(), mode)
                 .unwrap();
@@ -723,10 +725,11 @@ mod tests {
 
     #[test]
     fn test_generate_java_code_test() {
-        let parsed_flags = crate::test::parse_test_flags();
+        let cache = crate::test::create_test_cache();
         let mode = CodegenMode::Test;
         let modified_parsed_flags =
-            crate::commands::modify_parsed_flags_based_on_mode(parsed_flags, mode).unwrap();
+            crate::commands::modify_parsed_flags_based_on_mode(cache.parsed_flag.into_iter(), mode)
+                .unwrap();
         let generated_files =
             generate_java_code(crate::test::TEST_PACKAGE, modified_parsed_flags.into_iter(), mode)
                 .unwrap();
@@ -835,10 +838,11 @@ mod tests {
 
     #[test]
     fn test_generate_java_code_force_read_only() {
-        let parsed_flags = crate::test::parse_test_flags();
+        let cache = crate::test::create_test_cache();
         let mode = CodegenMode::ForceReadOnly;
         let modified_parsed_flags =
-            crate::commands::modify_parsed_flags_based_on_mode(parsed_flags, mode).unwrap();
+            crate::commands::modify_parsed_flags_based_on_mode(cache.parsed_flag.into_iter(), mode)
+                .unwrap();
         let generated_files =
             generate_java_code(crate::test::TEST_PACKAGE, modified_parsed_flags.into_iter(), mode)
                 .unwrap();

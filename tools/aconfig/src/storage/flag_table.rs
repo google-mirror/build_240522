@@ -176,7 +176,7 @@ impl FlagTable {
 mod tests {
     use super::*;
     use crate::storage::{
-        group_flags_by_package, tests::parse_all_test_flags, tests::read_str_from_bytes,
+        group_flags_by_package, tests::parse_all_test_caches, tests::read_str_from_bytes,
         tests::read_u32_from_bytes,
     };
 
@@ -259,7 +259,7 @@ mod tests {
     }
 
     pub fn create_test_flag_table() -> Result<FlagTable> {
-        let caches = parse_all_test_flags();
+        let caches = parse_all_test_caches();
         let packages = group_flags_by_package(caches.iter());
         FlagTable::new("system", &packages)
     }
