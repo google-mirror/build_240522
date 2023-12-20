@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab9a9c41_a4db0b29",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-20T15:36:50Z",
+      "side": 1,
+      "message": "I would have inlined `{codegen_mode}` directly but this works too",
+      "range": {
+        "startLine": 342,
+        "startChar": 16,
+        "endLine": 342,
+        "endChar": 20
+      },
+      "revId": "c2792f297bde809a3eee76d68431dd1ca01f339a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74840841_11d3e6aa",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-20T15:36:50Z",
+      "side": 1,
+      "message": "As we know what the string is, I prefer if it\u0027s spelled out as \"exported library contains no exported flags\" -- that makes it more obvious what the text expects.",
+      "revId": "c2792f297bde809a3eee76d68431dd1ca01f339a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
