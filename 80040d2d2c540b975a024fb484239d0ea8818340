@@ -69,6 +69,54 @@
       },
       "revId": "80040d2d2c540b975a024fb484239d0ea8818340",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d5c6d36_fc6ea2db",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-20T14:27:28Z",
+      "side": 1,
+      "message": "resolved in aosp/2883810",
+      "parentUuid": "af2898cd_82d6fdaa",
+      "range": {
+        "startLine": 354,
+        "startChar": 52,
+        "endLine": 354,
+        "endChar": 54
+      },
+      "revId": "80040d2d2c540b975a024fb484239d0ea8818340",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88fd971e_62e21e04",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-20T14:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3a2e31b_ff4040ed",
+      "range": {
+        "startLine": 354,
+        "startChar": 38,
+        "endLine": 354,
+        "endChar": 46
+      },
+      "revId": "80040d2d2c540b975a024fb484239d0ea8818340",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
