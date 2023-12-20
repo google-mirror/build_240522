@@ -339,7 +339,7 @@ pub fn modify_parsed_flags_based_on_mode(
         }
     };
     if modified_parsed_flags.is_empty() {
-        bail!("{} library contains no exported flags.", codegen_mode);
+        bail!("{mode} library contains no {mode} flags", mode = codegen_mode);
     }
 
     Ok(modified_parsed_flags)
@@ -654,7 +654,7 @@ mod tests {
         let error =
             modify_parsed_flags_based_on_mode(parsed_flags, CodegenMode::Exported).unwrap_err();
         assert_eq!(
-            format!("{} library contains no exported flags.", CodegenMode::Exported),
+            format!("{mode} library contains no {mode} flags", mode = CodegenMode::Exported),
             format!("{:?}", error)
         );
     }
