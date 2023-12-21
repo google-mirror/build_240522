@@ -128,13 +128,28 @@ endif
 # are controlled by the MODULE_BUILD_FROM_SOURCE environment variable by
 # default.
 INDIVIDUALLY_TOGGLEABLE_PREBUILT_MODULES := \
+  adservices \
+  appsearch \
   btservices \
+<<<<<<< HEAD   (fdaf4c Merge "Write ide_qeury results to stdout" into main)
   devicelock \
+=======
+  configinfrastructure \
+  conscrypt \
+  healthfitness \
+  ipsec \
+  media \
+  mediaprovider \
+  ondevicepersonalization \
+>>>>>>> CHANGE (e14f48 Add respective modules to the list of individually toggleabl)
   permission \
   rkpd \
+  scheduling \
+  sdkext \
+  statsd \
+  tethering \
   uwb \
   wifi \
-  mediaprovider \
 
 $(foreach m, $(INDIVIDUALLY_TOGGLEABLE_PREBUILT_MODULES),\
   $(if $(call soong_config_get,$(m)_module,source_build),,\
