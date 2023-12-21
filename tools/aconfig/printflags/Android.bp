@@ -11,6 +11,8 @@ rust_defaults {
     rustlibs: [
         "libaconfig_protos",
         "libanyhow",
+        "libitertools",
+        "libonce_cell",
         "libprotobuf",
         "libregex",
     ],
