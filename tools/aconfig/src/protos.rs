@@ -326,7 +326,6 @@ pub mod cache {
 pub mod parsed_flags {
     use super::*;
 
-    #[allow(dead_code)]
     pub fn verify_fields(pf: &ProtoParsedFlags) -> Result<()> {
         verify_parsed_flags(pf.parsed_flag.iter())
     }

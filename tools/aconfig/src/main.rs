@@ -109,7 +109,7 @@ fn cli() -> Command {
         .subcommand(
             Command::new("dump-cache")
                 .alias("dump")
-                .arg(Arg::new("cache").long("cache").action(ArgAction::Append))
+                .arg(Arg::new("cache").long("cache").action(ArgAction::Append).required(true))
                 .arg(
                     Arg::new("format")
                         .long("format")
@@ -124,7 +124,6 @@ fn cli() -> Command {
                         .action(ArgAction::Append)
                         .help(HELP_DUMP_FILTER.trim()),
                 )
-                .arg(Arg::new("dedup").long("dedup").num_args(0).action(ArgAction::SetTrue))
                 .arg(Arg::new("out").long("out").default_value("-")),
         )
         .subcommand(
@@ -137,6 +136,12 @@ fn cli() -> Command {
                 )
                 .arg(Arg::new("cache").long("cache").required(true))
                 .arg(Arg::new("out").long("out").required(true)),
+        )
+        .subcommand(
+            Command::new("export-flags")
+                .arg(Arg::new("cache").long("cache").action(ArgAction::Append))
+                .arg(Arg::new("dedup").long("dedup").num_args(0).action(ArgAction::SetTrue))
+                .arg(Arg::new("out").long("out").default_value("-")),
         )
 }
 
@@ -264,7 +269,7 @@ fn main() -> Result<()> {
             write_output_to_file_or_stdout(path, &output)?;
         }
         Some(("dump-cache", sub_matches)) => {
-            let input = open_zero_or_more_files(sub_matches, "cache")?;
+            let cache = open_single_file(sub_matches, "cache")?;
             let format = get_required_arg::<DumpFormat>(sub_matches, "format")
                 .context("failed to dump previously parsed flags")?;
             let filters = sub_matches
@@ -272,8 +277,7 @@ fn main() -> Result<()> {
                 .unwrap_or_default()
                 .map(String::as_ref)
                 .collect::<Vec<_>>();
-            let dedup = get_required_arg::<bool>(sub_matches, "dedup")?;
-            let output = commands::dump_cache(input, format.clone(), &filters, *dedup)?;
+            let output = commands::dump_cache(cache, format.clone(), &filters)?;
             let path = get_required_arg::<String>(sub_matches, "out")?;
             write_output_to_file_or_stdout(path, &output)?;
         }
@@ -286,6 +290,13 @@ fn main() -> Result<()> {
             generated_files
                 .iter()
                 .try_for_each(|file| write_output_file_realtive_to_dir(&dir, file))?;
+        }
+        Some(("export-flags", sub_matches)) => {
+            let input = open_zero_or_more_files(sub_matches, "cache")?;
+            let dedup = get_required_arg::<bool>(sub_matches, "dedup")?;
+            let output = commands::export_flags(input, *dedup)?;
+            let path = get_required_arg::<String>(sub_matches, "out")?;
+            write_output_to_file_or_stdout(path, &output)?;
         }
         _ => unreachable!(),
     }
