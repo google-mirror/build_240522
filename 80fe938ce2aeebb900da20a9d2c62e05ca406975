@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b509f935_a775e054",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-21T13:56:27Z",
+      "side": 1,
+      "message": "The implementation is in the commands file, in the modify_flag_ function. In the filter the non-exported flags are removed. We can discuss this",
+      "parentUuid": "9c98895f_82ed7c7b",
+      "range": {
+        "startLine": 14,
+        "startChar": 14,
+        "endLine": 14,
+        "endChar": 58
+      },
+      "revId": "80fe938ce2aeebb900da20a9d2c62e05ca406975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "610041b4_02be8966",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -83,6 +107,30 @@
       "writtenOn": "2023-12-21T10:18:32Z",
       "side": 1,
       "message": "Is this really a new codegen mode? Maybe it is, but the name suggests its a modification of one of the other codegen modes, to be passed in as a separate parameter. But I really don\u0027t want to open up for multiple permutations.\n\nMaybe there\u0027s a better name for the new mode...?",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 17
+      },
+      "revId": "80fe938ce2aeebb900da20a9d2c62e05ca406975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60b67d64_ff729309",
+        "filename": "tools/aconfig/src/codegen/mod.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-21T13:56:27Z",
+      "side": 1,
+      "message": "Yes this is the codegen mode. It won\u0027t open up for permutations. But yes, we can change for another name",
+      "parentUuid": "4b9ec348_ea267d5d",
       "range": {
         "startLine": 59,
         "startChar": 4,
