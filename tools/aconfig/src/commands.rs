@@ -26,7 +26,7 @@ use crate::codegen::CodegenMode;
 use crate::dump::{DumpFormat, DumpPredicate};
 use crate::protos::{
     ParsedFlagExt, ProtoCache, ProtoFlagMetadata, ProtoFlagPermission, ProtoFlagState,
-    ProtoParsedFlag, ProtoTracepoint,
+    ProtoParsedFlag, ProtoParsedFlags, ProtoTracepoint,
 };
 use crate::storage::generate_storage_files;
 
@@ -274,15 +274,8 @@ pub fn create_device_config_sysprops(mut input: Input) -> Result<Vec<u8>> {
     Ok(output)
 }
 
-pub fn dump_cache(
-    mut input: Vec<Input>,
-    format: DumpFormat,
-    filters: &[&str],
-    dedup: bool,
-) -> Result<Vec<u8>> {
-    let individually_parsed_flags: Result<Vec<ProtoCache>> =
-        input.iter_mut().map(|i| i.try_parse_cache()).collect();
-    let cache: ProtoCache = crate::protos::cache::merge(individually_parsed_flags?, dedup)?;
+pub fn dump_cache(mut input: Input, format: DumpFormat, filters: &[&str]) -> Result<Vec<u8>> {
+    let cache = input.try_parse_cache()?;
     let filters: Vec<Box<DumpPredicate>> = if filters.is_empty() {
         vec![Box::new(|_| true)]
     } else {
@@ -295,6 +288,17 @@ pub fn dump_cache(
         cache.parsed_flag.into_iter().filter(|flag| filters.iter().any(|p| p(flag))),
         format,
     )
+}
+
+pub fn export_flags(mut input: Vec<Input>, dedup: bool) -> Result<Vec<u8>> {
+    let individually_parsed_flags: Result<Vec<ProtoCache>> =
+        input.iter_mut().map(|i| i.try_parse_cache()).collect();
+    let cache: ProtoCache = crate::protos::cache::merge(individually_parsed_flags?, dedup)?;
+    let parsed_flags = ProtoParsedFlags { parsed_flag: cache.parsed_flag, ..Default::default() };
+    let mut output = Vec::new();
+    crate::protos::parsed_flags::verify_fields(&parsed_flags)?;
+    parsed_flags.write_to_vec(&mut output)?;
+    Ok(output)
 }
 
 fn find_unique_package(parsed_flags: &[ProtoParsedFlag]) -> Option<&str> {
@@ -585,30 +589,38 @@ mod tests {
     #[test]
     fn test_dump() {
         let input = create_test_cache_as_input();
-        let bytes = dump_cache(
-            vec![input],
-            DumpFormat::Custom("{fully_qualified_name}".to_string()),
-            &[],
-            false,
-        )
-        .unwrap();
+        let bytes =
+            dump_cache(input, DumpFormat::Custom("{fully_qualified_name}".to_string()), &[])
+                .unwrap();
         let text = std::str::from_utf8(&bytes).unwrap();
         assert!(text.contains("com.android.aconfig.test.disabled_ro"));
     }
 
     #[test]
-    fn test_dump_textproto_format_dedup() {
+    fn test_export_flags() {
         let input = create_test_cache_as_input();
-        let input2 = create_test_cache_as_input();
-        let bytes = dump_cache(vec![input, input2], DumpFormat::Textproto, &[], true).unwrap();
-        let text = std::str::from_utf8(&bytes).unwrap();
-        assert_eq!(
-            None,
-            crate::test::first_significant_code_diff(
-                crate::test::TEST_FLAGS_TEXTPROTO.trim(),
-                text.trim()
-            )
-        );
+        let bytes = export_flags(vec![input], false).unwrap();
+        let expected = protobuf::text_format::parse_from_str::<ProtoParsedFlags>(
+            crate::test::TEST_FLAGS_TEXTPROTO,
+        )
+        .unwrap()
+        .write_to_bytes()
+        .unwrap();
+        assert_eq!(bytes, expected);
+    }
+
+    #[test]
+    fn test_export_flags_dedup() {
+        let input = create_test_cache_as_input();
+        let input_copy = create_test_cache_as_input();
+        let bytes = export_flags(vec![input, input_copy], true).unwrap();
+        let expected = protobuf::text_format::parse_from_str::<ProtoParsedFlags>(
+            crate::test::TEST_FLAGS_TEXTPROTO,
+        )
+        .unwrap()
+        .write_to_bytes()
+        .unwrap();
+        assert_eq!(bytes, expected);
     }
 
     fn create_test_cache_as_input() -> Input {
