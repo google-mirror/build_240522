@@ -16,6 +16,23 @@
       "message": "To keep the size of this change manageable, I made the new cache message identical to parsed_flags. In future commits I want to\n\n- create a new create-exported-data command to transform a protobuf cache to a protobuf parsed_flags\n- pass in Cache to the codegen and storage commands\n- remodel what the fields in Cache look like, e.g. all flags in a cache must belong to the same package and container, so cache { package, container, Vec\u003ccached_flag\u003e } instead of duplicating the same info across all parsed_flag messages",
       "revId": "19b8be4b2643fc233836e9e0e4591b403c1bdd7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1248834_06882865",
+        "filename": "tools/aconfig/protos/internal.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2023-12-21T15:35:39Z",
+      "side": 1,
+      "message": "This comment is not needed now?",
+      "revId": "19b8be4b2643fc233836e9e0e4591b403c1bdd7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
