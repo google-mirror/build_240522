@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2045dc17_80f570a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-21T10:18:32Z",
+      "side": 1,
+      "message": "Do the scenarios arise if either of 1. and 2. is true, or only if 1. \u0026\u0026 2. is true? Can you clarify this, please, e.g.\n\n```\n1. The library must be build with read_only flags, and    \u003c---- added \", and\"\n2. ...\n```",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 2
+      },
+      "revId": "80fe938ce2aeebb900da20a9d2c62e05ca406975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c98895f_82ed7c7b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-21T10:18:32Z",
+      "side": 1,
+      "message": "I don\u0027t see this implemented in code? The generated lib will include both exported and non-exported flags?",
+      "range": {
+        "startLine": 14,
+        "startChar": 14,
+        "endLine": 14,
+        "endChar": 58
+      },
+      "revId": "80fe938ce2aeebb900da20a9d2c62e05ca406975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "610041b4_02be8966",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-21T10:18:32Z",
+      "side": 1,
+      "message": "will",
+      "range": {
+        "startLine": 17,
+        "startChar": 23,
+        "endLine": 17,
+        "endChar": 29
+      },
+      "revId": "80fe938ce2aeebb900da20a9d2c62e05ca406975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b9ec348_ea267d5d",
+        "filename": "tools/aconfig/src/codegen/mod.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-21T10:18:32Z",
+      "side": 1,
+      "message": "Is this really a new codegen mode? Maybe it is, but the name suggests its a modification of one of the other codegen modes, to be passed in as a separate parameter. But I really don\u0027t want to open up for multiple permutations.\n\nMaybe there\u0027s a better name for the new mode...?",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 17
+      },
+      "revId": "80fe938ce2aeebb900da20a9d2c62e05ca406975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9fc9182_f03420f1",
+        "filename": "tools/aconfig/src/codegen/rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-21T10:18:32Z",
+      "side": 1,
+      "message": "This update is expected. I would have expected java.rs and cpp.rs to need a similar update, but no? Feels like those files only check if specific values of CodegenMode is passed in, meaning we don\u0027t get a holistic view of the current codegen mode, and may end up with invalid states? We should look into this in a later CL.",
+      "range": {
+        "startLine": 50,
+        "startChar": 12,
+        "endLine": 50,
+        "endChar": 50
+      },
+      "revId": "80fe938ce2aeebb900da20a9d2c62e05ca406975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
