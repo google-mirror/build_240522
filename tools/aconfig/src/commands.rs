@@ -16,6 +16,7 @@
 
 use anyhow::{bail, ensure, Context, Result};
 use protobuf::Message;
+use std::collections::HashMap;
 use std::io::Read;
 use std::path::PathBuf;
 
@@ -200,11 +201,12 @@ pub fn create_java_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Ve
 
 pub fn create_cpp_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Vec<OutputFile>> {
     let parsed_flags = input.try_parse_flags()?;
-    let modified_parsed_flags = modify_parsed_flags_based_on_mode(parsed_flags, codegen_mode)?;
+    let mut modified_parsed_flags = modify_parsed_flags_based_on_mode(parsed_flags, codegen_mode)?;
     let Some(package) = find_unique_package(&modified_parsed_flags) else {
         bail!("no parsed flags, or the parsed flags use different packages");
     };
     let package = package.to_string();
+    let _flag_ids = assign_flag_ids(&package, &mut modified_parsed_flags)?;
     generate_cpp_code(&package, modified_parsed_flags.into_iter(), codegen_mode)
 }
 
@@ -343,6 +345,21 @@ pub fn modify_parsed_flags_based_on_mode(
     }
 
     Ok(modified_parsed_flags)
+}
+
+fn assign_flag_ids(
+    package: &str,
+    parsed_flags: &mut [ProtoParsedFlag],
+) -> Result<HashMap<String, u32>> {
+    parsed_flags.sort_by(|a, b| a.name().cmp(b.name()));
+    let mut flag_ids = HashMap::new();
+    for (id_to_assign, pf) in (0_u32..).zip(parsed_flags.iter()) {
+        if package != pf.package() {
+            return Err(anyhow::anyhow!("encounter a flag not in current package"));
+        }
+        flag_ids.insert(pf.name().to_string(), id_to_assign);
+    }
+    Ok(flag_ids)
 }
 
 #[cfg(test)]
@@ -654,5 +671,25 @@ mod tests {
         let error =
             modify_parsed_flags_based_on_mode(parsed_flags, CodegenMode::Exported).unwrap_err();
         assert_eq!("exported library contains no exported flags", format!("{:?}", error));
+    }
+
+    #[test]
+    fn test_assign_flag_ids() {
+        let mut parsed_flags = crate::test::parse_test_flags();
+        let package = find_unique_package(&parsed_flags.parsed_flag).unwrap().to_string();
+        let flag_ids = assign_flag_ids(&package, &mut parsed_flags.parsed_flag);
+        assert!(flag_ids.is_ok());
+        let expected_flag_ids = HashMap::from([
+            (String::from("disabled_ro"), 0_u32),
+            (String::from("disabled_rw"), 1_u32),
+            (String::from("disabled_rw_exported"), 2_u32),
+            (String::from("disabled_rw_in_other_namespace"), 3_u32),
+            (String::from("enabled_fixed_ro"), 4_u32),
+            (String::from("enabled_fixed_ro_exported"), 5_u32),
+            (String::from("enabled_ro"), 6_u32),
+            (String::from("enabled_ro_exported"), 7_u32),
+            (String::from("enabled_rw"), 8_u32),
+        ]);
+        assert_eq!(flag_ids.unwrap(), expected_flag_ids);
     }
 }
