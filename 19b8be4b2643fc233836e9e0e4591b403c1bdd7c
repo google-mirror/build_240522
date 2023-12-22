@@ -33,6 +33,24 @@
       "message": "This comment is not needed now?",
       "revId": "19b8be4b2643fc233836e9e0e4591b403c1bdd7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cec95cd_0e42a95b",
+        "filename": "tools/aconfig/protos/internal.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-22T16:22:26Z",
+      "side": 1,
+      "message": "Good catch!",
+      "parentUuid": "f1248834_06882865",
+      "revId": "19b8be4b2643fc233836e9e0e4591b403c1bdd7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
