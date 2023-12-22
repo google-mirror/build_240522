@@ -301,6 +301,17 @@ pub fn export_flags(mut input: Vec<Input>, dedup: bool) -> Result<Vec<u8>> {
     Ok(output)
 }
 
+pub fn dump_flags(mut input: Input) -> Result<Vec<u8>> {
+    let parsed_flags: ProtoParsedFlags = protobuf::Message::parse_from_reader(&mut input.reader)
+        .with_context(|| format!("failed to parse {}", input.source))?;
+    let mut output = vec![];
+    for flag in parsed_flags.parsed_flag.into_iter() {
+        let str = format!("{}\n", flag.fully_qualified_name());
+        output.extend_from_slice(str.as_bytes());
+    }
+    Ok(output)
+}
+
 fn find_unique_package(parsed_flags: &[ProtoParsedFlag]) -> Option<&str> {
     let Some(package) = parsed_flags.first().map(|pf| pf.package()) else {
         return None;
