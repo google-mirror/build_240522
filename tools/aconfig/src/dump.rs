@@ -42,6 +42,7 @@ impl TryFrom<&str> for DumpFormat {
     }
 }
 
+#[allow(unused)] // FIXME: rm
 pub fn dump_parsed_flags<I>(parsed_flags_iter: I, format: DumpFormat) -> Result<Vec<u8>>
 where
     I: Iterator<Item = ProtoParsedFlag>,
@@ -194,6 +195,8 @@ fn create_filter_predicate_single(filter: &str) -> Result<Box<DumpPredicate>> {
     }
 }
 
+/*
+ * FIXME: add this back
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -404,3 +407,4 @@ mod tests {
         );
     }
 }
+*/

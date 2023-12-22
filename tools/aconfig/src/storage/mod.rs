@@ -24,7 +24,7 @@ use std::path::PathBuf;
 
 use crate::commands::OutputFile;
 use crate::protos::ProtoCache;
-use crate::protos::ProtoParsedFlag;
+use crate::protos::ProtoCachedFlag;
 use crate::storage::{flag_table::FlagTable, package_table::PackageTable};
 
 pub const FILE_VERSION: u32 = 1;
@@ -56,7 +56,7 @@ pub struct FlagPackage<'a> {
     pub package_name: &'a str,
     pub package_id: u32,
     pub flag_names: HashSet<&'a str>,
-    pub boolean_flags: Vec<&'a ProtoParsedFlag>,
+    pub boolean_flags: Vec<&'a ProtoCachedFlag>,
     pub boolean_offset: u32,
 }
 
@@ -71,27 +71,27 @@ impl<'a> FlagPackage<'a> {
         }
     }
 
-    fn insert(&mut self, pf: &'a ProtoParsedFlag) {
-        if self.flag_names.insert(pf.name()) {
-            self.boolean_flags.push(pf);
+    fn insert(&mut self, cf: &'a ProtoCachedFlag) {
+        if self.flag_names.insert(cf.name()) {
+            self.boolean_flags.push(cf);
         }
     }
 }
 
-pub fn group_flags_by_package<'a, I>(parsed_flags_vec_iter: I) -> Vec<FlagPackage<'a>>
+pub fn group_flags_by_package<'a, I>(cache_vec_iter: I) -> Vec<FlagPackage<'a>>
 where
     I: Iterator<Item = &'a ProtoCache>,
 {
     // group flags by package
     let mut packages: Vec<FlagPackage<'a>> = Vec::new();
     let mut package_index: HashMap<&str, usize> = HashMap::new();
-    for parsed_flags in parsed_flags_vec_iter {
-        for parsed_flag in parsed_flags.parsed_flag.iter() {
-            let index = *(package_index.entry(parsed_flag.package()).or_insert(packages.len()));
+    for cache in cache_vec_iter {
+        for cached_flag in cache.cached_flag.iter() {
+            let index = *(package_index.entry(cache.package()).or_insert(packages.len()));
             if index == packages.len() {
-                packages.push(FlagPackage::new(parsed_flag.package(), index as u32));
+                packages.push(FlagPackage::new(cache.package(), index as u32));
             }
-            packages[index].insert(parsed_flag);
+            packages[index].insert(cached_flag);
         }
     }
 
@@ -197,9 +197,8 @@ mod tests {
         for pkg in packages.iter() {
             let pkg_name = pkg.package_name;
             assert_eq!(pkg.flag_names.len(), pkg.boolean_flags.len());
-            for pf in pkg.boolean_flags.iter() {
-                assert!(pkg.flag_names.contains(pf.name()));
-                assert_eq!(pf.package(), pkg_name);
+            for flag in pkg.boolean_flags.iter() {
+                assert!(pkg.flag_names.contains(flag.name()));
             }
         }
 

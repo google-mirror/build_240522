@@ -21,7 +21,7 @@ use tinytemplate::TinyTemplate;
 use crate::codegen;
 use crate::codegen::CodegenMode;
 use crate::commands::OutputFile;
-use crate::protos::{ProtoFlagPermission, ProtoFlagState, ProtoParsedFlag};
+use crate::protos::{ProtoCachedFlag, ProtoFlagPermission, ProtoFlagState};
 
 pub fn generate_rust_code<I>(
     package: &str,
@@ -29,7 +29,7 @@ pub fn generate_rust_code<I>(
     codegen_mode: CodegenMode,
 ) -> Result<OutputFile>
 where
-    I: Iterator<Item = ProtoParsedFlag>,
+    I: Iterator<Item = ProtoCachedFlag>,
 {
     let template_flags: Vec<TemplateParsedFlag> =
         parsed_flags_iter.map(|pf| TemplateParsedFlag::new(package, &pf)).collect();
@@ -74,7 +74,7 @@ struct TemplateParsedFlag {
 
 impl TemplateParsedFlag {
     #[allow(clippy::nonminimal_bool)]
-    fn new(package: &str, pf: &ProtoParsedFlag) -> Self {
+    fn new(package: &str, pf: &ProtoCachedFlag) -> Self {
         let template = TemplateParsedFlag {
             readwrite: pf.permission() == ProtoFlagPermission::READ_WRITE,
             default_value: match pf.state() {
@@ -636,7 +636,7 @@ pub fn enabled_rw() -> bool {
     fn test_generate_rust_code(mode: CodegenMode) {
         let cache = crate::test::create_test_cache();
         let modified_parsed_flags =
-            crate::commands::modify_parsed_flags_based_on_mode(cache.parsed_flag.into_iter(), mode)
+            crate::commands::modify_cached_flags_based_on_mode(cache.cached_flag.into_iter(), mode)
                 .unwrap();
         let generated =
             generate_rust_code(crate::test::TEST_PACKAGE, modified_parsed_flags.into_iter(), mode)

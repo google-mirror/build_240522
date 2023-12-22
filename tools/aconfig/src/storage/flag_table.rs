@@ -99,8 +99,7 @@ impl FlagTable {
     fn create_nodes(package: &FlagPackage, num_buckets: u32) -> Result<Vec<FlagTableNode>> {
         let flag_names = package.boolean_flags.iter().map(|pf| pf.name()).collect::<Vec<_>>();
         println!("{:?}", flag_names);
-        let flag_ids =
-            assign_flag_ids(package.package_name, package.boolean_flags.iter().copied())?;
+        let flag_ids = assign_flag_ids(package.boolean_flags.iter().copied())?;
         package
             .boolean_flags
             .iter()

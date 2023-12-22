@@ -23,7 +23,7 @@ use tinytemplate::TinyTemplate;
 use crate::codegen;
 use crate::codegen::CodegenMode;
 use crate::commands::OutputFile;
-use crate::protos::{ProtoFlagPermission, ProtoFlagState, ProtoParsedFlag};
+use crate::protos::{ProtoCachedFlag, ProtoFlagPermission, ProtoFlagState};
 
 pub fn generate_java_code<I>(
     package: &str,
@@ -31,7 +31,7 @@ pub fn generate_java_code<I>(
     codegen_mode: CodegenMode,
 ) -> Result<Vec<OutputFile>>
 where
-    I: Iterator<Item = ProtoParsedFlag>,
+    I: Iterator<Item = ProtoCachedFlag>,
 {
     let flag_elements: Vec<FlagElement> =
         parsed_flags_iter.map(|pf| create_flag_element(package, &pf)).collect();
@@ -128,7 +128,7 @@ struct FlagElement {
     pub properties: String,
 }
 
-fn create_flag_element(package: &str, pf: &ProtoParsedFlag) -> FlagElement {
+fn create_flag_element(package: &str, pf: &ProtoCachedFlag) -> FlagElement {
     let device_config_flag = codegen::create_device_config_ident(package, pf.name())
         .expect("values checked at flag parse time");
     FlagElement {
@@ -368,7 +368,7 @@ mod tests {
         let cache = crate::test::create_test_cache();
         let mode = CodegenMode::Production;
         let modified_parsed_flags =
-            crate::commands::modify_parsed_flags_based_on_mode(cache.parsed_flag.into_iter(), mode)
+            crate::commands::modify_cached_flags_based_on_mode(cache.cached_flag.into_iter(), mode)
                 .unwrap();
         let generated_files =
             generate_java_code(crate::test::TEST_PACKAGE, modified_parsed_flags.into_iter(), mode)
@@ -527,7 +527,7 @@ mod tests {
         let cache = crate::test::create_test_cache();
         let mode = CodegenMode::Exported;
         let modified_parsed_flags =
-            crate::commands::modify_parsed_flags_based_on_mode(cache.parsed_flag.into_iter(), mode)
+            crate::commands::modify_cached_flags_based_on_mode(cache.cached_flag.into_iter(), mode)
                 .unwrap();
         let generated_files =
             generate_java_code(crate::test::TEST_PACKAGE, modified_parsed_flags.into_iter(), mode)
@@ -728,7 +728,7 @@ mod tests {
         let cache = crate::test::create_test_cache();
         let mode = CodegenMode::Test;
         let modified_parsed_flags =
-            crate::commands::modify_parsed_flags_based_on_mode(cache.parsed_flag.into_iter(), mode)
+            crate::commands::modify_cached_flags_based_on_mode(cache.cached_flag.into_iter(), mode)
                 .unwrap();
         let generated_files =
             generate_java_code(crate::test::TEST_PACKAGE, modified_parsed_flags.into_iter(), mode)
@@ -841,7 +841,7 @@ mod tests {
         let cache = crate::test::create_test_cache();
         let mode = CodegenMode::ForceReadOnly;
         let modified_parsed_flags =
-            crate::commands::modify_parsed_flags_based_on_mode(cache.parsed_flag.into_iter(), mode)
+            crate::commands::modify_cached_flags_based_on_mode(cache.cached_flag.into_iter(), mode)
                 .unwrap();
         let generated_files =
             generate_java_code(crate::test::TEST_PACKAGE, modified_parsed_flags.into_iter(), mode)
