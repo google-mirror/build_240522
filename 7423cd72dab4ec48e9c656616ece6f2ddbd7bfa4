@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb05bc7f_d2e73069",
+        "filename": "tools/aconfig/tests/aconfig_force_read_only_mode_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2023-12-22T12:09:16Z",
+      "side": 1,
+      "message": "Now that the root release config has landed, the aconfig flags are correctly set in the integration tests.",
+      "revId": "7423cd72dab4ec48e9c656616ece6f2ddbd7bfa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
