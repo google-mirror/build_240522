@@ -22,6 +22,21 @@ package android.aconfig;
 
 import "aconfig.proto";
 
+message cached_flag {
+  required string name = 1;
+  required string namespace = 2;
+  required string description = 3;
+  repeated string bug = 4;
+  required android.aconfig.flag_state state = 5;
+  required android.aconfig.flag_permission permission = 6;
+  repeated android.aconfig.tracepoint trace = 7;
+  required bool is_fixed_read_only = 8;
+  required bool is_exported = 9;
+  optional android.aconfig.flag_metadata metadata = 10;
+};
+
 message cache {
-  repeated android.aconfig.parsed_flag parsed_flag = 1;
+  required string package = 1;
+  optional string container = 2;
+  repeated cached_flag cached_flag = 3;
 };

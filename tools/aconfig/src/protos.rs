@@ -41,6 +41,7 @@ mod auto_generated {
     pub use aconfig_protos::aconfig::Parsed_flags as ProtoParsedFlags;
     pub use aconfig_protos::aconfig::Tracepoint as ProtoTracepoint;
     pub use aconfig_protos::internal::Cache as ProtoCache;
+    pub use aconfig_protos::internal::Cached_flag as ProtoCachedFlag;
 }
 
 // ---- When building with cargo ----
@@ -62,6 +63,7 @@ mod auto_generated {
     pub use aconfig::Parsed_flags as ProtoParsedFlags;
     pub use aconfig::Tracepoint as ProtoTracepoint;
     pub use internal::Cache as ProtoCache;
+    pub use internal::Cached_flag as ProtoCachedFlag;
 }
 
 // ---- Common for both the Android tool-chain and cargo ----
@@ -87,40 +89,6 @@ macro_rules! ensure_required_fields {
     };
 }
 
-// Both ProtoCache and ProtoParsedFlags enforce the same restrictions
-fn verify_parsed_flags<'a, I>(iter: I) -> Result<()>
-where
-    I: Iterator<Item = &'a ProtoParsedFlag>,
-{
-    use anyhow::bail;
-    use std::cmp::Ordering;
-
-    let create_sorting_key = |pf: &ProtoParsedFlag| pf.fully_qualified_name();
-
-    let mut previous: Option<&ProtoParsedFlag> = None;
-    for parsed_flag in iter {
-        if let Some(prev) = previous {
-            let a = create_sorting_key(prev);
-            let b = create_sorting_key(parsed_flag);
-            match a.cmp(&b) {
-                Ordering::Less => {}
-                Ordering::Equal => bail!(
-                    "bad parsed flags: duplicate flag {} (defined in {} and {})",
-                    a,
-                    parsed_flag::path_to_declaration(prev),
-                    parsed_flag::path_to_declaration(parsed_flag)
-                ),
-                Ordering::Greater => {
-                    bail!("bad parsed flags: not sorted: {} comes before {}", a, b)
-                }
-            }
-        }
-        parsed_flag::verify_fields(parsed_flag)?;
-        previous = Some(parsed_flag);
-    }
-    Ok(())
-}
-
 pub mod flag_declaration {
     use super::*;
     use crate::codegen;
@@ -130,7 +98,10 @@ pub mod flag_declaration {
         ensure_required_fields!("flag declaration", pdf, "name", "namespace", "description");
 
         ensure!(codegen::is_valid_name_ident(pdf.name()), "bad flag declaration: bad name");
-        ensure!(codegen::is_valid_name_ident(pdf.namespace()), "bad flag declaration: bad name");
+        ensure!(
+            codegen::is_valid_name_ident(pdf.namespace()),
+            "bad flag declaration: bad namespace"
+        );
         ensure!(!pdf.description().is_empty(), "bad flag declaration: empty description");
         ensure!(pdf.bug.len() == 1, "bad flag declaration: exactly one bug required");
 
@@ -287,6 +258,9 @@ pub mod parsed_flag {
 
 pub mod cache {
     use super::*;
+    use crate::codegen;
+    use anyhow::{bail, ensure};
+    use std::cmp::Ordering;
 
     pub fn try_from_binary_proto(bytes: &[u8]) -> Result<ProtoCache> {
         let message: ProtoCache = protobuf::Message::parse_from_bytes(bytes)?;
@@ -295,39 +269,120 @@ pub mod cache {
     }
 
     pub fn verify_fields(cache: &ProtoCache) -> Result<()> {
-        verify_parsed_flags(cache.parsed_flag.iter())
-    }
-
-    pub fn merge(caches: Vec<ProtoCache>, dedup: bool) -> Result<ProtoCache> {
-        let mut merged = ProtoCache::new();
-        for mut pfs in caches.into_iter() {
-            merged.parsed_flag.append(&mut pfs.parsed_flag);
+        ensure_required_fields!("cache", cache, "package");
+        ensure!(codegen::is_valid_package_ident(cache.package()), "bad cache: bad package");
+        // TODO(b/312769710): Make the container field required.
+        ensure!(
+            !cache.has_container() || codegen::is_valid_container_ident(cache.container()),
+            "bad cache: bad container"
+        );
+        for cached_flag in cache.cached_flag.iter() {
+            super::cached_flag::verify_fields(cached_flag)?;
         }
-        merged.parsed_flag.sort_by_cached_key(create_sorting_key);
-        if dedup {
-            // Deduplicate identical protobuf messages.  Messages with the same sorting key but
-            // different fields (including the path to the original source file) will not be
-            // deduplicated and trigger an error in verify_fields.
-            merged.parsed_flag.dedup();
+        for (previous, current) in cache.cached_flag.iter().zip(cache.cached_flag.iter().skip(1)) {
+            let p = previous.fully_qualified_name(cache.package());
+            let c = current.fully_qualified_name(cache.package());
+            match p.cmp(&c) {
+                Ordering::Less => {}
+                Ordering::Equal => {
+                    bail!(
+                        "bad cache: duplicate flag {} (defined in {} and {})",
+                        p,
+                        previous.trace[0].source(),
+                        current.trace[0].source()
+                    );
+                }
+                Ordering::Greater => {
+                    bail!("bad parsed flags: not sorted: {} comes before {}", p, c);
+                }
+            }
         }
-        verify_fields(&merged)?;
-        Ok(merged)
+        Ok(())
     }
 
-    pub fn sort_parsed_flags(pf: &mut ProtoCache) {
-        pf.parsed_flag.sort_by_key(create_sorting_key);
+    pub fn sort_cached_flags(cache: &mut ProtoCache) {
+        let package = cache.package().to_string();
+        cache.cached_flag.sort_by_key(|flag| flag.fully_qualified_name(&package));
     }
 
-    fn create_sorting_key(pf: &ProtoParsedFlag) -> String {
-        pf.fully_qualified_name()
+    #[cfg(test)]
+    pub fn try_from_text_proto(s: &str) -> Result<ProtoCache> {
+        let cache: ProtoCache = super::try_from_text_proto(s)?;
+        verify_fields(&cache)?;
+        Ok(cache)
+    }
+}
+
+pub mod cached_flag {
+    use super::*;
+    use crate::codegen;
+    use anyhow::ensure;
+
+    pub fn verify_fields(flag: &ProtoCachedFlag) -> Result<()> {
+        // not need to call ensure_required_fields: protobuf message cached_flag has no optional fields
+        ensure!(codegen::is_valid_name_ident(flag.name()), "bad cached flag: bad name");
+        ensure!(codegen::is_valid_name_ident(flag.namespace()), "bad cached flag: bad namespace");
+        ensure!(!flag.description().is_empty(), "bad cached flag: empty description");
+        ensure!(flag.bug.len() == 1, "bad cached flag: exactly one bug required");
+        ensure!(!flag.trace.is_empty(), "bad cached flag: empty trace");
+        for tp in flag.trace.iter() {
+            super::tracepoint::verify_fields(tp)?;
+        }
+        if flag.is_fixed_read_only() {
+            ensure!(
+                flag.permission() == ProtoFlagPermission::READ_ONLY,
+                "bad parsed flag: flag is is_fixed_read_only but permission is not READ_ONLY"
+            );
+            for tp in flag.trace.iter() {
+                ensure!(tp.permission() == ProtoFlagPermission::READ_ONLY,
+                "bad parsed flag: flag is is_fixed_read_only but a tracepoint's permission is not READ_ONLY"
+                );
+            }
+        }
+        Ok(())
+    }
+}
+
+pub trait CachedFlagExt {
+    fn fully_qualified_name(&self, package: &str) -> String;
+}
+
+impl CachedFlagExt for ProtoCachedFlag {
+    fn fully_qualified_name(&self, package: &str) -> String {
+        format!("{}.{}", package, self.name())
     }
 }
 
 pub mod parsed_flags {
     use super::*;
+    use anyhow::bail;
+    use std::cmp::Ordering;
 
     pub fn verify_fields(pf: &ProtoParsedFlags) -> Result<()> {
-        verify_parsed_flags(pf.parsed_flag.iter())
+        let create_sorting_key = |pf: &ProtoParsedFlag| pf.fully_qualified_name();
+
+        let mut previous: Option<&ProtoParsedFlag> = None;
+        for parsed_flag in pf.parsed_flag.iter() {
+            if let Some(prev) = previous {
+                let a = create_sorting_key(prev);
+                let b = create_sorting_key(parsed_flag);
+                match a.cmp(&b) {
+                    Ordering::Less => {}
+                    Ordering::Equal => bail!(
+                        "bad parsed flags: duplicate flag {} (defined in {} and {})",
+                        a,
+                        parsed_flag::path_to_declaration(prev),
+                        parsed_flag::path_to_declaration(parsed_flag)
+                    ),
+                    Ordering::Greater => {
+                        bail!("bad parsed flags: not sorted: {} comes before {}", a, b)
+                    }
+                }
+            }
+            parsed_flag::verify_fields(parsed_flag)?;
+            previous = Some(parsed_flag);
+        }
+        Ok(())
     }
 }
 
@@ -618,18 +673,21 @@ flag_value {
         assert_eq!(format!("{:?}", error), "bad flag value: missing permission");
     }
 
-    fn try_from_binary_proto_from_text_proto(text_proto: &str) -> Result<ProtoCache> {
+    fn try_parsed_flags_from_binary_proto_from_text_proto(
+        text_proto: &str,
+    ) -> Result<ProtoParsedFlags> {
         use protobuf::Message;
 
-        let cache: ProtoCache = try_from_text_proto(text_proto)?;
+        let parsed_flags: ProtoParsedFlags = try_from_text_proto(text_proto)?;
         let mut binary_proto = Vec::new();
-        cache.write_to_vec(&mut binary_proto)?;
-        cache::try_from_binary_proto(&binary_proto)
+        parsed_flags.write_to_vec(&mut binary_proto)?;
+        let message: ProtoParsedFlags = protobuf::Message::parse_from_bytes(&binary_proto)?;
+        parsed_flags::verify_fields(&message)?;
+        Ok(message)
     }
 
     #[test]
     fn test_parsed_flags_try_from_text_proto() {
-        // valid input
         let text_proto = r#"
 parsed_flag {
     package: "com.first"
@@ -668,10 +726,11 @@ parsed_flag {
     container: "system"
 }
 "#;
-        let parsed_flags = try_from_binary_proto_from_text_proto(text_proto).unwrap();
+        let parsed_flags = try_parsed_flags_from_binary_proto_from_text_proto(text_proto).unwrap();
         assert_eq!(parsed_flags.parsed_flag.len(), 2);
         let second = parsed_flags.parsed_flag.iter().find(|fv| fv.name() == "second").unwrap();
         assert_eq!(second.package(), "com.second");
+        assert_eq!(second.container(), "system");
         assert_eq!(second.name(), "second");
         assert_eq!(second.namespace(), "second_ns");
         assert_eq!(second.description(), "This is the description of the second flag.");
@@ -688,7 +747,7 @@ parsed_flag {
         assert!(second.is_fixed_read_only());
 
         // valid input: empty
-        let parsed_flags = try_from_binary_proto_from_text_proto("").unwrap();
+        let parsed_flags = try_parsed_flags_from_binary_proto_from_text_proto("").unwrap();
         assert!(parsed_flags.parsed_flag.is_empty());
 
         // bad input: empty trace
@@ -703,7 +762,7 @@ parsed_flag {
     container: "system"
 }
 "#;
-        let error = try_from_binary_proto_from_text_proto(text_proto).unwrap_err();
+        let error = try_parsed_flags_from_binary_proto_from_text_proto(text_proto).unwrap_err();
         assert_eq!(format!("{:?}", error), "bad parsed flag: empty trace");
 
         // bad input: missing namespace in parsed_flag
@@ -722,7 +781,7 @@ parsed_flag {
     container: "system"
 }
 "#;
-        let error = try_from_binary_proto_from_text_proto(text_proto).unwrap_err();
+        let error = try_parsed_flags_from_binary_proto_from_text_proto(text_proto).unwrap_err();
         assert_eq!(format!("{:?}", error), "bad parsed flag: missing namespace");
 
         // bad input: parsed_flag not sorted by package
@@ -758,7 +817,7 @@ parsed_flag {
     container: "system"
 }
 "#;
-        let error = try_from_binary_proto_from_text_proto(text_proto).unwrap_err();
+        let error = try_parsed_flags_from_binary_proto_from_text_proto(text_proto).unwrap_err();
         assert_eq!(
             format!("{:?}", error),
             "bad parsed flags: not sorted: bbb.bbb.first comes before aaa.aaa.second"
@@ -797,7 +856,7 @@ parsed_flag {
     container: "system"
 }
 "#;
-        let error = try_from_binary_proto_from_text_proto(text_proto).unwrap_err();
+        let error = try_parsed_flags_from_binary_proto_from_text_proto(text_proto).unwrap_err();
         assert_eq!(
             format!("{:?}", error),
             "bad parsed flags: not sorted: com.foo.bbb comes before com.foo.aaa"
@@ -836,7 +895,7 @@ parsed_flag {
     container: "system"
 }
 "#;
-        let error = try_from_binary_proto_from_text_proto(text_proto).unwrap_err();
+        let error = try_parsed_flags_from_binary_proto_from_text_proto(text_proto).unwrap_err();
         assert_eq!(format!("{:?}", error), "bad parsed flags: duplicate flag com.foo.bar (defined in flags.declarations and flags.declarations)");
     }
 
@@ -864,132 +923,11 @@ parsed_flag {
     container: "system"
 }
 "#;
-        let parsed_flags = try_from_binary_proto_from_text_proto(text_proto).unwrap();
+        let parsed_flags = try_parsed_flags_from_binary_proto_from_text_proto(text_proto).unwrap();
         let parsed_flag = &parsed_flags.parsed_flag[0];
         assert_eq!(
             crate::protos::parsed_flag::path_to_declaration(parsed_flag),
             "flags.declarations"
         );
-    }
-
-    #[test]
-    fn test_parsed_flags_merge() {
-        let text_proto = r#"
-parsed_flag {
-    package: "com.first"
-    name: "first"
-    namespace: "first_ns"
-    description: "This is the description of the first flag."
-    bug: "a"
-    state: DISABLED
-    permission: READ_ONLY
-    trace {
-        source: "flags.declarations"
-        state: DISABLED
-        permission: READ_ONLY
-    }
-    container: "system"
-}
-parsed_flag {
-    package: "com.second"
-    name: "second"
-    namespace: "second_ns"
-    description: "This is the description of the second flag."
-    bug: "b"
-    state: ENABLED
-    permission: READ_WRITE
-    trace {
-        source: "flags.declarations"
-        state: DISABLED
-        permission: READ_ONLY
-    }
-    container: "system"
-}
-"#;
-        let expected = try_from_binary_proto_from_text_proto(text_proto).unwrap();
-
-        let text_proto = r#"
-parsed_flag {
-    package: "com.first"
-    name: "first"
-    namespace: "first_ns"
-    description: "This is the description of the first flag."
-    bug: "a"
-    state: DISABLED
-    permission: READ_ONLY
-    trace {
-        source: "flags.declarations"
-        state: DISABLED
-        permission: READ_ONLY
-    }
-    container: "system"
-}
-"#;
-        let first = try_from_binary_proto_from_text_proto(text_proto).unwrap();
-
-        let text_proto = r#"
-parsed_flag {
-    package: "com.second"
-    name: "second"
-    namespace: "second_ns"
-    bug: "b"
-    description: "This is the description of the second flag."
-    state: ENABLED
-    permission: READ_WRITE
-    trace {
-        source: "flags.declarations"
-        state: DISABLED
-        permission: READ_ONLY
-    }
-    container: "system"
-}
-"#;
-        let second = try_from_binary_proto_from_text_proto(text_proto).unwrap();
-
-        let text_proto = r#"
-parsed_flag {
-    package: "com.second"
-    name: "second"
-    namespace: "second_ns"
-    bug: "b"
-    description: "This is the description of the second flag."
-    state: ENABLED
-    permission: READ_WRITE
-    trace {
-        source: "duplicate/flags.declarations"
-        state: DISABLED
-        permission: READ_ONLY
-    }
-}
-"#;
-        let second_duplicate = try_from_binary_proto_from_text_proto(text_proto).unwrap();
-
-        // bad cases
-
-        // two of the same flag with dedup disabled
-        let error = cache::merge(vec![first.clone(), first.clone()], false).unwrap_err();
-        assert_eq!(format!("{:?}", error), "bad parsed flags: duplicate flag com.first.first (defined in flags.declarations and flags.declarations)");
-
-        // two conflicting flags with dedup disabled
-        let error =
-            cache::merge(vec![second.clone(), second_duplicate.clone()], false).unwrap_err();
-        assert_eq!(format!("{:?}", error), "bad parsed flags: duplicate flag com.second.second (defined in flags.declarations and duplicate/flags.declarations)");
-
-        // two conflicting flags with dedup enabled
-        let error = cache::merge(vec![second.clone(), second_duplicate.clone()], true).unwrap_err();
-        assert_eq!(format!("{:?}", error), "bad parsed flags: duplicate flag com.second.second (defined in flags.declarations and duplicate/flags.declarations)");
-
-        // valid cases
-        assert!(cache::merge(vec![], false).unwrap().parsed_flag.is_empty());
-        assert!(cache::merge(vec![], true).unwrap().parsed_flag.is_empty());
-        assert_eq!(first, cache::merge(vec![first.clone()], false).unwrap());
-        assert_eq!(first, cache::merge(vec![first.clone()], true).unwrap());
-        assert_eq!(expected, cache::merge(vec![first.clone(), second.clone()], false).unwrap());
-        assert_eq!(expected, cache::merge(vec![first.clone(), second.clone()], true).unwrap());
-        assert_eq!(expected, cache::merge(vec![second.clone(), first.clone()], false).unwrap());
-        assert_eq!(expected, cache::merge(vec![second.clone(), first.clone()], true).unwrap());
-
-        // two identical flags with dedup enabled
-        assert_eq!(first, cache::merge(vec![first.clone(), first.clone()], true).unwrap());
     }
 }
