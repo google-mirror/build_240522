@@ -143,6 +143,11 @@ fn cli() -> Command {
                 .arg(Arg::new("dedup").long("dedup").num_args(0).action(ArgAction::SetTrue))
                 .arg(Arg::new("out").long("out").default_value("-")),
         )
+        .subcommand(
+            Command::new("dump-flags")
+                .arg(Arg::new("flags").long("flags").required(true))
+                .arg(Arg::new("out").long("out").default_value("-")),
+        )
 }
 
 fn get_required_arg<'a, T>(matches: &'a ArgMatches, arg_name: &str) -> Result<&'a T>
@@ -295,6 +300,12 @@ fn main() -> Result<()> {
             let input = open_zero_or_more_files(sub_matches, "cache")?;
             let dedup = get_required_arg::<bool>(sub_matches, "dedup")?;
             let output = commands::export_flags(input, *dedup)?;
+            let path = get_required_arg::<String>(sub_matches, "out")?;
+            write_output_to_file_or_stdout(path, &output)?;
+        }
+        Some(("dump-flags", sub_matches)) => {
+            let cache = open_single_file(sub_matches, "flags")?;
+            let output = commands::dump_flags(cache)?;
             let path = get_required_arg::<String>(sub_matches, "out")?;
             write_output_to_file_or_stdout(path, &output)?;
         }
