@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc7e5e90_12dc7be9",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4604,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-22T06:39:25Z",
+      "side": 1,
+      "message": "My purpose of this change was,\n- First, Soong builds the target module(microdroid vendor image)\n- Second, Makefile extract information(hashtree descriptor root digest) from that image.\n- Third, append that information into host\u0027s AVB property.\n\nMy change works normally, but it doesn\u0027t work when trying `m` right after `m clean`. I think my code tries to extract information before Soong builds the module. How can I set Soong module dependency in Makefile?",
+      "range": {
+        "startLine": 4604,
+        "startChar": 0,
+        "endLine": 4604,
+        "endChar": 36
+      },
+      "revId": "e42f83fcf3c250815c719c7ddab1c6cc3bd50618",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aae2fa6d_c434f317",
         "filename": "core/Makefile",
         "patchSetId": 2
