@@ -16,6 +16,24 @@
       "message": "Now that the root release config has landed, the aconfig flags are correctly set in the integration tests.",
       "revId": "7423cd72dab4ec48e9c656616ece6f2ddbd7bfa4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdf951cf_b365a960",
+        "filename": "tools/aconfig/tests/aconfig_force_read_only_mode_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2023-12-26T16:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb05bc7f_d2e73069",
+      "revId": "7423cd72dab4ec48e9c656616ece6f2ddbd7bfa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
