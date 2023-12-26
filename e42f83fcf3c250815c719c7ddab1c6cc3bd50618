@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "575129ef_d2204803",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4604,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-26T08:22:30Z",
+      "side": 1,
+      "message": "Self-resolved, Done.",
+      "parentUuid": "dc7e5e90_12dc7be9",
+      "range": {
+        "startLine": 4604,
+        "startChar": 0,
+        "endLine": 4604,
+        "endChar": 36
+      },
+      "revId": "e42f83fcf3c250815c719c7ddab1c6cc3bd50618",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aae2fa6d_c434f317",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-19T02:13:28Z",
       "side": 1,
       "message": "avbtool should be invoked as an action",
+      "range": {
+        "startLine": 4607,
+        "startChar": 33,
+        "endLine": 4607,
+        "endChar": 40
+      },
+      "revId": "e42f83fcf3c250815c719c7ddab1c6cc3bd50618",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1557aef_abc401b9",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 4607,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-26T08:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aae2fa6d_c434f317",
       "range": {
         "startLine": 4607,
         "startChar": 33,
