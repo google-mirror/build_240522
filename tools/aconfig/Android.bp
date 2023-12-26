@@ -87,6 +87,7 @@ rust_test_host {
 aconfig_declarations {
     name: "aconfig.test.flags",
     package: "com.android.aconfig.test",
+    container: "system",
     srcs: ["tests/test.aconfig"],
 }
 
