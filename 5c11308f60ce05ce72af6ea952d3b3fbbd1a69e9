@@ -16,6 +16,24 @@
       "message": "(note- waiting on b/317821168 to do a full test for this)",
       "revId": "5c11308f60ce05ce72af6ea952d3b3fbbd1a69e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c8bf95_2fc976c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-12-27T18:40:22Z",
+      "side": 1,
+      "message": "b/317821168#comment4",
+      "parentUuid": "840a84ca_ae203663",
+      "revId": "5c11308f60ce05ce72af6ea952d3b3fbbd1a69e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
