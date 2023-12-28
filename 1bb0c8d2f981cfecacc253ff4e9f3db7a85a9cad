@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e95e03b1_bbf105a2",
+        "filename": "tools/build_scripts/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2023-12-28T23:24:42Z",
+      "side": 1,
+      "message": "I made a bp file for this just in case but it would require an extra build command to build it in CI before it would be called, so I\u0027m leaning towards just calling the python file directly instead.",
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f60d2a24_2c424d12",
+        "filename": "tools/build_scripts/test_mapping_parser.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2023-12-28T23:24:42Z",
+      "side": 1,
+      "message": "This is all borrowed from g3 test_mapping code, need to make sure that\u0027s ok.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 22
+      },
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebdef038_222526df",
+        "filename": "tools/build_scripts/test_suites.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2023-12-28T23:24:42Z",
+      "side": 1,
+      "message": "I\u0027m debating whether to use args to pass these values in or to pull them in directly from the command line (essentially leave everything in `extra_targets` and pass it down directly to the build commands). I\u0027d need to parse out the dist dir as i need that in the script.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 41
+      },
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cf84e4e_3a84c843",
+        "filename": "tools/build_scripts/test_suites.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2023-12-28T23:24:42Z",
+      "side": 1,
+      "message": "These are also hardcoded into general-tests.mk here: https://cs.android.com/android/platform/superproject/main/+/main:build/make/core/tasks/general-tests.mk;l\u003d17?q\u003dgeneral-tests.mk",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 72
+      },
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
