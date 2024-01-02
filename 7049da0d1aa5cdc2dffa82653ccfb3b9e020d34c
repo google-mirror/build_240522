@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b666d600_36b9f9da",
+        "filename": "core/definitions.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-01-02T22:49:59Z",
+      "side": 1,
+      "message": "I think this is leftover from an attempt that used multiple soong module info json files, can we remove this?",
+      "revId": "7049da0d1aa5cdc2dffa82653ccfb3b9e020d34c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
