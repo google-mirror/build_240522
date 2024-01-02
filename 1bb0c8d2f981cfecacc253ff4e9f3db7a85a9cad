@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e4fc160_b169036a",
+        "filename": "tools/build_scripts/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-01-02T04:45:22Z",
+      "side": 1,
+      "message": "+1  Just make this a standalone script.  Don\u0027t do prebuilts, just make sure you turn off the .pyc generation by adding this to top of the executable one:\n\n```\nimport sys\nif __name__ \u003d\u003d \"__main__\":\n    sys.dont_write_bytecode \u003d True\n```",
+      "parentUuid": "e95e03b1_bbf105a2",
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f60d2a24_2c424d12",
         "filename": "tools/build_scripts/test_mapping_parser.py",
         "patchSetId": 1
@@ -43,6 +61,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c55fb14_a257b641",
+        "filename": "tools/build_scripts/test_mapping_parser.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-01-02T04:45:22Z",
+      "side": 1,
+      "message": "should be\n\n```\n  with open(change_info) as change_info_file:\n    change_info_contents \u003d json.load(change_info_file)\n```",
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebdef038_222526df",
         "filename": "tools/build_scripts/test_suites.py",
         "patchSetId": 1
@@ -59,6 +94,53 @@
         "startChar": 0,
         "endLine": 54,
         "endChar": 41
+      },
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c844d5_a9697637",
+        "filename": "tools/build_scripts/test_suites.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-01-02T04:45:22Z",
+      "side": 1,
+      "message": "What\u0027s it for?",
+      "parentUuid": "ebdef038_222526df",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 41
+      },
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aad810a2_9a2f6e33",
+        "filename": "tools/build_scripts/test_suites.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-01-02T04:45:22Z",
+      "side": 1,
+      "message": "should be `get_soong_var(\"HOST_OUT\")`",
+      "range": {
+        "startLine": 99,
+        "startChar": 30,
+        "endLine": 99,
+        "endChar": 52
       },
       "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"

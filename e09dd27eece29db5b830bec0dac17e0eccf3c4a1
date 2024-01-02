@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d21ba27_4f77f952",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-01-02T04:45:22Z",
+      "side": 1,
+      "message": "minor nits, but mostly looks good to me.\n\nAlso, can you put this in a new directory in build/make/ci (I\u0027ve been meaning to add it for a while, but this would be a good time to do it).\n\nAnd rename test_suites.py to just test_suites (so we have flexibility about the language in the CI GCL).",
+      "revId": "e09dd27eece29db5b830bec0dac17e0eccf3c4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
