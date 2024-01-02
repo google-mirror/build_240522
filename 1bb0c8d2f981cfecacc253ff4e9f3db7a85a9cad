@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2c59b1e_a5667f58",
+        "filename": "tools/build_scripts/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-02T18:56:18Z",
+      "side": 1,
+      "message": "Added the code, I want to just remove the bp in that case, is that fine?",
+      "parentUuid": "9e4fc160_b169036a",
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f60d2a24_2c424d12",
         "filename": "tools/build_scripts/test_mapping_parser.py",
         "patchSetId": 1
@@ -72,6 +90,24 @@
       "writtenOn": "2024-01-02T04:45:22Z",
       "side": 1,
       "message": "should be\n\n```\n  with open(change_info) as change_info_file:\n    change_info_contents \u003d json.load(change_info_file)\n```",
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfb3f2e0_635aa08a",
+        "filename": "tools/build_scripts/test_mapping_parser.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-02T18:56:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c55fb14_a257b641",
       "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -125,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9118897d_531a6616",
+        "filename": "tools/build_scripts/test_suites.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-02T18:56:18Z",
+      "side": 1,
+      "message": "dist dir is needed when building the soong_zip command as the output folder for the zip file. I can also pull these from the environment most likely if i were not to make them options.",
+      "parentUuid": "b7c844d5_a9697637",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 41
+      },
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aad810a2_9a2f6e33",
         "filename": "tools/build_scripts/test_suites.py",
         "patchSetId": 1
@@ -136,6 +196,30 @@
       "writtenOn": "2024-01-02T04:45:22Z",
       "side": 1,
       "message": "should be `get_soong_var(\"HOST_OUT\")`",
+      "range": {
+        "startLine": 99,
+        "startChar": 30,
+        "endLine": 99,
+        "endChar": 52
+      },
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23aae8aa_6db38dc4",
+        "filename": "tools/build_scripts/test_suites.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-02T18:56:18Z",
+      "side": 1,
+      "message": "added and created a variable with all the other ones since I need to join all these dumpvar commands into one later.",
+      "parentUuid": "aad810a2_9a2f6e33",
       "range": {
         "startLine": 99,
         "startChar": 30,
