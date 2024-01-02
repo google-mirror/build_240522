@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d967ca04_08dd4c61",
+        "filename": "ci/test_mapping_parser.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-02T22:32:09Z",
+      "side": 1,
+      "message": "Please move everything that you copied into its own file with a TODO to figure out how to deduplicate in the future. Having its own file makes it easier to update in the future. You can move your code into the `main` script.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 49
+      },
+      "revId": "53e95af6c1c33b54badb44406bac8a73f8051d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a26c1368_8a80459a",
+        "filename": "ci/test_mapping_parser.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-02T22:32:09Z",
+      "side": 1,
+      "message": "Make this a `frozenlist`.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 16
+      },
+      "revId": "53e95af6c1c33b54badb44406bac8a73f8051d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e452a59_b5c3d98c",
+        "filename": "ci/test_mapping_parser.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-02T22:32:09Z",
+      "side": 1,
+      "message": "Could we please make the parsing more explicit to avoid future pain? Might be worth asking around if there already is a parser.",
+      "range": {
+        "startLine": 129,
+        "startChar": 5,
+        "endLine": 129,
+        "endChar": 15
+      },
+      "revId": "53e95af6c1c33b54badb44406bac8a73f8051d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a441307d_c878b29d",
+        "filename": "ci/test_mapping_parser.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-02T22:32:09Z",
+      "side": 1,
+      "message": "Add a return and make it a `Set`.",
+      "range": {
+        "startLine": 155,
+        "startChar": 40,
+        "endLine": 155,
+        "endChar": 41
+      },
+      "revId": "53e95af6c1c33b54badb44406bac8a73f8051d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbc0e20f_7ea3ed3a",
+        "filename": "ci/test_mapping_parser.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-02T22:32:09Z",
+      "side": 1,
+      "message": "Return the files (makes it easier to read/test/etc).",
+      "range": {
+        "startLine": 161,
+        "startChar": 31,
+        "endLine": 161,
+        "endChar": 44
+      },
+      "revId": "53e95af6c1c33b54badb44406bac8a73f8051d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f977b60_308cd553",
+        "filename": "ci/test_mapping_parser.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-02T22:32:09Z",
+      "side": 1,
+      "message": "`find_changed_files` since you\u0027re not parsing.",
+      "range": {
+        "startLine": 161,
+        "startChar": 4,
+        "endLine": 161,
+        "endChar": 21
+      },
+      "revId": "53e95af6c1c33b54badb44406bac8a73f8051d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb4f3b15_6801a9fe",
+        "filename": "ci/test_suites",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-02T22:32:09Z",
+      "side": 1,
+      "message": "Could you please move this to a .py file? Reviewing it is a pain since there\u0027s no syntax highlighting. You can keep `test_suites` and call the Python script from there.\n\nI\u0027d also rename this to `build_test_suites`.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 49
+      },
+      "revId": "53e95af6c1c33b54badb44406bac8a73f8051d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
