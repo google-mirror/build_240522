@@ -16,6 +16,24 @@
       "message": "Do *we* still have products that aren\u0027t treble?\n\nI\u0027m actually seriously asking. Cole is working through sandboxing the genrules, and one thing I think we should do is enforce that no AOSP code accesses product specific code in the build sandboxing.",
       "revId": "fb1160d0b89f5c21609308a989eebdb79f152020",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daa7c5d2_4eec8305",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-02T21:45:53Z",
+      "side": 1,
+      "message": "yes, there are device-like targets that don\u0027t use Treble and one device that skips some of these options, see https://b.corp.google.com/issues/307369186/dependencies. I\u0027m in the process of removing them.\n\n\u003e no AOSP code accesses product specific code in the build sandboxing.\n\nThis would be nice, though there are a huge number of product configurations that are used in Android today, nearly 100 - so fixing the 3-4 Treble ones, you\u0027ll still have quite a task. https://cs.android.com/android/platform/superproject/main/+/main:build/soong/android/variable.go;l\u003d191;drc\u003db63d7b3af71b13d94f30f1d973d375a5fadfdd48",
+      "parentUuid": "025f6125_2a8725e5",
+      "revId": "fb1160d0b89f5c21609308a989eebdb79f152020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
