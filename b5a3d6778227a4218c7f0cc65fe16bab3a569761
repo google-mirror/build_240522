@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d668029_0f354e04",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-02T14:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "463fdbf8_b6590a01",
+      "revId": "b5a3d6778227a4218c7f0cc65fe16bab3a569761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edb13778_5af2e93c",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-12-22T09:45:05Z",
       "side": 1,
       "message": "ProtoParsedFlags (and the upcoming ProtoCache) guarantees that the flags are sorted by fully qualified name (\u003cpackage\u003e.\u003cname\u003e). Add an `assert!(stuff-is-sorted)` instead.\n\n(For invariants like \"something else in the code guarantees X\" I think assert!() or unwrap() is the right call; for things that depend on e.g. user input we should return an Err(..) instead)\n\nThis also us to change the type of parsed_flags to an iterator instead of forcing it to be a specific collection.",
+      "range": {
+        "startLine": 354,
+        "startChar": 4,
+        "endLine": 354,
+        "endChar": 56
+      },
+      "revId": "b5a3d6778227a4218c7f0cc65fe16bab3a569761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e247916_d5bfb2ee",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-02T14:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edb13778_5af2e93c",
       "range": {
         "startLine": 354,
         "startChar": 4,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72f9bc78_6a9318ce",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-02T14:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa603cb2_388b4672",
+      "range": {
+        "startLine": 358,
+        "startChar": 40,
+        "endLine": 358,
+        "endChar": 49
+      },
+      "revId": "b5a3d6778227a4218c7f0cc65fe16bab3a569761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4ef39d7_5ae8d5f2",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-12-22T09:45:05Z",
       "side": 1,
       "message": "I prefer the unwrap to be on line 680; that way we can also remove the assert on 681.",
+      "range": {
+        "startLine": 693,
+        "startChar": 27,
+        "endLine": 693,
+        "endChar": 36
+      },
+      "revId": "b5a3d6778227a4218c7f0cc65fe16bab3a569761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b4f18f1_2e4ebdce",
+        "filename": "tools/aconfig/src/commands.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-02T14:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4ef39d7_5ae8d5f2",
       "range": {
         "startLine": 693,
         "startChar": 27,
