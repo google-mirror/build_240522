@@ -22,6 +22,30 @@
       },
       "revId": "5833d0c458d8ce6bcf3da3b4b8c34c01675430e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b48852d_911fccea",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-01-02T22:01:36Z",
+      "side": 1,
+      "message": "The side effects of the `$(call copy-many-vintf-manifest-files-checked)` are needed, but I can remove the variable.",
+      "parentUuid": "6d4cc17a_9a61112c",
+      "range": {
+        "startLine": 547,
+        "startChar": 0,
+        "endLine": 547,
+        "endChar": 1
+      },
+      "revId": "5833d0c458d8ce6bcf3da3b4b8c34c01675430e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
