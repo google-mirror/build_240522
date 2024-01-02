@@ -160,6 +160,30 @@
       },
       "revId": "53e95af6c1c33b54badb44406bac8a73f8051d19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a83d31f9_c1d812e0",
+        "filename": "ci/test_suites",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-01-02T22:47:54Z",
+      "side": 1,
+      "message": "I had just asked him to NOT use the .py extension. It\u0027s because this script will be the API between CI and the build system, so we should keep our flexibility about what language it\u0027s written in.  I can totally see it changing.\n\nAnother option is to make this is a very small wrapper and put the logic elsewhere, which might actually not be a bad idea, because I can see there being a bunch of shared code between other of these types of scripts.",
+      "parentUuid": "eb4f3b15_6801a9fe",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 49
+      },
+      "revId": "53e95af6c1c33b54badb44406bac8a73f8051d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
