@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "025f6125_2a8725e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-01-02T04:26:46Z",
+      "side": 1,
+      "message": "Do *we* still have products that aren\u0027t treble?\n\nI\u0027m actually seriously asking. Cole is working through sandboxing the genrules, and one thing I think we should do is enforce that no AOSP code accesses product specific code in the build sandboxing.",
+      "revId": "fb1160d0b89f5c21609308a989eebdb79f152020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
