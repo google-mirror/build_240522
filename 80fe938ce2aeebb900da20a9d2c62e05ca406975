@@ -239,6 +239,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d163e51_88b7f79e",
+        "filename": "tools/aconfig/src/codegen/mod.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2024-01-03T20:54:15Z",
+      "side": 1,
+      "message": "Conceptually this is as different to other modes as the exported, so I think it makes sense to treat it as its own mode.",
+      "parentUuid": "60b67d64_ff729309",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 17
+      },
+      "revId": "80fe938ce2aeebb900da20a9d2c62e05ca406975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9fc9182_f03420f1",
         "filename": "tools/aconfig/src/codegen/rust.rs",
         "patchSetId": 3
