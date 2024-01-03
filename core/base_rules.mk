@@ -541,14 +541,13 @@ ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
 
       # Only set up copy rules once, even if another arch variant shares it
       my_vintf_new_pairs := $(filter-out $(ALL_VINTF_MANIFEST_FRAGMENTS_LIST),$(my_vintf_pairs))
+      my_vintf_new_installed := $(call copy-many-vintf-manifest-files-checked,$(my_vintf_new_pairs))
+
       ALL_VINTF_MANIFEST_FRAGMENTS_LIST += $(my_vintf_new_pairs)
 
-      ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
-        $(call copy-many-vintf-manifest-files-checked,$(my_vintf_new_pairs))
-        $(my_all_targets) : $(my_vintf_installed)
-        # Install fragments together with the target
-        $(LOCAL_INSTALLED_MODULE) : | $(my_vintf_installed)
-     endif
+      $(my_all_targets) : $(my_vintf_installed)
+      # Install fragments together with the target
+      $(LOCAL_INSTALLED_MODULE) : | $(my_vintf_installed)
     endif # my_vintf_fragments
 
     # Rule to install the module's companion init.rc.
@@ -580,14 +579,13 @@ ifneq (true,$(LOCAL_UNINSTALLABLE_MODULE))
       # Make sure we only set up the copy rules once, even if another arch variant
       # shares a common LOCAL_INIT_RC.
       my_init_rc_new_pairs := $(filter-out $(ALL_INIT_RC_INSTALLED_PAIRS),$(my_init_rc_pairs))
+      my_init_rc_new_installed := $(call copy-many-init-script-files-checked,$(my_init_rc_new_pairs))
+
       ALL_INIT_RC_INSTALLED_PAIRS += $(my_init_rc_new_pairs)
 
-      ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
-        $(call copy-many-init-script-files-checked,$(my_init_rc_new_pairs))
-        $(my_all_targets) : $(my_init_rc_installed)
-        # Install init_rc together with the target
-        $(LOCAL_INSTALLED_MODULE) : | $(my_init_rc_installed)
-      endif
+      $(my_all_targets) : $(my_init_rc_installed)
+      # Install init_rc together with the target
+      $(LOCAL_INSTALLED_MODULE) : | $(my_init_rc_installed)
     endif # my_init_rc
 
   endif # !LOCAL_IS_HOST_MODULE
