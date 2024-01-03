@@ -16,6 +16,24 @@
       "message": "Remove or uncomment",
       "revId": "490acf84cad539cc000b484acbad386975e55796",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "169e7f9f_c67288e8",
+        "filename": "core/tasks/module-info.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-01-03T00:07:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9966ae62_defccdea",
+      "revId": "490acf84cad539cc000b484acbad386975e55796",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
