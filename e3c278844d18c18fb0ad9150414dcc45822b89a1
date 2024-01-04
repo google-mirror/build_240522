@@ -16,6 +16,24 @@
       "message": "I can see a request for a BUILD_BROKEN flag for this, because they might box themselves into a corner without time to recover. But let\u0027s try without that for now.",
       "revId": "e3c278844d18c18fb0ad9150414dcc45822b89a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e506ec9_6e296ba2",
+        "filename": "core/local_current_sdk.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-01-04T09:12:50Z",
+      "side": 1,
+      "message": "That\u0027s a good point. Thank you. I will submit a new change on top of this before submitting this. That will make it easier for us to remove the escape match when we are confident that this hurts no one.",
+      "parentUuid": "208e1353_bc88206f",
+      "revId": "e3c278844d18c18fb0ad9150414dcc45822b89a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
