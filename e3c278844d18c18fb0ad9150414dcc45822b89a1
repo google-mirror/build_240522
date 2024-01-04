@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "208e1353_bc88206f",
+        "filename": "core/local_current_sdk.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-01-04T06:37:03Z",
+      "side": 1,
+      "message": "I can see a request for a BUILD_BROKEN flag for this, because they might box themselves into a corner without time to recover. But let\u0027s try without that for now.",
+      "revId": "e3c278844d18c18fb0ad9150414dcc45822b89a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
