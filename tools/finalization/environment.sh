@@ -8,6 +8,9 @@ export FINAL_PLATFORM_CODENAME='VanillaIceCream'
 export CURRENT_PLATFORM_CODENAME='VanillaIceCream'
 export FINAL_PLATFORM_CODENAME_JAVA='VANILLA_ICE_CREAM'
 export FINAL_PLATFORM_VERSION='15'
+# The compatibility matrix versions are bumped during vFRC
+export CURRENT_COMPATIBILITY_MATRIX_LEVEL='9'
+export FINAL_COMPATIBILITY_MATRIX_LEVEL='10'
 
 # Set arbitrary large values for CI.
 # SDK_VERSION needs to be <61 (lint/libs/lint-api/src/main/java/com/android/tools/lint/detector/api/ApiConstraint.kt)
