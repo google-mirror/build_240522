@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a089045_c964515e",
+        "filename": "tools/finalization/create-new-compat-matrix.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-05T22:49:40Z",
+      "side": 1,
+      "message": "license",
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fdace6f_9473003c",
+        "filename": "tools/finalization/create-new-compat-matrix.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-05T22:49:40Z",
+      "side": 1,
+      "message": "We shouldn\u0027t add specific scripts here. If we need a VINTF-specific script, this should go in another directory, and the vFRC finalization script could call it. Otherwise, we should add this into the vFRC script itself. Otherwise, there will be a million random scripts for different surface here.",
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54ad1ccf_77c81b76",
+        "filename": "tools/finalization/create-new-compat-matrix.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-05T22:49:40Z",
+      "side": 1,
+      "message": "a variable which is just an alias for another variable?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 51
+      },
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "880a3557_60352f94",
+        "filename": "tools/finalization/create-new-compat-matrix.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-05T22:49:40Z",
+      "side": 1,
+      "message": "current_file, etc",
+      "range": {
+        "startLine": 15,
+        "startChar": 62,
+        "endLine": 15,
+        "endChar": 97
+      },
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d28831e3_2f655fe3",
+        "filename": "tools/finalization/create-new-compat-matrix.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-05T22:49:40Z",
+      "side": 1,
+      "message": "```\necho \"\nline 1\nline 2\n\" \u003e\u003e $bp_file\n```",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 24
+      },
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de438081_8e13df4e",
+        "filename": "tools/finalization/create-new-compat-matrix.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-05T22:49:40Z",
+      "side": 1,
+      "message": "file a bug or add printing ability to bpmodify?",
+      "range": {
+        "startLine": 32,
+        "startChar": 6,
+        "endLine": 32,
+        "endChar": 10
+      },
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cdd2370_5e9ca3af",
+        "filename": "tools/finalization/environment.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-05T22:49:40Z",
+      "side": 1,
+      "message": "we\u0027ll need a vFRC-specific section, yeah",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 44
+      },
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
