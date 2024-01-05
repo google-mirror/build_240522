@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d14aa3f3_28f6ec07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-05T22:50:23Z",
+      "side": 1,
+      "message": "oh - you might also want to switch development to internal since that\u0027s where I guess we\u0027re doing it this year for finalization. It\u0027s diffed a bit already",
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a089045_c964515e",
         "filename": "tools/finalization/create-new-compat-matrix.sh",
         "patchSetId": 2
