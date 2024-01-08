@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63462700_98a0feac",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2024-01-08T18:42:36Z",
+      "side": 1,
+      "message": "Should we really be hiding errors here?",
+      "range": {
+        "startLine": 791,
+        "startChar": 132,
+        "endLine": 791,
+        "endChar": 144
+      },
+      "revId": "03dd0283bcc376095908a26b65f63bba1134b689",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
