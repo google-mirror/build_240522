@@ -259,6 +259,9 @@ A/B OTA specific options
 
   --vabc_cow_version
       Specify the VABC cow version to be used
+
+  --compression_factor
+      Specify the maximum block size to be compressed at once during OTA. supported options: 4k, 16k, 32k, 64k
 """
 
 from __future__ import print_function
@@ -331,6 +334,7 @@ OPTIONS.vabc_compression_param = None
 OPTIONS.security_patch_level = None
 OPTIONS.max_threads = None
 OPTIONS.vabc_cow_version = None
+OPTIONS.compression_factor = None
 
 
 POSTINSTALL_CONFIG = 'META/postinstall_config.txt'
@@ -1067,6 +1071,9 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
   if OPTIONS.max_threads:
     additional_args += ["--max_threads", OPTIONS.max_threads]
 
+  if OPTIONS.compression_factor:
+    additional_args += ["--compression_factor", OPTIONS.compression_factor]
+
   additional_args += ["--enable_zucchini=" +
                       str(OPTIONS.enable_zucchini).lower()]
   if OPTIONS.enable_puffdiff is not None:
@@ -1280,6 +1287,13 @@ def main(argv):
       else:
         raise ValueError("Cannot parse value %r for option %r - only "
                          "integers are allowed." % (a, o))
+    elif o in ("--compression_factor"):
+        values = ["4k", "16k", "32k", "64k"]
+        if a[:-1].isdigit() and a in values and a.endswith("k"):
+            OPTIONS.compression_factor = str(int(a[:-1]) * 1024)
+        else:
+            raise ValueError("Please specify value from following options: 4k, 16k, 32k, 64k")
+
     elif o == "--vabc_cow_version":
       if a.isdigit():
         OPTIONS.vabc_cow_version = a
@@ -1335,6 +1349,7 @@ def main(argv):
                                  "security_patch_level=",
                                  "max_threads=",
                                  "vabc_cow_version=",
+                                 "compression_factor=",
                              ], extra_option_handler=[option_handler, payload_signer.signer_options])
   common.InitLogging()
 
