@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58bf3a15_ee946666",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3250880
+      },
+      "writtenOn": "2024-01-08T01:10:25Z",
+      "side": 1,
+      "message": "Android 13 R6 Compatibility Test Suite (CTS) - ARM",
+      "revId": "9926178660e5f971a1b6f53fa1812e4cd9a27233",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
