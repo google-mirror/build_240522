@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91ea73e5_8adc1ab2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-01-08T23:22:41Z",
+      "side": 1,
+      "message": "kk, good to know. I\u0027ll move over there now.",
+      "parentUuid": "d14aa3f3_28f6ec07",
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a089045_c964515e",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-01-05T22:49:40Z",
       "side": 1,
       "message": "license",
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d71ab293_df8b707c",
+        "filename": "tools/finalization/create-new-compat-matrix.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-01-08T23:22:41Z",
+      "side": 1,
+      "message": "Done. No other script in this directory has a license.",
+      "parentUuid": "0a089045_c964515e",
       "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ffd4a0e_699de633",
+        "filename": "tools/finalization/create-new-compat-matrix.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-01-08T23:22:41Z",
+      "side": 1,
+      "message": "Is there a vFRC script already, or is that what you are working on now?\nI can move this one into `hardware/interfaces/compatibility_matrices`.",
+      "parentUuid": "6fdace6f_9473003c",
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54ad1ccf_77c81b76",
         "filename": "tools/finalization/create-new-compat-matrix.sh",
         "patchSetId": 2
@@ -65,6 +119,30 @@
       "writtenOn": "2024-01-05T22:49:40Z",
       "side": 1,
       "message": "a variable which is just an alias for another variable?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 51
+      },
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea9818f4_c2c84de8",
+        "filename": "tools/finalization/create-new-compat-matrix.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-01-08T23:22:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54ad1ccf_77c81b76",
       "range": {
         "startLine": 11,
         "startChar": 0,
@@ -98,6 +176,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3fb6f2f_522557a3",
+        "filename": "tools/finalization/create-new-compat-matrix.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-01-08T23:22:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "880a3557_60352f94",
+      "range": {
+        "startLine": 15,
+        "startChar": 62,
+        "endLine": 15,
+        "endChar": 97
+      },
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d28831e3_2f655fe3",
@@ -111,6 +213,30 @@
       "writtenOn": "2024-01-05T22:49:40Z",
       "side": 1,
       "message": "```\necho \"\nline 1\nline 2\n\" \u003e\u003e $bp_file\n```",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 24
+      },
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bffff57e_397d00e3",
+        "filename": "tools/finalization/create-new-compat-matrix.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-01-08T23:22:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d28831e3_2f655fe3",
       "range": {
         "startLine": 21,
         "startChar": 0,
@@ -144,6 +270,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1efddf9_21eab230",
+        "filename": "tools/finalization/create-new-compat-matrix.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-01-08T23:22:41Z",
+      "side": 1,
+      "message": "Yifan\u0027s CL aosp/2899371 will conveniently make it unnecessary!",
+      "parentUuid": "de438081_8e13df4e",
+      "range": {
+        "startLine": 32,
+        "startChar": 6,
+        "endLine": 32,
+        "endChar": 10
+      },
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cdd2370_5e9ca3af",
@@ -157,6 +307,30 @@
       "writtenOn": "2024-01-05T22:49:40Z",
       "side": 1,
       "message": "we\u0027ll need a vFRC-specific section, yeah",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 44
+      },
+      "revId": "5b6dd0727261d4eb6b45bfbf491948f640a5c507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a593170f_524d5a0a",
+        "filename": "tools/finalization/environment.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-01-08T23:22:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7cdd2370_5e9ca3af",
       "range": {
         "startLine": 11,
         "startChar": 0,
