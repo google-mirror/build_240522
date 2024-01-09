@@ -440,6 +440,9 @@ _product_single_value_vars += PRODUCT_ENABLE_UFFD_GC
 # specified we default to COW version 2 in update_engine for backwards compatibility
 _product_single_value_vars += PRODUCT_VIRTUAL_AB_COW_VERSION
 
+# Specifies maximum bytes to be compressed at once during ota. Options: 4k, 8k, 16k, 32k, 64k, 128k
+_product_single_value_vars += PRODUCT_VIRTUAL_AB_COMPRESSION_FACTOR
+
 # If set, determines whether the build system checks vendor seapp contexts violations.
 _product_single_value_vars += PRODUCT_CHECK_VENDOR_SEAPP_VIOLATIONS
 
