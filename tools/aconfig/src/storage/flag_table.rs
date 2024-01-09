@@ -295,8 +295,6 @@ mod tests {
         };
         assert_eq!(header, &expected_header);
 
-        println!("{:?}", &flag_table.as_ref().unwrap().nodes);
-
         let buckets: &Vec<Option<u32>> = &flag_table.as_ref().unwrap().buckets;
         let expected_bucket: Vec<Option<u32>> = vec![
             Some(98),
