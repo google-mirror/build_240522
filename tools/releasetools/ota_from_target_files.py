@@ -914,7 +914,7 @@ def GenerateAbOtaPackage(target_file, output_file, source_file=None):
     # can support the new format. Otherwise, fallback on older versions
     if not source_info.vabc_cow_version or not target_info.vabc_cow_version:
       logger.info("Source or Target doesn't have VABC_COW_VERSION specified, default to version 2")
-      OPTIONS.vabc_cow_version = 2
+    OPTIONS.vabc_cow_version = 2
     elif source_info.vabc_cow_version != target_info.vabc_cow_version:
       logger.info("Source and Target have different cow VABC_COW_VERSION specified, default to minimum version")
       OPTIONS.vabc_cow_version = min(source_info.vabc_cow_version, target_info.vabc_cow_version)
