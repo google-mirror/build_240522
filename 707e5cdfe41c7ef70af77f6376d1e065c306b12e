@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceae4073_2e70932a",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6132,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-01-10T00:51:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e16a585_a17a8874",
+      "range": {
+        "startLine": 6132,
+        "startChar": 0,
+        "endLine": 6132,
+        "endChar": 1
+      },
+      "revId": "707e5cdfe41c7ef70af77f6376d1e065c306b12e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "757b78ec_bac89c08",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-10T00:48:05Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 25,
+        "startChar": 35,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "707e5cdfe41c7ef70af77f6376d1e065c306b12e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "568a378d_966980d9",
+        "filename": "target/product/virtual_ab_ota/android_t_baseline.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-01-10T00:51:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "757b78ec_bac89c08",
       "range": {
         "startLine": 25,
         "startChar": 35,
