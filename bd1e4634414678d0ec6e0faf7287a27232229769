@@ -110,6 +110,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7564dfb_ced13d0b",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-10T20:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd3d33ed_89c6ff8d",
+      "range": {
+        "startLine": 67,
+        "startChar": 9,
+        "endLine": 67,
+        "endChar": 14
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33b1553b_4fa44071",
@@ -123,6 +147,30 @@
       "writtenOn": "2024-01-10T01:30:53Z",
       "side": 1,
       "message": "Won\u0027t you be incorrectly skipping entries without an explicit `host`?",
+      "range": {
+        "startLine": 76,
+        "startChar": 36,
+        "endLine": 76,
+        "endChar": 64
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "177b50b3_987d6469",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-10T20:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33b1553b_4fa44071",
       "range": {
         "startLine": 76,
         "startChar": 36,
@@ -156,6 +204,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cddf19f_8ec4a424",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-10T20:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1369f024_1d026e5f",
+      "range": {
+        "startLine": 81,
+        "startChar": 38,
+        "endLine": 81,
+        "endChar": 42
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a06cd92_f4c5d792",
@@ -169,6 +241,30 @@
       "writtenOn": "2024-01-10T01:30:53Z",
       "side": 1,
       "message": "Push into `find_changed_files`.",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 86,
+        "endChar": 48
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a674f51f_e559b32e",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-10T20:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a06cd92_f4c5d792",
       "range": {
         "startLine": 86,
         "startChar": 2,
@@ -225,6 +321,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88676b72_872e7961",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-10T20:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bd679f2_87a755dc",
+      "range": {
+        "startLine": 112,
+        "startChar": 4,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "032761c9_27f68e46",
@@ -238,6 +358,30 @@
       "writtenOn": "2024-01-10T01:30:53Z",
       "side": 1,
       "message": "Why isn\u0027t this part of `base_build_command`?",
+      "range": {
+        "startLine": 129,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 44
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b5c0afa_8b00d828",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-10T20:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "032761c9_27f68e46",
       "range": {
         "startLine": 129,
         "startChar": 4,
@@ -271,6 +415,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95074814_f4e40af4",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-10T20:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a082a3fa_f5e8e38d",
+      "range": {
+        "startLine": 132,
+        "startChar": 4,
+        "endLine": 132,
+        "endChar": 8
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fe5f773_dc0f1edf",
@@ -294,6 +462,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eb8fe0f_6626385c",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-10T20:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fe5f773_dc0f1edf",
+      "range": {
+        "startLine": 167,
+        "startChar": 2,
+        "endLine": 167,
+        "endChar": 15
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8e35169_f55bce5b",
@@ -307,6 +499,30 @@
       "writtenOn": "2024-01-10T01:30:53Z",
       "side": 1,
       "message": "`TODO(lucafarsi): Deduplicate from test_mapping_test_receiver.py.`",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 63
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9800e50c_21b168de",
+        "filename": "ci/test_mapping_module_retriever.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-10T20:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8e35169_f55bce5b",
       "range": {
         "startLine": 18,
         "startChar": 0,
