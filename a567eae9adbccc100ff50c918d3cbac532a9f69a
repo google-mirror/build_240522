@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c0f8fea_62b85b7c",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-01-10T18:24:45Z",
+      "side": 1,
+      "message": "note we still need delta_generator to parse this value",
+      "range": {
+        "startLine": 1017,
+        "startChar": 70,
+        "endLine": 1017,
+        "endChar": 99
+      },
+      "revId": "a567eae9adbccc100ff50c918d3cbac532a9f69a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
