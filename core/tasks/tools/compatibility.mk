@@ -26,9 +26,24 @@
 # Output variables:
 #   compatibility_zip: the path to the output zip file.
 
-test_suite_subdir := android-$(test_suite_name)
-out_dir := $(HOST_OUT)/$(test_suite_name)/$(test_suite_subdir)
-test_artifacts := $(COMPATIBILITY.$(test_suite_name).FILES)
+special_test_suites :=
+special_test_suites += mcts
+generated_test_artifacts := $(COMPATIBILITY.$(test_suite_name).FILES)
+test_suite_prefix := $(HOST_OUT)/$(test_suite_name)/android-$(test_suite_name)/
+has_prefix = $(filter $(test_suite_prefix)%,$(1))
+ifneq ($(filter $(special_test_suites),$(subst -, ,$(test_suite_name))),)
+	test_suite_subdir := android-mts
+	out_dir := $(HOST_OUT)/$(test_suite_name)/$(test_suite_subdir)
+	unique_test_artifacts := $(sort $(generated_test_artifacts))
+	test_artifacts_copy_pairs := \
+    $(foreach f,$(unique_test_artifacts),\
+      $(if $(call has_prefix,$(f)),$(f):$(out_dir)/$(patsubst $(test_suite_prefix)%,%,$(f))))
+	test_artifacts := $(call copy-many-files,$(test_artifacts_copy_pairs))
+else
+	test_suite_subdir := android-$(test_suite_name)
+	out_dir := $(HOST_OUT)/$(test_suite_name)/$(test_suite_subdir)
+	test_artifacts := $(generated_test_artifacts)
+endif
 test_tools := $(HOST_OUT_JAVA_LIBRARIES)/tradefed.jar \
   $(HOST_OUT_JAVA_LIBRARIES)/loganalysis.jar \
   $(HOST_OUT_JAVA_LIBRARIES)/compatibility-host-util.jar \
@@ -74,7 +89,16 @@ test_copied_tools := $(foreach t,$(test_tools) $(test_suite_prebuilt_tools), $(o
 
 
 # Include host shared libraries
-host_shared_libs := $(call copy-many-files, $(COMPATIBILITY.$(test_suite_name).HOST_SHARED_LIBRARY.FILES))
+generated_host_shared_libs := $(call copy-many-files, $(COMPATIBILITY.$(test_suite_name).HOST_SHARED_LIBRARY.FILES))
+ifneq ($(filter $(special_test_suites),$(subst -, ,$(test_suite_name))),)
+	unique_host_shared_libs := $(sort $(generated_host_shared_libs))
+	host_shared_libs_copy_pairs := \
+    $(foreach f,$(unique_host_shared_libs),\
+      $(if $(call has_prefix,$(f)),$(f):$(out_dir)/$(patsubst $(test_suite_prefix)%,%,$(f))))
+	host_shared_libs := $(call copy-many-files,$(host_shared_libs_copy_pairs))
+else
+	host_shared_libs := $(generated_host_shared_libs)
+endif
 
 $(if $(strip $(host_shared_libs)),\
   $(foreach p,$(COMPATIBILITY.$(test_suite_name).HOST_SHARED_LIBRARY.FILES),\
@@ -107,9 +131,9 @@ test_suite_notice_html := $(out_dir)/NOTICE.html
 compatibility_zip_deps += $(test_suite_notice_txt)
 compatibility_zip_resources += $(test_suite_notice_txt)
 
-compatibility_tests_list_zip := $(out_dir)-tests_list.zip
+compatibility_tests_list_zip := $(HOST_OUT)/$(test_suite_name)/android-$(test_suite_name)-tests_list.zip
 
-compatibility_zip := $(out_dir).zip
+compatibility_zip := $(HOST_OUT)/$(test_suite_name)/android-$(test_suite_name).zip
 $(compatibility_zip) : .KATI_IMPLICIT_OUTPUTS := $(compatibility_tests_list_zip)
 $(compatibility_zip): PRIVATE_OUT_DIR := $(out_dir)
 $(compatibility_zip): PRIVATE_TOOLS := $(test_tools) $(test_suite_prebuilt_tools)
