@@ -16,6 +16,24 @@
       "message": "git rm this (maybe .vscode should be in .gitignore?)",
       "revId": "8cf9e8ad1c3eeafb1758da209ea80d887ed1d79b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "430c781b_5e7a2e23",
+        "filename": "tools/releasetools/.vscode/settings.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-01-10T00:52:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c641d22c_992b254c",
+      "revId": "8cf9e8ad1c3eeafb1758da209ea80d887ed1d79b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
