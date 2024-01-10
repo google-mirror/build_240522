@@ -1,0 +1,343 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "348a0fdd_18290382",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "```\nAdd a script to optimize Test Mapping builds\n\nMove the test build command to a script that lives in-source and intended to be called by the Android CI build system.\n\nThis script optimizes the build when change information is available by only building relevant test modules. More specifically, only \u0027affected\u0027 test modules listed in Test Mapping configuration files are built.\n\nUsing this script is expected to reduce build times and generate a smaller `general-tests.zip` file which had increased to over 30 GB.\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 6
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "353e39b3_4b83c4e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "Is this the exact command that someone can try out?",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 24
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9080e69d_81c9f893",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "t",
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c09ec1ad_44962c4c",
+        "filename": "ci/build_test_suites",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "Why not make this a shell script that calls Python with `PYTHONDONTWRITEBYTECODE`?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd3d33ed_89c6ff8d",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "group_name",
+      "range": {
+        "startLine": 67,
+        "startChar": 9,
+        "endLine": 67,
+        "endChar": 14
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33b1553b_4fa44071",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "Won\u0027t you be incorrectly skipping entries without an explicit `host`?",
+      "range": {
+        "startLine": 76,
+        "startChar": 36,
+        "endLine": 76,
+        "endChar": 64
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1369f024_1d026e5f",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "pathlib.Path",
+      "range": {
+        "startLine": 81,
+        "startChar": 38,
+        "endLine": 81,
+        "endChar": 42
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a06cd92_f4c5d792",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "Push into `find_changed_files`.",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 86,
+        "endChar": 48
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bd679f2_87a755dc",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "Could you please sort the definitions in topological/call order from top to bottom?",
+      "range": {
+        "startLine": 112,
+        "startChar": 4,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0be414a_d5829936",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "Could you please break this down to smaller functions for easier reviewing?",
+      "range": {
+        "startLine": 112,
+        "startChar": 4,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "032761c9_27f68e46",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "Why isn\u0027t this part of `base_build_command`?",
+      "range": {
+        "startLine": 129,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 44
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a082a3fa_f5e8e38d",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "Please don\u0027t `exit` from a function. Consider throwing from `run_command` if that makes things easier.",
+      "range": {
+        "startLine": 132,
+        "startChar": 4,
+        "endLine": 132,
+        "endChar": 8
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fe5f773_dc0f1edf",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "`zip_command`",
+      "range": {
+        "startLine": 167,
+        "startChar": 2,
+        "endLine": 167,
+        "endChar": 15
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8e35169_f55bce5b",
+        "filename": "ci/test_mapping_module_retriever.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "`TODO(lucafarsi): Deduplicate from test_mapping_test_receiver.py.`",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 63
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26ed5f41_7eda5912",
+        "filename": "ci/test_mapping_module_retriever.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-10T01:30:53Z",
+      "side": 1,
+      "message": "I don\u0027t see the code to handle `file_patterns`.",
+      "range": {
+        "startLine": 24,
+        "startChar": 7,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
