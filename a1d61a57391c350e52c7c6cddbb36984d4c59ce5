@@ -16,6 +16,24 @@
       "message": "Another thing to mention here is that some of these are not available in aosp, they\u0027re git_main only, so I might need to split this CL up into aosp and git_main versions (which is something we\u0027re gonna have to deal with at some point anyway cause this is all gonna be branch specific.",
       "revId": "a1d61a57391c350e52c7c6cddbb36984d4c59ce5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e1ce690_65ecf833",
+        "filename": "ci/test_mapping_parser.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-11T23:37:13Z",
+      "side": 1,
+      "message": "I suggest keeping the same script and passing the internal-only arguments from the Busytown GCL.",
+      "parentUuid": "cfb57973_8b235d45",
+      "revId": "a1d61a57391c350e52c7c6cddbb36984d4c59ce5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
