@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ecc99d7_71e1be25",
+        "filename": "tools/aconfig/src/storage/flag_value.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-01-11T14:54:20Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by RustFormatter: To run the same command the RustFormatter uses try: rustfmt --edition 2021 --config-path {path to  default  rustfmt.toml file} --check --color never tools/aconfig/src/storage/flag_value.rs. This will generate a diff between your file and a ...\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nTo run the same command the RustFormatter uses try: rustfmt --edition 2021 --config-path {path to  default  rustfmt.toml file} --check --color never tools/aconfig/src/storage/flag_value.rs. This will generate a diff between your file and a formatted version of your file. To automatically apply these changes to your file try: rustfmt --edition 2021 --config-path {path to  default  rustfmt.toml file} tools/aconfig/src/storage/flag_value.rs.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "23a531436c51180663723b573b47f77d5a334aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "becfbc57_cba8ef46",
+        "filename": "tools/aconfig/src/storage/flag_value.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-01-11T14:54:20Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n                        .get(pf.name())\n                        .ok_or(anyhow!(format!(\"missing flag id for {}\", pf.name())))?;\n\n                    list.booleans[start_offset + (*fid as usize)] \u003d\n                        pf.state() \u003d\u003d ProtoFlagState::ENABLED;\n                }\n            }",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 0
+      },
+      "revId": "23a531436c51180663723b573b47f77d5a334aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
