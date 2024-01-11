@@ -16,6 +16,24 @@
       "message": "We could also add it to `required:` in Android.bp under libandroid_runtime, right?",
       "revId": "b2ea62d07c7881bec0340f9fe25eb70fd9e6c7dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "562260dd_4f842d53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2024-01-11T20:00:37Z",
+      "side": 1,
+      "message": "Well, it would work, but I don\u0027t think it\u0027s a good idea because libandroid_runtime doesn\u0027t actually require libvintf_jni.",
+      "parentUuid": "1e283773_8972f27e",
+      "revId": "b2ea62d07c7881bec0340f9fe25eb70fd9e6c7dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
