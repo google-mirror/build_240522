@@ -34,6 +34,24 @@
       "parentUuid": "1e283773_8972f27e",
       "revId": "b2ea62d07c7881bec0340f9fe25eb70fd9e6c7dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9611c60a_27eb4d67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-01-11T20:02:36Z",
+      "side": 1,
+      "message": "IMO `required` means that, if libandroid_runtime is installed, then libvintf_jni should be installed so it can be lazily loaded. I think this statement is true, so I think putting it in `required` makes sense.\n\nThis is just a suggestion though.",
+      "parentUuid": "562260dd_4f842d53",
+      "revId": "b2ea62d07c7881bec0340f9fe25eb70fd9e6c7dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
