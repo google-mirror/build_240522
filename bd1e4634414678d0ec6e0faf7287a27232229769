@@ -161,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d61aa11b_73db8961",
+        "filename": "ci/build_test_suites",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-01-11T02:55:50Z",
+      "side": 1,
+      "message": "It\u0027s probably better to go back to the python version. The dance to get to the right directory so you can run the script from anywhere is annoying.  And shell has a thousand little things to do wrong.",
+      "parentUuid": "b2f699a1_79194d6c",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd3d33ed_89c6ff8d",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 8
