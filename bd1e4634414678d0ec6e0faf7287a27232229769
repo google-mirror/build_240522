@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9631f993_e3e731d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-11T00:34:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "348a0fdd_18290382",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 6
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "353e39b3_4b83c4e4",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-10T01:30:53Z",
       "side": 1,
       "message": "Is this the exact command that someone can try out?",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 24
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7d206bb_69b7d82a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-11T00:34:02Z",
+      "side": 1,
+      "message": "Some user input required.",
+      "parentUuid": "353e39b3_4b83c4e4",
       "range": {
         "startLine": 14,
         "startChar": 6,
@@ -77,6 +125,30 @@
       "writtenOn": "2024-01-10T01:30:53Z",
       "side": 1,
       "message": "Why not make this a shell script that calls Python with `PYTHONDONTWRITEBYTECODE`?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2f699a1_79194d6c",
+        "filename": "ci/build_test_suites",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-11T00:34:02Z",
+      "side": 1,
+      "message": "I\u0027ve changed it to this, but now we\u0027re not getting the print output from the script.",
+      "parentUuid": "c09ec1ad_44962c4c",
       "range": {
         "startLine": 15,
         "startChar": 0,
@@ -345,6 +417,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2df848b8_d45c9b10",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-11T00:34:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0be414a_d5829936",
+      "range": {
+        "startLine": 112,
+        "startChar": 4,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "032761c9_27f68e46",
@@ -546,6 +642,30 @@
       "writtenOn": "2024-01-10T01:30:53Z",
       "side": 1,
       "message": "I don\u0027t see the code to handle `file_patterns`.",
+      "range": {
+        "startLine": 24,
+        "startChar": 7,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "bd1e4634414678d0ec6e0faf7287a27232229769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eb8a803_78ccbd57",
+        "filename": "ci/test_mapping_module_retriever.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-11T00:34:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26ed5f41_7eda5912",
       "range": {
         "startLine": 24,
         "startChar": 7,
