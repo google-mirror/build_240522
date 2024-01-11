@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e283773_8972f27e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-01-11T19:47:26Z",
+      "side": 1,
+      "message": "We could also add it to `required:` in Android.bp under libandroid_runtime, right?",
+      "revId": "b2ea62d07c7881bec0340f9fe25eb70fd9e6c7dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
