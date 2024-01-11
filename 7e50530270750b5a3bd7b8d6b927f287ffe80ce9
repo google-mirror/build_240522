@@ -229,6 +229,29 @@
       },
       "revId": "7e50530270750b5a3bd7b8d6b927f287ffe80ce9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7dfb5b_ed259744",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-11T01:34:58Z",
+      "side": 1,
+      "message": "Future work: Push into a `general-tests-minimal` build target.",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 70
+      },
+      "revId": "7e50530270750b5a3bd7b8d6b927f287ffe80ce9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
