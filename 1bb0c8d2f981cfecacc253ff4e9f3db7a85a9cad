@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d49f9ef_4064e36d",
+        "filename": "tools/build_scripts/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-12T00:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2c59b1e_a5667f58",
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f60d2a24_2c424d12",
@@ -67,6 +85,30 @@
       "writtenOn": "2023-12-28T23:24:42Z",
       "side": 1,
       "message": "This is all borrowed from g3 test_mapping code, need to make sure that\u0027s ok.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 22
+      },
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11ba436a_519410b7",
+        "filename": "tools/build_scripts/test_mapping_parser.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-12T00:10:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f60d2a24_2c424d12",
       "range": {
         "startLine": 10,
         "startChar": 0,
@@ -183,6 +225,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "054d4474_7b6d7883",
+        "filename": "tools/build_scripts/test_suites.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-12T00:10:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9118897d_531a6616",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 41
+      },
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aad810a2_9a2f6e33",
@@ -243,6 +309,30 @@
       "writtenOn": "2023-12-28T23:24:42Z",
       "side": 1,
       "message": "These are also hardcoded into general-tests.mk here: https://cs.android.com/android/platform/superproject/main/+/main:build/make/core/tasks/general-tests.mk;l\u003d17?q\u003dgeneral-tests.mk",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 72
+      },
+      "revId": "1bb0c8d2f981cfecacc253ff4e9f3db7a85a9cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b75a3c8_6f6ab429",
+        "filename": "tools/build_scripts/test_suites.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-12T00:10:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6cf84e4e_3a84c843",
       "range": {
         "startLine": 119,
         "startChar": 0,
