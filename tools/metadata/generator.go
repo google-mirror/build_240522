@@ -77,18 +77,9 @@ func readFileToString(filePath string) string {
 	return string(data)
 }
 
-func writeEmptyOutputProto(outputFile string, metadataRule string) {
+func writeNewlineToOutputFile(outputFile string) {
 	file, err := os.Create(outputFile)
-	if err != nil {
-		log.Fatal(err)
-	}
-	var message proto.Message
-	if metadataRule == "test_spec" {
-		message = &test_spec_proto.TestSpec{}
-	} else if metadataRule == "code_metadata" {
-		message = &code_metadata_proto.CodeMetadata{}
-	}
-	data, err := proto.Marshal(message)
+	data := "\n"
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -101,8 +92,8 @@ func writeEmptyOutputProto(outputFile string, metadataRule string) {
 }
 
 func processTestSpecProtobuf(
-	filePath string, ownershipMetadataMap *sync.Map, keyLocks *keyToLocksMap,
-	errCh chan error, wg *sync.WaitGroup,
+		filePath string, ownershipMetadataMap *sync.Map, keyLocks *keyToLocksMap,
+		errCh chan error, wg *sync.WaitGroup,
 ) {
 	defer wg.Done()
 
@@ -130,7 +121,7 @@ func processTestSpecProtobuf(
 				if metadata.GetTrendyTeamId() != existing.GetTrendyTeamId() {
 					errCh <- fmt.Errorf(
 						"Conflicting trendy team IDs found for %s at:\n%s with teamId"+
-							": %s,\n%s with teamId: %s",
+								": %s,\n%s with teamId: %s",
 						key,
 						metadata.GetPath(), metadata.GetTrendyTeamId(), existing.GetPath(),
 						existing.GetTrendyTeamId(),
@@ -156,8 +147,8 @@ func processTestSpecProtobuf(
 
 // processCodeMetadataProtobuf processes CodeMetadata protobuf files
 func processCodeMetadataProtobuf(
-	filePath string, ownershipMetadataMap *sync.Map, sourceFileMetadataMap *sync.Map, keyLocks *keyToLocksMap,
-	errCh chan error, wg *sync.WaitGroup,
+		filePath string, ownershipMetadataMap *sync.Map, sourceFileMetadataMap *sync.Map, keyLocks *keyToLocksMap,
+		errCh chan error, wg *sync.WaitGroup,
 ) {
 	defer wg.Done()
 
@@ -191,8 +182,8 @@ func processCodeMetadataProtobuf(
 				if attributes.TeamID != existing.TeamID && (!attributes.MultiOwnership || !existing.MultiOwnership) {
 					errCh <- fmt.Errorf(
 						"Conflict found for source file %s covered at %s with team ID: %s. Existing team ID: %s and path: %s."+
-							" If multi-ownership is required, multiOwnership should be set to true in all test_spec modules using this target. "+
-							"Multiple-ownership in general is discouraged though as it make infrastructure around android relying on this information pick up a random value when it needs only one.",
+								" If multi-ownership is required, multiOwnership should be set to true in all test_spec modules using this target. "+
+								"Multiple-ownership in general is discouraged though as it make infrastructure around android relying on this information pick up a random value when it needs only one.",
 						srcFile, internalMetadata.GetPath(), attributes.TeamID, existing.TeamID, existing.Path,
 					)
 					srcFileLock.Unlock()
@@ -244,7 +235,7 @@ func main() {
 	inputFileData := strings.TrimRight(readFileToString(*inputFile), "\n")
 	filePaths := strings.Split(inputFileData, " ")
 	if len(filePaths) == 1 && filePaths[0] == "" {
-		writeEmptyOutputProto(*outputFile, *rule)
+		writeNewlineToOutputFile(*outputFile)
 		return
 	}
 	ownershipMetadataMap := &sync.Map{}
