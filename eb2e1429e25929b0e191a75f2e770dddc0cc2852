@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22bb27c5_991b9775",
+        "filename": "tools/aconfig/src/storage/flag_value.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-12T13:44:27Z",
+      "side": 1,
+      "message": "I think so, will update in another cl.",
+      "parentUuid": "1b8dc6e2_b6018a16",
+      "range": {
+        "startLine": 43,
+        "startChar": 30,
+        "endLine": 43,
+        "endChar": 33
+      },
+      "revId": "eb2e1429e25929b0e191a75f2e770dddc0cc2852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bde8d1e4_258fbfc1",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ced80ee4_d72bd07e",
+        "filename": "tools/aconfig/src/storage/flag_value.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-12T13:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bde8d1e4_258fbfc1",
+      "range": {
+        "startLine": 96,
+        "startChar": 21,
+        "endLine": 96,
+        "endChar": 79
+      },
+      "revId": "eb2e1429e25929b0e191a75f2e770dddc0cc2852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b5a30df_0cf439ba",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-01-12T07:11:53Z",
       "side": 1,
       "message": "in my experience, unit tests simplify this as\n\n`let flag_value_list \u003d create_test_flag_value_list().unwrap();`\n\nSame comment for the other occurrences of this pattern in this file.",
+      "range": {
+        "startLine": 170,
+        "startChar": 59,
+        "endLine": 173,
+        "endChar": 0
+      },
+      "revId": "eb2e1429e25929b0e191a75f2e770dddc0cc2852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3292e763_59817573",
+        "filename": "tools/aconfig/src/storage/flag_value.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-12T13:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b5a30df_0cf439ba",
       "range": {
         "startLine": 170,
         "startChar": 59,
