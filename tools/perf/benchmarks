@@ -130,6 +130,11 @@ def Snapshot(filename):
 def Clean():
     """Remove the out directory."""
     def remove_out():
+        # Workaround that lets metrics uploader settle, since it writes data to out.
+        # Builds that use this are already slow, so this won't have a huge impact on
+        # run time.
+        time.sleep(30)
+        # </hack>
         if os.path.exists("out"):
             shutil.rmtree("out")
     return Change(label="Remove out", change=remove_out, undo=lambda: None)
