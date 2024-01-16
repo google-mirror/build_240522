@@ -164,6 +164,10 @@ $(call add_soong_config_var_value,ANDROID,release_avf_enable_multi_tenant_microd
 $(call add_soong_config_var_value,ANDROID,release_avf_enable_remote_attestation,$(RELEASE_AVF_ENABLE_REMOTE_ATTESTATION))
 $(call add_soong_config_var_value,ANDROID,release_avf_enable_vendor_modules,$(RELEASE_AVF_ENABLE_VENDOR_MODULES))
 
+# TODO: Use a meaningful name
+# TODO: This example uses a boolean. If more than two states are desired, a string can be used.
+$(call soong_config_set, cts_shim_apex, use_stable_prebuilts, $(RELEASE_CTS_SHIM_APEX_SOME_MEANINGFUL_FLAG_NAME))
+
 $(call add_soong_config_var_value,ANDROID,release_binder_death_recipient_weak_from_jni,$(RELEASE_BINDER_DEATH_RECIPIENT_WEAK_FROM_JNI))
 
 # Enable system_server optimizations by default unless explicitly set or if
