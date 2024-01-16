@@ -130,8 +130,20 @@ def Snapshot(filename):
 def Clean():
     """Remove the out directory."""
     def remove_out():
+        # Workaround that lets rbe metrics uploader, since it insists on writing logs
+        # after the build is done.  Builds that use this are already slow, so this won't
+        # be a huge deal, and is outside the measurement of the benchmarks themselves.
+        for sleep in [0, 10, 30, 60]:
+            if os.path.exists("out"):
+                shutil.rmtree("out", ignore_errors=True)
+            if not os.path.exists("out"):
+                return
+            print(f"Couldn't remove out directory, sleeping for {sleep}s before trying again.")
+            time.sleep(sleep)
         if os.path.exists("out"):
-            shutil.rmtree("out")
+            report_error(f"Unable to remove out dir.")
+            raise FatalError()
+
     return Change(label="Remove out", change=remove_out, undo=lambda: None)
 
 
