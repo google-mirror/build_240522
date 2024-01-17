@@ -70,6 +70,30 @@
       },
       "revId": "c39f3781b865d73f3a887d21d5e86b3ed61381ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b4d8941_da799075",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-17T15:25:24Z",
+      "side": 1,
+      "message": "I tested in git main and non aosp target. Not sure if you can set RELEASE_CREATE_ACONFIG_STORAGE_FILE to true in command line, I modified the value in build/release/build_flags.scl file to true.",
+      "parentUuid": "a4495580_92d75842",
+      "range": {
+        "startLine": 124,
+        "startChar": 8,
+        "endLine": 124,
+        "endChar": 43
+      },
+      "revId": "c39f3781b865d73f3a887d21d5e86b3ed61381ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
