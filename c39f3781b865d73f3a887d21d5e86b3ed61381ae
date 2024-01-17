@@ -166,6 +166,30 @@
       },
       "revId": "c39f3781b865d73f3a887d21d5e86b3ed61381ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2b97b8c_7b9c4c83",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-17T21:36:18Z",
+      "side": 1,
+      "message": "Found the issue. Will submit the fix.",
+      "parentUuid": "0f5a03a9_bdb569c4",
+      "range": {
+        "startLine": 124,
+        "startChar": 8,
+        "endLine": 124,
+        "endChar": 43
+      },
+      "revId": "c39f3781b865d73f3a887d21d5e86b3ed61381ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
