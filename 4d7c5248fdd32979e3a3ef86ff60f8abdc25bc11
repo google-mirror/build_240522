@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f8fbff7_04fcd56c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2024-01-17T20:16:46Z",
+      "side": 1,
+      "message": "Once I get the rest of the bug addressed, I\u0027ll revisit LOCAL_SOONG_MODULE_INFO_JSON and work through how to re-enable it without losing the aconfig flags.",
+      "revId": "4d7c5248fdd32979e3a3ef86ff60f8abdc25bc11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
