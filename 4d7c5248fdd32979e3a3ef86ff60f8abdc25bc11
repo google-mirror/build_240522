@@ -16,6 +16,23 @@
       "message": "Once I get the rest of the bug addressed, I\u0027ll revisit LOCAL_SOONG_MODULE_INFO_JSON and work through how to re-enable it without losing the aconfig flags.",
       "revId": "4d7c5248fdd32979e3a3ef86ff60f8abdc25bc11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dab3aa21_84635ecf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-01-17T20:29:52Z",
+      "side": 1,
+      "message": "This won\u0027t work, the module that set this don\u0027t include the rest of the information necessary for Make to generate `module-info.json`.",
+      "revId": "4d7c5248fdd32979e3a3ef86ff60f8abdc25bc11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
