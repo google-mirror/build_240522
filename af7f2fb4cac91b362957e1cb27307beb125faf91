@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4838bb7_65929d7a",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1890,
+      "author": {
+        "id": 1982145
+      },
+      "writtenOn": "2024-01-17T18:25:13Z",
+      "side": 1,
+      "message": "Will this (the if) still change $?\nI might do `status\u003d$?`\n\ni.e. what do you think this will do:\n```\n#!/bin/bash\n\nfalse\nif [[ $? -eq 0 ]] ;then\n    echo \"pass 1\"\nfi\nif [[ $? -eq 0 ]] ;then\n    echo \"pass 2\"\nfi\n```\n\n\nSee: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:build/make/envsetup.sh;l\u003d132?q\u003dlang:shell%20%5C$%5C%3F\u0026sq\u003dgit:googleplex-android%2Fplatform%2Fsuperproject%2Fmain@main\n\nBe sure to test by doing: \n  `gcert --lifetime\u003d1s`\n  and ensure the LOAS message is still printed.",
+      "revId": "af7f2fb4cac91b362957e1cb27307beb125faf91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
