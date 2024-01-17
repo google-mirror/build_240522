@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d175933_7612bdd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-01-17T19:18:49Z",
+      "side": 1,
+      "message": "Concept LGTM as long as it solves the original issue.",
+      "revId": "af7f2fb4cac91b362957e1cb27307beb125faf91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a4838bb7_65929d7a",
         "filename": "envsetup.sh",
         "patchSetId": 2
