@@ -51,6 +51,24 @@
       "parentUuid": "a4838bb7_65929d7a",
       "revId": "af7f2fb4cac91b362957e1cb27307beb125faf91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11c210f9_c365bd70",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1890,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-01-17T22:51:47Z",
+      "side": 1,
+      "message": "Can you also test `echo $?` after the build failure to make sure you get non-zero?",
+      "parentUuid": "2601c030_b9b557e7",
+      "revId": "af7f2fb4cac91b362957e1cb27307beb125faf91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
