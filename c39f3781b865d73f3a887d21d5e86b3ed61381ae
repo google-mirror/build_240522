@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bddc8cf_7b449116",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-01-17T09:29:49Z",
+      "side": 1,
+      "message": "I don\u0027t see any flag.map files under out/ after `RELEASE_CREATE_ACONFIG_STORAGE_FILE\u003dtrue m`. What am I missing?\n\nShould we put these files in a separate dir $(partition)/etc/flags instead? The file names don\u0027t make it apparent that the files belong together (and package.map doesn\u0027t hint about its relationship to flags at all).",
+      "range": {
+        "startLine": 124,
+        "startChar": 8,
+        "endLine": 124,
+        "endChar": 43
+      },
+      "revId": "c39f3781b865d73f3a887d21d5e86b3ed61381ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
