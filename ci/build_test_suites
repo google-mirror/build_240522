@@ -1,3 +1,6 @@
+pwd
+prebuilts/build-tools/linux-x86/bin/py3-cmd build/make/ci/build_test_suites.py "$@"
+exit 0
 # Copyright 2024, The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");

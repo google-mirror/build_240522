@@ -282,3 +282,6 @@ def get_soong_var(var: str) -> str:
 
 def main(argv):
   build_test_suites(sys.argv)
+
+if __name__ == '__main__':
+  build_test_suites(sys.argv)
