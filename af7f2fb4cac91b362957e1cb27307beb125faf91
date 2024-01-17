@@ -69,6 +69,24 @@
       "parentUuid": "2601c030_b9b557e7",
       "revId": "af7f2fb4cac91b362957e1cb27307beb125faf91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d4b0c38_85de33bd",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1890,
+      "author": {
+        "id": 1982145
+      },
+      "writtenOn": "2024-01-17T22:57:27Z",
+      "side": 1,
+      "message": "Kevin, FYI, the other way I do this is with ||\nIt will only do the right-hand-side of the || if the left-hand-side fails.\ni.e.\n\nThe first should print \"non-zero-status\" and the second shouldn\u0027t\nm food || echo non-zero-status\nm nothing|| echo non-zero-status\n\nYou can also validate expected results of || with true/false commands.\n\n% false || echo hi\nhi\n% true || echo hi\nBut I also used to add $? to my prompt so I could see the result too 😊",
+      "parentUuid": "11c210f9_c365bd70",
+      "revId": "af7f2fb4cac91b362957e1cb27307beb125faf91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
