@@ -118,6 +118,30 @@
       },
       "revId": "c39f3781b865d73f3a887d21d5e86b3ed61381ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d23cb0ef_d8120f7d",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-01-17T16:02:28Z",
+      "side": 1,
+      "message": "If I apply this in build/release\n\n```\n$ git diff\ndiff --git a/build_config/trunk_versions.scl b/build_config/trunk_versions.scl\nindex 4be11a3e187..c3e7fc6bc1f 100644\n--- a/build_config/trunk_versions.scl\n+++ b/build_config/trunk_versions.scl\n@@ -28,4 +28,5 @@ platform_version_flags \u003d [\n     value(\"RELEASE_PLATFORM_VERSION_ALL_PREVIEW_CODENAMES\", \"UpsideDownCake,VanillaIceCream\"),\n     value(\"RELEASE_PLATFORM_VERSION_LAST_STABLE\", \"14\"),\n     value(\"RELEASE_PLATFORM_VNDK_VERSION\", \"35\"),\n+    value(\"RELEASE_CREATE_ACONFIG_STORAGE_FILE\", \"true\"),\n ]\n```\n\nand `m` I get\n\n```\n[ 17% 8/45 27s remaining] Copy: out/target/product/oriole/product/etc/flag.map\nFAILED: out/target/product/oriole/product/etc/flag.map\n/bin/bash -c \"(rm -f out/target/product/oriole/product/etc/flag.map ) \u0026\u0026 (cp \\\"out/target/product/oriole/obj/FLAGS/product/flag.map\\\" \\\"out/target/product/oriole/product/etc/flag.map\\\" )\"\ncp: bad \u0027out/target/product/oriole/obj/FLAGS/product/flag.map\u0027: No such file or directory\n[ 20% 9/45 27s remaining] Copy: out/target/product/oriole/product/etc/package.map\nFAILED: out/target/product/oriole/product/etc/package.map\n```\n\nand similar issues for the other partitions. Not sure if this is an error in my setup or not, but I would expect not -- setting the flag should make the build do the right thing.\n\nDennis can you debug this please?",
+      "parentUuid": "9f6104a3_66419eb6",
+      "range": {
+        "startLine": 124,
+        "startChar": 8,
+        "endLine": 124,
+        "endChar": 43
+      },
+      "revId": "c39f3781b865d73f3a887d21d5e86b3ed61381ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
