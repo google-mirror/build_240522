@@ -33,6 +33,24 @@
       "message": "This won\u0027t work, the module that set this don\u0027t include the rest of the information necessary for Make to generate `module-info.json`.",
       "revId": "4d7c5248fdd32979e3a3ef86ff60f8abdc25bc11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6593ff2c_d8b382ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2024-01-17T22:29:41Z",
+      "side": 1,
+      "message": "Good to know.",
+      "parentUuid": "dab3aa21_84635ecf",
+      "revId": "4d7c5248fdd32979e3a3ef86ff60f8abdc25bc11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
