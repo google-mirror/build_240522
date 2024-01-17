@@ -38,6 +38,7 @@ REQUIRED_MODULES = frozenset(
 
 def build_test_suites(argv):
   args = parse_args(argv)
+  test_thing = get_soong_var('HOST_OUT_TESTCASES', args.target_release)
 
   if not args.change_info:
     build_everything(args)
@@ -83,7 +84,7 @@ def build_affected_modules(args: argparse.Namespace):
 
   run_command(build_command)
 
-  zip_build_outputs(modules_to_build, args.dist_dir)
+  zip_build_outputs(modules_to_build, args.dist_dir, args.target_release)
 
 
 def base_build_command(args: argparse.Namespace) -> list:
@@ -102,12 +103,13 @@ def base_build_command(args: argparse.Namespace) -> list:
   return build_command
 
 
-def run_command(args: list[str]) -> str:
+def run_command(args: list[str], env = os.environ) -> str:
   result = subprocess.run(
       args=args,
       text=True,
       capture_output=True,
       check=False,
+      env=env
   )
   # If the process failed, print its stdout and propagate the exception.
   if not result.returncode == 0:
@@ -201,17 +203,17 @@ def matches_file_patterns(
   return False
 
 
-def zip_build_outputs(modules_to_build: Set[Text], dist_dir: Text):
+def zip_build_outputs(modules_to_build: Set[Text], dist_dir: Text, target_release: Text):
   src_top = os.environ.get('TOP', os.getcwd())
 
   # Call dumpvars to get the necessary things.
   # TODO(lucafarsi): Don't call soong_ui 4 times for this, --dumpvars-mode can
   # do it but it requires parsing.
-  host_out_testcases = get_soong_var('HOST_OUT_TESTCASES')
-  target_out_testcases = get_soong_var('TARGET_OUT_TESTCASES')
-  product_out = get_soong_var('PRODUCT_OUT')
-  soong_host_out = get_soong_var('SOONG_HOST_OUT')
-  host_out = get_soong_var('HOST_OUT')
+  host_out_testcases = get_soong_var('HOST_OUT_TESTCASES', target_release)
+  target_out_testcases = get_soong_var('TARGET_OUT_TESTCASES', target_release)
+  product_out = get_soong_var('PRODUCT_OUT', target_release)
+  soong_host_out = get_soong_var('SOONG_HOST_OUT', target_release)
+  host_out = get_soong_var('HOST_OUT', target_release)
 
   # Call the class to package the outputs.
   # TODO(lucafarsi): Move this code into a replaceable class.
@@ -270,9 +272,11 @@ def zip_build_outputs(modules_to_build: Set[Text], dist_dir: Text):
   run_command(zip_command)
 
 
-def get_soong_var(var: str) -> str:
+def get_soong_var(var: str, target_release: str) -> str:
+  new_env = os.environ.copy()
+  new_env['TARGET_RELEASE'] = target_release
   value = run_command(
-      ['./build/soong/soong_ui.bash', '--dumpvar-mode', '--abs', var]
+      ['./build/soong/soong_ui.bash', '--dumpvar-mode', '--abs', var], env=new_env
   ).strip()
   if not value:
     raise RuntimeError('Necessary soong variable ' + var + ' not found.')
@@ -281,4 +285,7 @@ def get_soong_var(var: str) -> str:
 
 
 def main(argv):
+  build_test_suites(sys.argv)
+
+if __name__ == '__main__':
   build_test_suites(sys.argv)
