@@ -46,6 +46,30 @@
       },
       "revId": "c39f3781b865d73f3a887d21d5e86b3ed61381ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4495580_92d75842",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-01-17T15:22:28Z",
+      "side": 1,
+      "message": "From an AOSP build synced just before the build:\n\n```\ncroot \u0026\u0026 rm -rf out \u0026\u0026 source build/envsetup.sh \u0026\u0026 lunch aosp_oriole-trunk-eng \u0026\u0026 RELEASE_CREATE_ACONFIG_STORAGE_FILE\u003dtrue m \u0026\u0026 fd --hidden package.map out\n```\n\nNo `package.map` files found. How did you test this?",
+      "parentUuid": "86f886f4_14f307bb",
+      "range": {
+        "startLine": 124,
+        "startChar": 8,
+        "endLine": 124,
+        "endChar": 43
+      },
+      "revId": "c39f3781b865d73f3a887d21d5e86b3ed61381ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
