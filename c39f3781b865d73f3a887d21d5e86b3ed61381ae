@@ -22,6 +22,30 @@
       },
       "revId": "c39f3781b865d73f3a887d21d5e86b3ed61381ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86f886f4_14f307bb",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-17T13:39:35Z",
+      "side": 1,
+      "message": "Are you just seeing package.map? Can you make sure the aconfig repo has all the latest changes in your internal main. Otherwise, it is a bug.",
+      "parentUuid": "7bddc8cf_7b449116",
+      "range": {
+        "startLine": 124,
+        "startChar": 8,
+        "endLine": 124,
+        "endChar": 43
+      },
+      "revId": "c39f3781b865d73f3a887d21d5e86b3ed61381ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
