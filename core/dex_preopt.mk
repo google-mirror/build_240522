@@ -57,6 +57,7 @@ my_boot_image_module :=
 # Build the boot.zip which contains the boot jars and their compilation output
 # We can do this only if preopt is enabled and if the product uses libart config (which sets the
 # default properties for preopting).
+# At the time of writing, this is only for ART Cloud.
 ifeq ($(WITH_DEXPREOPT), true)
 ifeq ($(PRODUCT_USES_DEFAULT_ART_CONFIG), true)
 
@@ -96,6 +97,7 @@ boot_images := $(subst :,$(space),$(DEXPREOPT_IMAGE_LOCATIONS_ON_DEVICE$(DEXPREO
 boot_image_arg := $(subst $(space),:,$(patsubst /%,%,$(boot_images)))
 
 boot_zip_metadata_txt := $(dir $(boot_zip))boot_zip/METADATA.txt
+$(boot_zip_metadata_txt): $(uffd_gc_flag_txt)
 $(boot_zip_metadata_txt):
 	rm -f $@
 	echo "booclasspath = $(booclasspath_arg)" >> $@
