@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e520ed5b_175419f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-18T20:33:54Z",
+      "side": 1,
+      "message": "Adding Colin Cross as code owner as they were the one who approved mtectrl in aosp/2197576, and this CL is following the same approach.",
+      "revId": "f145aaeee74fdd17232a157339d62599f1ce31ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
