@@ -287,6 +287,13 @@ endif
 endif
 endif
 
+# Do this early because sysprop.mk depends on BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC.
+ifeq (default,$(ENABLE_UFFD_GC))
+intermediates := $(call intermediates-dir-for,PACKAGING,check_vintf_all)
+BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC := $(intermediates)/kernel_version_for_uffd_gc.txt
+intermediates :=
+endif # ENABLE_UFFD_GC
+
 include $(BUILD_SYSTEM)/sysprop.mk
 
 # ----------------------------------------------------------------
@@ -5252,7 +5259,7 @@ $(warning Neither INSTALLED_KERNEL_TARGET nor INSTALLED_BOOTIMAGE_TARGET is defi
     (3) extracting kernel configuration and defining BOARD_KERNEL_CONFIG_FILE and \
         BOARD_KERNEL_VERSION manually; or \
     (4) unsetting PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS manually.)
-# Clear their values to indicate that these two files does not exist.
+# Clear the value to indicate that the file does not exist.
 BUILT_KERNEL_CONFIGS_FILE :=
 BUILT_KERNEL_VERSION_FILE :=
 endif
@@ -5261,6 +5268,34 @@ my_decompress_tools :=
 my_board_extracted_kernel :=
 
 endif # PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS
+
+ifeq (default,$(ENABLE_UFFD_GC))
+
+ifneq (,$(BUILT_KERNEL_VERSION_FILE))
+$(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC): $(BUILT_KERNEL_VERSION_FILE)
+$(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC):
+	cp $(BUILT_KERNEL_VERSION_FILE) $(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC)
+else
+# Temporarily make uffd_gc_utils.py happy, to avoid breaking too many builds.
+# TODO(jiakaiz): Make this fail hard.
+$(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC):
+	echo $$'\
+Unable to determine UFFD GC flag because the kernel version is not available and\n\
+PRODUCT_ENABLE_UFFD_GC is "default".\n\
+You can fix this by:\n\
+  1. [Recommended] Making the kernel version available.\n\
+    (1). Set PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS to "true".\n\
+    (2). If you are still getting this message after doing so, see the warning about\n\
+         PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS in the build logs.\n\
+  or\n\
+  2. Explicitly setting PRODUCT_ENABLE_UFFD_GC to "true" or "false" based on the kernel version.\n\
+    (1). Set PRODUCT_ENABLE_UFFD_GC to "true" if the kernel is a GKI kernel and is android12-5.4\n\
+         or above, or a non-GKI kernel that supports userfaultfd(2) and MREMAP_DONTUNMAP.\n\
+    (2). Set PRODUCT_ENABLE_UFFD_GC to "false" otherwise.'\
+	  && echo '<no-kernel>' > $@
+endif # BUILT_KERNEL_VERSION_FILE
+
+endif # ENABLE_UFFD_GC == "default"
 
 # -- Check VINTF compatibility of build.
 # Skip partial builds; only check full builds. Only check if:
