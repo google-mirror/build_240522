@@ -25,6 +25,9 @@ python_binary_host {
 python_binary_host {
   name: "post_process_props",
   srcs: ["post_process_props.py"],
+  libs: [
+    "uffd_gc_utils",
+  ],
 }
 
 python_test_host {
@@ -33,6 +36,9 @@ python_test_host {
   srcs: [
     "post_process_props.py",
     "test_post_process_props.py",
+  ],
+  libs: [
+    "uffd_gc_utils",
   ],
   test_config: "post_process_props_unittest.xml",
   test_suites: ["general-tests"],
