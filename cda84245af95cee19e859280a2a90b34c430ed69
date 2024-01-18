@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "132ca395_e847d557",
+        "filename": "tools/perf/benchmarks",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-01-18T00:45:42Z",
+      "side": 1,
+      "message": "From memory, I think this directory might not actually be removable too. We might have to just remove the contents.",
+      "revId": "cda84245af95cee19e859280a2a90b34c430ed69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
