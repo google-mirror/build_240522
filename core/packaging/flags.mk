@@ -110,12 +110,15 @@ $(strip $(1))/target: $(ACONFIG) $(strip $(5))
 	mkdir -p $$(PRIVATE_OUT_DIR)
 	$$(if $$(PRIVATE_IN), \
 		$$(ACONFIG) create-storage --container "" --out $$(PRIVATE_OUT_DIR) \
-			$$(addprefix --cache ,$$(PRIVATE_IN)), \
+			$$(addprefix --cache ,$$(PRIVATE_IN)) > $$(PRIVATE_OUT_DIR)/target 2>&1, \
 	)
-	echo -n > $$(PRIVATE_OUT_DIR)/target
+	touch $$(PRIVATE_OUT_DIR)/target
 $(strip $(1))/package.map: $(strip $(1))/target
+	touch $(strip $(1))/package.map
 $(strip $(1))/flag.map: $(strip $(1))/target
+	touch $(strip $(1))/flag.map
 $(strip $(1))/flag.val: $(strip $(1))/target
+	touch $(strip $(1))/flag.val
 $(call copy-one-file, $(strip $(1))/package.map, $(2))
 $(call copy-one-file, $(strip $(1))/flag.map, $(3))
 $(call copy-one-file, $(strip $(1))/flag.val, $(4))
@@ -125,7 +128,7 @@ ifeq ($(RELEASE_CREATE_ACONFIG_STORAGE_FILE),true)
 $(foreach partition, $(_FLAG_PARTITIONS), \
 	$(eval aconfig_storage_package_map.$(partition) := $(PRODUCT_OUT)/$(partition)/etc/package.map) \
 	$(eval aconfig_storage_flag_map.$(partition) := $(PRODUCT_OUT)/$(partition)/etc/flag.map) \
-	$(eval aconfig_storage_falg_value.$(partition) := $(PRODUCT_OUT)/$(partition)/etc/flag.val) \
+	$(eval aconfig_storage_flag_val.$(partition) := $(PRODUCT_OUT)/$(partition)/etc/flag.val) \
 	$(eval $(call generate-partition-aconfig-storage-file, \
 				$(TARGET_OUT_FLAGS)/$(partition), \
 				$(aconfig_storage_package_map.$(partition)), \
