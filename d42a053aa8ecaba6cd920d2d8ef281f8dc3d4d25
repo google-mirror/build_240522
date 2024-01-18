@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff92c234_2fb0d2ce",
+        "filename": "ci/build_test_suites",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-01-18T00:07:38Z",
+      "side": 1,
+      "message": "@hzalek@google.com @fabiancanas@google.com changed to use the prebuilt python binary since the one on the build bots is too old, PTAL. Tested with ABTD and got a successful build (with some other changes that i\u0027m going to put up for review in a second).",
+      "revId": "d42a053aa8ecaba6cd920d2d8ef281f8dc3d4d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
