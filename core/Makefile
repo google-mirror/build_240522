@@ -287,6 +287,17 @@ endif
 endif
 endif
 
+# Do this early because sysprop.mk depends on BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC.
+ifeq (default,$(ENABLE_UFFD_GC))
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+ifeq ($(PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS),true)
+intermediates := $(call intermediates-dir-for,PACKAGING,check_vintf_all)
+BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC := $(intermediates)/kernel_version_for_uffd_gc.txt
+intermediates :=
+endif # PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS
+endif # !TARGET_BUILD_UNBUNDLED
+endif # ENABLE_UFFD_GC
+
 include $(BUILD_SYSTEM)/sysprop.mk
 
 # ----------------------------------------------------------------
@@ -5242,6 +5253,13 @@ endif # my_board_extracted_kernel
 
 ifeq ($(my_board_extracted_kernel),true)
 $(call dist-for-goals, droid_targets, $(BUILT_KERNEL_VERSION_FILE))
+
+ifdef BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC
+$(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC): $(BUILT_KERNEL_VERSION_FILE)
+$(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC):
+	cp $(BUILT_KERNEL_VERSION_FILE) $(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC)
+endif #BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC
+
 else
 $(warning Neither INSTALLED_KERNEL_TARGET nor INSTALLED_BOOTIMAGE_TARGET is defined when \
     PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS  is true. Information about the updated kernel \
@@ -5252,9 +5270,17 @@ $(warning Neither INSTALLED_KERNEL_TARGET nor INSTALLED_BOOTIMAGE_TARGET is defi
     (3) extracting kernel configuration and defining BOARD_KERNEL_CONFIG_FILE and \
         BOARD_KERNEL_VERSION manually; or \
     (4) unsetting PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS manually.)
-# Clear their values to indicate that these two files does not exist.
+# Clear the value to indicate that the file does not exist.
 BUILT_KERNEL_CONFIGS_FILE :=
 BUILT_KERNEL_VERSION_FILE :=
+
+ifdef BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC
+# Temporarily make uffd_gc_utils.py happy, to avoid breaking too many builds.
+# TODO(jiakaiz): Make this fail hard.
+$(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC):
+	echo '<no-kernel>' > $@
+endif #BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC
+
 endif
 
 my_decompress_tools :=
