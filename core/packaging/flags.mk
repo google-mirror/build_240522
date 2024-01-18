@@ -117,15 +117,18 @@ $(strip $(1))/package.map: $(strip $(1))/target
 $(strip $(1))/flag.map: $(strip $(1))/target
 $(strip $(1))/flag.val: $(strip $(1))/target
 $(call copy-one-file, $(strip $(1))/package.map, $(2))
+	echo -n > $(strip $(1))/package.map
 $(call copy-one-file, $(strip $(1))/flag.map, $(3))
+	echo -n > $(strip $(1))/flag.map
 $(call copy-one-file, $(strip $(1))/flag.val, $(4))
+	echo -n > $(strip $(1))/flag.val
 endef
 
 ifeq ($(RELEASE_CREATE_ACONFIG_STORAGE_FILE),true)
 $(foreach partition, $(_FLAG_PARTITIONS), \
 	$(eval aconfig_storage_package_map.$(partition) := $(PRODUCT_OUT)/$(partition)/etc/package.map) \
 	$(eval aconfig_storage_flag_map.$(partition) := $(PRODUCT_OUT)/$(partition)/etc/flag.map) \
-	$(eval aconfig_storage_falg_value.$(partition) := $(PRODUCT_OUT)/$(partition)/etc/flag.val) \
+	$(eval aconfig_storage_flag_val.$(partition) := $(PRODUCT_OUT)/$(partition)/etc/flag.val) \
 	$(eval $(call generate-partition-aconfig-storage-file, \
 				$(TARGET_OUT_FLAGS)/$(partition), \
 				$(aconfig_storage_package_map.$(partition)), \
