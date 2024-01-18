@@ -287,6 +287,16 @@ endif
 endif
 endif
 
+# Do this early because sysprop.mk depends on BUILT_KERNEL_VERSION_FILE.
+ifeq (,$(TARGET_BUILD_UNBUNDLED))
+ifeq ($(PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS),true)
+intermediates := $(call intermediates-dir-for,PACKAGING,check_vintf_all)
+BUILT_KERNEL_CONFIGS_FILE := $(intermediates)/kernel_configs.txt
+BUILT_KERNEL_VERSION_FILE := $(intermediates)/kernel_version.txt
+intermediates :=
+endif # PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS
+endif # !TARGET_BUILD_UNBUNDLED
+
 include $(BUILD_SYSTEM)/sysprop.mk
 
 # ----------------------------------------------------------------
@@ -5165,9 +5175,6 @@ check_vintf_vendor_deps :=
 # -- Kernel version and configurations.
 ifeq ($(PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS),true)
 
-BUILT_KERNEL_CONFIGS_FILE := $(intermediates)/kernel_configs.txt
-BUILT_KERNEL_VERSION_FILE := $(intermediates)/kernel_version.txt
-
 my_board_extracted_kernel :=
 
 # Tools for decompression that is not in PATH.
@@ -5252,9 +5259,12 @@ $(warning Neither INSTALLED_KERNEL_TARGET nor INSTALLED_BOOTIMAGE_TARGET is defi
     (3) extracting kernel configuration and defining BOARD_KERNEL_CONFIG_FILE and \
         BOARD_KERNEL_VERSION manually; or \
     (4) unsetting PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS manually.)
-# Clear their values to indicate that these two files does not exist.
+# Temporarily make uffd_gc_utils.py happy, to avoid breaking too many builds.
+# TODO(jiakaiz): Make this fail hard.
+$(BUILT_KERNEL_VERSION_FILE):
+	echo '<no-kernel>' > $@
+# Clear the value to indicate that the file does not exist.
 BUILT_KERNEL_CONFIGS_FILE :=
-BUILT_KERNEL_VERSION_FILE :=
 endif
 
 my_decompress_tools :=
