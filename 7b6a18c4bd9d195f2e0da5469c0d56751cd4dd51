@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e8827d8_d124cc1e",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 10
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1947766
+      },
+      "writtenOn": "2024-01-18T23:54:55Z",
+      "side": 1,
+      "message": "Note: This will be updated to `bootclasspath` namespace in main in a subsequent change, as the namespace have been fixed there.",
+      "revId": "7b6a18c4bd9d195f2e0da5469c0d56751cd4dd51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
