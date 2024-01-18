@@ -91,6 +91,11 @@ define generate-common-build-props
 
 endef
 
+maybe_kernel_version_file :=
+ifeq (default,$(ENABLE_UFFD_GC))
+  maybe_kernel_version_file := $(BUILT_KERNEL_VERSION_FILE)
+endif
+
 # Rule for generating <partition>/[etc/]build.prop file
 #
 # $(1): partition name
@@ -124,7 +129,8 @@ $(if $(filter true,$(BUILD_BROKEN_DUP_SYSPROP)),\
     $(eval _option := --allow-dup)\
 )
 
-$(2): $(POST_PROCESS_PROPS) $(INTERNAL_BUILD_ID_MAKEFILE) $(3) $(6)
+$(2): PRIVATE_MAYBE_KERNEL_VERSION_FILE := $(maybe_kernel_version_file)
+$(2): $(POST_PROCESS_PROPS) $(INTERNAL_BUILD_ID_MAKEFILE) $(3) $(6) $(maybe_kernel_version_file)
 	$(hide) echo Building $$@
 	$(hide) mkdir -p $$(dir $$@)
 	$(hide) rm -f $$@ && touch $$@
@@ -148,7 +154,10 @@ endif
 	        echo "$$(line)" >> $$@;\
 	    )\
 	)
-	$(hide) $(POST_PROCESS_PROPS) $$(_option) --sdk-version $(PLATFORM_SDK_VERSION) $$@ $(5)
+	$(hide) $(POST_PROCESS_PROPS) $$(_option) \
+	  --sdk-version $(PLATFORM_SDK_VERSION) \
+	  --kernel-version-file "$$(PRIVATE_MAYBE_KERNEL_VERSION_FILE)" \
+	  $$@ $(5)
 	$(hide) $(foreach file,$(strip $(6)),\
 	    if [ -f "$(file)" ]; then\
 	        cat $(file) >> $$@;\
@@ -573,3 +582,5 @@ ALL_INSTALLED_BUILD_PROP_FILES := \
 define is-build-prop
 $(if $(findstring $1,$(ALL_INSTALLED_BUILD_PROP_FILES)),Y)
 endef
+
+maybe_kernel_version_file :=
