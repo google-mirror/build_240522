@@ -70,6 +70,24 @@
       "parentUuid": "3d04ca92_44cd05fd",
       "revId": "fb732b65601c760afe641a30f3e0a0ee25600493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1048bae5_7247750e",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-01-19T17:02:35Z",
+      "side": 1,
+      "message": "In this case, with this exact code I think it\u0027s fine actually because of the dependency of flag.val on $(1)/target.  There\u0027s a guaranteed ordering. But the problem is if that changes somehow, it\u0027s possible for the aconfig command to touch the file after the touch command. That\u0027ll make the dependency out of date the next time the build runs, and it\u0027ll redo the packaging steps after this, which actually are big, such as rebuilding the filesystem images.\n\nSo even though it\u0027s technically working, this is fragile and nobody will remember this detail. Aconfig is really fast, so I don\u0027t think it\u0027s worth trying to optimize it.  If this were like javac running on the framework we might think about hacking, but in this case the extra time won\u0027t be measurable, so it\u0027s better to do the clean thing.",
+      "parentUuid": "6160853f_9c80690a",
+      "revId": "fb732b65601c760afe641a30f3e0a0ee25600493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
