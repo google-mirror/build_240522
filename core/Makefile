@@ -5276,8 +5276,7 @@ $(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC): $(BUILT_KERNEL_VERSION_FILE)
 $(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC):
 	cp $(BUILT_KERNEL_VERSION_FILE) $(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC)
 else
-# Temporarily make uffd_gc_utils.py happy, to avoid breaking too many builds.
-# TODO(jiakaiz): Make this fail hard.
+# Fail the build if the kernel version file is used.
 $(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC):
 	echo $$'\
 Unable to determine UFFD GC flag because the kernel version is not available and\n\
@@ -5292,7 +5291,7 @@ You can fix this by:\n\
     (1). Set PRODUCT_ENABLE_UFFD_GC to "true" if the kernel is a GKI kernel and is android12-5.4\n\
          or above, or a non-GKI kernel that supports userfaultfd(2) and MREMAP_DONTUNMAP.\n\
     (2). Set PRODUCT_ENABLE_UFFD_GC to "false" otherwise.'\
-	  && echo '<no-kernel>' > $@
+	  && false
 endif # BUILT_KERNEL_VERSION_FILE
 
 endif # ENABLE_UFFD_GC == "default"
