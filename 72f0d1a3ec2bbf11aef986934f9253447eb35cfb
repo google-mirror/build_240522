@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12e88cf7_d0d6d1e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-01-19T12:57:21Z",
+      "side": 1,
+      "message": "Before these changes are ready, I\u0027d like to get this reviewed this first.",
+      "revId": "72f0d1a3ec2bbf11aef986934f9253447eb35cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91e93f6c_99ce289a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-01-19T12:57:21Z",
+      "side": 1,
+      "message": "Before these changes are ready, I\u0027d like to get this reviewed first.",
+      "revId": "72f0d1a3ec2bbf11aef986934f9253447eb35cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
