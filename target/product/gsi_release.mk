@@ -90,3 +90,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 # Window Extensions
 $(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)
+
+# A GSI is to be mixed with different boot images. That means we can't determine
+# the kernel version when building a GSI.
+# Assume the device supports UFFD. If it doesn't, the ART runtime will fall back
+# to CC, and odrefresh will regenerate core dexopt artifacts on the first boot,
+# so this is okay.
+PRODUCT_ENABLE_UFFD_GC := true
