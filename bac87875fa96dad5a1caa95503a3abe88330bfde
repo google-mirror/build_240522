@@ -33,6 +33,24 @@
       "message": "nit: could rewrite this in one line, without the `?`, as:\n```\nPackageTable::new(container, \u0026packages).map(|t| t.as_bytes())\n```",
       "revId": "bac87875fa96dad5a1caa95503a3abe88330bfde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de67e72c_61f9b49f",
+        "filename": "tools/aconfig/src/storage/mod.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-01-19T19:07:55Z",
+      "side": 1,
+      "message": "Same for the other match cases.",
+      "parentUuid": "741f05ed_cf81a351",
+      "revId": "bac87875fa96dad5a1caa95503a3abe88330bfde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
