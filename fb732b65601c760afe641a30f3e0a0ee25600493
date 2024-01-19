@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92c7aa7e_d5ec830a",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-01-19T15:43:25Z",
+      "side": 1,
+      "message": "I don\u0027t understand the logic here. What does creating these files do?",
+      "revId": "fb732b65601c760afe641a30f3e0a0ee25600493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
