@@ -5275,10 +5275,9 @@ BUILT_KERNEL_CONFIGS_FILE :=
 BUILT_KERNEL_VERSION_FILE :=
 
 ifdef BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC
-# Temporarily make uffd_gc_utils.py happy, to avoid breaking too many builds.
-# TODO(jiakaiz): Make this fail hard.
-$(BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC):
-	echo '<no-kernel>' > $@
+# Fail the build if the kernel version file is used.
+$(BUILT_KERNEL_VERSION_FILE):
+	echo 'Cannot determine kernel version. See the warning above' && false
 endif #BUILT_KERNEL_VERSION_FILE_FOR_UFFD_GC
 
 endif
