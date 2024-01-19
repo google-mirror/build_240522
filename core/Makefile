@@ -5259,10 +5259,9 @@ $(warning Neither INSTALLED_KERNEL_TARGET nor INSTALLED_BOOTIMAGE_TARGET is defi
     (3) extracting kernel configuration and defining BOARD_KERNEL_CONFIG_FILE and \
         BOARD_KERNEL_VERSION manually; or \
     (4) unsetting PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS manually.)
-# Temporarily make uffd_gc_utils.py happy, to avoid breaking too many builds.
-# TODO(jiakaiz): Make this fail hard.
+# Fail the build if the kernel version file is used.
 $(BUILT_KERNEL_VERSION_FILE):
-	echo '<no-kernel>' > $@
+	echo 'Cannot determine kernel version. See the warning above' && false
 # Clear the value to indicate that the file does not exist.
 BUILT_KERNEL_CONFIGS_FILE :=
 endif
