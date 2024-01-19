@@ -106,6 +106,24 @@
       "parentUuid": "1048bae5_7247750e",
       "revId": "fb732b65601c760afe641a30f3e0a0ee25600493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b748619c_334847c8",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-01-19T19:05:28Z",
+      "side": 1,
+      "message": "Kati has .KATI_IMPLICIT_OUTPUTS, which allows 1 make rule to output multiple files.\nWe could use that instead of the separate rules, and only touch all the output files if `PRIVATE_IN` is empty.",
+      "parentUuid": "e5e5548a_72b993e7",
+      "revId": "fb732b65601c760afe641a30f3e0a0ee25600493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
