@@ -656,7 +656,7 @@ benchmarks:
             Benchmark(id="framework_api",
                       title="Add API to Settings.java",
                       change=AddJavaField("frameworks/base/core/java/android/provider/Settings.java",
-                                          "@android.annotation.SuppressLint(\"UnflaggedApi\") public"),
+                                          "/** @hide */  @android.annotation.SuppressLint(\"UnflaggedApi\") public"),
                       modules=["framework-minus-apex"],
                       preroll=1,
                       postroll=2,
