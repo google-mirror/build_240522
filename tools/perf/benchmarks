@@ -220,16 +220,26 @@ def Create(filename):
                 undo=delete,
             )
 
-
-def Modify(filename, contents, before=None):
+def ModifyFile(filename, contents, before=None, after=None):
     """Create an action to modify `filename` by appending the result of `contents`
-    before the last instances of `before` in the file.
+    before the last instances of `before` or after the first instance of
+    `after` in the file.
 
     Raises an error if `before` doesn't appear in the file.
     """
     orig = Snapshot(filename)
+    start = 0
+    if after:
+        start = orig.contents.find(after)
+        if start < 0:
+            report_error(f"{filename}: Unable to find string '{after}' for modify operation.")
+            raise FatalError()
+        start += len(after)
     if before:
-        index = orig.contents.rfind(before)
+        if start > 0:
+            index = orig.contents.find(before, start)
+        else:
+            index = orig.contents.rfind(before)
         if index < 0:
             report_error(f"{filename}: Unable to find string '{before}' for modify operation.")
             raise FatalError()
@@ -243,11 +253,53 @@ def Modify(filename, contents, before=None):
         x = modified.contents.replace("\n", "\n   MODIFIED")
         print(f"   MODIFIED {x}")
 
+    return orig, modified
+
+def Modify(filename, contents, before=None, after=None):
+    """Create an action to modify `filename` by appending the result of `contents`
+    before the last instances of `before` or after the first instance of
+    `after` in the file.
+
+    Raises an error if `before` doesn't appear in the file.
+    """
+    orig, modified = ModifyFile(filename, contents, before=before, after=after)
+
     return Change(
             label="Modify " + filename,
             change=lambda: modified.write(),
             undo=lambda: orig.write()
-        )
+    )
+
+def ChangePublicApi():
+    """
+    Ensure it is the first one since current.txt is sorted on the variable name,
+    otherwise the API check will fail if the modified current.txt is not sorted.
+    """
+    variable = "public static final String AAAAAAAA = \"AAAAAAAA_VALUE\";\n"
+    indent = "    "
+    orig_current, modified_current = \
+        ModifyFile("frameworks/base/core/api/current.txt",
+                   lambda: f"{indent}field {variable}",
+                   before=indent + "field public static final String",
+                   after="public final class Settings {\n")
+
+    orig_api, modified_api = \
+        ModifyFile("frameworks/base/core/java/android/provider/Settings.java",
+                   lambda: f"{indent}@android.annotation.SuppressLint(\"UnflaggedApi\") {variable}",
+                   before="}")
+    def change_api():
+        modified_current.write()
+        modified_api.write()
+
+    def undo():
+        orig_current.write()
+        orig_api.write()
+
+    return Change(
+        label="Modify public API",
+        change=lambda: change_api(),
+        undo=lambda: undo()
+    )
 
 def AddJavaField(filename, prefix):
     return Modify(filename,
@@ -740,8 +792,7 @@ benchmarks:
                       ),
             Benchmark(id="framework_api",
                       title="Add API to Settings.java",
-                      change=AddJavaField("frameworks/base/core/java/android/provider/Settings.java",
-                                          "@android.annotation.SuppressLint(\"UnflaggedApi\") public"),
+                      change=ChangePublicApi(),
                       modules=["framework-minus-apex"],
                       preroll=1,
                       postroll=2,
