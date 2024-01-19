@@ -16,6 +16,24 @@
       "message": "I don\u0027t understand the logic here. What does creating these files do?",
       "revId": "fb732b65601c760afe641a30f3e0a0ee25600493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8feaacd1_f2c5a44d",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-19T15:48:05Z",
+      "side": 1,
+      "message": "If a partiton has no aconfig flags, then line 111 skips the aconfig storage creation command. Thus there will be no storage files created. However, we do need to have the empty files to show that there is no flag. These files are also in the `required_flag_files`, so if they don\u0027t exist, it will fail the copy rule, thus fail the build.",
+      "parentUuid": "92c7aa7e_d5ec830a",
+      "revId": "fb732b65601c760afe641a30f3e0a0ee25600493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
