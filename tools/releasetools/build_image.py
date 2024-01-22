@@ -249,7 +249,7 @@ def CalculateSizeAndReserved(prop_dict, size):
   partition_headroom = int(prop_dict.get("partition_headroom", 0))
   # If not specified, give us 16MB margin for GetDiskUsage error ...
   reserved_size = int(prop_dict.get(
-      "partition_reserved_size", BYTES_IN_MB * 16))
+      "partition_reserved_size", BYTES_IN_MB * 32))
 
   if fs_type == "erofs":
     reserved_size = int(prop_dict.get("partition_reserved_size", 0))
