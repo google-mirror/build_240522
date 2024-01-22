@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c247cbd3_5c19e1a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2024-01-22T22:21:24Z",
+      "side": 1,
+      "message": "Meh, so much complexity for reading something out of a file. Well, I don\u0027t have any bright ideas, and I suppose it\u0027s still worth it, but we\u0027re piling more tech debt onto an already bad code base. As a small measure to make amends, what about filing a ticket about cleaning this up when kernels are known to be good enough (in W, hopefully), and add TODO\u0027s referencing it in a few strategic places?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "43b21570ca6da0def85314240b762e7cec4667e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffd07335_a909d57e",
+        "filename": "tools/post_process_props.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2024-01-22T22:21:24Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be `--kernel-version-file-for-uffd-gc`, for consistency and to keep it honest (since the file is useful only when `ENABLE_UFFD_GC\u003ddefault`)?",
+      "range": {
+        "startLine": 243,
+        "startChar": 23,
+        "endLine": 243,
+        "endChar": 44
+      },
+      "revId": "43b21570ca6da0def85314240b762e7cec4667e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
