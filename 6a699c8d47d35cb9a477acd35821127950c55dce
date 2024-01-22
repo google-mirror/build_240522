@@ -16,6 +16,24 @@
       "message": "How about adding a comment under frameworks/base/data/fonts/Android.bp to mention that move the target under the new location?",
       "revId": "6a699c8d47d35cb9a477acd35821127950c55dce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d095f019_a2f587dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2024-01-22T03:03:52Z",
+      "side": 1,
+      "message": "Should be comment in another CL, lol.",
+      "parentUuid": "8653336d_e138c23d",
+      "revId": "6a699c8d47d35cb9a477acd35821127950c55dce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
