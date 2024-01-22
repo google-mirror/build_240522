@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c0603fd_8e0d77ef",
+        "filename": "tools/releasetools/apex_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-01-22T20:35:21Z",
+      "side": 1,
+      "message": "`GetApexInfoForPartition` to make the use case clear",
+      "range": {
+        "startLine": 558,
+        "startChar": 4,
+        "endLine": 558,
+        "endChar": 31
+      },
+      "revId": "dc1b0bdfe31e75d688fb81c94c4af8df12e7bda5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
