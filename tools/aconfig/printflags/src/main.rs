@@ -20,6 +20,7 @@ use aconfig_protos::aconfig::Flag_permission;
 use aconfig_protos::aconfig::Flag_state;
 use aconfig_protos::aconfig::Parsed_flags as ProtoParsedFlags;
 use anyhow::{anyhow, Context, Result};
+use clap::Parser;
 use itertools::Itertools;
 use once_cell::sync::Lazy;
 use regex::Regex;
@@ -74,6 +75,32 @@ impl Source {
     }
 }
 
+/// Returns true if there is any flag state different than the last runtime state
+fn is_override(states: &[SourceState]) -> bool {
+    states
+        .iter()
+        .rev()
+        .find(|SourceState(source, ..)| source.is_runtime())
+        .map(|SourceState(_, state, _)| {
+            states.iter().any(|SourceState(_, other_state, _)| other_state != state)
+        })
+        .unwrap_or(false)
+}
+
+/// Pre-Condition: states is partitioned over is_runtime (true if sorted)
+fn is_malformed(states: &[SourceState]) -> bool {
+    let part = states.partition_point(|SourceState(source, ..)| !source.is_runtime());
+    let all_ro = (part > 0)
+        && states[0..part]
+            .iter()
+            .all(|SourceState(.., permission)| permission == &Permission::ReadOnly);
+    (part < states.len() && all_ro) || // all_ro with a rw set OR
+        (part < states.len() - 1) && // more than one runtime state
+            !states[part + 1..].iter().all(|SourceState(_, state, _)| state == &states[part].1)
+    // which mismatches
+}
+
+/// The fully qualified name of an aconfig flag
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 struct FqName {
     /// The gantry namespace
@@ -217,7 +244,35 @@ where
     })
 }
 
+#[derive(Parser)]
+#[command(about = "Print the state of aconfig flags.", long_about = None)]
+struct Cli {
+    /// Include flags not found in proto files. See b/308625757
+    #[arg(long, short)]
+    all_runtime: bool,
+    /// Show flags with runtime overrides, includes those who are malformed
+    #[arg(long, short)]
+    overriden: bool,
+    /// Show flags whose state is malformed (sysprop mismatch, or overriding a RO flag)
+    #[arg(long, short)]
+    malformed: bool,
+
+    /// Only show flags whose namespace contains value
+    #[arg(short, long)]
+    namespace: Option<String>,
+}
+
 fn main() -> Result<()> {
+    let cli = Cli::parse();
+
+    let flag_filter = |state_list: &[SourceState]|
+        // If all flag is not set, filter out flags with only runtime values
+        (cli.all_runtime || state_list.iter().any(|SourceState(source, _, _)| !source.is_runtime()))
+        && match (cli.overriden, cli.malformed) {
+            (true, _) => is_override(state_list) || is_malformed(state_list),
+            (false, true) => is_malformed(state_list),
+            _ => true,
+        };
 
     let runtime_iter = [
         (run_command(Command::new("/system/bin/device_config").arg("list")), Source::DeviceConfig),
@@ -231,15 +286,16 @@ fn main() -> Result<()> {
         .filter_map(|x| get_proto_flags(x).ok());
 
     sorted_group_fold(proto_iter.chain(runtime_iter))
-        .filter(|(_, state_list)| {
-            state_list.iter().any(|SourceState(source, _, _)| !source.is_runtime())
+        .filter(|(fqname, states)| {
+            cli.namespace.as_ref().map(|x| fqname.namespace.contains(x)).unwrap_or(true)
+                && flag_filter(states)
         })
-        .for_each(|(flagname, value)| {
+        .for_each(|(fqname, value)| {
             let mut acc = value.get(0).map(|x| x.to_string()).unwrap_or_default();
             for elem in value.iter().skip(1) {
                 write!(&mut acc, ", {}", elem).expect("Writing to string");
             }
-            println!("{}/{}: [{}]", flagname.namespace, flagname.name, acc)
+            println!("{}/{}: [{}]", fqname.namespace, fqname.name, acc)
         });
     Ok(())
 }
@@ -334,5 +390,78 @@ namespace_two/android.flag_two=nonsense
         expected.sort();
         let actual: Vec<_> = sorted_group_fold(input.into_iter()).collect();
         assert_eq!(expected, actual);
+    }
+
+    #[test]
+    fn test_is_override() {
+        let no_runtime_states = [
+            SourceState(Source::System, State::Disabled, Permission::ReadWrite),
+            SourceState(Source::SystemExt, State::Enabled, Permission::ReadWrite),
+        ];
+        assert!(!is_override(&no_runtime_states));
+
+        let all_runtime_states = [
+            SourceState(Source::DeviceConfig, State::Enabled, Permission::ReadWrite),
+            SourceState(Source::SysProp, State::Enabled, Permission::ReadWrite),
+        ];
+        assert!(!is_override(&all_runtime_states));
+
+        let runtime_partial_mismatch = [
+            SourceState(Source::System, State::Disabled, Permission::ReadWrite),
+            SourceState(Source::SystemExt, State::Enabled, Permission::ReadWrite),
+            SourceState(Source::DeviceConfig, State::Enabled, Permission::ReadWrite),
+        ];
+
+        assert!(is_override(&runtime_partial_mismatch));
+
+        let runtime_no_mismatch = [
+            SourceState(Source::System, State::Disabled, Permission::ReadWrite),
+            SourceState(Source::SystemExt, State::Disabled, Permission::ReadWrite),
+            SourceState(Source::DeviceConfig, State::Disabled, Permission::ReadWrite),
+        ];
+
+        assert!(!is_override(&runtime_no_mismatch));
+    }
+
+    #[test]
+    fn test_is_malformed() {
+        let ro_states = [
+            SourceState(Source::System, State::Enabled, Permission::ReadOnly),
+            SourceState(Source::SystemExt, State::Enabled, Permission::ReadOnly),
+        ];
+        assert!(!is_malformed(&ro_states));
+
+        let ro_states_overriden = [
+            SourceState(Source::System, State::Enabled, Permission::ReadOnly),
+            SourceState(Source::SystemExt, State::Enabled, Permission::ReadOnly),
+            SourceState(Source::DeviceConfig, State::Enabled, Permission::ReadWrite),
+        ];
+
+        assert!(is_malformed(&ro_states_overriden));
+
+        let rw_states_overriden = [
+            SourceState(Source::System, State::Enabled, Permission::ReadOnly),
+            SourceState(Source::SystemExt, State::Enabled, Permission::ReadWrite),
+            SourceState(Source::DeviceConfig, State::Enabled, Permission::ReadWrite),
+            SourceState(Source::SysProp, State::Enabled, Permission::ReadWrite),
+        ];
+
+        assert!(!is_malformed(&rw_states_overriden));
+
+        let override_mismatch = [
+            SourceState(Source::System, State::Enabled, Permission::ReadOnly),
+            SourceState(Source::SystemExt, State::Enabled, Permission::ReadWrite),
+            SourceState(Source::DeviceConfig, State::Enabled, Permission::ReadWrite),
+            SourceState(Source::SysProp, State::Disabled, Permission::ReadWrite),
+        ];
+
+        assert!(is_malformed(&override_mismatch));
+
+        let override_only_mismatch = [
+            SourceState(Source::DeviceConfig, State::Disabled, Permission::ReadWrite),
+            SourceState(Source::SysProp, State::Enabled, Permission::ReadWrite),
+        ];
+
+        assert!(is_malformed(&override_only_mismatch));
     }
 }
