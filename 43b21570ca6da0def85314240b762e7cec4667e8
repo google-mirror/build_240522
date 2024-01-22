@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa4ece4f_4c71c748",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-01-22T22:36:57Z",
+      "side": 1,
+      "message": "I don\u0027t regard this as a tech debt. This is the way to determine something dynamically at build time. We use similar approaches for various purposes. See https://cs.android.com/android/platform/superproject/main/+/main:build/soong/scripts/\n\nAlso, I don\u0027t think we can get rid of this in the near future. Devices are allowed to update to new platforms without updating the kernel.",
+      "parentUuid": "c247cbd3_5c19e1a2",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "43b21570ca6da0def85314240b762e7cec4667e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffd07335_a909d57e",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-22T22:21:24Z",
       "side": 1,
       "message": "Shouldn\u0027t this be `--kernel-version-file-for-uffd-gc`, for consistency and to keep it honest (since the file is useful only when `ENABLE_UFFD_GC\u003ddefault`)?",
+      "range": {
+        "startLine": 243,
+        "startChar": 23,
+        "endLine": 243,
+        "endChar": 44
+      },
+      "revId": "43b21570ca6da0def85314240b762e7cec4667e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eb8a4d3_99abd92b",
+        "filename": "tools/post_process_props.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-01-22T22:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffd07335_a909d57e",
       "range": {
         "startLine": 243,
         "startChar": 23,
