@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7b62363_1ea88527",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-01-23T17:56:18Z",
+      "side": 1,
+      "message": "\u003e You mean by OTAs? Isn\u0027t there a limit to that?\n\nYes, I mean by OTAs. I\u0027m not aware of a limit.",
+      "parentUuid": "d11af04f_e3748e82",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "43b21570ca6da0def85314240b762e7cec4667e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffd07335_a909d57e",
