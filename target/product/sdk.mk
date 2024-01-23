@@ -30,3 +30,8 @@ PRODUCT_BRAND := Android
 PRODUCT_DEVICE := mainline_x86
 
 PRODUCT_BUILD_FROM_SOURCE_STUB := true
+
+# The system property "ro.dalvik.vm.enable_uffd_gc" is determined by this
+# option. It indicates whether to enable UFFD GC on the device or not. Since SDK
+# is not a device, the value doesn't matter. We arbitrarily set it to "true".
+PRODUCT_ENABLE_UFFD_GC := true
