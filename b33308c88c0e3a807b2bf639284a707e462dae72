@@ -16,6 +16,24 @@
       "message": "It seems like we could also remove `BOARD_API_LEVEL`, given that it will always be exactly the same as `RELEASE_BOARD_API_LEVEL`.",
       "revId": "b33308c88c0e3a807b2bf639284a707e462dae72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1c9b80d_2d1c7fab",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-01-23T04:30:43Z",
+      "side": 1,
+      "message": "I agree with you. It is a requirement not to change the `RELEASE_BOARD_API_LEVEL` for each target.\nLet me work on it, too.",
+      "parentUuid": "bf68a730_8661f29d",
+      "revId": "b33308c88c0e3a807b2bf639284a707e462dae72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
