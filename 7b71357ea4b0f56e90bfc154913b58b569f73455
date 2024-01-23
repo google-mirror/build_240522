@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50ed9fba_69623d4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-01-23T23:55:30Z",
+      "side": 1,
+      "message": "This is horrendously complex.  Would be possible to avoid most of this by making it a product config, assume some default (possibly based on other known configs like `BOARD_SHIPPING_API_LEVEL`), and then throw a build error that points to the product config variable if the the variable is unset and the assumed default doesn\u0027t match the `BOARD_KERNEL_VERSION` value?",
+      "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
