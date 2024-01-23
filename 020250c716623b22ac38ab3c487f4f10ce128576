@@ -22,6 +22,30 @@
       },
       "revId": "020250c716623b22ac38ab3c487f4f10ce128576",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ff3d506_43f6f3d9",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-01-23T07:36:55Z",
+      "side": 1,
+      "message": "i mean if it is harmless to enable on a kernel platform that doesn\u0027t support it, because it would just fallback, shouldn\u0027t this just be enabled by default (in build) and determined by checking the kernel (in runtime)?",
+      "parentUuid": "4a4de230_2021a725",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 7
+      },
+      "revId": "020250c716623b22ac38ab3c487f4f10ce128576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
