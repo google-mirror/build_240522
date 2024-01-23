@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d11af04f_e3748e82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2024-01-23T17:14:16Z",
+      "side": 1,
+      "message": "Imo it\u0027s not enough that the pattern already exists. If it could reuse existing code to a reasonable degree I wouldn\u0027t consider it tech debt either, but this adds more than 500 lines so that\u0027s not the case.\n\n\u003e Devices are allowed to update to new platforms without updating the kernel.\n\nYou mean by OTAs? Isn\u0027t there a limit to that? I\u0027d be interested to see the policy on this, but I\u0027m not very successful in my searches.",
+      "parentUuid": "aa4ece4f_4c71c748",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "43b21570ca6da0def85314240b762e7cec4667e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffd07335_a909d57e",
