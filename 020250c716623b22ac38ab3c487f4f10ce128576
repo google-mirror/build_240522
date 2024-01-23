@@ -46,6 +46,30 @@
       },
       "revId": "020250c716623b22ac38ab3c487f4f10ce128576",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f91dce4c_477b9e3f",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-01-23T11:44:00Z",
+      "side": 1,
+      "message": "The fallback will cause boot time regression on the first boot because odrefresh has to regenerate dexopt artifacts. OEMs don\u0027t expect such a regression. On GSI, we can only accept this because there isn\u0027t an alternative.",
+      "parentUuid": "4ff3d506_43f6f3d9",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 7
+      },
+      "revId": "020250c716623b22ac38ab3c487f4f10ce128576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
