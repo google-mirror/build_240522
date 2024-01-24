@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c05da35_c7217b3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2024-01-24T09:53:17Z",
+      "side": 1,
+      "message": "Oops, my previous attemp to clean up the client usage of those --gki-* arguments failed: b/315124276#comment3\n\nNeed to revisit now.",
+      "revId": "4ed19f23ea5ef397dfc5b4d0739b279b5e694b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
