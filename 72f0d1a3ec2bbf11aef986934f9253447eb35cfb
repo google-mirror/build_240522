@@ -33,6 +33,29 @@
       "message": "Before these changes are ready, I\u0027d like to get this reviewed first.",
       "revId": "72f0d1a3ec2bbf11aef986934f9253447eb35cfb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "909f1759_4727380b",
+        "filename": "tools/finalization/finalize-vintf-resources.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-01-24T05:39:44Z",
+      "side": 1,
+      "message": "We may add `FINAL_VENDOR_API_LEVEL` to environment.sh to declare the vendor api level to finalize. (See b/318883690#comment4)",
+      "range": {
+        "startLine": 12,
+        "startChar": 4,
+        "endLine": 12,
+        "endChar": 19
+      },
+      "revId": "72f0d1a3ec2bbf11aef986934f9253447eb35cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
