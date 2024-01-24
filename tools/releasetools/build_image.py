@@ -260,7 +260,7 @@ def CalculateSizeAndReserved(prop_dict, size):
   if fs_type.startswith("ext4") and partition_headroom > reserved_size:
     reserved_size = partition_headroom
 
-  return size + reserved_size
+  return int(size * 1.1) + reserved_size
 
 
 def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
@@ -636,7 +636,7 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       size = verity_image_builder.CalculateDynamicPartitionSize(size)
     prop_dict["partition_size"] = str(size)
     logger.info(
-        "Allocating %d MB for %s.", size // BYTES_IN_MB, out_file)
+        "Allocating %d MB for %s", size // BYTES_IN_MB, out_file)
 
   prop_dict["image_size"] = prop_dict["partition_size"]
 
@@ -646,6 +646,9 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
     prop_dict["image_size"] = str(max_image_size)
 
   if not mkfs_output:
+    logger.info(
+          "Second Pass based on estimates of %d MB and %s inodes.",
+          size // BYTES_IN_MB, prop_dict["extfs_inode_count"])
     mkfs_output = BuildImageMkfs(
         in_dir, prop_dict, out_file, target_out, fs_config)
 
@@ -979,7 +982,11 @@ def main(argv):
   parser.add_argument("target_out",
     help="the path to $(TARGET_OUT). Certain tools will use this to look through multiple staging "
     "directories for fs config files.")
+  parser.add_argument("-v", action="store_true",
+                      help="Enable verbose logging", dest="verbose")
   args = parser.parse_args()
+  if args.verbose:
+    OPTIONS.verbose = True
 
   common.InitLogging()
 
