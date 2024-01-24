@@ -224,7 +224,11 @@ pub fn create_rust_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Ou
     generate_rust_code(&package, modified_parsed_flags.into_iter(), codegen_mode)
 }
 
-pub fn create_storage(caches: Vec<Input>, container: &str, file: &StorageFileSelection) -> Result<Vec<u8>> {
+pub fn create_storage(
+    caches: Vec<Input>,
+    container: &str,
+    file: &StorageFileSelection,
+) -> Result<Vec<u8>> {
     let parsed_flags_vec: Vec<ProtoParsedFlags> = caches
         .into_iter()
         .map(|mut input| input.try_parse_flags())

@@ -277,8 +277,11 @@ mod tests {
     package com.android.aconfig.test;
     // TODO(b/303773055): Remove the annotation after access issue is resolved.
     import android.compat.annotation.UnsupportedAppUsage;
+    import java.util.Arrays;
     import java.util.HashMap;
+    import java.util.HashSet;
     import java.util.Map;
+    import java.util.Set;
     /** @hide */
     public class FakeFeatureFlagsImpl implements FeatureFlags {
         public FakeFeatureFlagsImpl() {
@@ -340,12 +343,23 @@ mod tests {
                 entry.setValue(null);
             }
         }
+        public boolean isFlagReadOnlyOptimized(String flagName) {
+            if (mReadOnlyFlagsSet.contains(flagName) &&
+                isOptimizationEnabled()) {
+                    return true;
+            }
+            return false;
+        }
         private boolean getValue(String flagName) {
             Boolean value = this.mFlagMap.get(flagName);
             if (value == null) {
                 throw new IllegalArgumentException(flagName + " is not set");
             }
             return value;
+        }
+        @com.android.aconfig.annotations.AssumeTrueForR8
+        private boolean isOptimizationEnabled() {
+            return false;
         }
         private Map<String, Boolean> mFlagMap = new HashMap<>(
             Map.ofEntries(
@@ -358,6 +372,16 @@ mod tests {
                 Map.entry(Flags.FLAG_ENABLED_RO, false),
                 Map.entry(Flags.FLAG_ENABLED_RO_EXPORTED, false),
                 Map.entry(Flags.FLAG_ENABLED_RW, false)
+            )
+        );
+        private Set<String> mReadOnlyFlagsSet = new HashSet<>(
+            Arrays.asList(
+                Flags.FLAG_DISABLED_RO,
+                Flags.FLAG_ENABLED_FIXED_RO,
+                Flags.FLAG_ENABLED_FIXED_RO_EXPORTED,
+                Flags.FLAG_ENABLED_RO,
+                Flags.FLAG_ENABLED_RO_EXPORTED,
+                ""
             )
         );
     }
@@ -643,8 +667,11 @@ mod tests {
         package com.android.aconfig.test;
         // TODO(b/303773055): Remove the annotation after access issue is resolved.
         import android.compat.annotation.UnsupportedAppUsage;
+        import java.util.Arrays;
         import java.util.HashMap;
+        import java.util.HashSet;
         import java.util.Map;
+        import java.util.Set;
         /** @hide */
         public class FakeFeatureFlagsImpl implements FeatureFlags {
             public FakeFeatureFlagsImpl() {
@@ -676,6 +703,13 @@ mod tests {
                     entry.setValue(null);
                 }
             }
+            public boolean isFlagReadOnlyOptimized(String flagName) {
+                if (mReadOnlyFlagsSet.contains(flagName) &&
+                    isOptimizationEnabled()) {
+                        return true;
+                }
+                return false;
+            }
             private boolean getValue(String flagName) {
                 Boolean value = this.mFlagMap.get(flagName);
                 if (value == null) {
@@ -683,11 +717,20 @@ mod tests {
                 }
                 return value;
             }
+            @com.android.aconfig.annotations.AssumeTrueForR8
+            private boolean isOptimizationEnabled() {
+                return false;
+            }
             private Map<String, Boolean> mFlagMap = new HashMap<>(
                 Map.ofEntries(
                     Map.entry(Flags.FLAG_DISABLED_RW_EXPORTED, false),
                     Map.entry(Flags.FLAG_ENABLED_FIXED_RO_EXPORTED, false),
                     Map.entry(Flags.FLAG_ENABLED_RO_EXPORTED, false)
+                )
+            );
+            private Set<String> mReadOnlyFlagsSet = new HashSet<>(
+                Arrays.asList(
+                    ""
                 )
             );
         }
@@ -963,8 +1006,11 @@ mod tests {
         package com.android.aconfig.test;
         // TODO(b/303773055): Remove the annotation after access issue is resolved.
         import android.compat.annotation.UnsupportedAppUsage;
+        import java.util.Arrays;
         import java.util.HashMap;
+        import java.util.HashSet;
         import java.util.Map;
+        import java.util.Set;
         /** @hide */
         public class FakeFeatureFlagsImpl implements FeatureFlags {
             public FakeFeatureFlagsImpl() {
@@ -1011,12 +1057,23 @@ mod tests {
                     entry.setValue(null);
                 }
             }
+            public boolean isFlagReadOnlyOptimized(String flagName) {
+                if (mReadOnlyFlagsSet.contains(flagName) &&
+                    isOptimizationEnabled()) {
+                        return true;
+                }
+                return false;
+            }
             private boolean getValue(String flagName) {
                 Boolean value = this.mFlagMap.get(flagName);
                 if (value == null) {
                     throw new IllegalArgumentException(flagName + " is not set");
                 }
                 return value;
+            }
+            @com.android.aconfig.annotations.AssumeTrueForR8
+            private boolean isOptimizationEnabled() {
+                return false;
             }
             private Map<String, Boolean> mFlagMap = new HashMap<>(
                 Map.ofEntries(
@@ -1026,6 +1083,17 @@ mod tests {
                     Map.entry(Flags.FLAG_ENABLED_FIXED_RO, false),
                     Map.entry(Flags.FLAG_ENABLED_RO, false),
                     Map.entry(Flags.FLAG_ENABLED_RW, false)
+                )
+            );
+            private Set<String> mReadOnlyFlagsSet = new HashSet<>(
+                Arrays.asList(
+                    Flags.FLAG_DISABLED_RO,
+                    Flags.FLAG_DISABLED_RW,
+                    Flags.FLAG_DISABLED_RW_IN_OTHER_NAMESPACE,
+                    Flags.FLAG_ENABLED_FIXED_RO,
+                    Flags.FLAG_ENABLED_RO,
+                    Flags.FLAG_ENABLED_RW,
+                    ""
                 )
             );
         }
