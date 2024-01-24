@@ -34,6 +34,24 @@
       "parentUuid": "50ed9fba_69623d4d",
       "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62f49de2_2da0a5c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-01-24T17:55:27Z",
+      "side": 1,
+      "message": "I mean\u0027t validate it based on `BUILT_KERNEL_VERSION_FILE`, not `BOARD_KERNEL_VERSION`.  If the error message gives the solution (e.g. \"This board uses a kernel version (%s) that supports UFFD, please set PRODUCT_ENABLE_UFFD_GC :\u003d true to enable UFFD GC, or explicitly set it false to disable it.\") then hopefully you shouldn\u0027t get many inquires.",
+      "parentUuid": "f0cc94f8_d55dd840",
+      "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
