@@ -55,7 +55,49 @@ pub fn create_flag_value(container: &str, packages: &[FlagPackage]) -> Result<Fl
     list.header.boolean_value_offset = list.header.as_bytes().len() as u32;
     list.header.file_size = list.header.boolean_value_offset + num_flags;
 
-    Ok(list)
+#[derive(PartialEq, Debug)]
+pub struct FlagValueList {
+    pub header: FlagValueHeader,
+    pub booleans: Vec<bool>,
+}
+
+impl FlagValueList {
+    pub fn new(container: &str, packages: &[FlagPackage]) -> Result<Self> {
+        // create list
+        let num_flags = packages.iter().map(|pkg| pkg.boolean_flags.len() as u32).sum();
+
+        let mut list = Self {
+            header: FlagValueHeader::new(container, num_flags),
+            booleans: vec![false; num_flags as usize],
+        };
+
+        for pkg in packages.iter() {
+            let start_offset = pkg.boolean_offset as usize;
+            let flag_ids = assign_flag_ids(pkg.package_name, pkg.boolean_flags.iter().copied())?;
+            for pf in pkg.boolean_flags.iter() {
+                let fid = flag_ids
+                    .get(pf.name())
+                    .ok_or(anyhow!(format!("missing flag id for {}", pf.name())))?;
+
+                list.booleans[start_offset + (*fid as usize)] =
+                    pf.state() == ProtoFlagState::ENABLED;
+            }
+        }
+
+        // initialize all header fields
+        list.header.boolean_value_offset = list.header.as_bytes().len() as u32;
+        list.header.file_size = list.header.boolean_value_offset + num_flags;
+
+        Ok(list)
+    }
+
+    pub fn as_bytes(&self) -> Vec<u8> {
+        [
+            self.header.as_bytes(),
+            self.booleans.iter().map(|&v| u8::from(v).to_le_bytes()).collect::<Vec<_>>().concat(),
+        ]
+        .concat()
+    }
 }
 
 #[cfg(test)]
