@@ -16,6 +16,24 @@
       "message": "This is horrendously complex.  Would be possible to avoid most of this by making it a product config, assume some default (possibly based on other known configs like `BOARD_SHIPPING_API_LEVEL`), and then throw a build error that points to the product config variable if the the variable is unset and the assumed default doesn\u0027t match the `BOARD_KERNEL_VERSION` value?",
       "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0cc94f8_d55dd840",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-01-24T11:42:10Z",
+      "side": 1,
+      "message": "Admittedly, this is complex, but I can\u0027t see a better alternative. `BOARD_KERNEL_VERSION` is not set on most of the devices. If it was set, I would use that instead of reading `BUILT_KERNEL_VERSION_FILE` in the first place, which would make things much simpler. On the other hand, if we validate based on `BOARD_KERNEL_VERSION`, the validation won\u0027t be done for most of the devices, making it unhelpful.\n\nTaking a step back, while this adds complexity, it scales. It can reliably work on OEMs\u0027 devices. With this solution, we won\u0027t have to make unreliable assumptions and get inquires from various OEMs about issues when the assumptions fail, so that we can save our bandwidth on more important things rather than responding to OEMs\u0027 inquires all the time. WDYT?",
+      "parentUuid": "50ed9fba_69623d4d",
+      "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
