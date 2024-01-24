@@ -16,6 +16,29 @@
       "message": "Oops, my previous attemp to clean up the client usage of those --gki-* arguments failed: b/315124276#comment3\n\nNeed to revisit now.",
       "revId": "4ed19f23ea5ef397dfc5b4d0739b279b5e694b80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e793b5f6_0cfda0c3",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1459,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2024-01-24T10:08:27Z",
+      "side": 1,
+      "message": "Ok, this should fix previous error in b/311134118#comment25",
+      "range": {
+        "startLine": 1458,
+        "startChar": 0,
+        "endLine": 1459,
+        "endChar": 10
+      },
+      "revId": "4ed19f23ea5ef397dfc5b4d0739b279b5e694b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
