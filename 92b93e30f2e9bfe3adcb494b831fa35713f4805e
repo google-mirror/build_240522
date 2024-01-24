@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca0ead8_b186a020",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 7347,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-01-24T22:50:33Z",
+      "side": 1,
+      "message": "This is duplicating the entire rule in the conditional, can you conditionally add the `$(INSTALLED_USERDATAIMAGE_TARGET)` dependency and line 7350 instead?",
+      "revId": "92b93e30f2e9bfe3adcb494b831fa35713f4805e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
