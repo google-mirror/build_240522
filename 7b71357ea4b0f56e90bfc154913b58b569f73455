@@ -52,6 +52,24 @@
       "parentUuid": "f0cc94f8_d55dd840",
       "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5580d968_0d06f4c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-01-24T18:58:11Z",
+      "side": 1,
+      "message": "One problem with the assume-and-validate approach is that many OEMs use unbundled vendor/boot images. That means `BOARD_API_LEVEL` and `BOARD_SHIPPING_API_LEVEL` are **unset** when they are building system images. If we guess the GC type based on those variables, that will be a pretty bad guess. Then OEMs will have to manually adjust `PRODUCT_ENABLE_UFFD_GC` for many products. That\u0027s a lot of hassle.\n\nAlso, this approach is weird from OEMs perspective: since we know the right choice, why do we ask them to manually spell it out?",
+      "parentUuid": "62f49de2_2da0a5c1",
+      "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
