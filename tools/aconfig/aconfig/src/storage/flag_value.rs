@@ -91,11 +91,7 @@ impl FlagValueList {
     pub fn as_bytes(&self) -> Vec<u8> {
         [
             self.header.as_bytes(),
-            self.booleans
-                .iter()
-                .map(|&v| u8::from(v).to_le_bytes())
-                .collect::<Vec<_>>()
-                .concat(),
+            self.booleans.iter().map(|&v| u8::from(v).to_le_bytes()).collect::<Vec<_>>().concat(),
         ]
         .concat()
     }
