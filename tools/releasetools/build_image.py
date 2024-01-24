@@ -262,6 +262,14 @@ def CalculateSizeAndReserved(prop_dict, size):
 
   return size + reserved_size
 
+def ShrinkExt4Image(path):
+  attributes = GetFilesystemCharacteristics("ext4", path, False)
+  blocks_used = int(attributes['Block count']) - int(attributes['Free blocks'])
+  minimum_image_size = blocks_used * int(attributes['Block size'])
+  common.RunAndCheckOutput(["resize2fs", "-f", path, str(blocks_used)])
+  return minimum_image_size
+
+
 
 def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
   """Builds a pure image for the files under in_dir and writes it to out_file.
@@ -289,7 +297,9 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
 
   disable_sparse = "disable_sparse" in prop_dict
   manual_sparse = False
-
+  max_image_size = int(prop_dict.get("image_size", "0"))
+  if not max_image_size:
+    max_image_size = int(GetDiskUsage(in_dir) * 1.1)
   if fs_type.startswith("ext"):
     build_command = [prop_dict["ext_mkuserimg"]]
     if "extfs_sparse_flag" in prop_dict and not disable_sparse:
@@ -297,7 +307,9 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
       run_e2fsck = RunE2fsck
     build_command.extend([in_dir, out_file, fs_type,
                           prop_dict["mount_point"]])
-    build_command.append(prop_dict["image_size"])
+    # Run mke2fs with over sized allocation, then call resize2fs to downsize
+    # it mke2fs requires image sizes to be specified up front.
+    build_command.append(str(max_image_size))
     if "journal_size" in prop_dict:
       build_command.extend(["-j", prop_dict["journal_size"]])
     if "timestamp" in prop_dict:
@@ -404,7 +416,7 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
       build_command.extend(["-a"])
   elif fs_type.startswith("f2fs"):
     build_command = ["mkf2fsuserimg"]
-    build_command.extend([out_file, prop_dict["image_size"]])
+    build_command.extend([out_file, str(max_image_size)])
     if "f2fs_sparse_flag" in prop_dict and not disable_sparse:
       build_command.extend([prop_dict["f2fs_sparse_flag"]])
     if fs_config:
@@ -464,14 +476,23 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
       print(
           "The max image size for filesystem files is {} bytes ({} MB), "
           "out of a total partition size of {} bytes ({} MB).".format(
-              int(prop_dict["image_size"]),
-              int(prop_dict["image_size"]) // BYTES_IN_MB,
-              int(prop_dict["partition_size"]),
-              int(prop_dict["partition_size"]) // BYTES_IN_MB))
+              max_image_size,
+              max_image_size // BYTES_IN_MB,
+              int(prop_dict.get("partition_size", "0")),
+              int(prop_dict.get("partition_size", "0")) // BYTES_IN_MB))
     raise
 
   if run_fsck and prop_dict.get("skip_fsck") != "true":
     run_fsck(out_file)
+  if fs_type.startswith("ext"):
+    ShrinkExt4Image(out_file)
+    if max_image_size and os.path.getsize(out_file) > max_image_size:
+      raise ValueError("The final image size {} bytes ({} MB) is larger than specified"
+              " image size {} bytes ({} MB)".format(
+                os.path.getsize(out_file),
+                os.path.getsize(out_file)//BYTES_IN_MB,
+                max_image_size,
+                max_image_size//BYTES_IN_MB))
 
   if manual_sparse:
     temp_file = out_file + ".sparse"
@@ -578,47 +599,12 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       logger.info(
           "First Pass based on estimates of %d MB and %s inodes.",
           size // BYTES_IN_MB, prop_dict["extfs_inode_count"])
-      BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config)
+      mkfs_output = BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config)
       sparse_image = False
       if "extfs_sparse_flag" in prop_dict and not disable_sparse:
         sparse_image = True
       fs_dict = GetFilesystemCharacteristics(fs_type, out_file, sparse_image)
-      os.remove(out_file)
-      block_size = int(fs_dict.get("Block size", "4096"))
-      free_size = int(fs_dict.get("Free blocks", "0")) * block_size
-      reserved_size = int(prop_dict.get("partition_reserved_size", 0))
-      partition_headroom = int(fs_dict.get("partition_headroom", 0))
-      if fs_type.startswith("ext4") and partition_headroom > reserved_size:
-        reserved_size = partition_headroom
-      if free_size <= reserved_size:
-        logger.info(
-            "Not worth reducing image %d <= %d.", free_size, reserved_size)
-      else:
-        size -= free_size
-        size += reserved_size
-        if reserved_size == 0:
-          # add .3% margin
-          size = size * 1003 // 1000
-        # Use a minimum size, otherwise we will fail to calculate an AVB footer
-        # or fail to construct an ext4 image.
-        size = max(size, 256 * 1024)
-        if block_size <= 4096:
-          size = common.RoundUpTo4K(size)
-        else:
-          size = ((size + block_size - 1) // block_size) * block_size
-      extfs_inode_count = prop_dict["extfs_inode_count"]
-      inodes = int(fs_dict.get("Inode count", extfs_inode_count))
-      inodes -= int(fs_dict.get("Free inodes", "0"))
-      # add .2% margin or 1 inode, whichever is greater
-      spare_inodes = inodes * 2 // 1000
-      min_spare_inodes = 1
-      if spare_inodes < min_spare_inodes:
-        spare_inodes = min_spare_inodes
-      inodes += spare_inodes
-      prop_dict["extfs_inode_count"] = str(inodes)
-      prop_dict["partition_size"] = str(size)
-      logger.info(
-          "Allocating %d Inodes for %s.", inodes, out_file)
+      size = common.RoundUpTo4K(os.path.getsize(out_file))
     elif fs_type.startswith("f2fs") and prop_dict.get("f2fs_compress") == "true":
       prop_dict["partition_size"] = str(size)
       prop_dict["image_size"] = str(size)
@@ -632,11 +618,12 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
       log_blocksize = int(fs_dict.get("log_blocksize", "12"))
       size = block_count << log_blocksize
       prop_dict["partition_size"] = str(size)
+
     if verity_image_builder:
       size = verity_image_builder.CalculateDynamicPartitionSize(size)
     prop_dict["partition_size"] = str(size)
     logger.info(
-        "Allocating %d MB for %s.", size // BYTES_IN_MB, out_file)
+        "Allocating %d MB for %s", size // BYTES_IN_MB, out_file)
 
   prop_dict["image_size"] = prop_dict["partition_size"]
 
@@ -979,7 +966,11 @@ def main(argv):
   parser.add_argument("target_out",
     help="the path to $(TARGET_OUT). Certain tools will use this to look through multiple staging "
     "directories for fs config files.")
+  parser.add_argument("-v", action="store_true",
+                      help="Enable verbose logging", dest="verbose")
   args = parser.parse_args()
+  if args.verbose:
+    OPTIONS.verbose = True
 
   common.InitLogging()
 
