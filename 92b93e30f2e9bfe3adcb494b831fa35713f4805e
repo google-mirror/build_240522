@@ -16,6 +16,24 @@
       "message": "This is duplicating the entire rule in the conditional, can you conditionally add the `$(INSTALLED_USERDATAIMAGE_TARGET)` dependency and line 7350 instead?",
       "revId": "92b93e30f2e9bfe3adcb494b831fa35713f4805e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b4371ed_3729253f",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 7347,
+      "author": {
+        "id": 3273674
+      },
+      "writtenOn": "2024-01-25T13:51:22Z",
+      "side": 1,
+      "message": "Please have a look at the new patchset and let me know, thanks",
+      "parentUuid": "eca0ead8_b186a020",
+      "revId": "92b93e30f2e9bfe3adcb494b831fa35713f4805e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
