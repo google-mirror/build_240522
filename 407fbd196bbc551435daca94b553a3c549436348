@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c0e407e_a7a52ac3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-01-25T00:18:14Z",
+      "side": 1,
+      "message": "LGTM, but over to the GSI owners for the approval.\n\nBY the way, if ART can fall back to CC which I assume is the existing behavior, why can\u0027t you enable UFFD by default on all devices and rely on the falling back?",
+      "revId": "407fbd196bbc551435daca94b553a3c549436348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
