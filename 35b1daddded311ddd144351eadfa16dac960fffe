@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0b8c171_0c18b2d9",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 7347,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-01-25T18:27:23Z",
+      "side": 1,
+      "message": "```suggestion\n$(INSTALLED_SYSTEM_QEMU_CONFIG): $(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_VBMETAIMAGE_TARGET)\nifneq (,$(filter true, $(QEMU_IMAGE_HAS_USERDATA_PARTITION)))\n  $(INSTALLED_SYSTEM_QEMU_CONFIG): $(INSTALLED_USERDATAIMAGE_TARGET)\nendif\n```",
+      "range": {
+        "startLine": 7346,
+        "startChar": 0,
+        "endLine": 7347,
+        "endChar": 93
+      },
+      "revId": "35b1daddded311ddd144351eadfa16dac960fffe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
