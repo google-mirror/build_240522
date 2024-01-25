@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b4fc49f_3af4d1fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2024-01-25T19:16:36Z",
+      "side": 1,
+      "message": "It turns out that the correct solution was trivial.  PTAL.",
+      "revId": "89d97bf901d8cde9f3b2431fc048a03565717f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
