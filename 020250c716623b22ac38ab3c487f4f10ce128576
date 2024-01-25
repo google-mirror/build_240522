@@ -94,6 +94,30 @@
       },
       "revId": "020250c716623b22ac38ab3c487f4f10ce128576",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58920433_e7123c41",
+        "filename": "target/product/gsi_release.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-01-25T02:33:19Z",
+      "side": 1,
+      "message": "@jiyong@google.com FYI",
+      "parentUuid": "24e58fd5_c55016b9",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 7
+      },
+      "revId": "020250c716623b22ac38ab3c487f4f10ce128576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
