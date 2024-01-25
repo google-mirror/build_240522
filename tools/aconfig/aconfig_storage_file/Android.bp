@@ -9,6 +9,7 @@ rust_defaults {
     srcs: ["src/lib.rs"],
     rustlibs: [
         "libanyhow",
+        "libaconfig_storage_protos",
     ],
 }
 
@@ -23,4 +24,12 @@ rust_test_host {
     name: "aconfig_storage_file.test",
     test_suites: ["general-tests"],
     defaults: ["aconfig_storage_file.defaults"],
+}
+
+rust_protobuf {
+    name: "libaconfig_storage_protos",
+    protos: ["protos/aconfig_storage_metadata.proto"],
+    crate_name: "aconfig_storage_protos",
+    source_stem: "aconfig_storage_protos",
+    host_supported: true,
 }
