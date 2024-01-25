@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4941e61a_82f4f5cb",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-01-25T03:21:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11953ed1_a035247a",
+      "revId": "4ed19f23ea5ef397dfc5b4d0739b279b5e694b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae819ba6_6f42c5c9",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-24T18:06:01Z",
       "side": 1,
       "message": "print a message notifying user that this option is now a no-op",
+      "revId": "4ed19f23ea5ef397dfc5b4d0739b279b5e694b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88832ed8_2237f354",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1458,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-01-25T03:21:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae819ba6_6f42c5c9",
       "revId": "4ed19f23ea5ef397dfc5b4d0739b279b5e694b80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
