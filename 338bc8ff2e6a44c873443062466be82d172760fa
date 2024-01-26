@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5636620d_961962f2",
+        "filename": "teams/OWNERS",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2024-01-26T16:11:04Z",
+      "side": 1,
+      "message": "can we have this set to also include everyone in android?\n\n(ok to do this in a separate CL)",
+      "revId": "338bc8ff2e6a44c873443062466be82d172760fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
