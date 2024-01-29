@@ -69,7 +69,6 @@ pub struct PackageTableNode {
     // boolean flag value array in the flag value file
     pub boolean_offset: u32,
     pub next_offset: Option<u32>,
-    pub bucket_index: u32,
 }
 
 impl PackageTableNode {
@@ -96,7 +95,6 @@ impl PackageTableNode {
                 0 => None,
                 val => Some(val),
             },
-            bucket_index: 0,
         };
         Ok(node)
     }
@@ -135,12 +133,11 @@ impl PackageTable {
             .collect();
         let nodes = (0..num_packages)
             .map(|_| {
-                let mut node = PackageTableNode::from_bytes(&bytes[head..]).unwrap();
+                let node = PackageTableNode::from_bytes(&bytes[head..])?;
                 head += node.as_bytes().len();
-                node.bucket_index = get_bucket_index(&node.package_name, num_buckets);
-                node
+                Ok(node)
             })
-            .collect();
+            .collect::<Result<Vec<_>>>()?;
 
         let table = Self { header, buckets, nodes };
         Ok(table)
@@ -210,21 +207,18 @@ mod tests {
             package_id: 1,
             boolean_offset: 3,
             next_offset: None,
-            bucket_index: 0,
         };
         let second_node = PackageTableNode {
             package_name: String::from("com.android.aconfig.storage.test_1"),
             package_id: 0,
             boolean_offset: 0,
             next_offset: Some(158),
-            bucket_index: 3,
         };
         let third_node = PackageTableNode {
             package_name: String::from("com.android.aconfig.storage.test_4"),
             package_id: 2,
             boolean_offset: 6,
             next_offset: None,
-            bucket_index: 3,
         };
         let nodes = vec![first_node, second_node, third_node];
         Ok(PackageTable { header, buckets, nodes })
@@ -241,11 +235,8 @@ mod tests {
         assert_eq!(header, &reinterpreted_header.unwrap());
 
         let nodes: &Vec<PackageTableNode> = &package_table.nodes;
-        let num_buckets = crate::get_table_size(header.num_packages).unwrap();
         for node in nodes.iter() {
-            let mut reinterpreted_node = PackageTableNode::from_bytes(&node.as_bytes()).unwrap();
-            reinterpreted_node.bucket_index =
-                get_bucket_index(&reinterpreted_node.package_name, num_buckets);
+            let reinterpreted_node = PackageTableNode::from_bytes(&node.as_bytes()).unwrap();
             assert_eq!(node, &reinterpreted_node);
         }
 
