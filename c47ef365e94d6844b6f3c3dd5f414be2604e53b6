@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76aa259c_7e949ce8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-29T18:54:31Z",
+      "side": 1,
+      "message": "b/318888479#comment6",
+      "parentUuid": "ad256191_1a7ca9ea",
+      "revId": "c47ef365e94d6844b6f3c3dd5f414be2604e53b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91312839_094c740f",
         "filename": "tools/finalization/finalize-vintf-resources.sh",
         "patchSetId": 2
