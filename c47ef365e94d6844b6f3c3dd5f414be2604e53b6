@@ -16,6 +16,46 @@
       "message": "Sorry for back and forth. Let\u0027s work on AOSP for sepolicy stuff.",
       "revId": "c47ef365e94d6844b6f3c3dd5f414be2604e53b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfbaa3d0_023f5fc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-29T18:35:32Z",
+      "side": 1,
+      "message": "did you run this with",
+      "revId": "c47ef365e94d6844b6f3c3dd5f414be2604e53b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91312839_094c740f",
+        "filename": "tools/finalization/finalize-vintf-resources.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-29T18:35:32Z",
+      "side": 1,
+      "message": "fyi, this is the one I was saying would conflict, since I need to remove it internally",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 124
+      },
+      "revId": "c47ef365e94d6844b6f3c3dd5f414be2604e53b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
