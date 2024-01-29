@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9f240b5_5c95d69d",
+        "filename": "tools/aconfig/aconfig_storage_file/src/flag_value.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-01-29T16:39:23Z",
+      "side": 1,
+      "message": "Could we include a bug with the TODO?",
+      "revId": "08201808e24beaacec5a0d3f67ee91bb3314dc7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
