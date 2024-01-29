@@ -16,6 +16,24 @@
       "message": "This should return a `Result` with `?` instead.",
       "revId": "8aa9bbeb99ebee101196f09fe77f8b2e75f2659f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "148def4f_f9bd7857",
+        "filename": "tools/aconfig/aconfig_storage_file/src/package_table.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-29T16:47:09Z",
+      "side": 1,
+      "message": "PackageTableNode::from_bytes does return a Result. Unfortunately we need to unwrap it to fill the value of bucket_index. \n\nI do plan to add a future cl to remove bucket_index from the struct, as this field is just the aux info used to aid the serialization, but itself is never serialized. Once that change is in, then we don\u0027t have to unwrap here and closure inside the map can simply return a Result.",
+      "parentUuid": "a927c66e_484ff0b4",
+      "revId": "8aa9bbeb99ebee101196f09fe77f8b2e75f2659f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
