@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a927c66e_484ff0b4",
+        "filename": "tools/aconfig/aconfig_storage_file/src/package_table.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-01-29T16:38:22Z",
+      "side": 1,
+      "message": "This should return a `Result` with `?` instead.",
+      "revId": "8aa9bbeb99ebee101196f09fe77f8b2e75f2659f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
