@@ -120,7 +120,7 @@ non_system_module := $(filter true, \
    $(LOCAL_VENDOR_MODULE) \
    $(LOCAL_PROPRIETARY_MODULE))
 
-include $(BUILD_SYSTEM)/local_vndk.mk
+include $(BUILD_SYSTEM)/local_vendor_product.mk
 
 # local_current_sdk needs to run before local_systemsdk because the former may override
 # LOCAL_SDK_VERSION which is used by the latter.
@@ -1093,10 +1093,10 @@ endif
 ## When compiling against API imported module, use API import stub
 ## libraries.
 ##########################################################################
-ifneq ($(LOCAL_USE_VNDK),)
+ifneq ($(LOCAL_IN_VENDOR_OR_PRODUCT),)
   ifneq ($(LOCAL_MODULE_MAKEFILE),$(SOONG_ANDROID_MK))
     apiimport_postfix := .apiimport
-    ifeq ($(LOCAL_USE_VNDK_PRODUCT),true)
+    ifeq ($(LOCAL_IN_PRODUCT),true)
       apiimport_postfix := .apiimport.product
     else
       apiimport_postfix := .apiimport.vendor
@@ -1111,7 +1111,7 @@ endif
 ## When compiling against the VNDK, add the .vendor or .product suffix to
 ## required modules.
 ##########################################################################
-ifneq ($(LOCAL_USE_VNDK),)
+ifneq ($(LOCAL_IN_VENDOR_OR_PRODUCT),)
   #####################################################
   ## Soong modules may be built three times, once for
   ## /system, once for /vendor and once for /product.
@@ -1122,7 +1122,7 @@ ifneq ($(LOCAL_USE_VNDK),)
     # We don't do this renaming for soong-defined modules since they already
     # have correct names (with .vendor or .product suffix when necessary) in
     # their LOCAL_*_LIBRARIES.
-    ifeq ($(LOCAL_USE_VNDK_PRODUCT),true)
+    ifeq ($(LOCAL_IN_PRODUCT),true)
       my_required_modules := $(foreach l,$(my_required_modules),\
         $(if $(SPLIT_PRODUCT.SHARED_LIBRARIES.$(l)),$(l).product,$(l)))
     else
