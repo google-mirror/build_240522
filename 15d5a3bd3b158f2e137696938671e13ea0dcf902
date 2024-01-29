@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e970f11b_14a19f85",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-01-29T19:15:55Z",
+      "side": 1,
+      "message": "We already have `LOCAL_VENDOR_MODULE` and `LOCAL_PRODUCT_MODULE`, which are the direct corollaries of Soongs\u0027 `mod.InVendor()` or `mod.InProduct()` that you used in aosp/2897612. Please use those instead of `LOCAL_IN_VENDOR` / `LOCAL_IN_PRODUCT`, and don\u0027t use the derivative variable `LOCAL_IN_VENDOR_OR_PRODUCT`. (Create a function to check both `LOCAL_VENDOR_MODULE` and `LOCAL_PRODUCT_MODULE` instead)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 25
+      },
+      "revId": "15d5a3bd3b158f2e137696938671e13ea0dcf902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
