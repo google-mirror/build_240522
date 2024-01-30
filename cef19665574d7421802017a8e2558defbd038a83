@@ -16,6 +16,24 @@
       "message": "`aconfig` (the host tool) already contains logic to --filter and --format; we should make both aconfig and (device side) printflags use the same implementation.",
       "revId": "cef19665574d7421802017a8e2558defbd038a83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "806bb6d7_c0e73cfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1494236
+      },
+      "writtenOn": "2024-01-30T17:47:02Z",
+      "side": 1,
+      "message": "aconfig/aconfig looks like it is mainly for source generation/build time, so the data structures involved are much more complicated (and there is no notion of runtime overrides for that tool, which is the main thing I was looking for w/ the filters here) -- meaning it is difficult to merge the impls.\n\nAlso, it should be easy to add arbitrary filtering over this (the first) CL, since it just refactors + adds the sysprops as a source.",
+      "parentUuid": "05134bf1_a52b0170",
+      "revId": "cef19665574d7421802017a8e2558defbd038a83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
