@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41cb5170_6497bab6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-30T15:21:46Z",
+      "side": 1,
+      "message": "Sorry, just submitted a change touching some of the files in this cl. You might need to cargo fmt them again.",
+      "revId": "2d55a293a7c72074c77d00e78a7af2edadf8f900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
