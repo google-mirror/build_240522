@@ -16,6 +16,24 @@
       "message": "do you want this in text or binary proto?",
       "revId": "2e47c7bbd3e29572fa075923becf9f5d14f3aeb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f486c863_1aff1ede",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2024-01-30T23:25:18Z",
+      "side": 1,
+      "message": "Binary, to match all_aconfig_declarations.pb and all of the other artifacts.  It\u0027s pretty easy to go from protobuf to text, and protobuf is easier to machine parse.",
+      "parentUuid": "9e6238c9_4299b722",
+      "revId": "2e47c7bbd3e29572fa075923becf9f5d14f3aeb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
