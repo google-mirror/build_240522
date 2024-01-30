@@ -135,6 +135,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "559d1f43_23e9342f",
+        "filename": "tools/aconfig/aconfig_storage_file/src/mapped_file.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-01-30T11:54:00Z",
+      "side": 1,
+      "message": "Add a safety comment (here and for the other unsafe blocks below) documenting how you prevent any possible undefined behaviour from this call no matter what parameters are passed to `map_container_storage_files`. If that\u0027s not the case, then `map_container_storage_files` should be unsafe too, and be documented accordingly.",
+      "revId": "e44854be085a168c4ae5a9651132eba4a773f48c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c4ad1c1_a058d81f",
         "filename": "tools/aconfig/aconfig_storage_file/src/mapped_file.rs",
         "patchSetId": 4
