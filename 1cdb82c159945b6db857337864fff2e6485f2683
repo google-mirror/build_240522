@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aabd604a_fe8a93fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-01-30T07:23:19Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 10,
+        "startChar": 44,
+        "endLine": 10,
+        "endChar": 56
+      },
+      "revId": "1cdb82c159945b6db857337864fff2e6485f2683",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2557d54_7bf07e1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-01-30T07:23:19Z",
+      "side": 1,
+      "message": "The convention is to omit b/ in commit message Bug: fields",
+      "range": {
+        "startLine": 15,
+        "startChar": 5,
+        "endLine": 15,
+        "endChar": 16
+      },
+      "revId": "1cdb82c159945b6db857337864fff2e6485f2683",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "483e4917_f6c631ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-01-30T07:23:19Z",
+      "side": 1,
+      "message": "`\u0026\u0026`",
+      "range": {
+        "startLine": 16,
+        "startChar": 24,
+        "endLine": 16,
+        "endChar": 25
+      },
+      "revId": "1cdb82c159945b6db857337864fff2e6485f2683",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3040b2f4_2912638a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-01-30T07:23:19Z",
+      "side": 1,
+      "message": "Code LGTM, some comments on the commit msg",
+      "revId": "1cdb82c159945b6db857337864fff2e6485f2683",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
