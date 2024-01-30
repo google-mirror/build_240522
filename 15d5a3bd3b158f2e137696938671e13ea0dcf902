@@ -46,6 +46,30 @@
       },
       "revId": "15d5a3bd3b158f2e137696938671e13ea0dcf902",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d2cf15d_491676e1",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-01-30T08:30:54Z",
+      "side": 1,
+      "message": "+1 to Kiyoung.\n`InVendor()`/`InProduct()` shows a module is vendor/product image variant. It does not mean the module is specific to each partition. Different from `LOCAL_{image}_MODULE`, `LOCAL_IN_[VENDOR|PRODUCT]` is not settable from Android.mk.\nSo I agree to define `LOCAL_IN_[VENDOR|PRODUCT]` to reflect the `mod.InVendor()` or `mod.InProduct()`.",
+      "parentUuid": "f3308730_6afd3c13",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 25
+      },
+      "revId": "15d5a3bd3b158f2e137696938671e13ea0dcf902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
