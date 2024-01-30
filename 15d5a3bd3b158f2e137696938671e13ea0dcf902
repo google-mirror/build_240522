@@ -70,6 +70,30 @@
       },
       "revId": "15d5a3bd3b158f2e137696938671e13ea0dcf902",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d485b3f7_05c4f6be",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-01-30T21:57:36Z",
+      "side": 1,
+      "message": "\u003e `LOCAL_IN_[VENDOR|PRODUCT]` is not settable from Android.mk.\n\nIs there anything that prevents that right now?\n\nLooking at the revised version, it looks like `LOCAL_IN_PRODUCT \u003d\u003d LOCAL_PRODUCT_MODULE`, so could we remove `LOCAL_IN_PRODUCT` at least? And could `LOCAL_IN_VENDOR` be made a function that ORs `$(LOCAL_VENDOR_MODULE) $(LOCAL_ODM_MODULE) $(LOCAL_OEM_MODULE) $(LOCAL_PROPRIETARY_MODULE)`? And consider naming it something like `is_vendor_variant`, `LOCAL_IN_VENDOR` implies that it actually goes into the vendor partition which is confusing me.",
+      "parentUuid": "4d2cf15d_491676e1",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 25
+      },
+      "revId": "15d5a3bd3b158f2e137696938671e13ea0dcf902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
