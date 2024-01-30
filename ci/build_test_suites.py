@@ -43,6 +43,8 @@ def build_test_suites(argv):
     build_everything(args)
     return
 
+  args.extra_targets.remove('mts')
+
   # Call the class to map changed files to modules to build.
   # TODO(lucafarsi): Move this into a replaceable class.
   build_affected_modules(args)
