@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05134bf1_a52b0170",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-01-30T09:25:15Z",
+      "side": 1,
+      "message": "`aconfig` (the host tool) already contains logic to --filter and --format; we should make both aconfig and (device side) printflags use the same implementation.",
+      "revId": "cef19665574d7421802017a8e2558defbd038a83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
