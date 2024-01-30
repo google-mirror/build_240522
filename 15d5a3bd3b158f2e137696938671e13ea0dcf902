@@ -22,6 +22,30 @@
       },
       "revId": "15d5a3bd3b158f2e137696938671e13ea0dcf902",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3308730_6afd3c13",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2024-01-30T08:00:45Z",
+      "side": 1,
+      "message": "I moved usage of `LOCAL_IN_VENDOR_OR_PRODUCT` into function as you suggested, but I left definitions of `LOCAL_IN_VENDOR` / `LOCAL_IN_PRODUCT`, because in Soong there are some modules which are not installed in vendor / odm / product (thus not `LOCAL_VENDOR_MODULE` nor `LOCAL_ODM_MDOULE`), but should be built as vendor / product variant - such as LLNDK stubs. PTAL.",
+      "parentUuid": "e970f11b_14a19f85",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 25
+      },
+      "revId": "15d5a3bd3b158f2e137696938671e13ea0dcf902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
