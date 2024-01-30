@@ -17,7 +17,7 @@
 //! flag table module defines the flag table file format and methods for serialization
 //! and deserialization
 
-use crate::{read_str_from_bytes, read_u16_from_bytes, read_u32_from_bytes, get_bucket_index};
+use crate::{get_bucket_index, read_str_from_bytes, read_u16_from_bytes, read_u32_from_bytes};
 use anyhow::{anyhow, Result};
 
 /// Flag table header struct
@@ -144,8 +144,8 @@ impl FlagTable {
             .map(|_| {
                 let mut node = FlagTableNode::from_bytes(&bytes[head..]).unwrap();
                 head += node.as_bytes().len();
-                node.bucket_index = FlagTableNode::find_bucket_index(
-                    node.package_id, &node.flag_name, num_buckets);
+                node.bucket_index =
+                    FlagTableNode::find_bucket_index(node.package_id, &node.flag_name, num_buckets);
                 node
             })
             .collect();
@@ -179,8 +179,7 @@ pub fn find_flag_offset(buf: &[u8], package_id: u32, flag: &str) -> Result<Optio
 
     loop {
         let interpreted_node = FlagTableNode::from_bytes(&buf[flag_node_offset..])?;
-        if interpreted_node.package_id == package_id &&
-            interpreted_node.flag_name == flag {
+        if interpreted_node.package_id == package_id && interpreted_node.flag_name == flag {
             return Ok(Some(interpreted_node.flag_id));
         }
         match interpreted_node.next_offset {
@@ -188,7 +187,6 @@ pub fn find_flag_offset(buf: &[u8], package_id: u32, flag: &str) -> Result<Optio
             None => return Ok(None),
         }
     }
-
 }
 
 #[cfg(test)]
@@ -274,7 +272,7 @@ mod tests {
             reinterpreted_node.bucket_index = FlagTableNode::find_bucket_index(
                 reinterpreted_node.package_id,
                 &reinterpreted_node.flag_name,
-                num_buckets
+                num_buckets,
             );
             assert_eq!(node, &reinterpreted_node);
         }
@@ -300,9 +298,7 @@ mod tests {
         ];
         for (package_id, flag_name, expected_offset) in baseline.into_iter() {
             let flag_offset =
-                find_flag_offset(&flag_table[..], package_id, flag_name)
-                .unwrap()
-                .unwrap();
+                find_flag_offset(&flag_table[..], package_id, flag_name).unwrap().unwrap();
             assert_eq!(flag_offset, expected_offset);
         }
     }
@@ -311,11 +307,9 @@ mod tests {
     // this test point locks down table query of a non exist flag
     fn test_not_existed_flag_query() {
         let flag_table = create_test_flag_table().unwrap().as_bytes();
-        let flag_offset =
-            find_flag_offset(&flag_table[..], 1, "disabled_fixed_ro").unwrap();
+        let flag_offset = find_flag_offset(&flag_table[..], 1, "disabled_fixed_ro").unwrap();
         assert_eq!(flag_offset, None);
-        let flag_offset =
-            find_flag_offset(&flag_table[..], 2, "disabled_rw").unwrap();
+        let flag_offset = find_flag_offset(&flag_table[..], 2, "disabled_rw").unwrap();
         assert_eq!(flag_offset, None);
     }
 
@@ -325,8 +319,7 @@ mod tests {
         let mut table = create_test_flag_table().unwrap();
         table.header.version = crate::FILE_VERSION + 1;
         let flag_table = table.as_bytes();
-        let error = find_flag_offset(&flag_table[..], 0, "enabled_ro")
-            .unwrap_err();
+        let error = find_flag_offset(&flag_table[..], 0, "enabled_ro").unwrap_err();
         assert_eq!(
             format!("{:?}", error),
             format!(
