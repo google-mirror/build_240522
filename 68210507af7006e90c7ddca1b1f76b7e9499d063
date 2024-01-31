@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ea51670_6f119731",
+        "filename": "tools/aconfig/aconfig_storage_file/src/mapped_file.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-01-31T10:46:05Z",
+      "side": 1,
+      "message": "See go/android-rust-style#unsafe for how to structure safety comments.\n\nSounds like the answer to why these calls are safe is that the file being mapped is read-only (and the underlying storage is guaranteed to not be unmounted (right -- why?)). See Andrew\u0027s comment above and reference the Mmap docs when you list all the conditions that need to be addressed to make these calls safe.",
+      "range": {
+        "startLine": 74,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 41
+      },
+      "revId": "68210507af7006e90c7ddca1b1f76b7e9499d063",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
