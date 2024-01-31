@@ -94,6 +94,30 @@
       },
       "revId": "15d5a3bd3b158f2e137696938671e13ea0dcf902",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ea6d0b9_100c5544",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2024-01-31T01:22:01Z",
+      "side": 1,
+      "message": "`LOCAL_IN_PRODUCT` is not exactly `LOCAL_PRODUCT_MODULE` for modules coming from Soong. In Makefile it exactly matches (even `LOCAL_IN_VENDOR` matches with combination of those variables as you mentioned), but it is not true from the Soong world.\n\nI hesitated to use the word \u0027variant\u0027 as this is mostly used from Soong, but if you are worried about confusing naming, what about `LOCAL_VENDOR_VARIANT`, `LOCAL_PRODUCT_VARIANT`, and `module-is-vendor-or-product-variant`?",
+      "parentUuid": "d485b3f7_05c4f6be",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 25
+      },
+      "revId": "15d5a3bd3b158f2e137696938671e13ea0dcf902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
