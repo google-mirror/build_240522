@@ -39,6 +39,30 @@
       },
       "revId": "19370a0a31a838b842dfdc086eb31d823cec4f81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "535a8d1f_b3b15c50",
+        "filename": "tools/aconfig/aconfig_storage_file/src/mapped_file.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-01-31T16:47:28Z",
+      "side": 1,
+      "message": "Makes sense. Will create a function to do that in the next cl.",
+      "parentUuid": "6a90497a_5f06f9f6",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 6
+      },
+      "revId": "19370a0a31a838b842dfdc086eb31d823cec4f81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
