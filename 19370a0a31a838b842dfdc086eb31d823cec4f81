@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a4e1062_71d1e8c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-01-31T16:32:54Z",
+      "side": 1,
+      "message": "The mmap logic is repeated 3 times. Consider a macro or function to dedup?\n\nCode LGTM. Big plus for the safety comment.",
+      "revId": "19370a0a31a838b842dfdc086eb31d823cec4f81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a90497a_5f06f9f6",
+        "filename": "tools/aconfig/aconfig_storage_file/src/mapped_file.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-01-31T16:32:54Z",
+      "side": 1,
+      "message": "Nice!\n\nSince this ensure! is repeated, you might want to consider a `macro_rules! ensure_read_only`.... or have a macro / function that checks if the flag is read only, then mmaps it, and returns the mmaped file.",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 6
+      },
+      "revId": "19370a0a31a838b842dfdc086eb31d823cec4f81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
