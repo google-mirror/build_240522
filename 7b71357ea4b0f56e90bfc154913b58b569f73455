@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3d663f9_e32bbf5f",
+        "filename": "core/art_config.mk",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-01-31T02:43:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81facee9_fb9bb819",
+      "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fcea752_adca6c7d",
@@ -102,6 +120,24 @@
       "writtenOn": "2024-01-31T02:10:15Z",
       "side": 1,
       "message": "`type\u003dstr` and `dest\u003d\u0027kernel_version_file_for_uffd_gc\u0027` are the defaulit values, remove.",
+      "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37bc3978_37578b33",
+        "filename": "tools/post_process_props.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-01-31T02:43:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fcea752_adca6c7d",
       "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
