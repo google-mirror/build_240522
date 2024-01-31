@@ -80,6 +80,7 @@ def build_affected_modules(args: argparse.Namespace):
   # Call the build command with everything.
   build_command = base_build_command(args)
   build_command.extend(modules_to_build)
+  build_command.append('general-tests-shared-libs')
 
   run_command(build_command, print_output=True)
 
@@ -228,14 +229,66 @@ def zip_build_outputs(
   # TODO(lucafarsi): Move this code into a replaceable class.
   host_paths = []
   target_paths = []
+  host_config_files = []
+  target_config_files = []
   for module in modules_to_build:
     host_path = os.path.join(host_out_testcases, module)
     if os.path.exists(host_path):
       host_paths.append(host_path)
+      print(os.walk(os.path.join(src_top, host_path)))
+      for root, dirs, files in os.walk(os.path.join(src_top, host_path)):
+        for file in files:
+          if file.endswith('.config'):
+            host_config_files.append(os.path.join(host_path, file))
 
     target_path = os.path.join(target_out_testcases, module)
     if os.path.exists(target_path):
       target_paths.append(target_path)
+      print(os.walk(os.path.join(src_top, target_path)))
+      for root, dirs, files in os.walk(os.path.join(src_top, target_path)):
+        for file in files:
+          if file.endswith('.config'):
+            target_config_files.append(os.path.join(target_path, file))
+
+  with open(os.path.join(host_out, 'host_general-tests_list'), 'w') as host_list_file:
+    with open(os.path.join(host_out, 'general-tests_list'), 'w') as list_file:
+      for config_file in host_config_files:
+        host_list_file.write(config_file + '\n')
+        list_file.write('host/' + os.path.relpath(config_file, host_out) + '\n')
+
+  with open(os.path.join(product_out, 'target_general-tests_list'), 'w') as target_list_file:
+    with open(os.path.join(host_out, 'general-tests_list'), 'a') as list_file:
+      for config_file in target_config_files:
+        target_list_file.write(config_file + '\n')
+        list_file.write('target/' + os.path.relpath(config_file, product_out) + '\n')
+
+  zip_command_2 = ['time', os.path.join(host_out, 'bin', 'soong_zip')]
+  zip_command_2.append('-d')
+  zip_command_2.append('-o')
+  zip_command_2.append(os.path.join(dist_dir, 'general-tests_configs.zip'))
+  zip_command_2.append('-P')
+  zip_command_2.append('host')
+  zip_command_2.append('-C')
+  zip_command_2.append(host_out)
+  zip_command_2.append('-l')
+  zip_command_2.append(os.path.join(host_out, 'host_general-tests_list'))
+  zip_command_2.append('-P')
+  zip_command_2.append('target')
+  zip_command_2.append('-C')
+  zip_command_2.append(product_out)
+  zip_command_2.append('-l')
+  zip_command_2.append(os.path.join(product_out, 'target_general-tests_list'))
+  run_command(zip_command_2, print_output=True)
+
+  zip_command_3 = ['time', os.path.join(host_out, 'bin', 'soong_zip')]
+  zip_command_3.append('-d')
+  zip_command_3.append('-o')
+  zip_command_3.append(os.path.join(dist_dir, 'general-tests_list.zip'))
+  zip_command_3.append('-C')
+  zip_command_3.append(host_out)
+  zip_command_3.append('-f')
+  zip_command_3.append(os.path.join(host_out, 'general-tests_list'))
+  run_command(zip_command_3, print_output=True)
 
   zip_command = ['time', os.path.join(host_out, 'bin', 'soong_zip')]
 
