@@ -70,6 +70,40 @@
       "parentUuid": "62f49de2_2da0a5c1",
       "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81facee9_fb9bb819",
+        "filename": "core/art_config.mk",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-01-31T02:10:15Z",
+      "side": 1,
+      "message": "nit: Negate this if statement so that the meat of the work can be unindented.",
+      "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fcea752_adca6c7d",
+        "filename": "tools/post_process_props.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-01-31T02:10:15Z",
+      "side": 1,
+      "message": "`type\u003dstr` and `dest\u003d\u0027kernel_version_file_for_uffd_gc\u0027` are the defaulit values, remove.",
+      "revId": "7b71357ea4b0f56e90bfc154913b58b569f73455",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
