@@ -18,4 +18,8 @@
 # (like "CRB01").  It must be a single word, and is
 # capitalized by convention.
 
+<<<<<<< HEAD   (427649 Merge "Make change and version bump to RT13.240131.001 Snap )
 BUILD_ID=RT13.240131.001
+=======
+BUILD_ID=RT13.240110.001.A3
+>>>>>>> BRANCH (8b1666 Merge "Version bump to RT13.240110.001.A3 [core/build_id.mk])
