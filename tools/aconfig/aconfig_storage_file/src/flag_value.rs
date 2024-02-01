@@ -87,7 +87,7 @@ impl FlagValueList {
 }
 
 /// Query flag value
-pub fn get_boolean_flag_value(buf: &[u8], flag_offset: u32) -> Result<bool> {
+pub fn find_boolean_flag_value(buf: &[u8], flag_offset: u32) -> Result<bool> {
     let interpreted_header = FlagValueHeader::from_bytes(buf)?;
     if interpreted_header.version > crate::FILE_VERSION {
         return Err(anyhow!(
@@ -146,9 +146,7 @@ mod tests {
         let flag_value_list = create_test_flag_value_list().unwrap().as_bytes();
         let baseline: Vec<bool> = vec![false, true, false, false, true, true, false, true];
         for (offset, expected_value) in baseline.into_iter().enumerate() {
-            let flag_value =
-                get_boolean_flag_value(&flag_value_list[..], offset as u32)
-                .unwrap();
+            let flag_value = find_boolean_flag_value(&flag_value_list[..], offset as u32).unwrap();
             assert_eq!(flag_value, expected_value);
         }
     }
@@ -157,12 +155,8 @@ mod tests {
     // this test point locks down query beyond the end of boolean section
     fn test_boolean_out_of_range() {
         let flag_value_list = create_test_flag_value_list().unwrap().as_bytes();
-        let error = get_boolean_flag_value(&flag_value_list[..], 8)
-            .unwrap_err();
-        assert_eq!(
-            format!("{:?}", error),
-            "Flag value offset goes beyond the end of the file."
-        );
+        let error = find_boolean_flag_value(&flag_value_list[..], 8).unwrap_err();
+        assert_eq!(format!("{:?}", error), "Flag value offset goes beyond the end of the file.");
     }
 
     #[test]
@@ -171,8 +165,7 @@ mod tests {
         let mut value_list = create_test_flag_value_list().unwrap();
         value_list.header.version = crate::FILE_VERSION + 1;
         let flag_value = value_list.as_bytes();
-        let error = get_boolean_flag_value(&flag_value[..], 4)
-            .unwrap_err();
+        let error = find_boolean_flag_value(&flag_value[..], 4).unwrap_err();
         assert_eq!(
             format!("{:?}", error),
             format!(
