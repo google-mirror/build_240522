@@ -99,7 +99,7 @@ fn map_container_storage_files(
 }
 
 /// Get a mapped storage file given the container and file type
-pub fn get_mapped_file(
+pub(crate) fn get_mapped_file(
     location_pb_file: &str,
     container: &str,
     file_selection: StorageFileSelection,
