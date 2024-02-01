@@ -118,6 +118,30 @@
       },
       "revId": "15d5a3bd3b158f2e137696938671e13ea0dcf902",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55190734_28bfdb38",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-02-01T18:04:55Z",
+      "side": 1,
+      "message": "I see, I didn\u0027t realize that it was handled differently in soong. I guess you\u0027re right that \"variant\" is kindof a soong thing, I guess this is fine.",
+      "parentUuid": "9ea6d0b9_100c5544",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 25
+      },
+      "revId": "15d5a3bd3b158f2e137696938671e13ea0dcf902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
