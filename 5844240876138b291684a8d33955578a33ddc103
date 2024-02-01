@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "039ccdcb_cd05e3e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-02-01T14:20:53Z",
+      "side": 1,
+      "message": "Thank you for your suggestions!\n\nNote: Please ignore the Bloat Buster warning on Mokey. It\u0027s expected. Because this change has fixed GC type inference, read barriers are now correctly emitted for Mokey, hence bloating the odex files.",
+      "revId": "5844240876138b291684a8d33955578a33ddc103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
