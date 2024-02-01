@@ -19,6 +19,7 @@
 
 use crate::{get_bucket_index, read_str_from_bytes, read_u16_from_bytes, read_u32_from_bytes};
 use anyhow::{anyhow, Result};
+pub type FlagOffset = u16;
 
 /// Flag table header struct
 #[derive(PartialEq, Debug)]
@@ -152,7 +153,7 @@ impl FlagTable {
 }
 
 /// Query flag within package offset
-pub fn find_flag_offset(buf: &[u8], package_id: u32, flag: &str) -> Result<Option<u16>> {
+pub fn find_flag_offset(buf: &[u8], package_id: u32, flag: &str) -> Result<Option<FlagOffset>> {
     let interpreted_header = FlagTableHeader::from_bytes(buf)?;
     if interpreted_header.version > crate::FILE_VERSION {
         return Err(anyhow!(
