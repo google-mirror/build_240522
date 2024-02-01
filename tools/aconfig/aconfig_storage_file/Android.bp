@@ -13,6 +13,7 @@ rust_defaults {
         "libonce_cell",
         "libprotobuf",
         "libtempfile",
+        "libmemmap2",
     ],
 }
 
@@ -27,6 +28,14 @@ rust_test_host {
     name: "aconfig_storage_file.test",
     test_suites: ["general-tests"],
     defaults: ["aconfig_storage_file.defaults"],
+    data: [
+        "tests/package.map",
+        "tests/flag.map",
+        "tests/flag.val",
+        "tests/rw.package.map",
+        "tests/rw.flag.map",
+        "tests/rw.flag.val",
+    ],
 }
 
 rust_protobuf {
@@ -36,3 +45,4 @@ rust_protobuf {
     source_stem: "aconfig_storage_protos",
     host_supported: true,
 }
+
