@@ -140,16 +140,20 @@ def MergeAbPartitions(framework_meta_dir, vendor_meta_dir, merged_meta_dir,
 
   The output contains the union of the partition names.
   """
-  with open(os.path.join(framework_meta_dir, 'ab_partitions.txt')) as f:
-    # Filter out some partitions here to support the case that the
-    # ab_partitions.txt of framework-target-files has non-framework partitions.
-    # This case happens when we use a complete merged target files package as
-    # the framework-target-files.
-    framework_ab_partitions = [
-        partition
-        for partition in f.read().splitlines()
-        if partition in framework_partitions
-    ]
+  framework_ab_partitions = []
+  try:
+    with open(os.path.join(framework_meta_dir, 'ab_partitions.txt')) as f:
+      # Filter out some partitions here to support the case that the
+      # ab_partitions.txt of framework-target-files has non-framework
+      # partitions. This case happens when we use a complete merged target
+      # files package as the framework-target-files.
+      framework_ab_partitions.extend([
+          partition
+          for partition in f.read().splitlines()
+          if partition in framework_partitions
+      ])
+  except:
+    logger.warning('framework ab_partitions.txt does not exist, skipping it.')
 
   with open(os.path.join(vendor_meta_dir, 'ab_partitions.txt')) as f:
     vendor_ab_partitions = f.read().splitlines()
