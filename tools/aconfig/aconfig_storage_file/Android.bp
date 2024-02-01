@@ -13,6 +13,7 @@ rust_defaults {
         "libonce_cell",
         "libprotobuf",
         "libtempfile",
+        "libmemmap2",
     ],
 }
 
