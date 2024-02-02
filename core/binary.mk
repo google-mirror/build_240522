@@ -476,8 +476,8 @@ ifneq (,$(my_cpp_std_version))
    my_cpp_std_cppflags := -std=$(my_cpp_std_version)
 endif
 
-# Extra cflags for projects under external/ directory
-ifneq ($(filter external/%,$(LOCAL_PATH)),)
+# Extra cflags for projects under external/ hardware/ and vendor/ directories
+ifneq ($(filter external/% hardware/% vendor/%,$(LOCAL_PATH)),)
     my_cflags += $(CLANG_EXTERNAL_CFLAGS)
 endif
 
