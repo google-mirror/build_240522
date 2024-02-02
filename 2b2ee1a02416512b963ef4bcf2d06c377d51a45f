@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "72d2d0f2_abe59199",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2024-02-02T05:48:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57786336_fde459c3",
+      "range": {
+        "startLine": 3,
+        "startChar": 15,
+        "endLine": 3,
+        "endChar": 34
+      },
+      "revId": "2b2ee1a02416512b963ef4bcf2d06c377d51a45f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "607c22e9_753fc9cf",
         "filename": "core/local_vendor_product.mk",
         "patchSetId": 1
@@ -72,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "949d5d0e_9611c9d2",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2024-02-02T05:48:22Z",
+      "side": 1,
+      "message": "It is true, but I\u0027d like to emphasize that it was not supposed to be used even before deprecation.",
+      "parentUuid": "48892123_74bedd76",
+      "range": {
+        "startLine": 5,
+        "startChar": 27,
+        "endLine": 5,
+        "endChar": 45
+      },
+      "revId": "2b2ee1a02416512b963ef4bcf2d06c377d51a45f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37a48731_1bff9e6a",
         "filename": "core/local_vendor_product.mk",
         "patchSetId": 1
@@ -83,6 +131,30 @@
       "writtenOn": "2024-02-02T05:40:28Z",
       "side": 1,
       "message": "LOCAL_IN_VENDOR",
+      "range": {
+        "startLine": 6,
+        "startChar": 2,
+        "endLine": 6,
+        "endChar": 21
+      },
+      "revId": "2b2ee1a02416512b963ef4bcf2d06c377d51a45f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0245618_dafea8ac",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2024-02-02T05:48:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37a48731_1bff9e6a",
       "range": {
         "startLine": 6,
         "startChar": 2,
