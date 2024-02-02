@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "135f4017_73f0f323",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3272400
+      },
+      "writtenOn": "2024-02-02T10:15:18Z",
+      "side": 1,
+      "message": "adb reboot bootloader",
+      "revId": "3e32a4c8fb3947a95f808a7460d48f7af1066db5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
