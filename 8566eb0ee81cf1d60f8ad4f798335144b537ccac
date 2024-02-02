@@ -69,6 +69,24 @@
       "parentUuid": "86972f3b_09e79aac",
       "revId": "8566eb0ee81cf1d60f8ad4f798335144b537ccac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac5656cd_f1e61f07",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2024-02-02T17:06:10Z",
+      "side": 1,
+      "message": "Actually, it gives you __has_feature(memtag_heap) already",
+      "parentUuid": "d83b3f63_33674944",
+      "revId": "8566eb0ee81cf1d60f8ad4f798335144b537ccac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
