@@ -120,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa84040c_13023f92",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-02-02T05:50:26Z",
+      "side": 1,
+      "message": "Then I think it is better to use \"must not\" instead of \"should not\".",
+      "parentUuid": "949d5d0e_9611c9d2",
+      "range": {
+        "startLine": 5,
+        "startChar": 27,
+        "endLine": 5,
+        "endChar": 45
+      },
+      "revId": "2b2ee1a02416512b963ef4bcf2d06c377d51a45f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37a48731_1bff9e6a",
         "filename": "core/local_vendor_product.mk",
         "patchSetId": 1
