@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b49e3491_28cf772d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2024-02-02T08:48:58Z",
+      "side": 1,
+      "message": "(p.s. llvm-readelf --memtag dumps the note nicely symbolized as well as the dynamic entries)",
+      "revId": "8566eb0ee81cf1d60f8ad4f798335144b537ccac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86972f3b_09e79aac",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2024-02-02T08:48:58Z",
+      "side": 1,
+      "message": "I guess this is technically not necessary any more (maybe best to leave it though to avoid any potential copypasta problems in the future).",
+      "revId": "8566eb0ee81cf1d60f8ad4f798335144b537ccac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
