@@ -1,4 +1,11 @@
 
+# LOCAL_USE_VNDK is not the variable which set by module directly, but there are some modules do so.
+# Set those as LOCAL_IN_VENDOR to make those modules work as expected.
+ifeq (true,$(LOCAL_USE_VNDK))
+  $(warning LOCAL_USE_VNDK should not be used. Please use LOCAL_VENDOR_MODULE or LOCAL_PRODUCT_MODULE instead.)
+  LOCAL_IN_VENDOR:=true
+endif
+
 # Set LOCAL_IN_VENDOR for modules going into vendor or odm partition and LOCAL_IN_PRODUCT for product
 # except for host modules. If LOCAL_SDK_VERSION is set, thats a more restrictive set, so they don't need
 # LOCAL_IN_VENDOR or LOCAL_IN_PRODUCT
