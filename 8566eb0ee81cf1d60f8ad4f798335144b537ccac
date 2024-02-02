@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5913284a_d7114123",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2024-02-02T17:03:47Z",
+      "side": 1,
+      "message": "My problem with that is it is never llvm-readelf, but llvm-readelf-16 or something. It\u0027s so annoying to always do llvm-readelf\u003ctab\u003e\u003ctab\u003e, find the highest number and input it manually.",
+      "parentUuid": "b49e3491_28cf772d",
+      "revId": "8566eb0ee81cf1d60f8ad4f798335144b537ccac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "86972f3b_09e79aac",
         "filename": "core/config_sanitizers.mk",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-02T08:48:58Z",
       "side": 1,
       "message": "I guess this is technically not necessary any more (maybe best to leave it though to avoid any potential copypasta problems in the future).",
+      "revId": "8566eb0ee81cf1d60f8ad4f798335144b537ccac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d83b3f63_33674944",
+        "filename": "core/config_sanitizers.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2024-02-02T17:03:47Z",
+      "side": 1,
+      "message": "Right, also we could add some compile-time action to memtag-heap in the future.",
+      "parentUuid": "86972f3b_09e79aac",
       "revId": "8566eb0ee81cf1d60f8ad4f798335144b537ccac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
