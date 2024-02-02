@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57786336_fde459c3",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-02-02T05:40:28Z",
+      "side": 1,
+      "message": "I think it must be `LOCAL_IN_VENDOR` instead.",
+      "range": {
+        "startLine": 3,
+        "startChar": 15,
+        "endLine": 3,
+        "endChar": 34
+      },
+      "revId": "2b2ee1a02416512b963ef4bcf2d06c377d51a45f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "607c22e9_753fc9cf",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-02-02T05:40:28Z",
+      "side": 1,
+      "message": "I think, this suggestion is correct as the LOCAL_USE_VNDK and LOCAL_IN_VENDOR are not for the users. We may suggest this module variables.",
+      "range": {
+        "startLine": 5,
+        "startChar": 58,
+        "endLine": 5,
+        "endChar": 109
+      },
+      "revId": "2b2ee1a02416512b963ef4bcf2d06c377d51a45f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48892123_74bedd76",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-02-02T05:40:28Z",
+      "side": 1,
+      "message": "is deprecated",
+      "range": {
+        "startLine": 5,
+        "startChar": 27,
+        "endLine": 5,
+        "endChar": 45
+      },
+      "revId": "2b2ee1a02416512b963ef4bcf2d06c377d51a45f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37a48731_1bff9e6a",
+        "filename": "core/local_vendor_product.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-02-02T05:40:28Z",
+      "side": 1,
+      "message": "LOCAL_IN_VENDOR",
+      "range": {
+        "startLine": 6,
+        "startChar": 2,
+        "endLine": 6,
+        "endChar": 21
+      },
+      "revId": "2b2ee1a02416512b963ef4bcf2d06c377d51a45f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
