@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6181ed3_7d0c0fb2",
+        "filename": "core/binary.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-02-03T00:03:46Z",
+      "side": 1,
+      "message": "You can make this:\n```\nifneq ($(filter external/% hardware/% vendor/%,$(LOCAL_PATH)),)\n    my_cflags +\u003d $(CLANG_EXTERNAL_CFLAGS)\nendif\n```",
+      "revId": "aba7ba168747deb1626365ac0ac07a9dd08066f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
