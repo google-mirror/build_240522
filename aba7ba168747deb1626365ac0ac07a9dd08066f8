@@ -16,6 +16,24 @@
       "message": "You can make this:\n```\nifneq ($(filter external/% hardware/% vendor/%,$(LOCAL_PATH)),)\n    my_cflags +\u003d $(CLANG_EXTERNAL_CFLAGS)\nendif\n```",
       "revId": "aba7ba168747deb1626365ac0ac07a9dd08066f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69acfd7b_7c52686f",
+        "filename": "core/binary.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2024-02-03T00:24:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6181ed3_7d0c0fb2",
+      "revId": "aba7ba168747deb1626365ac0ac07a9dd08066f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
