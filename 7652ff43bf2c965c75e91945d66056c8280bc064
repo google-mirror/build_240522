@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b198f02_7dbd8782",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-02-03T20:11:38Z",
+      "side": 1,
+      "message": "Please take out the trailing \\",
+      "revId": "7652ff43bf2c965c75e91945d66056c8280bc064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
