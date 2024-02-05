@@ -20,6 +20,8 @@
 # other java modules.
 
 $(call record-module-type,STATIC_JAVA_LIBRARY)
+$(if $(my_register_name),$(eval ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE:=STATIC_JAVA_LIBRARY))
+
 LOCAL_UNINSTALLABLE_MODULE := true
 LOCAL_IS_STATIC_JAVA_LIBRARY := true
 LOCAL_MODULE_CLASS := JAVA_LIBRARIES

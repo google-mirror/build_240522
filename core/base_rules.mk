@@ -16,6 +16,9 @@
 
 # Catch users that directly include base_rules.mk
 $(call record-module-type,base_rules)
+$(if $(my_register_name),\
+  $(if $(ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE),,\
+    $(eval ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE:=base_rules)))
 
 # Users can define base-rules-hook in their buildspec.mk to perform
 # arbitrary operations as each module is included.
@@ -931,7 +934,7 @@ ALL_MODULES.$(my_register_name).CHECKED := \
 ALL_MODULES.$(my_register_name).BUILT := \
     $(ALL_MODULES.$(my_register_name).BUILT) $(LOCAL_BUILT_MODULE)
 ALL_MODULES.$(my_register_name).SOONG_MODULE_TYPE := \
-    $(ALL_MODULES.$(my_register_name).SOONG_MODULE_TYPE) $(LOCAL_SOONG_MODULE_TYPE)
+    $(ALL_MODULES.$(my_register_name).SOONG_MODULE_TYPE) $(if $(LOCAL_SOONG_MODULE_TYPE),$(LOCAL_SOONG_MODULE_TYPE),$(if $(LOCAL_SOONG_INSTALLED_MODULE),NOT_REPORTED))
 ifndef LOCAL_IS_HOST_MODULE
 ALL_MODULES.$(my_register_name).TARGET_BUILT := \
     $(ALL_MODULES.$(my_register_name).TARGET_BUILT) $(LOCAL_BUILT_MODULE)

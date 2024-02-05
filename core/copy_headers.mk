@@ -3,6 +3,8 @@ ifneq (,$(strip $(LOCAL_COPY_HEADERS)))
 ## Copy headers to the install tree
 ###########################################################
 $(call record-module-type,COPY_HEADERS)
+$(if $(my_register_name),$(eval ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE:=COPY_HEADERS))
+
 ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),)
   $(call pretty-error,LOCAL_COPY_HEADERS may not be used with host modules)
 endif

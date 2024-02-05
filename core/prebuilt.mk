@@ -6,6 +6,7 @@
 ##
 ###########################################################
 $(call record-module-type,PREBUILT)
+$(if $(my_register_name),$(eval ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE:=PREBUILT))
 
 ifdef LOCAL_IS_HOST_MODULE
   my_prefix := HOST_

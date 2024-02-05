@@ -3,6 +3,7 @@
 ## Common flags for fuzz tests are added.
 ###########################################
 $(call record-module-type,FUZZ_TEST)
+$(if $(my_register_name),$(eval ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE:=FUZZ_TEST))
 
 ifdef LOCAL_SDK_VERSION
     $(error $(LOCAL_PATH): $(LOCAL_MODULE): NDK fuzz tests are not supported.)

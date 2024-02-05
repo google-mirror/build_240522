@@ -3,6 +3,7 @@
 ##
 ###########################################################
 $(call record-module-type,JAVA_LIBRARY)
+$(if $(my_register_name),$(eval ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE:=JAVA_LIBRARY))
 
 ifdef LOCAL_IS_HOST_MODULE
 $(error $(LOCAL_PATH): Host java libraries must use BUILD_HOST_JAVA_LIBRARY)

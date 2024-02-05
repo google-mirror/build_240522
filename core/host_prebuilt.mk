@@ -15,5 +15,7 @@
 #
 
 $(call record-module-type,HOST_PREBUILT)
+$(if $(my_register_name),$(eval ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE:=HOST_PREBUILT))
+
 LOCAL_IS_HOST_MODULE := true
 include $(BUILD_MULTI_PREBUILT)

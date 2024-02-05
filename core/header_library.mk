@@ -1,4 +1,6 @@
 $(call record-module-type,HEADER_LIBRARY)
+$(if $(my_register_name),$(eval ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE:=HEADER_LIBRARY))
+
 ifdef LOCAL_IS_HOST_MODULE
   my_prefix := HOST_
   LOCAL_HOST_PREFIX :=

@@ -3,6 +3,7 @@
 ## Common flags for native tests are added.
 ###########################################
 $(call record-module-type,NATIVE_TEST)
+$(if $(my_register_name),$(eval ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE:=NATIVE_TEST))
 
 ifdef LOCAL_MODULE_CLASS
 ifneq ($(LOCAL_MODULE_CLASS),NATIVE_TESTS)

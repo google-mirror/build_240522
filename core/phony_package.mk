@@ -1,4 +1,6 @@
 $(call record-module-type,PHONY_PACKAGE)
+$(if $(my_register_name),$(eval ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE:=PHONY_PACKAGE))
+
 ifneq ($(strip $(LOCAL_SRC_FILES)),)
 $(error LOCAL_SRC_FILES are not allowed for phony packages)
 endif

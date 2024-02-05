@@ -1,4 +1,6 @@
 $(call record-module-type,STATIC_LIBRARY)
+$(if $(my_register_name),$(eval ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE:=STATIC_LIBRARY))
+
 ifdef LOCAL_IS_HOST_MODULE
   $(call pretty-error,BUILD_STATIC_LIBRARY is incompatible with LOCAL_IS_HOST_MODULE. Use BUILD_HOST_STATIC_LIBRARY instead)
 endif

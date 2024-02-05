@@ -23,6 +23,7 @@ endif
 
 ifneq (true,$(my_skip_this_target))
 $(call record-module-type,EXECUTABLE)
+$(if $(my_register_name),$(eval ALL_MODULES.$(my_register_name).MAKE_MODULE_TYPE:=EXECUTABLE))
 
 my_prefix := TARGET_
 include $(BUILD_SYSTEM)/multilib.mk
