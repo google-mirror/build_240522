@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "358a37da_c022e8ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-02-05T12:38:00Z",
+      "side": 1,
+      "message": "It would be better to revert^2 the original CL and add patchsets to the original if you have.\nDo you add any changes from aosp/2931430?",
+      "revId": "454265c233678c5025a7a2ed45a2e6c604460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
