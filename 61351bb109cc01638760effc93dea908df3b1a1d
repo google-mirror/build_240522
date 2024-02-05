@@ -16,6 +16,63 @@
       "message": "I think that should be good for an initial version. PTAL - thanks!",
       "revId": "61351bb109cc01638760effc93dea908df3b1a1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f215db4b_fcd6c017",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-02-05T18:03:50Z",
+      "side": 1,
+      "message": "I have one question about the 1:1 mapping between source files and soong modules, and the rest are just nits.",
+      "revId": "61351bb109cc01638760effc93dea908df3b1a1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf344a0_3bb1c072",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-02-05T18:03:50Z",
+      "side": 1,
+      "message": "nit: Since we only support java currently, can we throw an exception if a non .java file is provided as input?",
+      "revId": "61351bb109cc01638760effc93dea908df3b1a1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2bf250a_3fed9e8e",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-02-05T18:03:50Z",
+      "side": 1,
+      "message": "I think some .java files can be included in multiple `java_library` modules in android (either directly or indirectly)\n1. Via static linking\n2. Via macros which create multiple child modules (`java_sdk_library`)\n\nCurrently file to java module is 1:1. Should we consider making this 1:many?",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 79
+      },
+      "revId": "61351bb109cc01638760effc93dea908df3b1a1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1863c9d_b0163df5",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-02-05T18:03:50Z",
+      "side": 1,
+      "message": "I think one option would be to _always_ invoke `runMake`. If there are no changes to soong modules, it should be a null build.",
+      "range": {
+        "startLine": 77,
+        "startChar": 1,
+        "endLine": 80,
+        "endChar": 2
+      },
+      "revId": "4e79a4ae53f0cbac1d403b30a22b1ae69cfe62a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "948c86b4_6b19d0e7",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-02-05T18:03:50Z",
+      "side": 1,
+      "message": "nit: Can we rename `modules` to `filePathToModuleMap`? This makes the comment redundant and also conveys the contents of this variable",
+      "range": {
+        "startLine": 87,
+        "startChar": 41,
+        "endLine": 87,
+        "endChar": 63
+      },
+      "revId": "4e79a4ae53f0cbac1d403b30a22b1ae69cfe62a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14a00128_5003ce3c",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-02-05T18:03:50Z",
+      "side": 1,
+      "message": "I think a lot of other scripts in android are expected to run from the root of the workspace, and we can enforce this on this script as well (you might need to add a `cd` in `tools/ide_query/ide_query.sh`). This way we dont have to log this value.",
+      "range": {
+        "startLine": 114,
+        "startChar": 3,
+        "endLine": 114,
+        "endChar": 27
+      },
+      "revId": "4e79a4ae53f0cbac1d403b30a22b1ae69cfe62a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80af06e9_900a9f54",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-02-05T18:03:50Z",
+      "side": 1,
+      "message": "nit: Since we are iterating over `files`, and files might have the same `module`, it is possible that we are computing `transitiveDeps` multiple times for the same module. Can we create a map here to store the transitveDeps of a specific module?",
+      "range": {
+        "startLine": 127,
+        "startChar": 2,
+        "endLine": 127,
+        "endChar": 40
+      },
+      "revId": "4e79a4ae53f0cbac1d403b30a22b1ae69cfe62a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
