@@ -302,6 +302,8 @@ endef
 #
 # internal utility to define a namespace and a variable in it.
 define soong_config_define_internal
+$(if $(call is-c-identifier,$(1)),,$(error Soong config namespaces must be valid c identifiers: $(1))) \
+$(if $(call is-c-identifier,$(2)),,$(error Soong config variables must be valid c identifiers: $(2))) \
 $(if $(filter $1,$(SOONG_CONFIG_NAMESPACES)),,$(eval SOONG_CONFIG_NAMESPACES:=$(SOONG_CONFIG_NAMESPACES) $(strip $1))) \
 $(if $(filter $2,$(SOONG_CONFIG_$(strip $1))),,$(eval SOONG_CONFIG_$(strip $1):=$(SOONG_CONFIG_$(strip $1)) $(strip $2)))
 endef
