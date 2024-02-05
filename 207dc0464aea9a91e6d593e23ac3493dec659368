@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0716cc62_94e3795f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-05T07:55:55Z",
+      "side": 1,
+      "message": "Some suggestions inline, but overall LGTM.",
+      "revId": "207dc0464aea9a91e6d593e23ac3493dec659368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0471c6f6_6d86fe6f",
+        "filename": "tools/aconfig/aconfig_protos/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-05T07:55:55Z",
+      "side": 1,
+      "message": "nit: can you include a valid example for name please? (The existing rules should absolutely be part of the text; the example is there to help a reader quickly understand what is expected).\n\nExamples for namespace and packages as well, please.",
+      "range": {
+        "startLine": 25,
+        "startChar": 78,
+        "endLine": 25,
+        "endChar": 79
+      },
+      "revId": "207dc0464aea9a91e6d593e23ac3493dec659368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1c0d937_8b1ed2b6",
+        "filename": "tools/aconfig/aconfig_protos/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-05T07:55:55Z",
+      "side": 1,
+      "message": "via release configs",
+      "range": {
+        "startLine": 58,
+        "startChar": 73,
+        "endLine": 58,
+        "endChar": 74
+      },
+      "revId": "207dc0464aea9a91e6d593e23ac3493dec659368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33079225_57f67149",
+        "filename": "tools/aconfig/aconfig_protos/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-05T07:55:55Z",
+      "side": 1,
+      "message": "Define this as a constant at the top of the file\n\n```\nconst ACONFIG_PROTO_PATH: \u0026str \u003d \"//build/make/...\";\n```\n\nand use it like so:\n\n```\nensure!(..., \"bad flag ..., see {ACONFIG_PROTO_PATH} for details\");\n```",
+      "range": {
+        "startLine": 130,
+        "startChar": 12,
+        "endLine": 130,
+        "endChar": 74
+      },
+      "revId": "207dc0464aea9a91e6d593e23ac3493dec659368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
