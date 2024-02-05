@@ -16,6 +16,24 @@
       "message": "Please take out the trailing \\",
       "revId": "7652ff43bf2c965c75e91945d66056c8280bc064",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3863da80_0812d89a",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-05T13:20:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b198f02_7dbd8782",
+      "revId": "7652ff43bf2c965c75e91945d66056c8280bc064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
