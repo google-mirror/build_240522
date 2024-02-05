@@ -225,20 +225,14 @@ ADDITIONAL_SYSTEM_PROPERTIES += ro.postinstall.fstab.prefix=/system
 # ADDITIONAL_VENDOR_PROPERTIES will be installed in vendor/build.prop if
 # property_overrides_split_enabled is true. Otherwise it will be installed in
 # /system/build.prop
+ifeq ($(KEEP_VNDK),true)
 ifdef BOARD_VNDK_VERSION
-  ifeq ($(KEEP_VNDK),true)
   ifeq ($(BOARD_VNDK_VERSION),current)
     ADDITIONAL_VENDOR_PROPERTIES := ro.vndk.version=$(PLATFORM_VNDK_VERSION)
   else
     ADDITIONAL_VENDOR_PROPERTIES := ro.vndk.version=$(BOARD_VNDK_VERSION)
   endif
-  endif
-
-  # TODO(b/290159430): ro.vndk.deprecate is a temporal variable for deprecating VNDK.
-  # This variable will be removed once ro.vndk.version can be removed.
-  ifneq ($(KEEP_VNDK),true)
-    ADDITIONAL_SYSTEM_PROPERTIES += ro.vndk.deprecate=true
-  endif
+endif
 endif
 
 # Add cpu properties for bionic and ART.
@@ -1247,8 +1241,7 @@ endef
 # Returns modules included automatically as a result of certain BoardConfig
 # variables being set.
 define auto-included-modules
-  $(if $(and $(BOARD_VNDK_VERSION),$(filter true,$(KEEP_VNDK))),vndk_package) \
-  $(if $(filter true,$(KEEP_VNDK)),,llndk_in_system) \
+  llndk_in_system \
   $(if $(DEVICE_MANIFEST_FILE),vendor_manifest.xml) \
   $(if $(DEVICE_MANIFEST_SKUS),$(foreach sku, $(DEVICE_MANIFEST_SKUS),vendor_manifest_$(sku).xml)) \
   $(if $(ODM_MANIFEST_FILES),odm_manifest.xml) \

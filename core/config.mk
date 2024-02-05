@@ -374,6 +374,7 @@ ANDROID_BUILDSPEC := $(TOPDIR)buildspec.mk
 endif
 -include $(ANDROID_BUILDSPEC)
 
+ifeq ($(KEEP_VNDK),true)
 # Starting in Android U, non-VNDK devices not supported
 # WARNING: DO NOT CHANGE: if you are downstream of AOSP, and you change this, without
 # letting upstream know it's important to you, we may do cleanup which breaks this
@@ -382,6 +383,10 @@ ifndef BOARD_VNDK_VERSION
 # READ WARNING - DO NOT CHANGE
 BOARD_VNDK_VERSION := current
 # READ WARNING - DO NOT CHANGE
+endif
+else
+$(KATI_deprecated_var BOARD_VNDK_VERSION,BOARD_VNDK_VERSION must not be used with VNDK deprecation)
+$(KATI_deprecated_var PLATFORM_VNDK_VERSION,PLATFORM_VNDK_VERSION must not used with VNDK deprecation)
 endif
 
 # ---------------------------------------------------------------
@@ -1292,6 +1297,15 @@ DEFAULT_DATA_OUT_MODULES := ltp $(ltp_packages)
 .KATI_READONLY := DEFAULT_DATA_OUT_MODULES
 
 include $(BUILD_SYSTEM)/dumpvar.mk
+
+ifneq ($(KEEP_VNDK),true)
+ifdef BOARD_VNDK_VERSION
+BOARD_VNDK_VERSION=
+endif
+ifdef PLATFORM_VNDK_VERSION
+PLATFORM_VNDK_VERSION=
+endif
+endif
 
 ifeq (true,$(FULL_SYSTEM_OPTIMIZE_JAVA))
 ifeq (,$(SYSTEM_OPTIMIZE_JAVA))
