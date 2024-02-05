@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "909924f0_b05bb93f",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-05T15:18:17Z",
+      "side": 1,
+      "message": "To clarify: while I think abstracting input sources as soon as possible (to make the rest of the code easier to test) is a good thing in general, what I really want to make sure is that this lib doesn\u0027t expose any APIs that aren\u0027t necessary.\n\nConsider using `pub (crate)` where possible. See https://doc.rust-lang.org/reference/visibility-and-privacy.html.",
+      "parentUuid": "e14b1c00_17c3fef7",
+      "range": {
+        "startLine": 139,
+        "startChar": 3,
+        "endLine": 139,
+        "endChar": 4
+      },
+      "revId": "52b5a540edc37ba17c70b3487e3d3a9d3eb7ce62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a7293a4_a64788e3",
         "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
         "patchSetId": 3
