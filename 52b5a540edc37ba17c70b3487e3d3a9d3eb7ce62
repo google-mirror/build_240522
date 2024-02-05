@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de089f3d_0a7cb52c",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-05T18:30:54Z",
+      "side": 1,
+      "message": "I have marked some of the pub items as pub (crate). Now there two categories of export:\n\n1, storage file definition to be used by aconfig crate to create storage file\n2, api to interact with the storage files.\n\nDown the road, I may split this crate further into two crates. One is purely storage file definition, the other is about api to interact with storage files. Then both aconfig crate and api crate will depend on storage file definition crate. But that is probably a larger change can be done in another cl.\n\nRegarding changing the signature of impl to take a pointer of already mapped file. I think it is more or less the same as what I already have. I still have to export this impl interface for integration test on device.",
+      "parentUuid": "909924f0_b05bb93f",
+      "range": {
+        "startLine": 139,
+        "startChar": 3,
+        "endLine": 139,
+        "endChar": 4
+      },
+      "revId": "52b5a540edc37ba17c70b3487e3d3a9d3eb7ce62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a7293a4_a64788e3",
         "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
         "patchSetId": 3
