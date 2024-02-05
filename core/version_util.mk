@@ -157,6 +157,7 @@ ifndef DEFAULT_APP_TARGET_SDK
 endif
 .KATI_READONLY := DEFAULT_APP_TARGET_SDK
 
+ifeq ($(KEEP_VNDK),true)
 ifndef PLATFORM_VNDK_VERSION
   # This is the definition of the VNDK version for the current VNDK libraries.
   # With trunk stable, VNDK will not be frozen but deprecated.
@@ -172,6 +173,7 @@ ifndef PLATFORM_VNDK_VERSION
   endif
 endif
 .KATI_READONLY := PLATFORM_VNDK_VERSION
+endif
 
 ifndef PLATFORM_SYSTEMSDK_MIN_VERSION
   # This is the oldest version of system SDK that the platform supports. Contrary

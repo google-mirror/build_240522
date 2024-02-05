@@ -374,6 +374,7 @@ ANDROID_BUILDSPEC := $(TOPDIR)buildspec.mk
 endif
 -include $(ANDROID_BUILDSPEC)
 
+ifeq ($(KEEP_VNDK),true)
 # Starting in Android U, non-VNDK devices not supported
 # WARNING: DO NOT CHANGE: if you are downstream of AOSP, and you change this, without
 # letting upstream know it's important to you, we may do cleanup which breaks this
@@ -382,6 +383,17 @@ ifndef BOARD_VNDK_VERSION
 # READ WARNING - DO NOT CHANGE
 BOARD_VNDK_VERSION := current
 # READ WARNING - DO NOT CHANGE
+endif
+else
+ifdef BOARD_VNDK_VERSION
+$(error BOARD_VNDK_VERSION must not be set)
+BOARD_VNDK_VERSION=
+endif
+
+ifdef PLATFORM_VNDK_VERSION
+$(error PLATFORM_VNDK_VERSION must not be set)
+PLATFORM_VNDK_VERSION=
+endif
 endif
 
 # ---------------------------------------------------------------
