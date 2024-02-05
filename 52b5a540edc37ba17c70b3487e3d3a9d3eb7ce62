@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2eccac8_05f49269",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-05T14:57:59Z",
+      "side": 1,
+      "message": "The impl are pub so that we can test these implementations. The impl takes one more input argument which is the pb file. In the actual api, the pb file location is fixed to a constant at /metadata/aconfig/storage_files.pb, and in rust_test, the device does not give permission to write to /metadata for rust_test target. With the impl api, we can create a temp pb file at /tmp and the device won\u0027t complain.\n\nAre there ways to write to /metadata in a rust_test?",
+      "parentUuid": "2d14a0aa_13feec19",
+      "range": {
+        "startLine": 139,
+        "startChar": 3,
+        "endLine": 139,
+        "endChar": 4
+      },
+      "revId": "52b5a540edc37ba17c70b3487e3d3a9d3eb7ce62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a7293a4_a64788e3",
         "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
         "patchSetId": 3
