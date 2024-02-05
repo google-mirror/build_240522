@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e14b1c00_17c3fef7",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-05T15:15:56Z",
+      "side": 1,
+      "message": "By test do you mean an integration test on device?\n\nHow about restructuring the code so that _impl methods take a pointer to an already mmapped file? The real code can mmap from a physical file, the tests cases can create an mmap from memory (MAP_ANONYMOUS in mmap(2)).",
+      "parentUuid": "d2eccac8_05f49269",
+      "range": {
+        "startLine": 139,
+        "startChar": 3,
+        "endLine": 139,
+        "endChar": 4
+      },
+      "revId": "52b5a540edc37ba17c70b3487e3d3a9d3eb7ce62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a7293a4_a64788e3",
         "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
         "patchSetId": 3
