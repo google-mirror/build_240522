@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b044acf_d72e4859",
+        "filename": "tools/aconfig/aconfig_protos/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2024-02-05T16:43:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0471c6f6_6d86fe6f",
+      "range": {
+        "startLine": 25,
+        "startChar": 78,
+        "endLine": 25,
+        "endChar": 79
+      },
+      "revId": "207dc0464aea9a91e6d593e23ac3493dec659368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1c0d937_8b1ed2b6",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "726092cf_8445ed2c",
+        "filename": "tools/aconfig/aconfig_protos/protos/aconfig.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2024-02-05T16:43:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1c0d937_8b1ed2b6",
+      "range": {
+        "startLine": 58,
+        "startChar": 73,
+        "endLine": 58,
+        "endChar": 74
+      },
+      "revId": "207dc0464aea9a91e6d593e23ac3493dec659368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33079225_57f67149",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-02-05T07:55:55Z",
       "side": 1,
       "message": "Define this as a constant at the top of the file\n\n```\nconst ACONFIG_PROTO_PATH: \u0026str \u003d \"//build/make/...\";\n```\n\nand use it like so:\n\n```\nensure!(..., \"bad flag ..., see {ACONFIG_PROTO_PATH} for details\");\n```",
+      "range": {
+        "startLine": 130,
+        "startChar": 12,
+        "endLine": 130,
+        "endChar": 74
+      },
+      "revId": "207dc0464aea9a91e6d593e23ac3493dec659368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c6cb9d7_05fde3d4",
+        "filename": "tools/aconfig/aconfig_protos/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2024-02-05T16:43:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33079225_57f67149",
       "range": {
         "startLine": 130,
         "startChar": 12,
