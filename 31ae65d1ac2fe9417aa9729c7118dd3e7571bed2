@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c4c684d_43fdbae6",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-06T16:18:07Z",
+      "side": 1,
+      "message": "Unpacking both a Result and Option makes the API less ergonomic to work with:\n\n```\nlet x \u003d get_package_offset_impl(...)?.ok_or(anyhow!(...)?;\n```\n\nCan we make it return just Result\u003cPackageOffset\u003e? (With multiple thiserror versions of the Result indicating different reasons of failure.)\n\nOr if you really want to provide an Option in case the requested data isn\u0027t available, restructure the API so the caller first gets a Result\u003cSomeHandle\u003e representing the mmapped file, and then impl SomeHandle { fn get_package_offset(...) -\u003e Option\u003c...\u003e }",
+      "range": {
+        "startLine": 140,
+        "startChar": 5,
+        "endLine": 140,
+        "endChar": 34
+      },
+      "revId": "31ae65d1ac2fe9417aa9729c7118dd3e7571bed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc8d1a05_e839543c",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-06T16:18:07Z",
+      "side": 1,
+      "message": "APIs exposed from libs should return thiserror Errors, not anyhow Errors. See go/android-rust-style, section \"Error handling\", for more info and rationale.",
+      "range": {
+        "startLine": 152,
+        "startChar": 5,
+        "endLine": 152,
+        "endChar": 11
+      },
+      "revId": "31ae65d1ac2fe9417aa9729c7118dd3e7571bed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72e64d91_ba6a444c",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-06T16:18:07Z",
+      "side": 1,
+      "message": "Why is there a PackageOffset in once instance, and a u16 here? Can you add a `type FlagOffset \u003d u16` and return FlagOffset?",
+      "range": {
+        "startLine": 152,
+        "startChar": 19,
+        "endLine": 152,
+        "endChar": 22
+      },
+      "revId": "31ae65d1ac2fe9417aa9729c7118dd3e7571bed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
