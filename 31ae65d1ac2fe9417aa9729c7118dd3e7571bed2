@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "846f1830_abeb5c1e",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-06T21:40:44Z",
+      "side": 1,
+      "message": "It is possible that the queried package is not in this package.map file. So I would like to it return an option. Overall, I would prefer to have just one api instead of two. An alternative is to factor the none option inside PackageOffset struct. We can add a boolean field called package_exists to cover the none case. But for now, I would prefer to keep this as it is.",
+      "parentUuid": "9c4c684d_43fdbae6",
+      "range": {
+        "startLine": 140,
+        "startChar": 5,
+        "endLine": 140,
+        "endChar": 34
+      },
+      "revId": "31ae65d1ac2fe9417aa9729c7118dd3e7571bed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc8d1a05_e839543c",
         "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
         "patchSetId": 10
