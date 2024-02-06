@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e91596_9ade7ef0",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-06T16:38:33Z",
+      "side": 1,
+      "message": "Yes, but this will add couple of seconds to the total execution time. Would be nice if we can optimize this more. I\u0027ll keep the TODO for now.",
+      "parentUuid": "f1863c9d_b0163df5",
+      "range": {
+        "startLine": 77,
+        "startChar": 1,
+        "endLine": 80,
+        "endChar": 2
+      },
+      "revId": "4e79a4ae53f0cbac1d403b30a22b1ae69cfe62a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "948c86b4_6b19d0e7",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-05T18:03:50Z",
       "side": 1,
       "message": "nit: Can we rename `modules` to `filePathToModuleMap`? This makes the comment redundant and also conveys the contents of this variable",
+      "range": {
+        "startLine": 87,
+        "startChar": 41,
+        "endLine": 87,
+        "endChar": 63
+      },
+      "revId": "4e79a4ae53f0cbac1d403b30a22b1ae69cfe62a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c40f6de_3715c600",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-06T16:38:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "948c86b4_6b19d0e7",
       "range": {
         "startLine": 87,
         "startChar": 41,
@@ -83,6 +131,30 @@
       "writtenOn": "2024-02-05T18:03:50Z",
       "side": 1,
       "message": "nit: Since we are iterating over `files`, and files might have the same `module`, it is possible that we are computing `transitiveDeps` multiple times for the same module. Can we create a map here to store the transitveDeps of a specific module?",
+      "range": {
+        "startLine": 127,
+        "startChar": 2,
+        "endLine": 127,
+        "endChar": 40
+      },
+      "revId": "4e79a4ae53f0cbac1d403b30a22b1ae69cfe62a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa4ff07b_1a21fb5c",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-06T16:38:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80af06e9_900a9f54",
       "range": {
         "startLine": 127,
         "startChar": 2,
