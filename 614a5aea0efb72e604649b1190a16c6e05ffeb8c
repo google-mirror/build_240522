@@ -16,6 +16,24 @@
       "message": "Can you please add a comment explaining in more detail why this is necessary? What kind of errors are we seeing in TF now, and why weren\u0027t they an issue before?",
       "revId": "614a5aea0efb72e604649b1190a16c6e05ffeb8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e1fb89d_a4663c3a",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 1900900
+      },
+      "writtenOn": "2024-02-06T03:14:53Z",
+      "side": 1,
+      "message": "To eliminate redundant work across g3 and aosp, ATS 2.0 will be the test harness for mobly tests in xTS. The components for ATS 2.0 (eg. `MoblyAospPackageTest` in the python_binary_host_mobly_test_config_template.xml) are totally different from TF components and TF cannot recognize them. By default, TF loads all files end with `.config` so there will be configuration errors for mobly tests. Existing mobly tests in xTS uses TF\u0027s MoblyBinaryHostTest, which is in maintenance mode and will be replaced by ATS 2.0. Other pure mobly tests don\u0027t have test configs in AOSP. Users had to config these tests in g3. After this change, they can directly add configs in AOSP and add tests to xTS.",
+      "parentUuid": "1d4dbe71_bed77e55",
+      "revId": "614a5aea0efb72e604649b1190a16c6e05ffeb8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
