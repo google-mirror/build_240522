@@ -34,6 +34,24 @@
       "parentUuid": "7d77c572_23a433df",
       "revId": "689cf514cedc41991bd1cd9fabafa1fe59b49449",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4717fd2c_8d8f644c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2024-02-06T07:30:23Z",
+      "side": 1,
+      "message": "\u003e Should we make missing AFDO profiles an error instead?\n\nNot with our current design... When we enable AFDO on a library (so that extra AFDO related debug symbols are emitted), we won\u0027t have a profile to go with it until the following profile drop.",
+      "parentUuid": "9e95b5d6_824a7031",
+      "revId": "689cf514cedc41991bd1cd9fabafa1fe59b49449",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
