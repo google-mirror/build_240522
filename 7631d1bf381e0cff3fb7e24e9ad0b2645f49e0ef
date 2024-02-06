@@ -22,6 +22,30 @@
       },
       "revId": "7631d1bf381e0cff3fb7e24e9ad0b2645f49e0ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5bb3474_de77f4ad",
+        "filename": "tools/releasetools/merge/merge_meta.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1966697
+      },
+      "writtenOn": "2024-02-06T14:43:05Z",
+      "side": 1,
+      "message": "No special reason. I changed this to check file exist to make the logic consistent.",
+      "parentUuid": "d5b3915b_68ce11fe",
+      "range": {
+        "startLine": 162,
+        "startChar": 2,
+        "endLine": 162,
+        "endChar": 27
+      },
+      "revId": "7631d1bf381e0cff3fb7e24e9ad0b2645f49e0ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
