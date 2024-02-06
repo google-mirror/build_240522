@@ -34,6 +34,24 @@
       "parentUuid": "1d4dbe71_bed77e55",
       "revId": "614a5aea0efb72e604649b1190a16c6e05ffeb8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37794a0a_458f6139",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-02-06T18:29:50Z",
+      "side": 1,
+      "message": "Please add this information in a comment, although maybe it would be better in `python/test.go` where you set `LOCAL_TEST_CONFIG_SUFFIX`.",
+      "parentUuid": "2e1fb89d_a4663c3a",
+      "revId": "614a5aea0efb72e604649b1190a16c6e05ffeb8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
