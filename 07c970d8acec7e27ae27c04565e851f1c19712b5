@@ -16,6 +16,91 @@
       "message": "LGTM, but it would be good to get Joe\u0027s review as well :)",
       "revId": "07c970d8acec7e27ae27c04565e851f1c19712b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee4e4181_3611c7cc",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-02-06T18:22:53Z",
+      "side": 1,
+      "message": "Usually if this isn\u0027t set, you should default it to \"out\".",
+      "revId": "07c970d8acec7e27ae27c04565e851f1c19712b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eded317d_217cb433",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-02-06T18:22:53Z",
+      "side": 1,
+      "message": "[envsetup.sh](https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:build/make/envsetup.sh;l\u003d417) sets ANDROID_BUILD_TOP.  I think it\u0027s better to standardize on that name.\n```suggestion\n\tenv.RepoDir \u003d os.Getenv(\"ANDROID_BUILD_TOP\")\n```",
+      "revId": "07c970d8acec7e27ae27c04565e851f1c19712b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b638189f_bc585454",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-02-06T18:22:53Z",
+      "side": 1,
+      "message": "For prototyping, probably just run `m nothing` every time.\n\nAfter that, we can move some of this into soong directly so we don\u0027t have to run it twice.",
+      "revId": "07c970d8acec7e27ae27c04565e851f1c19712b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef497ff_dd0a125d",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-02-06T18:22:53Z",
+      "side": 1,
+      "message": "This is going to be super common, and for cpp, true for almost every file.",
+      "revId": "07c970d8acec7e27ae27c04565e851f1c19712b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dcd1bf9_9eadc488",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-02-06T18:22:53Z",
+      "side": 1,
+      "message": "This is possibly going to do quite a bit of extra work.  Can you get away with looking at the ninja file and see which targets the module is a direct dependency of and building that rather than the whole module?\n\nIn the ninja, it\u0027ll look something like X.java --\u003e out/soong/.intermediates/blah/compiled.jar, but you don\u0027t have to do everything else like compile the resources etc to make it work.\n\nNot necessarily something to block this change on, but food for thought.",
+      "revId": "07c970d8acec7e27ae27c04565e851f1c19712b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
