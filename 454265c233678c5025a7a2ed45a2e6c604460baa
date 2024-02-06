@@ -16,6 +16,24 @@
       "message": "It would be better to revert^2 the original CL and add patchsets to the original if you have.\nDo you add any changes from aosp/2931430?",
       "revId": "454265c233678c5025a7a2ed45a2e6c604460baa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4459b4e5_53b72277",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2024-02-06T00:22:00Z",
+      "side": 1,
+      "message": "Yes this change includes aosp/2945965. I added into a one CL just because I didn\u0027t want raise a CL which can break again without another CL.",
+      "parentUuid": "358a37da_c022e8ec",
+      "revId": "454265c233678c5025a7a2ed45a2e6c604460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
