@@ -52,6 +52,24 @@
       "parentUuid": "2e1fb89d_a4663c3a",
       "revId": "614a5aea0efb72e604649b1190a16c6e05ffeb8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb80a56a_b1052e0b",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 1900900
+      },
+      "writtenOn": "2024-02-07T02:31:19Z",
+      "side": 1,
+      "message": "Done. Thank you for the review!",
+      "parentUuid": "37794a0a_458f6139",
+      "revId": "614a5aea0efb72e604649b1190a16c6e05ffeb8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
