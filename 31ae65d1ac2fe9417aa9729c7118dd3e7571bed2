@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85ff2a2a_6d22d493",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-07T14:40:31Z",
+      "side": 1,
+      "message": "My understanding is that yes, we would have one function to mmap the file, and all the other functions can be used on the return value of that initial function.",
+      "parentUuid": "ad7435f6_b37eccd1",
+      "range": {
+        "startLine": 140,
+        "startChar": 5,
+        "endLine": 140,
+        "endChar": 34
+      },
+      "revId": "31ae65d1ac2fe9417aa9729c7118dd3e7571bed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc8d1a05_e839543c",
         "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
         "patchSetId": 10
@@ -228,6 +252,30 @@
       "side": 1,
       "message": "No this api has not been exposed. It is purely from cl management perspective, the current cl is complex enough as it is. I would rather making another cl on top of this one. Yes, anyhow-\u003ethiserror cl would the immediate cl after this.",
       "parentUuid": "762fd003_05f2da6b",
+      "range": {
+        "startLine": 152,
+        "startChar": 5,
+        "endLine": 152,
+        "endChar": 11
+      },
+      "revId": "31ae65d1ac2fe9417aa9729c7118dd3e7571bed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09fa29f4_a3eab5f8",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-07T14:40:31Z",
+      "side": 1,
+      "message": "I\u0027m not convinced postponing the introduction of thiserror is the right choice, but if you pinky-promise that the next CL will address this, I\u0027m OK with it.",
+      "parentUuid": "d7225991_acab5e17",
       "range": {
         "startLine": 152,
         "startChar": 5,
