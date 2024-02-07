@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7eb0db1_62f5a835",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-07T17:49:00Z",
+      "side": 1,
+      "message": "ok, that makes sense. let\u0027s push on with Result\u003cOption\u003c...\u003e\u003e for now\n\nwhen we move to thiserror, we\u0027ll define errors for all the cases you describe. are you willing to discuss if we should keep Option at that point, or include a \"the item you\u0027re looking for wasn\u0027t found\" error in addition to the \"file is corrupt\" / \"failed to mmap because file is writeable\", etc?",
+      "parentUuid": "8b76a17b_273aa91b",
+      "range": {
+        "startLine": 140,
+        "startChar": 5,
+        "endLine": 140,
+        "endChar": 34
+      },
+      "revId": "31ae65d1ac2fe9417aa9729c7118dd3e7571bed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc8d1a05_e839543c",
         "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
         "patchSetId": 10
