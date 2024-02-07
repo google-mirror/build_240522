@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93d8d3fb_d9ad0ff9",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-07T13:49:29Z",
+      "side": 1,
+      "message": "I don\u0027t think representing None in PackageOffset is the right way.\n\nI suggest\n\n```\nstruct Handle { ... }\nimpl Handle {\n  fn try_from_file(path: P) where P: Into\u003cPathBuf\u003e -\u003e Result\u003cHandle\u003e { ... }\n  fn get(\u0026self, ...) -\u003e Option\u003c...\u003e { ... }\n}\n```\n\ninstead of Result\u003cOption\u003c...\u003e\u003e, but happy to have a discussion why the nested result/option is a better choice.",
+      "parentUuid": "846f1830_abeb5c1e",
+      "range": {
+        "startLine": 140,
+        "startChar": 5,
+        "endLine": 140,
+        "endChar": 34
+      },
+      "revId": "31ae65d1ac2fe9417aa9729c7118dd3e7571bed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc8d1a05_e839543c",
         "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
         "patchSetId": 10
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "The change needed is pretty extensive, touching all mods as we probably would define custom error for each. I would prefer to make this change in a separate cl.",
       "parentUuid": "dc8d1a05_e839543c",
+      "range": {
+        "startLine": 152,
+        "startChar": 5,
+        "endLine": 152,
+        "endChar": 11
+      },
+      "revId": "31ae65d1ac2fe9417aa9729c7118dd3e7571bed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "762fd003_05f2da6b",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-07T13:49:29Z",
+      "side": 1,
+      "message": "Exposing thiserror results instead of anyhow results in the public API is an important change that needs to happen.\n\nMaybe I\u0027m missing something, but I thought this CL was the first CL to expose a public API from the module? If so, why not update this CL? Or are we already exposing anyhow results publicly? If so, will you be working on the anyhow -\u003e thiserror CL right after this one?",
+      "parentUuid": "94017bec_bfa43f28",
       "range": {
         "startLine": 152,
         "startChar": 5,
