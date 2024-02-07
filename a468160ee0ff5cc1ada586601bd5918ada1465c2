@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92d7d4b7_7d06da36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021004
+      },
+      "writtenOn": "2024-02-07T11:29:09Z",
+      "side": 1,
+      "message": "Hi Pedro, you reviewed the internal version of this - moving it to AOSP per the linter results. The module itself isn\u0027t defined in AOSP yet but the flag is off by default so hopefully this is OK?",
+      "revId": "a468160ee0ff5cc1ada586601bd5918ada1465c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
