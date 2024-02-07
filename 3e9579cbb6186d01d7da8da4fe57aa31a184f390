@@ -22,6 +22,30 @@
       },
       "revId": "3e9579cbb6186d01d7da8da4fe57aa31a184f390",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b34e0af_118baae5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1758183
+      },
+      "writtenOn": "2024-02-07T18:48:47Z",
+      "side": 1,
+      "message": "I don\u0027t think anything else is supported? The comment above the changed line only mentions these two input formats.",
+      "parentUuid": "a9482c87_902f7283",
+      "range": {
+        "startLine": 9,
+        "startChar": 64,
+        "endLine": 10,
+        "endChar": 90
+      },
+      "revId": "3e9579cbb6186d01d7da8da4fe57aa31a184f390",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
