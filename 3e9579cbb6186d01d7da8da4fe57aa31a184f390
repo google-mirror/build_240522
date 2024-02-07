@@ -70,6 +70,30 @@
       },
       "revId": "3e9579cbb6186d01d7da8da4fe57aa31a184f390",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0de39c4_88136363",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1758183
+      },
+      "writtenOn": "2024-02-07T18:59:34Z",
+      "side": 1,
+      "message": "Reworded the commit message a bit.\nAs for the function not doing anything differently, I initially made this change on Android 14 which still has the code from before change 2589846.\nSo for master branch change 2806342 is needed additionally.",
+      "parentUuid": "1b116e5d_310ef2df",
+      "range": {
+        "startLine": 9,
+        "startChar": 64,
+        "endLine": 10,
+        "endChar": 90
+      },
+      "revId": "3e9579cbb6186d01d7da8da4fe57aa31a184f390",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
