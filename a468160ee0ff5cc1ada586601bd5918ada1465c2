@@ -33,6 +33,41 @@
       "message": "I think you need to declare the flag in AOSP but you can do this CL in internal, if you prefer and if that works for you. But it\u0027s also fine to do it here (if you\u0027re OK with that).",
       "revId": "a468160ee0ff5cc1ada586601bd5918ada1465c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48ffd258_68654f0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021004
+      },
+      "writtenOn": "2024-02-07T18:16:12Z",
+      "side": 1,
+      "message": "`Joe, can I get an owner review?",
+      "revId": "a468160ee0ff5cc1ada586601bd5918ada1465c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c30fe28_3d3e2a9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021004
+      },
+      "writtenOn": "2024-02-07T18:16:12Z",
+      "side": 1,
+      "message": "The linter on the internal version told me to submit it in AOSP and I don\u0027t have any particular reason not to, so this is fine. :)",
+      "parentUuid": "595dc990_5637850b",
+      "revId": "a468160ee0ff5cc1ada586601bd5918ada1465c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
