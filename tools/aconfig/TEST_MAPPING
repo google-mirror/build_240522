@@ -65,5 +65,11 @@
       // that using the flag macros to do filtering will get affected.
       "name": "FlagMacrosTests"
     }
+  ],
+  "postsubmit": [
+    {
+      // aconfig_protos unit tests
+      "name": "aflags.test"
+    }
   ]
 }
