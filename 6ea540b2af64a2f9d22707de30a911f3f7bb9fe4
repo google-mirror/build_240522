@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f1b75d6_ec9b50f3",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-08T11:57:31Z",
+      "side": 1,
+      "message": "Are we sure this is the full list of enum values? I would recommend we start with\n\n```\n#[non_exhaustive]\n```\n\n(https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute)\n\nuntil we\u0027ve had some runtime to gain confidence that yes, we never intend to add more enum variants.",
+      "revId": "6ea540b2af64a2f9d22707de30a911f3f7bb9fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20472ce8_115e7830",
         "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
         "patchSetId": 18
