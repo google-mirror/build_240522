@@ -65,5 +65,12 @@
       // that using the flag macros to do filtering will get affected.
       "name": "FlagMacrosTests"
     }
+  ],
+  "postsubmit": [
+    {
+      // aflags CLI unit tests
+      // TODO(b/326062088): add to presubmit once proven in postsubmit.
+      "name": "aflags.test"
+    }
   ]
 }
