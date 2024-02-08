@@ -90,6 +90,7 @@ PRODUCT_PACKAGES += \
     dumpsys \
     e2fsck \
     ExtShared \
+    flags \
     flags_health_check \
     framework-graphics \
     framework-minus-apex \

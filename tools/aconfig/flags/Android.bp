@@ -1,0 +1,29 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_defaults {
+    name: "flags.defaults",
+    edition: "2021",
+    clippy_lints: "android",
+    lints: "android",
+    srcs: ["src/main.rs"],
+    rustlibs: [
+        "libaconfig_protos",
+        "libanyhow",
+        "libclap",
+        "libprotobuf",
+        "libregex",
+    ],
+}
+
+rust_binary {
+    name: "flags",
+    defaults: ["flags.defaults"],
+}
+
+rust_test_host {
+    name: "flags.test",
+    defaults: ["flags.defaults"],
+    test_suites: ["general-tests"],
+}
