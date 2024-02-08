@@ -68,6 +68,29 @@
       },
       "revId": "6ea540b2af64a2f9d22707de30a911f3f7bb9fe4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a354a0c7_3092cf88",
+        "filename": "tools/aconfig/aconfig_storage_file/src/mapped_file.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-02-08T11:03:42Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by RustFormatter: To run the same command the RustFormatter uses try: rustfmt --edition 2021 --config-path {path to  default  rustfmt.toml file} --check --color never tools/aconfig/aconfig_storage_file/src/mapped_file.rs. This will generate a diff between yo...\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nTo run the same command the RustFormatter uses try: rustfmt --edition 2021 --config-path {path to  default  rustfmt.toml file} --check --color never tools/aconfig/aconfig_storage_file/src/mapped_file.rs. This will generate a diff between your file and a formatted version of your file. To automatically apply these changes to your file try: rustfmt --edition 2021 --config-path {path to  default  rustfmt.toml file} tools/aconfig/aconfig_storage_file/src/mapped_file.rs.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "6ea540b2af64a2f9d22707de30a911f3f7bb9fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
