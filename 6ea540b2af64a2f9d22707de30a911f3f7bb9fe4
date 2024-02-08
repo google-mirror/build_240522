@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8030a1d3_d6dee460",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-08T14:58:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f1b75d6_ec9b50f3",
+      "revId": "6ea540b2af64a2f9d22707de30a911f3f7bb9fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20472ce8_115e7830",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-02-08T07:49:52Z",
       "side": 1,
       "message": "rm?",
+      "range": {
+        "startLine": 169,
+        "startChar": 33,
+        "endLine": 169,
+        "endChar": 34
+      },
+      "revId": "6ea540b2af64a2f9d22707de30a911f3f7bb9fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "403d4787_05b95837",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-08T14:58:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20472ce8_115e7830",
       "range": {
         "startLine": 169,
         "startChar": 33,
@@ -87,6 +129,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "603433d5_c54d670f",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-08T14:58:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef7e7a6f_9448d2bb",
+      "range": {
+        "startLine": 178,
+        "startChar": 21,
+        "endLine": 178,
+        "endChar": 28
+      },
+      "revId": "6ea540b2af64a2f9d22707de30a911f3f7bb9fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08650df7_3f770a30",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-08T14:58:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba0ef87c_f6b2e6c2",
+      "range": {
+        "startLine": 178,
+        "startChar": 34,
+        "endLine": 178,
+        "endChar": 38
+      },
+      "revId": "6ea540b2af64a2f9d22707de30a911f3f7bb9fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a354a0c7_3092cf88",
@@ -100,6 +190,30 @@
       "writtenOn": "2024-02-08T11:03:42Z",
       "side": 1,
       "message": "Please fix this INFO reported by RustFormatter: To run the same command the RustFormatter uses try: rustfmt --edition 2021 --config-path {path to  default  rustfmt.toml file} --check --color never tools/aconfig/aconfig_storage_file/src/mapped_file.rs. This will generate a diff between yo...\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nTo run the same command the RustFormatter uses try: rustfmt --edition 2021 --config-path {path to  default  rustfmt.toml file} --check --color never tools/aconfig/aconfig_storage_file/src/mapped_file.rs. This will generate a diff between your file and a formatted version of your file. To automatically apply these changes to your file try: rustfmt --edition 2021 --config-path {path to  default  rustfmt.toml file} tools/aconfig/aconfig_storage_file/src/mapped_file.rs.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "6ea540b2af64a2f9d22707de30a911f3f7bb9fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5d6e61d_b4388204",
+        "filename": "tools/aconfig/aconfig_storage_file/src/mapped_file.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-08T14:58:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a354a0c7_3092cf88",
       "range": {
         "startLine": 1,
         "startChar": 0,
