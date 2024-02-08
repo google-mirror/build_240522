@@ -404,6 +404,30 @@
       },
       "revId": "31ae65d1ac2fe9417aa9729c7118dd3e7571bed2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e00a44a_d10abaa5",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-08T02:47:28Z",
+      "side": 1,
+      "message": "The thiserror change is also in this cl.",
+      "parentUuid": "8ba9ae1b_ba498d9d",
+      "range": {
+        "startLine": 152,
+        "startChar": 5,
+        "endLine": 152,
+        "endChar": 11
+      },
+      "revId": "31ae65d1ac2fe9417aa9729c7118dd3e7571bed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
