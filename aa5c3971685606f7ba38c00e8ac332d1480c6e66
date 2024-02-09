@@ -104,6 +104,24 @@
       "message": "read_device_config_flags command internally calls list command. The list command return result would not include list_local_overrides?",
       "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd4b3700_11dbabff",
+        "filename": "tools/aconfig/flags/src/device_config_source.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-02-09T20:04:55Z",
+      "side": 1,
+      "message": "No, it currently doesn\u0027t;\n- We should fix that, so it shows overridden values, it\u0027s super confusing right now.\n- But even after we fix it, there\u0027s no way to tell from the list output if a flag is overridden, it just displays the value. With this separate command, we can tell which flags are locally overridden, so we can display that info in this command.",
+      "parentUuid": "74e7e7d8_e3866101",
+      "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
