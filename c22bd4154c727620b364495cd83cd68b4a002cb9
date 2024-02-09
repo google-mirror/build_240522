@@ -1,0 +1,377 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffd78628_ddcd4726",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "Consider adding a prefix for all your CLs, like aconfig: or flags:. The storage CLs use aconfig: so you might want to stick with that for all subprojects under build/make/tools/aconfig.",
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e342c7_ece812fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "Please elaborate further on what the tool does, what the future plans are, etc in the commit message.\n\nAlso include sample output of the list command.",
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e20ac5c5_def9aaf0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "Add unit tests to your new tool, at least an empty test case so future CLs can build on that, and add a `Test: atest ...` line.",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 7
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d729d55c_3f227b52",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "Did we settle on this name? I called for a discussion in the design doc but no one seemed eager to chip in, and it feels like \"flags\" won by default?",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 9
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94902c89_aa778396",
+        "filename": "tools/aconfig/flags/.gitignore",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "Why is this file needed? The target directory will be under aconfig/, not under aconfig/flags, because flags is part of the aconfig workspace.\n\nAlso, /target refers to the root of the git repo.\n\nRemove this file.",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 7
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af875dd7_bc9a0944",
+        "filename": "tools/aconfig/flags/Cargo.toml",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "Remove this file. There\u0027s a Cargo.lock in the workspace (which is also gitignored btw).",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 8
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "806b12fe_9c872d21",
+        "filename": "tools/aconfig/flags/src/device_config_source.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "Incorrect year.",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c02b7bbc_a31f498a",
+        "filename": "tools/aconfig/flags/src/device_config_source.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "This fails on my device. Debug-printing stdout and stderr:\n\nError: failed to execute device_config: exit code 255 \"\" \"Invalid command: list_local_overrides\\n\"",
+      "range": {
+        "startLine": 92,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 61
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24b1087a_482487c0",
+        "filename": "tools/aconfig/flags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "FlagPermission for consistency with FlagState?",
+      "range": {
+        "startLine": 42,
+        "startChar": 5,
+        "endLine": 42,
+        "endChar": 15
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abc9405c_1cd2bfa2",
+        "filename": "tools/aconfig/flags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "How about an enum Partition { ... } and using a HashMap\u003cPartition, AconfigDefinition\u003e?",
+      "range": {
+        "startLine": 66,
+        "startChar": 17,
+        "endLine": 66,
+        "endChar": 20
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08095b97_ec979c8e",
+        "filename": "tools/aconfig/flags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "Not sure the help should be formatted markdown 😊\n\nI don\u0027t care that much, but consider removing the triple backticks and indentind the \"namespace package.flag_name ...\" line by e.g. 2 spaces.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 3
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79b6661c_6027a505",
+        "filename": "tools/aconfig/flags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "Should namespace be part of the default output? I feel that\u0027s not something most devs care about -- you set it once in your .aconfig declaration and forget about it.\n\nWe can add a --format\u003d... parameter to list to allow you to request the namespace if needed.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 9
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe307462_2159aaec",
+        "filename": "tools/aconfig/flags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "At a first glance of the `flags --help` output I saw dashes and thought command line options. Can we replace the dashes with e.g. asterisks to reduce the risk of confusion?",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 83,
+        "endChar": 3
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5830585e_efbf3738",
+        "filename": "tools/aconfig/flags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "The padding can be simplified, e.g.:\n\n```\nlet x \u003d \"foo\";\nlet padding \u003d 6;\nprintln!(\"{x:padding$}bar\");\n```\n\nwill output `foo   bar`",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 116,
+        "endChar": 10
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "957e5591_b82cf646",
+        "filename": "tools/aconfig/flags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "Clippy says\n\n```\nwarning: accessing first element with `flag.definitions.get(0)`\n   --\u003e flags/src/main.rs:125:9\n    |\n125 |         flag.definitions.get(0).map(|d| format!(\"{}\", d.permission)).unwrap_or(\"-\".to_string());\n    |         ^^^^^^^^^^^^^^^^^^^^^^^ help: try: `flag.definitions.first()\n```\n\nRun `cargo clippy --fix`.",
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d16de710_d94fe945",
+        "filename": "tools/aconfig/flags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "Big plus for returning a String instead of printing to stdout from this method. Makes testing so much easier.",
+      "range": {
+        "startLine": 143,
+        "startChar": 45,
+        "endLine": 143,
+        "endChar": 51
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08b3eb79_98c6bb4f",
+        "filename": "tools/aconfig/flags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T08:06:46Z",
+      "side": 1,
+      "message": "I\u0027m not convinced filtering by namespace is what devs want to do. I expect folks to be more interested in listing flags in in a given package, or globbing a flag name (which really could be handled by flags | grep -e ...).\n\nI suggest we remove the optional filtering for now, and add a more powerful filtering in a later CL.",
+      "range": {
+        "startLine": 162,
+        "startChar": 24,
+        "endLine": 162,
+        "endChar": 33
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
