@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77de348e_ce98dae4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T09:40:24Z",
+      "side": 1,
+      "message": "Remove. Commit message subjects should not end with a period.",
+      "range": {
+        "startLine": 7,
+        "startChar": 44,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43e342c7_ece812fd",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
@@ -163,6 +186,30 @@
       "writtenOn": "2024-02-09T08:06:46Z",
       "side": 1,
       "message": "This fails on my device. Debug-printing stdout and stderr:\n\nError: failed to execute device_config: exit code 255 \"\" \"Invalid command: list_local_overrides\\n\"",
+      "range": {
+        "startLine": 92,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 61
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e915509_2cb40173",
+        "filename": "tools/aconfig/flags/src/device_config_source.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T09:40:24Z",
+      "side": 1,
+      "message": "Seems like list_local_overrides isn\u0027t in AOSP! (ag/24840353)",
+      "parentUuid": "c02b7bbc_a31f498a",
       "range": {
         "startLine": 92,
         "startChar": 8,
