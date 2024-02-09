@@ -188,6 +188,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66345c84_9a6a53de",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-02-09T19:56:25Z",
+      "side": 1,
+      "message": "After some discussion, sounds like we\u0027ve landed on `aflags`. Fixed!",
+      "parentUuid": "d729d55c_3f227b52",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 9
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94902c89_aa778396",
@@ -623,6 +647,24 @@
       "writtenOn": "2024-02-09T08:06:46Z",
       "side": 1,
       "message": "Clippy says\n\n```\nwarning: accessing first element with `flag.definitions.get(0)`\n   --\u003e flags/src/main.rs:125:9\n    |\n125 |         flag.definitions.get(0).map(|d| format!(\"{}\", d.permission)).unwrap_or(\"-\".to_string());\n    |         ^^^^^^^^^^^^^^^^^^^^^^^ help: try: `flag.definitions.first()\n```\n\nRun `cargo clippy --fix`.",
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb8c6b84_83000c57",
+        "filename": "tools/aconfig/flags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-02-09T19:56:25Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "957e5591_b82cf646",
       "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
