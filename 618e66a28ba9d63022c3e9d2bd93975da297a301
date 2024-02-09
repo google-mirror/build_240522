@@ -34,6 +34,24 @@
       "parentUuid": "9d1d40b7_692cec3e",
       "revId": "618e66a28ba9d63022c3e9d2bd93975da297a301",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9dbf447_ef064448",
+        "filename": "tools/aconfig/aconfig_storage_file/build.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T16:53:38Z",
+      "side": 1,
+      "message": "mark it resolved for now. we can add the compile line if needed later.",
+      "parentUuid": "819daa76_e1684bd2",
+      "revId": "618e66a28ba9d63022c3e9d2bd93975da297a301",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
