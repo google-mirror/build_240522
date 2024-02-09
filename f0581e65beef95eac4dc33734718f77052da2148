@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b46b0c48_6a628d91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1609189
+      },
+      "writtenOn": "2024-02-09T02:25:50Z",
+      "side": 1,
+      "message": "Bloat Buster shows KBs of changes https://googleplex-android-review.git.corp.google.com/c/platform/build/+/26184938?tab\u003dchecks",
+      "revId": "f0581e65beef95eac4dc33734718f77052da2148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
