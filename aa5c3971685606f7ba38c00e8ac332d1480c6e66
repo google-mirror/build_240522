@@ -52,6 +52,40 @@
       "parentUuid": "73c280f9_40467fd4",
       "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebcb5abe_c5c0edb6",
+        "filename": "tools/aconfig/flags/src/device_config_source.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T20:00:19Z",
+      "side": 1,
+      "message": "why using BTreeMap instead of HashMap?",
+      "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74e7e7d8_e3866101",
+        "filename": "tools/aconfig/flags/src/device_config_source.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T20:00:19Z",
+      "side": 1,
+      "message": "read_device_config_flags command internally calls list command. The list command return result would not include list_local_overrides?",
+      "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
