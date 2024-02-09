@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "973bdd49_7d945acb",
+        "filename": "tools/aconfig/flags/src/device_config_source.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-02-09T20:02:29Z",
+      "side": 1,
+      "message": "BTreeMap sorts alphabetically inserted values, so we get an alphabetical sorting here.",
+      "parentUuid": "ebcb5abe_c5c0edb6",
+      "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74e7e7d8_e3866101",
         "filename": "tools/aconfig/flags/src/device_config_source.rs",
         "patchSetId": 7
