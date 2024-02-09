@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf4e5c5_681c8717",
+        "filename": "tools/aconfig/aconfig_storage_file/tests/storage_lib_rust_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T14:11:07Z",
+      "side": 1,
+      "message": "I prefer to just .unwrap-ping everything in tests.",
+      "range": {
+        "startLine": 25,
+        "startChar": 59,
+        "endLine": 25,
+        "endChar": 61
+      },
+      "revId": "aa29263a5898eaa4dcd1ef36e00db8c53b2ed443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f8c9af_066ea5e0",
+        "filename": "tools/aconfig/aconfig_storage_file/tests/storage_lib_rust_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T14:11:07Z",
+      "side": 1,
+      "message": "```\nfile.write_all(...).unwrap();\n```\n\ninstead to abort on file write errors",
+      "range": {
+        "startLine": 27,
+        "startChar": 8,
+        "endLine": 27,
+        "endChar": 52
+      },
+      "revId": "aa29263a5898eaa4dcd1ef36e00db8c53b2ed443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a36d348_aad82286",
+        "filename": "tools/aconfig/aconfig_storage_file/tests/storage_lib_rust_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T14:11:07Z",
+      "side": 1,
+      "message": "I don\u0027t understand how write_storage_location_file() can generate something that includes test_1. I assume it has to do with the binary files under aconfig_storage_file/tests, but I don\u0027t see where those are included.\n\nIs it possible to generate the binary data from text files as part of the test (in a follow-up CL) to make this less opaque?",
+      "range": {
+        "startLine": 40,
+        "startChar": 41,
+        "endLine": 40,
+        "endChar": 47
+      },
+      "revId": "aa29263a5898eaa4dcd1ef36e00db8c53b2ed443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efc521a6_bbeaf9d6",
+        "filename": "tools/aconfig/aconfig_storage_file/tests/storage_lib_rust_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T14:11:07Z",
+      "side": 1,
+      "message": "(This is why I don\u0027t like nested Result\u003cOption\u003c...\u003e\u003e...)",
+      "range": {
+        "startLine": 42,
+        "startChar": 7,
+        "endLine": 43,
+        "endChar": 18
+      },
+      "revId": "aa29263a5898eaa4dcd1ef36e00db8c53b2ed443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
