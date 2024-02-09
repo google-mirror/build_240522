@@ -34,6 +34,24 @@
       "parentUuid": "a4b79345_deebdd5f",
       "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3acc4e1_d7849b6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-02-09T19:42:58Z",
+      "side": 1,
+      "message": "Makes sense. We could just display that with some `--verbose` option as well. Re: type, is it guaranteed to be the same for every partition? If we can make that assumption, I\u0027m happy to just switch it to show read-only or read-write.\n\nRe: the proto, I believe that\u0027s what\u0027s getting used in `device_config_source`. Do you mean in `main.rs`? I\u0027m not super opinionated, but slightly prefer having types specifically just for the display logic.",
+      "parentUuid": "73c280f9_40467fd4",
+      "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
