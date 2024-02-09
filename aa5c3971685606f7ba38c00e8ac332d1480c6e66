@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4b79345_deebdd5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T19:33:46Z",
+      "side": 1,
+      "message": "Can we not show all partitions, maybe just show flag value and type. The reason is that there will be more containers down the road, for instance mainline modules. Having CCCC DDDD is nice to have now, but may not be exactly scalable down the road. Also, users need to know the partition corresponds to each partition.",
+      "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
