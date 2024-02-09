@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d1d40b7_692cec3e",
+        "filename": "tools/aconfig/aconfig_storage_file/build.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-09T14:13:59Z",
+      "side": 1,
+      "message": "According to https://docs.rs/cxx-build/latest/cxx_build/fn.bridge.html this returns a build which you should call .compile on.",
+      "revId": "618e66a28ba9d63022c3e9d2bd93975da297a301",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
