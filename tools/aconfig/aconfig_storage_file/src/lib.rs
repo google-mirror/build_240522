@@ -259,32 +259,34 @@ pub fn get_boolean_flag_value(container: &str, offset: u32) -> Result<bool, Acon
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::test_utils::{
-        create_temp_storage_files_for_test, get_binary_storage_proto_bytes,
-        set_temp_storage_files_to_read_only, write_bytes_to_temp_file,
-    };
+    use crate::test_utils::{copy_to_temp_read_only_file, write_storage_text_to_temp_file};
 
     #[test]
     // this test point locks down flag package offset query
     fn test_package_offset_query() {
-        #[cfg(feature = "cargo")]
-        create_temp_storage_files_for_test();
+        let ro_package_map_file = copy_to_temp_read_only_file("./tests/package.map").unwrap();
+        let ro_flag_map_file = copy_to_temp_read_only_file("./tests/flag.map").unwrap();
+        let ro_flag_val_file = copy_to_temp_read_only_file("./tests/flag.val").unwrap();
+        let ro_package_map = &ro_package_map_file.path().display().to_string();
+        let ro_flag_map = &ro_flag_map_file.path().display().to_string();
+        let ro_flag_val = &ro_flag_val_file.path().display().to_string();
 
-        set_temp_storage_files_to_read_only();
-        let text_proto = r#"
-files {
+        let text_proto = format!(
+            r#"
+files {{
     version: 0
     container: "system"
-    package_map: "./tests/tmp.ro.package.map"
-    flag_map: "./tests/tmp.ro.flag.map"
-    flag_val: "./tests/tmp.ro.flag.val"
+    package_map: "{}"
+    flag_map: "{}"
+    flag_val: "{}"
     timestamp: 12345
-}
-"#;
-        let binary_proto_bytes = get_binary_storage_proto_bytes(text_proto).unwrap();
-        let file = write_bytes_to_temp_file(&binary_proto_bytes).unwrap();
-        let file_full_path = file.path().display().to_string();
+}}
+"#,
+            ro_package_map, ro_flag_map, ro_flag_val
+        );
 
+        let file = write_storage_text_to_temp_file(&text_proto).unwrap();
+        let file_full_path = file.path().display().to_string();
         let package_offset = get_package_offset_impl(
             &file_full_path,
             "system",
@@ -319,24 +321,29 @@ files {
     #[test]
     // this test point locks down flag offset query
     fn test_flag_offset_query() {
-        #[cfg(feature = "cargo")]
-        create_temp_storage_files_for_test();
+        let ro_package_map_file = copy_to_temp_read_only_file("./tests/package.map").unwrap();
+        let ro_flag_map_file = copy_to_temp_read_only_file("./tests/flag.map").unwrap();
+        let ro_flag_val_file = copy_to_temp_read_only_file("./tests/flag.val").unwrap();
+        let ro_package_map = &ro_package_map_file.path().display().to_string();
+        let ro_flag_map = &ro_flag_map_file.path().display().to_string();
+        let ro_flag_val = &ro_flag_val_file.path().display().to_string();
 
-        set_temp_storage_files_to_read_only();
-        let text_proto = r#"
-files {
+        let text_proto = format!(
+            r#"
+files {{
     version: 0
     container: "system"
-    package_map: "./tests/tmp.ro.package.map"
-    flag_map: "./tests/tmp.ro.flag.map"
-    flag_val: "./tests/tmp.ro.flag.val"
+    package_map: "{}"
+    flag_map: "{}"
+    flag_val: "{}"
     timestamp: 12345
-}
-"#;
-        let binary_proto_bytes = get_binary_storage_proto_bytes(text_proto).unwrap();
-        let file = write_bytes_to_temp_file(&binary_proto_bytes).unwrap();
-        let file_full_path = file.path().display().to_string();
+}}
+"#,
+            ro_package_map, ro_flag_map, ro_flag_val
+        );
 
+        let file = write_storage_text_to_temp_file(&text_proto).unwrap();
+        let file_full_path = file.path().display().to_string();
         let baseline = vec![
             (0, "enabled_ro", 1u16),
             (0, "enabled_rw", 2u16),
@@ -359,24 +366,29 @@ files {
     #[test]
     // this test point locks down flag offset query
     fn test_flag_value_query() {
-        #[cfg(feature = "cargo")]
-        create_temp_storage_files_for_test();
+        let ro_package_map_file = copy_to_temp_read_only_file("./tests/package.map").unwrap();
+        let ro_flag_map_file = copy_to_temp_read_only_file("./tests/flag.map").unwrap();
+        let ro_flag_val_file = copy_to_temp_read_only_file("./tests/flag.val").unwrap();
+        let ro_package_map = &ro_package_map_file.path().display().to_string();
+        let ro_flag_map = &ro_flag_map_file.path().display().to_string();
+        let ro_flag_val = &ro_flag_val_file.path().display().to_string();
 
-        set_temp_storage_files_to_read_only();
-        let text_proto = r#"
-files {
+        let text_proto = format!(
+            r#"
+files {{
     version: 0
     container: "system"
-    package_map: "./tests/tmp.ro.package.map"
-    flag_map: "./tests/tmp.ro.flag.map"
-    flag_val: "./tests/tmp.ro.flag.val"
+    package_map: "{}"
+    flag_map: "{}"
+    flag_val: "{}"
     timestamp: 12345
-}
-"#;
-        let binary_proto_bytes = get_binary_storage_proto_bytes(text_proto).unwrap();
-        let file = write_bytes_to_temp_file(&binary_proto_bytes).unwrap();
-        let file_full_path = file.path().display().to_string();
+}}
+"#,
+            ro_package_map, ro_flag_map, ro_flag_val
+        );
 
+        let file = write_storage_text_to_temp_file(&text_proto).unwrap();
+        let file_full_path = file.path().display().to_string();
         let baseline: Vec<bool> = vec![false; 8];
         for (offset, expected_value) in baseline.into_iter().enumerate() {
             let flag_value =
