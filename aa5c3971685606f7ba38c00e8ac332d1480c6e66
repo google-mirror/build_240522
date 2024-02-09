@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "754c52ba_41c34077",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-02-09T20:11:36Z",
+      "side": 1,
+      "message": "WDYT of keeping partition in for this initial CL? I\u0027m hoping to add a `--verbose` as a follow-on, so could address this there.",
+      "parentUuid": "e3acc4e1_d7849b6b",
+      "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcb5abe_c5c0edb6",
         "filename": "tools/aconfig/flags/src/device_config_source.rs",
         "patchSetId": 7
