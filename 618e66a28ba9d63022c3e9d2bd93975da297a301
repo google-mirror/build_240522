@@ -16,6 +16,24 @@
       "message": "According to https://docs.rs/cxx-build/latest/cxx_build/fn.bridge.html this returns a build which you should call .compile on.",
       "revId": "618e66a28ba9d63022c3e9d2bd93975da297a301",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "819daa76_e1684bd2",
+        "filename": "tools/aconfig/aconfig_storage_file/build.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T15:48:44Z",
+      "side": 1,
+      "message": "In theory, yes. But we don\u0027t really need it here because, (1) we don\u0027t need to do rust call c++, so rust code compiles fine without compiling the c++ code, (2) we can have it compile the c++ code with cargo build command, but it is not useful. Because, we eventually would build the cc_library using m. unless we setup our own make file. \n\nThe only reason line 18 is useful is that we can see what the generated cpp code looks like based on exported rust apis.",
+      "parentUuid": "9d1d40b7_692cec3e",
+      "revId": "618e66a28ba9d63022c3e9d2bd93975da297a301",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
