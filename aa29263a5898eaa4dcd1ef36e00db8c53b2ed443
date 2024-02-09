@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45dda396_05e91f97",
+        "filename": "tools/aconfig/aconfig_storage_file/tests/storage_lib_rust_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T15:53:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cf4e5c5_681c8717",
+      "range": {
+        "startLine": 25,
+        "startChar": 59,
+        "endLine": 25,
+        "endChar": 61
+      },
+      "revId": "aa29263a5898eaa4dcd1ef36e00db8c53b2ed443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18f8c9af_066ea5e0",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-09T14:11:07Z",
       "side": 1,
       "message": "```\nfile.write_all(...).unwrap();\n```\n\ninstead to abort on file write errors",
+      "range": {
+        "startLine": 27,
+        "startChar": 8,
+        "endLine": 27,
+        "endChar": 52
+      },
+      "revId": "aa29263a5898eaa4dcd1ef36e00db8c53b2ed443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f86ac41_7e5299dd",
+        "filename": "tools/aconfig/aconfig_storage_file/tests/storage_lib_rust_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T15:53:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18f8c9af_066ea5e0",
       "range": {
         "startLine": 27,
         "startChar": 8,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e05d58e1_ec5d639a",
+        "filename": "tools/aconfig/aconfig_storage_file/tests/storage_lib_rust_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T15:53:21Z",
+      "side": 1,
+      "message": "Yes, package.map, flag.map and flag.val under tests dir are included thru genrules. The genrules makes read only copies of these files.\n\nWe could create the storage files at test run time by constructing the structs and then serialize them. We could make it more explicit in the future cls.",
+      "parentUuid": "5a36d348_aad82286",
+      "range": {
+        "startLine": 40,
+        "startChar": 41,
+        "endLine": 40,
+        "endChar": 47
+      },
+      "revId": "aa29263a5898eaa4dcd1ef36e00db8c53b2ed443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efc521a6_bbeaf9d6",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-02-09T14:11:07Z",
       "side": 1,
       "message": "(This is why I don\u0027t like nested Result\u003cOption\u003c...\u003e\u003e...)",
+      "range": {
+        "startLine": 42,
+        "startChar": 7,
+        "endLine": 43,
+        "endChar": 18
+      },
+      "revId": "aa29263a5898eaa4dcd1ef36e00db8c53b2ed443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6d7a76a_a2252331",
+        "filename": "tools/aconfig/aconfig_storage_file/tests/storage_lib_rust_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T15:53:21Z",
+      "side": 1,
+      "message": "Ack, \n\noption 1, how about we just create an new enum instead of using option. But then we have to ask client to do match statement once they get the return\n\noption 2, a custom struct that include a boolean like \"package_exists\", basically folding none into the struct. we can call this struct something like packageOffsetQuery rather than packageOffset like now.\n\nI prefer option 2",
+      "parentUuid": "efc521a6_bbeaf9d6",
       "range": {
         "startLine": 42,
         "startChar": 7,
