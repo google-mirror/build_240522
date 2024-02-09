@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32a2e899_590775c8",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T16:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e953535_1b496d15",
+      "range": {
+        "startLine": 324,
+        "startChar": 8,
+        "endLine": 330,
+        "endChar": 0
+      },
+      "revId": "ba3ae7034409fc97c677632b43f4b6f29a70c79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a655cef_850acf5e",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-09T15:30:05Z",
       "side": 1,
       "message": "These are almost identical. If you skip the perms.readonly flag the only difference is the parameter to .set_readonly. Can you combine the two methods into one, or have both method call the same internal helper method?",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 12
+      },
+      "revId": "ba3ae7034409fc97c677632b43f4b6f29a70c79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b4e91f2_e1e9b565",
+        "filename": "tools/aconfig/aconfig_storage_file/src/test_utils.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T16:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a655cef_850acf5e",
       "range": {
         "startLine": 38,
         "startChar": 0,
