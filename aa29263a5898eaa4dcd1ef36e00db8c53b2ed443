@@ -187,6 +187,30 @@
       },
       "revId": "aa29263a5898eaa4dcd1ef36e00db8c53b2ed443",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "709f6853_763516db",
+        "filename": "tools/aconfig/aconfig_storage_file/tests/storage_lib_rust_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T20:53:18Z",
+      "side": 1,
+      "message": "Mark it resolved here as this is a separate issue outside of this cl for integration test. Will keep the discussion and adapt the flag read lib api.",
+      "parentUuid": "c6d7a76a_a2252331",
+      "range": {
+        "startLine": 42,
+        "startChar": 7,
+        "endLine": 43,
+        "endChar": 18
+      },
+      "revId": "aa29263a5898eaa4dcd1ef36e00db8c53b2ed443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
