@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b700a57_34ebbfc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T20:36:27Z",
+      "side": 1,
+      "message": "The flag type actually may differ between partitions. For shared libs, flags can be read write in the parent partition, but can be force read only in other partitions.",
+      "parentUuid": "754c52ba_41c34077",
+      "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcb5abe_c5c0edb6",
         "filename": "tools/aconfig/flags/src/device_config_source.rs",
         "patchSetId": 7
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "BTreeMap sorts alphabetically inserted values, so we get an alphabetical sorting here.",
       "parentUuid": "ebcb5abe_c5c0edb6",
+      "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "296e7b5c_a7b0ab5a",
+        "filename": "tools/aconfig/flags/src/device_config_source.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-09T20:36:27Z",
+      "side": 1,
+      "message": "ah I see now, the return is used for printing, and we would like it to be sorted for fully qualified name.",
+      "parentUuid": "973bdd49_7d945acb",
       "revId": "aa5c3971685606f7ba38c00e8ac332d1480c6e66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
