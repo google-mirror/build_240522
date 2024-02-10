@@ -108,6 +108,7 @@ endif
 # Keep the list sorted by module names and then library names.
 PRODUCT_APEX_BOOT_JARS_FOR_SOURCE_BUILD_ONLY := \
     com.android.mediaprovider:framework-pdf \
+    com.android.mediaprovider:framework-pdf-v \
 
 # List of system_server classpath jars delivered via apex.
 # Keep the list sorted by module names and then library names.
