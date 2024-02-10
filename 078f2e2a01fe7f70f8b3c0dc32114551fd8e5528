@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d825d02c_2fc8e825",
+        "filename": "target/product/default_art_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2026903
+      },
+      "writtenOn": "2024-02-10T09:42:56Z",
+      "side": 1,
+      "message": "confirm if this is needed to add this in the SOURCE_ONLY set (See: aosp/2822531)",
+      "range": {
+        "startLine": 77,
+        "startChar": 3,
+        "endLine": 77,
+        "endChar": 51
+      },
+      "revId": "078f2e2a01fe7f70f8b3c0dc32114551fd8e5528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
