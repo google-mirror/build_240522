@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c6f1f85_78c7a5d5",
+        "filename": "ci/build_android_metadata.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2024-02-12T20:20:03Z",
+      "side": 1,
+      "message": "Got it, updated this",
+      "parentUuid": "cbb58a1c_74dcf989",
+      "revId": "cac1b29c0b1dc66dc8a156b995c25f286ffa66e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a55dcce_338e3446",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bff1220b_5d3bd317",
+        "filename": "ci/build_android_metadata.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2024-02-12T20:20:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a55dcce_338e3446",
+      "revId": "cac1b29c0b1dc66dc8a156b995c25f286ffa66e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c1d276a_07553e14",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-02-12T19:29:39Z",
       "side": 1,
       "message": "I don\u0027t think you want to do this.  You should just let it stream through and let the regular buildbot handling capture it.",
+      "revId": "cac1b29c0b1dc66dc8a156b995c25f286ffa66e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40504879_587d5978",
+        "filename": "ci/build_android_metadata.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2024-02-12T20:20:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c1d276a_07553e14",
       "revId": "cac1b29c0b1dc66dc8a156b995c25f286ffa66e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
