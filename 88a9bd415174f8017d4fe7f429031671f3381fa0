@@ -16,6 +16,24 @@
       "message": "Is there a way we could do this for just the make based modules?",
       "revId": "88a9bd415174f8017d4fe7f429031671f3381fa0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83f117b7_95d32b80",
+        "filename": "core/main.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 2223,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2024-02-12T20:32:58Z",
+      "side": 1,
+      "message": "Yes, we can. The make-metadata file contains the following information so far:\n1) The list of installed files\n2) If an installed file is a make module, columns: is_prebuilt_make_module, product_copy_files, kernel_module_copy_files or is_platform_generated should be populated.\n3) module_path is not necessary for Soong modules, but it is has to be kept for now because some Soong module types don\u0027t report their installed files correctly in Soong. After it is fixed, module_path will be for make modules only.\n\nSo finally the make metadata will contain: 1) the list of installed files; 2) all make modules\u0027 information.",
+      "parentUuid": "7f37aba0_e69ded10",
+      "revId": "88a9bd415174f8017d4fe7f429031671f3381fa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
