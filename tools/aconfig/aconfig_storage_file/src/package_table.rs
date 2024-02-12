@@ -17,9 +17,8 @@
 //! package table module defines the package table file format and methods for serialization
 //! and deserialization
 
-use crate::AconfigStorageError::{self, BytesParseFail, HigherStorageFileVersion};
 use crate::{get_bucket_index, read_str_from_bytes, read_u32_from_bytes};
-use anyhow::anyhow;
+use anyhow::{anyhow, Result};
 
 /// Package table header struct
 #[derive(PartialEq, Debug)]
@@ -48,7 +47,7 @@ impl PackageTableHeader {
     }
 
     /// Deserialize from bytes
-    pub fn from_bytes(bytes: &[u8]) -> Result<Self, AconfigStorageError> {
+    pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
         let mut head = 0;
         Ok(Self {
             version: read_u32_from_bytes(bytes, &mut head)?,
@@ -86,7 +85,7 @@ impl PackageTableNode {
     }
 
     /// Deserialize from bytes
-    pub fn from_bytes(bytes: &[u8]) -> Result<Self, AconfigStorageError> {
+    pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
         let mut head = 0;
         let node = Self {
             package_name: read_str_from_bytes(bytes, &mut head)?,
@@ -128,7 +127,7 @@ impl PackageTable {
     }
 
     /// Deserialize from bytes
-    pub fn from_bytes(bytes: &[u8]) -> Result<Self, AconfigStorageError> {
+    pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
         let header = PackageTableHeader::from_bytes(bytes)?;
         let num_packages = header.num_packages;
         let num_buckets = crate::get_table_size(num_packages)?;
@@ -145,8 +144,7 @@ impl PackageTable {
                 head += node.as_bytes().len();
                 Ok(node)
             })
-            .collect::<Result<Vec<_>, AconfigStorageError>>()
-            .map_err(|errmsg| BytesParseFail(anyhow!("fail to parse package table: {}", errmsg)))?;
+            .collect::<Result<Vec<_>>>()?;
 
         let table = Self { header, buckets, nodes };
         Ok(table)
@@ -161,21 +159,18 @@ pub struct PackageOffset {
 }
 
 /// Query package id and start offset
-pub fn find_package_offset(
-    buf: &[u8],
-    package: &str,
-) -> Result<Option<PackageOffset>, AconfigStorageError> {
+pub fn find_package_offset(buf: &[u8], package: &str) -> Result<Option<PackageOffset>> {
     let interpreted_header = PackageTableHeader::from_bytes(buf)?;
     if interpreted_header.version > crate::FILE_VERSION {
-        return Err(HigherStorageFileVersion(anyhow!(
+        return Err(anyhow!(
             "Cannot read storage file with a higher version of {} with lib version {}",
             interpreted_header.version,
             crate::FILE_VERSION
-        )));
+        ));
     }
 
     let num_buckets = (interpreted_header.node_offset - interpreted_header.bucket_offset) / 4;
-    let bucket_index = PackageTableNode::find_bucket_index(package, num_buckets);
+    let bucket_index = PackageTableNode::find_bucket_index(&package, num_buckets);
 
     let mut pos = (interpreted_header.bucket_offset + 4 * bucket_index) as usize;
     let mut package_node_offset = read_u32_from_bytes(buf, &mut pos)? as usize;
@@ -204,7 +199,7 @@ pub fn find_package_offset(
 mod tests {
     use super::*;
 
-    pub fn create_test_package_table() -> PackageTable {
+    pub fn create_test_package_table() -> Result<PackageTable> {
         let header = PackageTableHeader {
             version: crate::FILE_VERSION,
             container: String::from("system"),
@@ -233,13 +228,14 @@ mod tests {
             next_offset: None,
         };
         let nodes = vec![first_node, second_node, third_node];
-        PackageTable { header, buckets, nodes }
+        Ok(PackageTable { header, buckets, nodes })
     }
 
     #[test]
     // this test point locks down the table serialization
     fn test_serialization() {
-        let package_table = create_test_package_table();
+        let package_table = create_test_package_table().unwrap();
+
         let header: &PackageTableHeader = &package_table.header;
         let reinterpreted_header = PackageTableHeader::from_bytes(&header.as_bytes());
         assert!(reinterpreted_header.is_ok());
@@ -259,7 +255,7 @@ mod tests {
     #[test]
     // this test point locks down table query
     fn test_package_query() {
-        let package_table = create_test_package_table().as_bytes();
+        let package_table = create_test_package_table().unwrap().as_bytes();
         let package_offset =
             find_package_offset(&package_table[..], "com.android.aconfig.storage.test_1")
                 .unwrap()
@@ -284,7 +280,7 @@ mod tests {
     // this test point locks down table query of a non exist package
     fn test_not_existed_package_query() {
         // this will land at an empty bucket
-        let package_table = create_test_package_table().as_bytes();
+        let package_table = create_test_package_table().unwrap().as_bytes();
         let package_offset =
             find_package_offset(&package_table[..], "com.android.aconfig.storage.test_3").unwrap();
         assert_eq!(package_offset, None);
@@ -297,7 +293,7 @@ mod tests {
     #[test]
     // this test point locks down query error when file has a higher version
     fn test_higher_version_storage_file() {
-        let mut table = create_test_package_table();
+        let mut table = create_test_package_table().unwrap();
         table.header.version = crate::FILE_VERSION + 1;
         let package_table = table.as_bytes();
         let error = find_package_offset(&package_table[..], "com.android.aconfig.storage.test_1")
@@ -305,7 +301,7 @@ mod tests {
         assert_eq!(
             format!("{:?}", error),
             format!(
-                "HigherStorageFileVersion(Cannot read storage file with a higher version of {} with lib version {})",
+                "Cannot read storage file with a higher version of {} with lib version {}",
                 crate::FILE_VERSION + 1,
                 crate::FILE_VERSION
             )
