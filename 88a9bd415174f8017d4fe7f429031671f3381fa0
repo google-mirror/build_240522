@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f37aba0_e69ded10",
+        "filename": "core/main.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 2223,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-02-12T19:55:46Z",
+      "side": 1,
+      "message": "Is there a way we could do this for just the make based modules?",
+      "revId": "88a9bd415174f8017d4fe7f429031671f3381fa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
