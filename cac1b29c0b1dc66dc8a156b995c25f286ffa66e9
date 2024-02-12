@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbb58a1c_74dcf989",
+        "filename": "ci/build_android_metadata.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-02-12T19:40:49Z",
+      "side": 1,
+      "message": "CI already sets DIST_DIR in the environment.  You should be able to just completely ignore it here, and soong will see it.\n\nIf you need to access it yourself, then you can just get it from the environment directly.\n\nAlso remove it from the gcl too.",
+      "revId": "cac1b29c0b1dc66dc8a156b995c25f286ffa66e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a55dcce_338e3446",
         "filename": "ci/build_android_metadata.py",
         "patchSetId": 1
