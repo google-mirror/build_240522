@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "891dff6b_8ac59b9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-02-12T20:13:21Z",
+      "side": 1,
+      "message": "Note that with the deprecation of VNDK, we\u0027re rolling this back (although not as a pure revert, due to branch changes and such) in https://android-review.git.corp.google.com/c/platform/build/+/2959233",
+      "revId": "0408a6e18298dad7ee305eb967431bfed7e61074",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
