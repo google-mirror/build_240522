@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f82cf73f_aab0f038",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-02-12T17:06:54Z",
+      "side": 1,
+      "message": "Looks like a duplicate of https://r.android.com/2958072.",
+      "revId": "222d82b8fa97bea323b1b9eba8e0c2d3814afc4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
