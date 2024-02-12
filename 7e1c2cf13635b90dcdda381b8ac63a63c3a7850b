@@ -16,6 +16,69 @@
       "message": "I\u0027m still very much getting used to make files so can you take a look @colefaust@google.com and let me know if this is an acceptable way to split these targets up? I need the shared libs zip to be generated alone for the work I\u0027m doing.",
       "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01ee82c9_be801cd6",
+        "filename": "core/tasks/general-tests-shared-libs.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-02-12T19:56:33Z",
+      "side": 1,
+      "message": "This variable doesn\u0027t exist",
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073ca5e9_f7598b1f",
+        "filename": "core/tasks/general-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-02-12T19:56:33Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 43,
+        "startChar": 106,
+        "endLine": 43,
+        "endChar": 140
+      },
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb9aa0d1_6264a6d7",
+        "filename": "core/tasks/general-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-02-12T19:56:33Z",
+      "side": 1,
+      "message": "This should probably be a dependency of `$(general_tests_zip)` rather than just the `general-tests` alias.",
+      "range": {
+        "startLine": 70,
+        "startChar": 35,
+        "endLine": 70,
+        "endChar": 61
+      },
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
