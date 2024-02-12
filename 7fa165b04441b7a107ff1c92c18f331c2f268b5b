@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71bc1a9_d0fe3fe1",
+        "filename": "target/product/go_defaults_common.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-02-12T20:50:44Z",
+      "side": 0,
+      "message": "nit may want to comment this out and leave todo, but sgtm",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "7fa165b04441b7a107ff1c92c18f331c2f268b5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
