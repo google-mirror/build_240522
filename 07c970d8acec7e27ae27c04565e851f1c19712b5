@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19ae0b70_c13e69e6",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-12T13:58:19Z",
+      "side": 1,
+      "message": "`build/make/tools/ide_query/ide_query.sh` invokes `build/make/cogsetup.sh` which sets it to \"out/\" is not set by the user.",
+      "parentUuid": "ee4e4181_3611c7cc",
+      "revId": "07c970d8acec7e27ae27c04565e851f1c19712b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eded317d_217cb433",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-02-06T18:22:53Z",
       "side": 1,
       "message": "[envsetup.sh](https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:build/make/envsetup.sh;l\u003d417) sets ANDROID_BUILD_TOP.  I think it\u0027s better to standardize on that name.\n```suggestion\n\tenv.RepoDir \u003d os.Getenv(\"ANDROID_BUILD_TOP\")\n```",
+      "revId": "07c970d8acec7e27ae27c04565e851f1c19712b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "420d964e_b6c2f5ee",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-12T13:58:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eded317d_217cb433",
       "revId": "07c970d8acec7e27ae27c04565e851f1c19712b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
