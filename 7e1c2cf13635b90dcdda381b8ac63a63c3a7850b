@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "917b6931_53b3935b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-02-12T19:57:16Z",
+      "side": 1,
+      "message": "LGTM in general, just some minor issues.",
+      "parentUuid": "985217e2_b3e0de9c",
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01ee82c9_be801cd6",
