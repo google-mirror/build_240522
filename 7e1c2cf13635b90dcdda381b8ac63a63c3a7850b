@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "985217e2_b3e0de9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-12T18:33:43Z",
+      "side": 1,
+      "message": "I\u0027m still very much getting used to make files so can you take a look @colefaust@google.com and let me know if this is an acceptable way to split these targets up? I need the shared libs zip to be generated alone for the work I\u0027m doing.",
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
