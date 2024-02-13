@@ -218,24 +218,42 @@ def zip_build_outputs(
   # Call dumpvars to get the necessary things.
   # TODO(lucafarsi): Don't call soong_ui 4 times for this, --dumpvars-mode can
   # do it but it requires parsing.
-  host_out_testcases = get_soong_var('HOST_OUT_TESTCASES', target_release)
-  target_out_testcases = get_soong_var('TARGET_OUT_TESTCASES', target_release)
-  product_out = get_soong_var('PRODUCT_OUT', target_release)
-  soong_host_out = get_soong_var('SOONG_HOST_OUT', target_release)
-  host_out = get_soong_var('HOST_OUT', target_release)
+  host_out_testcases = pathlib.Path(
+      get_soong_var('HOST_OUT_TESTCASES', target_release)
+  )
+  target_out_testcases = pathlib.Path(
+      get_soong_var('TARGET_OUT_TESTCASES', target_release)
+  )
+  product_out = pathlib.Path(get_soong_var('PRODUCT_OUT', target_release))
+  soong_host_out = pathlib.Path(get_soong_var('SOONG_HOST_OUT', target_release))
+  host_out = pathlib.Path(get_soong_var('HOST_OUT', target_release))
 
   # Call the class to package the outputs.
   # TODO(lucafarsi): Move this code into a replaceable class.
   host_paths = []
   target_paths = []
+  host_config_files = []
+  target_config_files = []
   for module in modules_to_build:
     host_path = os.path.join(host_out_testcases, module)
     if os.path.exists(host_path):
       host_paths.append(host_path)
+      for root, dirs, files in os.walk(os.path.join(src_top, host_path)):
+        for file in files:
+          if file.endswith('.config'):
+            host_config_files.append(os.path.join(host_path, file))
 
     target_path = os.path.join(target_out_testcases, module)
     if os.path.exists(target_path):
       target_paths.append(target_path)
+      for root, dirs, files in os.walk(os.path.join(src_top, target_path)):
+        for file in files:
+          if file.endswith('.config'):
+            target_config_files.append(os.path.join(target_path, file))
+
+  zip_test_configs_zips(
+      dist_dir, host_out, product_out, host_config_files, target_config_files
+  )
 
   zip_command = ['time', os.path.join(host_out, 'bin', 'soong_zip')]
 
@@ -279,6 +297,71 @@ def zip_build_outputs(
   zip_command.append(os.path.join(dist_dir, 'general-tests.zip'))
 
   run_command(zip_command, print_output=True)
+
+
+def zip_test_configs_zips(
+    dist_dir: pathlib.Path,
+    host_out: pathlib.Path,
+    product_out: pathlib.Path,
+    host_config_files: Set[Text],
+    target_config_files: Set[Text],
+):
+  with open(
+      os.path.join(host_out, 'host_general-tests_list'), 'w'
+  ) as host_list_file:
+    with open(os.path.join(host_out, 'general-tests_list'), 'w') as list_file:
+      for config_file in host_config_files:
+        host_list_file.write(config_file + '\n')
+        list_file.write('host/' + os.path.relpath(config_file, host_out) + '\n')
+
+  with open(
+      os.path.join(product_out, 'target_general-tests_list'), 'w'
+  ) as target_list_file:
+    with open(os.path.join(host_out, 'general-tests_list'), 'a') as list_file:
+      for config_file in target_config_files:
+        target_list_file.write(config_file + '\n')
+        list_file.write(
+            'target/' + os.path.relpath(config_file, product_out) + '\n'
+        )
+
+  tests_config_zip_command = [
+      'time',
+      os.path.join(host_out, 'bin', 'soong_zip'),
+  ]
+  tests_config_zip_command.append('-d')
+  tests_config_zip_command.append('-o')
+  tests_config_zip_command.append(
+      os.path.join(dist_dir, 'general-tests_configs.zip')
+  )
+  tests_config_zip_command.append('-P')
+  tests_config_zip_command.append('host')
+  tests_config_zip_command.append('-C')
+  tests_config_zip_command.append(host_out)
+  tests_config_zip_command.append('-l')
+  tests_config_zip_command.append(
+      os.path.join(host_out, 'host_general-tests_list')
+  )
+  tests_config_zip_command.append('-P')
+  tests_config_zip_command.append('target')
+  tests_config_zip_command.append('-C')
+  tests_config_zip_command.append(product_out)
+  tests_config_zip_command.append('-l')
+  tests_config_zip_command.append(
+      os.path.join(product_out, 'target_general-tests_list')
+  )
+  run_command(tests_config_zip_command, print_output=True)
+
+  tests_list_zip_command = ['time', os.path.join(host_out, 'bin', 'soong_zip')]
+  tests_list_zip_command.append('-d')
+  tests_list_zip_command.append('-o')
+  tests_list_zip_command.append(
+      os.path.join(dist_dir, 'general-tests_list.zip')
+  )
+  tests_list_zip_command.append('-C')
+  tests_list_zip_command.append(host_out)
+  tests_list_zip_command.append('-f')
+  tests_list_zip_command.append(os.path.join(host_out, 'general-tests_list'))
+  run_command(tests_list_zip_command, print_output=True)
 
 
 def get_soong_var(var: str, target_release: str) -> str:
