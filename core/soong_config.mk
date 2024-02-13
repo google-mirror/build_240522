@@ -263,6 +263,10 @@ $(foreach namespace,$(sort $(SOONG_CONFIG_NAMESPACES)),\
   $(foreach key,$(sort $(SOONG_CONFIG_$(namespace))),\
     $(call add_json_str,$(key),$(subst ",\",$(SOONG_CONFIG_$(namespace)_$(key)))))\
   $(call end_json_map))
+$(call add_json_map, BuildFlags)
+$(foreach flag,$(_ALL_RELEASE_FLAGS),\
+  $(call add_json_str,$(flag),$(_ALL_RELEASE_FLAGS.$(flag).VALUE)))
+$(call end_json_map)
 $(call end_json_map)
 
 $(call add_json_bool, EnforceProductPartitionInterface,  $(filter true,$(PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE)))
