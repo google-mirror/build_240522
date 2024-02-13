@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8819c663_8d47eae2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982145
+      },
+      "writtenOn": "2024-02-13T00:34:15Z",
+      "side": 1,
+      "message": "Ronish, after this goes in, you should:\n 1) create new build\n 2) remove all_teams target from coverage build\n 3) Add all_teams and filter_teams target to new build.\n 4) have new build call\n      rbe.set_env(environment) + build/make/ci/filter_teams.sh\n\nWe could be step 3:\n```\n build/soong/soong_ui.bash --make-mode cts dist DIST_DIR\u003d%dist_dir% TARGET_PRODUCT\u003daosp_x86_64 TARGET_RELEASE\u003dtrunk_staging\n```\n in the filter_teams.sh script, but I think it would be too different from all the other builds.  We can always do that as a follow-up step too.",
+      "revId": "3026e6ed3ca6ed30a66cab3a9fa92e5dfc779b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
