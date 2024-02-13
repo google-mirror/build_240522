@@ -115,3 +115,21 @@ python_binary_host {
         },
     },
 }
+
+python_binary_host {
+    name: "filter_teams",
+    srcs: [
+        "filter_teams.py",
+    ],
+    libs: [
+        "teams-proto-py",
+        "code-metadata-proto-py",
+        "test-spec-proto-py",
+    ],
+    version: {
+        py3: {
+            embedded_launcher: true,
+        },
+    },
+}
+
