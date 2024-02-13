@@ -22,6 +22,30 @@
       },
       "revId": "81fb8cc268c38883f1d4d8384da24b29c08aa493",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c45c2a9_ed47138a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-02-13T15:53:02Z",
+      "side": 1,
+      "message": "I think this ends up being a no-op.  Presubmit ended up skipping the mokey boot test because it didn\u0027t detect any changes in the image (https://screenshot.googleplex.com/5Sp3aYRZckfkEEG) and that matches with what b/319529309#comment29 says about this.\n\nI\u0027ll change up this commit message a little.",
+      "parentUuid": "e3e02604_1f2661ab",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 118
+      },
+      "revId": "81fb8cc268c38883f1d4d8384da24b29c08aa493",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
