@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35e17fc2_a2258f00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2024-02-13T05:41:06Z",
+      "side": 1,
+      "message": "This change succeeds to build with mainline targets from git_main : https://android-build.corp.google.com/abtd/run/L86800030001934624",
+      "revId": "09aaa26c060e785e65fda9506934b1303019e841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
