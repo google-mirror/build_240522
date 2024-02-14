@@ -52,6 +52,24 @@
       "parentUuid": "819daa76_e1684bd2",
       "revId": "618e66a28ba9d63022c3e9d2bd93975da297a301",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1163f15_687685d1",
+        "filename": "tools/aconfig/aconfig_storage_file/build.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-14T22:32:16Z",
+      "side": 1,
+      "message": "The `let _ \u003d ...bridge(\"...\");` calls still looks weird to me. What does it do?\nWhere in https://docs.rs/cxx-build/latest/cxx_build/fn.bridge.html is it documented what side effects creating a cc::Build object has, but not calling any of the follow-up methods mentioned in the bridge docs?\n\n- Is the current code relying on implementation defined behaviour?\n- What would happen if we omit line 18?",
+      "parentUuid": "b9dbf447_ef064448",
+      "revId": "618e66a28ba9d63022c3e9d2bd93975da297a301",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
