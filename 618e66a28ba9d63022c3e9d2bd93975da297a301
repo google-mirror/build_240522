@@ -70,6 +70,24 @@
       "parentUuid": "b9dbf447_ef064448",
       "revId": "618e66a28ba9d63022c3e9d2bd93975da297a301",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beb0ed16_f28fede1",
+        "filename": "tools/aconfig/aconfig_storage_file/build.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-14T22:35:49Z",
+      "side": 1,
+      "message": "I think it triggers cxx code generation. So when running cargo build, it generates c++ code. If we remove this line, then when running cargo build, no c++ code is generated based on exported rust api. So we wouldn\u0027t know how to interface with the generated code.\n\nAnyway, android build system does not really rely on this. It is only used for cargo.",
+      "parentUuid": "b1163f15_687685d1",
+      "revId": "618e66a28ba9d63022c3e9d2bd93975da297a301",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
