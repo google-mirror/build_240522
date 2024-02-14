@@ -22,6 +22,30 @@
       },
       "revId": "9c1450e0d2fb5fb0b1aff88e107dfcf7cdf16f00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90bb8d05_4b8e2078",
+        "filename": "tools/aconfig/fake_device_config/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-02-14T17:38:02Z",
+      "side": 1,
+      "message": "Acknowledged, will fix this in the follow up CL as this is urgent.",
+      "parentUuid": "ed0097d4_382e6635",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "9c1450e0d2fb5fb0b1aff88e107dfcf7cdf16f00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
