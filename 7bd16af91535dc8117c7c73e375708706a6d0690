@@ -16,6 +16,24 @@
       "message": "I do have [some WIP cls](https://android-review.git.corp.google.com/q/topic:%22selects%22) that I hope to submit either this week or next that add select statements to soong. They would get rid of all the soong config variable boilder plate, and also allow you to select on `BuildFlags` without adding a `soong_config_set`, like this cl does.",
       "revId": "7bd16af91535dc8117c7c73e375708706a6d0690",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa468b7b_f3f577e5",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2024-02-14T01:16:01Z",
+      "side": 1,
+      "message": "Awesome!",
+      "parentUuid": "477fe7bd_780fad49",
+      "revId": "7bd16af91535dc8117c7c73e375708706a6d0690",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
