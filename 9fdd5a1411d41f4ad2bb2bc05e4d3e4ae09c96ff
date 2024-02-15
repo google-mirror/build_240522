@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f2dcff7_dba6f994",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-02-15T22:41:13Z",
+      "side": 1,
+      "message": "Yes, the GSI that is flashed has `/system/system_ext` as a real directory instead of a simlink to `/system_ext`",
+      "parentUuid": "d94e61f6_5aa71ddd",
+      "revId": "9fdd5a1411d41f4ad2bb2bc05e4d3e4ae09c96ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81cca437_bde0c419",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-15T22:30:35Z",
       "side": 1,
       "message": "Update this comment too",
+      "revId": "9fdd5a1411d41f4ad2bb2bc05e4d3e4ae09c96ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8862fd74_8caac24d",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 5107,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-02-15T22:41:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81cca437_bde0c419",
       "revId": "9fdd5a1411d41f4ad2bb2bc05e4d3e4ae09c96ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
