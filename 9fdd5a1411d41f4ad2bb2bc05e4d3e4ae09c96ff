@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d94e61f6_5aa71ddd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-02-15T22:31:21Z",
+      "side": 1,
+      "message": "So when we say GSI, does that include both /system and /system_ext?\n\nWhen running VTS tests, GSI is flashed; does that include system_ext from aosp_arm64 target?",
+      "revId": "9fdd5a1411d41f4ad2bb2bc05e4d3e4ae09c96ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81cca437_bde0c419",
         "filename": "core/Makefile",
         "patchSetId": 2
