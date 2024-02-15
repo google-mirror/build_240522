@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99beea00_ecb736fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1217797
+      },
+      "writtenOn": "2024-02-15T03:41:08Z",
+      "side": 1,
+      "message": "@jihoonkang, @spandandas, @ccross,\nAdded to reviewers who recently reviewed this file. Apologies if it is not your role 😞\n\nWhen migrating SoC codes to our products, SoC often defines those as \":\u003d\", initializing all the values that we defines. I think setting them as product variable is more reasonable than changing to \"+\u003d\" whenever it comes.",
+      "revId": "e914c837658a955852a0ae98fe9c05254a84a834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
