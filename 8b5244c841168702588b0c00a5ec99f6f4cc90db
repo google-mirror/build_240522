@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2bde625_9080b969",
+        "filename": "tools/aconfig/aconfig_storage_file/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-15T10:56:42Z",
+      "side": 1,
+      "message": "This should be part of TEST_MAPPING.",
+      "range": {
+        "startLine": 21,
+        "startChar": 10,
+        "endLine": 21,
+        "endChar": 35
+      },
+      "revId": "8b5244c841168702588b0c00a5ec99f6f4cc90db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
