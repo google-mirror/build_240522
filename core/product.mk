@@ -456,6 +456,12 @@ _product_single_value_vars += PRODUCT_BUILD_FROM_SOURCE_STUB
 
 _product_list_vars += PRODUCT_BUILD_IGNORE_APEX_CONTRIBUTION_CONTENTS
 
+# List of VINTF metadata files.
+_product_list_vars += PRODUCT_MANIFEST_FILES
+_product_list_vars += DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE
+_product_list_vars += DEVICE_MANIFEST_FILE
+_product_list_vars += DEVICE_MATRIX_FILE
+
 .KATI_READONLY := _product_single_value_vars _product_list_vars
 _product_var_list :=$= $(_product_single_value_vars) $(_product_list_vars)
 
