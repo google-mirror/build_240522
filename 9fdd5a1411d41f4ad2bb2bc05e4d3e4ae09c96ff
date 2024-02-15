@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "123ed106_a6bbe5ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-02-15T22:44:31Z",
+      "side": 1,
+      "message": "https://sites.google.com/corp/google.com/android-gsi/faq?pli\u003d1#h.de31yun8guzz\nLooks like /product is also handled like this. But we don\u0027t have any HALs in the product partition on GSI and I don\u0027t see a need for that.",
+      "parentUuid": "0f2dcff7_dba6f994",
+      "revId": "9fdd5a1411d41f4ad2bb2bc05e4d3e4ae09c96ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81cca437_bde0c419",
