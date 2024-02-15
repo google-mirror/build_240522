@@ -1926,26 +1926,28 @@ license_modules_agg := $(license_modules_system) \
 # targets used for debug symbols only and do not get copied to the device
 license_modules_symbols_only := $(filter $(PRODUCT_OUT)/apex/%,$(license_modules))
 
-license_modules_rest := $(filter-out $(license_modules_agg),$(license_modules))
-license_modules_rest := $(filter-out $(license_modules_symbols_only),$(license_modules_rest))
+license_modules_rest := $(filter-out $(license_modules_agg) \
+                                     $(license_modules_symbols_only), \
+                                     $(license_modules))
 
 # Identify the other targets we expect to have notices for:
 # targets copied to the device but are not readable by the UI (e.g. must boot
 # into a different partition to read or don't have an associated /etc
 # directory) must have their notices built somewhere readable.
 license_modules_rehomed := $(filter-out $(PRODUCT_OUT)/%/%,$(license_modules_rest))  # files in root have no /etc
-license_modules_rehomed += $(filter $(PRODUCT_OUT)/recovery/%,$(license_modules_rest))
-license_modules_rehomed += $(filter $(PRODUCT_OUT)/root/%,$(license_modules_rest))
-license_modules_rehomed += $(filter $(PRODUCT_OUT)/data/%,$(license_modules_rest))
-license_modules_rehomed += $(filter $(PRODUCT_OUT)/ramdisk/%,$(license_modules_rest))
-license_modules_rehomed += $(filter $(PRODUCT_OUT)/debug_ramdisk/%,$(license_modules_rest))
-license_modules_rehomed += $(filter $(PRODUCT_OUT)/vendor_ramdisk/%,$(license_modules_rest))
-license_modules_rehomed += $(filter $(PRODUCT_OUT)/persist/%,$(license_modules_rest))
-license_modules_rehomed += $(filter $(PRODUCT_OUT)/persist.img,$(license_modules_rest))
-license_modules_rehomed += $(filter $(PRODUCT_OUT)/system_other/%,$(license_modules_rest))
-license_modules_rehomed += $(filter $(PRODUCT_OUT)/kernel%,$(license_modules_rest))
-license_modules_rehomed += $(filter $(PRODUCT_OUT)/%.img,$(license_modules_rest))
-license_modules_rehomed += $(filter $(PRODUCT_OUT)/%.bin,$(license_modules_rest))
+license_modules_rehomed += $(filter $(PRODUCT_OUT)/recovery/% \
+                                    $(PRODUCT_OUT)/root/% \
+                                    $(PRODUCT_OUT)/data/% \
+                                    $(PRODUCT_OUT)/ramdisk/% \
+                                    $(PRODUCT_OUT)/debug_ramdisk/% \
+                                    $(PRODUCT_OUT)/vendor_ramdisk/% \
+                                    $(PRODUCT_OUT)/persist/% \
+                                    $(PRODUCT_OUT)/persist.img \
+                                    $(PRODUCT_OUT)/system_other/% \
+                                    $(PRODUCT_OUT)/kernel% \
+                                    $(PRODUCT_OUT)/%.img \
+                                    $(PRODUCT_OUT)/%.bin, \
+                                    $(license_modules_rest))
 
 # after removing targets in system images, targets reported in system images, and
 # targets used for debug symbols that do not need notices, nothing must remain.
