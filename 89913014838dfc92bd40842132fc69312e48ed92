@@ -48,6 +48,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1060f4b_163647b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1217797
+      },
+      "writtenOn": "2024-02-16T01:37:08Z",
+      "side": 1,
+      "message": "@smoreland, @jiyong,\nThanks for reviewing 😊\nAFAIK, DEVICE_XXX_FILE variables are currently plural, so we had better rename them someday.",
+      "revId": "89913014838dfc92bd40842132fc69312e48ed92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1e8702a_a9b982df",
