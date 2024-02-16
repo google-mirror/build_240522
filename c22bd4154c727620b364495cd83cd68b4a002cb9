@@ -424,6 +424,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "456477fa_ae9d1878",
+        "filename": "tools/aconfig/flags/src/device_config_source.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-02-16T19:02:07Z",
+      "side": 1,
+      "message": "Removed the call to get overrides altogether, will punt bringing it back to a new separate CL.",
+      "parentUuid": "ee0d9b4b_199952b2",
+      "range": {
+        "startLine": 92,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 61
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24b1087a_482487c0",
@@ -484,6 +508,30 @@
       "writtenOn": "2024-02-09T08:06:46Z",
       "side": 1,
       "message": "How about an enum Partition { ... } and using a HashMap\u003cPartition, AconfigDefinition\u003e?",
+      "range": {
+        "startLine": 66,
+        "startChar": 17,
+        "endLine": 66,
+        "endChar": 20
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d54a662_5e264031",
+        "filename": "tools/aconfig/flags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-02-16T19:02:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abc9405c_1cd2bfa2",
       "range": {
         "startLine": 66,
         "startChar": 17,
@@ -578,6 +626,30 @@
       "side": 1,
       "message": "I personally use it pretty often when using `device_config list`. It lines up with my mental model of flag ownership, which seems relevant here. WDYT?",
       "parentUuid": "79b6661c_6027a505",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 9
+      },
+      "revId": "c22bd4154c727620b364495cd83cd68b4a002cb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11dd578a_d15411b2",
+        "filename": "tools/aconfig/flags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-02-16T19:02:07Z",
+      "side": 1,
+      "message": "Chatted about this with Dennis; I removed the namespace field from the output. In a follow-up, we could show that info in a `verbose` mode.",
+      "parentUuid": "331d002a_9e9bce81",
       "range": {
         "startLine": 80,
         "startChar": 0,
