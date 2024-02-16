@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fd64835_a95ce511",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-02-16T01:40:34Z",
+      "side": 1,
+      "message": "Yeah, it fails. I wonder if we could have kati \"append only\" instead of \"obsolete\". Otherwise, I can\u0027t think of a fast way to debug.",
+      "parentUuid": "3fef5dde_90dd34fd",
+      "range": {
+        "startLine": 9,
+        "startChar": 79,
+        "endLine": 9,
+        "endChar": 155
+      },
+      "revId": "89913014838dfc92bd40842132fc69312e48ed92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d1060f4b_163647b7",
