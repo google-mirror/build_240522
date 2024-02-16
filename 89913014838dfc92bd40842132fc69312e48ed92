@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ca579b_148fb366",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-16T00:55:32Z",
+      "side": 1,
+      "message": "Yeah, but I believe there are some products which \"incorrectly\" have relied on this behavior.",
+      "range": {
+        "startLine": 9,
+        "startChar": 79,
+        "endLine": 9,
+        "endChar": 155
+      },
+      "revId": "89913014838dfc92bd40842132fc69312e48ed92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1e8702a_a9b982df",
+        "filename": "core/product.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-16T00:55:32Z",
+      "side": 1,
+      "message": "Are these really plural? 😮",
+      "range": {
+        "startLine": 461,
+        "startChar": 0,
+        "endLine": 463,
+        "endChar": 40
+      },
+      "revId": "89913014838dfc92bd40842132fc69312e48ed92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
