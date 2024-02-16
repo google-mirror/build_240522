@@ -233,6 +233,7 @@ PRODUCT_PACKAGES += \
     PackageInstaller \
     passwd_system \
     perfetto \
+    perfetto_persistent_cfg.pbtxt \
     ping \
     ping6 \
     platform.xml \
