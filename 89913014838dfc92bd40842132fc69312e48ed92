@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "87002273_3ac0c266",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-16T03:56:18Z",
+      "side": 1,
+      "message": "I agree with this change, but given that it will break unknown number of existing targets (not just in AOSP, but also in partner trees), I think we shouldn\u0027t accept this change.\n\nAFAIK, a (radically) better product configuration is what Joe and his team will be working this and next year. Can we embrace the confusion like this until then?",
+      "parentUuid": "b6b0cae3_f3cab100",
+      "range": {
+        "startLine": 9,
+        "startChar": 79,
+        "endLine": 9,
+        "endChar": 155
+      },
+      "revId": "89913014838dfc92bd40842132fc69312e48ed92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d1060f4b_163647b7",
