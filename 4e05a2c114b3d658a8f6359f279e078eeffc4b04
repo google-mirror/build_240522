@@ -16,6 +16,24 @@
       "message": "@bbadour@google.com, is there anything I should do extra to test this change?",
       "revId": "4e05a2c114b3d658a8f6359f279e078eeffc4b04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a0f2292_cb41e945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2024-02-16T22:07:32Z",
+      "side": 1,
+      "message": "I would suggest running device builds with and without the change and then comparing the license text files from the dist directory for a couple configurations.\n\nI haven\u0027t been involved with Android for over a year. Joe or Colin might have better suggestions.",
+      "parentUuid": "a9e43468_e0852986",
+      "revId": "4e05a2c114b3d658a8f6359f279e078eeffc4b04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
