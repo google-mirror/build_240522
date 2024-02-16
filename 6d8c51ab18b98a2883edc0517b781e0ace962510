@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5125dd4_ae8cde4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-02-16T01:36:28Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "6d8c51ab18b98a2883edc0517b781e0ace962510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9999aae6_aa29ee15",
+        "filename": "core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1927,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-02-16T01:36:28Z",
+      "side": 1,
+      "message": "I think you could inline (or at least keep the variables but as patterns instead of filter results) all these patterns into the filter-out as well.",
+      "range": {
+        "startLine": 1910,
+        "startChar": 0,
+        "endLine": 1927,
+        "endChar": 82
+      },
+      "revId": "6d8c51ab18b98a2883edc0517b781e0ace962510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
