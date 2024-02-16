@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9fea8d3_6e34777e",
+        "filename": "tools/ide_query/cc_analyzer/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-16T17:40:09Z",
+      "side": 1,
+      "message": "2024\n```suggestion\n * Copyright (C) 2024 The Android Open Source Project\n```",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "dc34687dded10f8f93f1d472b48a648da13fcc56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abdbab87_743bd36e",
+        "filename": "tools/ide_query/cc_analyzer/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-16T17:40:09Z",
+      "side": 1,
+      "message": "Any reason each source has a separate static library and not folded into  `ide_query_cc_analyzer`?",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 22
+      },
+      "revId": "dc34687dded10f8f93f1d472b48a648da13fcc56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dd07b87_64eda004",
+        "filename": "tools/ide_query/cc_analyzer/analyzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-16T17:40:09Z",
+      "side": 1,
+      "message": "All source files need an Android copyright notice.  See system/extras/simpleperf/include/simpleperf.h for an example.",
+      "revId": "dc34687dded10f8f93f1d472b48a648da13fcc56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
