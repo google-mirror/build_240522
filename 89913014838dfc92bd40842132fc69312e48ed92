@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6b0cae3_f3cab100",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-16T03:53:10Z",
+      "side": 1,
+      "message": "This seems to be a mess. 😞\n\nFor some targets, DEVICE_MATRIX_FILE is set in product makefiles, but some other targets it is set in boardconfig. The latter case will become illegal with this change.",
+      "parentUuid": "2fd64835_a95ce511",
+      "range": {
+        "startLine": 9,
+        "startChar": 79,
+        "endLine": 9,
+        "endChar": 155
+      },
+      "revId": "89913014838dfc92bd40842132fc69312e48ed92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d1060f4b_163647b7",
