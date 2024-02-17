@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "757cd19a_fa1c8c41",
+        "filename": "core/tasks/general-tests-shared-libs.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-17T00:19:48Z",
+      "side": 1,
+      "message": "isn\u0027t it defined up there as the output zip file path? What should I do instead?",
+      "parentUuid": "01ee82c9_be801cd6",
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "073ca5e9_f7598b1f",
         "filename": "core/tasks/general-tests.mk",
         "patchSetId": 1
@@ -66,6 +84,30 @@
       "writtenOn": "2024-02-12T19:56:33Z",
       "side": 1,
       "message": "Remove",
+      "range": {
+        "startLine": 43,
+        "startChar": 106,
+        "endLine": 43,
+        "endChar": 140
+      },
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aad816e4_647453c7",
+        "filename": "core/tasks/general-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-17T00:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "073ca5e9_f7598b1f",
       "range": {
         "startLine": 43,
         "startChar": 106,
@@ -89,6 +131,30 @@
       "writtenOn": "2024-02-12T19:56:33Z",
       "side": 1,
       "message": "This should probably be a dependency of `$(general_tests_zip)` rather than just the `general-tests` alias.",
+      "range": {
+        "startLine": 70,
+        "startChar": 35,
+        "endLine": 70,
+        "endChar": 61
+      },
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f31f045c_0842b078",
+        "filename": "core/tasks/general-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-17T00:19:48Z",
+      "side": 1,
+      "message": "Still very new to makefiles, does that mean I can add a line\n```\n$(general_tests_zip) : general-tests-shared-libs\n```\nto the top of all the commands that go into `$(general_tests_zip)`?",
+      "parentUuid": "fb9aa0d1_6264a6d7",
       "range": {
         "startLine": 70,
         "startChar": 35,
