@@ -4,6 +4,7 @@ SOONG_ANDROID_MK := $(SOONG_OUT_DIR)/Android-$(TARGET_PRODUCT).mk
 
 include $(BUILD_SYSTEM)/art_config.mk
 include $(BUILD_SYSTEM)/dex_preopt_config.mk
+include $(BUILD_SYSTEM)/wpa_supplicant_8_config.mk
 
 ifndef AFDO_PROFILES
 # Set AFDO_PROFILES
