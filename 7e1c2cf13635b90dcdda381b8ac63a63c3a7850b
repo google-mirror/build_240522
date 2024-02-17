@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd29253f_0868575c",
+        "filename": "core/tasks/general-tests-shared-libs.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-02-17T01:00:49Z",
+      "side": 1,
+      "message": "I don\u0027t see it, unless I\u0027m missing something. I see `PRIVATE_general_host_shared_libs_zip` is defined, but not `PRIVATE_general_tests_list_zip`.",
+      "parentUuid": "757cd19a_fa1c8c41",
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "073ca5e9_f7598b1f",
         "filename": "core/tasks/general-tests.mk",
         "patchSetId": 1
@@ -155,6 +173,30 @@
       "side": 1,
       "message": "Still very new to makefiles, does that mean I can add a line\n```\n$(general_tests_zip) : general-tests-shared-libs\n```\nto the top of all the commands that go into `$(general_tests_zip)`?",
       "parentUuid": "fb9aa0d1_6264a6d7",
+      "range": {
+        "startLine": 70,
+        "startChar": 35,
+        "endLine": 70,
+        "endChar": 61
+      },
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39cafa73_504344c6",
+        "filename": "core/tasks/general-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-02-17T01:00:49Z",
+      "side": 1,
+      "message": "Yes, exactly.",
+      "parentUuid": "f31f045c_0842b078",
       "range": {
         "startLine": 70,
         "startChar": 35,
