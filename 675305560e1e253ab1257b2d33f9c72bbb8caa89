@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc17933b_2813995f",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-02-19T09:45:54Z",
+      "side": 1,
+      "message": "`$(addsuffix :%,$(1))`",
+      "range": {
+        "startLine": 126,
+        "startChar": 23,
+        "endLine": 126,
+        "endChar": 51
+      },
+      "revId": "675305560e1e253ab1257b2d33f9c72bbb8caa89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
