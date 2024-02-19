@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1667f28_d3d2033a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-19T08:30:22Z",
+      "side": 1,
+      "message": "Some minor comments. We should be close to landing this CL.",
+      "revId": "0ed4a0e6ede86c0a4fd3eac0f4b86e649a9e233b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32c2347f_8d0daf3a",
+        "filename": "tools/aconfig/aflags/Android.bp",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-19T08:30:22Z",
+      "side": 1,
+      "message": "New tests should be added to TEST_MAPPING (as postsubmit) as part of their introduction.\n\nAlso file a bug on yourself to migrate the test from postsubmit to presubmit ~a week after the test starts running in postsubmit. See go/test-mapping-slo-guide",
+      "range": {
+        "startLine": 26,
+        "startChar": 11,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "0ed4a0e6ede86c0a4fd3eac0f4b86e649a9e233b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ce878e6_eb26d131",
+        "filename": "tools/aconfig/aflags/Cargo.toml",
+        "patchSetId": 16
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-19T08:30:22Z",
+      "side": 1,
+      "message": "Does aflags need to have any features?",
+      "revId": "0ed4a0e6ede86c0a4fd3eac0f4b86e649a9e233b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f1e4322_4f67eed1",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-19T08:30:22Z",
+      "side": 1,
+      "message": "I understand the server override. What does OverrideType::Default_ mean? Is there a more descriptive name we can use instead?",
+      "range": {
+        "startLine": 41,
+        "startChar": 5,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "revId": "0ed4a0e6ede86c0a4fd3eac0f4b86e649a9e233b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27c0f933_43c25874",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-19T08:30:22Z",
+      "side": 1,
+      "message": "Default is not a keyword (but default is). Possible to drop the trailing underscore?",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 12
+      },
+      "revId": "0ed4a0e6ede86c0a4fd3eac0f4b86e649a9e233b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36e14909_8a43b86f",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-19T08:30:22Z",
+      "side": 1,
+      "message": "So OverrideType::Default_ means \"no override\", not \"overridden using the default way of doing so as opposed to overriding via server\"? Rename Default to... None? Or rename the enum to something with a better name than (but still indicating the same) ValuePickedFrom.",
+      "range": {
+        "startLine": 80,
+        "startChar": 7,
+        "endLine": 80,
+        "endChar": 14
+      },
+      "revId": "0ed4a0e6ede86c0a4fd3eac0f4b86e649a9e233b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e1aeaa5_22ec8800",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-19T08:30:22Z",
+      "side": 1,
+      "message": "This is not implemented in this CL.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 66
+      },
+      "revId": "0ed4a0e6ede86c0a4fd3eac0f4b86e649a9e233b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
