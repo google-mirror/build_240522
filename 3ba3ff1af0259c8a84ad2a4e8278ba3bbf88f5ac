@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d613c9c7_ec34f6ff",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-02-19T12:41:06Z",
+      "side": 1,
+      "message": "Is it intended to have the LLNDK tag on both vndk and platform dumps? I thought LLNDK is only for vndk with this patch.",
+      "range": {
+        "startLine": 200,
+        "startChar": 32,
+        "endLine": 200,
+        "endChar": 37
+      },
+      "revId": "3ba3ff1af0259c8a84ad2a4e8278ba3bbf88f5ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
