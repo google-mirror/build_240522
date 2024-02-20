@@ -3,6 +3,7 @@
 package main
 
 import (
+	"bytes"
 	"container/list"
 	"context"
 	"encoding/json"
@@ -21,9 +22,16 @@ import (
 
 // Env contains information about the current environment.
 type Env struct {
-	LunchTarget LunchTarget
-	RepoDir     string
-	OutDir      string
+	LunchTarget             LunchTarget
+	RepoDir                 string
+	OutDir                  string
+	PrebuiltsClangToolsRoot string
+
+	CcFiles []string
+
+	JavaFiles           []string
+	JavaModules         map[string]*javaModule // mapping from module name to module
+	JavaFileToModuleMap map[string]*javaModule // mapping from file path to module
 }
 
 // LunchTarget is a parsed Android lunch target.
@@ -60,42 +68,74 @@ func (l *LunchTarget) String() string {
 	return fmt.Sprintf("%s-%s-%s", l.Product, l.Release, l.Variant)
 }
 
-func main() {
-	var env Env
-	env.OutDir = os.Getenv("OUT_DIR")
-	env.RepoDir = os.Getenv("ANDROID_BUILD_TOP")
-	flag.Var(&env.LunchTarget, "lunch_target", "The lunch target to query")
-	flag.Parse()
-	files := flag.Args()
-	if len(files) == 0 {
-		fmt.Println("No files provided.")
-		os.Exit(1)
-		return
+func RepoState(env *Env) pb.RepoState {
+	const compDbPath = "soong/development/ide/compdb/compile_commands.json"
+	return pb.RepoState{
+		RepoDir:        env.RepoDir,
+		ActiveFilePath: env.CcFiles,
+		OutDir:         env.OutDir,
+		CompDbPath:     path.Join(env.OutDir, compDbPath),
+	}
+}
+
+func RunCCanalyzer(ctx context.Context, env *Env, mode string, in []byte) []byte {
+	ccAnalyzerPath := path.Join(env.PrebuiltsClangToolsRoot, "bin/ide_query_cc_analyzer")
+	outBuffer := bytes.Buffer{}
+
+	inBuffer := bytes.Buffer{}
+	inBuffer.Write(in)
+
+	cmd := exec.CommandContext(ctx, ccAnalyzerPath, "--mode="+mode)
+	cmd.Dir = env.RepoDir
+
+	cmd.Stdin = &inBuffer
+	cmd.Stdout = &outBuffer
+	cmd.Stderr = os.Stderr
+
+	if err := cmd.Run(); err != nil {
+		log.Fatal(err)
 	}
 
-	var javaFiles []string
-	for _, f := range files {
-		switch {
-		case strings.HasSuffix(f, ".java") || strings.HasSuffix(f, ".kt"):
-			javaFiles = append(javaFiles, f)
-		default:
-			log.Printf("File %q is supported - will be skipped.", f)
-		}
-	}
+	return outBuffer.Bytes()
+}
 
-	ctx := context.Background()
-	javaDepsPath := path.Join(env.RepoDir, env.OutDir, "soong/module_bp_java_deps.json")
-	// TODO(michaelmerg): Figure out if module_bp_java_deps.json is outdated.
-	runMake(ctx, env, "nothing")
-
-	javaModules, err := loadJavaModules(javaDepsPath)
+// Execute cc_analyzer and get all the targets that needs to be build for analyzing files.
+func GetCCTargets(ctx context.Context, env *Env) ([]string, pb.Status) {
+	state := RepoState(env)
+	bytes, err := proto.Marshal(&state)
 	if err != nil {
-		log.Fatalf("Failed to load java modules: %v", err)
+		log.Fatalln("Failed to serialize state:", err)
 	}
 
+	resp := pb.DepsResponse{}
+	proto.Unmarshal(RunCCanalyzer(ctx, env, "deps", bytes), &resp)
+
+	var targets []string
+	if resp.Status != nil && resp.Status.Code != pb.Status_OK {
+		return targets, *resp.Status
+	}
+	for _, deps := range resp.Deps {
+		targets = append(targets, deps.BuildTarget...)
+	}
+	return targets, pb.Status{Code: pb.Status_OK}
+}
+
+func GetCCInputs(ctx context.Context, env *Env) pb.IdeAnalysis {
+	state := RepoState(env)
+	bytes, err := proto.Marshal(&state)
+	if err != nil {
+		log.Fatalln("Failed to serialize state:", err)
+	}
+
+	resp := pb.IdeAnalysis{}
+	proto.Unmarshal(RunCCanalyzer(ctx, env, "inputs", bytes), &resp)
+	return resp
+}
+
+func JavaFileToModuleMaps(ctx context.Context, env *Env) map[string]*javaModule {
 	fileToModule := make(map[string]*javaModule) // file path -> module
-	for _, f := range javaFiles {
-		for _, m := range javaModules {
+	for _, f := range env.JavaFiles {
+		for _, m := range env.JavaModules {
 			if !slices.Contains(m.Srcs, f) {
 				continue
 			}
@@ -107,30 +147,31 @@ func main() {
 			fileToModule[f] = m
 		}
 	}
+	return fileToModule
+}
 
-	var toMake []string
-	for _, m := range fileToModule {
-		toMake = append(toMake, m.Name)
+func GetJavaTargets(ctx context.Context, env *Env) []string {
+	var targets []string
+	for _, m := range env.JavaFileToModuleMap {
+		targets = append(targets, m.Name)
 	}
-	fmt.Printf("Running make for modules: %v\n", strings.Join(toMake, ", "))
-	if err := runMake(ctx, env, toMake...); err != nil {
-		log.Fatalf("Failed to run make: %v", err)
-	}
+	return targets
+}
 
+func GetJavaInputs(ctx context.Context, env *Env) pb.IdeAnalysis {
 	var sources []*pb.SourceFile
 	type depsAndGenerated struct {
 		Deps      []string
 		Generated []*pb.GeneratedFile
 	}
 	moduleToDeps := make(map[string]*depsAndGenerated)
-	for _, f := range files {
+	for _, f := range env.JavaFiles {
 		file := &pb.SourceFile{
-			Path:       f,
-			WorkingDir: env.RepoDir,
+			Path: f,
 		}
 		sources = append(sources, file)
 
-		m := fileToModule[f]
+		m := env.JavaFileToModuleMap[f]
 		if m == nil {
 			file.Status = &pb.Status{
 				Code:    pb.Status_FAILURE,
@@ -146,7 +187,7 @@ func main() {
 			continue
 		}
 
-		deps := transitiveDeps(m, javaModules)
+		deps := transitiveDeps(m, env.JavaModules)
 		var generated []*pb.GeneratedFile
 		outPrefix := env.OutDir + "/"
 		for _, d := range deps {
@@ -167,23 +208,71 @@ func main() {
 		file.Generated = generated
 		file.Deps = deps
 	}
-
-	res := &pb.IdeAnalysis{
-		BuildArtifactRoot: env.OutDir,
-		Sources:           sources,
-		Status:            &pb.Status{Code: pb.Status_OK},
+	return pb.IdeAnalysis{
+		Sources: sources,
 	}
-	data, err := proto.Marshal(res)
+}
+
+func main() {
+	var env Env
+	env.OutDir = os.Getenv("OUT_DIR")
+	env.RepoDir = os.Getenv("ANDROID_BUILD_TOP")
+	env.PrebuiltsClangToolsRoot = os.Getenv("PREBUILTS_CLANG_TOOLS_ROOT")
+	flag.Var(&env.LunchTarget, "lunch_target", "The lunch target to query")
+	flag.Parse()
+	files := flag.Args()
+	if len(files) == 0 {
+		fmt.Println("No files provided.")
+		os.Exit(1)
+		return
+	}
+
+	for _, f := range files {
+		switch {
+		case strings.HasSuffix(f, ".java") || strings.HasSuffix(f, ".kt"):
+			env.JavaFiles = append(env.JavaFiles, f)
+		case strings.HasSuffix(f, ".cc") || strings.HasSuffix(f, ".cpp") || strings.HasSuffix(f, ".h"):
+			env.CcFiles = append(env.CcFiles, f)
+		default:
+			log.Printf("File %q is supported - will be skipped.", f)
+		}
+	}
+
+	ctx := context.Background()
+	// TODO(michaelmerg): Figure out if module_bp_java_deps.json and compile_commands.json is outdated.
+	runMake(ctx, env, "nothing")
+
+	if err := env.loadJavaModules(); err != nil {
+		log.Printf("Failed to load java modules: %v", err)
+	}
+	toMake := GetJavaTargets(ctx, &env)
+
+	ccTargets, status := GetCCTargets(ctx, &env)
+	if status.Code != pb.Status_OK {
+		log.Fatalf("Failed to query cc targets: %v", *status.Message)
+	}
+	toMake = append(toMake, ccTargets...)
+	fmt.Printf("Running make for modules: %v\n", strings.Join(toMake, ", "))
+	if err := runMake(ctx, env, toMake...); err != nil {
+		log.Printf("Building deps failed: %v", err)
+	}
+
+	res := GetJavaInputs(ctx, &env)
+	ccAnalysis := GetCCInputs(ctx, &env)
+	proto.Merge(&res, &ccAnalysis)
+
+	res.BuildArtifactRoot = env.OutDir
+	data, err := proto.Marshal(&res)
 	if err != nil {
 		log.Fatalf("Failed to marshal result proto: %v", err)
 	}
 
-	err = os.WriteFile(path.Join(env.OutDir, "ide_query.pb"), data, 0644)
+	err = os.WriteFile(path.Join(env.RepoDir, env.OutDir, "ide_query.pb"), data, 0644)
 	if err != nil {
 		log.Fatalf("Failed to write result proto: %v", err)
 	}
 
-	for _, s := range sources {
+	for _, s := range res.Sources {
 		fmt.Printf("%s: %v (Deps: %d, Generated: %d)\n", s.GetPath(), s.GetStatus(), len(s.GetDeps()), len(s.GetGenerated()))
 	}
 }
@@ -192,6 +281,8 @@ func main() {
 func runMake(ctx context.Context, env Env, modules ...string) error {
 	args := []string{
 		"--make-mode",
+		"ALLOW_UNKNOWN_WARNING_OPTION=1",
+		"SOONG_GEN_COMPDB=1",
 		"ANDROID_BUILD_ENVIRONMENT_CONFIG=googler-cog",
 		"TARGET_PRODUCT=" + env.LunchTarget.Product,
 		"TARGET_RELEASE=" + env.LunchTarget.Release,
@@ -214,26 +305,40 @@ type javaModule struct {
 	SrcJars []string `json:"srcjars,omitempty"`
 }
 
-func loadJavaModules(path string) (map[string]*javaModule, error) {
-	data, err := os.ReadFile(path)
+func (env *Env) loadJavaModules() error {
+	javaDepsPath := path.Join(env.RepoDir, env.OutDir, "soong/module_bp_java_deps.json")
+	data, err := os.ReadFile(javaDepsPath)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	var ret map[string]*javaModule // module name -> module
-	if err = json.Unmarshal(data, &ret); err != nil {
-		return nil, err
+	var moduleMapping map[string]*javaModule // module name -> module
+	if err = json.Unmarshal(data, &moduleMapping); err != nil {
+		return err
 	}
 
-	for name, module := range ret {
+	env.JavaModules = make(map[string]*javaModule)
+	env.JavaFileToModuleMap = make(map[string]*javaModule)
+	for name, module := range moduleMapping {
 		if strings.HasSuffix(name, "-jarjar") || strings.HasSuffix(name, ".impl") {
-			delete(ret, name)
 			continue
 		}
-
 		module.Name = name
+		env.JavaModules[name] = module
+		for _, src := range module.Srcs {
+			if !slices.Contains(env.JavaFiles, src) {
+				// We are only interested in active files.
+				continue
+			}
+			if env.JavaFileToModuleMap[src] != nil {
+				// TODO(michaelmerg): Handle the case where a file is covered by multiple modules.
+				log.Printf("File %q found in module %q but is already covered by module %q", src, module.Name, env.JavaFileToModuleMap[src].Name)
+				continue
+			}
+			env.JavaFileToModuleMap[src] = module
+		}
 	}
-	return ret, nil
+	return nil
 }
 
 func transitiveDeps(m *javaModule, modules map[string]*javaModule) []string {
