@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fb5c14b_f8720587",
+        "filename": "core/tasks/general-tests.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-02-20T22:03:45Z",
+      "side": 1,
+      "message": "Unset this at the end of the file",
+      "revId": "8f6d27df50f60123170a971d9d09a2ca011c98f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
