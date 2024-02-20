@@ -29,14 +29,6 @@
       "name": "aconfig.prod_mode.test.rust"
     },
     {
-      // aconfig Rust integration tests (test mode auto-generated code)
-      "name": "aconfig.test_mode.test.rust"
-    },
-    {
-      // aconfig Rust integration tests (exported mode auto-generated code)
-      "name": "aconfig.exported_mode.test.rust"
-    },
-    {
       // printflags unit tests
       "name": "printflags.test"
     },
@@ -65,5 +57,15 @@
       // that using the flag macros to do filtering will get affected.
       "name": "FlagMacrosTests"
     }
+  ]
+  "postsubmit": [
+    {
+      // aconfig Rust integration tests (test mode auto-generated code)
+      "name": "aconfig.test_mode.test.rust"
+    },
+    {
+      // aconfig Rust integration tests (exported mode auto-generated code)
+      "name": "aconfig.exported_mode.test.rust"
+    },
   ]
 }
