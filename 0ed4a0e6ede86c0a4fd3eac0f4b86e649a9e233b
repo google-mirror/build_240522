@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dacea900_911fcee3",
+        "filename": "tools/aconfig/aflags/Android.bp",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-02-20T16:27:51Z",
+      "side": 1,
+      "message": "Done, linked bug in a TODO comment.",
+      "parentUuid": "32c2347f_8d0daf3a",
+      "range": {
+        "startLine": 26,
+        "startChar": 11,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "0ed4a0e6ede86c0a4fd3eac0f4b86e649a9e233b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ce878e6_eb26d131",
@@ -54,6 +78,24 @@
       "writtenOn": "2024-02-19T08:30:22Z",
       "side": 1,
       "message": "Does aflags need to have any features?",
+      "revId": "0ed4a0e6ede86c0a4fd3eac0f4b86e649a9e233b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7649050c_57589e21",
+        "filename": "tools/aconfig/aflags/Cargo.toml",
+        "patchSetId": 16
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-02-20T16:27:51Z",
+      "side": 1,
+      "message": "Removed, thanks for catching.",
+      "parentUuid": "9ce878e6_eb26d131",
       "revId": "0ed4a0e6ede86c0a4fd3eac0f4b86e649a9e233b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
