@@ -853,9 +853,9 @@ function lunch()
 
     destroy_build_var_cache
 
-    if [[ -n "${CHECK_MU_CONFIG:-}" ]]; then
-      check_mu_config
-    fi
+    # if [[ -n "${CHECK_MU_CONFIG:-}" ]]; then
+    #   check_mu_config
+    # fi
 }
 
 unset COMMON_LUNCH_CHOICES_CACHE

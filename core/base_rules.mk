@@ -792,6 +792,15 @@ else
       $(eval n := $(or $(word 2,$(p)),$(notdir $(word 1, $(p))))) \
       $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
         $(s):$(dir)/$(n)))))
+        # $(if $(findstring apimap.xml,$(n))$(findstring cts,$(suite)),$(s):$(subst android-cts,api-map,$(dir))/$(n),$(s):$(dir)/$(n))))))
+
+
+# $(if $(findstring cts,$(suite)),$(s):$(subst android-cts,api-map,$(dir))/$(n),$(s):$(dir)/$(n))
+
+  ifneq (,$(LOCAL_API_MAP_FILE))
+    $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+      $(eval my_compat_api_map_$(suite) += $(LOCAL_API_MAP_FILE)))
+  endif
 
   ifneq (,$(test_config))
     $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
@@ -857,7 +866,8 @@ is_native :=
 $(call create-suite-dependencies)
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_config_$(suite) := ) \
-  $(eval my_compat_dist_test_data_$(suite) := ))
+  $(eval my_compat_dist_test_data_$(suite) := ) \
+  $(eval my_compat_api_map_$(suite) := ))
 
 endif  # LOCAL_UNINSTALLABLE_MODULE
 
