@@ -247,6 +247,30 @@
       },
       "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08a5ecd4_fcda78ce",
+        "filename": "core/tasks/general-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-02-20T21:09:34Z",
+      "side": 1,
+      "message": "You\u0027ll need to depend on the actual file, `$(general_tests_shared_libs_zip)`, not the phony `general-tests-shared-libs`. `$(general-tests-shared-libs)` will expand to an empty string. `$(general_tests_shared_libs_zip)` isn\u0027t defined in this file but you can just copy its definition.",
+      "parentUuid": "deb2104e_5e8d78ec",
+      "range": {
+        "startLine": 70,
+        "startChar": 35,
+        "endLine": 70,
+        "endChar": 61
+      },
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
