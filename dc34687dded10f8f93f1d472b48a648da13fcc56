@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1aab646_af86e9b6",
+        "filename": "tools/ide_query/cc_analyzer/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-20T08:17:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9fea8d3_6e34777e",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "dc34687dded10f8f93f1d472b48a648da13fcc56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abdbab87_743bd36e",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d63f3d3d_285dbf6f",
+        "filename": "tools/ide_query/cc_analyzer/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-20T08:17:11Z",
+      "side": 1,
+      "message": "Mostly to have some fine-grained structuring of the project\u0027s build graph, as it\u0027s the common practice on other projects I worked on.\n\nIf it\u0027s preferred to have a single module bundling all the sources in android, happy to do that as well.",
+      "parentUuid": "abdbab87_743bd36e",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 22
+      },
+      "revId": "dc34687dded10f8f93f1d472b48a648da13fcc56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dd07b87_64eda004",
         "filename": "tools/ide_query/cc_analyzer/analyzer.h",
         "patchSetId": 4
@@ -60,6 +108,24 @@
       "writtenOn": "2024-02-16T17:40:09Z",
       "side": 1,
       "message": "All source files need an Android copyright notice.  See system/extras/simpleperf/include/simpleperf.h for an example.",
+      "revId": "dc34687dded10f8f93f1d472b48a648da13fcc56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80aa6dea_9c4fece8",
+        "filename": "tools/ide_query/cc_analyzer/analyzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-20T08:17:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dd07b87_64eda004",
       "revId": "dc34687dded10f8f93f1d472b48a648da13fcc56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
