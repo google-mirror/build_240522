@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0894f4c_6980da25",
+        "filename": "core/tasks/general-tests-shared-libs.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-20T20:30:00Z",
+      "side": 1,
+      "message": "No you\u0027re right, I was looking at the other file. Removed.",
+      "parentUuid": "fd29253f_0868575c",
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "073ca5e9_f7598b1f",
@@ -197,6 +215,30 @@
       "side": 1,
       "message": "Yes, exactly.",
       "parentUuid": "f31f045c_0842b078",
+      "range": {
+        "startLine": 70,
+        "startChar": 35,
+        "endLine": 70,
+        "endChar": 61
+      },
+      "revId": "7e1c2cf13635b90dcdda381b8ac63a63c3a7850b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb2104e_5e8d78ec",
+        "filename": "core/tasks/general-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-20T20:30:00Z",
+      "side": 1,
+      "message": "If i add that line verbatim it complains that\n```\nbuild/make/core/tasks/general-tests.mk:49: error: real file \"out/target/product/\ngeneric_x86_64/general-tests.zip\" depends on PHONY target \"general-tests-shared-\nlibs\"\n```\nand if i use the line `$(general_tests_zip) : $(general-tests-shared-libs)` then running `m dist general-tests` does not build the shared libs zip in dist, what am I missing?",
+      "parentUuid": "39cafa73_504344c6",
       "range": {
         "startLine": 70,
         "startChar": 35,
