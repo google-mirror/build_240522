@@ -793,6 +793,11 @@ else
       $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
         $(s):$(dir)/$(n)))))
 
+  ifneq (,$(LOCAL_MODULE_JAR_FILE))
+    $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
+      $(eval my_compat_jar_file_$(suite) += $(LOCAL_MODULE_JAR_FILE)))
+  endif
+
   ifneq (,$(test_config))
     $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
       $(eval my_compat_dist_config_$(suite) += $(foreach dir, $(call compatibility_suite_dirs,$(suite)), \
@@ -857,7 +862,8 @@ is_native :=
 $(call create-suite-dependencies)
 $(foreach suite, $(LOCAL_COMPATIBILITY_SUITE), \
   $(eval my_compat_dist_config_$(suite) := ) \
-  $(eval my_compat_dist_test_data_$(suite) := ))
+  $(eval my_compat_dist_test_data_$(suite) := ) \
+  $(eval my_compat_jar_file_$(suite) := ))
 
 endif  # LOCAL_UNINSTALLABLE_MODULE
 

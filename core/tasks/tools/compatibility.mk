@@ -109,6 +109,13 @@ compatibility_zip_resources += $(test_suite_notice_txt)
 
 compatibility_tests_list_zip := $(out_dir)-tests_list.zip
 
+compatibility_jar_files := $(out_dir)/jar_file_list.txt
+$(compatibility_jar_files) : PRIVATE_JAR_FILES := $(sort $(COMPATIBILITY.$(test_suite_name).JAR_FILES))
+$(compatibility_jar_files): PRIVATE_OUT_DIR := $(out_dir)
+$(compatibility_jar_files):
+	mkdir -p $(PRIVATE_OUT_DIR)
+	echo $(PRIVATE_JAR_FILES) > $@
+
 compatibility_zip := $(out_dir).zip
 $(compatibility_zip) : .KATI_IMPLICIT_OUTPUTS := $(compatibility_tests_list_zip)
 $(compatibility_zip): PRIVATE_OUT_DIR := $(out_dir)
