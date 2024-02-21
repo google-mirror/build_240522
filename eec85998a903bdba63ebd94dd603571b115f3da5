@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4570fac0_de431fa8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-21T07:42:32Z",
+      "side": 1,
+      "message": "This CL moves two tests from presubmit to postsubmit, but that is not what the commit message says.\n\nAlso curious why the existing tests are moved from presubmit?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 46
+      },
+      "revId": "eec85998a903bdba63ebd94dd603571b115f3da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
