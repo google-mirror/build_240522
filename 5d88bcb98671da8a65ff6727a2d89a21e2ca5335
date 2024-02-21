@@ -1,0 +1,197 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a21197f4_4527d6f1",
+        "filename": "tools/ide_query/cc_analyzer/analyzer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:28:20Z",
+      "side": 1,
+      "message": "Need copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f931be7_98b221cb",
+        "filename": "tools/ide_query/cc_analyzer/builtin_headers.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:28:20Z",
+      "side": 1,
+      "message": "Add copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daefe9d2_e78d4bac",
+        "filename": "tools/ide_query/cc_analyzer/builtin_headers.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:28:20Z",
+      "side": 1,
+      "message": "Add copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6207241c_91da4da1",
+        "filename": "tools/ide_query/cc_analyzer/include_scanner.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:28:20Z",
+      "side": 1,
+      "message": "Add copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35f9af53_40a9b63a",
+        "filename": "tools/ide_query/cc_analyzer/include_scanner.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:28:20Z",
+      "side": 1,
+      "message": "Add copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02c9e69d_177a40f3",
+        "filename": "tools/ide_query/cc_analyzer/main.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:28:20Z",
+      "side": 1,
+      "message": "Add copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c2ba1d5_e7387f80",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:28:20Z",
+      "side": 1,
+      "message": "Add copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bf03fc0_0d784ed7",
+        "filename": "tools/ide_query/ide_query.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:28:20Z",
+      "side": 1,
+      "message": "Add copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ae485f6_4af83e5f",
+        "filename": "tools/ide_query/ide_query_proto/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:28:20Z",
+      "side": 1,
+      "message": "```suggestion\n * Copyright (C) 2024 The Android Open Source Project\n```",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aee3fdd_158ad52b",
+        "filename": "tools/ide_query/ide_query_proto/ide_query.pb.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:28:20Z",
+      "side": 1,
+      "message": "This seems like a generated file.  Does soong have a module type to generate this during build?",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "067a5463_29c849ec",
+        "filename": "tools/ide_query/ide_query_proto/ide_query.proto",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:28:20Z",
+      "side": 1,
+      "message": "Add copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

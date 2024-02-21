@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d3f29e7_3b4a40f2",
+        "filename": "tools/ide_query/cc_analyzer/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:28:20Z",
+      "side": 1,
+      "message": "Thanks for the context.  Android build, unlike bazel, parses all build rules and has overhead for modules (unlike bazel).  I don\u0027t have strong preference though.   I\u0027ll let the build team comment on whether this needs refactoring.",
+      "parentUuid": "d63f3d3d_285dbf6f",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 22
+      },
+      "revId": "dc34687dded10f8f93f1d472b48a648da13fcc56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dd07b87_64eda004",
