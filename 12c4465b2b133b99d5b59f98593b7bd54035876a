@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95d7c2d7_6a3f8dc0",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-02-21T01:22:07Z",
+      "side": 1,
+      "message": "nit: this could be moved to a helper function that looks like:\n```\ndef collect_config_files(top_dir: str, path: str) -\u003e list[str]\n```\nto prevent duplication in L249-252.",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 67
+      },
+      "revId": "12c4465b2b133b99d5b59f98593b7bd54035876a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
