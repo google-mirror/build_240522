@@ -177,6 +177,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b008c440_9e622e7a",
+        "filename": "tools/ide_query/ide_query_proto/ide_query.pb.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:32:40Z",
+      "side": 1,
+      "message": "checked with ccross@ that this is ok.",
+      "parentUuid": "2aee3fdd_158ad52b",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "067a5463_29c849ec",
