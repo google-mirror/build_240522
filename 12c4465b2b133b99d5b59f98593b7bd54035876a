@@ -22,6 +22,30 @@
       },
       "revId": "12c4465b2b133b99d5b59f98593b7bd54035876a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb32affa_acda0663",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-21T01:35:00Z",
+      "side": 1,
+      "message": "pulled out just the config file stuff into the helper function, otherwise I think it\u0027d do too many things.",
+      "parentUuid": "95d7c2d7_6a3f8dc0",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 67
+      },
+      "revId": "12c4465b2b133b99d5b59f98593b7bd54035876a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
