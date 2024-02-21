@@ -106,6 +106,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bee195c2_2303a013",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-02-21T00:38:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "parentUuid": "56265fd5_3a421723",
+      "revId": "05445477bb27096c1fd111a09771749fb2ed2df3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ef53516_e90e9651",
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "no, `general-tests_list` should have both host and target files, so i\u0027m just adding to one of them. I can see how this is confusing though, so a better path than `host_out` for general outputs, would you happen to know of one?.",
       "parentUuid": "7ef53516_e90e9651",
+      "revId": "05445477bb27096c1fd111a09771749fb2ed2df3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d50d81b_ddaf8c78",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-02-21T00:38:51Z",
+      "side": 1,
+      "message": "Thanks for the clarification, and unfortunately I\u0027m not aware of it. I believe that the cause of confusion is that `general-tests_list` is being `open`ed twice. I\u0027ve made a suggestion in a different comment to combine the two for loops.",
+      "parentUuid": "a3ef1d2e_43a4c9f9",
       "revId": "05445477bb27096c1fd111a09771749fb2ed2df3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
