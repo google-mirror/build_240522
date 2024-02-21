@@ -1069,3 +1069,6 @@ ifeq (true,$(BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT))
       both true. Recovery resources should be installed to either boot or vendor_boot, but not both)
   endif
 endif
+
+# Set up soong config for "soong_config_value_variable".
+include $(BUILD_SYSTEM)/board_config_oemhook.mk
