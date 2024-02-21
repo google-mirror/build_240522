@@ -16,6 +16,23 @@
       "message": "uh not sure what happened to the formatting. but it looks like autoformat changed the spacing here to an extra space. lmk if I should change that",
       "revId": "ce0a59afa24a3bb76861541c175522a742deb575",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57777c5a_41a1c2c4",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-02-21T21:27:44Z",
+      "side": 1,
+      "message": "revert the indentation change .",
+      "revId": "ce0a59afa24a3bb76861541c175522a742deb575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
