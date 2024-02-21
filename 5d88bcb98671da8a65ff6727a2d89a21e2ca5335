@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de42aa62_2f86bb65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-02-21T00:37:54Z",
+      "side": 1,
+      "message": "The clang-tools aspect of this change LGTM.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a21197f4_4527d6f1",
