@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05491522_b5a9dc4f",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-21T00:08:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f525e1e0_9b6ef9ce",
+      "revId": "05445477bb27096c1fd111a09771749fb2ed2df3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c401c82_bf05deee",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-15T19:07:05Z",
       "side": 1,
       "message": "nit: This method seems to return a list, not a set?",
+      "revId": "05445477bb27096c1fd111a09771749fb2ed2df3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1386687a_d0c65aa6",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-21T00:08:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c401c82_bf05deee",
       "revId": "05445477bb27096c1fd111a09771749fb2ed2df3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56265fd5_3a421723",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-21T00:08:02Z",
+      "side": 1,
+      "message": "wrote an explanation for the method. Is this clear enough?",
+      "parentUuid": "a041ad3b_b3402b55",
+      "revId": "05445477bb27096c1fd111a09771749fb2ed2df3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ef53516_e90e9651",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 2
@@ -65,6 +119,24 @@
       "writtenOn": "2024-02-15T19:07:05Z",
       "side": 1,
       "message": "Should this be `product_out` instead of `host_out`?",
+      "revId": "05445477bb27096c1fd111a09771749fb2ed2df3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ef1d2e_43a4c9f9",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-21T00:08:02Z",
+      "side": 1,
+      "message": "no, `general-tests_list` should have both host and target files, so i\u0027m just adding to one of them. I can see how this is confusing though, so a better path than `host_out` for general outputs, would you happen to know of one?.",
+      "parentUuid": "7ef53516_e90e9651",
       "revId": "05445477bb27096c1fd111a09771749fb2ed2df3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
