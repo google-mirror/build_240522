@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b154a3f2_bd1401ea",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-21T01:03:32Z",
+      "side": 1,
+      "message": "I think they\u0027re already lists, so i\u0027ll just change the declaration.",
+      "parentUuid": "101c1b3e_afb3a36f",
+      "range": {
+        "startLine": 335,
+        "startChar": 4,
+        "endLine": 336,
+        "endChar": 34
+      },
+      "revId": "28efacf701ce653ce232e9474967e26a624f3048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec2dcb67_b19955ef",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-21T00:38:51Z",
       "side": 1,
       "message": "```suggestion\n  with open(os.path.join(host_out, \u0027host_general-tests_list\u0027), \u0027w\u0027) as host_list_file, \\\n     open(os.path.join(product_out, \u0027target_general-tests_list\u0027), \u0027w\u0027) as target_list_file, \\\n     open(os.path.join(host_out, \u0027general-tests_list\u0027), \u0027w\u0027) as list_file:\n\n    for config_file in host_config_files:\n        host_list_file.write(config_file + \u0027\\n\u0027)\n        list_file.write(\u0027host/\u0027 + os.path.relpath(config_file, host_out) + \u0027\\n\u0027)\n\n    for config_file in target_config_files:\n        target_list_file.write(config_file + \u0027\\n\u0027)\n        list_file.write(\n            \u0027target/\u0027 + os.path.relpath(config_file, product_out) + \u0027\\n\u0027\n        )\n```",
+      "range": {
+        "startLine": 338,
+        "startChar": 2,
+        "endLine": 354,
+        "endChar": 9
+      },
+      "revId": "28efacf701ce653ce232e9474967e26a624f3048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3645d3f2_eea95847",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-02-21T01:03:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec2dcb67_b19955ef",
       "range": {
         "startLine": 338,
         "startChar": 2,
