@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39073533_6d422ee8",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-02-21T21:33:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35d864f3_cffc6c10",
+      "revId": "ce0a59afa24a3bb76861541c175522a742deb575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57777c5a_41a1c2c4",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-21T21:27:44Z",
       "side": 1,
       "message": "revert the indentation change .",
+      "revId": "ce0a59afa24a3bb76861541c175522a742deb575",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f7f352b_37eb580e",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-02-21T21:33:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57777c5a_41a1c2c4",
       "revId": "ce0a59afa24a3bb76861541c175522a742deb575",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
