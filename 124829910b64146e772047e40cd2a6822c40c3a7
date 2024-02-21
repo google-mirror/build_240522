@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5591e4ef_a6a3e725",
+        "filename": "core/board_config_oemhook.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2024-02-21T07:41:28Z",
+      "side": 1,
+      "message": "I think it\u0027s good to me, but I\u0027m considering if there\u0027s a better way to define it. For example, besides the cases of\n```\nifeq ($(USE_QCRIL_OEMHOOK),true)\nifneq ($(BOARD_WITHOUT_RADIO),true)\n```\nI also see the following case:\n```\nifeq ($(USE_LASSEN_OEMHOOK),true)\nifneq ($(BOARD_WITHOUT_RADIO),true)\n```\n\nSo, instead of defining `oemhook`, can we define `various oemhooks`?   \nFor example,\n\nWhen `USE_QCRIL_OEMHOOK` is true:\n```\nifeq ($(USE_QCRIL_OEMHOOK),true)\nifneq ($(BOARD_WITHOUT_RADIO),true)\n$(call soong_config_set,qcril_oemhook,board_with_radio,true)\n```\n\nWhen `USE_LASSEN_OEMHOOK` is true:\n\n```\nifeq ($(USE_LASSEN_OEMHOOK),true)\nifneq ($(BOARD_WITHOUT_RADIO),true)\n$(call soong_config_set,lassen_oemhook,board_with_radio,true)\n```",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 35
+      },
+      "revId": "124829910b64146e772047e40cd2a6822c40c3a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
