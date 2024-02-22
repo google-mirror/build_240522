@@ -22,3 +22,8 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
 
 PRODUCT_VIRTUAL_AB_COW_VERSION ?= 2
+ifdef PRODUCT_SHIPPING_API_LEVEL
+	ifeq (true,$(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),35))
+		PRODUCT_VIRTUAL_AB_COW_VERSION := 3
+	endif
+endif
