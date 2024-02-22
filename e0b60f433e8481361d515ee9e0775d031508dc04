@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf9166d_60b3abe5",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-02-22T19:44:20Z",
+      "side": 1,
+      "message": "typo: platofmr",
+      "revId": "e0b60f433e8481361d515ee9e0775d031508dc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ada1cac1_f36c97a2",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-02-22T19:44:20Z",
+      "side": 1,
+      "message": "I think you can just call\n\n```\n$(call soong_config_set,ANDROID,pdfrenderer_in_module,$(RELEASE_MOVE_PDFRENDERER_IN_MODULE))\n```",
+      "range": {
+        "startLine": 214,
+        "startChar": 34,
+        "endLine": 214,
+        "endChar": 55
+      },
+      "revId": "e0b60f433e8481361d515ee9e0775d031508dc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
