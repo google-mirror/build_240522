@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "688787b5_11d57f49",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-02-22T21:27:40Z",
+      "side": 1,
+      "message": "leave some examples strings that these regexes would match?",
+      "revId": "a699fd4543a354f9a12aa3d3e8f31e2b63e21ee7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
