@@ -34,6 +34,24 @@
       "parentUuid": "065e26dd_0dd363ab",
       "revId": "22a62cd84171227727bbd7014fb467d5404368b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "392828e0_c7b56574",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-22T07:23:24Z",
+      "side": 1,
+      "message": "BTW, many thanks for giving a help via bug \u0026 reviewing this 😊",
+      "parentUuid": "0fc53027_badeb784",
+      "revId": "22a62cd84171227727bbd7014fb467d5404368b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
