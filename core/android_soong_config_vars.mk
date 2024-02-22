@@ -208,3 +208,10 @@ else
 endif
 # Weirdly required because platform_bootclasspath is using AUTO namespace
 $(call soong_config_set,AUTO,release_crashrecovery_module,$(RELEASE_CRASHRECOVERY_MODULE))
+
+# Add pdfrenderer file move flag to soong
+ifeq (true,$(RELEASE_MOVE_PDFRENDERER_TO_MODULE))
+  $(call soong_config_set,ANDROID,pdfrenderer_in_platform,false)
+else
+  $(call soong_config_set,ANDROID,pdfrenderer_in_platform,true)
+endif
