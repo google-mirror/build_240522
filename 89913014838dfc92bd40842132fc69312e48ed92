@@ -154,6 +154,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb6536c0_f54332e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-02-22T05:04:05Z",
+      "side": 1,
+      "message": "We\u0027re working on a complete rewrite of the way product configuration works.  Our ETA for AOSP and internal builds is this year, and then we\u0027ll start to roll it out to partners after that.",
+      "parentUuid": "4e416565_16ff498b",
+      "revId": "89913014838dfc92bd40842132fc69312e48ed92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1e8702a_a9b982df",
