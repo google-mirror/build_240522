@@ -40,6 +40,7 @@ PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.batch_writes=true
 # PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.threads=true
 
 PRODUCT_VIRTUAL_AB_COMPRESSION := true
+
 PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD ?= none
 PRODUCT_PACKAGES += \
     snapuserd \
