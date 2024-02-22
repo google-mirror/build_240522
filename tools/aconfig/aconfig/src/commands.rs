@@ -95,14 +95,15 @@ pub fn parse_flags(
                 flag_declarations.container()
             );
         }
+        let declaration_container = flag_declarations.container().to_string();
         for mut flag_declaration in flag_declarations.flag.into_iter() {
             aconfig_protos::flag_declaration::verify_fields(&flag_declaration)
                 .with_context(|| input.error_context())?;
 
             // create ParsedFlag using FlagDeclaration and default values
             let mut parsed_flag = ProtoParsedFlag::new();
-            if let Some(c) = container {
-                parsed_flag.set_container(c.to_string());
+            if ! declaration_container.is_empty()   {
+            parsed_flag.set_container(declaration_container.clone());
             }
             parsed_flag.set_package(package.to_string());
             parsed_flag.set_name(flag_declaration.take_name());
