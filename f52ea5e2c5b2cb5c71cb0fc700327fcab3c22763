@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4023667_ad320063",
+        "filename": "target/product/virtual_ab_ota/vabc_features.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-02-22T23:35:31Z",
+      "side": 1,
+      "message": "do we fallback to 2 if this isn\u0027t set during runtime ?",
+      "revId": "f52ea5e2c5b2cb5c71cb0fc700327fcab3c22763",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
