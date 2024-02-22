@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "065e26dd_0dd363ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-22T07:14:19Z",
+      "side": 1,
+      "message": "@zhangkelvin@google.com Would you know how I can run sign_target_files_apks fully for verifying my code is healthy? I\u0027m not 100% confident that I put right parameters to run the script.",
+      "revId": "22a62cd84171227727bbd7014fb467d5404368b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
