@@ -22,6 +22,30 @@
       },
       "revId": "124829910b64146e772047e40cd2a6822c40c3a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50b4dc6d_2f4a0797",
+        "filename": "core/board_config_oemhook.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1317851
+      },
+      "writtenOn": "2024-02-22T02:48:39Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, it\u0027s another way to do. But I think it\u0027s more clear to me to define all oemhook related settings in board_config_oemhook.mk.",
+      "parentUuid": "5591e4ef_a6a3e725",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 35
+      },
+      "revId": "124829910b64146e772047e40cd2a6822c40c3a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
