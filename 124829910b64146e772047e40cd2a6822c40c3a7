@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7e1e7d3_f4328329",
+        "filename": "core/board_config_oemhook.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1317851
+      },
+      "writtenOn": "2024-02-22T06:10:19Z",
+      "side": 1,
+      "message": "Do we have one common mk like board_config.mk in internal git to do these settings?",
+      "parentUuid": "2985eb2c_1b14af77",
+      "revId": "124829910b64146e772047e40cd2a6822c40c3a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5591e4ef_a6a3e725",
         "filename": "core/board_config_oemhook.mk",
         "patchSetId": 1
