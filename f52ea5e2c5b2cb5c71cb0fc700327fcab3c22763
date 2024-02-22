@@ -16,6 +16,24 @@
       "message": "do we fallback to 2 if this isn\u0027t set during runtime ?",
       "revId": "f52ea5e2c5b2cb5c71cb0fc700327fcab3c22763",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4abb8398_111b5cbf",
+        "filename": "target/product/virtual_ab_ota/vabc_features.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-02-22T23:45:21Z",
+      "side": 1,
+      "message": "yep, we default to 2 here -\u003e https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/update_engine/payload_generator/payload_generation_config.cc;l\u003d218?q\u003dpayload_generation_confi\u0026sq\u003dgit:googleplex-android%2Fplatform%2Fsuperproject%2Fmain@main\n\nalthough if we ever change this, we should maybe make the fallback logic occur here in the build system",
+      "parentUuid": "a4023667_ad320063",
+      "revId": "f52ea5e2c5b2cb5c71cb0fc700327fcab3c22763",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
