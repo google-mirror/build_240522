@@ -40,6 +40,15 @@ PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.batch_writes=true
 # PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.threads=true
 
 PRODUCT_VIRTUAL_AB_COMPRESSION := true
+ifndef PRODUCT_VIRTUAL_AB_COW_VERSION
+	ifdef PRODUCT_SHIPPING_API_LEVEL
+		ifeq (true,$(call math_gt_or_eq,$(PRODUCT_SHIPPING_API_LEVEL),34))
+			PRODUCT_VIRTUAL_AB_COW_VERSION := 3
+		endif
+	else 
+		PRODUCT_VIRTUAL_AB_COW_VERSION := 2
+	endif
+endif
 PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD ?= none
 PRODUCT_PACKAGES += \
     snapuserd \
