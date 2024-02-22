@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31045e5a_7422e319",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-22T06:37:44Z",
+      "side": 1,
+      "message": "@ioffe@google.com Completed to write code for resigning microdroid vendor partition, but I haven\u0027t run `sign_target_files_apks` fully yet. Until now, I\u0027ve just checked `ProcessTargetFiles` works properly for `VENDOR/etc/avf/microdroid/microdroid_vendor.img` only.",
+      "revId": "bfc44bf0145671dcfa98d43f0904092553755edc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
