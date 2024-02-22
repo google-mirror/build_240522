@@ -79,6 +79,7 @@ pub fn parse_flags(
 
         let flag_declarations = aconfig_protos::flag_declarations::try_from_text_proto(&contents)
             .with_context(|| input.error_context())?;
+        let declaration_container = flag_declarations.container().to_string();
         ensure!(
             package == flag_declarations.package(),
             "failed to parse {}: expected package {}, got {}",
@@ -88,11 +89,11 @@ pub fn parse_flags(
         );
         if let Some(c) = container {
             ensure!(
-                c == flag_declarations.container(),
+                c == declaration_container,
                 "failed to parse {}: expected container {}, got {}",
                 input.source,
                 c,
-                flag_declarations.container()
+                declaration_container
             );
         }
         for mut flag_declaration in flag_declarations.flag.into_iter() {
@@ -101,8 +102,8 @@ pub fn parse_flags(
 
             // create ParsedFlag using FlagDeclaration and default values
             let mut parsed_flag = ProtoParsedFlag::new();
-            if let Some(c) = container {
-                parsed_flag.set_container(c.to_string());
+            if !declaration_container.is_empty() {
+                parsed_flag.set_container(declaration_container.clone());
             }
             parsed_flag.set_package(package.to_string());
             parsed_flag.set_name(flag_declaration.take_name());
