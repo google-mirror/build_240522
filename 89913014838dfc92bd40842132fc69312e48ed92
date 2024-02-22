@@ -137,6 +137,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e416565_16ff498b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1217797
+      },
+      "writtenOn": "2024-02-22T02:01:46Z",
+      "side": 1,
+      "message": "@smoreland,\nYou mean reworking on product configurations have been done internally and this changes will be applied within then?",
+      "revId": "89913014838dfc92bd40842132fc69312e48ed92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1e8702a_a9b982df",
