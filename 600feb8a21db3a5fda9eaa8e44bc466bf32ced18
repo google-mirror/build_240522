@@ -16,6 +16,24 @@
       "message": "We could also skip all of the processing for `check_vintf_common_srcs` in this case to speed things up.",
       "revId": "600feb8a21db3a5fda9eaa8e44bc466bf32ced18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efc811fe_8cd75c78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-02-23T02:57:52Z",
+      "side": 1,
+      "message": "I believe there are (at least) two other places that uses `check_vintf_common_srcs`, so we cannot simply skip processing `check_vintf_common_srcs` altogether.\n\nBTW, are the check_vintf tests run only from Makefile? For split build targets (builds partial build, and merge build artifacts with releasetools later), these tests seem to be bypasses? is this fine?",
+      "parentUuid": "a72b9e6a_b3a5d77c",
+      "revId": "600feb8a21db3a5fda9eaa8e44bc466bf32ced18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
