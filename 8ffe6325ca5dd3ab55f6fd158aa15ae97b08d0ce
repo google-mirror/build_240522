@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c40284b_2ed0b5c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-02-23T21:52:46Z",
+      "side": 1,
+      "message": "Bug number",
+      "revId": "8ffe6325ca5dd3ab55f6fd158aa15ae97b08d0ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
