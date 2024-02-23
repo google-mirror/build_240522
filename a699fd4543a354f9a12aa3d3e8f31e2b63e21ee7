@@ -16,6 +16,24 @@
       "message": "leave some examples strings that these regexes would match?",
       "revId": "a699fd4543a354f9a12aa3d3e8f31e2b63e21ee7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "566a197c_afd924f8",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-23T03:00:34Z",
+      "side": 1,
+      "message": "Added an example. If you think my approach is roughly right, I\u0027ll proceed to try making a unit test about parsing the output of `avbtool info_image`.",
+      "parentUuid": "688787b5_11d57f49",
+      "revId": "a699fd4543a354f9a12aa3d3e8f31e2b63e21ee7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
