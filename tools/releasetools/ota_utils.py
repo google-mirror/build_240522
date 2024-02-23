@@ -872,7 +872,7 @@ class PayloadGenerator(object):
     cmd = ["delta_generator",
            "--out_file", payload_file]
     with open(os.path.join(target_dir, "META", "ab_partitions.txt"), "r") as fp:
-      ab_partitions = fp.read().strip().splitlines()
+      ab_partitions = sorted(set(fp.read().strip().splitlines()))
     cmd.extend(["--partition_names", ":".join(ab_partitions)])
     cmd.extend(
         ["--new_partitions", GetPartitionImages(target_dir, ab_partitions, False)])
