@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c93a9f_c9baea94",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1826738
+      },
+      "writtenOn": "2024-02-23T12:05:05Z",
+      "side": 1,
+      "message": "ADNROID is spelled wrong",
+      "revId": "481878810c616f289d5c0782298354c5372aedd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
