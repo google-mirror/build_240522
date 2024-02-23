@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7458859b_4ff84559",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-23T07:43:15Z",
+      "side": 1,
+      "message": "Nit: please include an aconfig: prefix (see other CLs in the aconfig directory), i.e.\n\n\"aconfig: include the declared ...\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "dc92ba81e482ea4262e7bd314618e034c7c72207",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a51fbb4_48b7a989",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-23T07:43:15Z",
+      "side": 1,
+      "message": "nit: add a # to delimit the bash command from the comment; this allows tools to extract the command and run it automatically, e.g.\n\nTest: m all_aconfig_declarations \u0026\u0026 printflags # verify that parsed_flags include a container",
+      "range": {
+        "startLine": 11,
+        "startChar": 33,
+        "endLine": 11,
+        "endChar": 34
+      },
+      "revId": "dc92ba81e482ea4262e7bd314618e034c7c72207",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "052cc89a_4e1adcff",
+        "filename": "tools/aconfig/aconfig/src/commands.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-23T07:43:15Z",
+      "side": 1,
+      "message": "Which bug tracks the needed update to soong to pass in --container? What\u0027s the ETA for that work?",
+      "range": {
+        "startLine": 66,
+        "startChar": 15,
+        "endLine": 66,
+        "endChar": 21
+      },
+      "revId": "dc92ba81e482ea4262e7bd314618e034c7c72207",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf78650a_bd04cef5",
+        "filename": "tools/aconfig/aconfig/src/commands.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-23T07:43:15Z",
+      "side": 1,
+      "message": "When --container is made a mandatory argument we should no longer allow the empty string as a valid container value. Is this captured in the work to teach soong to pass in --container?",
+      "range": {
+        "startLine": 105,
+        "startChar": 38,
+        "endLine": 105,
+        "endChar": 46
+      },
+      "revId": "dc92ba81e482ea4262e7bd314618e034c7c72207",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
