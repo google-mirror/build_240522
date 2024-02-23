@@ -34,6 +34,24 @@
       "parentUuid": "a72b9e6a_b3a5d77c",
       "revId": "600feb8a21db3a5fda9eaa8e44bc466bf32ced18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60c06aa6_42986461",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-02-23T18:17:13Z",
+      "side": 1,
+      "message": "@elsk@google.com? ^\n\n\u003e are the check_vintf tests run only from Makefile? \n\nIt looks like we have code for the merge in releasetools that will also check vintf:\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:build/make/tools/releasetools/merge/merge_compatibility_checks.py;l\u003d58",
+      "parentUuid": "efc811fe_8cd75c78",
+      "revId": "600feb8a21db3a5fda9eaa8e44bc466bf32ced18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
