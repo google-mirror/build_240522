@@ -52,6 +52,24 @@
       "parentUuid": "efc811fe_8cd75c78",
       "revId": "600feb8a21db3a5fda9eaa8e44bc466bf32ced18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e012419_0f319512",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-02-23T19:16:00Z",
+      "side": 1,
+      "message": "Devin\u0027s right about calling check vintf during merging of target files.",
+      "parentUuid": "60c06aa6_42986461",
+      "revId": "600feb8a21db3a5fda9eaa8e44bc466bf32ced18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
