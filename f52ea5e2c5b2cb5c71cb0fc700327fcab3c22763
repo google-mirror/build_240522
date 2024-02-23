@@ -34,6 +34,24 @@
       "parentUuid": "a4023667_ad320063",
       "revId": "f52ea5e2c5b2cb5c71cb0fc700327fcab3c22763",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b9ff316_9d27eb0b",
+        "filename": "target/product/virtual_ab_ota/vabc_features.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-02-23T21:34:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4abb8398_111b5cbf",
+      "revId": "f52ea5e2c5b2cb5c71cb0fc700327fcab3c22763",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
