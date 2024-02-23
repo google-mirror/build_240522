@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb78a44a_7a983182",
+        "filename": "tools/ide_query/cc_analyzer/analyzer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-23T11:19:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a21197f4_4527d6f1",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f931be7_98b221cb",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-02-21T00:28:20Z",
       "side": 1,
       "message": "Add copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71feddb3_1242f27c",
+        "filename": "tools/ide_query/cc_analyzer/builtin_headers.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-23T11:19:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f931be7_98b221cb",
       "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f93f416_655044dc",
+        "filename": "tools/ide_query/cc_analyzer/builtin_headers.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-23T11:19:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "daefe9d2_e78d4bac",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6207241c_91da4da1",
@@ -82,6 +136,24 @@
       "writtenOn": "2024-02-21T00:28:20Z",
       "side": 1,
       "message": "Add copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f7b6332_61db55bd",
+        "filename": "tools/ide_query/cc_analyzer/include_scanner.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-23T11:19:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6207241c_91da4da1",
       "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -103,6 +175,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e8efbea_f9484d33",
+        "filename": "tools/ide_query/cc_analyzer/include_scanner.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-23T11:19:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35f9af53_40a9b63a",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02c9e69d_177a40f3",
@@ -116,6 +206,24 @@
       "writtenOn": "2024-02-21T00:28:20Z",
       "side": 1,
       "message": "Add copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a399bd4_e0a12b01",
+        "filename": "tools/ide_query/cc_analyzer/main.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-23T11:19:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02c9e69d_177a40f3",
       "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -137,6 +245,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c94d0c9_b6f127ed",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-23T11:19:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c2ba1d5_e7387f80",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bf03fc0_0d784ed7",
@@ -154,6 +280,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e1cd5d9_23b5852f",
+        "filename": "tools/ide_query/ide_query.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-23T11:19:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bf03fc0_0d784ed7",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ae485f6_4af83e5f",
@@ -167,6 +311,30 @@
       "writtenOn": "2024-02-21T00:28:20Z",
       "side": 1,
       "message": "```suggestion\n * Copyright (C) 2024 The Android Open Source Project\n```",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e1c421b_65d7a5cb",
+        "filename": "tools/ide_query/ide_query_proto/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-23T11:19:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ae485f6_4af83e5f",
       "range": {
         "startLine": 2,
         "startChar": 17,
@@ -225,6 +393,24 @@
       "writtenOn": "2024-02-21T00:28:20Z",
       "side": 1,
       "message": "Add copyright notice.",
+      "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bc69d84_2da1e57a",
+        "filename": "tools/ide_query/ide_query_proto/ide_query.proto",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-23T11:19:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "067a5463_29c849ec",
       "revId": "5d88bcb98671da8a65ff6727a2d89a21e2ca5335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
