@@ -39,6 +39,24 @@
       "message": "ADNROID is spelled wrong",
       "revId": "481878810c616f289d5c0782298354c5372aedd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0859e91f_8dcdb608",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 2026903
+      },
+      "writtenOn": "2024-02-26T10:09:32Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "48c93a9f_c9baea94",
+      "revId": "481878810c616f289d5c0782298354c5372aedd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
