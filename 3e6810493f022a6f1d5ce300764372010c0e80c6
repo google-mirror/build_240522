@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b684c313_64aa64a3",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-26T08:10:09Z",
+      "side": 1,
+      "message": "The idea of the `Env` is that it is static after initialization. So it should only contain values derived from flags or configurations.",
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cc541d5_eb560412",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-26T08:10:09Z",
+      "side": 1,
+      "message": "This is a very long name for Go. Can we just use `ClangToolsRoot`?",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 44,
+        "endChar": 24
+      },
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "395aee05_8a4bcfdb",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-26T08:10:09Z",
+      "side": 1,
+      "message": "Either makes these private or add a comment like `// RepoState ...` (same for the methods below)\n\nAlso return just a pointer to the proto. https://google.github.io/styleguide/go/best-practices#:~:text\u003dSimilarly%2C%20protobufs%20should%20be%20declared%20as%20pointer%20types.",
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b753fcf0_02b5d465",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-26T08:10:09Z",
+      "side": 1,
+      "message": "We should not crash in that case but return a error to main and print that to the user.",
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db2ca6f2_22e73c1c",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-26T08:10:09Z",
+      "side": 1,
+      "message": "Should be an pointer",
+      "range": {
+        "startLine": 119,
+        "startChar": 60,
+        "endLine": 119,
+        "endChar": 69
+      },
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49ddd7b0_60871605",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-26T08:10:09Z",
+      "side": 1,
+      "message": "Please handle the returned error.",
+      "range": {
+        "startLine": 127,
+        "startChar": 1,
+        "endLine": 127,
+        "endChar": 16
+      },
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50bd40b2_4e19622e",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-26T08:10:09Z",
+      "side": 1,
+      "message": "Should be an pointer",
+      "range": {
+        "startLine": 139,
+        "startChar": 48,
+        "endLine": 139,
+        "endChar": 62
+      },
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f587863_a5609b3e",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-26T08:10:09Z",
+      "side": 1,
+      "message": "Please handle the returned error.",
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "543b3608_403e4654",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-26T08:10:09Z",
+      "side": 1,
+      "message": "Can you please keep this at the top to minimize the diff.",
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bebb683b_fe6260d1",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-02-26T08:10:09Z",
+      "side": 1,
+      "message": "Setting additional env variables here will invalidate builds that the user started from Cider oder CLI.\n\nDefault set of env vars are set it: googler-cog.json",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 301,
+        "endChar": 23
+      },
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
