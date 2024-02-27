@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0033a274_5ae70a23",
+        "filename": "target/product/base_system.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-02-27T21:32:46Z",
+      "side": 1,
+      "message": "This should be behind a the build flag that turns on the new flag storage.",
+      "revId": "04aea83c2e38c6425e8ad07e5c088aedc44853da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
