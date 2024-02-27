@@ -52,6 +52,24 @@
       "parentUuid": "0fc53027_badeb784",
       "revId": "22a62cd84171227727bbd7014fb467d5404368b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e63c8ee_9c432fce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-02-27T22:20:52Z",
+      "side": 1,
+      "message": "You can run `m target-files-package` and. then invoke `sign_target_files_apks` from top of your android tree.",
+      "parentUuid": "392828e0_c7b56574",
+      "revId": "22a62cd84171227727bbd7014fb467d5404368b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
