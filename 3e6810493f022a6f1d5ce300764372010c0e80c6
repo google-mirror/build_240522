@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd1be162_a1eab694",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-27T15:03:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b684c313_64aa64a3",
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cc541d5_eb560412",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-02-26T08:10:09Z",
       "side": 1,
       "message": "This is a very long name for Go. Can we just use `ClangToolsRoot`?",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 44,
+        "endChar": 24
+      },
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15f3103b_c23d2acb",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-27T15:03:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cc541d5_eb560412",
       "range": {
         "startLine": 44,
         "startChar": 1,
@@ -58,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ba9b26a_c22317e6",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-27T15:03:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "395aee05_8a4bcfdb",
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b753fcf0_02b5d465",
@@ -75,6 +135,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d029a9a5_10669cbf",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-27T15:03:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b753fcf0_02b5d465",
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db2ca6f2_22e73c1c",
@@ -88,6 +166,30 @@
       "writtenOn": "2024-02-26T08:10:09Z",
       "side": 1,
       "message": "Should be an pointer",
+      "range": {
+        "startLine": 119,
+        "startChar": 60,
+        "endLine": 119,
+        "endChar": 69
+      },
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f07870d_41b3e1b8",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-27T15:03:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db2ca6f2_22e73c1c",
       "range": {
         "startLine": 119,
         "startChar": 60,
@@ -121,6 +223,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30139206_28a9ea5d",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-27T15:03:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49ddd7b0_60871605",
+      "range": {
+        "startLine": 127,
+        "startChar": 1,
+        "endLine": 127,
+        "endChar": 16
+      },
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50bd40b2_4e19622e",
@@ -134,6 +260,30 @@
       "writtenOn": "2024-02-26T08:10:09Z",
       "side": 1,
       "message": "Should be an pointer",
+      "range": {
+        "startLine": 139,
+        "startChar": 48,
+        "endLine": 139,
+        "endChar": 62
+      },
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b492e2f5_e1befee1",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-27T15:03:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50bd40b2_4e19622e",
       "range": {
         "startLine": 139,
         "startChar": 48,
@@ -161,6 +311,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f92bc61b_16bdcac9",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-27T15:03:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f587863_a5609b3e",
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "543b3608_403e4654",
@@ -178,6 +346,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52c65003_655803e4",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-27T15:03:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "543b3608_403e4654",
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bebb683b_fe6260d1",
@@ -191,6 +377,30 @@
       "writtenOn": "2024-02-26T08:10:09Z",
       "side": 1,
       "message": "Setting additional env variables here will invalidate builds that the user started from Cider oder CLI.\n\nDefault set of env vars are set it: googler-cog.json",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 301,
+        "endChar": 23
+      },
+      "revId": "3e6810493f022a6f1d5ce300764372010c0e80c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "618a42b4_bd8f22f8",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-02-27T15:03:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bebb683b_fe6260d1",
       "range": {
         "startLine": 300,
         "startChar": 0,
