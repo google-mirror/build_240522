@@ -39,6 +39,9 @@ REQUIRED_MODULES = frozenset(
 def build_test_suites(argv):
   args = parse_args(argv)
 
+  args.extra_targets.remove('robolectric-tests')
+  args.extra_targets.remove('mts')
+
   if not os.environ.get('BUILD_NUMBER')[0] == 'P':
     build_everything(args)
     return
