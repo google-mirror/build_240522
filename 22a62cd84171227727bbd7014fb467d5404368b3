@@ -88,6 +88,24 @@
       "parentUuid": "8e63c8ee_9c432fce",
       "revId": "22a62cd84171227727bbd7014fb467d5404368b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec91388c_e767026a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-02-28T17:31:13Z",
+      "side": 1,
+      "message": "```\n17:14:04 mkuserimg_mke2fs.py ERROR: Failed to run e2fsdroid_cmd: Regex version mismatch, expected: 10.43 2024-02-16 actual: 10.40 2022-04-14\n\n```\n\nLooks like there\u0027s a mismatch in your regex libs. The target files you are trying to sign has a different regex version than your sign_target_files_apks.",
+      "parentUuid": "a3decec4_2476e7d6",
+      "revId": "22a62cd84171227727bbd7014fb467d5404368b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
