@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dd0d619_7113874e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951966
+      },
+      "writtenOn": "2024-02-28T01:19:46Z",
+      "side": 1,
+      "message": "do not submit this until aosp/2980954 \u0026 ag/26332775 are in.",
+      "revId": "25a39b5227d8ad22f1b1060fd5a3803dc89c1be9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
