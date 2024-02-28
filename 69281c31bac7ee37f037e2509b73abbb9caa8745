@@ -16,6 +16,24 @@
       "message": "Perhaps, we\u0027d better silence the warning message from linker, if that makes people uncomfortable. The behavior is (subtly) different in between empty ld.config.txt and the absence of it.\n\nElliott, what do you think?",
       "revId": "69281c31bac7ee37f037e2509b73abbb9caa8745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20095edc_08bdc502",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-02-28T00:09:51Z",
+      "side": 1,
+      "message": "+1 to not having this message for every first stage console command, but i have no opinion on which is the better fix. (i didn\u0027t even know until i just read this that empty !\u003d missing.)",
+      "parentUuid": "9ee847ee_b18a9a42",
+      "revId": "69281c31bac7ee37f037e2509b73abbb9caa8745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
