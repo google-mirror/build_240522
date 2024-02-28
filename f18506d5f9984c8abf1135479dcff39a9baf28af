@@ -117,6 +117,24 @@
       "parentUuid": "98244779_073eafa3",
       "revId": "f18506d5f9984c8abf1135479dcff39a9baf28af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15d17c13_06339149",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-02-28T23:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f7cae8e_2bcf5fa4",
+      "revId": "f18506d5f9984c8abf1135479dcff39a9baf28af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
