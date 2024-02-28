@@ -88,6 +88,24 @@
       "parentUuid": "a3e137be_3bc23ab5",
       "revId": "69281c31bac7ee37f037e2509b73abbb9caa8745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60885042_cdfb21da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-28T02:03:43Z",
+      "side": 1,
+      "message": "Ah, I missed the line. Thanks. Yes, then the behavior should be the same. I am fine with this.",
+      "parentUuid": "407f2709_795bf44f",
+      "revId": "69281c31bac7ee37f037e2509b73abbb9caa8745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
