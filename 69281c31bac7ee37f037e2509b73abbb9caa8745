@@ -52,6 +52,24 @@
       "parentUuid": "20095edc_08bdc502",
       "revId": "69281c31bac7ee37f037e2509b73abbb9caa8745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3e137be_3bc23ab5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-28T00:47:25Z",
+      "side": 1,
+      "message": "I haven\u0027t actually verified that empty !\u003d missing, but my reading of the code says so. If you provide an empty file, `read_binary_config`[1] will return true, with an empty `config`, whereas if it\u0027s missing, it will return false, in which case you use the built-in search paths.\n\n\u003e Is the behavior different in any way that matters for the first-stage console? \n\nIt depends on what people runs in the first-stage console. I recently learned that some partners use the first-stage console to run kernel tests. Such a use case might be affected, I guess.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:bionic/linker/linker.cpp;drc\u003d3007fcede5556fde554c517d600663b4e1664716;l\u003d3567",
+      "parentUuid": "e19b18d6_c2c49988",
+      "revId": "69281c31bac7ee37f037e2509b73abbb9caa8745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
