@@ -34,6 +34,24 @@
       "parentUuid": "9ee847ee_b18a9a42",
       "revId": "69281c31bac7ee37f037e2509b73abbb9caa8745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e19b18d6_c2c49988",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2024-02-28T00:23:22Z",
+      "side": 1,
+      "message": "No strong opinion either. Is the behavior different in any way that matters for the first-stage console? My experience so far tells me \"no\", so maybe this change would be better so that there\u0027s at least a chance that people will see the warning if the file is supposed to be there?",
+      "parentUuid": "20095edc_08bdc502",
+      "revId": "69281c31bac7ee37f037e2509b73abbb9caa8745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
