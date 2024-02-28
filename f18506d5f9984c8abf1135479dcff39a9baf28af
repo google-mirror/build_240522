@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c04fa123_0f630814",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-02-28T22:28:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aff64263_399158dd",
+      "range": {
+        "startLine": 911,
+        "startChar": 78,
+        "endLine": 911,
+        "endChar": 79
+      },
+      "revId": "f18506d5f9984c8abf1135479dcff39a9baf28af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a2b4874_a3157c08",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-02-28T22:20:31Z",
       "side": 1,
       "message": "the elif branch will never get executed? As `target_info.voabc_cow_version` is always defined and \u003e\u003d 2",
+      "revId": "f18506d5f9984c8abf1135479dcff39a9baf28af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f0496d5_283cf826",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-02-28T22:28:12Z",
+      "side": 1,
+      "message": "I thought we had added vabc_cow_version build property sometime last year here: aosp/2576750\n\nI was trying to account for the case that one build doesn\u0027t have this variable defined",
+      "parentUuid": "1a2b4874_a3157c08",
       "revId": "f18506d5f9984c8abf1135479dcff39a9baf28af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
