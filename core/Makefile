@@ -707,7 +707,7 @@ $(foreach kmd,$(BOARD_KERNEL_MODULE_DIRS), \
   $(if $(vendor_ramdisk_fragment), \
     $(eval output_dir := $(VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).STAGING_DIR)) \
     $(eval result_var := VENDOR_RAMDISK_FRAGMENT.$(vendor_ramdisk_fragment).FILES) \
-    $(eval ### else ###), \
+    $(eval "else:="), \
     $(eval output_dir := $(TARGET_VENDOR_RAMDISK_OUT)) \
     $(eval result_var := ALL_DEFAULT_INSTALLED_MODULES)) \
   $(eval $(result_var) += $(call build-image-kernel-modules-dir,VENDOR_RAMDISK,$(output_dir),,modules.load,$(VENDOR_RAMDISK_STRIPPED_MODULE_STAGING_DIR),$(kmd))) \
