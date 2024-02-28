@@ -184,6 +184,8 @@ cc_test {
     test_suites: ["general-tests"],
 }
 
+// TODO(327420679): Enable export mode for native flag library
+/*
 cc_test {
     name: "aconfig.test.cpp.exported_mode",
     srcs: [
@@ -198,6 +200,7 @@ cc_test {
     ],
     test_suites: ["general-tests"],
 }
+*/
 
 cc_test {
     name: "aconfig.test.cpp.force_read_only_mode",
@@ -256,6 +259,8 @@ rust_aconfig_library {
     mode: "exported",
 }
 
+// TODO(327420679): Enable export mode for native flag library
+/*
 rust_test {
     name: "aconfig.exported_mode.test.rust",
     srcs: [
@@ -266,6 +271,7 @@ rust_test {
     ],
     test_suites: ["general-tests"],
 }
+*/
 
 rust_aconfig_library {
     name: "libaconfig_test_rust_library_with_force_read_only_mode",
