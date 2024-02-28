@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aff64263_399158dd",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-02-28T22:20:31Z",
+      "side": 1,
+      "message": "remove extra space",
+      "range": {
+        "startLine": 911,
+        "startChar": 78,
+        "endLine": 911,
+        "endChar": 79
+      },
+      "revId": "f18506d5f9984c8abf1135479dcff39a9baf28af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a2b4874_a3157c08",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-02-28T22:20:31Z",
+      "side": 1,
+      "message": "the elif branch will never get executed? As `target_info.voabc_cow_version` is always defined and \u003e\u003d 2",
+      "revId": "f18506d5f9984c8abf1135479dcff39a9baf28af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
