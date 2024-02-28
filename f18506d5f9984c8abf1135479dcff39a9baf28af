@@ -81,6 +81,24 @@
       "parentUuid": "1a2b4874_a3157c08",
       "revId": "f18506d5f9984c8abf1135479dcff39a9baf28af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98244779_073eafa3",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-02-28T22:29:37Z",
+      "side": 1,
+      "message": "in order for the elif branch to be executed, both source_info and target_info must have vabc_cow_version defined. But if that\u0027s the case, your \n\n```\nif not source_info.vabc_cow_version or target_info.vabc_cow_version:\n```\n\nwould already run first.",
+      "parentUuid": "4f0496d5_283cf826",
+      "revId": "f18506d5f9984c8abf1135479dcff39a9baf28af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
