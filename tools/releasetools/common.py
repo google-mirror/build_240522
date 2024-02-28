@@ -478,6 +478,10 @@ class BuildInfo(object):
   @property
   def vabc_compression_param(self):
     return self.get("virtual_ab_compression_method", "")
+  
+  @property
+  def vabc_cow_version(self):
+    return self.get("virtual_ab_cow_version", "")
 
   @property
   def vendor_api_level(self):
