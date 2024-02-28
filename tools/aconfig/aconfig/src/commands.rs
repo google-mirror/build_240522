@@ -203,6 +203,10 @@ pub fn create_java_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Ve
 }
 
 pub fn create_cpp_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Vec<OutputFile>> {
+    // TODO(327420679): Enable export mode for native flag library
+    if codegen_mode == CodegenMode::Exported {
+        bail!("Exported mode for generated c/cpp flag library is disabled");
+    }
     let parsed_flags = input.try_parse_flags()?;
     let modified_parsed_flags = modify_parsed_flags_based_on_mode(parsed_flags, codegen_mode)?;
     let Some(package) = find_unique_package(&modified_parsed_flags) else {
@@ -214,6 +218,10 @@ pub fn create_cpp_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Vec
 }
 
 pub fn create_rust_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<OutputFile> {
+    // // TODO(327420679): Enable export mode for native flag library
+    if codegen_mode == CodegenMode::Exported {
+        bail!("Exported mode for generated rust flag library is disabled");
+    }
     let parsed_flags = input.try_parse_flags()?;
     let modified_parsed_flags = modify_parsed_flags_based_on_mode(parsed_flags, codegen_mode)?;
     let Some(package) = find_unique_package(&modified_parsed_flags) else {
