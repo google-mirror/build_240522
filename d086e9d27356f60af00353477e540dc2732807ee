@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6680d0a_614e5f48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-28T17:39:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2a09424_de36edce",
+      "range": {
+        "startLine": 7,
+        "startChar": 40,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "d086e9d27356f60af00353477e540dc2732807ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdb73911_106223b1",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-28T15:40:23Z",
       "side": 1,
       "message": "Note: the following can be done in a follow-up CL:\n\nI would be nice to also move /\u003cpartition\u003e/etc/aconfig_flags.pb to .../etc/aconfig but that would break build/make/tools/aconfig/printflags and the @Rule that @RequiresFlagEnabled and @RequiresFlagDisabled rely on.\n\nEssentially, all code that \"knows\" how to find the on-device aconfig flag blobs need to be updated in the same topic as this CL.\n\nWe should add a small library that those tools can link against that provide an iterator over paths to these files....",
+      "range": {
+        "startLine": 157,
+        "startChar": 84,
+        "endLine": 157,
+        "endChar": 91
+      },
+      "revId": "d086e9d27356f60af00353477e540dc2732807ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40c241ba_f9a9b503",
+        "filename": "core/packaging/flags.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-02-28T17:39:58Z",
+      "side": 1,
+      "message": "ack",
+      "parentUuid": "bdb73911_106223b1",
       "range": {
         "startLine": 157,
         "startChar": 84,
