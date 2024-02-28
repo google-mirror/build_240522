@@ -70,6 +70,24 @@
       "parentUuid": "e19b18d6_c2c49988",
       "revId": "69281c31bac7ee37f037e2509b73abbb9caa8745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "407f2709_795bf44f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2024-02-28T01:19:19Z",
+      "side": 1,
+      "message": "\u003e If you provide an empty file, read_binary_config[1] will return true\n\nIt doesn\u0027t look like it. According to my reading of the code it will return false [1] which is the same behavior as if the file doesn\u0027t exist [2]. So the behavior is the same except that we don\u0027t print the warning.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:bionic/linker/linker_config.cpp;l\u003d214\n\n[2] https://cs.android.com/android/platform/superproject/main/+/main:bionic/linker/linker_config.cpp;l\u003d192",
+      "parentUuid": "a3e137be_3bc23ab5",
+      "revId": "69281c31bac7ee37f037e2509b73abbb9caa8745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
