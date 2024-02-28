@@ -99,6 +99,24 @@
       "parentUuid": "4f0496d5_283cf826",
       "revId": "f18506d5f9984c8abf1135479dcff39a9baf28af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f7cae8e_2bcf5fa4",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-02-28T22:37:41Z",
+      "side": 1,
+      "message": "oh wait, I\u0027m missing a `not` in front of target_info.vabc_cow_version",
+      "parentUuid": "98244779_073eafa3",
+      "revId": "f18506d5f9984c8abf1135479dcff39a9baf28af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
