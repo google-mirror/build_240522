@@ -51,6 +51,24 @@
       "message": "This should probably be updated to match the Soong logic, with a comment in both places pointing to the other.\n\nSomething like this should work:\n```\n# This should match the definition of `thirdPartyDirPrefixExceptions` in build/soong/android/paths.go.\nmy_subdir :\u003d $(word 2,$(subst /,$(space),$(LOCAL_PATH)))\n# Get the second element of LOCAL_PATH\nifneq ($(filter hardware/%,$(LOCAL_PATH)),)\n  must_compile_hardware_subdirs :\u003d google/% interfaces/% libhardware/% libhardware_legacy/% ril/%\n  ifneq ($(filter-out $(must_compile_hardware_subdirs),$(my_subdir)),)\n    my_cflags +\u003d $(CLANG_EXTERNAL_CFLAGS)\n  endif\nendif\n\nifneq ($(filter vendor/%,$(LOCAL_PATH)),)\n  # Do not add the flags for any subdir that contains the string \"google\".\n  ifneq ($(findstring google,$(my_subdir)),)\n    my_cflags +\u003d $(CLANG_EXTERNAL_CFLAGS)\n  endif\nendif\n```",
       "revId": "aba7ba168747deb1626365ac0ac07a9dd08066f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad3a4d3e_f818d865",
+        "filename": "core/binary.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2024-02-29T22:57:53Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "76347fae_d545214c",
+      "revId": "aba7ba168747deb1626365ac0ac07a9dd08066f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
