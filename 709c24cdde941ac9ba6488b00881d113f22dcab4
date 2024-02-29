@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fb28115_6623dbfb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-02-29T16:51:45Z",
+      "side": 1,
+      "message": "Metalava already has support for diffing two API surfaces. I believe that is where the JDiff files that were used to generate the HTML differences came from.\n\nPlease be careful that you do not end up duplicating functionality that already exists.",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "709c24cdde941ac9ba6488b00881d113f22dcab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aaffbd3_50305eb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-02-29T16:51:45Z",
+      "side": 1,
+      "message": "It might make sense for this to be part of `tools/metalava`, albeit a stand alone application that sits alongside and uses Metalava code.\n\nOne concern I has is that Metalava is not designed or intended to be used as a library. We do make it available in a limited way simply because there were existing uses of it but I would rather not expand the amount of code that sits outside Metalava but uses Metalava too much.",
+      "revId": "709c24cdde941ac9ba6488b00881d113f22dcab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6009ab4_0d5fa4d0",
+        "filename": "tools/api-signature/ApiSignature.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-02-29T16:51:45Z",
+      "side": 1,
+      "message": "Something like this:\n```\nval flags \u003d File(path).inputStream().use { inputStream -\u003e\n   find_flagged_api_flags(path, inputStream)\n}\n```",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 54
+      },
+      "revId": "709c24cdde941ac9ba6488b00881d113f22dcab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a35c68e_82f76d65",
+        "filename": "tools/api-signature/ApiSignature.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-02-29T16:51:45Z",
+      "side": 1,
+      "message": "You should not use this, it is for testing.\n\nYou should use `parseApi(String, InputStream)` it avoids you having to specify a charset when reading the file.",
+      "range": {
+        "startLine": 49,
+        "startChar": 25,
+        "endLine": 49,
+        "endChar": 33
+      },
+      "revId": "709c24cdde941ac9ba6488b00881d113f22dcab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
