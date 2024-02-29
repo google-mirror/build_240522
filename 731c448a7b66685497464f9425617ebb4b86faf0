@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5bb57d0_320488a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-29T08:33:18Z",
+      "side": 1,
+      "message": "nit: double space",
+      "range": {
+        "startLine": 7,
+        "startChar": 54,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "731c448a7b66685497464f9425617ebb4b86faf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91336c8e_0ab38c3b",
+        "filename": "tools/aconfig/aconfig/src/commands.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-29T08:33:18Z",
+      "side": 1,
+      "message": "This can be simplified as\n\n```\nensure!(codegen_mode !\u003d CodegenMode::Exported, \"Exported mode ...\");\n```",
+      "range": {
+        "startLine": 207,
+        "startChar": 3,
+        "endLine": 209,
+        "endChar": 5
+      },
+      "revId": "731c448a7b66685497464f9425617ebb4b86faf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4907f25_ed9f5ca6",
+        "filename": "tools/aconfig/aconfig/src/commands.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-02-29T08:33:18Z",
+      "side": 1,
+      "message": "See above.",
+      "range": {
+        "startLine": 222,
+        "startChar": 4,
+        "endLine": 222,
+        "endChar": 6
+      },
+      "revId": "731c448a7b66685497464f9425617ebb4b86faf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
