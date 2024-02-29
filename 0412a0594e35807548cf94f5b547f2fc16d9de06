@@ -117,6 +117,24 @@
       "parentUuid": "40a2864e_b3a2f667",
       "revId": "0412a0594e35807548cf94f5b547f2fc16d9de06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99bc3d20_44467a24",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-02-29T19:18:54Z",
+      "side": 1,
+      "message": "The quotes are not syntactically meaningful, so `$(eval \"else:\u003d\")` assigns `\"` to a variable named `\"else`.  You could use `$(eval else:\u003d)`, but it wouldn\u0027t be obvious to me that this is a comment that means \"this is the else case\", and not a deliberate assignment to a variable named `else`.",
+      "parentUuid": "a87baa6d_18259ff8",
+      "revId": "0412a0594e35807548cf94f5b547f2fc16d9de06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
