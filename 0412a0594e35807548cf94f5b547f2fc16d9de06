@@ -57,6 +57,24 @@
       "parentUuid": "54df6e42_92b317f0",
       "revId": "0412a0594e35807548cf94f5b547f2fc16d9de06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40a2864e_b3a2f667",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-02-29T18:35:44Z",
+      "side": 1,
+      "message": "This is Make, not shell, so `$(echo)` is calling a make function that doesn\u0027t exist, which is a noop.  You could use something like `$(comment \"### else ###\")`.  But this seems like a lot of subtle hackery to work around bugs in the emacs syntax highlighting, and is relying on a different emacs bug: emacs seems to be ignoring `#` inside quotes, but quotes are meaningless in Makefiles:\n```Makefile\na :\u003d \"#\" foo\n$(warning $(a))\n```\nprints `/tmp/test.mk:2: \"`.  But Make highlights the \"foo\" as if it were not commented.",
+      "parentUuid": "21ca5208_a9e6deca",
+      "revId": "0412a0594e35807548cf94f5b547f2fc16d9de06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
