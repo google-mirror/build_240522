@@ -40,8 +40,11 @@ output_dir_or_file:
 from __future__ import print_function
 
 import logging
+import os
 import os.path
 import shlex
+import shutil
+import subprocess
 import sys
 import zipfile
 
@@ -200,6 +203,52 @@ def BuildSuperImage(inp, out):
   raise ValueError("{} is not a dictionary or a valid path".format(inp))
 
 
+def fixup_ld_library_path():
+
+  def run_cmd(cmd: str) -> None:
+    sys.stderr.write(f"fixup_ld_library_path: running: {cmd}\n")
+    subprocess.run(cmd, shell=True, stdout=sys.stderr, stderr=sys.stderr)
+
+  logger.warning("sys.version=%s", sys.version)
+  logger.warning("fixup_ld_library_path: PATH=%s", repr(os.getenv("PATH")))
+  logger.warning("fixup_ld_library_path: LD_LIBRARY_PATH=%s", repr(os.getenv("LD_LIBRARY_PATH")))
+  logger.warning("which file = %s", repr(shutil.which("file")))
+  logger.warning("which md5sum = %s", repr(shutil.which("md5sum")))
+  logger.warning("which ls = %s", repr(shutil.which("ls")))
+  logger.warning("which cat = %s", repr(shutil.which("cat")))
+  logger.warning("which grep = %s", repr(shutil.which("grep")))
+  logger.warning("which which = %s", repr(shutil.which("which")))
+  logger.warning("which readelf = %s", repr(shutil.which("readelf")))
+  logger.warning("which nm = %s", repr(shutil.which("nm")))
+  logger.warning("which objdump = %s", repr(shutil.which("objdump")))
+  logger.warning("which llvm-readelf = %s", repr(shutil.which("llvm-readelf")))
+  logger.warning("which llvm-objdump = %s", repr(shutil.which("llvm-objdump")))
+
+  if os.getenv("LD_LIBRARY_PATH") is None:
+    logger.warning("LD_LIBRARY_PATH is None")
+  else:
+    cfbase = os.path.dirname(os.getenv("LD_LIBRARY_PATH").split(":")[-1])
+    logger.warning("cfbase = %s", repr(cfbase))
+    run_cmd(f"ls -l {cfbase}")
+    run_cmd(f"ls -l {cfbase}/bin")
+    run_cmd(f"ls -l {cfbase}/lib")
+    run_cmd(f"ls -l {cfbase}/lib64")
+    run_cmd(f"ls -l {cfbase}/otatools")
+    run_cmd(f"ls -l {cfbase}/otatools/bin")
+    run_cmd(f"ls -l {cfbase}/otatools/lib")
+    run_cmd(f"ls -l {cfbase}/otatools/lib64")
+
+    run_cmd(f"md5sum {cfbase}/lib64/libc++.so")
+    run_cmd(f"md5sum {cfbase}/otatools/lib64/libc++.so")
+
+    run_cmd(f"readelf -W --dyn-syms {cfbase}/lib64/libc++.so | grep libcpp_verbose_abort")
+    run_cmd(f"readelf -W --dyn-syms {cfbase}/otatools/lib64/libc++.so | grep libcpp_verbose_abort")
+
+  # if os.getenv("LD_LIBRARY_PATH") is not None:
+  #   logger.warning("fixup_ld_library_path: clearing LD_LIBRARY_PATH")
+  #   del os.environ["LD_LIBRARY_PATH"]
+
+
 def main(argv):
 
   args = common.ParseOptions(argv, __doc__)
@@ -210,6 +259,7 @@ def main(argv):
 
   common.InitLogging()
 
+  fixup_ld_library_path()
   BuildSuperImage(args[0], args[1])
 
 

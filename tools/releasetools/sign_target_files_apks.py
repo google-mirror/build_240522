@@ -183,6 +183,7 @@ import os
 import re
 import shutil
 import stat
+import subprocess
 import sys
 import tempfile
 import zipfile
@@ -1441,6 +1442,45 @@ def BuildVendorPartitions(output_zip_path):
       common.ZipWrite(output_zip, os.path.join(vendor_tempdir, recovery_sh_path), recovery_sh_path)
 
 
+def fixup_ld_library_path():
+
+  def run_cmd(cmd: str) -> None:
+    sys.stderr.write(f"fixup_ld_library_path: running: {cmd}\n")
+    subprocess.run(cmd, shell=True, stdout=sys.stderr, stderr=sys.stderr)
+
+  logger.warning("sys.version=%s", sys.version)
+  logger.warning("fixup_ld_library_path: PATH=%s", repr(os.getenv("PATH")))
+  logger.warning("fixup_ld_library_path: LD_LIBRARY_PATH=%s", repr(os.getenv("LD_LIBRARY_PATH")))
+  logger.warning("which file = %s", repr(shutil.which("file")))
+  logger.warning("which md5sum = %s", repr(shutil.which("md5sum")))
+  logger.warning("which ls = %s", repr(shutil.which("ls")))
+  logger.warning("which cat = %s", repr(shutil.which("cat")))
+  logger.warning("which grep = %s", repr(shutil.which("grep")))
+  logger.warning("which which = %s", repr(shutil.which("which")))
+  logger.warning("which readelf = %s", repr(shutil.which("readelf")))
+  logger.warning("which nm = %s", repr(shutil.which("nm")))
+  logger.warning("which objdump = %s", repr(shutil.which("objdump")))
+  logger.warning("which llvm-readelf = %s", repr(shutil.which("llvm-readelf")))
+  logger.warning("which llvm-objdump = %s", repr(shutil.which("llvm-objdump")))
+
+  if os.getenv("LD_LIBRARY_PATH") is None:
+    logger.warning("LD_LIBRARY_PATH is None")
+  else:
+    for tfbase in [os.path.dirname(os.getenv("LD_LIBRARY_PATH").split(":")[0]),
+                   os.path.dirname(os.getenv("PATH").split(":")[0])]:
+      logger.warning("tfbase = %s", repr(tfbase))
+      run_cmd(f"ls -l {tfbase}")
+      run_cmd(f"ls -l {tfbase}/bin")
+      run_cmd(f"ls -l {tfbase}/lib")
+      run_cmd(f"ls -l {tfbase}/lib64")
+      run_cmd(f"md5sum {tfbase}/lib64/libc++.so")
+      run_cmd(f"readelf -W --dyn-syms {tfbase}/lib64/libc++.so | grep libcpp_verbose_abort")
+
+  # if os.getenv("LD_LIBRARY_PATH") is not None:
+  #   logger.warning("fixup_ld_library_path: clearing LD_LIBRARY_PATH")
+  #   del os.environ["LD_LIBRARY_PATH"]
+
+
 def main(argv):
 
   key_mapping_options = []
@@ -1641,6 +1681,7 @@ def main(argv):
     sys.exit(1)
 
   common.InitLogging()
+  fixup_ld_library_path()
 
   input_zip = zipfile.ZipFile(args[0], "r", allowZip64=True)
   output_zip = zipfile.ZipFile(args[1], "w",
