@@ -106,6 +106,24 @@
       "parentUuid": "a3decec4_2476e7d6",
       "revId": "22a62cd84171227727bbd7014fb467d5404368b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d00b3653_abd7f93d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-29T08:05:54Z",
+      "side": 1,
+      "message": "Thanks! It seems like downloading target-files from go/ab was the problem. Now I\u0027ve checked `sign_target_files_apks` fully works on my code.",
+      "parentUuid": "ec91388c_e767026a",
+      "revId": "22a62cd84171227727bbd7014fb467d5404368b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
