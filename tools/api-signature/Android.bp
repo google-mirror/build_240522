@@ -20,6 +20,7 @@ filegroup {
     name: "api-signature-sources",
     srcs: [
         "ApiSignature.kt",
+        "Main.kt",
     ],
 }
 
@@ -28,8 +29,9 @@ java_binary_host {
     srcs: [
         ":api-signature-sources",
     ],
-    main_class: "android.apisignature.ApiSignatureKt",
+    main_class: "android.apisignature.MainKt",
     static_libs: [
+        "jcommander",
         "metalava-signature-reader",
     ],
 }
@@ -45,6 +47,7 @@ java_test_host {
         "tradefed",
     ],
     static_libs: [
+        "jcommander",
         "metalava-signature-reader",
     ],
     test_suites: ["general-tests"],
