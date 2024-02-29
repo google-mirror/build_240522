@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf272f08_ffff0fbb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-02-29T18:11:29Z",
+      "side": 1,
+      "message": "The Make documentation also says:\n\n\u003e You cannot use comments within variable references or function calls: any instance of # will be treated literally (rather than as the start of a comment) inside a variable reference or function call.",
+      "range": {
+        "startLine": 10,
+        "startChar": 53,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "revId": "0412a0594e35807548cf94f5b547f2fc16d9de06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54df6e42_92b317f0",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-02-29T18:11:29Z",
+      "side": 1,
+      "message": "This makes the fact that this is an else case much less obvious.",
+      "revId": "0412a0594e35807548cf94f5b547f2fc16d9de06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
