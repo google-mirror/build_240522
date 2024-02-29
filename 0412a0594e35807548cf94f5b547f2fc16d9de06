@@ -39,6 +39,24 @@
       "message": "This makes the fact that this is an else case much less obvious.",
       "revId": "0412a0594e35807548cf94f5b547f2fc16d9de06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ca5208_a9e6deca",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-02-29T18:24:47Z",
+      "side": 1,
+      "message": "How about changing `$(eval ### else ###)` into `$(echo \"### else ###\" \u003e/dev/null)`?",
+      "parentUuid": "54df6e42_92b317f0",
+      "revId": "0412a0594e35807548cf94f5b547f2fc16d9de06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
