@@ -72,7 +72,8 @@ PRODUCT_PACKAGES += \
     UserDictionaryProvider \
     VpnDialogs \
     vr \
-
+    MyPrebuiltApp \
+    InputSpy \
 
 PRODUCT_SYSTEM_SERVER_APPS += \
     FusedLocation \
