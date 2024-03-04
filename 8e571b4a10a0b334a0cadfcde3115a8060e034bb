@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b80b7e1d_02064462",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2024-03-04T08:57:20Z",
+      "side": 1,
+      "message": "nit: for AOSP products.",
+      "range": {
+        "startLine": 7,
+        "startChar": 41,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "8e571b4a10a0b334a0cadfcde3115a8060e034bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
