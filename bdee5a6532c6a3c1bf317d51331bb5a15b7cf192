@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aece2d9d_9d7726fd",
+        "filename": "tools/aconfig/printflags/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-04T20:59:04Z",
+      "side": 1,
+      "message": "I can\u0027t decide if we should keep this or simplify this part to `[^@]+\\.[^@]+$`. WDYT?",
+      "range": {
+        "startLine": 70,
+        "startChar": 44,
+        "endLine": 70,
+        "endChar": 63
+      },
+      "revId": "bdee5a6532c6a3c1bf317d51331bb5a15b7cf192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d824669_d0964520",
+        "filename": "tools/aconfig/printflags/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-04T20:59:04Z",
+      "side": 1,
+      "message": "Rename to \"mount_points\"; they\u0027re not all partitions after we add the APEXes.",
+      "range": {
+        "startLine": 71,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 22
+      },
+      "revId": "bdee5a6532c6a3c1bf317d51331bb5a15b7cf192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
