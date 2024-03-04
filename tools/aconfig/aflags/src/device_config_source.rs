@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-use crate::{Flag, FlagPermission, FlagSource, ValuePickedFrom};
+use crate::{Flag, FlagPermission, FlagSource, OverrideType};
 use aconfig_protos::ProtoFlagPermission as ProtoPermission;
 use aconfig_protos::ProtoFlagState as ProtoState;
 use aconfig_protos::ProtoParsedFlag;
@@ -57,7 +57,7 @@ fn convert_parsed_flag(flag: &ProtoParsedFlag) -> Flag {
         container,
         value,
         permission,
-        value_picked_from: ValuePickedFrom::Default,
+        override_type: OverrideType::Default_,
     }
 }
 
@@ -98,11 +98,13 @@ fn parse_device_config(raw: &str) -> Result<HashMap<String, String>> {
     Ok(flags)
 }
 
-fn read_device_config_output(command: &str) -> Result<String> {
-    let output = Command::new("/system/bin/device_config").arg(command).output()?;
+fn read_device_config_output(command: &[String]) -> Result<String> {
+    let output = Command::new("/system/bin/device_config").args(command).output()?;
     if !output.status.success() {
         let reason = match output.status.code() {
-            Some(code) => format!("exit code {}", code),
+            Some(code) => {
+                format!("exit code {}, output was {}", code, str::from_utf8(&output.stdout)?)
+            }
             None => "terminated by signal".to_string(),
         };
         bail!("failed to execute device_config: {}", reason);
@@ -111,7 +113,7 @@ fn read_device_config_output(command: &str) -> Result<String> {
 }
 
 fn read_device_config_flags() -> Result<HashMap<String, String>> {
-    let list_output = read_device_config_output("list")?;
+    let list_output = read_device_config_output(&["list".to_string()])?;
     parse_device_config(&list_output)
 }
 
@@ -123,10 +125,10 @@ fn reconcile(pb_flags: &[Flag], dc_flags: HashMap<String, String>) -> Vec<Flag> 
                 .get(&format!("{}/{}.{}", f.namespace, f.package, f.name))
                 .map(|value| {
                     if value.eq(&f.value) {
-                        Flag { value_picked_from: ValuePickedFrom::Default, ..f.clone() }
+                        Flag { override_type: OverrideType::Default_, ..f.clone() }
                     } else {
                         Flag {
-                            value_picked_from: ValuePickedFrom::Server,
+                            override_type: OverrideType::Server,
                             value: value.to_string(),
                             ..f.clone()
                         }
@@ -144,6 +146,16 @@ impl FlagSource for DeviceConfigSource {
 
         let flags = reconcile(&pb_flags, dc_flags);
         Ok(flags)
+    }
+
+    fn override_flag(namespace: &str, package: &str, name: &str, value: &str) -> Result<()> {
+        read_device_config_output(&[
+            "put".to_string(),
+            namespace.to_string(),
+            format!("{}.{}", package, name),
+            value.to_string(),
+        ])
+        .map(|_| ())
     }
 }
 
