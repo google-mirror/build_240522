@@ -67,8 +67,22 @@ fn main() -> Result<()> {
     let device_config_flags = parse_device_config(dc_stdout);
 
     // read aconfig_flags.pb files
+    let mount_points = Regex::new(r"^/apex/[^@]+\.[^@]+$").unwrap();
+    let mut partitions = vec![
+        "system".to_string(),
+        "system_ext".to_string(),
+        "product".to_string(),
+        "vendor".to_string(),
+    ];
+    for apex in fs::read_dir("/apex")? {
+        let path_name = apex?.path().display().to_string();
+        if let Some(canonical_path) = mount_points.captures(&path_name) {
+            partitions.push(canonical_path.get(0).unwrap().as_str().to_owned());
+        }
+    }
+
     let mut flags: BTreeMap<String, Vec<String>> = BTreeMap::new();
-    for partition in ["system", "system_ext", "product", "vendor"] {
+    for partition in partitions {
         let path = format!("/{}/etc/aconfig_flags.pb", partition);
         let Ok(bytes) = fs::read(&path) else {
             eprintln!("warning: failed to read {}", path);
