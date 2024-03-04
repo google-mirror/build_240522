@@ -98,11 +98,13 @@ fn parse_device_config(raw: &str) -> Result<HashMap<String, String>> {
     Ok(flags)
 }
 
-fn read_device_config_output(command: &str) -> Result<String> {
-    let output = Command::new("/system/bin/device_config").arg(command).output()?;
+fn read_device_config_output(command: &[String]) -> Result<String> {
+    let output = Command::new("/system/bin/device_config").args(command).output()?;
     if !output.status.success() {
         let reason = match output.status.code() {
-            Some(code) => format!("exit code {}", code),
+            Some(code) => {
+                format!("exit code {}, output was {}", code, str::from_utf8(&output.stdout)?)
+            }
             None => "terminated by signal".to_string(),
         };
         bail!("failed to execute device_config: {}", reason);
@@ -111,7 +113,7 @@ fn read_device_config_output(command: &str) -> Result<String> {
 }
 
 fn read_device_config_flags() -> Result<HashMap<String, String>> {
-    let list_output = read_device_config_output("list")?;
+    let list_output = read_device_config_output(&["list".to_string()])?;
     parse_device_config(&list_output)
 }
 
@@ -144,6 +146,16 @@ impl FlagSource for DeviceConfigSource {
 
         let flags = reconcile(&pb_flags, dc_flags);
         Ok(flags)
+    }
+
+    fn override_flag(namespace: &str, package: &str, name: &str, value: &str) -> Result<()> {
+        read_device_config_output(&[
+            "put".to_string(),
+            namespace.to_string(),
+            format!("{}.{}", package, name),
+            value.to_string(),
+        ])
+        .map(|_| ())
     }
 }
 
