@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50bbe618_ff0771a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-04T21:03:49Z",
+      "side": 1,
+      "message": "nit: typo",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 20
+      },
+      "revId": "174dcd1d98ba418f2fe388fff7dd04c2f34d3f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b164d141_89775b91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-04T21:03:49Z",
+      "side": 1,
+      "message": "What will aconfig use to write the storage files?",
+      "range": {
+        "startLine": 26,
+        "startChar": 28,
+        "endLine": 27,
+        "endChar": 7
+      },
+      "revId": "174dcd1d98ba418f2fe388fff7dd04c2f34d3f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
