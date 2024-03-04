@@ -16,6 +16,46 @@
       "message": "Need +2 again.",
       "revId": "e6d996479bfee456d1a2ab24a36ff8d37a0550d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "611624d8_2d468770",
+        "filename": "core/proguard/kotlin.flags",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1059977
+      },
+      "writtenOn": "2024-03-04T22:52:27Z",
+      "side": 1,
+      "message": "Are these defaults if you\u0027re using Kotlin with Android Studio? And in google3?",
+      "revId": "e6d996479bfee456d1a2ab24a36ff8d37a0550d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "988e8d91_356fa886",
+        "filename": "core/proguard/kotlin.flags",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1059977
+      },
+      "writtenOn": "2024-03-04T22:52:27Z",
+      "side": 1,
+      "message": "DebugMetadata",
+      "range": {
+        "startLine": 12,
+        "startChar": 31,
+        "endLine": 12,
+        "endChar": 44
+      },
+      "revId": "e6d996479bfee456d1a2ab24a36ff8d37a0550d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
