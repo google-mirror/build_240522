@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33e3c8ad_d2c4fd6b",
+        "filename": "tools/api-signature/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-03-05T11:49:51Z",
+      "side": 1,
+      "message": "FTR Metalava uses Clikt for command line parsing.",
+      "range": {
+        "startLine": 18,
+        "startChar": 28,
+        "endLine": 18,
+        "endChar": 38
+      },
+      "revId": "e195e4d602ef15a201680510aafadb320f16d72c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
