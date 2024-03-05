@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e180d38_1ca756ea",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-05T16:14:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b473163c_2c6ef0b2",
+      "range": {
+        "startLine": 101,
+        "startChar": 38,
+        "endLine": 101,
+        "endChar": 47
+      },
+      "revId": "2c141ba77c7a737c063bc3541f814bd17ca93a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc52e61e_cdc6764a",
@@ -60,6 +84,30 @@
       "writtenOn": "2024-03-05T08:51:25Z",
       "side": 1,
       "message": "I prefer a single parameter that is the fully qualified name. Easier to reason about.",
+      "range": {
+        "startLine": 100,
+        "startChar": 13,
+        "endLine": 100,
+        "endChar": 42
+      },
+      "revId": "2c141ba77c7a737c063bc3541f814bd17ca93a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb3191b2_06f83fce",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-05T16:14:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc52e61e_cdc6764a",
       "range": {
         "startLine": 100,
         "startChar": 13,
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa1e63d6_d1e25f38",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-05T16:14:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a11ae68_0807160f",
+      "range": {
+        "startLine": 139,
+        "startChar": 32,
+        "endLine": 139,
+        "endChar": 33
+      },
+      "revId": "2c141ba77c7a737c063bc3541f814bd17ca93a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f94be762_20587424",
@@ -116,6 +188,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b0165f_6fceb9cb",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-05T16:14:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f94be762_20587424",
+      "range": {
+        "startLine": 146,
+        "startChar": 37,
+        "endLine": 146,
+        "endChar": 38
+      },
+      "revId": "2c141ba77c7a737c063bc3541f814bd17ca93a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74c180e8_60a782af",
@@ -129,6 +225,30 @@
       "writtenOn": "2024-03-05T08:51:25Z",
       "side": 1,
       "message": "See previous comment. aconfig has a helper method to construct a canonical name from package and name; add a similar helper to aflags?",
+      "range": {
+        "startLine": 161,
+        "startChar": 32,
+        "endLine": 161,
+        "endChar": 33
+      },
+      "revId": "2c141ba77c7a737c063bc3541f814bd17ca93a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0ed9756_54a20e73",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-05T16:14:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74c180e8_60a782af",
       "range": {
         "startLine": 161,
         "startChar": 32,
