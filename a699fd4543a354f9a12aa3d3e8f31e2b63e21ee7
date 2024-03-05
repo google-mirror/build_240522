@@ -52,6 +52,24 @@
       "parentUuid": "566a197c_afd924f8",
       "revId": "a699fd4543a354f9a12aa3d3e8f31e2b63e21ee7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b4ea994_7aea426d",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-03-05T09:14:06Z",
+      "side": 1,
+      "message": "Marking as resolved in advance to satisfy submit requirement.",
+      "parentUuid": "e88c5e19_becf964d",
+      "revId": "a699fd4543a354f9a12aa3d3e8f31e2b63e21ee7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
