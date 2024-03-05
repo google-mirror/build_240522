@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2016f89a_203cee07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1317851
+      },
+      "writtenOn": "2024-03-05T02:46:16Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. I will update it as \"for all products\"",
+      "parentUuid": "b80b7e1d_02064462",
+      "range": {
+        "startLine": 7,
+        "startChar": 41,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "8e571b4a10a0b334a0cadfcde3115a8060e034bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa074618_2041b4d1",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-03-04T17:57:14Z",
       "side": 1,
       "message": "Would you like to make it like https://cs.android.com/android/platform/superproject/main/+/main:build/make/core/Makefile;drc\u003da290c6caf8798bc4c1133093da1d797f668b7ec2;l\u003d7656, so later new .mk files will also be included?",
+      "revId": "8e571b4a10a0b334a0cadfcde3115a8060e034bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93b8402a_7fe7cacc",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1317851
+      },
+      "writtenOn": "2024-03-05T02:46:16Z",
+      "side": 1,
+      "message": "Currently I will keep it. If there are many mk need to include in the future, I will update it as *.mk.",
+      "parentUuid": "aa074618_2041b4d1",
       "revId": "8e571b4a10a0b334a0cadfcde3115a8060e034bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
