@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b04d3427_8010dc5b",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-05T16:21:09Z",
+      "side": 1,
+      "message": "nit: simplify: `\"... flag \u0027{qualified_name}\u0027, it is ...\"` (here and elsewhere)",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 156,
+        "endChar": 27
+      },
+      "revId": "acec9fbc819d246308929381d29d9c9303193eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c84e43b_6ebfcd11",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-05T16:21:09Z",
+      "side": 1,
+      "message": "I would prefer if the tool does not print anything in case of success. I makes it so much easier to spot errors -- no need to manually parse the text.\n\nAlso it follows the UNIX standard for CLIs.",
+      "range": {
+        "startLine": 208,
+        "startChar": 8,
+        "endLine": 208,
+        "endChar": 48
+      },
+      "revId": "acec9fbc819d246308929381d29d9c9303193eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
