@@ -22,6 +22,30 @@
       },
       "revId": "b6e067dbe37453e4ecd236eaebd1a157505ea70a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dcec6ad_1ef88770",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-05T19:34:45Z",
+      "side": 1,
+      "message": "I forgot to send an email out telling everyone that I\u0027m renaming everything to `econfig`!",
+      "parentUuid": "0bf571b3_44c143c0",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "b6e067dbe37453e4ecd236eaebd1a157505ea70a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
