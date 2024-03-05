@@ -45,6 +45,30 @@
       },
       "revId": "acec9fbc819d246308929381d29d9c9303193eed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "375d5fe3_809e0549",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-05T17:17:49Z",
+      "side": 1,
+      "message": "Ack, makes sense. One thing, is I\u0027d like to communicate to the user that the device needs to reboot to apply the flag, since it\u0027s a common confusion. Maybe we can just rely on the help text for that here.\n\nActually, how about I\u0027ll communicate that the flag is \"staged,\" in the list/read commands. Turning this into a bit of a rabbithole, there isn\u0027t an easy way to tell in AOSP right now; the staging and boot-stable logic is still only internal, although the codegen caching is external, so a reboot is still required to refresh that value. How about we just rely on helptext now; and then once we get the new storage in, we can showcase clearly that a flag is staged in the list/read commands.",
+      "parentUuid": "1c84e43b_6ebfcd11",
+      "range": {
+        "startLine": 208,
+        "startChar": 8,
+        "endLine": 208,
+        "endChar": 48
+      },
+      "revId": "acec9fbc819d246308929381d29d9c9303193eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
