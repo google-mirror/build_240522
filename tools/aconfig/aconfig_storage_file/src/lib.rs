@@ -197,7 +197,7 @@ pub fn list_flags(
     package_map: &str,
     flag_map: &str,
     flag_val: &str,
-) -> Result<Vec<(String, bool)>, AconfigStorageError> {
+) -> Result<Vec<(String, String, bool)>, AconfigStorageError> {
     let package_table = PackageTable::from_bytes(&read_file_to_bytes(package_map)?)?;
     let flag_table = FlagTable::from_bytes(&read_file_to_bytes(flag_map)?)?;
     let flag_value_list = FlagValueList::from_bytes(&read_file_to_bytes(flag_val)?)?;
@@ -210,10 +210,9 @@ pub fn list_flags(
     let mut flags = Vec::new();
     for node in flag_table.nodes.iter() {
         let (package_name, package_offset) = package_info[node.package_id as usize];
-        let full_flag_name = String::from(package_name) + "/" + &node.flag_name;
         let flag_offset = package_offset + node.flag_id as u32;
         let flag_value = flag_value_list.booleans[flag_offset as usize];
-        flags.push((full_flag_name, flag_value));
+        flags.push((String::from(package_name), node.flag_name.clone(), flag_value));
     }
 
     flags.sort_by(|v1, v2| v1.0.cmp(&v2.0));
