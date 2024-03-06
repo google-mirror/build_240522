@@ -16,9 +16,10 @@
 
 //! `aflags` is a device binary to read and write aconfig flags.
 
-use anyhow::{anyhow, Result};
+use anyhow::{anyhow, bail, Result};
 use clap::Parser;
 
+use std::process::Command as ProcessCommand;
 mod device_config_source;
 use device_config_source::DeviceConfigSource;
 
@@ -144,7 +145,25 @@ fn format_flag_row(flag: &Flag, info: &PaddingInfo) -> String {
     format!("{pkg:p0$}{name:p1$}{val:p2$}{value_picked_from:p3$}{perm:p4$}{container}\n")
 }
 
+fn check_root() -> Result<bool> {
+    let output = ProcessCommand::new("whoami").output()?;
+    if !output.status.success() {
+        let reason = match output.status.code() {
+            Some(code) => {
+                format!("exit code {}, output was {}", code, std::str::from_utf8(&output.stdout)?)
+            }
+            None => "terminated by signal".to_string(),
+        };
+        bail!("failed to determine root: {}", reason);
+    }
+    Ok(std::str::from_utf8(&output.stdout)?.trim() == "root")
+}
+
 fn set_flag(qualified_name: &str, value: &str) -> Result<()> {
+    if !check_root()? {
+        return Err(anyhow!("cannot write flags without root access."));
+    }
+
     let flags_binding = DeviceConfigSource::list_flags()?;
     let flag = flags_binding.iter().find(|f| f.qualified_name() == qualified_name).ok_or(
         anyhow!("no aconfig flag '{qualified_name}'. Does the flag have an .aconfig definition?"),
