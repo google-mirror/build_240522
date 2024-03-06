@@ -22,6 +22,9 @@ use clap::Parser;
 mod device_config_source;
 use device_config_source::DeviceConfigSource;
 
+mod aconfig_storage_source;
+use aconfig_storage_source::AconfigStorageSource;
+
 #[derive(Clone)]
 enum FlagPermission {
     ReadOnly,
@@ -74,6 +77,11 @@ trait FlagSource {
     fn override_flag(namespace: &str, qualified_name: &str, value: &str) -> Result<()>;
 }
 
+enum FlagSourceType {
+    DeviceConfig,
+    AconfigStorage,
+}
+
 const ABOUT_TEXT: &str = "Tool for reading and writing flags.
 
 Rows in the table from the `list` command follow this format:
@@ -100,7 +108,11 @@ struct Cli {
 #[derive(Parser, Debug)]
 enum Command {
     /// List all aconfig flags on this device.
-    List,
+    List {
+        /// Read from the new flag storage.
+        #[clap(long)]
+        use_new_storage: bool,
+    },
 
     /// Enable an aconfig flag on this device, on the next boot.
     Enable {
@@ -161,8 +173,11 @@ fn set_flag(qualified_name: &str, value: &str) -> Result<()> {
     Ok(())
 }
 
-fn list() -> Result<String> {
-    let flags = DeviceConfigSource::list_flags()?;
+fn list(source_type: FlagSourceType) -> Result<String> {
+    let flags = match source_type {
+        FlagSourceType::DeviceConfig => DeviceConfigSource::list_flags()?,
+        FlagSourceType::AconfigStorage => AconfigStorageSource::list_flags()?,
+    };
     let padding_info = PaddingInfo {
         longest_package_col: flags.iter().map(|f| f.package.len()).max().unwrap_or(0),
         longest_name_col: flags.iter().map(|f| f.name.len()).max().unwrap_or(0),
@@ -190,7 +205,13 @@ fn list() -> Result<String> {
 fn main() {
     let cli = Cli::parse();
     let output = match cli.command {
-        Command::List => list().map(Some),
+        Command::List { use_new_storage } => {
+            if use_new_storage {
+                list(FlagSourceType::AconfigStorage).map(Some)
+            } else {
+                list(FlagSourceType::DeviceConfig).map(Some)
+            }
+        }
         Command::Enable { qualified_name } => set_flag(&qualified_name, "true").map(|_| None),
         Command::Disable { qualified_name } => set_flag(&qualified_name, "false").map(|_| None),
     };
