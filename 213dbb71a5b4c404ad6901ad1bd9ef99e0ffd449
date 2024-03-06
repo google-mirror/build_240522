@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f87226b_0a445269",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012569
+      },
+      "writtenOn": "2024-03-06T08:38:40Z",
+      "side": 1,
+      "message": "If aconfig_storage.test.rust\u0027s dependency changed, incremental build will fail.\nI changed androidmk-parser in https://android-review.googlesource.com/c/platform/build/soong/+/2975671,\nI encountered the error below.\n---------------\ncp `cat out/soong/.intermediates/build/make/tools/aconfig/aconfig_storage_file/tests/aconfig_storage.test.rust/android_x86_64_silvermont/out.rsp` out/soong/.intermediates/build/make/tools/aconfig/aconfig_storage_file/tests/aconfig_storage.test.rust/android_x86_64_silvermont/out\ncp: out/soong/.intermediates/build/make/tools/aconfig/aconfig_storage_file/tests/aconfig_storage.test.rust/android_x86_64_silvermont/out/tmp.ro.package.map: Permission denied\ncp: out/soong/.intermediates/build/make/tools/aconfig/aconfig_storage_file/tests/aconfig_storage.test.rust/android_x86_64_silvermont/out/tmp.ro.flag.map: Permission denied\ncp: out/soong/.intermediates/build/make/tools/aconfig/aconfig_storage_file/tests/aconfig_storage.test.rust/android_x86_64_silvermont/out/tmp.ro.flag.val: Permission denied\n---------------\nIn first build, \n----\ngenrule {\n    name: \"ro.flag.val\",\n    out: [\"tests/tmp.ro.flag.val\"],\n    srcs: [\"tests/flag.val\"],\n    cmd: \"rm -f $(out);cp -f $(in) $(out);chmod -w $(out)\",\n}\n---\nwork well.\nBut increment build, rm -f (cmd) not work before \"g.rust.cp\" rule.\nThe file changed the permission via chmod -w, so g.rust.cp is failed.\n\nYou can check it via enter new line in build/soong/androidmk/parser/parser.go and build again.",
+      "revId": "213dbb71a5b4c404ad6901ad1bd9ef99e0ffd449",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
