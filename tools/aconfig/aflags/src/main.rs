@@ -16,7 +16,7 @@
 
 //! `aflags` is a device binary to read and write aconfig flags.
 
-use anyhow::{anyhow, Result};
+use anyhow::{anyhow, ensure, Result};
 use clap::Parser;
 
 mod device_config_source;
@@ -145,6 +145,8 @@ fn format_flag_row(flag: &Flag, info: &PaddingInfo) -> String {
 }
 
 fn set_flag(qualified_name: &str, value: &str) -> Result<()> {
+    ensure!(nix::unistd::Uid::current().is_root(), "must be root to mutate flags");
+
     let flags_binding = DeviceConfigSource::list_flags()?;
     let flag = flags_binding.iter().find(|f| f.qualified_name() == qualified_name).ok_or(
         anyhow!("no aconfig flag '{qualified_name}'. Does the flag have an .aconfig definition?"),
