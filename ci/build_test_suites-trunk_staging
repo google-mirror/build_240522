@@ -17,7 +17,9 @@ import sys
 
 import build_test_suites
 
+EXTRA_TARGETS_FILE = 'build/make/ci/test_suites_x86_64_trunk_staging_branch_specific_targets'
+
 if __name__ == '__main__':
   sys.dont_write_bytecode = True
 
-  build_test_suites.main(sys.argv)
+  build_test_suites.main(sys.argv, EXTRA_TARGETS_FILE)
