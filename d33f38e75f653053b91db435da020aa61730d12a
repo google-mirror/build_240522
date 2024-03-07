@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f110603_d9dd90cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-03-07T22:26:39Z",
+      "side": 1,
+      "message": "Do you mind sharing why this is being renamed with a `trunk_staging` suffix? Does this mean that this will run only in `trunk_staging` release configuration?",
+      "revId": "d33f38e75f653053b91db435da020aa61730d12a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
