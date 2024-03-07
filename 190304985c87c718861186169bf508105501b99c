@@ -1,5 +1,98 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27ccb1d6_48fed37e",
+        "filename": "tools/aconfig/aconfig_storage_file/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-07T08:46:28Z",
+      "side": 1,
+      "message": "```\n$ cargo r --bin aconfig_storage_file print --file aconfig_storage_read_api/tests/flag.map --type PackageMap\n```\n\nwill error out with the message\n\n```\naconfig_storage_file/src/lib.rs\n81:            _ \u003d\u003e Err(anyhow!(\"Invalid storage file to create\")),\n```\n\nI didn\u0027t expect an error about creating a storage file from invoking a print command?",
+      "range": {
+        "startLine": 30,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 31
+      },
+      "revId": "190304985c87c718861186169bf508105501b99c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4253627d_374e8c02",
+        "filename": "tools/aconfig/aconfig_storage_file/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-07T08:46:28Z",
+      "side": 1,
+      "message": "```\n$ cargo r --bin aconfig_storage_file print --file aconfig_storage_read_api/tests/flag.map --type package_map\n    Finished dev [unoptimized + debuginfo] target(s) in 0.04s\n     Running `target/debug/aconfig_storage_file print --file aconfig_storage_read_api/tests/flag.map --type package_map`\nthread \u0027main\u0027 panicked at aconfig_storage_file/src/lib.rs:142:36:\nrange end index 94070 out of range for slice of length 206\nnote: run with `RUST_BACKTRACE\u003d1` environment variable to display a backtrace\n```\n\nIs this panic expected? I would expect a Result indicating what went wrong?",
+      "range": {
+        "startLine": 31,
+        "startChar": 35,
+        "endLine": 31,
+        "endChar": 36
+      },
+      "revId": "190304985c87c718861186169bf508105501b99c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c4ae4d_68db38bb",
+        "filename": "tools/aconfig/aconfig_storage_file/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-07T08:46:28Z",
+      "side": 1,
+      "message": "list also seems to print the values of the flags:\n\n```\n$ cargo r --bin aconfig_storage_file list --package_map aconfig_storage_read_api/tests/package.map --flag_map aconfig_storage_read_api/tests/flag.map --flag_val aconfig_storage_read_api/tests/flag.val\n    Finished dev [unoptimized + debuginfo] target(s) in 0.04s\n     Running `target/debug/aconfig_storage_file list --package_map aconfig_storage_read_api/tests/package.map --flag_map aconfig_storage_read_api/tests/flag.map --flag_val aconfig_storage_read_api/tests/flag.val`\ncom.android.aconfig.storage.test_1/disabled_rw: false\ncom.android.aconfig.storage.test_1/enabled_ro: false\ncom.android.aconfig.storage.test_1/enabled_rw: false\ncom.android.aconfig.storage.test_2/disabled_ro: false\ncom.android.aconfig.storage.test_2/enabled_fixed_ro: false\ncom.android.aconfig.storage.test_2/enabled_ro: false\ncom.android.aconfig.storage.test_4/enabled_fixed_ro: false\ncom.android.aconfig.storage.test_4/enabled_ro: false\n```\n\nWhat\u0027s the difference between list and print?",
+      "range": {
+        "startLine": 40,
+        "startChar": 26,
+        "endLine": 40,
+        "endChar": 30
+      },
+      "revId": "190304985c87c718861186169bf508105501b99c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ed1aa14_948733ea",
+        "filename": "tools/aconfig/aconfig_storage_file/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-07T08:46:28Z",
+      "side": 1,
+      "message": "aconfig uses dashes instead of underscores; can we change this to `flag-map` to stay consistent?\n\nthis also applies to other arguments, and to the name of the binary (I propose aconfig-storage-file)",
+      "range": {
+        "startLine": 47,
+        "startChar": 31,
+        "endLine": 47,
+        "endChar": 39
+      },
+      "revId": "190304985c87c718861186169bf508105501b99c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
