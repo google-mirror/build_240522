@@ -35,13 +35,40 @@ REQUIRED_MODULES = frozenset(
     ['cts-tradefed', 'vts-tradefed', 'compatibility-host-util', 'soong_zip']
 )
 
+# Test suites other than general-tests that need to be built.
+EXTRA_TEST_SUITES = frozenset([
+    'acts_power',
+    'acts_tests',
+    'ats',
+    'csuite',
+    'gts',
+    'mts',
+    'mcts',
+    'pts',
+    'sts',
+    'vts',
+    'wts',
+    'google-tradefed-all',
+    'catbox',
+    'gcatbox',
+    'test_mapping',
+    'bluetooth_stack_with_facade',
+    'robolectric-tests',
+    'ravenwood-tests',
+    'art-host-tests',
+    'host-unit-tests',
+    'haiku-presubmit',
+])
+
 
 def build_test_suites(argv):
   args = parse_args(argv)
 
-  if not os.environ.get('BUILD_NUMBER')[0] == 'P':
-    build_everything(args)
-    return
+  # TODO(lucafarsi): switch back to building only affected general-tests modules
+  # in presubmit once ready.
+  # if not os.environ.get('BUILD_NUMBER')[0] == 'P':
+  build_everything(args)
+  return
 
   # Call the class to map changed files to modules to build.
   # TODO(lucafarsi): Move this into a replaceable class.
@@ -142,6 +169,7 @@ def find_modules_to_build(
 
   # Soong_zip is required to generate the output zip so always build it.
   modules_to_build = set(REQUIRED_MODULES)
+  modules_to_build.extend(EXTRA_TEST_SUITES)
   if extra_required_modules:
     modules_to_build.update(extra_required_modules)
 
