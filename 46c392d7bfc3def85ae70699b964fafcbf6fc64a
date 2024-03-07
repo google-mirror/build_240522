@@ -22,6 +22,30 @@
       },
       "revId": "46c392d7bfc3def85ae70699b964fafcbf6fc64a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e75770eb_854bd7bb",
+        "filename": "core/tasks/offline-sdk-docs.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2024-03-07T11:30:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "866373ee_66f39083",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 20
+      },
+      "revId": "46c392d7bfc3def85ae70699b964fafcbf6fc64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
