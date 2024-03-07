@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00e3f5f4_a8b8491f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1317851
+      },
+      "writtenOn": "2024-03-07T08:42:29Z",
+      "side": 1,
+      "message": "We can try add CL into go/abtd to check if this CL can build pass in sdk target. https://android-build.corp.google.com/abtd/create/",
+      "revId": "a21e16733b8914976ab6191337406f97fd5640c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
