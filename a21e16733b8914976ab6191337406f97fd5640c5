@@ -16,6 +16,24 @@
       "message": "We can try add CL into go/abtd to check if this CL can build pass in sdk target. https://android-build.corp.google.com/abtd/create/",
       "revId": "a21e16733b8914976ab6191337406f97fd5640c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7bbd9bf_749be6ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2024-03-07T08:52:10Z",
+      "side": 1,
+      "message": "Created sdk build in the forrest:\nhttps://android-build.corp.google.com/builds/abtd/run/L49700030002357976",
+      "parentUuid": "00e3f5f4_a8b8491f",
+      "revId": "a21e16733b8914976ab6191337406f97fd5640c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
