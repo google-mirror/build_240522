@@ -1,4 +1,4 @@
-#!prebuilts/build-tools/linux-x86/bin/py3-cmd
+#!prebuilts/build-tools/linux-x86/bin/py3-cmd -B
 # Copyright 2024, The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import build_test_suites
 import sys
 
-import build_test_suites
+EXTRA_TARGETS = frozenset([
+    'acts_tests',
+    'cts',
+    'host-unit-tests',
+    'robolectric-tests',
+    'test_mapping',
+    'tradefed-all',
+    'vts',
+])
 
-if __name__ == '__main__':
-  sys.dont_write_bytecode = True
-
-  build_test_suites.main(sys.argv)
+build_test_suites.main(sys.argv, EXTRA_TARGETS)
