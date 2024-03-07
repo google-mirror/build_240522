@@ -16,6 +16,24 @@
       "message": "aosp/2990573 tradefed prebuilt update to android13-tests-dev broke vts kernel tests.  This cherry-pick should fix those tests.",
       "revId": "11d37415843c22769400217016925f78a0c6f474",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1005038_1a504aaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942356
+      },
+      "writtenOn": "2024-03-07T19:34:09Z",
+      "side": 1,
+      "message": "See: b/328593876",
+      "parentUuid": "36e560c1_e53cb7db",
+      "revId": "11d37415843c22769400217016925f78a0c6f474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
