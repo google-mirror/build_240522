@@ -15,9 +15,9 @@
 
 import sys
 
-import build_test_suites
+import build_test_suites_trunk_staging
 
 if __name__ == '__main__':
   sys.dont_write_bytecode = True
 
-  build_test_suites.main(sys.argv)
+  build_test_suites_trunk_staging.main(sys.argv)
