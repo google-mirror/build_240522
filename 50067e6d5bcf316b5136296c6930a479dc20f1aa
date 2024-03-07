@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "228421d2_2c847906",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-07T14:17:18Z",
+      "side": 1,
+      "message": "```\n$ git diff\ndiff --git a/tools/aconfig/aflags/Android.bp b/tools/aconfig/aflags/Android.bp\nindex c65da97089a..6d2602afded 100644\n--- a/tools/aconfig/aflags/Android.bp\n+++ b/tools/aconfig/aflags/Android.bp\n@@ -9,6 +9,7 @@ rust_defaults {\n     lints: \"android\",\n     srcs: [\"src/main.rs\"],\n     rustlibs: [\n+       \"libnix\",\n         \"libaconfig_protos\",\n         \"libanyhow\",\n         \"libclap\",\ndiff --git a/tools/aconfig/aflags/src/main.rs b/tools/aconfig/aflags/src/main.rs\nindex 7ca70a23519..730fa8fda0b 100644\n--- a/tools/aconfig/aflags/src/main.rs\n+++ b/tools/aconfig/aflags/src/main.rs\n@@ -183,6 +183,8 @@ fn list() -\u003e Result\u003cString\u003e {\n }\n\n fn main() {\n+    dbg!(nix::unistd::Uid::current().is_root());\n+\n     let cli \u003d Cli::parse();\n     let output \u003d match cli.command {\n         Command::List \u003d\u003e list().map(Some),\n```\n\nworks out of the box!",
+      "parentUuid": "4a1576a3_e3e4b941",
+      "range": {
+        "startLine": 149,
+        "startChar": 38,
+        "endLine": 149,
+        "endChar": 44
+      },
+      "revId": "50067e6d5bcf316b5136296c6930a479dc20f1aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1a07dab6_51fdd1d4",
         "filename": "tools/aconfig/aflags/src/main.rs",
         "patchSetId": 4
