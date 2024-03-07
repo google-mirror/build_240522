@@ -34,6 +34,24 @@
       "parentUuid": "5f110603_d9dd90cc",
       "revId": "d33f38e75f653053b91db435da020aa61730d12a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96391e76_2724754b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-03-07T22:36:06Z",
+      "side": 1,
+      "message": "Can `EXTRA_TEST_SUITES` be an argument passed to the `ci/build_test_suites.py` script instead and have `ci/build_test_suites_\u003crelease_confiuguration\u003e` wrapper per release configurations instead?",
+      "parentUuid": "1c3761bd_570447c4",
+      "revId": "d33f38e75f653053b91db435da020aa61730d12a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
