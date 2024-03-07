@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "866373ee_66f39083",
+        "filename": "core/tasks/offline-sdk-docs.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2024-03-07T10:40:35Z",
+      "side": 1,
+      "message": "Should we also add Copyright claim here?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 20
+      },
+      "revId": "46c392d7bfc3def85ae70699b964fafcbf6fc64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
