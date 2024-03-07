@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c60cd47_7582ed54",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-07T07:28:26Z",
+      "side": 1,
+      "message": "This test doesn\u0027t guarantee that the stuff before || actually fails.",
+      "range": {
+        "startLine": 10,
+        "startChar": 65,
+        "endLine": 10,
+        "endChar": 68
+      },
+      "revId": "50067e6d5bcf316b5136296c6930a479dc20f1aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a1576a3_e3e4b941",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-07T07:28:26Z",
+      "side": 1,
+      "message": "Don\u0027t rely on PATH for security critical parts. It would be trivial to create a shell script called \"whoami\" that just prints \"root\" and add the script to PATH before calling aflags. Always use the full path to the binary, e.g. \"/system/bin/whoami\".\n\nThat said in this case I think just checking if the process\u0027 uid is 0 is sufficient and cleaner.\n\nApparently Android has imported the `nix` crate, and it contains a wrapper around libc\u0027s getuid. Looking at its docs it also contains a convenience wrapper function that I think you should use: https://docs.rs/nix/0.28.0/nix/unistd/struct.Uid.html#method.is_root\n\nSo something like `Uid.current().is_root()`.\n\nNote that Uid requires nix to have the `user` feature enabled. I know Android is picky about features; you have to check if it\u0027s actually possible to use this.",
+      "range": {
+        "startLine": 149,
+        "startChar": 38,
+        "endLine": 149,
+        "endChar": 44
+      },
+      "revId": "50067e6d5bcf316b5136296c6930a479dc20f1aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a07dab6_51fdd1d4",
+        "filename": "tools/aconfig/aflags/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-07T07:28:26Z",
+      "side": 1,
+      "message": "go/android-rust-style says to use `ensure!(condition, error)`",
+      "range": {
+        "startLine": 163,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 5
+      },
+      "revId": "50067e6d5bcf316b5136296c6930a479dc20f1aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
