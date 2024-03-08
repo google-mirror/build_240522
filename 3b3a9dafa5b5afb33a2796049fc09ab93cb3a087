@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e5242c9_550337b3",
+        "filename": "tools/aconfig/aconfig_storage_write_api/Cargo.toml",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-03-08T14:08:44Z",
+      "side": 1,
+      "message": "When do you expect to build this with Cargo rather than Soong?",
+      "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c1fd5dc_2857560a",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-03-08T14:08:44Z",
+      "side": 1,
+      "message": "Add a `# Safety` section to the doc comment explaining what the caller needs to do to avoid undefined behaviour.",
+      "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d00b2178_7c13ce1b",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-03-08T14:08:44Z",
+      "side": 1,
+      "message": "Add a safety comment.",
+      "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "994785a6_8d633695",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-03-08T14:08:44Z",
+      "side": 1,
+      "message": "Add a `# Safety` section to the doc comment.",
+      "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3c81feb_206ebe5b",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/mapped_file.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-03-08T14:08:44Z",
+      "side": 1,
+      "message": "Again, here and in the rest of this file, please add safety comments. See http://go/android-rust-style#unsafe.",
+      "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
