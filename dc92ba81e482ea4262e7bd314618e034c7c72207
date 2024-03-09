@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9484f816_cb229564",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2024-03-09T00:36:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7458859b_4ff84559",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "dc92ba81e482ea4262e7bd314618e034c7c72207",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a51fbb4_48b7a989",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-23T07:43:15Z",
       "side": 1,
       "message": "nit: add a # to delimit the bash command from the comment; this allows tools to extract the command and run it automatically, e.g.\n\nTest: m all_aconfig_declarations \u0026\u0026 printflags # verify that parsed_flags include a container",
+      "range": {
+        "startLine": 11,
+        "startChar": 33,
+        "endLine": 11,
+        "endChar": 34
+      },
+      "revId": "dc92ba81e482ea4262e7bd314618e034c7c72207",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51a98fe7_db2b73f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2024-03-09T00:36:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a51fbb4_48b7a989",
       "range": {
         "startLine": 11,
         "startChar": 33,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "717dd868_59997fdf",
+        "filename": "tools/aconfig/aconfig/src/commands.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2024-03-09T00:36:40Z",
+      "side": 1,
+      "message": "b/328823994 (we can track the ETA in the bug)",
+      "parentUuid": "052cc89a_4e1adcff",
+      "range": {
+        "startLine": 66,
+        "startChar": 15,
+        "endLine": 66,
+        "endChar": 21
+      },
+      "revId": "dc92ba81e482ea4262e7bd314618e034c7c72207",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf78650a_bd04cef5",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-02-23T07:43:15Z",
       "side": 1,
       "message": "When --container is made a mandatory argument we should no longer allow the empty string as a valid container value. Is this captured in the work to teach soong to pass in --container?",
+      "range": {
+        "startLine": 105,
+        "startChar": 38,
+        "endLine": 105,
+        "endChar": 46
+      },
+      "revId": "dc92ba81e482ea4262e7bd314618e034c7c72207",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b4fc153_d9166336",
+        "filename": "tools/aconfig/aconfig/src/commands.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1890055
+      },
+      "writtenOn": "2024-03-09T00:36:40Z",
+      "side": 1,
+      "message": "That part is captured in b/327606978, added a TODO.",
+      "parentUuid": "cf78650a_bd04cef5",
       "range": {
         "startLine": 105,
         "startChar": 38,
