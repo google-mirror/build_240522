@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c58fee5_ea91de0f",
+        "filename": "tools/aconfig/aconfig_storage_write_api/Cargo.toml",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-10T19:00:49Z",
+      "side": 1,
+      "message": "It can be built both with Cargo and Soong, it also has a soong target defined in Android.bp file in this change. Building using cargo is faster and allows quick compilation check, also quick unit test run.",
+      "parentUuid": "8e5242c9_550337b3",
+      "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c1fd5dc_2857560a",
         "filename": "tools/aconfig/aconfig_storage_write_api/src/lib.rs",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-08T14:08:44Z",
       "side": 1,
       "message": "Add a `# Safety` section to the doc comment explaining what the caller needs to do to avoid undefined behaviour.",
+      "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "171c5abf_8f5027da",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-10T19:00:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c1fd5dc_2857560a",
       "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58bb724a_15765c4a",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-10T19:00:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00b2178_7c13ce1b",
+      "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "994785a6_8d633695",
@@ -69,6 +123,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95d2d030_e6f0ded6",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-10T19:00:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "994785a6_8d633695",
+      "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3c81feb_206ebe5b",
@@ -82,6 +154,24 @@
       "writtenOn": "2024-03-08T14:08:44Z",
       "side": 1,
       "message": "Again, here and in the rest of this file, please add safety comments. See http://go/android-rust-style#unsafe.",
+      "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a18027d_aed3f998",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/mapped_file.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-10T19:00:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3c81feb_206ebe5b",
       "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
