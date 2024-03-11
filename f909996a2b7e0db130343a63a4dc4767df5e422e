@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb2ef89c_87b2c038",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-03-11T23:30:01Z",
+      "side": 1,
+      "message": "move LOG after L921, then just log the value of OPTIONS.vabc_cow_version to avoid duplicating code.",
+      "revId": "f909996a2b7e0db130343a63a4dc4767df5e422e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
