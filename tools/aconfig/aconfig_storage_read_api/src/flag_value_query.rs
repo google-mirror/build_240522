@@ -54,9 +54,10 @@ mod tests {
         let header = FlagValueHeader {
             version: crate::FILE_VERSION,
             container: String::from("system"),
-            file_size: 34,
+            file_type: 2,
+            file_size: 35,
             num_flags: 8,
-            boolean_value_offset: 26,
+            boolean_value_offset: 27,
         };
         let booleans: Vec<bool> = vec![false, true, false, false, true, true, false, true];
         FlagValueList { header, booleans }
