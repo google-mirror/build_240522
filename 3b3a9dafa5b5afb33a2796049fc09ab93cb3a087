@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aaea4e9_632acc32",
+        "filename": "tools/aconfig/aconfig_storage_write_api/Cargo.toml",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-11T12:16:12Z",
+      "side": 1,
+      "message": "All Cargo builds has corresponding soong build targets. Pre and post submit are being done by soong targets. Even if the cargo setup break is fine (will remove the cargo setup by then), but the fact that it is working ATM provides valuable advantages for local development compilation and testing. Cargo build/unit test are substantially faster than soong.",
+      "parentUuid": "ead649a3_bd7f0656",
+      "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c1fd5dc_2857560a",
