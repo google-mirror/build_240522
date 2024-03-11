@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5cd8641_21e4335c",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-03-11T17:35:02Z",
+      "side": 1,
+      "message": "this could be replaced by s.split(\":\") and then calling strip() on each item returned",
+      "revId": "b345651e6c85ac7a7a8d637ab38fee61397d6996",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aa72f9d_02d80c3b",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-03-11T17:35:02Z",
+      "side": 1,
+      "message": "could be replaced by s.split(\"-\u003e\")",
+      "revId": "b345651e6c85ac7a7a8d637ab38fee61397d6996",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
