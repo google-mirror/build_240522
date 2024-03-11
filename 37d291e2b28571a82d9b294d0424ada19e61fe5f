@@ -16,6 +16,74 @@
       "message": "Moving myself to CC as I don\u0027t have time to review this until end of this week at the earliest.",
       "revId": "37d291e2b28571a82d9b294d0424ada19e61fe5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aaef999_80822334",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/flag_value_update.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-11T13:50:29Z",
+      "side": 1,
+      "message": "Can we use `ensure!` here instead?",
+      "revId": "37d291e2b28571a82d9b294d0424ada19e61fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9c8619c_14cf5a31",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/flag_value_update.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-11T13:50:29Z",
+      "side": 1,
+      "message": "Same here as well, replace with `ensure!`?",
+      "revId": "37d291e2b28571a82d9b294d0424ada19e61fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7236294_7dc62993",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/lib.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-11T13:50:29Z",
+      "side": 1,
+      "message": "Instead of the `?` followed by `Ok(())`, you could rewrite as:\n\n```\nfile.flush().map_err(|errmsg| {\n        AconfigStorageError::MapFlushFail(anyhow!(\"fail to flush storage file: {}\", errmsg))\n    }).map(|_| ())\n```",
+      "revId": "37d291e2b28571a82d9b294d0424ada19e61fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a65fd4c4_0324907b",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/mapped_file.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-11T13:50:29Z",
+      "side": 1,
+      "message": "Can you remove the `?` and `Ok(mapped_file)` and just return the result of `map_mut`?",
+      "revId": "37d291e2b28571a82d9b294d0424ada19e61fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
