@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e1f8f3_c946824d",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-03-11T17:03:45Z",
+      "side": 1,
+      "message": "log what the minimum version is",
+      "revId": "da1c5ec09610a9ca3b9fb979cae22cdb7030d0eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
