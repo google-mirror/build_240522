@@ -97,7 +97,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
     dalvik.vm.usejit=true \
     dalvik.vm.dexopt.secondary=true \
     dalvik.vm.dexopt.thermal-cutoff=2 \
-    dalvik.vm.appimageformat=lz4
+    dalvik.vm.appimageformat=uncompressed
 
 PRODUCT_SYSTEM_PROPERTIES += \
     ro.dalvik.vm.native.bridge?=0
