@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ea2441_b9f3e3b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2024-03-11T13:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3021e489_f66dd7f3",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "8431b55db40d2218274bc0d0b030c99572143e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aab31183_ffd08316",
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "I think this line should be removed as well.",
       "parentUuid": "aab31183_ffd08316",
+      "range": {
+        "startLine": 3,
+        "startChar": 10,
+        "endLine": 3,
+        "endChar": 19
+      },
+      "revId": "8431b55db40d2218274bc0d0b030c99572143e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b95efc31_e423a2d9",
+        "filename": "tools/aconfig/aconfig/templates/FakeFeatureFlagsImpl.java.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1944425
+      },
+      "writtenOn": "2024-03-11T13:07:25Z",
+      "side": 1,
+      "message": "Updated the commit message. Yes so this change will only remove this annotation for exported mode but not for all. Eventually we want to remove it for all",
+      "parentUuid": "11ed2486_81ce86cb",
       "range": {
         "startLine": 3,
         "startChar": 10,
