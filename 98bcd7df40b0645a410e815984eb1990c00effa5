@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f5db9a2_023d0b0e",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-11T14:14:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a596090_556f5816",
+      "range": {
+        "startLine": 111,
+        "startChar": 40,
+        "endLine": 111,
+        "endChar": 41
+      },
+      "revId": "98bcd7df40b0645a410e815984eb1990c00effa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2521efe2_0aa233cb",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-10T17:12:42Z",
       "side": 1,
       "message": "`:` feels more standard than `;`",
+      "range": {
+        "startLine": 116,
+        "startChar": 44,
+        "endLine": 116,
+        "endChar": 45
+      },
+      "revId": "98bcd7df40b0645a410e815984eb1990c00effa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31776e8d_fe325c40",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-11T14:14:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2521efe2_0aa233cb",
       "range": {
         "startLine": 116,
         "startChar": 44,
