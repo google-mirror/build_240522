@@ -45,6 +45,30 @@
       },
       "revId": "8431b55db40d2218274bc0d0b030c99572143e3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11ed2486_81ce86cb",
+        "filename": "tools/aconfig/aconfig/templates/FakeFeatureFlagsImpl.java.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-11T12:46:59Z",
+      "side": 1,
+      "message": "I think this line should be removed as well.",
+      "parentUuid": "aab31183_ffd08316",
+      "range": {
+        "startLine": 3,
+        "startChar": 10,
+        "endLine": 3,
+        "endChar": 19
+      },
+      "revId": "8431b55db40d2218274bc0d0b030c99572143e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
