@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3021e489_f66dd7f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-11T12:35:27Z",
+      "side": 1,
+      "message": "I don\u0027t understand what this CL does. Can you rephrase the commit message to make that easier for me to understand, please?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "8431b55db40d2218274bc0d0b030c99572143e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aab31183_ffd08316",
+        "filename": "tools/aconfig/aconfig/templates/FakeFeatureFlagsImpl.java.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-11T12:35:27Z",
+      "side": 1,
+      "message": "This CL claims to fix this bug, but doesn\u0027t remove this TODO. Is this CL a partial fix?",
+      "range": {
+        "startLine": 3,
+        "startChar": 10,
+        "endLine": 3,
+        "endChar": 19
+      },
+      "revId": "8431b55db40d2218274bc0d0b030c99572143e3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
