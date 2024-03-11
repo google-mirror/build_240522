@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dffeedf_5c540345",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/flag_value_update.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-11T14:27:17Z",
+      "side": 1,
+      "message": "discussed offline, keep the current form so we don\u0027t have to implementation additional traits",
+      "parentUuid": "7aaef999_80822334",
+      "revId": "37d291e2b28571a82d9b294d0424ada19e61fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9c8619c_14cf5a31",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-03-11T13:50:29Z",
       "side": 1,
       "message": "Same here as well, replace with `ensure!`?",
+      "revId": "37d291e2b28571a82d9b294d0424ada19e61fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9590c137_02b478d8",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/flag_value_update.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-11T14:27:17Z",
+      "side": 1,
+      "message": "discussed offline, keep the current form so we don\u0027t have to implementation additional traits",
+      "parentUuid": "a9c8619c_14cf5a31",
       "revId": "37d291e2b28571a82d9b294d0424ada19e61fe5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72e8e945_59bd8b90",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/lib.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-11T14:27:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7236294_7dc62993",
+      "revId": "37d291e2b28571a82d9b294d0424ada19e61fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a65fd4c4_0324907b",
@@ -82,6 +136,24 @@
       "writtenOn": "2024-03-11T13:50:29Z",
       "side": 1,
       "message": "Can you remove the `?` and `Ok(mapped_file)` and just return the result of `map_mut`?",
+      "revId": "37d291e2b28571a82d9b294d0424ada19e61fe5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fad02c1_ad0bebbd",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/mapped_file.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-11T14:27:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a65fd4c4_0324907b",
       "revId": "37d291e2b28571a82d9b294d0424ada19e61fe5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
