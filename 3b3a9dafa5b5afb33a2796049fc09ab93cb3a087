@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7defd22f_19d02a6d",
+        "filename": "tools/aconfig/aconfig_storage_write_api/Cargo.toml",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-11T12:08:43Z",
+      "side": 1,
+      "message": "Re cargo: tools/aconfig/Cargo.toml contains a workspace for all aconfig related tools. Cargo *dramatically* increases productivity compared to soong and I\u0027d like to keep it, but the minute maintaining cargo becomes an issue we will remove it.",
+      "parentUuid": "ead649a3_bd7f0656",
+      "revId": "3b3a9dafa5b5afb33a2796049fc09ab93cb3a087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c1fd5dc_2857560a",
         "filename": "tools/aconfig/aconfig_storage_write_api/src/lib.rs",
         "patchSetId": 4
