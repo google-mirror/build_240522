@@ -16,6 +16,24 @@
       "message": "log what the minimum version is",
       "revId": "da1c5ec09610a9ca3b9fb979cae22cdb7030d0eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "925b4fed_00b417d5",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-03-11T22:30:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11e1f8f3_c946824d",
+      "revId": "da1c5ec09610a9ca3b9fb979cae22cdb7030d0eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
