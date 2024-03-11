@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad8e9210_317285eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-11T07:36:07Z",
+      "side": 1,
+      "message": "`aconfig: include ...` to follow the existing standard",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "7179e420e955f407c02f23bc8c314134ebaeccc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "427fca30_ca05586a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-11T07:36:07Z",
+      "side": 1,
+      "message": "What\u0027s the purpose of the `grep` part?",
+      "range": {
+        "startLine": 11,
+        "startChar": 45,
+        "endLine": 11,
+        "endChar": 103
+      },
+      "revId": "7179e420e955f407c02f23bc8c314134ebaeccc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6734eb56_cebe4f10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-11T07:36:07Z",
+      "side": 1,
+      "message": "`\u0026\u0026`, not `;`",
+      "range": {
+        "startLine": 11,
+        "startChar": 32,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "7179e420e955f407c02f23bc8c314134ebaeccc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6748717_1d314fee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-11T07:36:07Z",
+      "side": 1,
+      "message": "No blank lines among the git trailers",
+      "revId": "7179e420e955f407c02f23bc8c314134ebaeccc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32a74fc2_227bee66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-11T07:36:07Z",
+      "side": 1,
+      "message": "This CL assigns parsed_flags.container the value of the flag_declarations.container. In the current state of aconfig and soong, this does mean that parsed_flags now does set the container (sometimes) but I don\u0027t think this CL is the right way to do that.\n\nSoong never passes in --container to `aconfig create-cache`. It should, and aconfig should verify that the --container argument matches flag_declarations.container() or abort: this is how --package and flag_declarations.package work.\n\nCan we please make a change to soong instead of this CL? (If needed while we fill in the container field in all .aconfig declarations, we could temporarily teach aconfig to consider a missing container declaration as an instruction to use the --container value instead, and revert that CL when all .aconfig declarations are populated)",
+      "revId": "7179e420e955f407c02f23bc8c314134ebaeccc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07b73fe0_07d0e819",
+        "filename": "tools/aconfig/aconfig/src/commands.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-11T07:36:07Z",
+      "side": 1,
+      "message": "I don\u0027t think introducing this variable makes the code easier to read: there are already too many variables with confusingly similar names. I prefer the old version.\n\nAlso, no need to allocate a `String` for this? `.container()` returns a `\u0026str` and that should be sufficient.",
+      "range": {
+        "startLine": 82,
+        "startChar": 12,
+        "endLine": 82,
+        "endChar": 33
+      },
+      "revId": "7179e420e955f407c02f23bc8c314134ebaeccc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
