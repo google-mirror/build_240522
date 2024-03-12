@@ -122,6 +122,24 @@
       "message": "Disregard this comment.",
       "revId": "d33f38e75f653053b91db435da020aa61730d12a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40e3c7b1_50fdb062",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879655
+      },
+      "writtenOn": "2024-03-12T18:13:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "845c96cd_3a6f11ce",
+      "revId": "d33f38e75f653053b91db435da020aa61730d12a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
