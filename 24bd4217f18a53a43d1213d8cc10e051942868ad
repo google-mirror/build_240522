@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af03dbba_22136e0f",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-12T20:05:50Z",
+      "side": 1,
+      "message": "Can you add some comment like an example to show aht is being done here?",
+      "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
