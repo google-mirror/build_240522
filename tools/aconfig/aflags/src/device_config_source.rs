@@ -55,6 +55,7 @@ fn convert_parsed_flag(flag: &ProtoParsedFlag) -> Flag {
         name,
         container,
         value,
+        staged_value: None,
         permission,
         value_picked_from: ValuePickedFrom::Default,
     }
@@ -118,7 +119,33 @@ fn read_device_config_flags() -> Result<HashMap<String, FlagValue>> {
     parse_device_config(&list_output)
 }
 
-fn reconcile(pb_flags: &[Flag], dc_flags: HashMap<String, FlagValue>) -> Vec<Flag> {
+fn parse_staged_flags(raw: &str) -> Result<HashMap<String, FlagValue>> {
+    let mut flags = HashMap::new();
+    for line in raw.split('\n') {
+        match (line.find('*'), line.find('=')) {
+            (Some(star_index), Some(equal_index)) => {
+                let namespace = &line[..star_index];
+                let flag = &line[star_index + 1..equal_index];
+                if let Ok(value) = FlagValue::try_from(&line[equal_index + 1..]) {
+                    flags.insert(namespace.to_owned() + "/" + flag, value);
+                }
+            }
+            _ => continue,
+        };
+    }
+    Ok(flags)
+}
+
+fn read_staged_flags() -> Result<HashMap<String, FlagValue>> {
+    let staged_flags_output = read_device_config_output(&["list", "staged"])?;
+    parse_staged_flags(&staged_flags_output)
+}
+
+fn reconcile(
+    pb_flags: &[Flag],
+    dc_flags: HashMap<String, FlagValue>,
+    staged_flags: HashMap<String, FlagValue>,
+) -> Vec<Flag> {
     pb_flags
         .iter()
         .map(|f| {
@@ -137,6 +164,18 @@ fn reconcile(pb_flags: &[Flag], dc_flags: HashMap<String, FlagValue>) -> Vec<Fla
                 })
                 .unwrap_or(f.clone())
         })
+        .map(|f| {
+            staged_flags
+                .get(&format!("{}/{}.{}", f.namespace, f.package, f.name))
+                .map(|value| {
+                    if *value != f.value {
+                        Flag { staged_value: Some(*value), ..f.clone() }
+                    } else {
+                        f.clone()
+                    }
+                })
+                .unwrap_or(f.clone())
+        })
         .collect()
 }
 
@@ -144,8 +183,9 @@ impl FlagSource for DeviceConfigSource {
     fn list_flags() -> Result<Vec<Flag>> {
         let pb_flags = read_pb_files()?;
         let dc_flags = read_device_config_flags()?;
+        let staged_flags = read_staged_flags()?;
 
-        let flags = reconcile(&pb_flags, dc_flags);
+        let flags = reconcile(&pb_flags, dc_flags, staged_flags);
         Ok(flags)
     }
 
