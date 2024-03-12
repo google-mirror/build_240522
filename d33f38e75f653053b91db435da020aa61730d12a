@@ -52,6 +52,23 @@
       "parentUuid": "1c3761bd_570447c4",
       "revId": "d33f38e75f653053b91db435da020aa61730d12a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37a1a1b5_3aae4a93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879655
+      },
+      "writtenOn": "2024-03-12T18:09:34Z",
+      "side": 1,
+      "message": "Disregard this comment - testing something in Gerrit",
+      "revId": "d33f38e75f653053b91db435da020aa61730d12a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
