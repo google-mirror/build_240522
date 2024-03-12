@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e4d8455_7fc58bae",
+        "filename": "tools/aconfig/aconfig_storage_write_api/tests/storage_write_api_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-03-12T17:06:53Z",
+      "side": 1,
+      "message": "This unsafe block should be restricted to `get_mapped_file`, unless there is an invariant being upheld throughout the rest of the block. I don\u0027t think there is one, but if there is, that needs to be added to the comment.",
+      "revId": "4f1445563c1fa71c948fd838896cddc3b8548da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
