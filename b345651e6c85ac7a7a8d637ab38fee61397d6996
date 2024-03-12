@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5371eae1_f0ac33c5",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-03-12T04:08:27Z",
+      "side": 1,
+      "message": "I would so if we don\u0027t have to check indentation of the line. However, we should know its indentation to know which lines are included in specific descriptor.\n\nThough we can still use split function and checking indentation explicitly, that would increase the complexity of the code I think. HDYT?",
+      "parentUuid": "c5cd8641_21e4335c",
+      "revId": "b345651e6c85ac7a7a8d637ab38fee61397d6996",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5aa72f9d_02d80c3b",
         "filename": "tools/releasetools/sign_target_files_apks.py",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-11T17:35:02Z",
       "side": 1,
       "message": "could be replaced by s.split(\"-\u003e\")",
+      "revId": "b345651e6c85ac7a7a8d637ab38fee61397d6996",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0634220_b57d5d36",
+        "filename": "tools/releasetools/sign_target_files_apks.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-03-12T04:08:27Z",
+      "side": 1,
+      "message": "That\u0027s slightly different. Since the second one is wrapped with `\u0027\u0027`, so we should care it after splitting. But your suggestion wouldn\u0027t increase the code complexity so much, so I don\u0027t have any strong opinion. HDYT?",
+      "parentUuid": "5aa72f9d_02d80c3b",
       "revId": "b345651e6c85ac7a7a8d637ab38fee61397d6996",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
