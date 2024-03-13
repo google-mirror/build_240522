@@ -22,6 +22,30 @@
       },
       "revId": "4b114c29ec2adbaa3b3959b1cdb31847933002c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c066a2a_b9417de2",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1330,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-03-13T22:46:08Z",
+      "side": 1,
+      "message": "Yes, that\u0027s correct - this change alone doesn\u0027t fix the 2GiB limitation - see the commit message.\n\nYou\u0027ll also need http://ag/26566922. I just preferred to have these split to minimize the revert risk.",
+      "parentUuid": "91237629_50d8bf78",
+      "range": {
+        "startLine": 1328,
+        "startChar": 0,
+        "endLine": 1330,
+        "endChar": 25
+      },
+      "revId": "4b114c29ec2adbaa3b3959b1cdb31847933002c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
