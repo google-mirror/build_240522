@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "520ee49e_9f8cef56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-13T07:30:38Z",
+      "side": 1,
+      "message": "Add an example output to the commit message to make it easier to quickly understand what the CL does without reading the code.",
+      "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af03dbba_22136e0f",
         "filename": "tools/aconfig/aflags/src/device_config_source.rs",
         "patchSetId": 4
@@ -14,6 +31,98 @@
       "writtenOn": "2024-03-12T20:05:50Z",
       "side": 1,
       "message": "Can you add some comment like an example to show aht is being done here?",
+      "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2de86f91_0d58e73c",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-13T07:30:38Z",
+      "side": 1,
+      "message": "f.qualified_name?",
+      "range": {
+        "startLine": 169,
+        "startChar": 55,
+        "endLine": 169,
+        "endChar": 72
+      },
+      "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63896d74_376fa34b",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-13T07:30:38Z",
+      "side": 1,
+      "message": "is this clone necessary?",
+      "range": {
+        "startLine": 172,
+        "startChar": 62,
+        "endLine": 172,
+        "endChar": 70
+      },
+      "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5ed0082_18ce0e53",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-13T07:30:38Z",
+      "side": 1,
+      "message": "is the clone necessary?",
+      "range": {
+        "startLine": 174,
+        "startChar": 26,
+        "endLine": 174,
+        "endChar": 31
+      },
+      "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa83c714_117b0e56",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-13T07:30:38Z",
+      "side": 1,
+      "message": "is the clone necessary?",
+      "range": {
+        "startLine": 177,
+        "startChar": 29,
+        "endLine": 177,
+        "endChar": 34
+      },
       "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
