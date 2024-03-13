@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91237629_50d8bf78",
+        "filename": "tools/signapk/src/com/android/signapk/SignApk.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1330,
+      "author": {
+        "id": 1294681
+      },
+      "writtenOn": "2024-03-13T22:33:38Z",
+      "side": 1,
+      "message": "Isn\u0027t this the one section that can be larger than the `Integer.MAX_VALUE` to support APKs \u003e 2GiB? The majority of the data should be within the local file headers, and both the size as well as offsets into this section could be greater than the 2GiB limit.",
+      "range": {
+        "startLine": 1328,
+        "startChar": 0,
+        "endLine": 1330,
+        "endChar": 25
+      },
+      "revId": "4b114c29ec2adbaa3b3959b1cdb31847933002c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
