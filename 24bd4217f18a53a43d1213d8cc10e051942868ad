@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29fd9d55_fbf9a1dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-13T14:48:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "520ee49e_9f8cef56",
+      "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af03dbba_22136e0f",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07c2f4bf_86d9175b",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-13T14:48:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af03dbba_22136e0f",
+      "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2de86f91_0d58e73c",
@@ -48,6 +84,30 @@
       "writtenOn": "2024-03-13T07:30:38Z",
       "side": 1,
       "message": "f.qualified_name?",
+      "range": {
+        "startLine": 169,
+        "startChar": 55,
+        "endLine": 169,
+        "endChar": 72
+      },
+      "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0847cb7b_814e765b",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-13T14:48:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2de86f91_0d58e73c",
       "range": {
         "startLine": 169,
         "startChar": 55,
@@ -81,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48afaa83_5de4ff34",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-13T14:48:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63896d74_376fa34b",
+      "range": {
+        "startLine": 172,
+        "startChar": 62,
+        "endLine": 172,
+        "endChar": 70
+      },
+      "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5ed0082_18ce0e53",
@@ -104,6 +188,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09ede986_8c25c675",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-13T14:48:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5ed0082_18ce0e53",
+      "range": {
+        "startLine": 174,
+        "startChar": 26,
+        "endLine": 174,
+        "endChar": 31
+      },
+      "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa83c714_117b0e56",
@@ -117,6 +225,30 @@
       "writtenOn": "2024-03-13T07:30:38Z",
       "side": 1,
       "message": "is the clone necessary?",
+      "range": {
+        "startLine": 177,
+        "startChar": 29,
+        "endLine": 177,
+        "endChar": 34
+      },
+      "revId": "24bd4217f18a53a43d1213d8cc10e051942868ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3e29d63_c00e410b",
+        "filename": "tools/aconfig/aflags/src/device_config_source.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-03-13T14:48:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa83c714_117b0e56",
       "range": {
         "startLine": 177,
         "startChar": 29,
