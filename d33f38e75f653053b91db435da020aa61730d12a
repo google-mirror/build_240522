@@ -158,6 +158,24 @@
       "parentUuid": "96391e76_2724754b",
       "revId": "d33f38e75f653053b91db435da020aa61730d12a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11cf8225_0865714c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-03-14T18:18:56Z",
+      "side": 1,
+      "message": "Agreed with the script being universal, but with this implementation the number of files to be managed/added doubles (`ci/build_test_suites-*` \u0026\u0026 `ci/*_branch_specific_targets` per release configuration). WDYT about embedding the `branch_specific_targets` list inside the `ci/build_test_suites-*` executables instead of the executable referencing the file?",
+      "parentUuid": "6abadf06_dd9a5a92",
+      "revId": "d33f38e75f653053b91db435da020aa61730d12a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
