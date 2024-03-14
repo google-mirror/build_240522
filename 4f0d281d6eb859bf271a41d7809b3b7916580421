@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ffbf07a_2e48bc3c",
+        "filename": "ci/branch_specific_targets",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-14T18:39:30Z",
+      "side": 1,
+      "message": "Why not just call this something like `test_suites_targets.cfg`?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 3
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06d66206_4bada646",
+        "filename": "ci/branch_specific_targets",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-14T18:39:30Z",
+      "side": 1,
+      "message": "Please sort.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 15
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f16a45fe_1f847b10",
         "filename": "ci/build_test_suites-trunk_staging",
         "patchSetId": 3
@@ -14,6 +60,144 @@
       "writtenOn": "2024-03-14T18:18:56Z",
       "side": 1,
       "message": "It seems like the path to the file is `ci/branch_specific_targets`? Or will this file be added in another change?",
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11099a63_ce232482",
+        "filename": "ci/build_test_suites-trunk_staging",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-14T18:39:30Z",
+      "side": 1,
+      "message": "This doesn\u0027t match the above file name. I\u0027d just all targets in a single file and avoid partitioning into several files.",
+      "range": {
+        "startLine": 20,
+        "startChar": 36,
+        "endLine": 20,
+        "endChar": 92
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7feb76c8_e48d5e61",
+        "filename": "ci/build_test_suites-trunk_staging",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-14T18:39:30Z",
+      "side": 1,
+      "message": "Put this into `main` to keep the file simple. It\u0027s confusing to have some args in `sys.argv` and some via params. You could add a flag that defaults to the chosen targets config file.",
+      "range": {
+        "startLine": 25,
+        "startChar": 35,
+        "endLine": 25,
+        "endChar": 53
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5a0da26_ebe08eec",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-14T18:39:30Z",
+      "side": 1,
+      "message": "Please use `pathlib`.",
+      "range": {
+        "startLine": 39,
+        "startChar": 48,
+        "endLine": 39,
+        "endChar": 51
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edfcf455_f76d516c",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-14T18:39:30Z",
+      "side": 1,
+      "message": "Parse the file in here and pass the content to the functions as a `Set[str]`.",
+      "range": {
+        "startLine": 45,
+        "startChar": 25,
+        "endLine": 45,
+        "endChar": 43
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cebb82d2_2eb9294e",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-14T18:39:30Z",
+      "side": 1,
+      "message": "Why? This just adds platform-specific complications.",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 59
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80350b0c_f5b3b412",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-14T18:39:30Z",
+      "side": 1,
+      "message": "I don\u0027t understand why this line was added if you\u0027re adding to `build_command` elsewhere.",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 44
+      },
       "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
