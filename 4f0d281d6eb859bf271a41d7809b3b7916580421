@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b0ac841_34ff09f8",
+        "filename": "ci/branch_specific_targets",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-14T23:19:30Z",
+      "side": 1,
+      "message": "does this work?",
+      "parentUuid": "6ffbf07a_2e48bc3c",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 3
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06d66206_4bada646",
         "filename": "ci/branch_specific_targets",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-14T18:39:30Z",
       "side": 1,
       "message": "Please sort.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 15
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab170e9e_d2f05611",
+        "filename": "ci/branch_specific_targets",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-14T23:19:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06d66206_4bada646",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -87,6 +135,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a546bb48_3423967e",
+        "filename": "ci/build_test_suites-trunk_staging",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-14T23:19:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f16a45fe_1f847b10",
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8055b84_ae6e91f0",
+        "filename": "ci/build_test_suites-trunk_staging",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-14T23:19:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11099a63_ce232482",
+      "range": {
+        "startLine": 20,
+        "startChar": 36,
+        "endLine": 20,
+        "endChar": 92
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7feb76c8_e48d5e61",
@@ -100,6 +190,30 @@
       "writtenOn": "2024-03-14T18:39:30Z",
       "side": 1,
       "message": "Put this into `main` to keep the file simple. It\u0027s confusing to have some args in `sys.argv` and some via params. You could add a flag that defaults to the chosen targets config file.",
+      "range": {
+        "startLine": 25,
+        "startChar": 35,
+        "endLine": 25,
+        "endChar": 53
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1799425_b621c0a4",
+        "filename": "ci/build_test_suites-trunk_staging",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-14T23:19:30Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you mean here, do you want to make it an arg passed in from the gcl? I don\u0027t want to have different versions of the underlying build_test_suites.py script per target.",
+      "parentUuid": "7feb76c8_e48d5e61",
       "range": {
         "startLine": 25,
         "startChar": 35,
@@ -133,6 +247,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad5e8fd9_c7d0984e",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-14T23:19:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5a0da26_ebe08eec",
+      "range": {
+        "startLine": 39,
+        "startChar": 48,
+        "endLine": 39,
+        "endChar": 51
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edfcf455_f76d516c",
@@ -146,6 +284,30 @@
       "writtenOn": "2024-03-14T18:39:30Z",
       "side": 1,
       "message": "Parse the file in here and pass the content to the functions as a `Set[str]`.",
+      "range": {
+        "startLine": 45,
+        "startChar": 25,
+        "endLine": 45,
+        "endChar": 43
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c71449ac_7a1641f1",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-14T23:19:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edfcf455_f76d516c",
       "range": {
         "startLine": 45,
         "startChar": 25,
@@ -179,6 +341,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ad740d5_bd175db8",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-14T23:19:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cebb82d2_2eb9294e",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 59
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80350b0c_f5b3b412",
@@ -192,6 +378,30 @@
       "writtenOn": "2024-03-14T18:39:30Z",
       "side": 1,
       "message": "I don\u0027t understand why this line was added if you\u0027re adding to `build_command` elsewhere.",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 44
+      },
+      "revId": "4f0d281d6eb859bf271a41d7809b3b7916580421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03f9d34d_a024ef92",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-14T23:19:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80350b0c_f5b3b412",
       "range": {
         "startLine": 146,
         "startChar": 0,
