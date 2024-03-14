@@ -10,9 +10,7 @@ mod aconfig_storage_write_api_test {
     use tempfile::NamedTempFile;
 
     /// Write storage location record pb to a temp file
-    fn write_storage_record_file(
-        flag_val: &str,
-    ) -> NamedTempFile {
+    fn write_storage_record_file(flag_val: &str) -> NamedTempFile {
         let text_proto = format!(
             r#"
 files {{
