@@ -9,6 +9,7 @@ cargo = []
 
 [dependencies]
 anyhow = "1.0.69"
+cxx = "1.0"
 memmap2 = "0.8.0"
 tempfile = "3.9.0"
 thiserror = "1.0.56"
