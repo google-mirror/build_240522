@@ -21,23 +21,26 @@ use aconfig_protos::ProtoParsedFlag;
 use aconfig_protos::ProtoParsedFlags;
 use anyhow::{anyhow, bail, Result};
 use regex::Regex;
-use std::collections::BTreeMap;
 use std::collections::HashMap;
 use std::process::Command;
 use std::{fs, str};
 
 pub struct DeviceConfigSource {}
 
-fn convert_parsed_flag(flag: &ProtoParsedFlag) -> Flag {
+// TODO(b/329875578): use container field directly instead of inferring.
+fn infer_container(path: &str) -> String {
+    path.strip_prefix("/apex/")
+        .or_else(|| path.strip_prefix('/'))
+        .unwrap_or(path)
+        .strip_suffix("/etc/aconfig_flags.pb")
+        .unwrap_or(path)
+        .to_string()
+}
+
+fn convert_parsed_flag(path: &str, flag: &ProtoParsedFlag) -> Flag {
     let namespace = flag.namespace().to_string();
     let package = flag.package().to_string();
     let name = flag.name().to_string();
-
-    let container = if flag.container().is_empty() {
-        "system".to_string()
-    } else {
-        flag.container().to_string()
-    };
 
     let value = match flag.state() {
         ProtoState::ENABLED => FlagValue::Enabled,
@@ -53,7 +56,7 @@ fn convert_parsed_flag(flag: &ProtoParsedFlag) -> Flag {
         namespace,
         package,
         name,
-        container,
+        container: infer_container(path),
         value,
         staged_value: None,
         permission,
@@ -61,29 +64,19 @@ fn convert_parsed_flag(flag: &ProtoParsedFlag) -> Flag {
     }
 }
 
-fn read_pb_files() -> Result<Vec<Flag>> {
-    let mut flags: BTreeMap<String, Flag> = BTreeMap::new();
-    for partition in ["system", "system_ext", "product", "vendor"] {
-        let path = format!("/{partition}/etc/aconfig_flags.pb");
-        let Ok(bytes) = fs::read(&path) else {
-            eprintln!("warning: failed to read {}", path);
+fn read_flag_protos() -> Result<Vec<Flag>> {
+    let mut result = Vec::new();
+    for path in include!("../../container_proto_paths.txt") {
+        let Ok(bytes) = fs::read(path) else {
+            // Some /apex/container/etc/aconfig_flag.pb paths might not exist yet.
             continue;
         };
         let parsed_flags: ProtoParsedFlags = protobuf::Message::parse_from_bytes(&bytes)?;
         for flag in parsed_flags.parsed_flag {
-            let key = format!("{}.{}", flag.package(), flag.name());
-            let container = if flag.container().is_empty() {
-                "system".to_string()
-            } else {
-                flag.container().to_string()
-            };
-
-            if container.eq(partition) {
-                flags.insert(key, convert_parsed_flag(&flag));
-            }
+            result.push(convert_parsed_flag(path, &flag));
         }
     }
-    Ok(flags.values().cloned().collect())
+    Ok(result)
 }
 
 fn parse_device_config(raw: &str) -> Result<HashMap<String, FlagValue>> {
@@ -180,7 +173,7 @@ fn reconcile(
 
 impl FlagSource for DeviceConfigSource {
     fn list_flags() -> Result<Vec<Flag>> {
-        let pb_flags = read_pb_files()?;
+        let pb_flags = read_flag_protos()?;
         let dc_flags = read_device_config_flags()?;
         let staged_flags = read_staged_flags()?;
 
