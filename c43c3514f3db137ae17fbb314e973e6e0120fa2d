@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb08bc3f_9adf4b00",
+        "filename": "ci/build_test_suites_x86_64-trunk_staging",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-15T21:38:40Z",
+      "side": 1,
+      "message": "Consider inlining the variable that\u0027s only used once.\n\n```\nbuild_test_suites.main(sys.argv, extra_targets\u003d[\n    \u0027acts_tests\u0027,\n    \u0027cts\u0027,\n    \u0027host-unit-tests\u0027,\n    \u0027robolectric-tests\u0027,\n    \u0027test_mapping\u0027,\n    \u0027tradefed-all\u0027,\n    \u0027vts\u0027,\n])\n```",
+      "range": {
+        "startLine": 29,
+        "startChar": 33,
+        "endLine": 29,
+        "endChar": 46
+      },
+      "revId": "c43c3514f3db137ae17fbb314e973e6e0120fa2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
