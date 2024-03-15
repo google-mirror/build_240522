@@ -20,6 +20,7 @@ use anyhow::{anyhow, ensure, Result};
 use clap::Parser;
 
 mod device_config_source;
+mod load_protos;
 use device_config_source::DeviceConfigSource;
 
 mod aconfig_storage_source;
