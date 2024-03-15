@@ -345,6 +345,10 @@ ifneq ($(call module-in-vendor-or-product),)
     else
       my_cflags += -D__ANDROID_VENDOR_API__=$(BOARD_API_LEVEL)
     endif
+
+    ifneq ($(wildcard $(VENDOR_DEFAULT_LLNDK_VERSIONING_HEADER)),)
+      my_cflags += -include $(VENDOR_DEFAULT_LLNDK_VERSIONING_HEADER)
+    endif
   else ifneq ($(LOCAL_IN_PRODUCT),)
     # Product modules have LOCAL_IN_PRODUCT
     my_cflags += -D__ANDROID_PRODUCT__

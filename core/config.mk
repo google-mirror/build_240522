@@ -849,6 +849,10 @@ ifdef PRODUCT_SHIPPING_API_LEVEL
   endif
 endif
 
+# Vendor modules include a default header file for LLNDK versioning macros.
+VENDOR_DEFAULT_LLNDK_VERSIONING_HEADER := system/core/libvendorsupport/include_llndk/android/llndk-versioning.h
+.KATI_READONLY := VENDOR_DEFAULT_LLNDK_VERSIONING_HEADER
+
 # The default key if not set as LOCAL_CERTIFICATE
 ifdef PRODUCT_DEFAULT_DEV_CERTIFICATE
   DEFAULT_SYSTEM_DEV_CERTIFICATE := $(PRODUCT_DEFAULT_DEV_CERTIFICATE)
