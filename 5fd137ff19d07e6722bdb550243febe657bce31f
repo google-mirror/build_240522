@@ -16,6 +16,24 @@
       "message": "`false` must be the same with not defining the variable.\n\nInstead of updating this change, I suggest changing the default value of `RELEASE_DEPRECATE_VNDK` from `build_flags.scl`.\n\nAnd finally, when we don\u0027t need this flag, let\u0027s completely remove this condition.",
       "revId": "5fd137ff19d07e6722bdb550243febe657bce31f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8db96b37_f85ca90b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2024-03-15T01:21:34Z",
+      "side": 1,
+      "message": "Make sense. Let me make a change of default value as a flag instead of this.",
+      "parentUuid": "ba98533b_1af49116",
+      "revId": "5fd137ff19d07e6722bdb550243febe657bce31f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
