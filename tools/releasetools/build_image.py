@@ -25,7 +25,6 @@ Usage:  build_image input_directory properties_file output_image \\
 import datetime
 
 import argparse
-import glob
 import logging
 import os
 import os.path
@@ -294,7 +293,7 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
     build_command = [prop_dict["ext_mkuserimg"]]
     if "extfs_sparse_flag" in prop_dict and not disable_sparse:
       build_command.append(prop_dict["extfs_sparse_flag"])
-      run_e2fsck = RunE2fsck
+      run_fsck = RunE2fsck
     build_command.extend([in_dir, out_file, fs_type,
                           prop_dict["mount_point"]])
     build_command.append(prop_dict["image_size"])
@@ -430,7 +429,7 @@ def BuildImageMkfs(in_dir, prop_dict, out_file, target_out, fs_config):
       build_command.append("--readonly")
     if (prop_dict.get("f2fs_compress") == "true"):
       build_command.append("--sldc")
-      if (prop_dict.get("f2fs_sldc_flags") == None):
+      if (prop_dict.get("f2fs_sldc_flags") is None):
         build_command.append(str(0))
       else:
         sldc_flags_str = prop_dict.get("f2fs_sldc_flags")
@@ -535,7 +534,6 @@ def BuildImage(in_dir, prop_dict, out_file, target_out=None):
   in_dir, fs_config = SetUpInDirAndFsConfig(in_dir, prop_dict)
   SetUUIDIfNotExist(prop_dict)
 
-  build_command = []
   fs_type = prop_dict.get("fs_type", "")
 
   fs_spans_partition = True
@@ -958,7 +956,7 @@ def CopyInputDirectory(src, dst, filter_file):
         os.link(full_src, full_dst, follow_symlinks=False)
 
 
-def main(argv):
+def main():
   parser = argparse.ArgumentParser(
     description="Builds output_image from the given input_directory and properties_file, and "
     "writes the image to target_output_directory.")
@@ -1025,7 +1023,7 @@ def main(argv):
       logger.error("Unknown image file name %s", image_filename)
       sys.exit(1)
 
-    if "vbmeta" != mount_point:
+    if mount_point != "vbmeta":
       image_properties = ImagePropFromGlobalDict(glob_dict, mount_point)
 
   if args.input_directory_filter_file and not os.environ.get("BUILD_BROKEN_INCORRECT_PARTITION_IMAGES"):
@@ -1038,6 +1036,6 @@ def main(argv):
 
 if __name__ == '__main__':
   try:
-    main(sys.argv[1:])
+    main()
   finally:
     common.Cleanup()
