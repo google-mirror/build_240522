@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e25d2aba_fadea0b9",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-15T00:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f3d25fa_c895df5b",
+      "range": {
+        "startLine": 42,
+        "startChar": 20,
+        "endLine": 42,
+        "endChar": 36
+      },
+      "revId": "b955681c61227b3e1ef7c8018f78babca602acbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88e3b07d_38be0ad3",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-14T23:36:51Z",
       "side": 1,
       "message": "Move this to a `is_optimization_enabled` function.",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 52
+      },
+      "revId": "b955681c61227b3e1ef7c8018f78babca602acbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d2398b6_7add8268",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-15T00:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88e3b07d_38be0ad3",
       "range": {
         "startLine": 46,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c71539a0_cc3dd9f6",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-15T00:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94adf534_ecf5529c",
+      "range": {
+        "startLine": 410,
+        "startChar": 15,
+        "endLine": 410,
+        "endChar": 33
+      },
+      "revId": "b955681c61227b3e1ef7c8018f78babca602acbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9423fe5_cdb24f4a",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-03-14T23:36:51Z",
       "side": 1,
       "message": "Every new target will require this boilerplate. Why not just call `build_test_suites`:\n\n```\n#!/usr/bin/env bash\n\nci/build_test_suites cts ...\n```",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 8
+      },
+      "revId": "b955681c61227b3e1ef7c8018f78babca602acbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c47cc441_3a6e9930",
+        "filename": "ci/build_test_suites_x86_64-trunk_staging",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-15T00:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9423fe5_cdb24f4a",
       "range": {
         "startLine": 23,
         "startChar": 2,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea539703_0cdf004e",
+        "filename": "ci/build_test_suites_x86_64-trunk_staging",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-15T00:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "021eb2cf_9f1d1221",
+      "range": {
+        "startLine": 25,
+        "startChar": 35,
+        "endLine": 25,
+        "endChar": 53
+      },
+      "revId": "b955681c61227b3e1ef7c8018f78babca602acbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6a095fd_b5393880",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-03-14T23:36:51Z",
       "side": 1,
       "message": "Should this be here?",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 13
+      },
+      "revId": "b955681c61227b3e1ef7c8018f78babca602acbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7052b864_03ddd579",
+        "filename": "ci/test_suites_x86_64_trunk_staging_targets.cfg",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-15T00:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6a095fd_b5393880",
       "range": {
         "startLine": 3,
         "startChar": 0,
