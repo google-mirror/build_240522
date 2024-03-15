@@ -6,7 +6,7 @@ members = [
     "aconfig_storage_file",
     "aconfig_storage_read_api",
     "aconfig_storage_write_api",
-    "aflags",
+    "aflags", "load_aconfig_proto_paths",
     "printflags"
 ]
 

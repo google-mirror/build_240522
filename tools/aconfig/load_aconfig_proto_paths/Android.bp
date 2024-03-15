@@ -1,0 +1,24 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_defaults {
+    name: "libload_aconfig_proto_paths.defaults",
+    edition: "2021",
+    clippy_lints: "android",
+    lints: "android",
+    srcs: ["src/lib.rs"],
+    rustlibs: [
+        "libaconfig_protos",
+        "libanyhow",
+        "libprotobuf",
+        "libregex",
+    ],
+}
+
+rust_library {
+    name: "libload_aconfig_proto_paths",
+    crate_name: "load_aconfig_proto_paths",
+    host_supported: true,
+    defaults: ["libload_aconfig_proto_paths.defaults"],
+}
