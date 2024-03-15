@@ -51,10 +51,10 @@ endef
 include $(BUILD_SYSTEM)/release_config.mk
 
 # Set default value of KEEP_VNDK.
-ifeq ($(RELEASE_DEPRECATE_VNDK),true)
-  KEEP_VNDK ?= false
-else
+ifeq ($(RELEASE_DEPRECATE_VNDK),false)
   KEEP_VNDK ?= true
+else
+  KEEP_VNDK ?= false
 endif
 
 ifeq ($(KEEP_VNDK),true)
