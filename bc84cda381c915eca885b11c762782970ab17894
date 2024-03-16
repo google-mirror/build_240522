@@ -16,6 +16,46 @@
       "message": "I can see that the `build_test_suites` is no longer release configuration or product specific. Does this mean that the `extra_targets` entries will be universal across all release configurations and products?",
       "revId": "bc84cda381c915eca885b11c762782970ab17894",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4ea4b7f_89af5404",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-03-16T00:54:43Z",
+      "side": 1,
+      "message": "```suggestion\n  if is_optimization_enabled():\n    # Call the class to map changed files to modules to build.\n    # TODO(lucafarsi): Move this into a replaceable class.\n    build_affected_modules(args, extra_targets)\n  else:\n    build_everything(args, extra_targets)\n```\n\nFor readability",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 45
+      },
+      "revId": "bc84cda381c915eca885b11c762782970ab17894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab617d15_465a9791",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-03-16T00:54:43Z",
+      "side": 1,
+      "message": "If this would be the determining condition for this function, I believe that the more intuitive name would be `is_presubmit_build` than `is_optimization_enabled`?",
+      "revId": "bc84cda381c915eca885b11c762782970ab17894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
