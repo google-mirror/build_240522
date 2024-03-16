@@ -56,6 +56,24 @@
       "message": "If this would be the determining condition for this function, I believe that the more intuitive name would be `is_presubmit_build` than `is_optimization_enabled`?",
       "revId": "bc84cda381c915eca885b11c762782970ab17894",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7dcdaf_6ba1b8dd",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-16T00:56:31Z",
+      "side": 1,
+      "message": "We currently use presubmit as the condition but that\u0027s going to change. We hope to have the instruction (enable_optimization) injected from TreeHugger to avoid the build containing this type of logic since TH is better placed to make these decisions.",
+      "parentUuid": "ab617d15_465a9791",
+      "revId": "bc84cda381c915eca885b11c762782970ab17894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
