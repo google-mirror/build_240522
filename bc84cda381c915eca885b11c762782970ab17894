@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "249090f5_9d59e97d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-03-16T01:00:16Z",
+      "side": 1,
+      "message": "Will wait for @lucafarsi@google.com to respond to the other comments.",
+      "revId": "bc84cda381c915eca885b11c762782970ab17894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4ea4b7f_89af5404",
@@ -72,6 +89,24 @@
       "side": 1,
       "message": "We currently use presubmit as the condition but that\u0027s going to change. We hope to have the instruction (enable_optimization) injected from TreeHugger to avoid the build containing this type of logic since TH is better placed to make these decisions.",
       "parentUuid": "ab617d15_465a9791",
+      "revId": "bc84cda381c915eca885b11c762782970ab17894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "629e0449_bfa90045",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-03-16T01:00:16Z",
+      "side": 1,
+      "message": "Acknowledged. Thanks for the explanation!",
+      "parentUuid": "ab7dcdaf_6ba1b8dd",
       "revId": "bc84cda381c915eca885b11c762782970ab17894",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
