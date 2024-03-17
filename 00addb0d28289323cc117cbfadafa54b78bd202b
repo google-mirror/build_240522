@@ -54,6 +54,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "42a7b4b9_6c7f046f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3351350
+      },
+      "writtenOn": "2024-03-17T21:13:16Z",
+      "side": 1,
+      "message": "target/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk",
+      "revId": "00addb0d28289323cc117cbfadafa54b78bd202b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "26a8ae16_78c1eb7b",
         "filename": "target/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk",
         "patchSetId": 1
@@ -89,6 +106,30 @@
       "side": 1,
       "message": "\u003e git fetch https://android.googlesource.com/platform/build refs/changes/79/1849979/1 \u0026\u0026 git checkout -b change-1849979 FETCH_HEAD",
       "parentUuid": "26a8ae16_78c1eb7b",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 30
+      },
+      "revId": "00addb0d28289323cc117cbfadafa54b78bd202b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5d260d0_03cd97ab",
+        "filename": "target/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3351350
+      },
+      "writtenOn": "2024-03-17T21:13:16Z",
+      "side": 1,
+      "message": "\u003e \u003e git fetch https://android.googlesource.com/platform/build refs/changes/79/1849979/1 \u0026\u0026 git checkout -b change-1849979 FETCH_HEAD\n\n1849979: Add f2fs.fsck to vendor_ramdisk. | https://android-review.googlesource.com/c/platform/build/+/1849979",
+      "parentUuid": "8b55292e_0a1c846f",
       "range": {
         "startLine": 27,
         "startChar": 0,
