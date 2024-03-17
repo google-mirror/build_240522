@@ -16,6 +16,23 @@
       "message": "y",
       "revId": "9210c0c3770dac2fc6c511a0092d5fbd9c634a70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a78843ca_e19d31f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3351350
+      },
+      "writtenOn": "2024-03-17T21:22:31Z",
+      "side": 1,
+      "message": "2372277: Enable Batch writes for OTA installation. | https://android-review.googlesource.com/c/platform/build/+/2372277",
+      "revId": "9210c0c3770dac2fc6c511a0092d5fbd9c634a70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
