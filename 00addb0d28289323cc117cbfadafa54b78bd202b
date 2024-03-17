@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12129162_7df4ae1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3351350
+      },
+      "writtenOn": "2024-03-17T20:57:59Z",
+      "side": 1,
+      "message": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nmDMEZfdTAhYJKwYBBAHaRw8BAQdAaupOMsearnNupo6wdVJwQESq15oQ0K8iTrrF\ntjuJAYW0J21lbWV0Y2ltZW44NTEgPG1lbWV0Y2ltZW44NTFAZ21haWwuY29tPohy\nBBMWCAAaBAsJCAcCFQgCFgECGQEFgmX3UwICngECmwMACgkQrW0yYpTUgA9RMgEA\nrO6o0ywDmBXpuBC+wq+grdc63HmFDQHeMKRewdm4bv4BALsprHv/AD3H417IrUXW\nFw9Jo02MC5g7hCqp55XB/1ALuDgEZfdTAhIKKwYBBAGXVQEFAQEHQIv0Qqo5ojQY\nBtFwl+J5E6q2IuRPQZz5TbjGj+jFQ/4jAwEIB4h4BBgWCAAJBYJl91MCApsMACEJ\nEK1tMmKU1IAPFiEEe6rbnGuG6mpZdfHDrW0yYpTUgA85NgD8D8pNlgQeGd1pc2WZ\nmc+iUDyj/vns64P4/Q/YuPb/sRUA/148A+7irhjRMvldX6Aqc1fdEP2qZud0zv+5\nh229cX0D\n\u003dLHQf\n-----END PGP PUBLIC KEY BLOCK-----",
+      "revId": "00addb0d28289323cc117cbfadafa54b78bd202b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26a8ae16_78c1eb7b",
+        "filename": "target/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3351350
+      },
+      "writtenOn": "2024-03-17T20:57:59Z",
+      "side": 1,
+      "message": "git fetch https://android.googlesource.com/platform/build refs/changes/79/1849979/1 \u0026\u0026 git checkout -b change-1849979 FETCH_HEAD",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 30
+      },
+      "revId": "00addb0d28289323cc117cbfadafa54b78bd202b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
