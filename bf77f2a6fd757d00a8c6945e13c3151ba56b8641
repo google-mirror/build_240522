@@ -70,6 +70,30 @@
       },
       "revId": "bf77f2a6fd757d00a8c6945e13c3151ba56b8641",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6296d4ad_a6a88844",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-03-18T02:38:16Z",
+      "side": 1,
+      "message": "soong to make using makevars requires a singleton module definition only to export a build variable. Or does soong provide any better way to do?\n\n\u003e Besides, what about name it VENDOR_DEFAULT_HEADER or -S(plural)?\n\nI want to make it specific to this case. We will not allow adding more header files like this.",
+      "parentUuid": "025a9ce4_8c300c88",
+      "range": {
+        "startLine": 853,
+        "startChar": 0,
+        "endLine": 853,
+        "endChar": 111
+      },
+      "revId": "bf77f2a6fd757d00a8c6945e13c3151ba56b8641",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
