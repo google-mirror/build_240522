@@ -94,6 +94,30 @@
       },
       "revId": "bf77f2a6fd757d00a8c6945e13c3151ba56b8641",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7bf0548_261fa9c6",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-18T16:20:02Z",
+      "side": 1,
+      "message": "Then let\u0027s duplicate the header path in Make and Soong. I don\u0027t think we need to seek for a general and flexible mechanism here.",
+      "parentUuid": "6296d4ad_a6a88844",
+      "range": {
+        "startLine": 853,
+        "startChar": 0,
+        "endLine": 853,
+        "endChar": 111
+      },
+      "revId": "bf77f2a6fd757d00a8c6945e13c3151ba56b8641",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
