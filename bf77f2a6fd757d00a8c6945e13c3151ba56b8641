@@ -22,6 +22,30 @@
       },
       "revId": "bf77f2a6fd757d00a8c6945e13c3151ba56b8641",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70154460_4479ef4e",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-03-18T00:51:50Z",
+      "side": 1,
+      "message": "binary.mk is only for defining Android.mk binary modules. It is not visible to soong.\nAs this is a constant, do you want me to define it in both Make and soong? That also LGTM.",
+      "parentUuid": "bfb53a9c_4e468140",
+      "range": {
+        "startLine": 853,
+        "startChar": 0,
+        "endLine": 853,
+        "endChar": 111
+      },
+      "revId": "bf77f2a6fd757d00a8c6945e13c3151ba56b8641",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
