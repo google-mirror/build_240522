@@ -466,6 +466,7 @@ PRODUCT_PACKAGES_DEBUG := \
     strace \
     su \
     sanitizer-status \
+    ThreadNetworkDemoApp \
     tracepath \
     tracepath6 \
     traceroute6 \
