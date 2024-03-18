@@ -46,6 +46,30 @@
       },
       "revId": "bf77f2a6fd757d00a8c6945e13c3151ba56b8641",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "025a9ce4_8c300c88",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2024-03-18T02:21:12Z",
+      "side": 1,
+      "message": "As an alternative, we could define it in Soong and export it to Make. Besides, what about name it `VENDOR_DEFAULT_HEADER` or `-S`(plural)?",
+      "parentUuid": "70154460_4479ef4e",
+      "range": {
+        "startLine": 853,
+        "startChar": 0,
+        "endLine": 853,
+        "endChar": 111
+      },
+      "revId": "bf77f2a6fd757d00a8c6945e13c3151ba56b8641",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
