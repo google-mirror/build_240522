@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d6a6237_0b8ab5c8",
+        "filename": "tools/aconfig/container_proto_paths.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-18T08:06:12Z",
+      "side": 1,
+      "message": "I\u0027d prefer a lib that generates the paths based on the `/\u003cpartition\u003e` lines of this file + runtime `readdir(\"/apex\")`, because 1. it means no need to update this file when a new mainline module is introduced (no one will remember this step) and 2. the apex names can be either `com.android.*` or `com.google.android.*`.\n\nSomething like\n```\nfn get_me_all_the_paths() -\u003e impl Iterator\u003cItem \u003d PathBuf\u003e {\n  let mut v: Vec\u003cPathBuf\u003e \u003d include!(\"partitions\").into_iter().into();\n  for dir in /apex/ {\n      path \u003d dir + \"/etc/aconfig_flags.pb\"\n      if path exists {\n        v.push(path)\n      }\n  }\n  v.into_iter()\n}\n```",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 36
+      },
+      "revId": "633bcf374ab70b0112407986bc4aa526eda7ef4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
