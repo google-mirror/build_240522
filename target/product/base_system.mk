@@ -282,6 +282,7 @@ PRODUCT_PACKAGES += \
     tombstoned \
     traced \
     traced_probes \
+    traced_probes.android \
     tune2fs \
     uiautomator \
     uinput \
