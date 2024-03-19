@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84e524ce_7b4b3f79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040443
+      },
+      "writtenOn": "2024-03-19T16:36:24Z",
+      "side": 1,
+      "message": "+vdonnefort to check if trace_probes (which gives perfetto ftrace data) is expected to be there or not in microdroid.\n\nRegardless of the above, can you help me understand this change a bit more?\nWhere is traced_probes.android declared? How do we make traced_probes be there on Android but not on microdroid?\nI guess this is done in some related CL, but I coudln\u0027t immediately find any in the \"Submitted together\" listead by gerrit",
+      "revId": "d1bebd88c8ba78b620b217e6ef1a497dbd8ceaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
