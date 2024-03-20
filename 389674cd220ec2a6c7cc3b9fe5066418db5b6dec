@@ -16,6 +16,24 @@
       "message": "We don\u0027t add demo apps to userdebug / eng builds. These are supposed to remain as close to the shipping builds as possible.",
       "revId": "389674cd220ec2a6c7cc3b9fe5066418db5b6dec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e6b3517_385cc8da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1693933
+      },
+      "writtenOn": "2024-03-20T05:00:19Z",
+      "side": 1,
+      "message": "Thanks for info, abandon this CL now",
+      "parentUuid": "ff86cf3d_127d86fe",
+      "revId": "389674cd220ec2a6c7cc3b9fe5066418db5b6dec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
