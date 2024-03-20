@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d902022_e1bcbd1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-03-20T23:47:45Z",
+      "side": 1,
+      "message": "You need to find a way of refactoring the inherit-product calls to avoid doing this kind of procedural logic.",
+      "revId": "dc05c17b887094866dd6a5e5243251145469fc51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
