@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd4bee41_99af5d64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2024-03-20T16:01:28Z",
+      "side": 1,
+      "message": "The python implementation will not the same size as native du.\n\nWhen building on a host using ext4 on aosp, the output from the log is (changed info to error):\n[ 89% 226/253 57s remaining] Target system_ext fs image: out/target/product/flame/system_ext.img\n2024-03-20 16:59:35 - build_image.py - ERROR   : Disk usage calculated: py_total\u003d231006759 (du_total\u003d231007232 diff\u003d473)\n[ 93% 236/253 54s remaining] Target product fs image: out/target/product/flame/product.img\n2024-03-20 16:59:37 - build_image.py - ERROR   : Disk usage calculated: py_total\u003d291077773 (du_total\u003d291078144 diff\u003d371)\n[ 98% 248/253 47s remaining] Target system_other fs image: out/target/product/flame/system_other.img\n2024-03-20 16:59:57 - build_image.py - ERROR   : Disk usage calculated: py_total\u003d16220948 (du_total\u003d16221184 diff\u003d236)\n[ 98% 250/253 0s remaining] Target system fs image: out/target/product/flame/obj/PACKAGING/systemimage_intermediates/system.img\n2024-03-20 17:00:00 - build_image.py - ERROR   : Disk usage calculated: py_total\u003d916283874 (du_total\u003d916399104 diff\u003d115230)",
+      "revId": "d98a51e2bb3725075215eb955c0fb903a143c1a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f334d52_707d41ff",
@@ -14,6 +31,30 @@
       "writtenOn": "2024-03-19T16:10:57Z",
       "side": 1,
       "message": "This should probably be proportional to number of directory entries? e.g. 512 * num_dirent",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 57
+      },
+      "revId": "d98a51e2bb3725075215eb955c0fb903a143c1a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6296fa94_415682ca",
+        "filename": "tools/releasetools/build_image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2024-03-20T16:01:28Z",
+      "side": 1,
+      "message": "Each directory would allocate minimum one block on ext4.\nThis will contain a list of all file entries, if there is not enough space additional blocks will be used.\nIf all the entries in the directory have short names, more entries will fit inside the block.",
+      "parentUuid": "6f334d52_707d41ff",
       "range": {
         "startLine": 77,
         "startChar": 12,
