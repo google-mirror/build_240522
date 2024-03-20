@@ -278,7 +278,6 @@ PRODUCT_PACKAGES += \
     task_profiles.json \
     tc \
     telecom \
-    telephony-common \
     tombstoned \
     traced \
     traced_probes \
@@ -288,7 +287,6 @@ PRODUCT_PACKAGES += \
     uncrypt \
     usbd \
     vdc \
-    voip-common \
     vold \
     watchdogd \
     wificond \
@@ -306,6 +304,8 @@ endif
 ifneq ($(PRODUCT_IS_ATV),true)
   PRODUCT_PACKAGES += \
       $(RELEASE_PACKAGE_SOUND_PICKER) \
+      telephony-common \
+      voip-common\
 
 endif
 
