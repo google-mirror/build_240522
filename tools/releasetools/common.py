@@ -1313,11 +1313,13 @@ def MergeDynamicPartitionInfoDicts(framework_dict, vendor_dict):
     key = "super_%s_partition_list" % partition_group
     merged_dict[key] = uniq_concat(
         framework_dict.get(key, ""), vendor_dict.get(key, ""))
-
+  # in the case that vendor is on s build, but is taking a v3 -> v3 vabc ota, we want to fallback to v2
+  if "vabc_cow_version" not in vendor_dict:
+    merged_dict["vabc_cow_version"] = 2
   # Various other flags should be copied from the vendor dict, if defined.
   for key in ("virtual_ab", "virtual_ab_retrofit", "lpmake",
               "super_metadata_device", "super_partition_error_limit",
-              "super_partition_size"):
+              "super_partition_size", "vabc_cow_version"):
     if key in vendor_dict.keys():
       merged_dict[key] = vendor_dict[key]
 
