@@ -22,6 +22,30 @@
       },
       "revId": "497f02d8c0208790f112aad79ed814f7147a0e42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e02a7b48_38a39998",
+        "filename": "tools/aconfig/aconfig_storage_read_api/src/mapped_file.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-21T13:45:22Z",
+      "side": 0,
+      "message": "No, we cannot enforce read only check on device. I realized that painfully just now. I thought the files on RO partitions like system can have file permission of 444. But no, they are 644 and it is a mountain to climb over, if not impossible, to make build system to create files of 444 on these RO partitions.\n\nIt is simpler just leave the api unsafe and add a safety comment. In reality though, the partitions are RO even though the file permissions are not.",
+      "parentUuid": "e74380b5_d37142b1",
+      "range": {
+        "startLine": 60,
+        "startChar": 3,
+        "endLine": 60,
+        "endChar": 27
+      },
+      "revId": "497f02d8c0208790f112aad79ed814f7147a0e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
