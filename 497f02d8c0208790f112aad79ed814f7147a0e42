@@ -166,6 +166,30 @@
       },
       "revId": "497f02d8c0208790f112aad79ed814f7147a0e42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b9b0296_434a888c",
+        "filename": "tools/aconfig/aconfig_storage_read_api/src/mapped_file.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-21T15:18:46Z",
+      "side": 0,
+      "message": "Yes, native processes will require something different than `adb shell stop`. This is not about native processes, it\u0027s about frameworks/base.\n\nWhat I\u0027m worried about is if `aconfigd` crashes when a mmapped file changes, all processes that uses aconfig flags will crash (directly or when attempting to read a flag?), ultimately preventing the processes supposed to start via `adb shell start` from actually starting.\n\nI don\u0027t expect the init.rc rules to be able to recover from that.\n\nExamples: what if `servicemanager` dies? (`adb shell kill -9 \u003cpid\u003e` shows that the device becomes really borked -- adbd is still running, but very little continues to work; `adb shell reboot` is hanging.)\n\nWhat if `adbd` dies?",
+      "parentUuid": "59fee136_34f7e1d6",
+      "range": {
+        "startLine": 60,
+        "startChar": 3,
+        "endLine": 60,
+        "endChar": 27
+      },
+      "revId": "497f02d8c0208790f112aad79ed814f7147a0e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
