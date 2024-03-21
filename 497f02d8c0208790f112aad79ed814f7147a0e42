@@ -94,6 +94,30 @@
       },
       "revId": "497f02d8c0208790f112aad79ed814f7147a0e42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45c4ab2b_0f676657",
+        "filename": "tools/aconfig/aconfig_storage_read_api/src/mapped_file.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-21T14:21:50Z",
+      "side": 0,
+      "message": "No, `adb reboot` would cause init to run again. `adb shell stop` causes zygote and a some very few native services to get killed, but leave most of the native system intact. It\u0027s the recommended way of developing framework code as it doesn\u0027t require a full device reboot (so the kernel keeps running, your adb connection stays up, etc, not to mention it\u0027s much faster). Breaking this workflow would be a severe problem for platform developers.",
+      "parentUuid": "c197b5b7_f7f61bba",
+      "range": {
+        "startLine": 60,
+        "startChar": 3,
+        "endLine": 60,
+        "endChar": 27
+      },
+      "revId": "497f02d8c0208790f112aad79ed814f7147a0e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
