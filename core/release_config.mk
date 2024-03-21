@@ -251,5 +251,11 @@ filename_to_starlark:=
 #
 # We also need to pass --allow_external_entrypoint to rbcrun in case the OUT_DIR is set to something
 # outside of the source tree.
-$(call run-starlark,$(OUT_DIR)/release_config_entrypoint.scl,$(OUT_DIR)/release_config_entrypoint.scl,--allow_external_entrypoint)
+_entrypoint_file := $(OUT_DIR)/release_config_entrypoint.scl
+$(call run-starlark,$(_entrypoint_file),$(OUT_DIR)/release_config_entrypoint.scl,--allow_external_entrypoint)
 
+# Now dump just the release config variables to a place for humans to find it.
+_starlark_results := $(OUT_DIR)/starlark_results/$(subst /,_,$(_entrypoint_file)).mk
+$(shell grep ^RELEASE_ $(_starlark_results) >$(OUT_DIR)/release_config)
+_starlark_results :=
+_entrypoint_file :=
