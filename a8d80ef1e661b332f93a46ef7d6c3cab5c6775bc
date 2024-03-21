@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "990144c6_8eff821b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2024-03-21T23:15:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f890bf2e_f9073cb3",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "a8d80ef1e661b332f93a46ef7d6c3cab5c6775bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "082fad69_28192857",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-21T07:14:19Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "a8d80ef1e661b332f93a46ef7d6c3cab5c6775bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0caf62a_99f39caa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2024-03-21T23:15:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "082fad69_28192857",
       "range": {
         "startLine": 9,
         "startChar": 5,
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "718dddd4_afb5ef83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2024-03-21T23:15:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1613349c_944c69a0",
+      "revId": "a8d80ef1e661b332f93a46ef7d6c3cab5c6775bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f80c494_ecb40784",
@@ -77,6 +143,30 @@
       "writtenOn": "2024-03-21T07:14:19Z",
       "side": 1,
       "message": "I assume you need to repo sync the rust-toolchain project to access this script?\n\nWhat\u0027s the path to this script? Please change to \"croot \u003cpath\u003e \u0026\u0026 ./test_compiler.py [...] # need to repo sync \u003cinstructions\u003e\"",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "a8d80ef1e661b332f93a46ef7d6c3cab5c6775bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d921a115_aa2c6f47",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2024-03-21T23:15:28Z",
+      "side": 1,
+      "message": "If you would like to run the test yourself you will also need to checkout the latest version of Rust and such. \n\nWe unfortunately don\u0027t upload any sources until we get past the clippy errors (like yours). You can recreate the process if you want with directions here: https://android.googlesource.com/toolchain/android_rust/+/refs/heads/master/README.md and my patches: https://android-review.git.corp.google.com/c/toolchain/android_rust/+/3002143",
+      "parentUuid": "2f80c494_ecb40784",
       "range": {
         "startLine": 11,
         "startChar": 8,
