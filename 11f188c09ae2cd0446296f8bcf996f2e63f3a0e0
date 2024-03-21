@@ -33,6 +33,23 @@
       "message": "Use command instead of which to locate/run adb\n\nIf adb is not found on PATH, which will silently fail and evaluate to\nthe empty string. This will cause the remaining arguments to be\ninterpreted as a command to run in the shell, which is generally\nundesirable. (Consider, for example, \"adb reboot\" -\u003e \"reboot\".)\n\nBug: 24473359\nTest: Just run adb before lunch so it\u0027s not on PATH\n\nChange-Id: I6b20722add6c67d1d2627f963dc66095502ab816\nSigned-off-by: Saagar Jha \u003csaagarjha@google.com\u003e",
       "revId": "11f188c09ae2cd0446296f8bcf996f2e63f3a0e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "466c8228_2b567176",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-03-21T00:27:15Z",
+      "side": 1,
+      "message": "note that this doesn\u0027t actually work --- `which adb` explicitly re-searched $PATH, but `command` doesn\u0027t do that. it just avoids aliases, builtins, and functions, which weren\u0027t the problem here.\n\nhttps://android-review.git.corp.google.com/c/platform/build/+/3006975 fixes it, or https://android-review.git.corp.google.com/c/platform/build/+/3005951 deletes it (since no-one\u0027s noticed in almost a year). let the chips fall where they may!",
+      "revId": "11f188c09ae2cd0446296f8bcf996f2e63f3a0e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
