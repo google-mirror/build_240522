@@ -16,6 +16,24 @@
       "message": "if vabc_cow_version is defined on both sides, use the minimum of the two",
       "revId": "9df621faed327cc1203658592ebc5bb6c808e5e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "233c3051_5116f0c9",
+        "filename": "tools/releasetools/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1317,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2024-03-21T21:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3feaead6_05dd8978",
+      "revId": "9df621faed327cc1203658592ebc5bb6c808e5e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
