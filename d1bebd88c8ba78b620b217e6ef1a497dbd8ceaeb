@@ -52,6 +52,24 @@
       "parentUuid": "4dfac942_c774c543",
       "revId": "d1bebd88c8ba78b620b217e6ef1a497dbd8ceaeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9f6d17d_c0178082",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-21T13:53:03Z",
+      "side": 1,
+      "message": "Currently, Android and Microdroid are built quite differently. The Android system image is built by Make (though individual files are built by Soong), and what to include in the filesystem image is determined by `PRODUCT_PACKAGES` and their `required` dependencies. To be specific, what\u0027s written in `required` is translated into `LOCAL_REQUIRED_MODULES` and handled by Make.\n\nOn the other hand, Microdroid system image is entirely built by Soong [1]. What to included is termined by the `deps` property, but so far it didn\u0027t track `required` dependencies. As a result, `libperfetto_android_internal` (and its dependencies) were not included in Microdroid.\n\nNow, with my change in Soong, it can correctly track the `required` dependencies. However, that means we have much more files in Microdroid system image than before. For example, we will have `android.hardware.health@2.0` and more [2] there. This will come as a huge regression in size, and it\u0027s a waste actually because Microdroid doesn\u0027t have the health HAL (actully any HAL).\n\nFor the correct behavior of perfetto, we may need all or some of those additional dependencies also in Microdroid. But that\u0027s a different issue that don\u0027t have to be fixed in this topic. I don\u0027t want to make any regression in size here.\n\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/microdroid/Android.bp;drc\u003d9da7b2d391bbbd707ef2856f93539aef96879db5;l\u003d62\n[2] https://cs.android.com/android/platform/superproject/main/+/main:external/perfetto/Android.bp;drc\u003d8f2b24418b1037ad977c538d97b51e17375e2b89;l\u003d704",
+      "parentUuid": "dab5e5b3_50d77310",
+      "revId": "d1bebd88c8ba78b620b217e6ef1a497dbd8ceaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
