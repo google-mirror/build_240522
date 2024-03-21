@@ -190,6 +190,30 @@
       },
       "revId": "497f02d8c0208790f112aad79ed814f7147a0e42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0122374b_5a30d92c",
+        "filename": "tools/aconfig/aconfig_storage_read_api/src/mapped_file.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-21T15:36:28Z",
+      "side": 0,
+      "message": "for flag read, individual processes holds their mmaped files in memory, not via aconfigd. So aconfigd crashing won\u0027t be in the way of reading flags. Today each process when start will look for /metadata/aconfig/boot/available_aconfig_storage_records.pb to find if the storage files they needs is available, if so, they find the storage file location from that pb file and then mmap it. processes do not communicate with aconfigd in flag read.",
+      "parentUuid": "1b9b0296_434a888c",
+      "range": {
+        "startLine": 60,
+        "startChar": 3,
+        "endLine": 60,
+        "endChar": 27
+      },
+      "revId": "497f02d8c0208790f112aad79ed814f7147a0e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
