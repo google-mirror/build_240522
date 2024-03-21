@@ -57,8 +57,10 @@ def parse_args(argv):
   argparser.add_argument(
       '--with_dexpreopt_boot_img_and_system_server_only', action='store_true'
   )
-  argparser.add_argument('--dist_dir')
   argparser.add_argument('--change_info', nargs='?')
+
+  if not os.getenv('DIST_DIR'):
+    raise RuntimeError('DIST_DIR not set in environment.')
 
   return argparser.parse_args()
 
@@ -92,7 +94,7 @@ def build_affected_modules(args: argparse.Namespace):
 
   run_command(build_command, print_output=True)
 
-  zip_build_outputs(modules_to_build, args.dist_dir, args.target_release)
+  zip_build_outputs(modules_to_build, args.target_release)
 
 
 def base_build_command(args: argparse.Namespace, extra_targets: set[str]) -> list:
@@ -101,7 +103,7 @@ def base_build_command(args: argparse.Namespace, extra_targets: set[str]) -> lis
   build_command.append('./build/soong/soong_ui.bash')
   build_command.append('--make-mode')
   build_command.append('dist')
-  build_command.append('DIST_DIR=' + args.dist_dir)
+  build_command.append('DIST_DIR=' + os.environ['DIST_DIR'])
   build_command.append('TARGET_PRODUCT=' + args.target_product)
   build_command.append('TARGET_RELEASE=' + args.target_release)
   if args.with_dexpreopt_boot_img_and_system_server_only:
@@ -220,7 +222,7 @@ def matches_file_patterns(
 
 
 def zip_build_outputs(
-    modules_to_build: set[str], dist_dir: str, target_release: str
+    modules_to_build: set[str], target_release: str
 ):
   src_top = os.environ.get('TOP', os.getcwd())
 
@@ -255,10 +257,10 @@ def zip_build_outputs(
       collect_config_files(src_top, target_path, target_config_files)
 
   zip_test_configs_zips(
-      dist_dir, host_out, product_out, host_config_files, target_config_files
+      host_out, product_out, host_config_files, target_config_files
   )
 
-  zip_command = base_zip_command(host_out, dist_dir, 'general-tests.zip')
+  zip_command = base_zip_command(host_out, 'general-tests.zip')
 
   # Add host testcases.
   zip_command.append('-C')
@@ -308,14 +310,14 @@ def collect_config_files(
 
 
 def base_zip_command(
-    host_out: pathlib.Path, dist_dir: pathlib.Path, name: str
+    host_out: pathlib.Path, name: str
 ) -> list[str]:
   return [
       'time',
       os.path.join(host_out, 'bin', 'soong_zip'),
       '-d',
       '-o',
-      os.path.join(dist_dir, name),
+      os.path.join(os.environ['DIST_DIR'], name),
   ]
 
 
@@ -341,7 +343,6 @@ def base_zip_command(
 # the paths to all the config files into a third file to use for
 # general-tests_list.zip.
 def zip_test_configs_zips(
-    dist_dir: pathlib.Path,
     host_out: pathlib.Path,
     product_out: pathlib.Path,
     host_config_files: list[str],
@@ -366,7 +367,7 @@ def zip_test_configs_zips(
       )
 
   tests_config_zip_command = base_zip_command(
-      host_out, dist_dir, 'general-tests_configs.zip'
+      host_out, 'general-tests_configs.zip'
   )
   tests_config_zip_command.append('-P')
   tests_config_zip_command.append('host')
@@ -387,7 +388,7 @@ def zip_test_configs_zips(
   run_command(tests_config_zip_command, print_output=True)
 
   tests_list_zip_command = base_zip_command(
-      host_out, dist_dir, 'general-tests_list.zip'
+      host_out, 'general-tests_list.zip'
   )
   tests_list_zip_command.append('-C')
   tests_list_zip_command.append(host_out)
