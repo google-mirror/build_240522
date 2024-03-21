@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8ab4a22_c6d8131b",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-03-21T18:36:56Z",
+      "side": 1,
+      "message": "I thought the version in patchset 1 was correct, why did you change it to use intermediate-dir-for?",
+      "revId": "6a35810856883cb318793a90114c1b2f7cdb2e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
