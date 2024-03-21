@@ -38,11 +38,12 @@ REQUIRED_MODULES = frozenset(
 
 def build_test_suites(argv):
   args = parse_args(argv)
+  dist_dir = pathlib.Path(os.environ['DIST_DIR'])
 
   if is_optimization_enabled():
     # Call the class to map changed files to modules to build.
     # TODO(lucafarsi): Move this into a replaceable class.
-    build_affected_modules(args)
+    build_affected_modules(args, dist_dir)
   else:
     build_everything(args)
 
@@ -57,7 +58,6 @@ def parse_args(argv):
   argparser.add_argument(
       '--with_dexpreopt_boot_img_and_system_server_only', action='store_true'
   )
-  argparser.add_argument('--dist_dir')
   argparser.add_argument('--change_info', nargs='?')
 
   return argparser.parse_args()
@@ -78,7 +78,7 @@ def build_everything(args: argparse.Namespace):
   run_command(build_command, print_output=True)
 
 
-def build_affected_modules(args: argparse.Namespace):
+def build_affected_modules(args: argparse.Namespace, dist_dir: pathlib.Path):
   modules_to_build = find_modules_to_build(
       pathlib.Path(args.change_info), args.extra_required_modules
   )
@@ -92,7 +92,7 @@ def build_affected_modules(args: argparse.Namespace):
 
   run_command(build_command, print_output=True)
 
-  zip_build_outputs(modules_to_build, args.dist_dir, args.target_release)
+  zip_build_outputs(modules_to_build, dist_dir, args.target_release)
 
 
 def base_build_command(args: argparse.Namespace, extra_targets: set[str]) -> list:
@@ -101,7 +101,6 @@ def base_build_command(args: argparse.Namespace, extra_targets: set[str]) -> lis
   build_command.append('./build/soong/soong_ui.bash')
   build_command.append('--make-mode')
   build_command.append('dist')
-  build_command.append('DIST_DIR=' + args.dist_dir)
   build_command.append('TARGET_PRODUCT=' + args.target_product)
   build_command.append('TARGET_RELEASE=' + args.target_release)
   if args.with_dexpreopt_boot_img_and_system_server_only:
@@ -220,7 +219,7 @@ def matches_file_patterns(
 
 
 def zip_build_outputs(
-    modules_to_build: set[str], dist_dir: str, target_release: str
+    modules_to_build: set[str], dist_dir: pathlib.Path, target_release: str
 ):
   src_top = os.environ.get('TOP', os.getcwd())
 
