@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f890bf2e_f9073cb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-21T07:14:19Z",
+      "side": 1,
+      "message": "Please clarify what is in the commit message body. Ideally the compile error from new version of rustc without this CL. For bonus points, add a link to the 1.77.0 release notes where this new check is explained.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "a8d80ef1e661b332f93a46ef7d6c3cab5c6775bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "082fad69_28192857",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-21T07:14:19Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "a8d80ef1e661b332f93a46ef7d6c3cab5c6775bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1613349c_944c69a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-21T07:14:19Z",
+      "side": 1,
+      "message": "nit: no blank lines among the git trailers (blanks breaks git-interpret-trailers).",
+      "revId": "a8d80ef1e661b332f93a46ef7d6c3cab5c6775bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f80c494_ecb40784",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-21T07:14:19Z",
+      "side": 1,
+      "message": "I assume you need to repo sync the rust-toolchain project to access this script?\n\nWhat\u0027s the path to this script? Please change to \"croot \u003cpath\u003e \u0026\u0026 ./test_compiler.py [...] # need to repo sync \u003cinstructions\u003e\"",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "a8d80ef1e661b332f93a46ef7d6c3cab5c6775bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f05ea54a_a0076cad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-21T07:14:19Z",
+      "side": 1,
+      "message": "Thanks for uploading this (and for keeping rustc up-to-date -- I very much appreciate that work!). I know this CL is only a WIP CL but added some feedback anyway.",
+      "revId": "a8d80ef1e661b332f93a46ef7d6c3cab5c6775bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
