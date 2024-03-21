@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b6b4456_85bc01d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1623611
+      },
+      "writtenOn": "2024-03-21T18:23:46Z",
+      "side": 1,
+      "message": "Requesting a sanity check on the diffs.  This change fixes the sdk, sbom, and mainline module builds on main and aosp-main.  Other testing is in progress.",
+      "revId": "7ce9e621503300511b5f774c1658ad74f1003004",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
