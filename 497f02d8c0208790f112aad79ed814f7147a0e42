@@ -214,6 +214,30 @@
       },
       "revId": "497f02d8c0208790f112aad79ed814f7147a0e42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9878c630_0f410ebc",
+        "filename": "tools/aconfig/aconfig_storage_read_api/src/mapped_file.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-03-22T12:48:58Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "0122374b_5a30d92c",
+      "range": {
+        "startLine": 60,
+        "startChar": 3,
+        "endLine": 60,
+        "endChar": 27
+      },
+      "revId": "497f02d8c0208790f112aad79ed814f7147a0e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
