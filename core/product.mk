@@ -33,10 +33,6 @@ _product_single_value_vars += PRODUCT_MODEL_FOR_ATTESTATION
 # 4096, 16384 and 65536.
 _product_single_value_vars += PRODUCT_MAX_PAGE_SIZE_SUPPORTED
 
-# Indicates that AOSP can use a kernel configured with 4k/16k/64k page sizes.
-# The possible values are true or false.
-_product_single_value_vars += PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO
-
 # The resource configuration options to use for this product.
 _product_list_vars += PRODUCT_LOCALES
 _product_list_vars += PRODUCT_AAPT_CONFIG
