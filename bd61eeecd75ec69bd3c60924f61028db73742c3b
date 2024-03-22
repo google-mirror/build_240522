@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a8d614_762a105b",
+        "filename": "core/product.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-03-22T07:49:10Z",
+      "side": 0,
+      "message": "see my previous comment",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 63
+      },
+      "revId": "bd61eeecd75ec69bd3c60924f61028db73742c3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
