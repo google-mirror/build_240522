@@ -16,6 +16,24 @@
       "message": "You need to find a way of refactoring the inherit-product calls to avoid doing this kind of procedural logic.",
       "revId": "dc05c17b887094866dd6a5e5243251145469fc51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1b2271a_e887d96b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1994610
+      },
+      "writtenOn": "2024-03-22T19:18:33Z",
+      "side": 1,
+      "message": "What\u0027s your suggestion? Ultimately, we need an if-statement that conditionally includes these packages somewhere.",
+      "parentUuid": "6d902022_e1bcbd1c",
+      "revId": "dc05c17b887094866dd6a5e5243251145469fc51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
