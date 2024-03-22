@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eda414bc_aa2b198f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-03-22T19:23:20Z",
+      "side": 1,
+      "message": "This patch does multiple different things. Please create one patch that moves to 16kB and then another patch (or additional patches) which does the other changes/refactoring and explains them. If this 2nd/etc patch(es) causes in issue or is controversial, it could be discussed/reverted separately from the non-controversial change.",
+      "revId": "f97d5de8baeddfb732eefcf143cae36cdb585fcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
