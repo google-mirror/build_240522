@@ -424,14 +424,11 @@ endif
 
 # Boolean variable determining if AOSP is page size agnostic. This means
 # that AOSP can use a kernel configured with 4k/16k/64k PAGE SIZES.
-TARGET_NO_BIONIC_PAGE_SIZE_MACRO := false
-ifdef PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO
-  TARGET_NO_BIONIC_PAGE_SIZE_MACRO := $(PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO)
-  ifeq ($(TARGET_NO_BIONIC_PAGE_SIZE_MACRO),true)
-      ifeq (,$(filter 16384 65536,$(TARGET_MAX_PAGE_SIZE_SUPPORTED)))
-          $(error TARGET_MAX_PAGE_SIZE_SUPPORTED has to be either 16384 or 65536 to support page size agnostic)
-      endif
-  endif
+# AOSP is page size agnostic by default.
+TARGET_NO_BIONIC_PAGE_SIZE_MACRO := true
+ifdef PRODUCT_MAX_PAGE_SIZE_SUPPORTED
+   # This is to provide a way to override with "false" for testing.
+   TARGET_NO_BIONIC_PAGE_SIZE_MACRO := $(PRODUCT_MAX_PAGE_SIZE_SUPPORTED)
 endif
 .KATI_READONLY := TARGET_NO_BIONIC_PAGE_SIZE_MACRO
 
