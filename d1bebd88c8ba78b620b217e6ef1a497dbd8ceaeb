@@ -70,6 +70,24 @@
       "parentUuid": "dab5e5b3_50d77310",
       "revId": "d1bebd88c8ba78b620b217e6ef1a497dbd8ceaeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0f84d13_234c3e6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-22T03:56:50Z",
+      "side": 1,
+      "message": "Ping. Does above answer your question/concerns?",
+      "parentUuid": "c9f6d17d_c0178082",
+      "revId": "d1bebd88c8ba78b620b217e6ef1a497dbd8ceaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
