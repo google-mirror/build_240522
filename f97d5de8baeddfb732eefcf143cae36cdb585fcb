@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4a8ffdf_3de8bc91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-03-22T21:17:12Z",
+      "side": 1,
+      "message": "Good point, done!",
+      "parentUuid": "eda414bc_aa2b198f",
+      "revId": "f97d5de8baeddfb732eefcf143cae36cdb585fcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0dd3cc81_f11e33d6",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-03-22T19:23:56Z",
       "side": 1,
       "message": "this also needs to be changed?",
+      "range": {
+        "startLine": 431,
+        "startChar": 47,
+        "endLine": 431,
+        "endChar": 52
+      },
+      "revId": "f97d5de8baeddfb732eefcf143cae36cdb585fcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f4c9ba_29c2c5ce",
+        "filename": "core/config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-03-22T21:17:12Z",
+      "side": 1,
+      "message": "Done in the diffbase CL.",
+      "parentUuid": "0dd3cc81_f11e33d6",
       "range": {
         "startLine": 431,
         "startChar": 47,
