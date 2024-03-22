@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9841ed1d_086268bf",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-03-22T23:51:29Z",
+      "side": 1,
+      "message": "Policy and mechanism. If 4k page is explicitly specified, we can continue the build, but a VTS or other test should fail.",
+      "parentUuid": "69e29d2b_91c2aa23",
+      "range": {
+        "startLine": 406,
+        "startChar": 18,
+        "endLine": 406,
+        "endChar": 23
+      },
+      "revId": "091c2c1f6dac19c62b2b7f2f8062bc59e522a784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "477dd75c_fc74c9da",
         "filename": "core/config.mk",
         "patchSetId": 3
