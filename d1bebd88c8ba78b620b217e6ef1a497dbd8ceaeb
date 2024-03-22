@@ -88,6 +88,24 @@
       "parentUuid": "c9f6d17d_c0178082",
       "revId": "d1bebd88c8ba78b620b217e6ef1a497dbd8ceaeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5034e232_be055df3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040443
+      },
+      "writtenOn": "2024-03-22T11:56:05Z",
+      "side": 1,
+      "message": "ACK on your point \"for now I want to keep things as they are\" makes sense\n\nwhat I don\u0027t understand is the following: today the dependency graph from a buildsystem viewpoint is\n\n```\n[base_system.mk] -\u003e [traced_probes] -\u003e {libperfetto_android_internal, mm_events, ...}\n```\n\n\nnow, my expectation was that you\u0027d break the dependency at the root, i.e. break the dep between [microdroid] and [traced_probes]\ninstead now you have\n\n```\n[base_system.mk]  -\u003e [traced_probes]\n                     [traced_probes.android] -\u003e  {libperfetto_android_internal, mm_events, ...}\n```\n\nand I don\u0027t understand how it helps with microdroid. What\u0027s the resulting dep graph for microdroid?\nbecause:\n\ncase 1) If you end up depending only on one of the targets, either of them will pull stuff you don\u0027t want (either traced_probes alone, or mm_event and the rest)\n\ncase 2) if you end up depending on neither of them... what\u0027s the point of splitting in two\n\n\nLet me ask a different question, maybe it\u0027s easier: which targets from external/perfetto (if any) do you want for microdroif?",
+      "parentUuid": "e0f84d13_234c3e6b",
+      "revId": "d1bebd88c8ba78b620b217e6ef1a497dbd8ceaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
