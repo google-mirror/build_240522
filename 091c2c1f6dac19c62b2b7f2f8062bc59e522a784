@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed877846_1b143dbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-03-22T17:49:04Z",
+      "side": 1,
+      "message": "Sounds good! I took out the page agnostic flag change out of this",
+      "parentUuid": "eb0c7e1a_1335a59a",
+      "revId": "091c2c1f6dac19c62b2b7f2f8062bc59e522a784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ea7b29d_37409a39",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-03-22T07:49:10Z",
       "side": 1,
       "message": "should we add 4096 to the filter list?",
+      "range": {
+        "startLine": 406,
+        "startChar": 18,
+        "endLine": 406,
+        "endChar": 23
+      },
+      "revId": "091c2c1f6dac19c62b2b7f2f8062bc59e522a784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69e29d2b_91c2aa23",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-03-22T17:49:04Z",
+      "side": 1,
+      "message": "Why? PRODUCT_MAX_PAGE_SIZE_SUPPORTED is not allowed to be 4096 right?",
+      "parentUuid": "6ea7b29d_37409a39",
       "range": {
         "startLine": 406,
         "startChar": 18,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "326c6f7f_8003ada0",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-03-22T17:49:04Z",
+      "side": 1,
+      "message": "PRODUCT_MAX_PAGE_SUPPORTED override can be 64k, right?",
+      "parentUuid": "477dd75c_fc74c9da",
+      "range": {
+        "startLine": 426,
+        "startChar": 45,
+        "endLine": 426,
+        "endChar": 55
+      },
+      "revId": "091c2c1f6dac19c62b2b7f2f8062bc59e522a784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6ba66623_1da24e90",
@@ -77,6 +143,30 @@
       "writtenOn": "2024-03-22T07:49:10Z",
       "side": 1,
       "message": "I think we should have something like:\n\n```\nTARGET_NO_BIONIC_PAGE_SIZE_MACRO :\u003d true\nifdef PRODUCT_MAX_PAGE_SIZE_SUPPORTED\n   TARGET_NO_BIONIC_PAGE_SIZE_MACRO :\u003d $(PRODUCT_MAX_PAGE_SIZE_SUPPORTED)\nendif\n```\n\nIn this way, we have the flexibility to allow certain targets to set\n\nPRODUCT_MAX_PAGE_SIZE_SUPPORTED :\u003d false\n\nfor testing.",
+      "range": {
+        "startLine": 428,
+        "startChar": 0,
+        "endLine": 428,
+        "endChar": 40
+      },
+      "revId": "091c2c1f6dac19c62b2b7f2f8062bc59e522a784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2971567a_f0811983",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-03-22T17:49:04Z",
+      "side": 1,
+      "message": "I\u0027ll take the NO_BIONIC_PAGE_SIZE changes in a separate CL as @kaleshsingh@google.com suggested\n\nBut why do we need to allow flexibility?",
+      "parentUuid": "6ba66623_1da24e90",
       "range": {
         "startLine": 428,
         "startChar": 0,
