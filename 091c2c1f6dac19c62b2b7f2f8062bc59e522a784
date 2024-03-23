@@ -107,6 +107,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df249533_2d42bb82",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-03-23T00:30:15Z",
+      "side": 1,
+      "message": "Ok that makes sense. Removing the validation logic altogether.",
+      "parentUuid": "9841ed1d_086268bf",
+      "range": {
+        "startLine": 406,
+        "startChar": 18,
+        "endLine": 406,
+        "endChar": 23
+      },
+      "revId": "091c2c1f6dac19c62b2b7f2f8062bc59e522a784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "477dd75c_fc74c9da",
