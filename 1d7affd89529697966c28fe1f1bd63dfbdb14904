@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d5c3a85_af8774ec",
+        "filename": "core/config.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-03-23T00:35:32Z",
+      "side": 1,
+      "message": "I think you should be able to do this, so that unless someone explicitly sets it, you set it to true:\n\n```\nTARGET_NO_BIONIC_PAGE_SIZE_MACRO ?\u003d true\n```\n\nNote",
+      "range": {
+        "startLine": 424,
+        "startChar": 0,
+        "endLine": 429,
+        "endChar": 5
+      },
+      "revId": "1d7affd89529697966c28fe1f1bd63dfbdb14904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
