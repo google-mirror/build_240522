@@ -131,6 +131,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c460930_3cd49042",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-03-23T00:31:47Z",
+      "side": 1,
+      "message": "thanks",
+      "parentUuid": "9841ed1d_086268bf",
+      "range": {
+        "startLine": 406,
+        "startChar": 18,
+        "endLine": 406,
+        "endChar": 23
+      },
+      "revId": "091c2c1f6dac19c62b2b7f2f8062bc59e522a784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "477dd75c_fc74c9da",
@@ -168,6 +192,30 @@
       "side": 1,
       "message": "PRODUCT_MAX_PAGE_SUPPORTED override can be 64k, right?",
       "parentUuid": "477dd75c_fc74c9da",
+      "range": {
+        "startLine": 426,
+        "startChar": 45,
+        "endLine": 426,
+        "endChar": 55
+      },
+      "revId": "091c2c1f6dac19c62b2b7f2f8062bc59e522a784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c85ed9a5_599b451e",
+        "filename": "core/config.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-03-23T00:31:47Z",
+      "side": 1,
+      "message": "yes - resolving since this is a comment, and we do want to test 64k kernels too, just not yet.",
+      "parentUuid": "326c6f7f_8003ada0",
       "range": {
         "startLine": 426,
         "startChar": 45,
