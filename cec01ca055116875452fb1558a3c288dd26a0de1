@@ -22,6 +22,30 @@
       },
       "revId": "cec01ca055116875452fb1558a3c288dd26a0de1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d85e5957_2ec12f05",
+        "filename": "core/product.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-03-23T00:41:58Z",
+      "side": 0,
+      "message": "But we still remove the override values from the targets in AOSP, right?",
+      "parentUuid": "fbb2d9be_d9719fdb",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 63
+      },
+      "revId": "cec01ca055116875452fb1558a3c288dd26a0de1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
