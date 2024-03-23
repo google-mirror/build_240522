@@ -46,6 +46,30 @@
       },
       "revId": "cec01ca055116875452fb1558a3c288dd26a0de1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f073a52_d40cf089",
+        "filename": "core/product.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-03-23T00:50:19Z",
+      "side": 0,
+      "message": "Yeah, but we want to be able to specify `PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO :\u003d false` as well. Imagine for instance, a keystone branch breaks or a watch branch breaks. Rather than revert this CL there, they can set it false for that target, only on the one that still uses page size.\n\nWe might also want to specify this to be used only on \u003e\u003d V devices, since old devices might not want to remove PAGE_SIZE logic, and they don\u0027t really need to.",
+      "parentUuid": "d85e5957_2ec12f05",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 63
+      },
+      "revId": "cec01ca055116875452fb1558a3c288dd26a0de1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
