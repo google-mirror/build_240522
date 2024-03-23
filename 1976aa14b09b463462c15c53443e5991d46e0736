@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce3eb4d8_58601c69",
+        "filename": "core/config.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-03-23T07:10:52Z",
+      "side": 1,
+      "message": "Remove this? I think not-hardcoding page_size assumptions is independent of ELF alignment",
+      "range": {
+        "startLine": 429,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 11
+      },
+      "revId": "1976aa14b09b463462c15c53443e5991d46e0736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
