@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53492b57_abdda322",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-03-23T02:30:19Z",
+      "side": 1,
+      "message": "After this, throw an exception if \u0027DIST_DIR\u0027 isn\u0027t set in os.environ.\n```suggestion\n  argparser.add_argument(\u0027--change_info\u0027, nargs\u003d\u0027?\u0027)\n\n  if not os.getenv(\u0027DIST_DIR\u0027):\n    raise RuntimeError(\u0027DIST_DIR not set in environment.\u0027)\n\n```",
+      "revId": "d479258b50d1e2a2264812b01e3369362e97039e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a30548d2_47041f7e",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-03-23T02:30:19Z",
+      "side": 1,
+      "message": "Use os.environ[\u0027DIST_DIR\u0027]\n```suggestion\n  build_command.append(\u0027DIST_DIR\u003d\u0027 + os.environ[\u0027DIST_DIR\u0027])\n```",
+      "revId": "d479258b50d1e2a2264812b01e3369362e97039e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc6ff539_6732dac9",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-03-23T02:30:19Z",
+      "side": 1,
+      "message": "Use os.environ[\u0027DIST_DIR\u0027]\n\nThis will throw a more descriptive KeyError if it isn\u0027t set\n```suggestion\n      os.path.join(os.environ[\u0027DIST_DIR\u0027], name),\n```",
+      "revId": "d479258b50d1e2a2264812b01e3369362e97039e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
