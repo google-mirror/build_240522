@@ -117,6 +117,23 @@
       },
       "revId": "adaf1c6f119d8c075fbb476102f23b3c98d28ed7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb25df84_fc414959",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1867,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-03-25T18:00:11Z",
+      "side": 1,
+      "message": "Could we also wrap the definitions of these files in `BUILDING_*_IMAGE` here? https://cs.android.com/android/platform/superproject/main/+/main:build/make/core/sysprop.mk;l\u003d342;drc\u003d53dd895407cf3d09c559f31240a1985005d8085d",
+      "revId": "adaf1c6f119d8c075fbb476102f23b3c98d28ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
