@@ -125,7 +125,7 @@ $(eval $(strip $(1)): PRIVATE_IN := $(strip $(7)))
 $(strip $(1)): $(ACONFIG) $(strip $(7))
 	mkdir -p $$(dir $$(PRIVATE_OUT))
 	$$(if $$(PRIVATE_IN), \
-		$$(ACONFIG) create-storage --container "" --file package_map --out $$(PRIVATE_OUT) \
+		$$(ACONFIG) create-storage --container $(8) --file package_map --out $$(PRIVATE_OUT) \
 			$$(addprefix --cache ,$$(PRIVATE_IN)), \
 	)
 	touch $$(PRIVATE_OUT)
@@ -134,7 +134,7 @@ $(eval $(strip $(2)): PRIVATE_IN := $(strip $(7)))
 $(strip $(2)): $(ACONFIG) $(strip $(7))
 	mkdir -p $$(dir $$(PRIVATE_OUT))
 	$$(if $$(PRIVATE_IN), \
-		$$(ACONFIG) create-storage --container "" --file flag_map --out $$(PRIVATE_OUT) \
+		$$(ACONFIG) create-storage --container $(8) --file flag_map --out $$(PRIVATE_OUT) \
 			$$(addprefix --cache ,$$(PRIVATE_IN)), \
 	)
 	touch $$(PRIVATE_OUT)
@@ -143,7 +143,7 @@ $(eval $(strip $(3)): PRIVATE_IN := $(strip $(7)))
 $(strip $(3)): $(ACONFIG) $(strip $(7))
 	mkdir -p $$(dir $$(PRIVATE_OUT))
 	$$(if $$(PRIVATE_IN), \
-		$$(ACONFIG) create-storage --container "" --file flag_val --out $$(PRIVATE_OUT) \
+		$$(ACONFIG) create-storage --container $(8) --file flag_val --out $$(PRIVATE_OUT) \
 		$$(addprefix --cache ,$$(PRIVATE_IN)), \
 	)
 	touch $$(PRIVATE_OUT)
@@ -167,6 +167,7 @@ $(foreach partition, $(_FLAG_PARTITIONS), \
 				$(sort $(foreach m,$(call register-names-for-partition, $(partition)), \
 					$(ALL_MODULES.$(m).ACONFIG_FILES) \
 				)), \
+				$(partition), \
 	)) \
 )
 endif
