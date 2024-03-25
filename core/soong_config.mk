@@ -173,8 +173,18 @@ $(call add_json_bool, VndkUseCoreVariant,                $(TARGET_VNDK_USE_CORE_
 $(call add_json_bool, VndkSnapshotBuildArtifacts,        $(VNDK_SNAPSHOT_BUILD_ARTIFACTS))
 
 $(call add_json_map,  BuildFlags)
-$(foreach flag,$(_ALL_RELEASE_FLAGS),\
-  $(call add_json_str,$(flag),$(_ALL_RELEASE_FLAGS.$(flag).VALUE)))
+  $(foreach flag,$(_ALL_RELEASE_FLAGS),\
+    $(call add_json_map,$(flag),BuildFlagsData) \
+      $(call add_json_str, Name,     $(flag)) \
+      $(call add_json_str, Value,    $(_ALL_RELEASE_FLAGS.$(flag).VALUE)) \
+      $(call add_json_str, Set,      $(_ALL_RELEASE_FLAGS.$(flag).SET_IN)) \
+      $(call add_json_str, Default,  $(_ALL_RELEASE_FLAGS.$(flag).DEFAULT)) \
+      $(call add_json_str, Declared, $(_ALL_RELEASE_FLAGS.$(flag).DECLARED_IN)) \
+    $(call end_json_map))
+$(call end_json_map)
+$(call add_json_map,  BuildFlagsPartitions)
+$(foreach partition,$(_ALL_RELEASE_FLAGS.PARTITIONS),\
+  $(call add_json_list,$(partition),$(_ALL_RELEASE_FLAGS.PARTITIONS.$(partition))))
 $(call end_json_map)
 
 $(call add_json_bool, DirectedVendorSnapshot,            $(DIRECTED_VENDOR_SNAPSHOT))
