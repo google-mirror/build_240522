@@ -175,6 +175,22 @@ $(call add_json_map,  BuildFlags)
 $(foreach flag,$(_ALL_RELEASE_FLAGS),\
   $(call add_json_str,$(flag),$(_ALL_RELEASE_FLAGS.$(flag).VALUE)))
 $(call end_json_map)
+$(call add_json_map,  BuildFlagsSet)
+$(foreach flag,$(_ALL_RELEASE_FLAGS),\
+  $(call add_json_str,$(flag),$(_ALL_RELEASE_FLAGS.$(flag).SET_IN)))
+$(call end_json_map)
+$(call add_json_map,  BuildFlagsDefault)
+$(foreach flag,$(_ALL_RELEASE_FLAGS),\
+  $(call add_json_str,$(flag),$(_ALL_RELEASE_FLAGS.$(flag).DEFAULT)))
+$(call end_json_map)
+$(call add_json_map,  BuildFlagsDeclared)
+$(foreach flag,$(_ALL_RELEASE_FLAGS),\
+  $(call add_json_str,$(flag),$(_ALL_RELEASE_FLAGS.$(flag).DECLARED_IN)))
+$(call end_json_map)
+$(call add_json_map,  BuildFlagsPartitions)
+$(foreach partition,$(_ALL_RELEASE_FLAGS.PARTITIONS),\
+  $(call add_json_list,$(partition),$(_ALL_RELEASE_FLAGS.PARTITIONS.$(partition))))
+$(call end_json_map)
 
 $(call add_json_bool, DirectedVendorSnapshot,            $(DIRECTED_VENDOR_SNAPSHOT))
 $(call add_json_map,  VendorSnapshotModules)

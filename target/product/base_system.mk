@@ -43,6 +43,7 @@ PRODUCT_PACKAGES += \
     boringssl_self_test \
     bpfloader \
     bu \
+    build_flag_system \
     bugreport \
     bugreportz \
     cgroups.json \

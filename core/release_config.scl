@@ -224,6 +224,7 @@ def release_config(all_flags, all_values):
     result = {
         "_ALL_RELEASE_FLAGS": sorted(flag_names),
     }
+    result["_ALL_RELEASE_FLAGS.PARTITIONS"] = _flag_partitions
     for partition, names in partitions.items():
         result["_ALL_RELEASE_FLAGS.PARTITIONS." + partition] = names
     for flag in all_flags:
