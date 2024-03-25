@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7bc3a45_39107dc3",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1861,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-25T08:29:17Z",
+      "side": 1,
+      "message": "what about these? :)",
+      "range": {
+        "startLine": 1842,
+        "startChar": 0,
+        "endLine": 1861,
+        "endChar": 38
+      },
+      "revId": "adaf1c6f119d8c075fbb476102f23b3c98d28ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e8aafdd_b8065905",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1862,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-25T08:29:17Z",
+      "side": 1,
+      "message": "didn\u0027t know that we have these...",
+      "range": {
+        "startLine": 1862,
+        "startChar": 11,
+        "endLine": 1862,
+        "endChar": 32
+      },
+      "revId": "adaf1c6f119d8c075fbb476102f23b3c98d28ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
