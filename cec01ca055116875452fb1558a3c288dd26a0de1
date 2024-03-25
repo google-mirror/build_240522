@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5bc01050_65235cdf",
+        "filename": "core/product.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-03-25T04:29:21Z",
+      "side": 0,
+      "message": "This comment is misleading. It should say aosp doesn\u0027t rely on bionic\u0027s PAGE_SIZE macro.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "cec01ca055116875452fb1558a3c288dd26a0de1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbb2d9be_d9719fdb",
         "filename": "core/product.mk",
         "patchSetId": 5
