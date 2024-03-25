@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "115c228e_1fc56536",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1861,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-03-25T08:35:03Z",
+      "side": 1,
+      "message": "Most of these (except INSTALLED_FILES_FILE_ROOT) are conditionally empty if the corresponding partition is not built\n\nfor example, INSTALLED_FILES_FILE is defined iff BUILDING_SYSTEM_IMAGE is defined truthy.\n\n---\n\n`INSTALLED_FILES_FILE_ROOT` this is unconditionally always built. It is depended only system.img and recovery.img build rule (and maybe some other implicit dependencies), and I can\u0027t really wrap my head around how (or why) it should (or should not) be unconditionally always built, so I\u0027ll just leave it alone. \nI think `INSTALLED_FILES_FILE_ROOT` comes from before we have recovery-as-boot. Nowadays the \"ROOT\" structure is embeded in system.img and recovery .img ramdisk, so maybe we can remove `INSTALLED_FILES_FILE_ROOT` entirely...?",
+      "parentUuid": "a7bc3a45_39107dc3",
+      "range": {
+        "startLine": 1842,
+        "startChar": 0,
+        "endLine": 1861,
+        "endChar": 38
+      },
+      "revId": "adaf1c6f119d8c075fbb476102f23b3c98d28ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9e8aafdd_b8065905",
