@@ -46,6 +46,30 @@
       },
       "revId": "ee0a77ba3ad5bcfbfb08ddbd9c70c2461c87ef08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afccf5a0_04fb9ce2",
+        "filename": "core/tasks/tools/vts_package_utils.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1311067
+      },
+      "writtenOn": "2024-03-26T06:51:19Z",
+      "side": 1,
+      "message": "https://www.gnu.org/software/make/manual/html_node/Text-Functions.html\n\n```\n$(sort list)\nSorts the words of list in lexical order, removing duplicate words. The output is a list of words separated by single spaces. \n```\n\nThanks!",
+      "parentUuid": "05020558_932f5a20",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 21
+      },
+      "revId": "ee0a77ba3ad5bcfbfb08ddbd9c70c2461c87ef08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
