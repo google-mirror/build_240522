@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa1670b8_3c0253f5",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-26T23:30:22Z",
+      "side": 1,
+      "message": "You don\u0027t need this. The function name should be self explanatory. Maybe something like `log_tool_invocation`?",
+      "range": {
+        "startLine": 1104,
+        "startChar": 4,
+        "endLine": 1104,
+        "endChar": 43
+      },
+      "revId": "1df7d49903d4fece3e7e246cc30763bcaaf72f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a46457_f07f17fc",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-26T23:30:22Z",
+      "side": 1,
+      "message": "How are you capturing the start time?",
+      "range": {
+        "startLine": 1105,
+        "startChar": 4,
+        "endLine": 1105,
+        "endChar": 14
+      },
+      "revId": "1df7d49903d4fece3e7e246cc30763bcaaf72f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae16e93c_b13a3bda",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-26T23:30:22Z",
+      "side": 1,
+      "message": "How will you override this for internal checkouts?",
+      "range": {
+        "startLine": 1108,
+        "startChar": 9,
+        "endLine": 1108,
+        "endChar": 19
+      },
+      "revId": "1df7d49903d4fece3e7e246cc30763bcaaf72f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
