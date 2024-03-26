@@ -70,6 +70,24 @@
       "parentUuid": "7e0e8f2f_29ea9291",
       "revId": "6a35810856883cb318793a90114c1b2f7cdb2e42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a36b3310_1bd00884",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-03-26T00:46:45Z",
+      "side": 1,
+      "message": "ah and I assume this does the copying then: https://cs.android.com/android/platform/superproject/main/+/main:build/make/core/misc_prebuilt_internal.mk;l\u003d31;drc\u003d710c3cb5fbdac2e43ebd17be007845e424ec8816\n\nI see now, thanks for explaining.",
+      "parentUuid": "aa679150_9460cc38",
+      "revId": "6a35810856883cb318793a90114c1b2f7cdb2e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
