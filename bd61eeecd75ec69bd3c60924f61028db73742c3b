@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7a502f3_9d600839",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-26T23:21:20Z",
+      "side": 0,
+      "message": "Keep the dist dir parameter as it was explicit. I would do something like this:\n\n```\ndef build_test_suites(argv):\n  args \u003d parse_args(argv)\n  dist_dir \u003d os.env[\u0027DIST_DIR\u0027]  # Raises a `KeyError` if absent.\n\n  if is_optimization_enabled():\n    # Call the class to map changed files to modules to build.\n    # TODO(lucafarsi): Move this into a replaceable class.\n    build_affected_modules(args, dist_dir)\n  else:\n    build_everything(args, dist_dir)\n```",
+      "range": {
+        "startLine": 95,
+        "startChar": 38,
+        "endLine": 95,
+        "endChar": 51
+      },
+      "revId": "bd61eeecd75ec69bd3c60924f61028db73742c3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
