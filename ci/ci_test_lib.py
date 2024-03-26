@@ -1,5 +1,3 @@
-#!prebuilts/build-tools/linux-x86/bin/py3-cmd -B
-#
 # Copyright 2024, The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +12,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import build_test_suites
-import sys
+"""Testing utilities for tests in the CI package."""
 
-build_test_suites.main(sys.argv[1:])
+import logging
+import os
+import unittest
+
+
+# Export the TestCase class to reduce the number of imports tests have to list.
+TestCase = unittest.TestCase
+
+
+def process_alive(pid):
+  """Check For the existence of a pid."""
+
+  try:
+    os.kill(pid, 0)
+  except OSError:
+    return False
+
+  return True
+
+
+def main():
+
+  # Disable logging since it breaks the TF Python test output parser.
+  # TODO(hzalek): Use TF's `test-output-file` option to re-enable logging.
+  logging.getLogger().disabled = True
+
+  unittest.main()
