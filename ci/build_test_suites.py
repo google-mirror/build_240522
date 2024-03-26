@@ -23,6 +23,7 @@ import json
 import os
 import pathlib
 import re
+import signal
 import subprocess
 import sys
 from typing import Any
@@ -74,7 +75,7 @@ def build_everything(args: argparse.Namespace):
   build_command = base_build_command(args, args.extra_targets)
   build_command.append('general-tests')
 
-  run_command(build_command, print_output=True)
+  run_command(build_command)
 
 
 def build_affected_modules(args: argparse.Namespace):
@@ -89,7 +90,7 @@ def build_affected_modules(args: argparse.Namespace):
   # shared libs.
   build_command.append('general-tests-shared-libs')
 
-  run_command(build_command, print_output=True)
+  run_command(build_command)
 
   zip_build_outputs(modules_to_build, args.target_release)
 
@@ -113,28 +114,22 @@ def base_build_command(
 
 def run_command(
     args: list[str],
-    env: dict[str, str] = os.environ,
-    print_output: bool = False,
-) -> str:
-  result = subprocess.run(
-      args=args,
-      text=True,
-      capture_output=True,
-      check=False,
-      env=env,
-  )
-  # If the process failed, print its stdout and propagate the exception.
-  if not result.returncode == 0:
-    print('Build command failed! output:')
-    print('stdout: ' + result.stdout)
-    print('stderr: ' + result.stderr)
+    env: dict[str, str] = os.environ
+):
+  try:
+    with subprocess.Popen(
+        args=args
+    ) as proc:
+      proc.wait()
+  except KeyboardInterrupt:
+    log_error('Received SIGINT! Build interrupted, shutting down.')
+    proc.send_signal(signal.SIGINT)
+    proc.wait()
+    sys.exit(0)
 
-  result.check_returncode()
 
-  if print_output:
-    print(result.stdout)
-
-  return result.stdout
+def log_error(log: str):
+  print(log, file=sys.stderr)
 
 
 def find_modules_to_build(
@@ -401,12 +396,18 @@ def get_soong_var(var: str, target_release: str) -> str:
   new_env = os.environ.copy()
   new_env['TARGET_RELEASE'] = target_release
 
-  value = run_command(
-      ['./build/soong/soong_ui.bash', '--dumpvar-mode', '--abs', var],
-      env=new_env,
-  ).strip()
+  result = suprocess.run(
+      args = ['./build/soong/soong_ui.bash', '--dumpvar-mode', '--abs', var],
+      text=True,
+      capture_output=True,
+      env=new_env
+  )
+
+  value = result.stdout.strip()
   if not value:
     raise RuntimeError('Necessary soong variable ' + var + ' not found.')
+
+  result.check_returncode()
 
   return value
 
