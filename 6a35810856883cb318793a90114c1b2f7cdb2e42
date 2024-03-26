@@ -52,6 +52,24 @@
       "parentUuid": "453a9561_53667543",
       "revId": "6a35810856883cb318793a90114c1b2f7cdb2e42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa679150_9460cc38",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-03-26T00:32:31Z",
+      "side": 1,
+      "message": "\u003e I thought buildinfo_prop was an input to the partition-specific property files.\n\nRight.\n\n\u003e It\u0027s not generated in make any more, right?\n\nYes.\n\n\u003e So if you point it to a makefile-specific path, won\u0027t there be nothing at this path during the build?\n\nbuildinfo_prop Soong module will export a Makefile module (`out/soong/Android-{product}.mk`) and it will produce this output.",
+      "parentUuid": "7e0e8f2f_29ea9291",
+      "revId": "6a35810856883cb318793a90114c1b2f7cdb2e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
