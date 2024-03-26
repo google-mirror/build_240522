@@ -1101,6 +1101,12 @@ function adb() {
         return 1
     fi
     $ADB "${@}"
+    log_adb_invocation "${@}"
+}
+
+function log_adb_invocation() {
+  # Do nothing by default.
+  return 0
 }
 
 # simplified version of ps; output in the form
