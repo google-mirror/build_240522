@@ -25,9 +25,22 @@ import pathlib
 import re
 import subprocess
 import sys
+import time
+from functools import wraps
 from typing import Any
 
 import test_mapping_module_retriever
+
+def timeit(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        print(f"{func.__name__!r} executed in {(end_time - start_time):.4f} seconds")
+        print()
+        return result
+    return wrapper
 
 
 # List of modules that are always required to be in general-tests.zip
@@ -36,6 +49,7 @@ REQUIRED_MODULES = frozenset(
 )
 
 
+@timeit
 def build_test_suites(argv):
   args = parse_args(argv)
 
@@ -45,6 +59,8 @@ def build_test_suites(argv):
     build_affected_modules(args)
   else:
     build_everything(args)
+  if args.with_cas_upload:
+    cas_upload(args)
 
 
 def parse_args(argv):
@@ -59,6 +75,7 @@ def parse_args(argv):
   )
   argparser.add_argument('--dist_dir')
   argparser.add_argument('--change_info', nargs='?')
+  argparser.add_argument('--with_cas_upload', action='store_true')
 
   return argparser.parse_args()
 
@@ -116,25 +133,40 @@ def run_command(
     env: dict[str, str] = os.environ,
     print_output: bool = False,
 ) -> str:
-  result = subprocess.run(
+  print(f'Running command: {" ".join(args)}')
+  process = subprocess.Popen(
       args=args,
       text=True,
-      capture_output=True,
-      check=False,
+      stdout=subprocess.PIPE,
+      stderr=subprocess.PIPE,
       env=env,
   )
-  # If the process failed, print its stdout and propagate the exception.
-  if not result.returncode == 0:
-    print('Build command failed! output:')
-    print('stdout: ' + result.stdout)
-    print('stderr: ' + result.stderr)
 
-  result.check_returncode()
+  # Continuously read and print the output
+  stdout = ''
+  while True:
+      output = process.stdout.readline()
+      if output == '' and process.poll() is not None:
+          break
+      if output:
+          if print_output:
+            print(output.strip())
+          stdout += output
+          stdout += '\n'
 
+  # Wait for the process to finish and get the final output
+  remaining_stdout, stderr = process.communicate()
   if print_output:
-    print(result.stdout)
+    print(remaining_stdout.strip())
 
-  return result.stdout
+  stdout += remaining_stdout
+
+  # Check for errors
+  if process.returncode != 0:
+      print(stderr)
+      raise subprocess.CalledProcessError(process.returncode, args, stderr)
+
+  return stdout
 
 
 def find_modules_to_build(
@@ -408,6 +440,19 @@ def get_soong_var(var: str, target_release: str) -> str:
     raise RuntimeError('Necessary soong variable ' + var + ' not found.')
 
   return value
+
+
+@timeit
+def cas_upload(args: argparse.Namespace):
+  new_env = os.environ.copy()
+  new_env['DIST_DIR'] = args.dist_dir
+  run_command(
+    [
+      './prebuilts/build-tools/linux-x86/bin/py3-cmd',
+      'tools/tradefederation/core/tools/content_uploader.py'
+    ],
+    env=new_env,
+    print_output=True)
 
 
 def main(argv):
