@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd91817e_556c353a",
+        "filename": "core/tasks/tools/vts_package_utils.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1311067
+      },
+      "writtenOn": "2024-03-26T06:31:05Z",
+      "side": 1,
+      "message": "I don\u0027t understand why `sort` can dedupliate `_built_files`. Why not `sort | uniq`? or any magic hidden in the following processes?",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 21
+      },
+      "revId": "ee0a77ba3ad5bcfbfb08ddbd9c70c2461c87ef08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
