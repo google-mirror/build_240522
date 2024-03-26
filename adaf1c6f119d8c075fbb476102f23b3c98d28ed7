@@ -152,6 +152,24 @@
       "parentUuid": "cb25df84_fc414959",
       "revId": "adaf1c6f119d8c075fbb476102f23b3c98d28ed7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a1ff55a_6bf35407",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1867,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-03-26T17:39:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8f5a29fd_5d65afe1",
+      "revId": "adaf1c6f119d8c075fbb476102f23b3c98d28ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
