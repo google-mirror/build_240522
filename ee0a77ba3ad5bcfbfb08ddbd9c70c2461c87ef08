@@ -22,6 +22,30 @@
       },
       "revId": "ee0a77ba3ad5bcfbfb08ddbd9c70c2461c87ef08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05020558_932f5a20",
+        "filename": "core/tasks/tools/vts_package_utils.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2024-03-26T06:49:27Z",
+      "side": 1,
+      "message": "As I know, there is no `uniq` in the Makefile.\nAnd the `sort` function in Makefile has the ability to exclude duplicate items.",
+      "parentUuid": "fd91817e_556c353a",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 21
+      },
+      "revId": "ee0a77ba3ad5bcfbfb08ddbd9c70c2461c87ef08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
