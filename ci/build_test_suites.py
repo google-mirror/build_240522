@@ -23,6 +23,7 @@ import json
 import os
 import pathlib
 import re
+import signal
 import subprocess
 import sys
 from typing import Any
@@ -116,25 +117,32 @@ def run_command(
     env: dict[str, str] = os.environ,
     print_output: bool = False,
 ) -> str:
-  result = subprocess.run(
-      args=args,
-      text=True,
-      capture_output=True,
-      check=False,
-      env=env,
-  )
-  # If the process failed, print its stdout and propagate the exception.
-  if not result.returncode == 0:
+  try:
+    with subprocess.Popen(
+        args=args,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True
+    ) as proc:
+      stdout = []
+      if print_output:
+        for line in proc.stdout:
+          print(line, end = '')
+          stdout.append(line)
+      _, stderr = proc.communicate()
+  except KeyboardInterrupt:
+    proc.send_signal(signal.SIGINT)
+    _, _ = proc.communicate()
+    print('Received SIGINT! Build interrupted, shutting down.')
+    sys.exit(0)
+
+  # If the process failed, print its stderr and propagate the exception.
+  if not proc.returncode == 0:
     print('Build command failed! output:')
-    print('stdout: ' + result.stdout)
-    print('stderr: ' + result.stderr)
+    print('stderr:\n' + stderr)
+    raise subprocess.CalledProcessError(proc.returncode, args)
 
-  result.check_returncode()
-
-  if print_output:
-    print(result.stdout)
-
-  return result.stdout
+  return stdout
 
 
 def find_modules_to_build(
