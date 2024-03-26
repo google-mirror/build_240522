@@ -20,9 +20,11 @@ with whatever other targets are passed in.
 import argparse
 from collections.abc import Sequence
 import json
+import logging
 import os
 import pathlib
 import re
+import signal
 import subprocess
 import sys
 from typing import Any
@@ -74,7 +76,7 @@ def build_everything(args: argparse.Namespace):
   build_command = base_build_command(args, args.extra_targets)
   build_command.append('general-tests')
 
-  run_command(build_command, print_output=True)
+  run_command(build_command)
 
 
 def build_affected_modules(args: argparse.Namespace):
@@ -89,7 +91,7 @@ def build_affected_modules(args: argparse.Namespace):
   # shared libs.
   build_command.append('general-tests-shared-libs')
 
-  run_command(build_command, print_output=True)
+  run_command(build_command)
 
   zip_build_outputs(modules_to_build, args.target_release)
 
@@ -113,28 +115,21 @@ def base_build_command(
 
 def run_command(
     args: list[str],
-    env: dict[str, str] = os.environ,
-    print_output: bool = False,
-) -> str:
-  result = subprocess.run(
-      args=args,
-      text=True,
-      capture_output=True,
-      check=False,
-      env=env,
-  )
-  # If the process failed, print its stdout and propagate the exception.
-  if not result.returncode == 0:
-    print('Build command failed! output:')
-    print('stdout: ' + result.stdout)
-    print('stderr: ' + result.stderr)
+):
+  try:
+    proc = subprocess.Popen(
+        args=args,
+        env=os.environ
+    )
+    proc.wait()
+  except KeyboardInterrupt:
+    logging.error('Received SIGINT! Build interrupted, shutting down.')
+    proc.send_signal(signal.SIGINT)
+    proc.wait()
+    raise
 
-  result.check_returncode()
-
-  if print_output:
-    print(result.stdout)
-
-  return result.stdout
+  if proc.returncode != 0:
+    raise RuntimeError('Command: ' + args + ' failed!')
 
 
 def find_modules_to_build(
@@ -296,7 +291,7 @@ def zip_build_outputs(
   zip_command.append('-f')
   zip_command.append(os.path.join(framework_path, 'vts-tradefed.jar'))
 
-  run_command(zip_command, print_output=True)
+  run_command(zip_command)
 
 
 def collect_config_files(
@@ -385,7 +380,7 @@ def zip_test_configs_zips(
   tests_config_zip_command.append(
       os.path.join(product_out, 'target_general-tests_list')
   )
-  run_command(tests_config_zip_command, print_output=True)
+  run_command(tests_config_zip_command)
 
   tests_list_zip_command = base_zip_command(
       host_out, dist_dir, 'general-tests_list.zip'
@@ -394,17 +389,22 @@ def zip_test_configs_zips(
   tests_list_zip_command.append(host_out)
   tests_list_zip_command.append('-f')
   tests_list_zip_command.append(os.path.join(host_out, 'general-tests_list'))
-  run_command(tests_list_zip_command, print_output=True)
+  run_command(tests_list_zip_command)
 
 
 def get_soong_var(var: str, target_release: str) -> str:
   new_env = os.environ.copy()
   new_env['TARGET_RELEASE'] = target_release
 
-  value = run_command(
-      ['./build/soong/soong_ui.bash', '--dumpvar-mode', '--abs', var],
+  proc = subprocess.run(
+      args = ['./build/soong/soong_ui.bash', '--dumpvar-mode', '--abs', var],
+      text=True,
+      capture_output=True,
       env=new_env,
-  ).strip()
+      check=True
+  )
+
+  value = proc.stdout.strip()
   if not value:
     raise RuntimeError('Necessary soong variable ' + var + ' not found.')
 
