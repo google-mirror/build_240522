@@ -1101,6 +1101,13 @@ function adb() {
         return 1
     fi
     $ADB "${@}"
+    # Log the adb usage and upload the log.
+    upload_log "${@}"
+}
+
+function upload_log() {
+  # Do nothing by default.
+  return 0
 }
 
 # simplified version of ps; output in the form
