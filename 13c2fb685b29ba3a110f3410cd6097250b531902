@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cd3f9f2_e2cb411f",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-03-26T23:12:49Z",
+      "side": 1,
+      "message": "stdout is now an array instead of declared string type to return",
+      "range": {
+        "startLine": 127,
+        "startChar": 15,
+        "endLine": 127,
+        "endChar": 17
+      },
+      "revId": "13c2fb685b29ba3a110f3410cd6097250b531902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b7c7fa_44f55dc2",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-03-26T23:12:49Z",
+      "side": 1,
+      "message": "I think we want to return full output regardless of print_output?",
+      "range": {
+        "startLine": 131,
+        "startChar": 10,
+        "endLine": 131,
+        "endChar": 29
+      },
+      "revId": "13c2fb685b29ba3a110f3410cd6097250b531902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dcab7cb_65c156f8",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-03-26T23:12:49Z",
+      "side": 1,
+      "message": "nit: empty lines below",
+      "range": {
+        "startLine": 149,
+        "startChar": 22,
+        "endLine": 149,
+        "endChar": 28
+      },
+      "revId": "13c2fb685b29ba3a110f3410cd6097250b531902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
