@@ -20,3 +20,11 @@ tests=(
 for test in $tests; do
   bash -x $test
 done
+
+python_tests=(
+ $(dirname $0)/run_tool_with_logging_test.py
+)
+
+for test in $python_tests; do
+  $ANDROID_BUILD_TOP/prebuilts/build-tools/linux-x86/bin/py3-cmd -B -W ignore $test
+done
