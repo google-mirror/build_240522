@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f66034d3_685a571b",
+        "filename": "core/product.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-03-26T15:58:28Z",
+      "side": 0,
+      "message": "Done in a diffbase CL",
+      "parentUuid": "5bc01050_65235cdf",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "cec01ca055116875452fb1558a3c288dd26a0de1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbb2d9be_d9719fdb",
@@ -85,6 +109,30 @@
       "side": 0,
       "message": "Yeah, but we want to be able to specify `PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO :\u003d false` as well. Imagine for instance, a keystone branch breaks or a watch branch breaks. Rather than revert this CL there, they can set it false for that target, only on the one that still uses page size.\n\nWe might also want to specify this to be used only on \u003e\u003d V devices, since old devices might not want to remove PAGE_SIZE logic, and they don\u0027t really need to.",
       "parentUuid": "d85e5957_2ec12f05",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 63
+      },
+      "revId": "cec01ca055116875452fb1558a3c288dd26a0de1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "979faef0_62509064",
+        "filename": "core/product.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-03-26T15:58:28Z",
+      "side": 0,
+      "message": "Got it! Modifying TARGET_NO_BIONIC_PAGE_SIZE_MACRO to be false for VSR_VENDOR_API_LEVEL \u003c 34 and true for all other scenarios - this would be similar to how TARGET_MAX_PAGE_SIZE_SUPPORTED is set.",
+      "parentUuid": "0f073a52_d40cf089",
       "range": {
         "startLine": 36,
         "startChar": 0,
