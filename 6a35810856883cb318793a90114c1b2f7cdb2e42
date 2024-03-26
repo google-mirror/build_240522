@@ -16,6 +16,24 @@
       "message": "I thought the version in patchset 1 was correct, why did you change it to use intermediate-dir-for?",
       "revId": "6a35810856883cb318793a90114c1b2f7cdb2e42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "453a9561_53667543",
+        "filename": "core/sysprop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-03-26T00:22:56Z",
+      "side": 1,
+      "message": "It uses a hard-coded Soong intermediate path and I don\u0027t think it\u0027s stable. This Makefile-specific intermediates output is guaranteed to exist.\n\nIf you think that\u0027s wrong then I\u0027m fine with patchset 1. WDYT?",
+      "parentUuid": "c8ab4a22_c6d8131b",
+      "revId": "6a35810856883cb318793a90114c1b2f7cdb2e42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
