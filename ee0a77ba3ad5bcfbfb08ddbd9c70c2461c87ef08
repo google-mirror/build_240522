@@ -94,6 +94,30 @@
       },
       "revId": "ee0a77ba3ad5bcfbfb08ddbd9c70c2461c87ef08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84ca6dba_09f03ba0",
+        "filename": "core/tasks/tools/vts_package_utils.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1311067
+      },
+      "writtenOn": "2024-03-26T08:02:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "98b05347_dfd957b0",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 21
+      },
+      "revId": "ee0a77ba3ad5bcfbfb08ddbd9c70c2461c87ef08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
