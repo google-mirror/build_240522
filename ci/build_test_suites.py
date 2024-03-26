@@ -20,9 +20,11 @@ with whatever other targets are passed in.
 import argparse
 from collections.abc import Sequence
 import json
+import logging
 import os
 import pathlib
 import re
+import signal
 import subprocess
 import sys
 from typing import Any
@@ -30,32 +32,53 @@ from typing import Any
 import test_mapping_module_retriever
 
 
+class BuildFailure(Exception):
+  pass
+
+
 # List of modules that are always required to be in general-tests.zip
 REQUIRED_MODULES = frozenset(
-    ['cts-tradefed', 'vts-tradefed', 'compatibility-host-util', 'soong_zip']
+    ['cts-tradefed', 'vts-tradefed', 'compatibility-host-util']
 )
+
+REQUIRED_ENV_VARS = frozenset(['TARGET_PRODUCT', 'TARGET_RELEASE'])
+
+SOONG_ZIP_EXE_REL_PATH = 'prebuilts/build-tools/linux-x86/bin/soong_zip'
+SOONG_UI_EXE_REL_PATH = 'build/soong/soong_ui.bash'
+
+
+def get_top() -> pathlib.Path:
+  return pathlib.Path(os.environ.get('TOP', os.getcwd()))
 
 
 def build_test_suites(argv):
+  check_required_env()
   args = parse_args(argv)
 
-  if is_optimization_enabled():
-    # Call the class to map changed files to modules to build.
-    # TODO(lucafarsi): Move this into a replaceable class.
-    build_affected_modules(args)
-  else:
-    build_everything(args)
+  try:
+    if is_optimization_enabled():
+      # Call the class to map changed files to modules to build.
+      # TODO(lucafarsi): Move this into a replaceable class.
+      build_affected_modules(args)
+    else:
+      build_everything(args)
+  except BuildFailure:
+    logging.error('Build command failed! Check build_log for details.')
+    return 1
+
+  return 0
+
+
+def check_required_env():
+  for env_var in REQUIRED_ENV_VARS:
+    if env_var not in os.environ:
+      raise RuntimeError(f'Required env var {env_var} not found! Aborting.')
 
 
 def parse_args(argv):
   argparser = argparse.ArgumentParser()
   argparser.add_argument(
       'extra_targets', nargs='*', help='Extra test suites to build.'
-  )
-  argparser.add_argument('--target_product')
-  argparser.add_argument('--target_release')
-  argparser.add_argument(
-      '--with_dexpreopt_boot_img_and_system_server_only', action='store_true'
   )
   argparser.add_argument('--change_info', nargs='?')
 
@@ -74,12 +97,15 @@ def build_everything(args: argparse.Namespace):
   build_command = base_build_command(args, args.extra_targets)
   build_command.append('general-tests')
 
-  run_command(build_command, print_output=True)
+  try:
+    run_command(build_command)
+  except subprocess.CalledProcessError:
+    raise BuildFailure
 
 
 def build_affected_modules(args: argparse.Namespace):
   modules_to_build = find_modules_to_build(
-      pathlib.Path(args.change_info), args.extra_required_modules
+      pathlib.Path(args.change_info), args.extra_targets
   )
 
   # Call the build command with everything.
@@ -89,9 +115,12 @@ def build_affected_modules(args: argparse.Namespace):
   # shared libs.
   build_command.append('general-tests-shared-libs')
 
-  run_command(build_command, print_output=True)
+  try:
+    run_command(build_command)
+  except subprocess.CalledProcessError:
+    raise BuildFailure
 
-  zip_build_outputs(modules_to_build, args.target_release)
+  zip_build_outputs(modules_to_build)
 
 
 def base_build_command(
@@ -99,42 +128,18 @@ def base_build_command(
 ) -> list:
   build_command = []
   build_command.append('time')
-  build_command.append('./build/soong/soong_ui.bash')
+  build_command.append(os.path.join(get_top(), SOONG_UI_EXE_REL_PATH))
   build_command.append('--make-mode')
   build_command.append('dist')
-  build_command.append('TARGET_PRODUCT=' + args.target_product)
-  build_command.append('TARGET_RELEASE=' + args.target_release)
-  if args.with_dexpreopt_boot_img_and_system_server_only:
-    build_command.append('WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY=true')
   build_command.extend(extra_targets)
 
   return build_command
 
 
-def run_command(
-    args: list[str],
-    env: dict[str, str] = os.environ,
-    print_output: bool = False,
-) -> str:
-  result = subprocess.run(
-      args=args,
-      text=True,
-      capture_output=True,
-      check=False,
-      env=env,
-  )
-  # If the process failed, print its stdout and propagate the exception.
-  if not result.returncode == 0:
-    print('Build command failed! output:')
-    print('stdout: ' + result.stdout)
-    print('stderr: ' + result.stderr)
-
-  result.check_returncode()
-
-  if print_output:
-    print(result.stdout)
-
-  return result.stdout
+def run_command(args: list[str], print_cmd: bool = True):
+  if print_cmd:
+    print('+ ' + str(args))
+  proc = subprocess.run(args=args, check=True)
 
 
 def find_modules_to_build(
@@ -146,7 +151,6 @@ def find_modules_to_build(
       changed_files, set()
   )
 
-  # Soong_zip is required to generate the output zip so always build it.
   modules_to_build = set(REQUIRED_MODULES)
   if extra_required_modules:
     modules_to_build.update(extra_required_modules)
@@ -219,24 +223,18 @@ def matches_file_patterns(
   return False
 
 
-def zip_build_outputs(
-    modules_to_build: set[str], target_release: str
-):
-  src_top = os.environ.get('TOP', os.getcwd())
+def zip_build_outputs(modules_to_build: set[str]):
+  src_top = get_top()
 
   # Call dumpvars to get the necessary things.
   # TODO(lucafarsi): Don't call soong_ui 4 times for this, --dumpvars-mode can
   # do it but it requires parsing.
-  host_out_testcases = pathlib.Path(
-      get_soong_var('HOST_OUT_TESTCASES', target_release)
-  )
-  target_out_testcases = pathlib.Path(
-      get_soong_var('TARGET_OUT_TESTCASES', target_release)
-  )
-  product_out = pathlib.Path(get_soong_var('PRODUCT_OUT', target_release))
-  soong_host_out = pathlib.Path(get_soong_var('SOONG_HOST_OUT', target_release))
-  host_out = pathlib.Path(get_soong_var('HOST_OUT', target_release))
-  dist_dir = pathlib.Path(get_soong_var('DIST_DIR', target_release))
+  host_out_testcases = pathlib.Path(get_soong_var('HOST_OUT_TESTCASES'))
+  target_out_testcases = pathlib.Path(get_soong_var('TARGET_OUT_TESTCASES'))
+  product_out = pathlib.Path(get_soong_var('PRODUCT_OUT'))
+  soong_host_out = pathlib.Path(get_soong_var('SOONG_HOST_OUT'))
+  host_out = pathlib.Path(get_soong_var('HOST_OUT'))
+  dist_dir = pathlib.Path(get_soong_var('DIST_DIR'))
 
   # Call the class to package the outputs.
   # TODO(lucafarsi): Move this code into a replaceable class.
@@ -259,44 +257,74 @@ def zip_build_outputs(
       dist_dir, host_out, product_out, host_config_files, target_config_files
   )
 
-  zip_command = base_zip_command(host_out, dist_dir, 'general-tests.zip')
+  zip_command = base_zip_command(dist_dir, 'general-tests.zip')
 
   # Add host testcases.
-  zip_command.append('-C')
-  zip_command.append(os.path.join(src_top, soong_host_out))
-  zip_command.append('-P')
-  zip_command.append('host/')
-  for path in host_paths:
-    zip_command.append('-D')
-    zip_command.append(path)
+  zip_command.extend(
+      zip_entry(
+          relative_root=os.path.join(src_top, soong_host_out),
+          prefix='host',
+          directories=host_paths,
+      )
+  )
 
   # Add target testcases.
-  zip_command.append('-C')
-  zip_command.append(os.path.join(src_top, product_out))
-  zip_command.append('-P')
-  zip_command.append('target')
-  for path in target_paths:
-    zip_command.append('-D')
-    zip_command.append(path)
+  zip_command.extend(
+      zip_entry(
+          relative_root=os.path.join(src_top, product_out),
+          prefix='target',
+          directories=target_paths,
+      )
+  )
 
   # TODO(lucafarsi): Push this logic into a general-tests-minimal build command
   # Add necessary tools. These are also hardcoded in general-tests.mk.
   framework_path = os.path.join(soong_host_out, 'framework')
 
-  zip_command.append('-C')
-  zip_command.append(framework_path)
-  zip_command.append('-P')
-  zip_command.append('host/tools')
-  zip_command.append('-f')
-  zip_command.append(os.path.join(framework_path, 'cts-tradefed.jar'))
-  zip_command.append('-f')
-  zip_command.append(
-      os.path.join(framework_path, 'compatibility-host-util.jar')
+  zip_command.extend(
+      zip_entry(
+          relative_root=framework_path,
+          prefix=os.path.join('host', 'tools'),
+          files=[
+              os.path.join(framework_path, 'cts-tradefed.jar'),
+              os.path.join(framework_path, 'compatibility-host-util.jar'),
+              os.path.join(framework_path, 'vts-tradefed.jar'),
+          ],
+      )
   )
-  zip_command.append('-f')
-  zip_command.append(os.path.join(framework_path, 'vts-tradefed.jar'))
 
-  run_command(zip_command, print_output=True)
+  run_command(zip_command, print_cmd=False)
+
+
+def zip_entry(
+    relative_root: str = None,
+    prefix: str = None,
+    files: list[str] = [],
+    directories: list[str] = [],
+    list_files: list[str] = [],
+) -> list[str]:
+  entry = []
+  if relative_root:
+    entry.append('-C')
+    entry.append(relative_root)
+
+  if prefix:
+    entry.append('-P')
+    entry.append(prefix)
+
+  for file in files:
+    entry.append('-f')
+    entry.append(file)
+
+  for directory in directories:
+    entry.append('-D')
+    entry.append(directory)
+
+  for list_file in list_files:
+    entry.append('-l')
+    entry.append(list_file)
+
+  return entry
 
 
 def collect_config_files(
@@ -308,12 +336,10 @@ def collect_config_files(
         config_files.append(os.path.join(root_dir, file))
 
 
-def base_zip_command(
-    host_out: pathlib.Path, dist_dir: pathlib.Path, name: str
-) -> list[str]:
+def base_zip_command(dist_dir: pathlib.Path, name: str) -> list[str]:
   return [
       'time',
-      os.path.join(host_out, 'bin', 'soong_zip'),
+      os.path.join(get_top(), SOONG_ZIP_EXE_REL_PATH),
       '-d',
       '-o',
       os.path.join(dist_dir, name),
@@ -358,53 +384,60 @@ def zip_test_configs_zips(
 
     for config_file in host_config_files:
       host_list_file.write(config_file + '\n')
-      list_file.write('host/' + os.path.relpath(config_file, host_out) + '\n')
+      list_file.write(
+          os.path.join('host', os.path.relpath(config_file, host_out)) + '\n'
+      )
 
     for config_file in target_config_files:
       target_list_file.write(config_file + '\n')
       list_file.write(
-          'target/' + os.path.relpath(config_file, product_out) + '\n'
+          os.path.join('target', os.path.relpath(config_file, product_out))
+          + '\n'
       )
 
   tests_config_zip_command = base_zip_command(
-      host_out, dist_dir, 'general-tests_configs.zip'
+      dist_dir, 'general-tests_configs.zip'
   )
-  tests_config_zip_command.append('-P')
-  tests_config_zip_command.append('host')
-  tests_config_zip_command.append('-C')
-  tests_config_zip_command.append(host_out)
-  tests_config_zip_command.append('-l')
-  tests_config_zip_command.append(
-      os.path.join(host_out, 'host_general-tests_list')
+  tests_config_zip_command.extend(
+      zip_entry(
+          relative_root=host_out,
+          prefix='host',
+          list_files=[os.path.join(host_out, 'host_general-tests_list')],
+      )
   )
-  tests_config_zip_command.append('-P')
-  tests_config_zip_command.append('target')
-  tests_config_zip_command.append('-C')
-  tests_config_zip_command.append(product_out)
-  tests_config_zip_command.append('-l')
-  tests_config_zip_command.append(
-      os.path.join(product_out, 'target_general-tests_list')
+  tests_config_zip_command.extend(
+      zip_entry(
+          relative_root=product_out,
+          prefix='target',
+          list_files=[os.path.join(product_out, 'target_general-tests_list')],
+      )
   )
-  run_command(tests_config_zip_command, print_output=True)
+  run_command(tests_config_zip_command, print_cmd=False)
 
-  tests_list_zip_command = base_zip_command(
-      host_out, dist_dir, 'general-tests_list.zip'
+  tests_list_zip_command = base_zip_command(dist_dir, 'general-tests_list.zip')
+  tests_list_zip_command.extend(
+      zip_entry(
+          relative_root=host_out,
+          files=[os.path.join(host_out, 'general-tests_list')],
+      )
   )
-  tests_list_zip_command.append('-C')
-  tests_list_zip_command.append(host_out)
-  tests_list_zip_command.append('-f')
-  tests_list_zip_command.append(os.path.join(host_out, 'general-tests_list'))
-  run_command(tests_list_zip_command, print_output=True)
+  run_command(tests_list_zip_command, print_cmd=False)
 
 
-def get_soong_var(var: str, target_release: str) -> str:
-  new_env = os.environ.copy()
-  new_env['TARGET_RELEASE'] = target_release
+def get_soong_var(var: str) -> str:
+  proc = subprocess.run(
+      args=[
+          os.path.join(get_top(), SOONG_UI_EXE_REL_PATH),
+          '--dumpvar-mode',
+          '--abs',
+          var,
+      ],
+      text=True,
+      capture_output=True,
+      check=True,
+  )
 
-  value = run_command(
-      ['./build/soong/soong_ui.bash', '--dumpvar-mode', '--abs', var],
-      env=new_env,
-  ).strip()
+  value = proc.stdout.rstrip('\n')
   if not value:
     raise RuntimeError('Necessary soong variable ' + var + ' not found.')
 
@@ -412,4 +445,4 @@ def get_soong_var(var: str, target_release: str) -> str:
 
 
 def main(argv):
-  build_test_suites(argv)
+  sys.exit(build_test_suites(argv))
