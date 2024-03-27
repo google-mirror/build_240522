@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba99f721_4de12d78",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-03-27T05:54:45Z",
+      "side": 1,
+      "message": "Will record the timestamp before and after ADB and then pass them to the upload_log function",
+      "parentUuid": "57a46457_f07f17fc",
+      "range": {
+        "startLine": 1105,
+        "startChar": 4,
+        "endLine": 1105,
+        "endChar": 14
+      },
+      "revId": "1df7d49903d4fece3e7e246cc30763bcaaf72f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae16e93c_b13a3bda",
         "filename": "envsetup.sh",
         "patchSetId": 1
@@ -60,6 +84,30 @@
       "writtenOn": "2024-03-26T23:30:22Z",
       "side": 1,
       "message": "How will you override this for internal checkouts?",
+      "range": {
+        "startLine": 1108,
+        "startChar": 9,
+        "endLine": 1108,
+        "endChar": 19
+      },
+      "revId": "1df7d49903d4fece3e7e246cc30763bcaaf72f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "317d6e34_be0bc77d",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-03-27T05:54:45Z",
+      "side": 1,
+      "message": "Will add the override function in a file under vendor/google/tools/ and source it in envsetup.sh: https://googleplex-android-review.git.corp.google.com/c/platform/vendor/google/tools/+/26719571",
+      "parentUuid": "ae16e93c_b13a3bda",
       "range": {
         "startLine": 1108,
         "startChar": 9,
