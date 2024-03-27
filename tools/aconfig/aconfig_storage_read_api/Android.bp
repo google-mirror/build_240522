@@ -23,6 +23,11 @@ rust_library {
     crate_name: "aconfig_storage_read_api",
     host_supported: true,
     defaults: ["aconfig_storage_read_api.defaults"],
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    min_sdk_version: "29",
 }
 
 rust_test_host {
