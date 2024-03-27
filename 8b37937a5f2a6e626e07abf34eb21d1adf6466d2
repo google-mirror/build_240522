@@ -33,6 +33,24 @@
       "message": "Do you want to do it before calling adb so that if the user cancels you still get the logs?",
       "revId": "8b37937a5f2a6e626e07abf34eb21d1adf6466d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39de1fea_8d38d839",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-27T22:40:05Z",
+      "side": 1,
+      "message": "Yeah that\u0027s why I had sort of split it with a begin/end. That way we can tell which invocations were killed because they have no end. I guess we could trap the signal and what not.\n\nWrapping the execution in a function allows us to change how we do this though. We could start out simple and expand.\n\nI have no real opinion on this though.",
+      "parentUuid": "111a0bd2_1f04b415",
+      "revId": "8b37937a5f2a6e626e07abf34eb21d1adf6466d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
