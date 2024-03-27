@@ -35,6 +35,7 @@
 pub mod flag_table;
 pub mod flag_value;
 pub mod package_table;
+pub mod flag_info;
 pub mod protos;
 
 #[cfg(test)]
@@ -49,6 +50,7 @@ use std::io::Read;
 pub use crate::flag_table::{FlagTable, FlagTableHeader, FlagTableNode};
 pub use crate::flag_value::{FlagValueHeader, FlagValueList};
 pub use crate::package_table::{PackageTable, PackageTableHeader, PackageTableNode};
+pub use crate::flag_info::{FlagInfoHeader, FlagInfoNode, FlagInfoList};
 
 use crate::AconfigStorageError::{BytesParseFail, HashTableSizeLimit};
 
@@ -68,6 +70,7 @@ pub enum StorageFileType {
     PackageMap = 0,
     FlagMap = 1,
     FlagVal = 2,
+    FlagInfo = 3,
 }
 
 impl TryFrom<&str> for StorageFileType {
@@ -78,6 +81,7 @@ impl TryFrom<&str> for StorageFileType {
             "package_map" => Ok(Self::PackageMap),
             "flag_map" => Ok(Self::FlagMap),
             "flag_val" => Ok(Self::FlagVal),
+            "flag_info" => Ok(Self::FlagInfo),
             _ => Err(anyhow!(
                 "Invalid storage file type, valid types are package_map|flag_map|flag_val"
             )),
@@ -93,6 +97,7 @@ impl TryFrom<u8> for StorageFileType {
             x if x == Self::PackageMap as u8 => Ok(Self::PackageMap),
             x if x == Self::FlagMap as u8 => Ok(Self::FlagMap),
             x if x == Self::FlagVal as u8 => Ok(Self::FlagVal),
+            x if x == Self::FlagInfo as u8 => Ok(Self::FlagInfo),
             _ => Err(anyhow!("Invalid storage file type")),
         }
     }
