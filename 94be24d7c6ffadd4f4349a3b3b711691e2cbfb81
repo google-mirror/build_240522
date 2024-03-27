@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7adcf90b_91cb72fc",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2024-03-27T17:32:41Z",
+      "side": 1,
+      "message": "This should just come from `get_soong_var(\u0027DIST_DIR\u0027, target_release)` now that this is the only place it\u0027s used. Then all of the rules on how to discover it (environment, or based on other variables) will apply.",
+      "range": {
+        "startLine": 222,
+        "startChar": 32,
+        "endLine": 222,
+        "endChar": 54
+      },
+      "revId": "94be24d7c6ffadd4f4349a3b3b711691e2cbfb81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
