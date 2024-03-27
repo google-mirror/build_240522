@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84d05a09_4d6462bd",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-27T20:47:09Z",
+      "side": 1,
+      "message": "Or\n\n```\nfunction exec_tool() {\n  \"$@\"\n  # Logging call, etc....\n}\n\nfunction adb {\n  ...\n  exec_and_log_tool $ADB \"${@}\"\n}\n```\n\nWhatever is most maintainable and risk-free.",
+      "parentUuid": "b9825d11_06357a60",
+      "range": {
+        "startLine": 1104,
+        "startChar": 4,
+        "endLine": 1104,
+        "endChar": 43
+      },
+      "revId": "1df7d49903d4fece3e7e246cc30763bcaaf72f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57a46457_f07f17fc",
         "filename": "envsetup.sh",
         "patchSetId": 1
