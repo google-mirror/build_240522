@@ -1100,8 +1100,11 @@ function adb() {
         echo "Command adb not found; try lunch (and building) first?"
         return 1
     fi
+    local start_time=$(date +%s.%N)
     $ADB "${@}"
-    log_adb_invocation "${@}"
+    local exit_code=$?
+    local exit_time=$(date +%s.%N)
+    log_adb_invocation "$start_time" "$exit_time" "$exit_code" "${@}"
 }
 
 function log_adb_invocation() {
