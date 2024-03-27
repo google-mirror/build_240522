@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9825d11_06357a60",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-27T20:40:18Z",
+      "side": 1,
+      "message": "Sure but you\u0027ll end up needing a `log_\u003ctool\u003e_invocation` for every tool. I was thinking:\n\n`log_tool_invocation \"ADB\" \"${@}\"`\n\nor\n\n```\nlocal _invocation_id\u003d$(uuidgen)  # Assuming `uuidgen` is universally available.\nlog_tool_start \"ADB\" \"${_invocation_id}}\" \"${@}\"`\nlog_tool_end \"ADB\" \"${_invocation_id}}\"\n```",
+      "parentUuid": "a2b4be3a_10202fb5",
+      "range": {
+        "startLine": 1104,
+        "startChar": 4,
+        "endLine": 1104,
+        "endChar": 43
+      },
+      "revId": "1df7d49903d4fece3e7e246cc30763bcaaf72f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57a46457_f07f17fc",
         "filename": "envsetup.sh",
         "patchSetId": 1
@@ -97,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38e12ba0_76e939d4",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-27T20:40:18Z",
+      "side": 1,
+      "message": "Why not do that now then?",
+      "parentUuid": "ba99f721_4de12d78",
+      "range": {
+        "startLine": 1105,
+        "startChar": 4,
+        "endLine": 1105,
+        "endChar": 14
+      },
+      "revId": "1df7d49903d4fece3e7e246cc30763bcaaf72f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae16e93c_b13a3bda",
         "filename": "envsetup.sh",
         "patchSetId": 1
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "Will add the override function in a file under vendor/google/tools/ and source it in envsetup.sh: https://googleplex-android-review.git.corp.google.com/c/platform/vendor/google/tools/+/26719571",
       "parentUuid": "ae16e93c_b13a3bda",
+      "range": {
+        "startLine": 1108,
+        "startChar": 9,
+        "endLine": 1108,
+        "endChar": 19
+      },
+      "revId": "1df7d49903d4fece3e7e246cc30763bcaaf72f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560798a6_a15ed22a",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-27T20:40:18Z",
+      "side": 1,
+      "message": "Are you sure that all shells will use the redefined function?",
+      "parentUuid": "317d6e34_be0bc77d",
       "range": {
         "startLine": 1108,
         "startChar": 9,
