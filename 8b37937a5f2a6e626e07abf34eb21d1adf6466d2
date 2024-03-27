@@ -51,6 +51,24 @@
       "parentUuid": "111a0bd2_1f04b415",
       "revId": "8b37937a5f2a6e626e07abf34eb21d1adf6466d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcb6d477_765a22c7",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-03-27T23:19:05Z",
+      "side": 1,
+      "message": "This is my plan to collect and upload log: https://android-review.git.corp.google.com/c/platform/build/+/3018404\n\nI record the timestamp ate the begin/end of the ADB call and also the exit code and then pass it to the uploader to generate the log proto and upload to clearcut. \n\nIn case the user cancel the ADB run, we should get an exit code 130 and still upload the start and exit event.",
+      "parentUuid": "39de1fea_8d38d839",
+      "revId": "8b37937a5f2a6e626e07abf34eb21d1adf6466d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
