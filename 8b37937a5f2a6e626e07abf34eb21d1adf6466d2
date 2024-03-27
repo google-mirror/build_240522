@@ -16,6 +16,23 @@
       "message": "Might be worth building out the entire stack of CLs and we can rework git history to land the no-nop first.",
       "revId": "8b37937a5f2a6e626e07abf34eb21d1adf6466d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "111a0bd2_1f04b415",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-03-27T20:57:18Z",
+      "side": 1,
+      "message": "Do you want to do it before calling adb so that if the user cancels you still get the logs?",
+      "revId": "8b37937a5f2a6e626e07abf34eb21d1adf6466d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
