@@ -16,6 +16,24 @@
       "message": "Pending on ag/26692210",
       "revId": "a66ac8cf8e13b7c103f0b11b29fdfbabb803fd63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f34e1dd_82cdf027",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2024-03-28T05:14:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d24bf04_b0d91807",
+      "revId": "a66ac8cf8e13b7c103f0b11b29fdfbabb803fd63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
