@@ -404,9 +404,6 @@ endef
 # TARGET_MAX_PAGE_SIZE_SUPPORTED indicates the alignment of the ELF segments.
 ifdef PRODUCT_MAX_PAGE_SIZE_SUPPORTED
   TARGET_MAX_PAGE_SIZE_SUPPORTED := $(PRODUCT_MAX_PAGE_SIZE_SUPPORTED)
-else ifeq ($(strip $(call is-low-mem-device)),true)
-  # Low memory device will have 4096 binary alignment.
-  TARGET_MAX_PAGE_SIZE_SUPPORTED := 4096
 else ifeq ($(call math_lt,$(VSR_VENDOR_API_LEVEL),34),true)
   TARGET_MAX_PAGE_SIZE_SUPPORTED := 4096
 else ifeq (,$(filter arm64 x86_64,$(TARGET_ARCH)))
