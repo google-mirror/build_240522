@@ -46,6 +46,30 @@
       },
       "revId": "6757cab2ac5c387b3ce6121e955a8857ad688504",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abfc6014_b917e21a",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1318142
+      },
+      "writtenOn": "2024-03-28T21:15:02Z",
+      "side": 1,
+      "message": "See my comment on ag/26741728.",
+      "parentUuid": "443ad6ce_fec94530",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 75
+      },
+      "revId": "6757cab2ac5c387b3ce6121e955a8857ad688504",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
