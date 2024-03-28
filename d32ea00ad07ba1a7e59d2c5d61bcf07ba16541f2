@@ -49,6 +49,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee659fbf_214a356d",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-03-28T22:25:41Z",
+      "side": 1,
+      "message": "why end with \u0027 \u0027? we must have many lines here.",
+      "range": {
+        "startLine": 131,
+        "startChar": 22,
+        "endLine": 131,
+        "endChar": 30
+      },
+      "revId": "d32ea00ad07ba1a7e59d2c5d61bcf07ba16541f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "674fcf32_1edbaef9",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-03-28T22:25:41Z",
+      "side": 1,
+      "message": "there may also be remaining stdout not handled in the above for loop.",
+      "range": {
+        "startLine": 132,
+        "startChar": 6,
+        "endLine": 132,
+        "endChar": 7
+      },
+      "revId": "d32ea00ad07ba1a7e59d2c5d61bcf07ba16541f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84d84f8c_49f34abb",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 6
