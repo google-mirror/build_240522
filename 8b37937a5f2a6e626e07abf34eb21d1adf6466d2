@@ -69,6 +69,24 @@
       "parentUuid": "39de1fea_8d38d839",
       "revId": "8b37937a5f2a6e626e07abf34eb21d1adf6466d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26e14111_d7c68cb6",
+        "filename": "envsetup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-03-28T01:04:48Z",
+      "side": 1,
+      "message": "Sorry I\u0027m wrong.. I think you mean if the ADB run got stuck and user send Ctrl-C, then it kill the entire function and the upload wont be executed in this case..\n\nWe can trap the Ctrl-C signal to ensure the upload function is still called, but maybe Hadrien\u0027s suggestion to call the upload function before/after the ADB run is simpler",
+      "parentUuid": "fcb6d477_765a22c7",
+      "revId": "8b37937a5f2a6e626e07abf34eb21d1adf6466d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
