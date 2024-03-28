@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91a1d3bf_4917aadc",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-28T22:16:33Z",
+      "side": 1,
+      "message": "Isn\u0027t this always `True`? If so, why do we need a parameter?",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 31
+      },
+      "revId": "d32ea00ad07ba1a7e59d2c5d61bcf07ba16541f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c724f7a_bf4ba4bd",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-28T22:16:33Z",
+      "side": 1,
+      "message": "Deserves a comment on why and what you are doing here.",
+      "range": {
+        "startLine": 120,
+        "startChar": 2,
+        "endLine": 120,
+        "endChar": 5
+      },
+      "revId": "d32ea00ad07ba1a7e59d2c5d61bcf07ba16541f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84d84f8c_49f34abb",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-28T22:16:33Z",
+      "side": 1,
+      "message": "QQ. Why isn\u0027t this as simple as:\n\n```\ntry:\n    p \u003d subprocess.Popen(...)  # Just stream to the current stdout, stderr.\n    p.wait()\n    \n    ...\nexcept KeyboardInterrupt:\n    p.send_signal(signal.SIGINT)\n    p.wait()\n```",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 15
+      },
+      "revId": "d32ea00ad07ba1a7e59d2c5d61bcf07ba16541f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8602c69d_e3e7b4d6",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-28T22:16:33Z",
+      "side": 1,
+      "message": "`proc.returncode !\u003d 0`",
+      "range": {
+        "startLine": 140,
+        "startChar": 5,
+        "endLine": 140,
+        "endChar": 29
+      },
+      "revId": "d32ea00ad07ba1a7e59d2c5d61bcf07ba16541f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
