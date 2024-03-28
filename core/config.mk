@@ -387,26 +387,10 @@ $(foreach var,$(_build_broken_bool_vars), \
 
 .KATI_READONLY := $(_build_broken_var_names)
 
-# Returns true if it is a low memory device, otherwise it returns false.
-define is-low-mem-device
-$(if $(findstring ro.config.low_ram=true,$(PRODUCT_PROPERTY_OVERRIDES)),true,\
-$(if $(findstring ro.config.low_ram=true,$(PRODUCT_DEFAULT_PROPERTY_OVERRIDES)),true,\
-$(if $(findstring ro.config.low_ram=true,$(PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE)),true,\
-$(if $(findstring ro.config.low_ram=true,$(PRODUCT_COMPATIBLE_PROPERTY)),true,\
-$(if $(findstring ro.config.low_ram=true,$(PRODUCT_SYSTEM_DEFAULT_PROPERTIES)),true,\
-$(if $(findstring ro.config.low_ram=true,$(PRODUCT_SYSTEM_EXT_PROPERTIES)),true,\
-$(if $(findstring ro.config.low_ram=true,$(PRODUCT_PRODUCT_PROPERTIES)),true,\
-$(if $(findstring ro.config.low_ram=true,$(PRODUCT_VENDOR_PROPERTIES)),true,\
-$(if $(findstring ro.config.low_ram=true,$(PRODUCT_ODM_PROPERTIES)),true,false)))))))))
-endef
-
 # Set TARGET_MAX_PAGE_SIZE_SUPPORTED.
 # TARGET_MAX_PAGE_SIZE_SUPPORTED indicates the alignment of the ELF segments.
 ifdef PRODUCT_MAX_PAGE_SIZE_SUPPORTED
   TARGET_MAX_PAGE_SIZE_SUPPORTED := $(PRODUCT_MAX_PAGE_SIZE_SUPPORTED)
-else ifeq ($(strip $(call is-low-mem-device)),true)
-  # Low memory device will have 4096 binary alignment.
-  TARGET_MAX_PAGE_SIZE_SUPPORTED := 4096
 else ifeq ($(call math_lt,$(VSR_VENDOR_API_LEVEL),34),true)
   TARGET_MAX_PAGE_SIZE_SUPPORTED := 4096
 else ifeq (,$(filter arm64 x86_64,$(TARGET_ARCH)))
