@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d83de511_7d904ce8",
+        "filename": "core/config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-03-28T17:08:28Z",
+      "side": 1,
+      "message": "let\u0027s remove these function too.",
+      "range": {
+        "startLine": 390,
+        "startChar": 0,
+        "endLine": 401,
+        "endChar": 5
+      },
+      "revId": "b0847c44cb9d66913ac00c9b76937d82a4e54254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
