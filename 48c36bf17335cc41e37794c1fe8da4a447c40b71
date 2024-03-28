@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d83d029_170e4c8e",
+        "filename": "tools/aconfig/aconfig_storage_file/src/flag_info.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-28T08:33:29Z",
+      "side": 1,
+      "message": "Why not #[derive(Debug)]? (Same comment applies to other structs in this file)",
+      "revId": "48c36bf17335cc41e37794c1fe8da4a447c40b71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12d9cb4d_0e24c287",
+        "filename": "tools/aconfig/aconfig_storage_file/src/flag_info.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-28T08:33:29Z",
+      "side": 1,
+      "message": "Should return \u0026[u8] instead; cf String::as_bytes and str::as_bytes: as_\u003csomething\u003e should not allocate, and should be cheap (so more similar to a cast).\n\nFor more costly conversions, the convention is to name the method into_*",
+      "range": {
+        "startLine": 58,
+        "startChar": 30,
+        "endLine": 58,
+        "endChar": 37
+      },
+      "revId": "48c36bf17335cc41e37794c1fe8da4a447c40b71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
