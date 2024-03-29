@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64b49f22_953380e2",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-29T21:38:20Z",
+      "side": 1,
+      "message": "Popen doesn\u0027t have the `check` option, added a return code check.",
+      "parentUuid": "2be8e055_a3cc4f4b",
+      "range": {
+        "startLine": 119,
+        "startChar": 22,
+        "endLine": 119,
+        "endChar": 27
+      },
+      "revId": "0361809b79b722360e4428917bbec9d07a4d3417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01c39927_afe39942",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-29T21:24:26Z",
       "side": 1,
       "message": "Why don\u0027t you use standard Python logging facilities?",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 13
+      },
+      "revId": "0361809b79b722360e4428917bbec9d07a4d3417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7bc7d01_8b8a3cf2",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-29T21:38:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01c39927_afe39942",
       "range": {
         "startLine": 125,
         "startChar": 4,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4a4b7cd_a1e2edfc",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-29T21:38:20Z",
+      "side": 1,
+      "message": "Well, i guess it depends on how you handle things, getting a var that isn\u0027t defined from soong will not error out and will return `\u0027\u0027`, but I don\u0027t think we\u0027re going to be expecting that, so we can let it fail somewhere else if the variable isn\u0027t defined. I don\u0027t really mind either way.\n\nI can do the stripping either way, I went with the regular strip() just because I don\u0027t think we want any empty variables.",
+      "parentUuid": "6097eb7c_75587293",
+      "range": {
+        "startLine": 406,
+        "startChar": 2,
+        "endLine": 406,
+        "endChar": 29
+      },
+      "revId": "0361809b79b722360e4428917bbec9d07a4d3417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09ca3199_658f4aac",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 9
@@ -83,6 +155,30 @@
       "writtenOn": "2024-03-29T21:24:26Z",
       "side": 1,
       "message": "Move this to right after the `run` call. You can\u0027t trust any output if it wasn\u0027t a successful run. Hek, you may be returning an error message as the variable\u0027s value.",
+      "range": {
+        "startLine": 410,
+        "startChar": 2,
+        "endLine": 410,
+        "endChar": 25
+      },
+      "revId": "0361809b79b722360e4428917bbec9d07a4d3417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8067bbc2_d0f1723f",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-29T21:38:20Z",
+      "side": 1,
+      "message": "just set check\u003dTrue",
+      "parentUuid": "09ca3199_658f4aac",
       "range": {
         "startLine": 410,
         "startChar": 2,
