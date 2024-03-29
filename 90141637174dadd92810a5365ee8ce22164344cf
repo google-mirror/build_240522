@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa6ee7a_858e0ad8",
+        "filename": "core/config.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-03-29T20:31:09Z",
+      "side": 1,
+      "message": "35",
+      "range": {
+        "startLine": 425,
+        "startChar": 50,
+        "endLine": 425,
+        "endChar": 52
+      },
+      "revId": "90141637174dadd92810a5365ee8ce22164344cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
