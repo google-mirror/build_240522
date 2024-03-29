@@ -22,6 +22,30 @@
       },
       "revId": "90141637174dadd92810a5365ee8ce22164344cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59c2b764_571bd91d",
+        "filename": "core/config.mk",
+        "patchSetId": 12
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-03-29T23:50:17Z",
+      "side": 1,
+      "message": "Will address in the another CL as discussed!",
+      "parentUuid": "7aa6ee7a_858e0ad8",
+      "range": {
+        "startLine": 425,
+        "startChar": 50,
+        "endLine": 425,
+        "endChar": 52
+      },
+      "revId": "90141637174dadd92810a5365ee8ce22164344cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
