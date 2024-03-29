@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c93bf42_107de493",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-29T20:57:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb88ae63_22612c23",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 8
+      },
+      "revId": "7347017c613ea35f72f60d9b9d0bc48e7f62ec93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53554aa1_f83a18e6",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-28T23:26:58Z",
       "side": 1,
       "message": "Avoid exiting in \u0027library\u0027 code. Raise instead.\n\nYou can do something like this:\n\n```\nexcept KeyboardInterrupt:\n  ...\n  raise\n```",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 128,
+        "endChar": 15
+      },
+      "revId": "7347017c613ea35f72f60d9b9d0bc48e7f62ec93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50e43779_b27a0892",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-29T20:57:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53554aa1_f83a18e6",
       "range": {
         "startLine": 128,
         "startChar": 4,
@@ -88,6 +136,54 @@
         "startChar": 11,
         "endLine": 399,
         "endChar": 20
+      },
+      "revId": "7347017c613ea35f72f60d9b9d0bc48e7f62ec93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f84075_3427cef7",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-29T20:57:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1994d429_c7ad65b2",
+      "range": {
+        "startLine": 399,
+        "startChar": 11,
+        "endLine": 399,
+        "endChar": 20
+      },
+      "revId": "7347017c613ea35f72f60d9b9d0bc48e7f62ec93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d4be6e_28dadeca",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-03-29T20:57:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26615787_41beb8c0",
+      "range": {
+        "startLine": 399,
+        "startChar": 2,
+        "endLine": 399,
+        "endChar": 8
       },
       "revId": "7347017c613ea35f72f60d9b9d0bc48e7f62ec93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
