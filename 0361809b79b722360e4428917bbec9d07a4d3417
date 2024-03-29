@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2be8e055_a3cc4f4b",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-29T21:24:26Z",
+      "side": 1,
+      "message": "Shouldn\u0027t you be passing `check\u003dTrue`?",
+      "range": {
+        "startLine": 119,
+        "startChar": 22,
+        "endLine": 119,
+        "endChar": 27
+      },
+      "revId": "0361809b79b722360e4428917bbec9d07a4d3417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01c39927_afe39942",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-29T21:24:26Z",
+      "side": 1,
+      "message": "Why don\u0027t you use standard Python logging facilities?",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 13
+      },
+      "revId": "0361809b79b722360e4428917bbec9d07a4d3417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6097eb7c_75587293",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-29T21:24:26Z",
+      "side": 1,
+      "message": "If the return code is non-zero and the string is empty, then it\u0027s ok to just return the empty string.\n\nAny reason why you\u0027re stripping the string and not just, say, the last newline? For example, what if the value of some variable was \u0027  \u0027.\n\nI don\u0027t expect this to happen in practice though.",
+      "range": {
+        "startLine": 406,
+        "startChar": 2,
+        "endLine": 406,
+        "endChar": 29
+      },
+      "revId": "0361809b79b722360e4428917bbec9d07a4d3417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09ca3199_658f4aac",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-03-29T21:24:26Z",
+      "side": 1,
+      "message": "Move this to right after the `run` call. You can\u0027t trust any output if it wasn\u0027t a successful run. Hek, you may be returning an error message as the variable\u0027s value.",
+      "range": {
+        "startLine": 410,
+        "startChar": 2,
+        "endLine": 410,
+        "endChar": 25
+      },
+      "revId": "0361809b79b722360e4428917bbec9d07a4d3417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
