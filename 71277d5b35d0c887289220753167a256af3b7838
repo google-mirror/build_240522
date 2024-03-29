@@ -16,6 +16,24 @@
       "message": "I\u0027m a bit worried about losing the ownership over this file. What is the reason why this makefile doesn\u0027t work if stored under `frameworks/binary_translation`? Could we document it here?",
       "revId": "71277d5b35d0c887289220753167a256af3b7838",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f25d6194_fb1c805a",
+        "filename": "core/tasks/berberis_test.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2024-03-29T01:53:56Z",
+      "side": 1,
+      "message": "Currently, only files named `Android.mk` are included, and there is no such restriction for `*.mk` files in `build/core/tasks/`.\nbuild/core/Makefile:`\n```\nifneq ($(dont_bother),true)\ninclude $(sort $(wildcard $(BUILD_SYSTEM)/tasks/*.mk))\n-include $(sort $(wildcard vendor/*/build/tasks/*.mk))\n...\n```\nThe purpose of clearing all `Android.mk` files for now is to optimize the build process with `Soong`. and the `berberis_test` was moved here temporarily due to difficulties in conversion.\n\nThis file only includes files under `frameworks/binary_translation`. If you need to, you may consider adding another line in this file and you will still be the owner of `frameworks/binary_translation`.\n```\ninclude $(BERBERIS_DIR)/tests/run_host_tests.mk\ninclude $(BERBERIS_DIR)/xxx.mk   \u003c---- Add this.\n```\nHowever, we do not recommend this unless absolutely necessary, as it contradicts the purpose of clearing Android.mk files.\n\n@weiwli@google.com, do you have any suggestions?",
+      "parentUuid": "b9651151_525ae9c7",
+      "revId": "71277d5b35d0c887289220753167a256af3b7838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
