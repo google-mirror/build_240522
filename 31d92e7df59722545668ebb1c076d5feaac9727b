@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83530003_f2dc5315",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-04-01T18:28:11Z",
+      "side": 1,
+      "message": "why do we implicitly add general-tests here? prefer adding general-tests explicitly",
+      "range": {
+        "startLine": 77,
+        "startChar": 23,
+        "endLine": 77,
+        "endChar": 38
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7162b07e_f0bdaf83",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
@@ -43,6 +66,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1046257_51c0c2c9",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-04-01T18:28:11Z",
+      "side": 1,
+      "message": "or, pass in the path for soong_ui.bash from commandline? so configured in gcl?",
+      "parentUuid": "7162b07e_f0bdaf83",
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84d0e21f_9f84de11",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
@@ -54,6 +95,24 @@
       "writtenOn": "2024-04-01T15:01:08Z",
       "side": 1,
       "message": "Does TARGET_RELEASE and TARGET_PRODUCT need to be supplied on the build command or can they be supplied in the environment ?\n\nIt would be more consistent to throw them all in the environment in parent and then pass through to every command, rather than having them as arguments that get passed through and are easy to forget (for example, when calling soong_ui in some places, you don\u0027t pass through both TARGET_RELEASE and TARGET_PRODUCT).",
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e361946a_38f23fdb",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-04-01T18:28:11Z",
+      "side": 1,
+      "message": "agreed. but we need to explicitly check these environments.",
+      "parentUuid": "84d0e21f_9f84de11",
       "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -83,6 +142,76 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d8bd349_1b7c5fb0",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-04-01T18:28:11Z",
+      "side": 1,
+      "message": "Using subprocess.Run mutes all stdout when run locally.",
+      "parentUuid": "17288390_5d57e69b",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebcea79c_6fccd8df",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-04-01T18:28:11Z",
+      "side": 1,
+      "message": "nit: consider extract to a function like:\nzip_command.append(zip_entry(relative_root\u003dos.path.join(src_top, soong_host_out), prefix\u003d\u0027host/\u0027, directory\u003dpath))",
+      "range": {
+        "startLine": 260,
+        "startChar": 1,
+        "endLine": 266,
+        "endChar": 28
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bba58f9b_ab4684cf",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-04-01T18:28:11Z",
+      "side": 1,
+      "message": "same as soong_ui.bash. shall we not assume where it is and let it passed by gcl?",
+      "range": {
+        "startLine": 311,
+        "startChar": 6,
+        "endLine": 311,
+        "endChar": 48
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b6c5881c_48e4d294",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
@@ -94,6 +223,24 @@
       "writtenOn": "2024-04-01T15:01:08Z",
       "side": 1,
       "message": "You are mixing forward slashes and OS-type slashes here. This does not work on Windows. Should we add any check at the top that os.path.sep \u003d\u003d \u0027/\u0027 since this will  break?",
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b43abfb_0cb4cfe5",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-04-01T18:28:11Z",
+      "side": 1,
+      "message": "consider os.path.join?",
+      "parentUuid": "b6c5881c_48e4d294",
       "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
