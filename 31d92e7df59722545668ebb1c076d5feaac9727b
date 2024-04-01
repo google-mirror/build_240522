@@ -262,6 +262,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4fc8951_0e746e82",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-01T19:02:54Z",
+      "side": 1,
+      "message": "Got it. Your original code had the bug that if you hit CTRL-C it is possible all output would be lost and never printed. You\u0027ve fixed that now because you aren\u0027t buffering the output.\n\nBefore adding SIGINT checking, I would suggest to check with Dan to see if there\u0027s some additional test cases. We need to reproduce the problem before introducing any fix, to make sure that 1) there\u0027s a real problem, and 2) that the fix fixes it.",
+      "parentUuid": "0257175d_0f86107d",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcea79c_6fccd8df",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
