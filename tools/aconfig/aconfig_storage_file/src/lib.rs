@@ -37,9 +37,7 @@ pub mod flag_table;
 pub mod flag_value;
 pub mod package_table;
 pub mod protos;
-
-#[cfg(test)]
-mod test_utils;
+pub mod test_utils;
 
 use anyhow::anyhow;
 use std::collections::hash_map::DefaultHasher;
@@ -297,11 +295,11 @@ mod tests {
         let expected = [
             (String::from("com.android.aconfig.storage.test_1/disabled_rw"), false),
             (String::from("com.android.aconfig.storage.test_1/enabled_ro"), true),
-            (String::from("com.android.aconfig.storage.test_1/enabled_rw"), false),
+            (String::from("com.android.aconfig.storage.test_1/enabled_rw"), true),
             (String::from("com.android.aconfig.storage.test_2/disabled_ro"), false),
             (String::from("com.android.aconfig.storage.test_2/enabled_fixed_ro"), true),
             (String::from("com.android.aconfig.storage.test_2/enabled_ro"), true),
-            (String::from("com.android.aconfig.storage.test_4/enabled_fixed_ro"), false),
+            (String::from("com.android.aconfig.storage.test_4/enabled_fixed_ro"), true),
             (String::from("com.android.aconfig.storage.test_4/enabled_ro"), true),
         ];
         assert_eq!(flags, expected);
