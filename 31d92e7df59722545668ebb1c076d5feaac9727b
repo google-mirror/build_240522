@@ -441,6 +441,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a31a03d_0c615d5f",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-04-01T23:08:33Z",
+      "side": 1,
+      "message": "That\u0027s for readability. Otherwise a reader must cross reference soong_zip manual to find what these parameters mean. As for the logic, I don\u0027t think there are much. zip_entry will have a list of named parameters, all we do is null-checks:\nif relative_root:\n   args.append(\u0027-C\u0027)\n   args.append(relative_root)\nif other_param:\n   ...\n  \nOne zip_entry correspond to one set of -C/-P with following -l/-f/-d.",
+      "parentUuid": "323304c2_00bf1b49",
+      "range": {
+        "startLine": 260,
+        "startChar": 1,
+        "endLine": 266,
+        "endChar": 28
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bba58f9b_ab4684cf",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
@@ -476,6 +500,30 @@
       "side": 1,
       "message": "I\u0027m not sure, we want to have less stuff in the gcl, not more. @hzalek@google.com any thoughts?",
       "parentUuid": "bba58f9b_ab4684cf",
+      "range": {
+        "startLine": 311,
+        "startChar": 6,
+        "endLine": 311,
+        "endChar": 48
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41e7785f_0182dd4b",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-04-01T23:08:33Z",
+      "side": 1,
+      "message": "To avoid too much stuff in gcl, we can define the tool paths (relative to TOP) as env vars.\n\nOr else we have soong_ui.bash, soong_zip, and in future cas_uploader in this script. If we\u0027re fine assuming the paths here, prefer we define these tool paths in one place, so it\u0027s clear what this script depends on.",
+      "parentUuid": "b75e12f1_eaa9b251",
       "range": {
         "startLine": 311,
         "startChar": 6,
