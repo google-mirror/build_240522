@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e3c1b67_99924507",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-01T15:01:08Z",
+      "side": 1,
+      "message": "These are required options.\n```suggestion\n  argparser.add_argument(\u0027--target_product\u0027, required\u003dTrue)\n  argparser.add_argument(\u0027--target_release\u0027, required\u003dTrue)\n```",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 44
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7162b07e_f0bdaf83",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-01T15:01:08Z",
+      "side": 1,
+      "message": "Is this a fair assumption about the location of soong_ui.bash ?\n\nThis should be calculated based on TOP to stay consistent with other code in the same file. This can probably move into a function as I see other code need this too. Do we just assume CWD everywhere or use TOP ? Question for build team.",
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84d0e21f_9f84de11",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-01T15:01:08Z",
+      "side": 1,
+      "message": "Does TARGET_RELEASE and TARGET_PRODUCT need to be supplied on the build command or can they be supplied in the environment ?\n\nIt would be more consistent to throw them all in the environment in parent and then pass through to every command, rather than having them as arguments that get passed through and are easy to forget (for example, when calling soong_ui in some places, you don\u0027t pass through both TARGET_RELEASE and TARGET_PRODUCT).",
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17288390_5d57e69b",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-01T15:01:08Z",
+      "side": 1,
+      "message": "Why are we using subprocess.Popen here instead of subprocess.run ? It sounds like we just need to use subprocess.run but don\u0027t capture_output so we can make sure any output isn\u0027t lost. With that in mind, we also don\u0027t need any code to capture SIGINT.\n\n```suggestion\ndef run_command(args: list[str]):\n  subprocess.run(args\u003dargs, check\u003dTrue)\n```\n\nOther notes:\n- We likely also need some code for suppressing the traceback in case of subprocess.CalledProcessError because otherwise folks are going to be debugging ci/build_test_suites.py every time there\u0027s a build error. We just want to get people focused on the error in the build command only.\n- We likely want to print major commands executed that are likely to fail (with a + in front) to aid with debugging. Most likely we need this for the build command and any other commands that are likely to fail.",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c5881c_48e4d294",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-01T15:01:08Z",
+      "side": 1,
+      "message": "You are mixing forward slashes and OS-type slashes here. This does not work on Windows. Should we add any check at the top that os.path.sep \u003d\u003d \u0027/\u0027 since this will  break?",
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
