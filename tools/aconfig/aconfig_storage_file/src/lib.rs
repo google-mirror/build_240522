@@ -37,9 +37,7 @@ pub mod flag_table;
 pub mod flag_value;
 pub mod package_table;
 pub mod protos;
-
-#[cfg(test)]
-mod test_utils;
+pub mod test_utils;
 
 use anyhow::anyhow;
 use std::collections::hash_map::DefaultHasher;
@@ -294,6 +292,16 @@ mod tests {
         let flags =
             list_flags(&package_table_path, &flag_table_path, &flag_value_list_path).unwrap();
         let expected = [
+<<<<<<< PATCH SET (588a5b aconfig: test updates)
+            (String::from("com.android.aconfig.storage.test_1/disabled_rw"), false),
+            (String::from("com.android.aconfig.storage.test_1/enabled_ro"), true),
+            (String::from("com.android.aconfig.storage.test_1/enabled_rw"), true),
+            (String::from("com.android.aconfig.storage.test_2/disabled_ro"), false),
+            (String::from("com.android.aconfig.storage.test_2/enabled_fixed_ro"), true),
+            (String::from("com.android.aconfig.storage.test_2/enabled_ro"), true),
+            (String::from("com.android.aconfig.storage.test_4/enabled_fixed_ro"), true),
+            (String::from("com.android.aconfig.storage.test_4/enabled_ro"), true),
+=======
             (String::from("com.android.aconfig.storage.test_1"), String::from("enabled_ro"), true),
             (String::from("com.android.aconfig.storage.test_1"), String::from("enabled_rw"), false),
             (
@@ -318,6 +326,7 @@ mod tests {
                 String::from("enabled_fixed_ro"),
                 false,
             ),
+>>>>>>> BASE      (cd381f Merge "aconfig: use an enum to represetn flag type" into mai)
         ];
         assert_eq!(flags, expected);
     }
