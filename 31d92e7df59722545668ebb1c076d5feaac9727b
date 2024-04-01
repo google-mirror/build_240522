@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac9b509e_8f6e3cde",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-01T22:34:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e3c1b67_99924507",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 44
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83530003_f2dc5315",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-01T18:28:11Z",
       "side": 1,
       "message": "why do we implicitly add general-tests here? prefer adding general-tests explicitly",
+      "range": {
+        "startLine": 77,
+        "startChar": 23,
+        "endLine": 77,
+        "endChar": 38
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6c6d46b_8d5174e8",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-01T22:34:04Z",
+      "side": 1,
+      "message": "I took it out of the gcl config. If we build optimized then we can\u0027t have `general-tests` in the list of modules to build but we do build it when we\u0027re building everything, so we\u0027re either stripping it out of the command in the optimized case or adding it in the unoptimized case. How would you handle adding it explictly?",
+      "parentUuid": "83530003_f2dc5315",
       "range": {
         "startLine": 77,
         "startChar": 23,
@@ -84,6 +132,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9021bbe6_14d50506",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-01T22:34:04Z",
+      "side": 1,
+      "message": "assuming CWD is TOP on the build is safe, I discussed with build team before. I think we\u0027re also trying to strip as much out of the gcl config as possible so I\u0027d prefer David\u0027s approach of using the same TOP variable and falling back on CWD.",
+      "parentUuid": "d1046257_51c0c2c9",
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84d0e21f_9f84de11",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
@@ -113,6 +179,24 @@
       "side": 1,
       "message": "agreed. but we need to explicitly check these environments.",
       "parentUuid": "84d0e21f_9f84de11",
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1394983_39d3142c",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-01T22:34:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e361946a_38f23fdb",
       "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -286,6 +370,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07731392_c2302c99",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-01T22:34:04Z",
+      "side": 1,
+      "message": "I just asked Dan if he\u0027s ok with the straight `subprocess.run` without capturing output approach and mentioned that your testing seems to show that the interruption is propagated correctly. If he\u0027s fine with it then i think that\u0027s the best choice as it\u0027s the simplest on our end.",
+      "parentUuid": "0257175d_0f86107d",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcea79c_6fccd8df",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
@@ -309,6 +417,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "323304c2_00bf1b49",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-01T22:34:04Z",
+      "side": 1,
+      "message": "i\u0027m not sure how I feel about this. There is the possibility of removing the duplication of just these two blocks with a function like `zip_testcases` since it would be specific to just this part of the zip file. But there\u0027s already all the other blocks which i can\u0027t pull out without making a function with a lot of logic that i\u0027d rather avoid.",
+      "parentUuid": "ebcea79c_6fccd8df",
+      "range": {
+        "startLine": 260,
+        "startChar": 1,
+        "endLine": 266,
+        "endChar": 28
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bba58f9b_ab4684cf",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
@@ -320,6 +452,30 @@
       "writtenOn": "2024-04-01T18:28:11Z",
       "side": 1,
       "message": "same as soong_ui.bash. shall we not assume where it is and let it passed by gcl?",
+      "range": {
+        "startLine": 311,
+        "startChar": 6,
+        "endLine": 311,
+        "endChar": 48
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b75e12f1_eaa9b251",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-01T22:34:04Z",
+      "side": 1,
+      "message": "I\u0027m not sure, we want to have less stuff in the gcl, not more. @hzalek@google.com any thoughts?",
+      "parentUuid": "bba58f9b_ab4684cf",
       "range": {
         "startLine": 311,
         "startChar": 6,
@@ -361,6 +517,24 @@
       "side": 1,
       "message": "consider os.path.join?",
       "parentUuid": "b6c5881c_48e4d294",
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83c68f95_2d56a1c4",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-01T22:34:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b43abfb_0cb4cfe5",
       "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
