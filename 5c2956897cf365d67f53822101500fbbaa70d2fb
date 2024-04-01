@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3072a60_578ebfab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903387
+      },
+      "writtenOn": "2024-04-01T11:25:46Z",
+      "side": 1,
+      "message": "Build cop override as requested by @surajitc@google.com to solve b/332223093",
+      "revId": "5c2956897cf365d67f53822101500fbbaa70d2fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
