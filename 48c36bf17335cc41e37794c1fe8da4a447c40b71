@@ -81,6 +81,30 @@
       },
       "revId": "48c36bf17335cc41e37794c1fe8da4a447c40b71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ceaef59_45679d03",
+        "filename": "tools/aconfig/aconfig_storage_file/src/flag_info.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-04-01T13:43:01Z",
+      "side": 1,
+      "message": "Will take care of this in another cl. Need to change a number of other storage files as well. Keep this cl focused on flag info definition.",
+      "parentUuid": "5d817c6d_5a290f80",
+      "range": {
+        "startLine": 58,
+        "startChar": 30,
+        "endLine": 58,
+        "endChar": 37
+      },
+      "revId": "48c36bf17335cc41e37794c1fe8da4a447c40b71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
