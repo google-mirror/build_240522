@@ -214,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0f53ca6_16b6d456",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-01T18:47:31Z",
+      "side": 1,
+      "message": "Can you show me a recipe for reproducing this?\n\n```\n$ python -c \u0027import subprocess; subprocess.run(\"sleep infinity\", shell\u003dTrue, check\u003dTrue)\u0027 \u0026\n[1] 1253789\n$ ps -eo cmd | grep infinity\npython -c import subprocess; subprocess.run(\"sleep infinity\", shell\u003dTrue, check\u003dTrue)\nsleep infinity\ngrep --color\u003dauto infinity\n$ kill -INT %1\nTraceback (most recent call last):\n  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n  File \"/usr/lib/python3.11/subprocess.py\", line 550, in run\n    stdout, stderr \u003d process.communicate(input, timeout\u003dtimeout)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/subprocess.py\", line 1201, in communicate\n    self.wait()\n  File \"/usr/lib/python3.11/subprocess.py\", line 1264, in wait\n    return self._wait(timeout\u003dtimeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/subprocess.py\", line 2046, in _wait\n    (pid, sts) \u003d self._try_wait(0)\n                 ^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/subprocess.py\", line 2004, in _try_wait\n    (pid, sts) \u003d os.waitpid(self.pid, wait_flags)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nKeyboardInterrupt\n\n[1]+  Interrupt               python -c \u0027import subprocess; subprocess.run(\"sleep infinity\", shell\u003dTrue, check\u003dTrue)\u0027\n$ ps -eo cmd | grep infinity\ngrep --color\u003dauto infinity\n```\n\nSeems to work with the above program.",
+      "parentUuid": "10c24b73_d2b89c75",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcea79c_6fccd8df",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
