@@ -166,6 +166,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa853c91_9140e218",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-01T18:35:13Z",
+      "side": 1,
+      "message": "For me, that\u0027s only the case when you use capture_output\u003dTrue (I tested on my machine with a 1-liner script).\n\nsubprocess.run is more modern compared to Popen and helps avoid common bugs",
+      "parentUuid": "2d8bd349_1b7c5fb0",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcea79c_6fccd8df",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
