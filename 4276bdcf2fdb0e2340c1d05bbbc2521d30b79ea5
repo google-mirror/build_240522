@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aad3c443_c14848d3",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-01T22:41:40Z",
+      "side": 1,
+      "message": "`if env_var not in os.environ`",
+      "range": {
+        "startLine": 59,
+        "startChar": 11,
+        "endLine": 59,
+        "endChar": 34
+      },
+      "revId": "4276bdcf2fdb0e2340c1d05bbbc2521d30b79ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
