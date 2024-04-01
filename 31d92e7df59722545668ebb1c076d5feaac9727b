@@ -238,6 +238,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0257175d_0f86107d",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-01T18:52:27Z",
+      "side": 1,
+      "message": "It\u0027s not something I reproduced locally, it was just what i inferenced from looking up how people were handling interrupt signals in python. If in fact this is not the case then I will switch to just using subprocess.run. Dan had also mentioned properly handling SIGINT when it used to just be using subprocess.run so it sounded like that wasn\u0027t correctly handling it.",
+      "parentUuid": "c0f53ca6_16b6d456",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcea79c_6fccd8df",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
