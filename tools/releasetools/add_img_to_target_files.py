@@ -1055,6 +1055,13 @@ def AddImagesToTargetFiles(filename):
     for call in add_partition_calls:
       add_partition(*call)
   else:
+    # Add keys to the dict `partitions` with null values in the order they are
+    # listed in the variable `add_partition_calls`, and then the values are
+    # updated by `add_partition` keeping the order of the items.
+    # This ensures the generated vbmeta.img is the same for the same input.
+    for call in add_partition_calls:
+      if call[1]:
+        partitions[call[0]] = None
     with ThreadPoolExecutor(max_workers=len(add_partition_calls)) as executor:
       for future in [executor.submit(add_partition, *call) for call in add_partition_calls]:
         future.result()
