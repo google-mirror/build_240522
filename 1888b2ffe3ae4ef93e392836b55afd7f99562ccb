@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa72a808_f61bfe9d",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-02T05:10:12Z",
+      "side": 1,
+      "message": "David is right. The initial intent was to thread `env` for unit testing purposes but it\u0027s quite useless now since there\u0027s no way to pass in the injected env.\n\nThis is why I always suggest adding tests first as it otherwise gets harder with time.",
+      "parentUuid": "3a4263c3_29005796",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "610ee1a4_2db8def0",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 15
@@ -84,6 +102,24 @@
       "writtenOn": "2024-04-02T00:22:04Z",
       "side": 1,
       "message": "We need sys.exit here instead so that users don\u0027t get a big stack trace. Something like this.\n```suggestion\n    sys.exit(\u0027Build command failed! Please see the build log for errors.\u0027)\n```",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d6a346_1e5ea691",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-02T05:10:12Z",
+      "side": 1,
+      "message": "Seeing that we\u0027re going to unit test this, I\u0027d avoid sys.exiting from \u0027library\u0027 code. I suggest raising a `BuildError(exit_code)` exception that we catch in `main` and use to return the exit code:\n\n```\nif __name__ \u003d\u003d \"__main__\":\n  sys.exit(main())\n```\n\nSee Guido\u0027s original article:\n\nhttps://www.artima.com/weblogs/viewpost.jsp?thread\u003d4829\n\nBut again, here, we don\u0027t need this code in the first phase and we can simplify to accelerate this review.",
+      "parentUuid": "610ee1a4_2db8def0",
       "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

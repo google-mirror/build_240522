@@ -537,6 +537,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "655ab1fb_1e598424",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-02T05:10:12Z",
+      "side": 1,
+      "message": "I suggest that Luca strips all non-essential code for their change to make it in. Zipping is on the optimized path and can be taken out for now.",
+      "parentUuid": "032fed1e_75520c97",
+      "range": {
+        "startLine": 260,
+        "startChar": 1,
+        "endLine": 266,
+        "endChar": 28
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bba58f9b_ab4684cf",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
