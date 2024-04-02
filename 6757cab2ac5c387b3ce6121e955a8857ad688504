@@ -70,6 +70,30 @@
       },
       "revId": "6757cab2ac5c387b3ce6121e955a8857ad688504",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb6c5790_5359db69",
+        "filename": "core/board_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1317851
+      },
+      "writtenOn": "2024-04-02T02:30:41Z",
+      "side": 1,
+      "message": "Thanks. We should set flag on device.mk instead of using this mk file.",
+      "parentUuid": "abfc6014_b917e21a",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 75
+      },
+      "revId": "6757cab2ac5c387b3ce6121e955a8857ad688504",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
