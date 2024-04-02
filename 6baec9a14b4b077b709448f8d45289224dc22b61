@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a62241_29abb4f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-04-02T02:01:05Z",
+      "side": 1,
+      "message": "(",
+      "revId": "6baec9a14b4b077b709448f8d45289224dc22b61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "379edfe8_71a4c20c",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-04-02T02:01:05Z",
+      "side": 1,
+      "message": "So if I understand this correctly, we can abandon http://r.android.com/3020058 then?",
+      "range": {
+        "startLine": 566,
+        "startChar": 59,
+        "endLine": 566,
+        "endChar": 85
+      },
+      "revId": "6baec9a14b4b077b709448f8d45289224dc22b61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
