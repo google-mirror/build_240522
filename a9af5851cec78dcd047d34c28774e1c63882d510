@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9202691_e70dc545",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-02T18:06:41Z",
+      "side": 1,
+      "message": "I thought the point of VSR_VENDOR_API_LEVEL was that it was it\u0027s own version independent of all the other version numbers for simplicity. But idk much about vndk.",
+      "revId": "a9af5851cec78dcd047d34c28774e1c63882d510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
