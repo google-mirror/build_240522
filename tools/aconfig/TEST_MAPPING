@@ -67,8 +67,6 @@
       // that using the flag macros to do filtering will get affected.
       "name": "FlagMacrosTests"
     }
-  ],
-  "postsubmit": [
     {
       // aconfig_storage_write_api unit tests
       "name": "aconfig_storage_write_api.test"
@@ -93,6 +91,8 @@
       // aconfig_storage read api cpp integration tests
       "name": "aconfig_storage_read_api.test.cpp"
     },
+  ],
+  "postsubmit": [
     {
       // aflags CLI unit tests
       // TODO(b/326062088): add to presubmit once proven in postsubmit.
