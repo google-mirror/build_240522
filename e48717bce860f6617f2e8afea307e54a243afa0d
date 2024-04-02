@@ -16,6 +16,24 @@
       "message": "I\u0027m not super experienced in python subprocesses and from what i researched this seems to be like an ok way to print subprocess output in real time. If i get a SIGINT then i propagate it to the called subprocess and exit. The output of the process after it\u0027s interrupted isn\u0027t captured but I don\u0027t think that\u0027s an issue since its output up until it was interrupted was logged and we log the interruption as well, so there shouldn\u0027t be any confusion.",
       "revId": "e48717bce860f6617f2e8afea307e54a243afa0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85a9ad3f_3f8950a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-02T19:15:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4a52e5b0_048c3bd0",
+      "revId": "e48717bce860f6617f2e8afea307e54a243afa0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

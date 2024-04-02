@@ -148,6 +148,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3950d479_87767fbe",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-02T19:15:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9021bbe6_14d50506",
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84d0e21f_9f84de11",
@@ -464,6 +482,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd93f672_661382a5",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-02T19:15:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad079c1a_46c60ed2",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebcea79c_6fccd8df",
@@ -631,6 +673,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ddc8d93_dedffd0d",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-02T19:15:36Z",
+      "side": 1,
+      "message": "Implemented Weijia\u0027s suggestion, I don\u0027t want to split this CL out more.",
+      "parentUuid": "6fbcb2ed_23d9075b",
+      "range": {
+        "startLine": 260,
+        "startChar": 1,
+        "endLine": 266,
+        "endChar": 28
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bba58f9b_ab4684cf",
@@ -692,6 +758,30 @@
       "side": 1,
       "message": "To avoid too much stuff in gcl, we can define the tool paths (relative to TOP) as env vars.\n\nOr else we have soong_ui.bash, soong_zip, and in future cas_uploader in this script. If we\u0027re fine assuming the paths here, prefer we define these tool paths in one place, so it\u0027s clear what this script depends on.",
       "parentUuid": "b75e12f1_eaa9b251",
+      "range": {
+        "startLine": 311,
+        "startChar": 6,
+        "endLine": 311,
+        "endChar": 48
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "245d5e4f_f0170700",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-02T19:15:36Z",
+      "side": 1,
+      "message": "Defined the EXEs as constants so that they\u0027re all in one place.",
+      "parentUuid": "41e7785f_0182dd4b",
       "range": {
         "startLine": 311,
         "startChar": 6,

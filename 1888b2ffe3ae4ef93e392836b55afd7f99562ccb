@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29f3d83c_e64e390c",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-02T19:15:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "745a868e_fa4efb9e",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d1144de_eb283930",
@@ -66,6 +84,24 @@
       "writtenOn": "2024-04-02T00:22:04Z",
       "side": 1,
       "message": "You can only print this if print_cmd argument is set. That\u0027ll allow you to reuse.",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcb10fe7_6164054c",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-02T19:15:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d1144de_eb283930",
       "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -159,6 +195,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b87993b_246d8f23",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-02T19:15:36Z",
+      "side": 1,
+      "message": "Let\u0027s keep it out for now, when we add tests we can add it in if it becomes necessary.",
+      "parentUuid": "123ed40b_4b44068e",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "610ee1a4_2db8def0",
@@ -208,6 +262,24 @@
       "side": 1,
       "message": "Yes that sounds good.\n\nHonestly, I don\u0027t think simplifying the code will accelerate the review at this point. We might as well push forward and try to get it all in as splitting the CL in two will cost Luca more time than it will save. But I\u0027ll let Luca decide on that.",
       "parentUuid": "19d6a346_1e5ea691",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8734d3b_55e752f6",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-04-02T19:15:36Z",
+      "side": 1,
+      "message": "We don\u0027t have a `if __name__ \u003d\u003d \"__main__\":` quite like a normal function since the wrapper script is calling our main directly but I\u0027ve made it as close as possible.",
+      "parentUuid": "d7c53be1_96d8fc3e",
       "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
