@@ -418,6 +418,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad079c1a_46c60ed2",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-02T00:22:04Z",
+      "side": 1,
+      "message": "I suggest adding a print_cmd\u003dTrue argument.",
+      "parentUuid": "f7067cb5_8d10b728",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcea79c_6fccd8df",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 12
@@ -477,6 +501,30 @@
       "side": 1,
       "message": "That\u0027s for readability. Otherwise a reader must cross reference soong_zip manual to find what these parameters mean. As for the logic, I don\u0027t think there are much. zip_entry will have a list of named parameters, all we do is null-checks:\nif relative_root:\n   args.append(\u0027-C\u0027)\n   args.append(relative_root)\nif other_param:\n   ...\n  \nOne zip_entry correspond to one set of -C/-P with following -l/-f/-d.",
       "parentUuid": "323304c2_00bf1b49",
+      "range": {
+        "startLine": 260,
+        "startChar": 1,
+        "endLine": 266,
+        "endChar": 28
+      },
+      "revId": "31d92e7df59722545668ebb1c076d5feaac9727b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "032fed1e_75520c97",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-02T00:22:04Z",
+      "side": 1,
+      "message": "This does look easy to implement and would improve readability. I like Weijia\u0027s suggestion.",
+      "parentUuid": "0a31a03d_0c615d5f",
       "range": {
         "startLine": 260,
         "startChar": 1,

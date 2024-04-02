@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d1144de_eb283930",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-02T00:22:04Z",
+      "side": 1,
+      "message": "You can only print this if print_cmd argument is set. That\u0027ll allow you to reuse.",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "470f4577_dee2173e",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-02T00:22:04Z",
+      "side": 1,
+      "message": "Don\u0027t need env\u003d.",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "610ee1a4_2db8def0",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-02T00:22:04Z",
+      "side": 1,
+      "message": "We need sys.exit here instead so that users don\u0027t get a big stack trace. Something like this.\n```suggestion\n    sys.exit(\u0027Build command failed! Please see the build log for errors.\u0027)\n```",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
