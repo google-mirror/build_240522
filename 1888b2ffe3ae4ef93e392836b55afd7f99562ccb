@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4862544_9f1ac11c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-02T13:30:50Z",
+      "side": 1,
+      "message": "This is overall looking quite good and almost ready. I see Hadrien is advocating for splitting in two. In my opinion, I think it is better to just push forward with this CL and try to land it, because it\u0027ll cost you more time to split it then it\u0027d save, and this CL is looking quite good by now with few remaining issues that need to be fixed.\n\nThis leaves you with a choice:\n- If you agree with Hadrien that it should be split, go ahead and do it. You don\u0027t need my permission for this.\n- If you agree with me that we should push forward with the CL, double check with Hadrien that he\u0027s OK with it, and then fix the couple nits, and let\u0027s land it.",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "745a868e_fa4efb9e",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-02T13:30:50Z",
+      "side": 1,
+      "message": "Use a format string.\n```suggestion\n      raise RuntimeError(f\u0027Required env var {env_var} not found! Aborting.\u0027)\n```",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d1144de_eb283930",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 15
@@ -91,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "123ed40b_4b44068e",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-02T13:30:50Z",
+      "side": 1,
+      "message": "Got it. OK, if it\u0027s for unit tests, we can leave it in there, but we should add documentation to the arg explaining that it\u0027s for unit tests\n\nIt should be noted that passing os.environ through is not really necessary as Python provides extensive mocking facilities that remove the need for the code to be so aware of unit tests. But it doesn\u0027t hurt to make the test friendlier to unit tests, either -- it\u0027s more of a subjective stylistic choice.",
+      "parentUuid": "fa72a808_f61bfe9d",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "610ee1a4_2db8def0",
         "filename": "ci/build_test_suites.py",
         "patchSetId": 15
@@ -120,6 +172,24 @@
       "side": 1,
       "message": "Seeing that we\u0027re going to unit test this, I\u0027d avoid sys.exiting from \u0027library\u0027 code. I suggest raising a `BuildError(exit_code)` exception that we catch in `main` and use to return the exit code:\n\n```\nif __name__ \u003d\u003d \"__main__\":\n  sys.exit(main())\n```\n\nSee Guido\u0027s original article:\n\nhttps://www.artima.com/weblogs/viewpost.jsp?thread\u003d4829\n\nBut again, here, we don\u0027t need this code in the first phase and we can simplify to accelerate this review.",
       "parentUuid": "610ee1a4_2db8def0",
+      "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7c53be1_96d8fc3e",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-02T13:30:50Z",
+      "side": 1,
+      "message": "Yes that sounds good.\n\nHonestly, I don\u0027t think simplifying the code will accelerate the review at this point. We might as well push forward and try to get it all in as splitting the CL in two will cost Luca more time than it will save. But I\u0027ll let Luca decide on that.",
+      "parentUuid": "19d6a346_1e5ea691",
       "revId": "1888b2ffe3ae4ef93e392836b55afd7f99562ccb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
