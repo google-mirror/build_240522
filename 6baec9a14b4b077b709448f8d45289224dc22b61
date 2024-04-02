@@ -39,6 +39,30 @@
       },
       "revId": "6baec9a14b4b077b709448f8d45289224dc22b61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01912e34_d70e60b6",
+        "filename": "core/product_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-04-02T02:29:55Z",
+      "side": 1,
+      "message": "Yes, we can abandon the patch unless we need a different version than 202404 for trunk and 34 for next.\nIf we need a different version, use `PRODUCT_SHIPPING_VENDOR_API_LEVEL` instead of `BOARD_SHIPPING_API_LEVEL` which is only for the GRF SoCs.",
+      "parentUuid": "379edfe8_71a4c20c",
+      "range": {
+        "startLine": 566,
+        "startChar": 59,
+        "endLine": 566,
+        "endChar": 85
+      },
+      "revId": "6baec9a14b4b077b709448f8d45289224dc22b61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
