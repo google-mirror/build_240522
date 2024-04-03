@@ -88,6 +88,23 @@
       "parentUuid": "b6226c43_18e680bc",
       "revId": "03d014a03fcdb695f3fdd79493f6443355c8b07d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50fe934b_cbe5425e",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 3353839
+      },
+      "writtenOn": "2024-04-03T07:44:41Z",
+      "side": 1,
+      "message": "# Add partition keys to the Dict `partitions` in serial to make the insertion\n    # order determinestic.\n    # This ensures the generated vbmeta.img is the same for the same input.\n    for call in add_partition_calls:\n      if call[1]:\n        partitions[call[0]] \u003d None\n        \nCreated the buganizer https://partnerissuetracker.corp.google.com/issues/332550989\nThanks.",
+      "revId": "03d014a03fcdb695f3fdd79493f6443355c8b07d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
