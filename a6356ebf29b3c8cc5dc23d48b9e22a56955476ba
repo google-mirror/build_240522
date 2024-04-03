@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe8a076a_afb78dbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-03T11:05:01Z",
+      "side": 1,
+      "message": "Thanks for the updated PS!",
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49475f95_e29e87f4",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-03T11:05:01Z",
+      "side": 1,
+      "message": "Mention in the commit message why we do this, and what future CLs we plan, otherwise this is just a messier way of using a const variable directly in the Rust code.",
+      "range": {
+        "startLine": 49,
+        "startChar": 35,
+        "endLine": 49,
+        "endChar": 66
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33230ad6_72c0d02f",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-03T11:05:01Z",
+      "side": 1,
+      "message": "singular",
+      "range": {
+        "startLine": 53,
+        "startChar": 35,
+        "endLine": 53,
+        "endChar": 36
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26340a21_be1473c2",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-03T11:05:01Z",
+      "side": 1,
+      "message": "There can actually be more @version directories; the dir without the @ char is the currently active version of the module. Rephrase this comment to say something like \"only scan the currently active version of each mainline module; skip the @version dirs\"",
+      "range": {
+        "startLine": 53,
+        "startChar": 48,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f94d29cd_9a28146d",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-03T11:05:01Z",
+      "side": 1,
+      "message": "Not a fan of lossy -- if there\u0027s an error in the conversion `result.push` will add an invalid path, and there will be errors down the line when trying to access an unexpected path, or (worse) the error will not be noticed and a .pb file will be silently skipped.\n\nHow about\n\n```\ndir.file_name().as_encoded_bytes().iter().any(|\u0026b| b \u003d\u003d b\u0027@\u0027)\n```\n\ninstead? As a micro optimization bonus, this also avoids an allocation.",
+      "range": {
+        "startLine": 55,
+        "startChar": 27,
+        "endLine": 55,
+        "endChar": 42
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84e26b16_0347bb86",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-03T11:05:01Z",
+      "side": 1,
+      "message": "`pub(crate)`",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 3
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0834d037_94d5b0b2",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-03T11:05:01Z",
+      "side": 1,
+      "message": "If a flag occurs in multiple containers, it will be included in the Vec multiple times.",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 59
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6460f466_f57867d5",
+        "filename": "tools/aconfig/partitions.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-03T11:05:01Z",
+      "side": 1,
+      "message": "The contents are paths, not partitions as the file name indicates. Rename?",
+      "range": {
+        "startLine": 2,
+        "startChar": 4,
+        "endLine": 2,
+        "endChar": 35
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
