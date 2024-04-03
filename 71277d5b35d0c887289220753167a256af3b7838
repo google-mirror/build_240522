@@ -70,6 +70,24 @@
       "parentUuid": "fdc9bd16_9619572d",
       "revId": "71277d5b35d0c887289220753167a256af3b7838",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30f966bc_b425a506",
+        "filename": "core/tasks/berberis_test.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2024-04-03T01:14:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5305298c_8c120b52",
+      "revId": "71277d5b35d0c887289220753167a256af3b7838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
