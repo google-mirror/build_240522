@@ -16,6 +16,24 @@
       "message": "I thought the point of VSR_VENDOR_API_LEVEL was that it was it\u0027s own version independent of all the other version numbers for simplicity. But idk much about vndk.",
       "revId": "a9af5851cec78dcd047d34c28774e1c63882d510",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56986328_8360f001",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-04-03T00:20:45Z",
+      "side": 1,
+      "message": "That is true for ro.board.api_level derived from RELEASE_BOARD_API_LEVEL.\nVSR_VENDOR_API_LEVEL has the same value of ro.vendor.api_level that is related to the vendor software requirement (VSR) and depends on both sdk and vendor versions to find the minimum requirement of the device.",
+      "parentUuid": "d9202691_e70dc545",
+      "revId": "a9af5851cec78dcd047d34c28774e1c63882d510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
