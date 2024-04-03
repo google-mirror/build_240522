@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29573007_a448a40a",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-03T14:24:28Z",
+      "side": 1,
+      "message": "Please add documentation and return signature. Also declare types of your inputs and outputs.\n```suggestion\ndef build_test_suites(argv: list[str]) -\u003e int:\n  \"\"\"Builds the general-tests and any other test suites passed in.\n\n  Args:\n    argv: The command line arguments passed in.\n\n  Returns:\n    The exit code of the build.\n  \"\"\"\n```",
+      "revId": "9163dff3368a88e0150c03197095879d2ac697bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eadbfb7e_7cb82aac",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-03T14:24:28Z",
+      "side": 1,
+      "message": "Add comment explaining exceptions\n```suggestion\ndef check_required_env():\n  \"\"\"Check for required env vars.\n\n  Raises:\n    RuntimeError: If any required env vars are not found.\n  \"\"\"\n```",
+      "revId": "9163dff3368a88e0150c03197095879d2ac697bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2c5007c_4d6e4d33",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-03T14:24:28Z",
+      "side": 1,
+      "message": "Add documentation and explain exceptions.\n```suggestion\ndef build_everything(args: argparse.Namespace):\n  \"\"\"Builds all tests (regardless of whether they are needed).\n\n  Args:\n    args: The parsed arguments.\n\n  Raises:\n    BuildFailure: If the build command fails.\n  \"\"\"\n```",
+      "revId": "9163dff3368a88e0150c03197095879d2ac697bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc02c8cb_5e147c0d",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-03T14:24:28Z",
+      "side": 1,
+      "message": "Add documentation. Explain each arg. Explain exceptions.\n\n```suggestion\ndef run_command(args: list[str], print_cmd: bool \u003d True):\n  \"\"\"Runs a command using subprocess.run.\n\n  Args:\n    args: The command to run.\n    print_cmd: Whether to print the command before running it.\n\n  Raises:\n    subprocess.CalledProcessError: If the command fails.\n  \"\"\"\n```",
+      "revId": "9163dff3368a88e0150c03197095879d2ac697bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dee38608_380e47bb",
+        "filename": "ci/build_test_suites.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-04-03T14:24:28Z",
+      "side": 1,
+      "message": "Use f strings\n```suggestion\n    print(f\u0027+ {args}\u0027)\n```",
+      "revId": "9163dff3368a88e0150c03197095879d2ac697bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
