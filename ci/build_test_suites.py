@@ -12,10 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Script to build only the necessary modules for general-tests along
-
-with whatever other targets are passed in.
-"""
+"""Build script for the CI `test_suites` target."""
 
 import argparse
 import logging
@@ -25,17 +22,25 @@ import subprocess
 import sys
 
 
-class BuildFailure(Exception):
-  pass
+class Error(Exception):
+
+  def __init__(self, message):
+    super().__init__(message)
 
 
-REQUIRED_ENV_VARS = frozenset(['TARGET_PRODUCT', 'TARGET_RELEASE'])
+class BuildFailureError(Error):
 
+  def __init__(self, return_code):
+    super().__init__(f'Build command failed with return code: f{return_code}')
+    self.return_code = return_code
+
+
+REQUIRED_ENV_VARS = frozenset(['TARGET_PRODUCT', 'TARGET_RELEASE', 'TOP'])
 SOONG_UI_EXE_REL_PATH = 'build/soong/soong_ui.bash'
 
 
 def get_top() -> pathlib.Path:
-  return pathlib.Path(os.environ.get('TOP', os.getcwd()))
+  return pathlib.Path(os.environ['TOP'])
 
 
 def build_test_suites(argv):
@@ -44,27 +49,31 @@ def build_test_suites(argv):
 
   try:
     build_everything(args)
-  except BuildFailure:
+  except BuildFailureError as e:
     logging.error('Build command failed! Check build_log for details.')
-    return 1
+    return e.return_code
 
   return 0
 
 
 def check_required_env():
-  for env_var in REQUIRED_ENV_VARS:
-    if env_var not in os.environ:
-      raise RuntimeError(f'Required env var {env_var} not found! Aborting.')
+  missing_env_vars = sorted(v for v in REQUIRED_ENV_VARS if v not in os.environ)
+
+  if not missing_env_vars:
+    return
+
+  t = ','.join(missing_env_vars)
+  raise Error(f'Missing required environment variables: f{t}')
 
 
 def parse_args(argv):
   argparser = argparse.ArgumentParser()
+
   argparser.add_argument(
       'extra_targets', nargs='*', help='Extra test suites to build.'
   )
-  argparser.add_argument('--change_info', nargs='?')
 
-  return argparser.parse_args()
+  return argparser.parse_args(argv)
 
 
 def build_everything(args: argparse.Namespace):
@@ -73,15 +82,16 @@ def build_everything(args: argparse.Namespace):
 
   try:
     run_command(build_command)
-  except subprocess.CalledProcessError:
-    raise BuildFailure
+  except subprocess.CalledProcessError as e:
+    raise BuildFailureError(e.returncode) from e
 
 
 def base_build_command(
     args: argparse.Namespace, extra_targets: set[str]
-) -> list:
+) -> list[str]:
+
   build_command = []
-  build_command.append(os.path.join(get_top(), SOONG_UI_EXE_REL_PATH))
+  build_command.append(get_top().joinpath(SOONG_UI_EXE_REL_PATH))
   build_command.append('--make-mode')
   build_command.append('dist')
   build_command.extend(extra_targets)
@@ -89,10 +99,8 @@ def base_build_command(
   return build_command
 
 
-def run_command(args: list[str], print_cmd: bool = True):
-  if print_cmd:
-    print('+ ' + str(args))
-  subprocess.run(args=args, check=True)
+def run_command(args: list[str], stdout=None):
+  subprocess.run(args=args, check=True, stdout=stdout)
 
 
 def main(argv):
