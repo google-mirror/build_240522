@@ -25,17 +25,19 @@ import subprocess
 import sys
 
 
-class BuildFailure(Exception):
-  pass
+# TODO: Rename.
+class BuildFailureError(Exception):
+
+  def __init__(self, return_code):
+    super().__init__(f'Build command failed with return code: f{return_code}')
+    self.return_code = return_code
 
 
-REQUIRED_ENV_VARS = frozenset(['TARGET_PRODUCT', 'TARGET_RELEASE'])
-
+REQUIRED_ENV_VARS = frozenset(['TARGET_PRODUCT', 'TARGET_RELEASE', 'TOP'])
 SOONG_UI_EXE_REL_PATH = 'build/soong/soong_ui.bash'
 
-
 def get_top() -> pathlib.Path:
-  return pathlib.Path(os.environ.get('TOP', os.getcwd()))
+  return pathlib.Path(os.environ['TOP'])
 
 
 def build_test_suites(argv):
@@ -44,9 +46,9 @@ def build_test_suites(argv):
 
   try:
     build_everything(args)
-  except BuildFailure:
+  except BuildFailureError as e:
     logging.error('Build command failed! Check build_log for details.')
-    return 1
+    return e.return_code
 
   return 0
 
@@ -54,6 +56,7 @@ def build_test_suites(argv):
 def check_required_env():
   for env_var in REQUIRED_ENV_VARS:
     if env_var not in os.environ:
+      # TODO(hzalek): Use a module-specific error type.
       raise RuntimeError(f'Required env var {env_var} not found! Aborting.')
 
 
@@ -62,9 +65,8 @@ def parse_args(argv):
   argparser.add_argument(
       'extra_targets', nargs='*', help='Extra test suites to build.'
   )
-  argparser.add_argument('--change_info', nargs='?')
 
-  return argparser.parse_args()
+  return argparser.parse_args(argv)
 
 
 def build_everything(args: argparse.Namespace):
@@ -73,15 +75,15 @@ def build_everything(args: argparse.Namespace):
 
   try:
     run_command(build_command)
-  except subprocess.CalledProcessError:
-    raise BuildFailure
+  except subprocess.CalledProcessError as e:
+    raise BuildFailureError(e.returncode) from e
 
 
 def base_build_command(
     args: argparse.Namespace, extra_targets: set[str]
 ) -> list:
   build_command = []
-  build_command.append(os.path.join(get_top(), SOONG_UI_EXE_REL_PATH))
+  build_command.append(get_top().joinpath(SOONG_UI_EXE_REL_PATH))
   build_command.append('--make-mode')
   build_command.append('dist')
   build_command.extend(extra_targets)
@@ -89,9 +91,7 @@ def base_build_command(
   return build_command
 
 
-def run_command(args: list[str], print_cmd: bool = True):
-  if print_cmd:
-    print('+ ' + str(args))
+def run_command(args: list[str]):
   subprocess.run(args=args, check=True)
 
 
