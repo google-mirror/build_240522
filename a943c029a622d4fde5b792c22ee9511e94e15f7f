@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0926531_f778c7b0",
+        "filename": "core/product.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-04-05T22:56:47Z",
+      "side": 1,
+      "message": "use _product_single_value_vars",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 333,
+        "endChar": 18
+      },
+      "revId": "a943c029a622d4fde5b792c22ee9511e94e15f7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
