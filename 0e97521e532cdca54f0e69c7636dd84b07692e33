@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e1906d9_5eceb090",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1099348
+      },
+      "writtenOn": "2024-04-05T19:30:41Z",
+      "side": 1,
+      "message": "recommend to split the owner change first which I can bless. the mk file looks like it is having some challenges",
+      "revId": "0e97521e532cdca54f0e69c7636dd84b07692e33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
