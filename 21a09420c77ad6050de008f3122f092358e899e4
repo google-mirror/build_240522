@@ -16,6 +16,24 @@
       "message": "noting dependency on http://r.android.com/3023360",
       "revId": "21a09420c77ad6050de008f3122f092358e899e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "198f1197_a9ad15a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-04-05T17:15:10Z",
+      "side": 1,
+      "message": "Closing comment - The permanent fix for the post-submit failure is at https://r.android.com/3026794\nHence, http://r.android.com/3023360 is not required anymore.",
+      "parentUuid": "26170c91_10f3ef90",
+      "revId": "21a09420c77ad6050de008f3122f092358e899e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
