@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8671c57b_87e8e7ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-05T00:56:27Z",
+      "side": 1,
+      "message": "Could you please flesh out the commit message with a detailed description of why you\u0027re making this change?\n\nAlso, on the internal version of this cl, I didn\u0027t see any usages of `PLATFORM_BASE_OS` in the other cls in the topic. Where you planning on adding usages in a followup? It would be helpful to know what you\u0027re planning on using this for.\n\nAlso, why did you not follow the suggesting in b/155105803#comment23?",
+      "revId": "c0286129f6c08c4f21c89d4a09955da80774d30b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
