@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8267522_a3ecf6b4",
+        "filename": "tools/aconfig/aconfig/Cargo.toml",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-04-07T18:01:32Z",
+      "side": 1,
+      "message": "Why do you need to create debian packages? Aconfig is only used by android build system a tooling binary.",
+      "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
