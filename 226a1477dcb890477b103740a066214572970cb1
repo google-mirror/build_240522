@@ -34,6 +34,24 @@
       "parentUuid": "486153a5_037a42e1",
       "revId": "226a1477dcb890477b103740a066214572970cb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0237554c_7545c2ca",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1062,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-04-08T21:25:03Z",
+      "side": 1,
+      "message": "make sense, can you put these details in comment as well?",
+      "parentUuid": "930ba6a2_9bf4395f",
+      "revId": "226a1477dcb890477b103740a066214572970cb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
