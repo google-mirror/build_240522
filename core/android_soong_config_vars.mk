@@ -44,12 +44,6 @@ ifeq (,$(BRANCH_DEFAULT_MODULE_BUILD_FROM_SOURCE))
   BRANCH_DEFAULT_MODULE_BUILD_FROM_SOURCE := false
 endif
 
-# ART does not provide host side arm64 variants needed for products that
-# set HOST_CROSS_ARCH=arm64.
-ifeq (arm64,${HOST_CROSS_ARCH})
-  BRANCH_DEFAULT_MODULE_BUILD_FROM_SOURCE := true
-endif
-
 # TV based devices do not seem to work with prebuilts, so build from source
 # for now and fix in a follow up.
 ifneq (,$(filter tv,$(subst $(comma),$(space),${PRODUCT_CHARACTERISTICS})))
