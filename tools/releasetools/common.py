@@ -488,10 +488,10 @@ class BuildInfo(object):
     vendor_prop = self.info_dict.get("vendor.build.prop")
     if not vendor_prop:
       return -1
-    value = vendor_prop.GetProp("ro.product.first_api_level")
-    if value:
-      return value
-    return -1
+    try:
+      return int(vendor_prop.GetProp("ro.product.first_api_level"))
+    except:
+        return -1
 
   @property
   def is_vabc_xor(self):
