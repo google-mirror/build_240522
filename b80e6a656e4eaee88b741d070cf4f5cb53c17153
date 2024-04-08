@@ -24,6 +24,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c95aaff_be6365a3",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2024-04-08T03:16:14Z",
+      "side": 0,
+      "message": "Need to restore\nhttps://android-review.googlesource.com/c/platform/build/+/3018445/1/target/product/gsi/Android.mk",
+      "range": {
+        "startLine": 168,
+        "startChar": 62,
+        "endLine": 168,
+        "endChar": 79
+      },
+      "revId": "b80e6a656e4eaee88b741d070cf4f5cb53c17153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0017b61b_8a77c2c6",
