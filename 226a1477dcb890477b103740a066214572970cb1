@@ -16,6 +16,24 @@
       "message": "I don\u0027t quite understand how this helps make vbmeta images consistent. Could you elaborate?",
       "revId": "226a1477dcb890477b103740a066214572970cb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "930ba6a2_9bf4395f",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1062,
+      "author": {
+        "id": 3353839
+      },
+      "writtenOn": "2024-04-08T20:05:50Z",
+      "side": 1,
+      "message": "when calling avbtool make_vbmeta_image, it uses the `partitions` dictionary to include the options for --include_descriptors_from_image. The vbmeta image is different if the order of the --include_descriptors_from_image order changes.\nAs we are generating the images parallelly and building `partitions` dictionary to add the entry of partition name and image path, this `partitions` dict is becoming indeterministic as the order of completion of image creation cannot be predicted.",
+      "parentUuid": "486153a5_037a42e1",
+      "revId": "226a1477dcb890477b103740a066214572970cb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
