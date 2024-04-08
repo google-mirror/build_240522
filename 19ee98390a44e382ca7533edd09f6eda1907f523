@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b5969f4_07319632",
+        "filename": "target/product/virtual_ab_ota/vabc_features.mk",
+        "patchSetId": 17
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-04-08T17:29:06Z",
+      "side": 1,
+      "message": "`?\u003d` so that OEMs can override this",
+      "range": {
+        "startLine": 41,
+        "startChar": 38,
+        "endLine": 41,
+        "endChar": 40
+      },
+      "revId": "19ee98390a44e382ca7533edd09f6eda1907f523",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
