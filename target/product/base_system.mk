@@ -477,6 +477,10 @@ ifeq (,$(DISABLE_WALLPAPER_BACKUP))
     WallpaperBackup
 endif
 
+ifeq (true,$(TARGET_USES_VM_LAUNCHER))
+  PRODUCT_PACKAGES += VmLauncherApp
+endif
+
 PRODUCT_PACKAGES_DEBUG_JAVA_COVERAGE := \
     libdumpcoverage
 
