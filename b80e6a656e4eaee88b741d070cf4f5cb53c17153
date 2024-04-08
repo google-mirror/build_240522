@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade55d45_6c9f0e44",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2024-04-08T03:10:16Z",
+      "side": 0,
+      "message": "This command should not be deleted.\nThe two tags starting with VNDK can be deleted.",
+      "range": {
+        "startLine": 165,
+        "startChar": 37,
+        "endLine": 165,
+        "endChar": 55
+      },
+      "revId": "b80e6a656e4eaee88b741d070cf4f5cb53c17153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0017b61b_8a77c2c6",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2024-04-08T03:10:16Z",
+      "side": 0,
+      "message": "This can be deleted.",
+      "range": {
+        "startLine": 170,
+        "startChar": 1,
+        "endLine": 170,
+        "endChar": 27
+      },
+      "revId": "b80e6a656e4eaee88b741d070cf4f5cb53c17153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc14e1e4_7a21c849",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2024-04-08T03:10:16Z",
+      "side": 0,
+      "message": "This should not be deleted.",
+      "range": {
+        "startLine": 178,
+        "startChar": 1,
+        "endLine": 178,
+        "endChar": 32
+      },
+      "revId": "b80e6a656e4eaee88b741d070cf4f5cb53c17153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
