@@ -16,6 +16,24 @@
       "message": "Why do you need to create debian packages? Aconfig is only used by android build system a tooling binary.",
       "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f326a28_0387ea0a",
+        "filename": "tools/aconfig/aconfig/Cargo.toml",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-08T11:23:33Z",
+      "side": 1,
+      "message": "Also, cargo is not the official Android build system. aconfig currently supports cargo *for local development only*, and we may remove cargo support in the future. We don\u0027t want external parties to rely on cargo.",
+      "parentUuid": "c8267522_a3ecf6b4",
+      "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
