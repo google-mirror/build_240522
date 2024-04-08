@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "236b73bc_f2348bc7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-04-08T17:27:56Z",
+      "side": 1,
+      "message": "maybe briefly explain why the original CL was reverted, and how are things different this time. I would also recommend creating a revert of the revert(instead of uploading the original CL again)",
+      "revId": "903286d9b63b77ae1229a5ee45a20e29cdbc2d76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
