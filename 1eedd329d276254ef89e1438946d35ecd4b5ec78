@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00741622_111f442e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2024-04-08T02:46:04Z",
+      "side": 1,
+      "message": "Adding Szuwei for the .mk under gsi/",
+      "revId": "1eedd329d276254ef89e1438946d35ecd4b5ec78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
