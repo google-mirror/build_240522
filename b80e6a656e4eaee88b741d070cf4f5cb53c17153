@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2e3a185_1c4b9ced",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2024-04-09T05:50:51Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "ade55d45_6c9f0e44",
+      "range": {
+        "startLine": 165,
+        "startChar": 37,
+        "endLine": 165,
+        "endChar": 55
+      },
+      "revId": "b80e6a656e4eaee88b741d070cf4f5cb53c17153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c95aaff_be6365a3",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-08T03:16:14Z",
       "side": 0,
       "message": "Need to restore\nhttps://android-review.googlesource.com/c/platform/build/+/3018445/1/target/product/gsi/Android.mk",
+      "range": {
+        "startLine": 168,
+        "startChar": 62,
+        "endLine": 168,
+        "endChar": 79
+      },
+      "revId": "b80e6a656e4eaee88b741d070cf4f5cb53c17153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb10bc58_06e57170",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2024-04-09T05:50:51Z",
+      "side": 0,
+      "message": "Done, but do we need to rename directory as LLNDK instead of VNDK?",
+      "parentUuid": "8c95aaff_be6365a3",
       "range": {
         "startLine": 168,
         "startChar": 62,
@@ -83,6 +131,30 @@
       "writtenOn": "2024-04-08T03:10:16Z",
       "side": 0,
       "message": "This should not be deleted.",
+      "range": {
+        "startLine": 178,
+        "startChar": 1,
+        "endLine": 178,
+        "endChar": 32
+      },
+      "revId": "b80e6a656e4eaee88b741d070cf4f5cb53c17153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca5fa54c_d25c69d2",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2024-04-09T05:50:51Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "cc14e1e4_7a21c849",
       "range": {
         "startLine": 178,
         "startChar": 1,
