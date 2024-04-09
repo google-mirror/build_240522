@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49219750_27289f5e",
+        "filename": "core/tasks/automotive-sdv-tests.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1972355
+      },
+      "writtenOn": "2024-04-09T14:38:19Z",
+      "side": 0,
+      "message": "```\nFAILED: \nvendor/google/build/tasks/automotive-sdv-tests.mk:31: error: overriding commands for target `out/target/product/bluejay/automotive-sdv-tests.zip\u0027, previously defined at build/make/core/tasks/automotive-sdv-tests.mk:31\n12:17:39 ckati failed with: exit status 1\n\nRBE Stats: down 0 B, up 0 B,\n```\n\nIt seems to be that it is necessary to have the ag/26876107",
+      "revId": "7e8a80d8576d2cc5a7c4175ce64d8665fd11a83e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
