@@ -97,6 +97,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "068aa1b6_226212e8",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2024-04-09T07:28:28Z",
+      "side": 0,
+      "message": "The variables can be renamed. The directory is a git project and referenced by scripts and documents. I am okay not to rename now.",
+      "parentUuid": "cb10bc58_06e57170",
+      "range": {
+        "startLine": 168,
+        "startChar": 62,
+        "endLine": 168,
+        "endChar": 79
+      },
+      "revId": "b80e6a656e4eaee88b741d070cf4f5cb53c17153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0017b61b_8a77c2c6",
         "filename": "target/product/gsi/Android.mk",
         "patchSetId": 1
