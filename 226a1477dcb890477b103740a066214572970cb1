@@ -70,6 +70,24 @@
       "parentUuid": "0237554c_7545c2ca",
       "revId": "226a1477dcb890477b103740a066214572970cb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5b10473_27f54caf",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1062,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2024-04-09T10:04:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e7a55c7_243c1f91",
+      "revId": "226a1477dcb890477b103740a066214572970cb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
