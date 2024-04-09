@@ -16,6 +16,24 @@
       "message": "This should be submitted after ag/26893818 has been submitted",
       "revId": "a43378be1951b69dca0d0999c2b5cd30e4982b30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff8822c4_ce017b8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-04-09T22:43:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9fbc5f36_37d897fe",
+      "revId": "a43378be1951b69dca0d0999c2b5cd30e4982b30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
