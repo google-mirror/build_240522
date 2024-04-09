@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae0e7fe3_06d850de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-09T17:50:35Z",
+      "side": 1,
+      "message": "LGTM, but please have someone more familiar with the boot otas +2.",
+      "revId": "19805cb372251c8384f5289257df4159b5e04c05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
