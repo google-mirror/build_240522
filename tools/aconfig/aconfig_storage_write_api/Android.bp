@@ -14,6 +14,7 @@ rust_defaults {
         "libcxx",
         "libthiserror",
         "libaconfig_storage_file",
+        "libaconfig_storage_read_api",
     ],
 }
 
