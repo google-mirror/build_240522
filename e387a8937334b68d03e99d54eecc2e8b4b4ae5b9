@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1fafcaf_c529b940",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-09T05:12:07Z",
+      "side": 1,
+      "message": "as discussed let\u0027s move the app into the virt apex and guard it using the build flag.",
+      "revId": "e387a8937334b68d03e99d54eecc2e8b4b4ae5b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
