@@ -124,6 +124,25 @@ impl TryFrom<u16> for StoredFlagType {
     }
 }
 
+/// Flag value type enum, one FlagValueType maps to many StoredFlagType
+/// ONLY APPEND, NEVER REMOVE FOR BACKWARD COMPATOBILITY.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum FlagValueType {
+    Boolean = 0,
+}
+
+impl TryFrom<StoredFlagType> for FlagValueType {
+    type Error = AconfigStorageError;
+
+    fn try_from(value: StoredFlagType) -> Result<Self, Self::Error> {
+        match value {
+            StoredFlagType::ReadWriteBoolean => Ok(Self::Boolean),
+            StoredFlagType::ReadOnlyBoolean => Ok(Self::Boolean),
+            StoredFlagType::FixedReadOnlyBoolean => Ok(Self::Boolean),
+        }
+    }
+}
+
 /// Storage query api error
 #[non_exhaustive]
 #[derive(thiserror::Error, Debug)]
