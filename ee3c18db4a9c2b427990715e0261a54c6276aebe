@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "636a9cc8_0b337056",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2024-04-10T08:02:18Z",
+      "side": 1,
+      "message": "also --chain_partitions, right?\n\nmake_vbmeta_image can either  --include_descriptors_from_image or --chain_partitions from another image.",
+      "range": {
+        "startLine": 1059,
+        "startChar": 44,
+        "endLine": 1059,
+        "endChar": 76
+      },
+      "revId": "ee3c18db4a9c2b427990715e0261a54c6276aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b6cc718_ed92dbd8",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2024-04-10T08:02:18Z",
+      "side": 1,
+      "message": "How about just using sorted() for partitions in BuildVBMeta()?\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:build/make/tools/releasetools/common.py;l\u003d1615;drc\u003d4dc089971bb1a2257cf1cc8c80e2b97b7be44086\n\n    for partition, path in sorted(partitions.items()):",
+      "range": {
+        "startLine": 1068,
+        "startChar": 18,
+        "endLine": 1068,
+        "endChar": 46
+      },
+      "revId": "ee3c18db4a9c2b427990715e0261a54c6276aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
