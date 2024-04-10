@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29a6839a_9538dc83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-10T00:51:57Z",
+      "side": 1,
+      "message": "I wouldn\u0027t add this since it\u0027s on AOSP but it\u0027s more of a nit. Add a \u0027.\u0027.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 63
+      },
+      "revId": "c88a9272a0eacb86cb149779988287c3a836b6e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b0f6a71_242d9895",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-10T00:51:57Z",
+      "side": 1,
+      "message": "Do you need `${ANDROID_BUILD_TOP}\u0027?",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 11
+      },
+      "revId": "c88a9272a0eacb86cb149779988287c3a836b6e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f4bb420_0e5bb568",
+        "filename": "tests/envsetup_tests.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-10T00:51:57Z",
+      "side": 1,
+      "message": "You\u0027re missing a newline at end of file.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 4
+      },
+      "revId": "c88a9272a0eacb86cb149779988287c3a836b6e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
