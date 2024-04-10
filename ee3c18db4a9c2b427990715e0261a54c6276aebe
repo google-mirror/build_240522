@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "232c3f4e_f3497247",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2024-04-10T10:06:30Z",
+      "side": 1,
+      "message": "OK, got it.",
+      "parentUuid": "e919564b_248e5d93",
+      "range": {
+        "startLine": 1059,
+        "startChar": 44,
+        "endLine": 1059,
+        "endChar": 76
+      },
+      "revId": "ee3c18db4a9c2b427990715e0261a54c6276aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b6cc718_ed92dbd8",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Yes, this could also solve the problem.\nHowever, this patch keeps exactly the same behaviour before parallelism was introduced (https://android-review.googlesource.com/c/platform/build/+/2585397), which minimises unexpected impact.",
       "parentUuid": "8b6cc718_ed92dbd8",
+      "range": {
+        "startLine": 1068,
+        "startChar": 18,
+        "endLine": 1068,
+        "endChar": 46
+      },
+      "revId": "ee3c18db4a9c2b427990715e0261a54c6276aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "817ba8d8_87d162bc",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2024-04-10T10:06:30Z",
+      "side": 1,
+      "message": "I see. I just felt that the comment here is long and the code is a bit hard to understanding in the beginning.",
+      "parentUuid": "5584ddfd_5b69dd94",
       "range": {
         "startLine": 1068,
         "startChar": 18,
