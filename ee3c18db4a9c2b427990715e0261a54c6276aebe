@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e919564b_248e5d93",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 3353839
+      },
+      "writtenOn": "2024-04-10T09:16:18Z",
+      "side": 1,
+      "message": "if the order of --chain_partition will also affect deterministic.\nBut none of the partition from add_partition_calls were not added to --chain_partition option.",
+      "parentUuid": "636a9cc8_0b337056",
+      "range": {
+        "startLine": 1059,
+        "startChar": 44,
+        "endLine": 1059,
+        "endChar": 76
+      },
+      "revId": "ee3c18db4a9c2b427990715e0261a54c6276aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8b6cc718_ed92dbd8",
         "filename": "tools/releasetools/add_img_to_target_files.py",
         "patchSetId": 2
