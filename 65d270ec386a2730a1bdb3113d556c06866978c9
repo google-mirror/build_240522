@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f583dc0_9e5b11e0",
+        "filename": "tools/aconfig/aconfig_storage_file/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-04-10T20:55:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94cc1d15_ff4d9f18",
+      "range": {
+        "startLine": 128,
+        "startChar": 43,
+        "endLine": 128,
+        "endChar": 56
+      },
+      "revId": "65d270ec386a2730a1bdb3113d556c06866978c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99a15c31_2299dd90",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-10T12:45:50Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Bpfmt: This file is not formatted.\n\nAnalyzer Description: Formats Android.bp files.\nOwner: soong-team@google.com\n\nThis file is not formatted.\n\nRun `prebuilts/build-tools/linux-x86/bin/bpfmt -w {filename}` to format the file, or apply the suggested fix.",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "65d270ec386a2730a1bdb3113d556c06866978c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc3d1840_02882504",
+        "filename": "tools/aconfig/aconfig_storage_write_api/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-04-10T20:55:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99a15c31_2299dd90",
       "range": {
         "startLine": 0,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04da6c43_6c14a405",
+        "filename": "tools/aconfig/aconfig_storage_write_api/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-04-10T20:55:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "450dbfee_0fef9c36",
+      "range": {
+        "startLine": 43,
+        "startChar": 22,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "65d270ec386a2730a1bdb3113d556c06866978c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a21880a_fbd5b6e5",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-04-10T12:45:50Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Bpfmt: This file is not formatted.\n\nAnalyzer Description: Formats Android.bp files.\nOwner: soong-team@google.com\n\nThis file is not formatted.\n\nRun `prebuilts/build-tools/linux-x86/bin/bpfmt -w {filename}` to format the file, or apply the suggested fix.",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "65d270ec386a2730a1bdb3113d556c06866978c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e9b6ec2_fc26269a",
+        "filename": "tools/aconfig/aconfig_storage_write_api/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-04-10T20:55:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a21880a_fbd5b6e5",
       "range": {
         "startLine": 0,
         "startChar": 0,
