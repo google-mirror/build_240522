@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f809341_7da32c4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386695
+      },
+      "writtenOn": "2024-04-11T06:51:37Z",
+      "side": 1,
+      "message": "I believe this needs to also update the documentation. There are still many references to the sdk_phone targets, such as https://source.android.com/docs/setup/create/avd",
+      "revId": "4bf479f6057ad532c792e26d3d958a8b50fc1f02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
