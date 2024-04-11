@@ -101,9 +101,11 @@ pub fn parse_flags(
 
             // create ParsedFlag using FlagDeclaration and default values
             let mut parsed_flag = ProtoParsedFlag::new();
+            /*
             if let Some(c) = container {
                 parsed_flag.set_container(c.to_string());
             }
+            */
             parsed_flag.set_package(package.to_string());
             parsed_flag.set_name(flag_declaration.take_name());
             parsed_flag.set_namespace(flag_declaration.take_namespace());
