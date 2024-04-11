@@ -36,7 +36,7 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
 # GSI should always support up-to-date platform features.
 # Keep this value at the latest API level to ensure latest build system
 # default configs are applied.
-PRODUCT_SHIPPING_API_LEVEL := 34
+PRODUCT_SHIPPING_API_LEVEL := 35
 
 # Enable dynamic partitions to facilitate mixing onto Cuttlefish
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
