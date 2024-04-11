@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3eeb77f_fa4a0470",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-04-11T23:08:56Z",
+      "side": 1,
+      "message": "nit: rename FakeScript to TestScript. These are real scripts, not fake ones.",
+      "range": {
+        "startLine": 258,
+        "startChar": 6,
+        "endLine": 258,
+        "endChar": 16
+      },
+      "revId": "56fcbf34fe0a8d5831e8431d83b3a4a7423ef322",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
