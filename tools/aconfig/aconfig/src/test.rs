@@ -46,7 +46,6 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
-  container: "system"
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
@@ -66,7 +65,6 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
-  container: "system"
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
@@ -91,7 +89,6 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: true
-  container: "system"
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
@@ -116,7 +113,6 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
-  container: "system"
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
@@ -141,7 +137,6 @@ parsed_flag {
   }
   is_fixed_read_only: true
   is_exported: false
-  container: "system"
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
@@ -166,7 +161,6 @@ parsed_flag {
   }
   is_fixed_read_only: true
   is_exported: true
-  container: "system"
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
@@ -196,7 +190,6 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
-  container: "system"
   metadata {
     purpose: PURPOSE_BUGFIX
   }
@@ -221,7 +214,6 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: true
-  container: "system"
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
@@ -246,7 +238,6 @@ parsed_flag {
   }
   is_fixed_read_only: false
   is_exported: false
-  container: "system"
   metadata {
     purpose: PURPOSE_UNSPECIFIED
   }
