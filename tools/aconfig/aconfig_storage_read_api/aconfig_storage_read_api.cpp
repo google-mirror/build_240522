@@ -178,12 +178,14 @@ Result<bool> get_boolean_flag_value(
 }
 
 /// Get boolean flag attribute
-Result<uint8_t> get_boolean_flag_attribute(
+Result<uint8_t> get_flag_attribute(
     MappedStorageFile const& file,
+    FlagValueType value_type,
     uint32_t index) {
   auto content = rust::Slice<const uint8_t>(
       static_cast<uint8_t*>(file.file_ptr), file.file_size);
-  auto info_cxx = get_boolean_flag_attribute_cxx(content, index);
+  auto info_cxx = get_flag_attribute_cxx(
+      content, static_cast<uint16_t>(value_type), index);
   if (info_cxx.query_success) {
     return info_cxx.flag_attribute;
   } else {

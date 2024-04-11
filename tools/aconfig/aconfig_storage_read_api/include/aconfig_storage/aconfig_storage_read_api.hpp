@@ -110,9 +110,11 @@ android::base::Result<bool> get_boolean_flag_value(
 
 /// Get boolean flag attribute
 /// \input file: mapped storage file
+/// \input value_type: flag value type
 /// \input index: the boolean flag index in the file
 /// \returns the boolean flag attribute
-android::base::Result<uint8_t> get_boolean_flag_attribute(
+android::base::Result<uint8_t> get_flag_attribute(
     MappedStorageFile const& file,
+    FlagValueType value_type,
     uint32_t index);
 } // namespace aconfig_storage
