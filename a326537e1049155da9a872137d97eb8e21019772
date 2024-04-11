@@ -16,6 +16,23 @@
       "message": "Updated commit message",
       "revId": "a326537e1049155da9a872137d97eb8e21019772",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97f37250_afd5da6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1203519
+      },
+      "writtenOn": "2024-04-11T19:52:13Z",
+      "side": 1,
+      "message": "Bumping. Can this be merged?",
+      "revId": "a326537e1049155da9a872137d97eb8e21019772",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
