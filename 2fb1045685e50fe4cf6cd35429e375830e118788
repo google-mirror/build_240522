@@ -34,6 +34,24 @@
       "parentUuid": "c8267522_a3ecf6b4",
       "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e1a19d4_ce606baf",
+        "filename": "tools/aconfig/aconfig/Cargo.toml",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1599263
+      },
+      "writtenOn": "2024-04-11T02:52:34Z",
+      "side": 1,
+      "message": "Floss is a Bluetooth stack based on Android Bluetooth stack. So, using same tools on Linux and ChromeOS build systems make our life easier. See go/floss-static-aflags for more context.\n\nWe can adapt the change when you move to new build system other than Cargo. Of course, if you\u0027d like avoid the burden of this meta information, ChromeOS can maintain this in other means.",
+      "parentUuid": "0f326a28_0387ea0a",
+      "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
