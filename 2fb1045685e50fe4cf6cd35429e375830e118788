@@ -52,6 +52,47 @@
       "parentUuid": "0f326a28_0387ea0a",
       "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39301fc8_7126ed80",
+        "filename": "tools/aconfig/aconfig/Cargo.toml",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-11T06:56:59Z",
+      "side": 1,
+      "message": "Android\u0027s Bluetooth components build using soong. Are you saying that you use soong to build the Bluetooth parts and want to use cargo to build aconfig?\n\n\u003eWe can adapt the change when you move to new build system other than Cargo. Of \u003ecourse, if you\u0027d like avoid the burden of this meta information,\nMy concern is not the metadata to the Cargo.toml file, but what will happen when something outside our control and knowledge breaks when someone removes cargo support on a random Tuesday two years down the line, and everyone in the discussions here have moved on to other projects.\n\nIf you\u0027re using soong for Bluetooth, I would prefer you used soong for aconfig as well. If that\u0027s not feasible, I would prefer if you maintained your own cargo workspace with aconfig as a dependency, and you teach cargo to apply a patch to add the info in this CL. See doc.rust-lang.org/cargo/reference/overriding-dependencies.html#the-patch-section. Or something similar, as long as it\u0027s obvious to everyone that your project is downstream of Android, and that Android can change at any moment and it\u0027s your responsibility, not Android\u0027s, to fix any breakages.",
+      "parentUuid": "3e1a19d4_ce606baf",
+      "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "937dde7f_6576deaa",
+        "filename": "tools/aconfig/aconfig/Cargo.toml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-11T06:56:59Z",
+      "side": 1,
+      "message": "Dennis, is this accurate? When I handed over aconfig to the ACE team Zhi was the official maintainer. Has this changed?",
+      "range": {
+        "startLine": 22,
+        "startChar": 14,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
