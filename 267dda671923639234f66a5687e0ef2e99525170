@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c67914c_b0fdc698",
+        "filename": "core/product.mk",
+        "patchSetId": 21
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2024-04-11T03:44:55Z",
+      "side": 1,
+      "message": "Mention that these are not literally valid values (eg, it must be \"4096\" not \"4k\")",
+      "revId": "267dda671923639234f66a5687e0ef2e99525170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
