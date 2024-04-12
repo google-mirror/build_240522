@@ -138,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e71ea929_d80cebec",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-12T23:44:04Z",
+      "side": 1,
+      "message": "exit_code will be 130 if we have ctrl+c, which will be logged.",
+      "parentUuid": "8dc36d8a_6df753c4",
+      "range": {
+        "startLine": 1133,
+        "startChar": 3,
+        "endLine": 1133,
+        "endChar": 15
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "564a2104_300de7f0",
         "filename": "envsetup.sh",
         "patchSetId": 5
