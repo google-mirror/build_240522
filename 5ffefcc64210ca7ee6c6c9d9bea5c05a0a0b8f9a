@@ -34,6 +34,24 @@
       "parentUuid": "f2acc4fb_0332de10",
       "revId": "5ffefcc64210ca7ee6c6c9d9bea5c05a0a0b8f9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3973be5a_926bbcf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2024-04-12T08:34:15Z",
+      "side": 1,
+      "message": "To our understanding two +2s are needed to merge patches from external contributors (non-googlers).\n\nReference:\nhttps://www.androidpolice.com/google-aosp-external-code-contributions-security-approval/",
+      "parentUuid": "bb7e48a2_03ca5285",
+      "revId": "5ffefcc64210ca7ee6c6c9d9bea5c05a0a0b8f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
