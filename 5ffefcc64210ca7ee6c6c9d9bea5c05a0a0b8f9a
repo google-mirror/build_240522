@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2acc4fb_0332de10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2024-04-12T08:01:42Z",
+      "side": 1,
+      "message": "Is there something that should be adjusted in this patch or the current patch looks ok?\n\nAnother approval needed in order to merge.\n\nThanks.",
+      "revId": "5ffefcc64210ca7ee6c6c9d9bea5c05a0a0b8f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
