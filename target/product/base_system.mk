@@ -295,6 +295,7 @@ PRODUCT_PACKAGES += \
     wificond \
     wifi.rc \
     wm \
+    VmLauncherApp \
 
 # When we release crashrecovery module
 ifeq ($(RELEASE_CRASHRECOVERY_MODULE),true)
