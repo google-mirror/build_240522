@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef1149d8_8708947c",
+        "filename": "tools/aconfig/aconfig/Cargo.toml",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-12T07:17:37Z",
+      "side": 1,
+      "message": "I\u0027m curious what benefit this tool can add to the Rust community? The additional effort of developing a tool (currently) tightly coupled to Android outside the Android tree must be weight against the benefits the tool would bring to the Rust ecosystem.\n\nI\u0027m personally not against uploading aconfig to crates.io, but I need to be convinced that it is worth the overhead for the team maintaining aconfig.",
+      "parentUuid": "aab1f5d0_59972d5d",
+      "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "937dde7f_6576deaa",
         "filename": "tools/aconfig/aconfig/Cargo.toml",
         "patchSetId": 1
@@ -169,6 +187,30 @@
       "side": 1,
       "message": "You meant zhidou@? If so, I can update in our local patch.",
       "parentUuid": "49a4f137_6d91c88a",
+      "range": {
+        "startLine": 22,
+        "startChar": 14,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8527d6d_61152dad",
+        "filename": "tools/aconfig/aconfig/Cargo.toml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-12T07:17:37Z",
+      "side": 1,
+      "message": "\u003ezhidou@\nCorrect.",
+      "parentUuid": "ba9d65fd_6006a3fa",
       "range": {
         "startLine": 22,
         "startChar": 14,
