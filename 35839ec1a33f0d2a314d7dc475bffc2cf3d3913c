@@ -34,6 +34,24 @@
       "parentUuid": "91f7984d_941ac430",
       "revId": "35839ec1a33f0d2a314d7dc475bffc2cf3d3913c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32ff3892_4b0db78e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-04-12T02:58:16Z",
+      "side": 1,
+      "message": "Submitting separately. I dont want to block the other one https://r.android.com/3037194 due to this CL so didnt add a topic yet.\n\nKeeping this comment to open to track dependency.",
+      "parentUuid": "7b2da889_cf14df2d",
+      "revId": "35839ec1a33f0d2a314d7dc475bffc2cf3d3913c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
