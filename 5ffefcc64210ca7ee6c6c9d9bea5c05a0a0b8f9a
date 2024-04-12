@@ -144,6 +144,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfcf1984_694a4d96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2024-04-12T13:04:42Z",
+      "side": 1,
+      "message": "It\u0027s good to keep the order of partitions to be deterministic, lgtm.",
+      "revId": "5ffefcc64210ca7ee6c6c9d9bea5c05a0a0b8f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b958d1dc_819b6030",
@@ -181,6 +198,30 @@
       "side": 1,
       "message": "These partitions can be generated independently, may be the reason for introducing parallelization.\n\nWith this patch, Since the `partitions` dict already having the entry of the partitions, this `add_partition` will only update the values in the dictionary. That\u0027s why the dictionary is deterministic even though the image creations happened parallel.",
       "parentUuid": "b958d1dc_819b6030",
+      "range": {
+        "startLine": 1067,
+        "startChar": 26,
+        "endLine": 1067,
+        "endChar": 70
+      },
+      "revId": "5ffefcc64210ca7ee6c6c9d9bea5c05a0a0b8f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d65af53e_29a66775",
+        "filename": "tools/releasetools/add_img_to_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2024-04-12T13:04:42Z",
+      "side": 1,
+      "message": "I see, got it!\n\nThanks for the explanation.",
+      "parentUuid": "7c60bf52_5fd67b7d",
       "range": {
         "startLine": 1067,
         "startChar": 26,
