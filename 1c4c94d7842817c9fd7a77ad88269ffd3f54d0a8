@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d60a264_cd00ed58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-04-12T17:14:50Z",
+      "side": 1,
+      "message": "Note - this is required because one copy of tests are built with this, and run on all devices, so we need to have the tests be generic.",
+      "revId": "1c4c94d7842817c9fd7a77ad88269ffd3f54d0a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
