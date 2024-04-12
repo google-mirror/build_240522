@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aab1f5d0_59972d5d",
+        "filename": "tools/aconfig/aconfig/Cargo.toml",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1599263
+      },
+      "writtenOn": "2024-04-12T06:18:52Z",
+      "side": 1,
+      "message": "amhk@, I know this is an internal tool, but it\u0027s been published on aosp. I was wondering if you will consider publishing it to crates.io in the future? It can benefit the Rust community?",
+      "parentUuid": "7c455919_e53b9611",
+      "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "937dde7f_6576deaa",
         "filename": "tools/aconfig/aconfig/Cargo.toml",
         "patchSetId": 1
