@@ -70,6 +70,24 @@
       "parentUuid": "3973be5a_926bbcf8",
       "revId": "5ffefcc64210ca7ee6c6c9d9bea5c05a0a0b8f9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7144016_1e907943",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3381359
+      },
+      "writtenOn": "2024-04-12T10:18:50Z",
+      "side": 1,
+      "message": "Even though we found deterministic issue with VBmeta.. `partitions` is used not just in BuildVBMeta, it is used in several places, such care_map.pb generation\n\nCurrently the partitions dictionary is built in specific order, such as adding vbmeta_system and vbmeta_vendor at the end of the dictionary before creating the vbmeta image.\n\nNot sure if the partitions order is strict or can it be sorted order ?",
+      "parentUuid": "626dc0b9_e050eb2b",
+      "revId": "5ffefcc64210ca7ee6c6c9d9bea5c05a0a0b8f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
