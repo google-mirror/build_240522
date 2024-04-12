@@ -88,6 +88,24 @@
       "parentUuid": "626dc0b9_e050eb2b",
       "revId": "5ffefcc64210ca7ee6c6c9d9bea5c05a0a0b8f9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc9d260d_d581eb96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2024-04-12T11:08:21Z",
+      "side": 1,
+      "message": "I see.\n\nBtw, I didn\u0027t mean sort the `partitions` in place.\n\nInstead, only using sorted() function when building vbmeta images.\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:build/make/tools/releasetools/common.py;l\u003d1527;drc\u003d4dc089971bb1a2257cf1cc8c80e2b97b7be44086\n\n\n  \u003d\u003d\u003e for partition, path in sorted(partitions.items()):\n\nWill that still be a concern?",
+      "parentUuid": "e7144016_1e907943",
+      "revId": "5ffefcc64210ca7ee6c6c9d9bea5c05a0a0b8f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
