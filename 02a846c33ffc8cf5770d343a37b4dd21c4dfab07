@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4d82198_95f4f8fd",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-12T22:03:00Z",
+      "side": 1,
+      "message": "I think it is clearer to have separate vars to enable/disable the feature VS specify different logger. Yes, we can also set ANDROID_TOOL_LOGGER to empty to disable the logging, but I think that is implicit and might be confusing.",
+      "parentUuid": "dd5b103e_32aae566",
+      "range": {
+        "startLine": 1118,
+        "startChar": 8,
+        "endLine": 1118,
+        "endChar": 88
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e3ca859_0c20fd23",
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3da1d342_fecc79b2",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-12T22:03:00Z",
+      "side": 1,
+      "message": "Sorry, I tried that but $1 just returned the input arg..\nAlso, I dont think we are interested in the received_signal, the exit_code should be enough.",
+      "parentUuid": "5e3ca859_0c20fd23",
+      "range": {
+        "startLine": 1133,
+        "startChar": 3,
+        "endLine": 1133,
+        "endChar": 15
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "564a2104_300de7f0",
         "filename": "envsetup.sh",
         "patchSetId": 5
@@ -77,6 +125,30 @@
       "writtenOn": "2024-04-11T23:08:56Z",
       "side": 1,
       "message": "does this include the actual command or just the params? If params then name the arg --tool_params",
+      "range": {
+        "startLine": 1137,
+        "startChar": 15,
+        "endLine": 1137,
+        "endChar": 24
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84af43a1_4b2d42a4",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1137,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-12T22:03:00Z",
+      "side": 1,
+      "message": "Just the params. Done.",
+      "parentUuid": "564a2104_300de7f0",
       "range": {
         "startLine": 1137,
         "startChar": 15,
@@ -135,6 +207,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25241ad9_99344138",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-12T22:03:00Z",
+      "side": 1,
+      "message": "I cant do this when trap is entered as I want to capture the exit_code of the tool run before the trap, I moved this up (just after \"exit_code\u003d$?;\"), but just curious, what is the difference here? I think as long as we remove the traps before the trap exit, we should not see duplicate log entries? (I tried with the original code, didn\u0027t see duplicates).",
+      "parentUuid": "58b3a2e6_57f70cbf",
+      "range": {
+        "startLine": 1140,
+        "startChar": 6,
+        "endLine": 1140,
+        "endChar": 8
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46fe391b_ac89fee1",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-12T22:03:00Z",
+      "side": 1,
+      "message": "As discussed offline, we want to ensure the log function is called whenever the tool exits.",
+      "parentUuid": "ca87083f_6e15fed3",
+      "range": {
+        "startLine": 1140,
+        "startChar": 2,
+        "endLine": 1140,
+        "endChar": 14
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5c48c78_45211ba1",
         "filename": "envsetup.sh",
         "patchSetId": 5
@@ -146,6 +266,30 @@
       "writtenOn": "2024-04-11T23:08:56Z",
       "side": 1,
       "message": "consider propagate the signal by `kill -s $received_signal`?",
+      "range": {
+        "startLine": 1141,
+        "startChar": 2,
+        "endLine": 1141,
+        "endChar": 17
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a307949a_b1ba7c5c",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-12T22:03:00Z",
+      "side": 1,
+      "message": "Same here, not sure how we can get the signal.\nAlso we dont want o kill the logger..",
+      "parentUuid": "c5c48c78_45211ba1",
       "range": {
         "startLine": 1141,
         "startChar": 2,
@@ -179,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5b1799a_ed4dfa9c",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-12T22:03:00Z",
+      "side": 1,
+      "message": "This is fine, if ANDROID_TOOL_LOGGER is not set or empty, the function will already returned.",
+      "parentUuid": "8674c19d_a0ba2b3d",
+      "range": {
+        "startLine": 1145,
+        "startChar": 1,
+        "endLine": 1145,
+        "endChar": 25
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0763e583_90d03c30",
@@ -202,6 +370,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a16a479c_079609ea",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-12T22:03:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0763e583_90d03c30",
+      "range": {
+        "startLine": 169,
+        "startChar": 33,
+        "endLine": 169,
+        "endChar": 36
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f458269_d69fd62d",
@@ -215,6 +407,30 @@
       "writtenOn": "2024-04-11T23:08:56Z",
       "side": 1,
       "message": "can we assert on the actual logs instead? (args are implementation details. we care about results)\n\ntest_logger.assert_last_log_entry(\"FAKE_TOOL arg1, arg2, start_timestamp, 130, ...\")",
+      "range": {
+        "startLine": 175,
+        "startChar": 16,
+        "endLine": 175,
+        "endChar": 66
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f17d59d1_8611f671",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-12T22:03:00Z",
+      "side": 1,
+      "message": "The test_logger is an instance of FakeScript which is used to create both the test_tool and test_logger so it does not make much sense to have a logger specific assert, we can create a subclass to just for creating logger and having the assert there, but I feel it is a bit overkill and it does not improve the test logic (assert_last_log_entry is basically a rename of the called_with_args..)",
+      "parentUuid": "3f458269_d69fd62d",
       "range": {
         "startLine": 175,
         "startChar": 16,
