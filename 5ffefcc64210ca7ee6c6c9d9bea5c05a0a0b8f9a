@@ -106,6 +106,24 @@
       "parentUuid": "e7144016_1e907943",
       "revId": "5ffefcc64210ca7ee6c6c9d9bea5c05a0a0b8f9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9fae538_1ee6b47c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3381359
+      },
+      "writtenOn": "2024-04-12T11:37:32Z",
+      "side": 1,
+      "message": "\u003e for partition, path in sorted(partitions.items()):\n\nIf the partitions order is not strict, I think it might work for vbmeta deterministic \n\nBut my point was the `partitions` will still be in deterministic dictionary and was using in other places. Just wondering if it will cause any other issues later.",
+      "parentUuid": "bc9d260d_d581eb96",
+      "revId": "5ffefcc64210ca7ee6c6c9d9bea5c05a0a0b8f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
