@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c455919_e53b9611",
+        "filename": "tools/aconfig/aconfig/Cargo.toml",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1599263
+      },
+      "writtenOn": "2024-04-12T06:04:49Z",
+      "side": 1,
+      "message": "We\u0027re using GN build system:\nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Bluetooth/README.md\n\nThanks for the suggestion. We are fine to do a patch on our side:\n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Bluetooth/+/3017397",
+      "parentUuid": "39301fc8_7126ed80",
+      "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "937dde7f_6576deaa",
         "filename": "tools/aconfig/aconfig/Cargo.toml",
         "patchSetId": 1
@@ -109,6 +127,30 @@
       "side": 1,
       "message": "no this has not changed, it should be updated to Zhi.",
       "parentUuid": "937dde7f_6576deaa",
+      "range": {
+        "startLine": 22,
+        "startChar": 14,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "2fb1045685e50fe4cf6cd35429e375830e118788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba9d65fd_6006a3fa",
+        "filename": "tools/aconfig/aconfig/Cargo.toml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1599263
+      },
+      "writtenOn": "2024-04-12T06:04:49Z",
+      "side": 1,
+      "message": "You meant zhidou@? If so, I can update in our local patch.",
+      "parentUuid": "49a4f137_6d91c88a",
       "range": {
         "startLine": 22,
         "startChar": 14,
