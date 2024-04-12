@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8dc36d8a_6df753c4",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-04-12T23:18:44Z",
+      "side": 1,
+      "message": "can we distinguish ctrl+c then? I think this is an important signal to log.",
+      "parentUuid": "3da1d342_fecc79b2",
+      "range": {
+        "startLine": 1133,
+        "startChar": 3,
+        "endLine": 1133,
+        "endChar": 15
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "564a2104_300de7f0",
         "filename": "envsetup.sh",
         "patchSetId": 5
@@ -248,6 +272,30 @@
         "startChar": 2,
         "endLine": 1140,
         "endChar": 14
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ec41fcb_6458bd6f",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-04-12T23:18:44Z",
+      "side": 1,
+      "message": "there can still theoretically be signals when executing the command. (although actually you are running in background)",
+      "parentUuid": "25241ad9_99344138",
+      "range": {
+        "startLine": 1140,
+        "startChar": 6,
+        "endLine": 1140,
+        "endChar": 8
       },
       "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
