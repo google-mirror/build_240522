@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2c2eb79_55e16693",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-13T00:10:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84d05a09_4d6462bd",
+      "range": {
+        "startLine": 1104,
+        "startChar": 4,
+        "endLine": 1104,
+        "endChar": 43
+      },
+      "revId": "1df7d49903d4fece3e7e246cc30763bcaaf72f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57a46457_f07f17fc",
@@ -167,6 +191,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32d07224_f6382115",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-13T00:10:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38e12ba0_76e939d4",
+      "range": {
+        "startLine": 1105,
+        "startChar": 4,
+        "endLine": 1105,
+        "endChar": 14
+      },
+      "revId": "1df7d49903d4fece3e7e246cc30763bcaaf72f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae16e93c_b13a3bda",
@@ -228,6 +276,30 @@
       "side": 1,
       "message": "Are you sure that all shells will use the redefined function?",
       "parentUuid": "317d6e34_be0bc77d",
+      "range": {
+        "startLine": 1108,
+        "startChar": 9,
+        "endLine": 1108,
+        "endChar": 19
+      },
+      "revId": "1df7d49903d4fece3e7e246cc30763bcaaf72f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29901090_67d59fee",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-13T00:10:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "560798a6_a15ed22a",
       "range": {
         "startLine": 1108,
         "startChar": 9,
