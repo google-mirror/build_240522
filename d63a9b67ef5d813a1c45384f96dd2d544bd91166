@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0f37f0a_f9a385bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1988540
+      },
+      "writtenOn": "2024-04-15T21:52:29Z",
+      "side": 1,
+      "message": "Keeping comment open since some tests (Internal bug: http://b/334200225) are still not resolved with this",
+      "revId": "d63a9b67ef5d813a1c45384f96dd2d544bd91166",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
