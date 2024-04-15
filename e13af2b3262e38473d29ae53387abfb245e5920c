@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c58e9cd9_0c9b8f49",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-04-15T17:46:31Z",
+      "side": 1,
+      "message": "Try adding this:\n\n```\nifneq (,$(LOCAL_SOONG_INSTALLED_MODULE))\n$(my_all_targets): \\\n    $(foreach f, $(LOCAL_SOONG_INSTALL_PAIRS),\\\n      $(word 2,$(subst :,$(space),$(f))))\nendif\n```",
+      "revId": "e13af2b3262e38473d29ae53387abfb245e5920c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
