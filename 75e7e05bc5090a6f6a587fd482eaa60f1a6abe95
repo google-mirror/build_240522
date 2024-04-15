@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5a220da_765101d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2024-04-15T07:52:43Z",
+      "side": 1,
+      "message": "aosp/3039156 will add \"APEX\" tag.",
+      "revId": "75e7e05bc5090a6f6a587fd482eaa60f1a6abe95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
