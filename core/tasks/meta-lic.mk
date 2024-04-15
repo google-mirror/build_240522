@@ -14,6 +14,9 @@
 
 # Declare license metadata for non-module files released with products.
 
+# Moved here from device/generic/car/Android.mk
+$(eval $(call declare-1p-copy-files,device/generic/car,))
+
 # Moved here from device/sample/Android.mk
 $(eval $(call declare-1p-copy-files,device/sample,))
 
