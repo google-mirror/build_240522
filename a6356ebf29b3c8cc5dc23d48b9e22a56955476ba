@@ -302,6 +302,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed9464be_d66177b3",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-15T19:10:48Z",
+      "side": 1,
+      "message": "When that has happened, will you add a check here to check the invariant? (Separate CL)",
+      "parentUuid": "6663bccf_ab70d8d9",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 59
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6460f466_f57867d5",
         "filename": "tools/aconfig/partitions.txt",
         "patchSetId": 3

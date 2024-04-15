@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc9f79d7_7ed6edab",
+        "filename": "tools/aconfig/partition_aconfig_flags_paths.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-15T19:10:48Z",
+      "side": 1,
+      "message": "This file should be in tools/aconfig/aflags because that\u0027s where the logic is.\n\nOr even better, it should be in a new tools/aconfig/read-all-the-things lib that aflags links against.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "eba85bea798fe5eb05f4768be44b390ac1280758",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
