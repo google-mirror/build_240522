@@ -396,6 +396,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1087972a_eb839ca5",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-15T18:22:20Z",
+      "side": 1,
+      "message": "Resolved offline.",
+      "parentUuid": "a307949a_b1ba7c5c",
+      "range": {
+        "startLine": 1141,
+        "startChar": 2,
+        "endLine": 1141,
+        "endChar": 17
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8674c19d_a0ba2b3d",
@@ -527,6 +551,30 @@
       "side": 1,
       "message": "The test_logger is an instance of FakeScript which is used to create both the test_tool and test_logger so it does not make much sense to have a logger specific assert, we can create a subclass to just for creating logger and having the assert there, but I feel it is a bit overkill and it does not improve the test logic (assert_last_log_entry is basically a rename of the called_with_args..)",
       "parentUuid": "3f458269_d69fd62d",
+      "range": {
+        "startLine": 175,
+        "startChar": 16,
+        "endLine": 175,
+        "endChar": 66
+      },
+      "revId": "02a846c33ffc8cf5770d343a37b4dd21c4dfab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5c15930_48bfbd77",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-15T18:22:20Z",
+      "side": 1,
+      "message": "Resolved offline.",
+      "parentUuid": "f17d59d1_8611f671",
       "range": {
         "startLine": 175,
         "startChar": 16,
