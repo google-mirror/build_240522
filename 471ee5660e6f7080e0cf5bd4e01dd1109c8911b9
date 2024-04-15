@@ -117,6 +117,30 @@
       },
       "revId": "471ee5660e6f7080e0cf5bd4e01dd1109c8911b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82effbbc_0f27ae0b",
+        "filename": "tools/aconfig/aconfig_storage_read_api/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-04-15T13:38:16Z",
+      "side": 1,
+      "message": "I\u0027m mostly concerned about mainline modules, if I make them shared libs. Then every mainline modules are forced to include these two libraries. On the other hand, if we static link here, we will include a small parts of libbase and liblog in the reader api lib (which probably is not much). It is a tradeoff really.",
+      "parentUuid": "be8183d4_dc520e55",
+      "range": {
+        "startLine": 85,
+        "startChar": 1,
+        "endLine": 86,
+        "endChar": 17
+      },
+      "revId": "471ee5660e6f7080e0cf5bd4e01dd1109c8911b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
