@@ -22,6 +22,30 @@
       },
       "revId": "eba85bea798fe5eb05f4768be44b390ac1280758",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9eee707_8a3dfc46",
+        "filename": "tools/aconfig/partition_aconfig_flags_paths.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-15T19:36:14Z",
+      "side": 1,
+      "message": "Moved determining the paths to its own crate. I left reading the files from the paths/marshaling into types in the `load_protos` lib in aflags. WDYT?",
+      "parentUuid": "fc9f79d7_7ed6edab",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "eba85bea798fe5eb05f4768be44b390ac1280758",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
