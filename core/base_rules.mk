@@ -694,6 +694,16 @@ endif
 endif
 
 ###########################################################
+## SOONG INSTALL PAIRS
+###########################################################
+# Decalir dependencies for LOCAL_SOONG_INSTALL_PAIRS in soong to the module it rely on.
+ifneq (,$(LOCAL_SOONG_INSTALLED_MODULE))
+$(my_all_targets): \
+    $(foreach f, $(LOCAL_SOONG_INSTALL_PAIRS),\
+      $(word 2,$(subst :,$(space),$(f))))
+endif
+
+###########################################################
 ## Compatibility suite files.
 ###########################################################
 ifdef LOCAL_COMPATIBILITY_SUITE
