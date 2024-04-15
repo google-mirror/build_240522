@@ -18,3 +18,5 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/module_common.mk)
 
 PRODUCT_NAME := module_arm
 PRODUCT_DEVICE := module_arm
+
+PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO := true
