@@ -141,6 +141,30 @@
       },
       "revId": "471ee5660e6f7080e0cf5bd4e01dd1109c8911b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f645bd05_8ea46d9d",
+        "filename": "tools/aconfig/aconfig_storage_read_api/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1124746
+      },
+      "writtenOn": "2024-04-15T17:18:58Z",
+      "side": 1,
+      "message": "You probably know better than I do about DCLA, I suspect most of the cc mainline modules already depend on these two libs, but I am ok with either ways.",
+      "parentUuid": "82effbbc_0f27ae0b",
+      "range": {
+        "startLine": 85,
+        "startChar": 1,
+        "endLine": 86,
+        "endChar": 17
+      },
+      "revId": "471ee5660e6f7080e0cf5bd4e01dd1109c8911b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
