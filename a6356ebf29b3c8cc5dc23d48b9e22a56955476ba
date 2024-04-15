@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9f9b4e8_70daf781",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-15T18:54:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49475f95_e29e87f4",
+      "range": {
+        "startLine": 49,
+        "startChar": 35,
+        "endLine": 49,
+        "endChar": 66
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33230ad6_72c0d02f",
@@ -87,6 +111,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "394a2aac_a69b1309",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-15T18:54:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33230ad6_72c0d02f",
+      "range": {
+        "startLine": 53,
+        "startChar": 35,
+        "endLine": 53,
+        "endChar": 36
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dac91e4_25889e5f",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-15T18:54:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26340a21_be1473c2",
+      "range": {
+        "startLine": 53,
+        "startChar": 48,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f94d29cd_9a28146d",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a92a7d30_b373ad5a",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-15T18:54:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f94d29cd_9a28146d",
+      "range": {
+        "startLine": 55,
+        "startChar": 27,
+        "endLine": 55,
+        "endChar": 42
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84e26b16_0347bb86",
@@ -123,6 +219,30 @@
       "writtenOn": "2024-04-03T11:05:01Z",
       "side": 1,
       "message": "`pub(crate)`",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 3
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "404a0a62_3894980a",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-15T18:54:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84e26b16_0347bb86",
       "range": {
         "startLine": 68,
         "startChar": 0,
@@ -158,6 +278,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6663bccf_ab70d8d9",
+        "filename": "tools/aconfig/aflags/src/load_protos.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-15T18:54:59Z",
+      "side": 1,
+      "message": "This will be an illegal state soon--flags should only occur in one container. We\u0027ve done some migration work to move flags to their own containers, will be enforced by build system soon.",
+      "parentUuid": "0834d037_94d5b0b2",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 59
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6460f466_f57867d5",
         "filename": "tools/aconfig/partitions.txt",
         "patchSetId": 3
@@ -169,6 +313,30 @@
       "writtenOn": "2024-04-03T11:05:01Z",
       "side": 1,
       "message": "The contents are paths, not partitions as the file name indicates. Rename?",
+      "range": {
+        "startLine": 2,
+        "startChar": 4,
+        "endLine": 2,
+        "endChar": 35
+      },
+      "revId": "a6356ebf29b3c8cc5dc23d48b9e22a56955476ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "221a1941_deec6630",
+        "filename": "tools/aconfig/partitions.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-15T18:54:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6460f466_f57867d5",
       "range": {
         "startLine": 2,
         "startChar": 4,
