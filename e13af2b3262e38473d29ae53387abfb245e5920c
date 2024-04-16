@@ -34,6 +34,24 @@
       "parentUuid": "c58e9cd9_0c9b8f49",
       "revId": "e13af2b3262e38473d29ae53387abfb245e5920c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d40530c_528a629a",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2024-04-16T03:18:14Z",
+      "side": 1,
+      "message": "Oh, it is working... Not sure what\u0027s wrong I did yesterday with similar approach, thanks.",
+      "parentUuid": "c0aaa599_3f388d53",
+      "revId": "e13af2b3262e38473d29ae53387abfb245e5920c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
