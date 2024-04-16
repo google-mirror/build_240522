@@ -133,6 +133,30 @@
       },
       "revId": "4c9a5c5535d7d89190b581fd4d56eba753ee7c52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e74a2fe_057a1ca2",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2024-04-16T13:07:09Z",
+      "side": 1,
+      "message": "Yes, I generally agree that it can easily make things worse, but in this case we\u0027re just repeating the call immediately prior to `use` (`inputStream()`).",
+      "parentUuid": "7e017201_ff53f67c",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 0
+      },
+      "revId": "4c9a5c5535d7d89190b581fd4d56eba753ee7c52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
