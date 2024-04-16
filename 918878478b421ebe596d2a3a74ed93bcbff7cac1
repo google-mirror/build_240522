@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "445cb7b9_3600d14b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2024-04-16T12:22:08Z",
+      "side": 1,
+      "message": "Things generally missing from the tool: `README.md` explaining how to use it and tests.",
+      "revId": "918878478b421ebe596d2a3a74ed93bcbff7cac1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
