@@ -81,6 +81,36 @@ internal value class Flag(val name: String) {
   override fun toString(): String = name.toString()
 }
 
+internal sealed class ApiError {
+  abstract val symbol: Symbol
+  abstract val flag: Flag
+}
+
+internal data class EnabledFlaggedApiNotPresentError(
+    override val symbol: Symbol,
+    override val flag: Flag
+) : ApiError() {
+  override fun toString(): String {
+    return "error: enabled @FlaggedApi not present in built artifact: symbol=$symbol flag=$flag"
+  }
+}
+
+internal data class DisabledFlaggedApiIsPresentError(
+    override val symbol: Symbol,
+    override val flag: Flag
+) : ApiError() {
+  override fun toString(): String {
+    return "error: disabled @FlaggedApi is present in built artifact: symbol=$symbol flag=$flag"
+  }
+}
+
+internal data class UnknownFlagError(override val symbol: Symbol, override val flag: Flag) :
+    ApiError() {
+  override fun toString(): String {
+    return "error: unknown flag: symbol=$symbol flag=$flag"
+  }
+}
+
 class CheckCommand : CliktCommand() {
   private val apiSignaturePath by
       option("--api-signature")
@@ -113,16 +143,17 @@ class CheckCommand : CliktCommand() {
           .required()
 
   override fun run() {
-    @Suppress("UNUSED_VARIABLE")
     val flaggedSymbols =
         apiSignaturePath.toFile().inputStream().use {
           parseApiSignature(apiSignaturePath.toString(), it)
         }
-    @Suppress("UNUSED_VARIABLE")
     val flags = flagValuesPath.toFile().inputStream().use { parseFlagValues(it) }
-    @Suppress("UNUSED_VARIABLE")
     val exportedSymbols = apiVersionsPath.toFile().inputStream().use { parseApiVersions(it) }
-    throw ProgramResult(0)
+    val errors = findErrors(flaggedSymbols, flags, exportedSymbols)
+    for (e in errors) {
+      println(e)
+    }
+    throw ProgramResult(errors.size)
   }
 }
 
@@ -174,6 +205,30 @@ internal fun parseApiVersions(input: InputStream): Set<Symbol> {
     output.add(Symbol.create("$className.$fieldName"))
   }
   return output
+}
+
+internal fun findErrors(
+    flaggedSymbolsInSource: Set<Pair<Symbol, Flag>>,
+    flags: Map<Flag, Boolean>,
+    symbolsInOutput: Set<Symbol>
+): Set<ApiError> {
+  val errors = mutableSetOf<ApiError>()
+  for ((symbol, flag) in flaggedSymbolsInSource) {
+    try {
+      if (flags.getValue(flag)) {
+        if (!symbolsInOutput.contains(symbol)) {
+          errors.add(EnabledFlaggedApiNotPresentError(symbol, flag))
+        }
+      } else {
+        if (symbolsInOutput.contains(symbol)) {
+          errors.add(DisabledFlaggedApiIsPresentError(symbol, flag))
+        }
+      }
+    } catch (e: NoSuchElementException) {
+      errors.add(UnknownFlagError(symbol, flag))
+    }
+  }
+  return errors
 }
 
 fun main(args: Array<String>) = CheckCommand().main(args)
