@@ -46,6 +46,30 @@
       },
       "revId": "eba85bea798fe5eb05f4768be44b390ac1280758",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a240663d_67837b8a",
+        "filename": "tools/aconfig/partition_aconfig_flags_paths.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-16T06:28:00Z",
+      "side": 1,
+      "message": "That\u0027s fine -- what you do with the paths is up to the caller.",
+      "parentUuid": "a9eee707_8a3dfc46",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "eba85bea798fe5eb05f4768be44b390ac1280758",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
