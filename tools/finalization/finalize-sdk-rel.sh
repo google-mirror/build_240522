@@ -44,18 +44,8 @@ function finalize_sdk_rel() {
     system/sepolicy/tools/finalize-sdk-rel.sh "$top" "$FINAL_PLATFORM_SDK_VERSION"
 
     # prebuilts/abi-dumps/platform
-    mkdir -p "$top/prebuilts/abi-dumps/platform/$FINAL_PLATFORM_SDK_VERSION"
-    cp -r "$top/prebuilts/abi-dumps/platform/current/64/" "$top/prebuilts/abi-dumps/platform/$FINAL_PLATFORM_SDK_VERSION/"
-
-    # TODO(b/309880485)
-    # uncomment and update
-    # prebuilts/abi-dumps/ndk
-    #mkdir -p "$top/prebuilts/abi-dumps/ndk/$FINAL_PLATFORM_SDK_VERSION"
-    #cp -r "$top/prebuilts/abi-dumps/ndk/current/64/" "$top/prebuilts/abi-dumps/ndk/$FINAL_PLATFORM_SDK_VERSION/"
-    #if [ "$FINAL_STATE" != "sdk" ] || [ "$FINAL_PLATFORM_CODENAME" == "$CURRENT_PLATFORM_CODENAME" ] ; then
-        # prebuilts/abi-dumps/vndk
-        #mv "$top/prebuilts/abi-dumps/vndk/$CURRENT_PLATFORM_CODENAME" "$top/prebuilts/abi-dumps/vndk/$FINAL_PLATFORM_SDK_VERSION"
-    #fi;
+    "$top/build/soong/soong_ui.bash" --make-mode TARGET_RELEASE=fina_2 TARGET_PRODUCT=aosp_arm64 TARGET_BUILD_VARIANT=userdebug create_reference_dumps
+    ANDROID_BUILD_TOP="$top" "$top/out/host/linux-x86/bin/create_reference_dumps" -release fina_2 --build-variant userdebug --lib-variant APEX
 }
 
 finalize_sdk_rel
