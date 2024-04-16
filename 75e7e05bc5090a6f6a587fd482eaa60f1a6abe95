@@ -16,6 +16,29 @@
       "message": "aosp/3039156 will add \"APEX\" tag.",
       "revId": "75e7e05bc5090a6f6a587fd482eaa60f1a6abe95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b9de6cb_4773cb91",
+        "filename": "target/product/gsi/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-04-16T04:19:50Z",
+      "side": 1,
+      "message": "is this a typo?\n\ncheck-abi-dump-list-timestamp vs. check-vndk-abi-dump-list-timestamp",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 53
+      },
+      "revId": "75e7e05bc5090a6f6a587fd482eaa60f1a6abe95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
