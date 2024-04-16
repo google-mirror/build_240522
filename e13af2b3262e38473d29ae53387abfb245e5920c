@@ -52,6 +52,24 @@
       "parentUuid": "c0aaa599_3f388d53",
       "revId": "e13af2b3262e38473d29ae53387abfb245e5920c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63854e3f_dcfaf057",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2024-04-16T03:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d40530c_528a629a",
+      "revId": "e13af2b3262e38473d29ae53387abfb245e5920c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
