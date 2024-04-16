@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3c9338_3b48039a",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1311067
+      },
+      "writtenOn": "2024-04-16T03:59:37Z",
+      "side": 1,
+      "message": "Declare",
+      "range": {
+        "startLine": 699,
+        "startChar": 2,
+        "endLine": 699,
+        "endChar": 9
+      },
+      "revId": "ab09b1350991f65364294a724f84fc262eb0f4ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06906c6a_cdeddfd8",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1311067
+      },
+      "writtenOn": "2024-04-16T03:59:37Z",
+      "side": 1,
+      "message": "relies",
+      "range": {
+        "startLine": 699,
+        "startChar": 79,
+        "endLine": 699,
+        "endChar": 83
+      },
+      "revId": "ab09b1350991f65364294a724f84fc262eb0f4ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
