@@ -20,6 +20,30 @@ package com.android.checkflaggedapis
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.ProgramResult
 
+@JvmInline
+value class Symbol(val name: String) {
+  companion object {
+    private val FORBIDDEN_CHARS = listOf('/', '#', '$')
+
+    fun create(name: String): Symbol {
+      var sanitized_name = name
+      for (ch in FORBIDDEN_CHARS) {
+        sanitized_name = sanitized_name.replace(ch, '.')
+      }
+      return Symbol(sanitized_name)
+    }
+  }
+
+  init {
+    require(!name.isEmpty()) { "empty string" }
+    for (ch in FORBIDDEN_CHARS) {
+      require(!name.contains(ch)) { "$name: contains $ch" }
+    }
+  }
+
+  override fun toString(): String = name.toString()
+}
+
 class CheckCommand : CliktCommand() {
   override fun run() {
     println("hello world")
