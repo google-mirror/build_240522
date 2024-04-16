@@ -59,6 +59,26 @@ value class Flag(val name: String) {
   override fun toString(): String = name.toString()
 }
 
+sealed class ApiError(val symbol: Symbol, val flag: Flag)
+
+class EnabledFlaggedApiNotPresentError(symbol: Symbol, flag: Flag) : ApiError(symbol, flag) {
+  override fun toString(): String {
+    return "error: enabled @FlaggedApi not present in built artifact: symbol=$symbol flag=$flag"
+  }
+}
+
+class DisabledFlaggedApiIsPresentError(symbol: Symbol, flag: Flag) : ApiError(symbol, flag) {
+  override fun toString(): String {
+    return "error: disabled @FlaggedApi is present in built artifact: symbol=$symbol flag=$flag"
+  }
+}
+
+class UnknownFlagError(symbol: Symbol, flag: Flag) : ApiError(symbol, flag) {
+  override fun toString(): String {
+    return "error: unknown flag: symbol=$symbol flag=$flag"
+  }
+}
+
 class CheckCommand : CliktCommand() {
   private val api_signature_path by
       option("--api-signature")
@@ -74,20 +94,37 @@ class CheckCommand : CliktCommand() {
           .required()
 
   override fun run() {
-    @Suppress("UNUSED_VARIABLE")
     val flagged_symbols =
         api_signature_path.toFile().inputStream().use { inputStream ->
           parseApiSignature(api_signature_path.toString(), inputStream)
         }
-    @Suppress("UNUSED_VARIABLE")
     val flags =
         flag_values_path.toFile().inputStream().use { inputStream -> parseFlagValues(inputStream) }
-    @Suppress("UNUSED_VARIABLE")
     val exported_symbols =
         api_versions_path.toFile().inputStream().use { inputStream ->
           parseApiVersions(inputStream)
         }
-    throw ProgramResult(0)
+
+    val errors = mutableSetOf<ApiError>()
+    for ((symbol, flag) in flagged_symbols) {
+      try {
+        if (flags.getValue(flag)) {
+          if (!exported_symbols.contains(symbol)) {
+            errors.add(EnabledFlaggedApiNotPresentError(symbol, flag))
+          }
+        } else {
+          if (exported_symbols.contains(symbol)) {
+            errors.add(DisabledFlaggedApiIsPresentError(symbol, flag))
+          }
+        }
+      } catch (e: NoSuchElementException) {
+        errors.add(UnknownFlagError(symbol, flag))
+      }
+    }
+    for (e in errors) {
+      println(e)
+    }
+    throw ProgramResult(errors.size)
   }
 }
 
