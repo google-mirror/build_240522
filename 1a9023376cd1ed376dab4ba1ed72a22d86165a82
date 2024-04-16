@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b824b92_bf908037",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1679391
+      },
+      "writtenOn": "2024-04-16T10:23:56Z",
+      "side": 1,
+      "message": "Added \"Fixes\" for the breakage bug.",
+      "revId": "1a9023376cd1ed376dab4ba1ed72a22d86165a82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
