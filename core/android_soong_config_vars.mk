@@ -192,3 +192,8 @@ else
 endif
 # Weirdly required because platform_bootclasspath is using AUTO namespace
 $(call soong_config_set,AUTO,release_crashrecovery_module,$(RELEASE_CRASHRECOVERY_MODULE))
+
+# Add EMMA_INSTRUMENT
+ifeq (true, $(EMMA_INSTRUMENT))
+$(call soong_config_set,JAVA_COVERAGE,emma_instrument,true)
+endif
