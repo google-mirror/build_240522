@@ -17,6 +17,7 @@
 
 package com.android.checkflaggedapis
 
+import android.aconfig.Aconfig
 import com.android.tools.metalava.model.BaseItemVisitor
 import com.android.tools.metalava.model.FieldItem
 import com.android.tools.metalava.model.text.ApiFile
@@ -61,6 +62,10 @@ class CheckCommand : CliktCommand() {
       option("--api-signature")
           .path(mustExist = true, canBeDir = false, mustBeReadable = true)
           .required()
+  private val flag_values_path by
+      option("--flag-values")
+          .path(mustExist = true, canBeDir = false, mustBeReadable = true)
+          .required()
 
   override fun run() {
     @Suppress("UNUSED_VARIABLE")
@@ -68,6 +73,9 @@ class CheckCommand : CliktCommand() {
         api_signature_path.toFile().inputStream().use { inputStream ->
           parseApiSignature(api_signature_path.toString(), inputStream)
         }
+    @Suppress("UNUSED_VARIABLE")
+    val flags =
+        flag_values_path.toFile().inputStream().use { inputStream -> parseFlagValues(inputStream) }
     throw ProgramResult(0)
   }
 }
@@ -93,6 +101,13 @@ private fun parseApiSignature(path: String, input: InputStream): Set<Pair<Symbol
   val codebase = ApiFile.parseApi(path, input)
   codebase.accept(visitor)
   return output
+}
+
+private fun parseFlagValues(input: InputStream): Map<Flag, Boolean> {
+  val parsedFlags = Aconfig.parsed_flags.parseFrom(input).getParsedFlagList()
+  return parsedFlags.associateBy(
+      { Flag("${it.getPackage()}.${it.getName()}") },
+      { it.getState() == Aconfig.flag_state.ENABLED })
 }
 
 fun main(args: Array<String>) = CheckCommand().main(args)

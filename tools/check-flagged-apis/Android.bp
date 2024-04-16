@@ -22,6 +22,7 @@ java_binary_host {
         "src/**/*.kt",
     ],
     static_libs: [
+        "libaconfig_java_proto_lite",
         "metalava-signature-reader",
         "metalava-tools-common-m2-deps",
     ],
