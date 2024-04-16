@@ -81,6 +81,28 @@ internal value class Flag(val name: String) {
   override fun toString(): String = name.toString()
 }
 
+internal sealed class ApiError(val symbol: Symbol, val flag: Flag)
+
+internal class EnabledFlaggedApiNotPresentError(symbol: Symbol, flag: Flag) :
+    ApiError(symbol, flag) {
+  override fun toString(): String {
+    return "error: enabled @FlaggedApi not present in built artifact: symbol=$symbol flag=$flag"
+  }
+}
+
+internal class DisabledFlaggedApiIsPresentError(symbol: Symbol, flag: Flag) :
+    ApiError(symbol, flag) {
+  override fun toString(): String {
+    return "error: disabled @FlaggedApi is present in built artifact: symbol=$symbol flag=$flag"
+  }
+}
+
+internal class UnknownFlagError(symbol: Symbol, flag: Flag) : ApiError(symbol, flag) {
+  override fun toString(): String {
+    return "error: unknown flag: symbol=$symbol flag=$flag"
+  }
+}
+
 class CheckCommand : CliktCommand() {
   private val apiSignaturePath by
       option("--api-signature")
@@ -113,16 +135,33 @@ class CheckCommand : CliktCommand() {
           .required()
 
   override fun run() {
-    @Suppress("UNUSED_VARIABLE")
     val flaggedSymbols =
         apiSignaturePath.toFile().inputStream().use {
           parseApiSignature(apiSignaturePath.toString(), it)
         }
-    @Suppress("UNUSED_VARIABLE")
     val flags = flagValuesPath.toFile().inputStream().use { parseFlagValues(it) }
-    @Suppress("UNUSED_VARIABLE")
     val exportedSymbols = apiVersionsPath.toFile().inputStream().use { parseApiVersions(it) }
-    throw ProgramResult(0)
+
+    val errors = mutableSetOf<ApiError>()
+    for ((symbol, flag) in flaggedSymbols) {
+      try {
+        if (flags.getValue(flag)) {
+          if (!exportedSymbols.contains(symbol)) {
+            errors.add(EnabledFlaggedApiNotPresentError(symbol, flag))
+          }
+        } else {
+          if (exportedSymbols.contains(symbol)) {
+            errors.add(DisabledFlaggedApiIsPresentError(symbol, flag))
+          }
+        }
+      } catch (e: NoSuchElementException) {
+        errors.add(UnknownFlagError(symbol, flag))
+      }
+    }
+    for (e in errors) {
+      println(e)
+    }
+    throw ProgramResult(errors.size)
   }
 }
 

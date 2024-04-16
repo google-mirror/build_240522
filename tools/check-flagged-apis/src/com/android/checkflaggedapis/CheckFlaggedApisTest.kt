@@ -86,4 +86,6 @@ class CheckFlaggedApisTest : BaseHostJUnit4Test() {
     val actual = parseApiVersions(API_VERSIONS.byteInputStream())
     assertEquals(expected, actual)
   }
+
+  // TODO(334870672): add test cross-checking input and finding @FlaggedApi errors
 }
