@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6766cf52_c372509b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-16T11:33:50Z",
+      "side": 1,
+      "message": "I didn\u0027t use Lint\u0027s ApiLookup class -- it looks like the public interface expects certain paths to the XML file, and we don\u0027t want that constraint.",
+      "revId": "68ecc63701d70843424469aba4790c92ad93bb62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
