@@ -16,6 +16,24 @@
       "message": "Try adding this:\n\n```\nifneq (,$(LOCAL_SOONG_INSTALLED_MODULE))\n$(my_all_targets): \\\n    $(foreach f, $(LOCAL_SOONG_INSTALL_PAIRS),\\\n      $(word 2,$(subst :,$(space),$(f))))\nendif\n```",
       "revId": "e13af2b3262e38473d29ae53387abfb245e5920c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0aaa599_3f388d53",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1308044
+      },
+      "writtenOn": "2024-04-16T00:42:10Z",
+      "side": 1,
+      "message": "I have tried this way before I think, but in the make file scope it could not know how to generate the output of the install_pairs, that\u0027s why I use the way. But I will have a try later, thanks.",
+      "parentUuid": "c58e9cd9_0c9b8f49",
+      "revId": "e13af2b3262e38473d29ae53387abfb245e5920c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
