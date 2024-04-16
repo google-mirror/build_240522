@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b18b1e29_fd0a794b",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2024-04-16T13:09:25Z",
+      "side": 1,
+      "message": "Why snake_case?",
+      "range": {
+        "startLine": 65,
+        "startChar": 14,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "9b0b2a773ca65af0fc06b75487bf0d55c4bced47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a66a58d_de681b99",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2024-04-16T13:09:25Z",
+      "side": 1,
+      "message": "optional nit: consider using `it` (which lets this fit on one line and is more readable IMO):\n\n\n```suggestion\n    val flags \u003d flag_values_path.toFile().inputStream().use { parseFlagValues(it) }\n    throw ProgramResult(0)\n```",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 0
+      },
+      "revId": "9b0b2a773ca65af0fc06b75487bf0d55c4bced47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
