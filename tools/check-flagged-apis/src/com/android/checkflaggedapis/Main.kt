@@ -44,6 +44,11 @@ value class Symbol(val name: String) {
   override fun toString(): String = name.toString()
 }
 
+@JvmInline
+value class Flag(val name: String) {
+  override fun toString(): String = name.toString()
+}
+
 class CheckCommand : CliktCommand() {
   override fun run() {
     println("hello world")
