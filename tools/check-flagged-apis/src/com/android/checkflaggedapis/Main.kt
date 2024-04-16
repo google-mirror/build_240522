@@ -27,6 +27,8 @@ import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.path
 import java.io.InputStream
+import javax.xml.parsers.DocumentBuilderFactory
+import org.w3c.dom.Node
 
 @JvmInline
 value class Symbol(val name: String) {
@@ -66,6 +68,10 @@ class CheckCommand : CliktCommand() {
       option("--flag-values")
           .path(mustExist = true, canBeDir = false, mustBeReadable = true)
           .required()
+  private val api_versions_path by
+      option("--api-versions")
+          .path(mustExist = true, canBeDir = false, mustBeReadable = true)
+          .required()
 
   override fun run() {
     @Suppress("UNUSED_VARIABLE")
@@ -76,6 +82,11 @@ class CheckCommand : CliktCommand() {
     @Suppress("UNUSED_VARIABLE")
     val flags =
         flag_values_path.toFile().inputStream().use { inputStream -> parseFlagValues(inputStream) }
+    @Suppress("UNUSED_VARIABLE")
+    val exported_symbols =
+        api_versions_path.toFile().inputStream().use { inputStream ->
+          parseApiVersions(inputStream)
+        }
     throw ProgramResult(0)
   }
 }
@@ -108,6 +119,26 @@ private fun parseFlagValues(input: InputStream): Map<Flag, Boolean> {
   return parsedFlags.associateBy(
       { Flag("${it.getPackage()}.${it.getName()}") },
       { it.getState() == Aconfig.flag_state.ENABLED })
+}
+
+private fun parseApiVersions(input: InputStream): Set<Symbol> {
+  fun Node.getAttribute(name: String): String? = getAttributes()?.getNamedItem(name)?.getNodeValue()
+
+  val output = mutableSetOf<Symbol>()
+  val factory = DocumentBuilderFactory.newInstance()
+  val parser = factory.newDocumentBuilder()
+  val document = parser.parse(input)
+  val fields = document.getElementsByTagName("field")
+  // ktfmt doesn't understand the `..<` range syntax; explicitly call .rangeUntil instead
+  for (i in 0.rangeUntil(fields.getLength())) {
+    val field = fields.item(i)
+    val fieldName = field.getAttribute("name")
+    val className =
+        requireNotNull(field.getParentNode()) { "Bad XML: top level <field> element" }
+            .getAttribute("name")
+    output.add(Symbol.create("$className.$fieldName"))
+  }
+  return output
 }
 
 fun main(args: Array<String>) = CheckCommand().main(args)
