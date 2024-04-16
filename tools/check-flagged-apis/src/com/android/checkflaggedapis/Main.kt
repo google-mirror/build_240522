@@ -17,8 +17,15 @@
 
 package com.android.checkflaggedapis
 
+import com.android.tools.metalava.model.BaseItemVisitor
+import com.android.tools.metalava.model.FieldItem
+import com.android.tools.metalava.model.text.ApiFile
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.ProgramResult
+import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.options.required
+import com.github.ajalt.clikt.parameters.types.path
+import java.io.InputStream
 
 @JvmInline
 value class Symbol(val name: String) {
@@ -50,10 +57,42 @@ value class Flag(val name: String) {
 }
 
 class CheckCommand : CliktCommand() {
+  private val api_signature_path by
+      option("--api-signature")
+          .path(mustExist = true, canBeDir = false, mustBeReadable = true)
+          .required()
+
   override fun run() {
-    println("hello world")
+    @Suppress("UNUSED_VARIABLE")
+    val flagged_symbols =
+        api_signature_path.toFile().inputStream().use { inputStream ->
+          parseApiSignature(api_signature_path.toString(), inputStream)
+        }
     throw ProgramResult(0)
   }
+}
+
+private fun parseApiSignature(path: String, input: InputStream): Set<Pair<Symbol, Flag>> {
+  // TODO(334870672): add support for classes and metods
+  val output = mutableSetOf<Pair<Symbol, Flag>>()
+  val visitor =
+      object : BaseItemVisitor() {
+        override fun visitField(field: FieldItem) {
+          val flag =
+              field.modifiers
+                  .findAnnotation("android.annotation.FlaggedApi")
+                  ?.findAttribute("value")
+                  ?.value
+                  ?.value() as? String
+          if (flag != null) {
+            val symbol = Symbol.create(field.baselineElementId())
+            output.add(Pair(symbol, Flag(flag)))
+          }
+        }
+      }
+  val codebase = ApiFile.parseApi(path, input)
+  codebase.accept(visitor)
+  return output
 }
 
 fun main(args: Array<String>) = CheckCommand().main(args)

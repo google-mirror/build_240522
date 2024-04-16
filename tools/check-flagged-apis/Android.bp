@@ -22,6 +22,7 @@ java_binary_host {
         "src/**/*.kt",
     ],
     static_libs: [
+        "metalava-signature-reader",
         "metalava-tools-common-m2-deps",
     ],
     main_class: "com.android.checkflaggedapis.Main",
