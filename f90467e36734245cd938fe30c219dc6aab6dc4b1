@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93138896_a2f79238",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-04-17T12:06:25Z",
+      "side": 1,
+      "message": "Please document this method and add comments explaining the different logic paths.\n```suggestion\n/**\n * Find errors in the given data.\n *\n * @param flaggedSymbolsInSource the set of symbols that are flagged in the source code\n * @param flags the set of flags and their values\n * @param symbolsInOutput the set of symbols that are present in the output\n * @return the set of errors found\n */\ninternal fun findErrors(\n```",
+      "range": {
+        "startLine": 210,
+        "startChar": 13,
+        "endLine": 210,
+        "endChar": 23
+      },
+      "revId": "f90467e36734245cd938fe30c219dc6aab6dc4b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
