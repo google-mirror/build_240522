@@ -41,15 +41,16 @@
 # which has OWNERS control.  If it isn't let others define their own.
 # TODO: Remove wildcard for build/release one when all branch manifests
 # have updated.
-config_map_files := $(wildcard build/release/release_config_map.mk) \
-    $(wildcard vendor/google_shared/build/release/release_config_map.mk) \
-    $(if $(wildcard vendor/google/release/release_config_map.mk), \
-        vendor/google/release/release_config_map.mk, \
+
+config_map_files := $(wildcard build/release/release_config_map.textproto) \
+    $(wildcard vendor/google_shared/build/release/release_config_map.textproto) \
+    $(if $(wildcard vendor/google/release/release_config_map.textproto), \
+        vendor/google/release/release_config_map.textproto, \
         $(sort \
-            $(wildcard device/*/release/release_config_map.mk) \
-            $(wildcard device/*/*/release/release_config_map.mk) \
-            $(wildcard vendor/*/release/release_config_map.mk) \
-            $(wildcard vendor/*/*/release/release_config_map.mk) \
+            $(wildcard device/*/release/release_config_map.textproto) \
+            $(wildcard device/*/*/release/release_config_map.textproto) \
+            $(wildcard vendor/*/release/release_config_map.textproto) \
+            $(wildcard vendor/*/*/release/release_config_map.textproto) \
         ) \
     )
 
@@ -60,89 +61,12 @@ $(foreach map,$(PRODUCT_RELEASE_CONFIG_MAPS), \
     $(if $(filter $(map),$(config_map_files)),,$(eval config_map_files += $(map))) \
 )
 
-# Declare an alias release-config
-#
-# This should be used to declare a release as an alias of another, meaning no
-# release config files should be present.
-#
-# $1 config name
-# $2 release config for which it is an alias
-define alias-release-config
-    $(call _declare-release-config,$(1),,$(2),true)
-endef
-
-# Declare or extend a release-config.
-#
-# The order of processing is:
-# 1. Recursively apply any overridden release configs.  Only apply each config
-#    the first time we reach it.
-# 2. Apply any files for this release config, in the order they were added to
-#    the declaration.
-#
-# Example:
-#   With these declarations:
-#     $(declare-release-config foo, foo.scl)
-#     $(declare-release-config bar, bar.scl, foo)
-#     $(declare-release-config baz, baz.scl, bar)
-#     $(declare-release-config bif, bif.scl, foo baz)
-#     $(declare-release-config bop, bop.scl, bar baz)
-#
-#   TARGET_RELEASE:
-#     - bar will use: foo.scl bar.scl
-#     - baz will use: foo.scl bar.scl baz.scl
-#     - bif will use: foo.scl bar.scl baz.scl bif.scl
-#     - bop will use: foo.scl bar.scl baz.scl bop.scl
-#
-# $1 config name
-# $2 release config files
-# $3 overridden release config
-define declare-release-config
-    $(call _declare-release-config,$(1),$(2),$(3),)
-endef
-
-define _declare-release-config
-    $(if $(strip $(2)$(3)),,  \
-        $(error declare-release-config: config $(strip $(1)) must have release config files, override another release config, or both) \
-    )
-    $(if $(strip $(4)),$(eval _all_release_configs.$(strip $(1)).ALIAS := true))
-    $(eval _all_release_configs := $(sort $(_all_release_configs) $(strip $(1))))
-    $(if $(strip $(3)), \
-      $(if $(filter $(_all_release_configs), $(strip $(3))),
-        $(if $(filter $(_all_release_configs.$(strip $(1)).OVERRIDES),$(strip $(3))),,
-          $(eval _all_release_configs.$(strip $(1)).OVERRIDES := $(_all_release_configs.$(strip $(1)).OVERRIDES) $(strip $(3)))), \
-        $(error No release config $(strip $(3))) \
-      ) \
-    )
-    $(eval _all_release_configs.$(strip $(1)).DECLARED_IN := $(_included) $(_all_release_configs.$(strip $(1)).DECLARED_IN))
-    $(eval _all_release_configs.$(strip $(1)).FILES := $(_all_release_configs.$(strip $(1)).FILES) $(strip $(2)))
-endef
-
-# Include the config map files and populate _flag_declaration_files.
-# If the file is found more than once, only include it the first time.
-_flag_declaration_files :=
-_included_config_map_files :=
-$(foreach f, $(config_map_files), \
-    $(eval FLAG_DECLARATION_FILES:= ) \
-    $(if $(filter $(_included_config_map_files),$(f)),,\
-        $(eval _included := $(f)) \
-        $(eval include $(f)) \
-        $(eval _flag_declaration_files += $(FLAG_DECLARATION_FILES)) \
-        $(eval _included_config_map_files += $(f)) \
-    ) \
-)
-FLAG_DECLARATION_FILES :=
-
-# Verify that all inherited/overridden release configs are declared.
-$(foreach config,$(_all_release_configs),\
-  $(foreach r,$(all_release_configs.$(r).OVERRIDES),\
-    $(if $(strip $(_all_release_configs.$(r).FILES)$(_all_release_configs.$(r).OVERRIDES)),,\
-    $(error Release config $(config) [declared in: $(_all_release_configs.$(r).DECLARED_IN)] inherits from non-existent $(r).)\
-)))
-# Verify that alias configs do not have config files.
-$(foreach r,$(_all_release_configs),\
-  $(if $(_all_release_configs.$(r).ALIAS),$(if $(_all_release_configs.$(r).FILES),\
-    $(error Alias release config "$(r)" may not specify release config files $(_all_release_configs.$(r).FILES))\
-)))
+_args := $(foreach map,$(config_map_files), --map $(map) )
+$(KATI_shell_no_rerun $(OUT_DIR)/release-config $(_args) >$(OUT_DIR)/release-config.out && touch -t 200001010000 $(OUT_DIR)/release-config.out)
+$(if $(filter-out 0,$(.SHELLSTATUS)),$(error release-config failed to run))
+# This will also set _all_release_configs for us.
+$(eval include $(OUT_DIR)/soong/release-config/release_config-$(TARGET_PRODUCT)-$(TARGET_RELEASE).mk)
+$(KATI_extra_file_deps $(OUT_DIR)/release-config $(config_map_files))
 
 ifeq ($(TARGET_RELEASE),)
     # We allow some internal paths to explicitly set TARGET_RELEASE to the
@@ -156,6 +80,7 @@ ifeq ($(TARGET_RELEASE),)
     # Instead of leaving this string empty, we want to default to a valid
     # setting.  Full builds coming through this path is a bug, but in case
     # of such a bug, we want to at least get consistent, valid results.
+    # This matches the default value used in release-config.
     TARGET_RELEASE = trunk_staging
 endif
 
@@ -166,35 +91,6 @@ ifneq (PRODUCT_RELEASE_CONFIG_MAPS,$(DUMP_MANY_VARS))
         $(error No release config found for TARGET_RELEASE: $(TARGET_RELEASE). Available releases are: $(_all_release_configs))
     endif
 endif
-
-# Choose flag files
-# Don't sort this, use it in the order they gave us.
-# Do allow duplicate entries, retaining only the first usage.
-flag_value_files :=
-
-# Apply overrides recursively
-#
-# $1 release config that we override
-applied_releases :=
-define _apply-release-config-overrides
-$(foreach r,$(1), \
-  $(if $(filter $(r),$(applied_releases)),, \
-    $(foreach o,$(_all_release_configs.$(r).OVERRIDES),$(call _apply-release-config-overrides,$(o)))\
-    $(eval applied_releases += $(r))\
-    $(foreach f,$(_all_release_configs.$(r).FILES), \
-      $(if $(filter $(f),$(flag_value_files)),,$(eval flag_value_files += $(f)))\
-    )\
-  )\
-)
-endef
-$(call _apply-release-config-overrides,$(TARGET_RELEASE))
-# Unset variables so they can't use them
-define declare-release-config
-$(error declare-release-config can only be called from inside release_config_map.mk files)
-endef
-define _apply-release-config-overrides
-$(error invalid use of apply-release-config-overrides)
-endef
 
 # TODO: Remove this check after enough people have sourced lunch that we don't
 # need to worry about it trying to do get_build_vars TARGET_RELEASE. Maybe after ~9/2023
@@ -207,48 +103,5 @@ TARGET_RELEASE:=
 endif
 .KATI_READONLY := TARGET_RELEASE
 
-$(foreach config, $(_all_release_configs), \
-    $(eval _all_release_configs.$(config).DECLARED_IN:= ) \
-    $(eval _all_release_configs.$(config).FILES:= ) \
-)
 _all_release_configs:=
 config_map_files:=
-applied_releases:=
-
-
-# -----------------------------------------------------------------
-# Flag declarations and values
-# -----------------------------------------------------------------
-# This part is in starlark.  We generate a root starlark file that loads
-# all of the flags declaration files that we found, and the flag_value_files
-# that we chose from the config map above.  Then we run that, and load the
-# results of that into the make environment.
-
-# _flag_declaration_files is the combined list of FLAG_DECLARATION_FILES set by
-# release_config_map.mk files above.
-
-# Because starlark can't find files with $(wildcard), write an entrypoint starlark script that
-# contains the result of the above wildcards for the starlark code to use.
-filename_to_starlark=$(subst /,_,$(subst .,_,$(1)))
-_c:=load("//build/make/core/release_config.scl", "release_config")
-_c+=$(newline)def add(d, k, v):
-_c+=$(newline)$(space)d = dict(d)
-_c+=$(newline)$(space)d[k] = v
-_c+=$(newline)$(space)return d
-_c+=$(foreach f,$(_flag_declaration_files),$(newline)load("$(f)", flags_$(call filename_to_starlark,$(f)) = "flags"))
-_c+=$(newline)all_flags = [] $(foreach f,$(_flag_declaration_files),+ [add(x, "declared_in", "$(f)") for x in flags_$(call filename_to_starlark,$(f))])
-_c+=$(foreach f,$(flag_value_files),$(newline)load("//$(f)", values_$(call filename_to_starlark,$(f)) = "values"))
-_c+=$(newline)all_values = [] $(foreach f,$(flag_value_files),+ [add(x, "set_in", "$(f)") for x in values_$(call filename_to_starlark,$(f))])
-_c+=$(newline)variables_to_export_to_make = release_config(all_flags, all_values)
-$(file >$(OUT_DIR)/release_config_entrypoint.scl,$(_c))
-_c:=
-filename_to_starlark:=
-
-# Exclude the entrypoint file as a dependency (by passing it as the 2nd argument) so that we don't
-# rerun kati every build. Kati will replay the $(file) command that generates it every build,
-# updating its timestamp.
-#
-# We also need to pass --allow_external_entrypoint to rbcrun in case the OUT_DIR is set to something
-# outside of the source tree.
-$(call run-starlark,$(OUT_DIR)/release_config_entrypoint.scl,$(OUT_DIR)/release_config_entrypoint.scl,--allow_external_entrypoint)
-
