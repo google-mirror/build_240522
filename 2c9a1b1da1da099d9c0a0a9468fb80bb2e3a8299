@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "005d1efa_d6a4d906",
+        "filename": "Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-17T18:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d45c264_79f79e00",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "2c9a1b1da1da099d9c0a0a9468fb80bb2e3a8299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af0e4ecd_ad0c3c82",
@@ -41,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93229469_74780d47",
+        "filename": "Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-17T18:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af0e4ecd_ad0c3c82",
+      "revId": "2c9a1b1da1da099d9c0a0a9468fb80bb2e3a8299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbf059d2_8749ecfb",
@@ -54,6 +96,30 @@
       "writtenOn": "2024-04-17T17:54:31Z",
       "side": 1,
       "message": "Please fix this ERROR reported by Bpfmt: This file is not formatted.\n\nAnalyzer Description: Formats Android.bp files.\nOwner: soong-team@google.com\n\nThis file is not formatted.\n\nRun `prebuilts/build-tools/linux-x86/bin/bpfmt -w {filename}` to format the file, or apply the suggested fix.",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "2c9a1b1da1da099d9c0a0a9468fb80bb2e3a8299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5324b1f_4f6c2e18",
+        "filename": "tests/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-17T18:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbf059d2_8749ecfb",
       "range": {
         "startLine": 0,
         "startChar": 0,
@@ -99,6 +165,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7bbdfeb_0078583c",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-17T18:17:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "867e85dd_84a32dbe",
+      "revId": "2c9a1b1da1da099d9c0a0a9468fb80bb2e3a8299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc85c620_d8007937",
@@ -112,6 +196,30 @@
       "writtenOn": "2024-04-17T17:54:31Z",
       "side": 1,
       "message": "```suggestion\n    with resources.files(\"testdata\").joinpath(envsetup_zip).open(\u0027rb\u0027) as p:\n      with zipfile.ZipFile(p, \"r\") as zip_f:\n        zip_f.extractall()\n```",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 24
+      },
+      "revId": "2c9a1b1da1da099d9c0a0a9468fb80bb2e3a8299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc924573_ad54d833",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-17T18:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc85c620_d8007937",
       "range": {
         "startLine": 44,
         "startChar": 4,
