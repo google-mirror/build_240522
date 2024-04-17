@@ -34,6 +34,24 @@
       "parentUuid": "6766cf52_c372509b",
       "revId": "68ecc63701d70843424469aba4790c92ad93bb62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d76687a4_61bfae1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-17T14:34:55Z",
+      "side": 1,
+      "message": "Looks like there are too many issues with ApiLookup to motivate using it ATM, e.g. setting Java system properties, requiring an actual file instead of a stream (bad for testability), etc. Sticking with an XML parser for now, but will reconsider ApiLookup if the XML path doesn\u0027t pan out.",
+      "parentUuid": "cba56568_5c9b96be",
+      "revId": "68ecc63701d70843424469aba4790c92ad93bb62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
