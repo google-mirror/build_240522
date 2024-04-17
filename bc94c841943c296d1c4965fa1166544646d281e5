@@ -22,6 +22,30 @@
       },
       "revId": "bc94c841943c296d1c4965fa1166544646d281e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b0daa55_daf85fdf",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/CheckFlaggedApisTest.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-17T14:40:26Z",
+      "side": 1,
+      "message": "Yes and no. The proto message is `parsed_flags` (as in, the result of aconfig parsing and processing .aconfig declarations and release configs), but I agree that\u0027s obscure. FlagsProto probably makes more sense for someone casually looking at this tool. Will update.",
+      "parentUuid": "8ecb5578_18ef6be1",
+      "range": {
+        "startLine": 52,
+        "startChar": 20,
+        "endLine": 52,
+        "endChar": 26
+      },
+      "revId": "bc94c841943c296d1c4965fa1166544646d281e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
