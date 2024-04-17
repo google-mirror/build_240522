@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e8216e5_8fcab0d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-04-17T20:19:04Z",
+      "side": 1,
+      "message": "btw Colin, here was the reasoning for mast@ why mainline targets as well:\n\n\u003e My understanding is that (b) is the problem here, and specifically the PAGE_SIZE macro needs to have the same setting in both module and test builds. So can we ensure that setting is the same in the module builds (typically TARGET_PRODUCT\u003dmodule_x86_64 from `banchan com.google.android.art x86_64` or TARGET_PRODUCT\u003dcf_x86_64_phone from `lunch cf_x86_64_phone-trunk_staging-userdebug`) and the test builds (typically TARGET_PRODUCT\u003daosp_x86_64 from `lunch aosp_x86_64-trunk_staging-userdebug`)?\n\u003e\n\u003e That\u0027s the preferred approach at least, before we consider different ways of making the tests tolerant to build differences.",
+      "revId": "f44951d3af6850c52845d10474795be6b097748a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
