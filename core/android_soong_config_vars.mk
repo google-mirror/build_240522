@@ -55,6 +55,8 @@ else
   MODULE_BUILD_FROM_SOURCE := $(BRANCH_DEFAULT_MODULE_BUILD_FROM_SOURCE)
 endif
 
+MODULE_BUILD_FROM_SOURCE := true
+
 ifneq (,$(ART_MODULE_BUILD_FROM_SOURCE))
   # Keep an explicit setting.
 else ifneq (,$(findstring .android.art,$(TARGET_BUILD_APPS)))
