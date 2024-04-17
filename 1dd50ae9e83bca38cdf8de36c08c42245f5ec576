@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77a5d571_797c3142",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-17T08:07:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b764a480_1224716b",
+      "range": {
+        "startLine": 24,
+        "startChar": 12,
+        "endLine": 24,
+        "endChar": 18
+      },
+      "revId": "1dd50ae9e83bca38cdf8de36c08c42245f5ec576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0a9fc4c_f632fd98",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-04-16T12:11:03Z",
       "side": 1,
       "message": "nit: both Kotlin and Android style is to use camelCase rather than snake_case. Is there a reason this is different?",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 22
+      },
+      "revId": "1dd50ae9e83bca38cdf8de36c08c42245f5ec576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d08000b_b1c15578",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-17T08:07:52Z",
+      "side": 1,
+      "message": "Just that I\u0027m used to Rust and have difficulties spotting these errors in Kotlin code",
+      "parentUuid": "f0a9fc4c_f632fd98",
       "range": {
         "startLine": 31,
         "startChar": 8,
