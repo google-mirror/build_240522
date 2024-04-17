@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43360d5a_cd2f2f1e",
+        "filename": "Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-17T21:05:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20637936_acb43aea",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 33
+      },
+      "revId": "be750f7110052e6f3b61cf89256b4dc3d3883f8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2a8c1a0_71269dfc",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54a2eaa3_82de5eff",
+        "filename": "envsetup.sh",
+        "patchSetId": 11
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-17T21:05:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2a8c1a0_71269dfc",
+      "range": {
+        "startLine": 1107,
+        "startChar": 4,
+        "endLine": 1108,
+        "endChar": 41
+      },
+      "revId": "be750f7110052e6f3b61cf89256b4dc3d3883f8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "130ef90c_ae57b932",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-04-17T19:03:55Z",
       "side": 1,
       "message": "I believe you should call this first but I\u0027m not 100% sure.",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 22
+      },
+      "revId": "be750f7110052e6f3b61cf89256b4dc3d3883f8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b0b8678_f777cd36",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-17T21:05:13Z",
+      "side": 1,
+      "message": "According to the guidance here, should be called at the end. https://g3doc.corp.google.com/devtools/gpylint/g3doc/faq.md?cl\u003dhead",
+      "parentUuid": "130ef90c_ae57b932",
       "range": {
         "startLine": 49,
         "startChar": 4,
