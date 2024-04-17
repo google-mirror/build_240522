@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d45c264_79f79e00",
+        "filename": "Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-17T17:54:31Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Bpfmt: This file is not formatted.\n\nAnalyzer Description: Formats Android.bp files.\nOwner: soong-team@google.com\n\nThis file is not formatted.\n\nRun `prebuilts/build-tools/linux-x86/bin/bpfmt -w {filename}` to format the file, or apply the suggested fix.",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "2c9a1b1da1da099d9c0a0a9468fb80bb2e3a8299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af0e4ecd_ad0c3c82",
+        "filename": "Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-17T17:54:31Z",
+      "side": 1,
+      "message": "Add visibility to just build/make/tests or something similar.",
+      "revId": "2c9a1b1da1da099d9c0a0a9468fb80bb2e3a8299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf059d2_8749ecfb",
+        "filename": "tests/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-17T17:54:31Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Bpfmt: This file is not formatted.\n\nAnalyzer Description: Formats Android.bp files.\nOwner: soong-team@google.com\n\nThis file is not formatted.\n\nRun `prebuilts/build-tools/linux-x86/bin/bpfmt -w {filename}` to format the file, or apply the suggested fix.",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "2c9a1b1da1da099d9c0a0a9468fb80bb2e3a8299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0011d457_82731c25",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-17T17:54:31Z",
+      "side": 1,
+      "message": "Add a `tearDown()` function that deletes the working_dir",
+      "revId": "2c9a1b1da1da099d9c0a0a9468fb80bb2e3a8299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc85c620_d8007937",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-17T17:54:31Z",
+      "side": 1,
+      "message": "```suggestion\n    with resources.files(\"testdata\").joinpath(envsetup_zip).open(\u0027rb\u0027) as p:\n      with zipfile.ZipFile(p, \"r\") as zip_f:\n        zip_f.extractall()\n```",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 24
+      },
+      "revId": "2c9a1b1da1da099d9c0a0a9468fb80bb2e3a8299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
