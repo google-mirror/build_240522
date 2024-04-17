@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "149e4a9c_1588678d",
+        "filename": "tools/check-flagged-apis/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-04-17T11:46:15Z",
+      "side": 1,
+      "message": "It would be better to add a `java_library_host` and then use that in the binary and the test but that is something that can be done later.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 13
+      },
+      "revId": "656ce026e11f1d3fc12de22015527a6dc1396f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
