@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8d9cf7d_014345a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-17T08:07:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d30f411_6ba0134c",
+      "revId": "4c9a5c5535d7d89190b581fd4d56eba753ee7c52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf5c4203_eb1aa407",
@@ -65,6 +83,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "481f735a_2953dd4a",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-17T08:07:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57035daa_e0da172d",
+      "range": {
+        "startLine": 60,
+        "startChar": 14,
+        "endLine": 60,
+        "endChar": 32
+      },
+      "revId": "4c9a5c5535d7d89190b581fd4d56eba753ee7c52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0e372a0_727cb113",
@@ -78,6 +120,30 @@
       "writtenOn": "2024-04-16T12:25:52Z",
       "side": 1,
       "message": "One of the advantages of Clikt is it allows you to document the option in place and will generate a nice help message when you run without the correct options.",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 12
+      },
+      "revId": "4c9a5c5535d7d89190b581fd4d56eba753ee7c52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a969578_ed75b580",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-17T08:07:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0e372a0_727cb113",
       "range": {
         "startLine": 61,
         "startChar": 6,
