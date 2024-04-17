@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ecb5578_18ef6be1",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/CheckFlaggedApisTest.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2024-04-17T13:54:58Z",
+      "side": 1,
+      "message": "nit: This isn\u0027t really parsed flags, is it? It\u0027s the flags protobuf and then you parse them in the next step.\n\n(generated suggestion LGTM so including it)\n\n```suggestion\nprivate fun generateFlagsProto(fooState: Aconfig.flag_state): InputStream {\n```",
+      "range": {
+        "startLine": 52,
+        "startChar": 20,
+        "endLine": 52,
+        "endChar": 26
+      },
+      "revId": "bc94c841943c296d1c4965fa1166544646d281e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
