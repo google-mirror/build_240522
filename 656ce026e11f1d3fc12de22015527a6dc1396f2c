@@ -46,6 +46,30 @@
       },
       "revId": "656ce026e11f1d3fc12de22015527a6dc1396f2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56449acf_f0afd894",
+        "filename": "tools/check-flagged-apis/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-17T13:28:41Z",
+      "side": 1,
+      "message": "Apparently being in the same package doesn\u0027t give the test access to `internal` symbols in the lib. Sticking with defaults for now.",
+      "parentUuid": "87549d12_fdc78bb8",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 13
+      },
+      "revId": "656ce026e11f1d3fc12de22015527a6dc1396f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
