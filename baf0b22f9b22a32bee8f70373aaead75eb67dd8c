@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "777d345a_6a566cb2",
+        "filename": "ci/build_test_suites_local_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-17T22:08:44Z",
+      "side": 1,
+      "message": "Create a `out` subdir to use for the outputs:\n\n`self.out_dir \u003d ...`",
+      "range": {
+        "startLine": 38,
+        "startChar": 21,
+        "endLine": 38,
+        "endChar": 34
+      },
+      "revId": "baf0b22f9b22a32bee8f70373aaead75eb67dd8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
