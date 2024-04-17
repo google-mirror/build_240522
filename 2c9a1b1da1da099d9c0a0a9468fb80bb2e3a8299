@@ -83,6 +83,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "867e85dd_84a32dbe",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-17T17:57:17Z",
+      "side": 1,
+      "message": "By using the `self.working_dir.cleanup()` method. Although this is a temporary directory, we shouldn\u0027t rely on the garbage collector to deallocate it and cause it to be cleaned.",
+      "parentUuid": "0011d457_82731c25",
+      "revId": "2c9a1b1da1da099d9c0a0a9468fb80bb2e3a8299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc85c620_d8007937",
         "filename": "tests/run_tool_with_logging_test.py",
         "patchSetId": 8
