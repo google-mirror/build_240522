@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57bf8cc4_d17915ff",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-04-17T11:49:59Z",
+      "side": 1,
+      "message": "You can also add something like this:\n```suggestion\nclass CheckCommand : CliktCommand(help \u003d \"\"\"\n  Check that all flagged APIs are used in the correct way.\n  \n  This tool reads the API signature file and checks that all flagged APIs are used in the correct\n  way.\n  \n  The tool will exit with a non-zero exit code if any flagged APIs are found to be used in the\n  incorrect way.\n  \"\"\") {\n```\n\nFTR the above suggestion was auto generated which is pretty cool.",
+      "range": {
+        "startLine": 81,
+        "startChar": 33,
+        "endLine": 81,
+        "endChar": 35
+      },
+      "revId": "6664730b15cc4b75939da9bf57573f1d208e0d2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
