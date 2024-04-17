@@ -16,6 +16,24 @@
       "message": "I didn\u0027t use Lint\u0027s ApiLookup class -- it looks like the public interface expects certain paths to the XML file, and we don\u0027t want that constraint.",
       "revId": "68ecc63701d70843424469aba4790c92ad93bb62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cba56568_5c9b96be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-04-17T12:04:26Z",
+      "side": 1,
+      "message": "You can override that by setting a `LINT_API_DATABASE` environment variable or system property. You would also need to set `android.lint.api-database-binary-path` to set the cached version of the file too.\n\nI\u0027m not sure how much benefit using the `ApiLookup` will get you for handling methods.",
+      "parentUuid": "6766cf52_c372509b",
+      "revId": "68ecc63701d70843424469aba4790c92ad93bb62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
