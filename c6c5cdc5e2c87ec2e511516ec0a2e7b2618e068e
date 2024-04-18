@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "909d2c90_256ae4ee",
+        "filename": "core/product.mk",
+        "patchSetId": 24
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-04-18T17:56:27Z",
+      "side": 1,
+      "message": "Nit, but this seems more verbose than just writing out all the correct values.",
+      "range": {
+        "startLine": 450,
+        "startChar": 72,
+        "endLine": 452,
+        "endChar": 17
+      },
+      "revId": "c6c5cdc5e2c87ec2e511516ec0a2e7b2618e068e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
