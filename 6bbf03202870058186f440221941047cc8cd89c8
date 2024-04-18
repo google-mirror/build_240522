@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3682c102_f7e37fdb",
+        "filename": "tools/aconfig/load_aconfig_proto_paths/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-18T14:15:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dbce598_6834f7f5",
+      "revId": "6bbf03202870058186f440221941047cc8cd89c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7ecd26d_21e4555d",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-04-16T06:28:00Z",
       "side": 1,
       "message": "aconfig_device_paths? aconfig_paths_on_device?",
+      "range": {
+        "startLine": 2,
+        "startChar": 8,
+        "endLine": 2,
+        "endChar": 32
+      },
+      "revId": "6bbf03202870058186f440221941047cc8cd89c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b579ceff_9cd15dc4",
+        "filename": "tools/aconfig/load_aconfig_proto_paths/Cargo.toml",
+        "patchSetId": 13
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-18T14:15:23Z",
+      "side": 1,
+      "message": "I like `aconfig_device_paths`! Switched.",
+      "parentUuid": "f7ecd26d_21e4555d",
       "range": {
         "startLine": 2,
         "startChar": 8,
@@ -81,6 +123,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b140d805_371946cb",
+        "filename": "tools/aconfig/load_aconfig_proto_paths/src/lib.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-18T14:15:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b001b248_c7eaebbf",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 17
+      },
+      "revId": "6bbf03202870058186f440221941047cc8cd89c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "772c90e6_017d1fc4",
@@ -94,6 +160,30 @@
       "writtenOn": "2024-04-16T06:28:00Z",
       "side": 1,
       "message": "Instead of converting to a lossy string, stay within the realm of Path and PathBuf via e.g.\n\n```\nlet mut path \u003d PathBuf::from(\"/apex\");\npath.push(dir.path());\npath.push(\"etc\");\npath.push(\"aconfig_flags.pb\");\nif path.exists() {\n    ...\n}\n```",
+      "range": {
+        "startLine": 36,
+        "startChar": 76,
+        "endLine": 36,
+        "endChar": 91
+      },
+      "revId": "6bbf03202870058186f440221941047cc8cd89c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5cb4a12_6f5791ba",
+        "filename": "tools/aconfig/load_aconfig_proto_paths/src/lib.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-18T14:15:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "772c90e6_017d1fc4",
       "range": {
         "startLine": 36,
         "startChar": 76,
