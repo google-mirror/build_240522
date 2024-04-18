@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c9a6c75_6afc3631",
+        "filename": "tools/ide_query/ide_query.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 3276774
+      },
+      "writtenOn": "2024-04-18T12:27:33Z",
+      "side": 1,
+      "message": "FWIW, i think this is still going to cause discrepancies between aosp vs internal android repository, as `googler-cog` is only available in the latter.\n\nIn the long term, it\u0027d be great to have ability to invoke `soong` in a way that won\u0027t invalidate the \"latest\" analysis, while making sure `SOONG_GEN_COMPDB\u003d1` is set.",
+      "revId": "75d934f261e478df88831514ae41db72c2425390",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
