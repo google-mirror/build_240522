@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2002ef32_4376bde0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-19T17:15:24Z",
+      "side": 1,
+      "message": "```\nSupport tool event logging for ADB invocations\n\nNote that tool logging is still disabled by default. This change validates that the ADB shell function does not break any user flows when integrated with the logging facility.\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "c43871050f674f7b77b7065a25bf951c0b68600b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ae736ad_8279a7d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-19T17:15:24Z",
+      "side": 1,
+      "message": "Could you please create a bug to add automated tests for ADB? It\u0027s unrelated to your change.\n\n```\ntest_fails_if_no_adb_found\ntest_finds_system_adb\ntest_prefers_workspace_adb_once_built\n```",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 4
+      },
+      "revId": "c43871050f674f7b77b7065a25bf951c0b68600b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b6ff6a1_156fa5ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-19T17:15:24Z",
+      "side": 1,
+      "message": "Optional: Do you want the team to try it out first? I think it\u0027s pretty safe but it\u0027s your call.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 4
+      },
+      "revId": "c43871050f674f7b77b7065a25bf951c0b68600b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3c110b0_f50631c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-19T17:15:24Z",
+      "side": 1,
+      "message": "Please add the actual command.",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 12
+      },
+      "revId": "c43871050f674f7b77b7065a25bf951c0b68600b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
