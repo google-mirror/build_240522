@@ -195,6 +195,24 @@
       "parentUuid": "bab0ec2a_cfa8e5e0",
       "revId": "850a2e8e2fc2fb6870d3e00121ba5e35a6ac740f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a3cb99d_bbacdb46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-04-19T23:32:58Z",
+      "side": 1,
+      "message": "trivial proof: i can build with `PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO` but with `-DPAGE_SIZE\u003d4096` in the global cflags. (or many more morally equivalent variants that you couldn\u0027t possibly prevent if i was _trying_ to break this, nor, to be honest, even if i\u0027m just honestly \"fixing\" my build by adding the missing `#define PAGE_SIZE 4096`.)",
+      "parentUuid": "bc4240a6_ce33766e",
+      "revId": "850a2e8e2fc2fb6870d3e00121ba5e35a6ac740f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
