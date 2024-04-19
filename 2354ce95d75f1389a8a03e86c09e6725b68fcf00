@@ -16,6 +16,24 @@
       "message": "Friendly reminder, is there anything holding this from being merged?",
       "revId": "2354ce95d75f1389a8a03e86c09e6725b68fcf00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87e5ee4_4158db56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-04-19T00:13:33Z",
+      "side": 1,
+      "message": "It seems like the presubmit verified vote expired as the change was not merged within the allowed timeframe after the presubmit run completed successfully. Please retrigger the presubmit run and merge after it completes. Other than that, nothing seems to be blocking.",
+      "parentUuid": "5d7f139b_c2463133",
+      "revId": "2354ce95d75f1389a8a03e86c09e6725b68fcf00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
