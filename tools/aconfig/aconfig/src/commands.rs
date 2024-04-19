@@ -242,10 +242,7 @@ pub fn create_storage(
     let parsed_flags_vec: Vec<ProtoParsedFlags> = caches
         .into_iter()
         .map(|mut input| input.try_parse_flags())
-        .collect::<Result<Vec<_>>>()?
-        .into_iter()
-        .filter(|pfs| find_unique_container(pfs) == Some(container))
-        .collect();
+        .collect::<Result<Vec<_>>>()?;
     generate_storage_file(container, parsed_flags_vec.iter(), file)
 }
 
