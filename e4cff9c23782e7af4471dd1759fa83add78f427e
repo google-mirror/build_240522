@@ -16,6 +16,23 @@
       "message": "Friendly reminder, is there anything holding this and I7fa2c53c79d6016cf371d5f1dad58edf21093032 from being merged?",
       "revId": "e4cff9c23782e7af4471dd1759fa83add78f427e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2756e14_b591bfd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-19T00:15:00Z",
+      "side": 1,
+      "message": "Looks like WallpaperPicker was removed in ag/23625773 and replaced with WallpaperPIcker2",
+      "revId": "e4cff9c23782e7af4471dd1759fa83add78f427e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
