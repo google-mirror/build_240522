@@ -34,6 +34,24 @@
       "parentUuid": "5d7f139b_c2463133",
       "revId": "2354ce95d75f1389a8a03e86c09e6725b68fcf00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50822b01_1215044f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020839
+      },
+      "writtenOn": "2024-04-19T03:16:52Z",
+      "side": 1,
+      "message": "I do not have submit permissions on AOSP",
+      "parentUuid": "e87e5ee4_4158db56",
+      "revId": "2354ce95d75f1389a8a03e86c09e6725b68fcf00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
