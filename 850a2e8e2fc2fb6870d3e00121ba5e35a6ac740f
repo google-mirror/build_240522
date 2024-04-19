@@ -108,6 +108,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfaa5c02_605ba246",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-04-19T18:04:25Z",
+      "side": 1,
+      "message": "I think adding a property is the best option we have since VTS is run with a GSI image and would guarantee the test always passes regardless of what the vendor does.",
+      "parentUuid": "43d1802d_a694876d",
+      "revId": "850a2e8e2fc2fb6870d3e00121ba5e35a6ac740f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ce602c1_72ed1507",
