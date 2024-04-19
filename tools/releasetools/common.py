@@ -2979,26 +2979,16 @@ def ZipWrite(zip_file, filename, arcname=None, perms=0o644,
   if arcname is None:
     arcname = filename
 
-  saved_stat = os.stat(filename)
-
   try:
     # `zipfile.write()` doesn't allow us to pass ZipInfo, so just modify the
     # file to be zipped and reset it when we're done.
     os.chmod(filename, perms)
 
     # Use a fixed timestamp so the output is repeatable.
-    # Note: Use of fromtimestamp rather than utcfromtimestamp here is
-    # intentional. zip stores datetimes in local time without a time zone
-    # attached, so we need "epoch" but in the local time zone to get 2009/01/01
-    # in the zip archive.
-    local_epoch = datetime.datetime.fromtimestamp(0)
-    timestamp = (datetime.datetime(2009, 1, 1) - local_epoch).total_seconds()
-    os.utime(filename, (timestamp, timestamp))
-
-    zip_file.write(filename, arcname=arcname, compress_type=compress_type)
+    info = zipfile.ZipInfo(filename=arcname, date_time=(2009, 1, 1, 0, 0, 0))
+    with open(filename, 'rb') as f:
+      zip_file.writestr(info, f.read(), compress_type=compress_type)
   finally:
-    os.chmod(filename, saved_stat.st_mode)
-    os.utime(filename, (saved_stat.st_atime, saved_stat.st_mtime))
     zipfile.ZIP64_LIMIT = saved_zip64_limit
 
 
