@@ -177,6 +177,24 @@
       "parentUuid": "19dd3e68_96a484a5",
       "revId": "850a2e8e2fc2fb6870d3e00121ba5e35a6ac740f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc4240a6_ce33766e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-04-19T23:31:16Z",
+      "side": 1,
+      "message": "you have the ELF note for padding, no? have the build system ensure those imply each other?\n\n(if you\u0027re worried about them hacking things up, you can\u0027t win anyway. but you can easily spot honest mistakes.)",
+      "parentUuid": "bab0ec2a_cfa8e5e0",
+      "revId": "850a2e8e2fc2fb6870d3e00121ba5e35a6ac740f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
