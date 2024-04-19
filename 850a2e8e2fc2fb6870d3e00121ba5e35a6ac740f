@@ -159,6 +159,24 @@
       "parentUuid": "1ce602c1_72ed1507",
       "revId": "850a2e8e2fc2fb6870d3e00121ba5e35a6ac740f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bab0ec2a_cfa8e5e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-04-19T18:07:12Z",
+      "side": 1,
+      "message": "I don\u0027t this would work as those are system libraries which get replaces by the GSI image when partners run VTS. We would have to add a special symbol to the vendor binaries which I\u0027m not sure how we could guarantee which binary every partners will have. Also, that\u0027s easy for partners to fake as well. So I don\u0027t think there\u0027s any real advantage to that over just setting this property.",
+      "parentUuid": "19dd3e68_96a484a5",
+      "revId": "850a2e8e2fc2fb6870d3e00121ba5e35a6ac740f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
