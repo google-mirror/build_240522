@@ -213,6 +213,24 @@
       "parentUuid": "bc4240a6_ce33766e",
       "revId": "850a2e8e2fc2fb6870d3e00121ba5e35a6ac740f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8120f4fe_4cbca2d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-04-22T18:29:52Z",
+      "side": 1,
+      "message": "In order to allow for flexibility to control both max page size and the bionic PAGE_SIZE flag, we decided not to tie both options together to a single product flag. This gives us a nice fallback in case there\u0027s a regression that we need to handle that requires us toggle these flags separately. Since we already have the max page size check, this is a just an extra guardrail for partners to make sure they are aware of what\u0027s going on here.",
+      "parentUuid": "6a3cb99d_bbacdb46",
+      "revId": "850a2e8e2fc2fb6870d3e00121ba5e35a6ac740f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
