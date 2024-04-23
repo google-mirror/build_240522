@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6499a38f_0a7ba877",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-04-23T19:47:02Z",
+      "side": 0,
+      "message": "I think we can keep this line?",
+      "revId": "b24b46d43fa27a4236c46a49b17344a2f2b0f0ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
