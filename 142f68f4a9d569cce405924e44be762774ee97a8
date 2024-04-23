@@ -16,6 +16,24 @@
       "message": "I don\u0027t think giving a warning if repo isn\u0027t found, just so we can shadow it is appropriate. I think the shell function should report an error if *it* can\u0027t find the real one.  It\u0027s probably reasonable to have the function even if the real one can\u0027t be found though, in case it\u0027s installed later.",
       "revId": "142f68f4a9d569cce405924e44be762774ee97a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26551bd2_74d895e6",
+        "filename": "cogsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-04-23T17:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "867c3e3a_58e58214",
+      "revId": "142f68f4a9d569cce405924e44be762774ee97a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
