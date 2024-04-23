@@ -52,7 +52,9 @@ function _setup_cog_env() {
   # it with this function. If the user is running repo within a Cog workspace,
   # we'll fail with an error, otherwise, we run the original repo command with
   # the given args.
-  ORIG_REPO_PATH=`which repo`
+  if ! ORIG_REPO_PATH=`which repo`; then
+    echo "\e[01;31mERROR:\e[0mUnable to find repo command in PATH."
+  fi
   function repo {
     if [[ "${PWD}" == /google/cog/* ]]; then
       echo "\e[01;31mERROR:\e[0mrepo command is disallowed within Cog workspaces."
