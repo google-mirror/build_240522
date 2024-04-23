@@ -16,6 +16,24 @@
       "message": "I did this change already in internal main, where the file has been renamed: ag/26891984. If you get merge conflicts just make it marged-in on that cl.",
       "revId": "f7834a669b3f3bf0ea2c08a73ebaf3ca2efdaedb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "033fc298_22551268",
+        "filename": "tools/finalization/finalize-aidl-vndk-sdk-resources.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-04-23T19:50:30Z",
+      "side": 1,
+      "message": "Yeah [this line](https://googleplex-android-review.git.corp.google.com/c/platform/build/+/26891984/2/tools/finalization/finalize-sdk-resources.sh#124) differs. I\u0027ll just create a cherry pick of ag/26891984.",
+      "parentUuid": "0c8e6186_222422e9",
+      "revId": "f7834a669b3f3bf0ea2c08a73ebaf3ca2efdaedb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
