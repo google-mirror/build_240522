@@ -79,11 +79,23 @@ cc_library {
     generated_sources: ["libcxx_aconfig_storage_read_api_bridge_code"],
     whole_static_libs: ["libaconfig_storage_read_api_cxx_bridge"],
     export_include_dirs: ["include"],
-    static_libs: [
-        "libaconfig_storage_protos_cc",
-        "libprotobuf-cpp-lite",
+    shared_libs: [
         "libbase",
         "liblog",
+        "libaconfig_storage_protos_cc",
+    ],
+    static_libs: [
+        "libprotobuf-cpp-lite",
+    ],
+    ldflags: [
+        "-Wl,--as-needed",
+        "-Wl,--gc-sections",
+        "-Wl,--icf=all",
+    ],
+    cflags: [
+        "-fvisibility=hidden",
+        "-Wall",
+        "-Werror",
     ],
     apex_available: [
         "//apex_available:platform",
