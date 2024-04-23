@@ -34,6 +34,24 @@
       "parentUuid": "0c8e6186_222422e9",
       "revId": "f7834a669b3f3bf0ea2c08a73ebaf3ca2efdaedb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "767b5937_6c907a2c",
+        "filename": "tools/finalization/finalize-aidl-vndk-sdk-resources.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-04-23T19:55:36Z",
+      "side": 1,
+      "message": "That did not work: aosp/3056483😅 Added a merged-in tag as suggested.",
+      "parentUuid": "033fc298_22551268",
+      "revId": "f7834a669b3f3bf0ea2c08a73ebaf3ca2efdaedb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
