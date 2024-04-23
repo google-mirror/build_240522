@@ -16,6 +16,24 @@
       "message": "I think we can keep this line?",
       "revId": "b24b46d43fa27a4236c46a49b17344a2f2b0f0ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1e50cde_182d9340",
+        "filename": "target/product/runtime_libart.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-04-23T20:33:01Z",
+      "side": 0,
+      "message": "I think my earlier patchset was not in sync with my intention. I have removed this expanded allowlist from all configurations now (source/prebuilts). So this comment is likely obsolete now.",
+      "parentUuid": "6499a38f_0a7ba877",
+      "revId": "b24b46d43fa27a4236c46a49b17344a2f2b0f0ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
