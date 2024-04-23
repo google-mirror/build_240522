@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c8e6186_222422e9",
+        "filename": "tools/finalization/finalize-aidl-vndk-sdk-resources.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-23T19:47:38Z",
+      "side": 1,
+      "message": "I did this change already in internal main, where the file has been renamed: ag/26891984. If you get merge conflicts just make it marged-in on that cl.",
+      "revId": "f7834a669b3f3bf0ea2c08a73ebaf3ca2efdaedb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
