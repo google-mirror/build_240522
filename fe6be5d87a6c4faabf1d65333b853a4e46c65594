@@ -16,6 +16,24 @@
       "message": "There are currently some problems with this. Working on it...",
       "revId": "fe6be5d87a6c4faabf1d65333b853a4e46c65594",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b491c677_eea7450a",
+        "filename": "tools/whichgit",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1979435
+      },
+      "writtenOn": "2024-04-24T21:13:09Z",
+      "side": 1,
+      "message": "The problem is that if a product is not lunch-able, it will fail. And it\u0027s not uncommon for a checkout to contain non-lunch-able products. Possibly, that\u0027s not whichgit\u0027s problem.",
+      "parentUuid": "9242c63a_a1374835",
+      "revId": "fe6be5d87a6c4faabf1d65333b853a4e46c65594",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
