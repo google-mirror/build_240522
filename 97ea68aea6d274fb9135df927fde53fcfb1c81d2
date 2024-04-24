@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0afb77d8_0bb35eb7",
+        "filename": "tools/whichgit",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1979435
+      },
+      "writtenOn": "2024-04-24T01:31:28Z",
+      "side": 1,
+      "message": "Trim trailing / on output.",
+      "revId": "97ea68aea6d274fb9135df927fde53fcfb1c81d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
