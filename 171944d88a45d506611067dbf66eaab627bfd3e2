@@ -16,6 +16,24 @@
       "message": "Keeping the trailing / on directories lets us use the output of this function in subsequent operations.",
       "revId": "171944d88a45d506611067dbf66eaab627bfd3e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5a0056c_87a34bb0",
+        "filename": "tools/whichgit",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1979435
+      },
+      "writtenOn": "2024-04-24T13:11:02Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "9f9e5145_78fbab24",
+      "revId": "171944d88a45d506611067dbf66eaab627bfd3e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
