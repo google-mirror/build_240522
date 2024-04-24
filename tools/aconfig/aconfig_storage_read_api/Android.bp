@@ -89,13 +89,13 @@ cc_library {
     host_supported: true,
     vendor_available: true,
     product_available: true,
+    shared_libs: [
+        "liblog",
+    ],
     static_libs: [
         "libaconfig_storage_protos_cc",
         "libprotobuf-cpp-lite",
         "libbase",
-    ],
-    shared_libs: [
-        "liblog",
     ],
     apex_available: [
         "//apex_available:platform",
@@ -103,4 +103,16 @@ cc_library {
     ],
     min_sdk_version: "29",
     double_loadable: true,
+}
+
+cc_defaults {
+    name: "libaconfig_storage_read_api_cc.defaults",
+    shared_libs: [
+        "server_configurable_flags",
+        "libaconfig_storage_read_api_cc",
+        "libbase",
+        "liblog",
+        "libprotobuf-cpp-lite",
+        "libaconfig_storage_protos_cc",
+    ],
 }
