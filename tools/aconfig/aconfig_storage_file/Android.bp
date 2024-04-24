@@ -27,8 +27,6 @@ rust_library {
         "//apex_available:anyapex",
     ],
     min_sdk_version: "29",
-    vendor_available: true,
-    product_available: true,
 }
 
 rust_binary_host {
@@ -56,8 +54,6 @@ rust_protobuf {
         "//apex_available:anyapex",
     ],
     min_sdk_version: "29",
-    vendor_available: true,
-    product_available: true,
 }
 
 cc_library {
@@ -72,8 +68,4 @@ cc_library {
         "//apex_available:anyapex",
     ],
     host_supported: true,
-    min_sdk_version: "29",
-    vendor_available: true,
-    product_available: true,
-    double_loadable: true,
 }
