@@ -214,8 +214,8 @@ pub fn create_cpp_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<Vec
         bail!("no parsed flags, or the parsed flags use different packages");
     };
     let package = package.to_string();
-    let _flag_ids = assign_flag_ids(&package, modified_parsed_flags.iter())?;
-    generate_cpp_code(&package, modified_parsed_flags.into_iter(), codegen_mode)
+    let flag_ids = assign_flag_ids(&package, modified_parsed_flags.iter())?;
+    generate_cpp_code(&package, modified_parsed_flags.into_iter(), codegen_mode, flag_ids, false)
 }
 
 pub fn create_rust_lib(mut input: Input, codegen_mode: CodegenMode) -> Result<OutputFile> {
@@ -242,7 +242,10 @@ pub fn create_storage(
     let parsed_flags_vec: Vec<ProtoParsedFlags> = caches
         .into_iter()
         .map(|mut input| input.try_parse_flags())
-        .collect::<Result<Vec<_>>>()?;
+        .collect::<Result<Vec<_>>>()?
+        .into_iter()
+        .filter(|pfs| find_unique_container(pfs) == Some(container))
+        .collect();
     generate_storage_file(container, parsed_flags_vec.iter(), file)
 }
 
@@ -319,6 +322,14 @@ fn find_unique_package(parsed_flags: &[ProtoParsedFlag]) -> Option<&str> {
         return None;
     }
     Some(package)
+}
+
+fn find_unique_container(parsed_flags: &ProtoParsedFlags) -> Option<&str> {
+    let container = parsed_flags.parsed_flag.first().map(|pf| pf.container())?;
+    if parsed_flags.parsed_flag.iter().any(|pf| pf.container() != container) {
+        return None;
+    }
+    Some(container)
 }
 
 pub fn modify_parsed_flags_based_on_mode(
