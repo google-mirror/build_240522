@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d277ae8e_c5ef1185",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-04-25T00:05:42Z",
+      "side": 1,
+      "message": "Moved from https://android-review.git.corp.google.com/c/platform/tools/asuite/+/3039733",
+      "revId": "076d283983fa57d280ceffbb90fc5fe6b3620081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
