@@ -156,15 +156,15 @@ TEST_F(AconfigStorageTest, test_invalid_boolean_flag_value_update) {
             std::string("InvalidStorageFileOffset(Flag value offset goes beyond the end of the file.)"));
 }
 
-/// Test to lock down storage flag has server override update api
-TEST_F(AconfigStorageTest, test_flag_has_server_override_update) {
+/// Test to lock down storage flag stickiness update api
+TEST_F(AconfigStorageTest, test_flag_is_sticky_update) {
   auto mapped_file_result = private_api::get_mutable_mapped_file_impl(
       storage_record_pb, "mockup", api::StorageFileType::flag_info);
   ASSERT_TRUE(mapped_file_result.ok());
   auto mapped_file = *mapped_file_result;
 
   for (int offset = 0; offset < 8; ++offset) {
-    auto update_result = api::set_flag_has_server_override(
+    auto update_result = api::set_flag_is_sticky(
         mapped_file, api::FlagValueType::Boolean, offset, true);
     ASSERT_TRUE(update_result.ok());
     auto ro_mapped_file = api::MappedStorageFile();
@@ -173,9 +173,9 @@ TEST_F(AconfigStorageTest, test_flag_has_server_override_update) {
     auto attribute = api::get_flag_attribute(
         ro_mapped_file, api::FlagValueType::Boolean, offset);
     ASSERT_TRUE(attribute.ok());
-    ASSERT_TRUE(*attribute & api::FlagInfoBit::HasServerOverride);
+    ASSERT_TRUE(*attribute & api::FlagInfoBit::IsSticky);
 
-    update_result = api::set_flag_has_server_override(
+    update_result = api::set_flag_is_sticky(
         mapped_file, api::FlagValueType::Boolean, offset, false);
     ASSERT_TRUE(update_result.ok());
     ro_mapped_file.file_ptr = mapped_file.file_ptr;
@@ -183,19 +183,19 @@ TEST_F(AconfigStorageTest, test_flag_has_server_override_update) {
     attribute = api::get_flag_attribute(
         ro_mapped_file, api::FlagValueType::Boolean, offset);
     ASSERT_TRUE(attribute.ok());
-    ASSERT_FALSE(*attribute & api::FlagInfoBit::HasServerOverride);
+    ASSERT_FALSE(*attribute & api::FlagInfoBit::IsSticky);
   }
 }
 
-/// Test to lock down storage flag has local override update api
-TEST_F(AconfigStorageTest, test_flag_has_local_override_update) {
+/// Test to lock down storage flag has override update api
+TEST_F(AconfigStorageTest, test_flag_has_override_update) {
   auto mapped_file_result = private_api::get_mutable_mapped_file_impl(
       storage_record_pb, "mockup", api::StorageFileType::flag_info);
   ASSERT_TRUE(mapped_file_result.ok());
   auto mapped_file = *mapped_file_result;
 
   for (int offset = 0; offset < 8; ++offset) {
-    auto update_result = api::set_flag_has_local_override(
+    auto update_result = api::set_flag_has_override(
         mapped_file, api::FlagValueType::Boolean, offset, true);
     ASSERT_TRUE(update_result.ok());
     auto ro_mapped_file = api::MappedStorageFile();
@@ -204,9 +204,9 @@ TEST_F(AconfigStorageTest, test_flag_has_local_override_update) {
     auto attribute = api::get_flag_attribute(
         ro_mapped_file, api::FlagValueType::Boolean, offset);
     ASSERT_TRUE(attribute.ok());
-    ASSERT_TRUE(*attribute & api::FlagInfoBit::HasLocalOverride);
+    ASSERT_TRUE(*attribute & api::FlagInfoBit::HasOverride);
 
-    update_result = api::set_flag_has_local_override(
+    update_result = api::set_flag_has_override(
         mapped_file, api::FlagValueType::Boolean, offset, false);
     ASSERT_TRUE(update_result.ok());
     ro_mapped_file.file_ptr = mapped_file.file_ptr;
@@ -214,6 +214,6 @@ TEST_F(AconfigStorageTest, test_flag_has_local_override_update) {
     attribute = api::get_flag_attribute(
         ro_mapped_file, api::FlagValueType::Boolean, offset);
     ASSERT_TRUE(attribute.ok());
-    ASSERT_FALSE(*attribute & api::FlagInfoBit::HasLocalOverride);
+    ASSERT_FALSE(*attribute & api::FlagInfoBit::HasOverride);
   }
 }
