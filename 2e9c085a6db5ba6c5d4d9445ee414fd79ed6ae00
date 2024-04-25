@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef34d99_1aeb873a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2024-04-25T18:59:07Z",
+      "side": 1,
+      "message": "Iow the zip file created in https://r.android.com/2287335 will change format. @islamelbanna@google.com, I suspect this will need some adaptations in ART benchmark service.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 69
+      },
+      "revId": "2e9c085a6db5ba6c5d4d9445ee414fd79ed6ae00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
