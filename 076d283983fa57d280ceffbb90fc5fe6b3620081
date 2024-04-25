@@ -16,6 +16,29 @@
       "message": "Moved from https://android-review.git.corp.google.com/c/platform/tools/asuite/+/3039733",
       "revId": "076d283983fa57d280ceffbb90fc5fe6b3620081",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf22538_7f187fe9",
+        "filename": "tool_event_logger/OWNERS",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-04-25T00:30:21Z",
+      "side": 1,
+      "message": "Could you include the ADTE team OWNERS file? See https://cs.android.com/android/platform/superproject/main/+/main:prebuilts/asuite/OWNERS;l\u003d1;drc\u003d2b6d74c872611d15ebd97e52e6c104dd286d7f1e for example.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "076d283983fa57d280ceffbb90fc5fe6b3620081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
