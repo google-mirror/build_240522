@@ -102,5 +102,6 @@ cc_library {
         "//apex_available:anyapex",
     ],
     min_sdk_version: "29",
+    version_script: "libaconfig_storage_read_api_cc.map.txt",
     double_loadable: true,
 }
