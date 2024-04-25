@@ -22,6 +22,30 @@
       },
       "revId": "2e9c085a6db5ba6c5d4d9445ee414fd79ed6ae00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a720e380_a7d8d1fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-04-25T23:30:27Z",
+      "side": 1,
+      "message": "If keeping the existing file format is desirable, then I think I can update the implementation to do that. Islam, please lmk if the ART benchmark service expects the zip file to be in the existing file format.",
+      "parentUuid": "2ef34d99_1aeb873a",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 69
+      },
+      "revId": "2e9c085a6db5ba6c5d4d9445ee414fd79ed6ae00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
