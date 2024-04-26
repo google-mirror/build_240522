@@ -46,6 +46,53 @@
       },
       "revId": "2e9c085a6db5ba6c5d4d9445ee414fd79ed6ae00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca5b7c10_1d35a955",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-04-26T09:30:48Z",
+      "side": 1,
+      "message": "Could you show us how the file structure looks like after the change? E.g., paste the `find` output?",
+      "parentUuid": "a720e380_a7d8d1fe",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 69
+      },
+      "revId": "2e9c085a6db5ba6c5d4d9445ee414fd79ed6ae00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9999248_899c9cd3",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-04-26T09:30:48Z",
+      "side": 1,
+      "message": "The name conflicts with the one on line 73.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 27
+      },
+      "revId": "2e9c085a6db5ba6c5d4d9445ee414fd79ed6ae00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
