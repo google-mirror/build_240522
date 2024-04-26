@@ -52,6 +52,24 @@
       "parentUuid": "b664c251_cdec7fde",
       "revId": "e18b9fee63c1ad00398b56b378e650bd073e67f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afcbbbf6_77214086",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-04-26T22:00:48Z",
+      "side": 1,
+      "message": "\u003e Even if a user sets MODULE_BUILD_FROM_SOURCE\u003dfalse, sdk builds will be built from source. \n\nYes, that is accurate. The build flags for `trunk_staging` and `next` have both been configured to use the source java_sdk_library and not the prebuilt java_sdk_library library. `trunk_staging` and `next` will have a different set of aconfig flag values, both these come from source.\n\n\u003e Would this change be changing that logic?\n\nThe prior mentioned behavior will remain the same after this CL. From the perspective of docs and sdk, `MODULE_BUILD_FROM_SOURCE` has no effect in these two release configuratrions since apex_contributions [supersede](https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:build/soong/android/prebuilt.go;l\u003d680-683;bpv\u003d1) `prefer` property.",
+      "parentUuid": "43359976_c1f62d08",
+      "revId": "e18b9fee63c1ad00398b56b378e650bd073e67f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
