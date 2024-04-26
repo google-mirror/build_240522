@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69c36d29_a778be95",
+        "filename": "tools/aconfig/aconfig_storage_read_api/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-04-26T20:14:32Z",
+      "side": 1,
+      "message": "This breaks the mac build, which can\u0027t support version scripts.  Make this linux-specific (including android) with:\n```\ntarget: {\n    linux: {\n        version_script: \"libaconfig_storage_read_api_cc.map\",\n    },\n},\n```",
+      "revId": "8782e1e85864ab4bac1d7b85b8cdada181b793de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
