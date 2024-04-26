@@ -34,6 +34,24 @@
       "parentUuid": "0f1d2e0e_45f0bcb5",
       "revId": "e18b9fee63c1ad00398b56b378e650bd073e67f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43359976_c1f62d08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-04-26T21:31:56Z",
+      "side": 1,
+      "message": "Hmm, the public sdk release would use `next` and the google3 sdk drop uses `trunk_staging`, so these two would be what I would be curious about. I don\u0027t think that the CI builds would ever pass `MODULE_BUILD_FROM_SOURCE\u003dfalse` for `sdk` builds, but I\u0027m more curious about the user experience for local builds.\n\nIIUC as of now (before this change) even if a user sets `MODULE_BUILD_FROM_SOURCE\u003dfalse`, sdk builds will be built from source. Would this change be changing that logic? Please correct me if I am wrong.",
+      "parentUuid": "b664c251_cdec7fde",
+      "revId": "e18b9fee63c1ad00398b56b378e650bd073e67f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
