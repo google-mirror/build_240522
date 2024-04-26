@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba8b7007_3bb2f7a8",
+        "filename": "tools/aconfig/aconfig_storage_read_api/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-04-26T18:10:04Z",
+      "side": 1,
+      "message": "I don\u0027t think we need it.",
+      "revId": "36bee4f87ff21e2c84e23b0d80b82e56e7d1cb58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
