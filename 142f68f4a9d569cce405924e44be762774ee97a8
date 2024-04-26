@@ -70,6 +70,24 @@
       "parentUuid": "9429fa56_801b1c75",
       "revId": "142f68f4a9d569cce405924e44be762774ee97a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2f60df8_f3b932ea",
+        "filename": "cogsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-04-26T07:18:05Z",
+      "side": 1,
+      "message": "Sorry - I completely misunderstood your first comment.\n\nIf the user installs it later we still have the empty $ORIG_REPO_PATH used in the function. We could use `\\repo` to ignore the function definition and use the original binary if available. WDYT?",
+      "parentUuid": "e13e7fe7_97082e5a",
+      "revId": "142f68f4a9d569cce405924e44be762774ee97a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
