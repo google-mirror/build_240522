@@ -165,6 +165,30 @@
       },
       "revId": "2e9c085a6db5ba6c5d4d9445ee414fd79ed6ae00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c2a99cf_36ef8e94",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-04-26T15:48:21Z",
+      "side": 1,
+      "message": "Although there is no more name conflict, it is still confusing from a readability point of view because we now have two similar variable names representing two different things: `platform_system_server_jars` representing only the jars on `system`, and `platform_system_server_jars_for_zip` representing the jars on `system` and `system_ext`, meaning the latter is a superset of the former. Please consider better names. You are free to rename existing variables if you need to.",
+      "parentUuid": "c8e5bee9_790aca6d",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 27
+      },
+      "revId": "2e9c085a6db5ba6c5d4d9445ee414fd79ed6ae00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
