@@ -16,6 +16,24 @@
       "message": "Oh interesting, looks like `.map.txt` files get flagged for NDK API review? Not sure what the best practice is here given it\u0027s not part of the NDK, I\u0027m guessing just use a different extension? @danalbert@google.com maybe you can speak to that?",
       "revId": "571bc803140bb160c9d67a5e2a06fab378651095",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb489cc_f3b547a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2024-04-26T17:26:04Z",
+      "side": 1,
+      "message": "I removed the `.txt` suffix as that seems the convention for NDK libs, though now I need reapproval. Thanks!",
+      "parentUuid": "7b078faf_ebb19ef5",
+      "revId": "571bc803140bb160c9d67a5e2a06fab378651095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
