@@ -50,7 +50,7 @@ endif
 
 ifneq (,$(MODULE_BUILD_FROM_SOURCE))
   # Keep an explicit setting.
-else ifeq (,$(filter docs sdk win_sdk sdk_addon,$(MAKECMDGOALS)))
+else ifeq (,$(filter docs,$(MAKECMDGOALS)))
   MODULE_BUILD_FROM_SOURCE := true
 else ifneq (,$(PRODUCT_MODULE_BUILD_FROM_SOURCE))
   # Let products override the branch default.
