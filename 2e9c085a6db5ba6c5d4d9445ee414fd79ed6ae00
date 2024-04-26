@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab966f12_e5c82ba7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-04-26T15:40:02Z",
+      "side": 1,
+      "message": "Before this change, the zip file had the following format\n```\n$ unzip -l system_server.zip.bak \nArchive:  system_server.zip.bak\n  Length      Date    Time    Name\n---------  ---------- -----   ----\n    29954  2008-01-01 00:00   system/framework/com.android.location.provider.jar\n 21211165  2008-01-01 00:00   system/framework/services.jar\n    89218  2008-01-01 00:00   apex/com.android.adservices/javalib/service-adservices.jar\n   265033  2008-01-01 00:00   apex/com.android.adservices/javalib/service-sdksandbox.jar\n   805275  2008-01-01 00:00   apex/com.android.appsearch/javalib/service-appsearch.jar\n   434550  2008-01-01 00:00   apex/com.android.art/javalib/service-art.jar\n    20386  2008-01-01 00:00   apex/com.android.compos/javalib/service-compos.jar\n   303700  2008-01-01 00:00   apex/com.android.configinfrastructure/javalib/service-configinfrastructure.jar\n      930  2008-01-01 00:00   apex/com.android.crashrecovery/javalib/service-crashrecovery.jar\n   407823  2008-01-01 00:00   apex/com.android.healthfitness/javalib/service-healthfitness.jar\n    21202  2008-01-01 00:00   apex/com.android.media/javalib/service-media-s.jar\n    10474  2008-01-01 00:00   apex/com.android.ondevicepersonalization/javalib/service-ondevicepersonalization.jar\n   508941  2008-01-01 00:00   apex/com.android.permission/javalib/service-permission.jar\n    32330  2008-01-01 00:00   apex/com.android.rkpd/javalib/service-rkp.jar\n    17898  2008-01-01 00:00   apex/com.android.virt/javalib/service-virtualization.jar\n   822593  2008-01-01 00:00   apex/com.android.btservices/javalib/service-bluetooth.jar\n    86854  2008-01-01 00:00   apex/com.android.devicelock/javalib/service-devicelock.jar\n    40374  2008-01-01 00:00   apex/com.android.os.statsd/javalib/service-statsd.jar\n    40017  2008-01-01 00:00   apex/com.android.scheduling/javalib/service-scheduling.jar\n  1740621  2008-01-01 00:00   apex/com.android.tethering/javalib/service-connectivity.jar\n   979872  2008-01-01 00:00   apex/com.android.uwb/javalib/service-uwb.jar\n  5059790  2008-01-01 00:00   apex/com.android.wifi/javalib/service-wifi.jar\n   198618  2008-01-01 00:00   apex/com.android.profiling/javalib/service-profiling.jar\n---------                     -------\n 33127618                     23 files\n\n```\n\nAfter this change, the zip file has the following format\n```\n$ unzip -l out/target/product/vsoc_x86_64/system_server.zip \nArchive:  out/target/product/vsoc_x86_64/system_server.zip\n  Length      Date    Time    Name\n---------  ---------- -----   ----\n    29954  2008-01-01 00:00   com.android.location.provider.jar\n 21211165  2008-01-01 00:00   services.jar\n    89218  2008-01-01 00:00   service-adservices.jar\n   265033  2008-01-01 00:00   service-sdksandbox.jar\n   805275  2008-01-01 00:00   service-appsearch.jar\n   434550  2008-01-01 00:00   service-art.jar\n    20386  2008-01-01 00:00   service-compos.jar\n   303700  2008-01-01 00:00   service-configinfrastructure.jar\n      930  2008-01-01 00:00   service-crashrecovery.jar\n   407823  2008-01-01 00:00   service-healthfitness.jar\n    21202  2008-01-01 00:00   service-media-s.jar\n    10474  2008-01-01 00:00   service-ondevicepersonalization.jar\n   508941  2008-01-01 00:00   service-permission.jar\n    32330  2008-01-01 00:00   service-rkp.jar\n    17898  2008-01-01 00:00   service-virtualization.jar\n   822593  2008-01-01 00:00   service-bluetooth.jar\n    86854  2008-01-01 00:00   service-devicelock.jar\n    40374  2008-01-01 00:00   service-statsd.jar\n    40017  2008-01-01 00:00   service-scheduling.jar\n  1740621  2008-01-01 00:00   service-connectivity.jar\n   979872  2008-01-01 00:00   service-uwb.jar\n  5059790  2008-01-01 00:00   service-wifi.jar\n   198618  2008-01-01 00:00   service-profiling.jar\n---------                     -------\n 33127618                     23 files\n```",
+      "parentUuid": "99274bcc_298daf4b",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 69
+      },
+      "revId": "2e9c085a6db5ba6c5d4d9445ee414fd79ed6ae00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9999248_899c9cd3",
         "filename": "core/dex_preopt.mk",
         "patchSetId": 2
@@ -109,6 +133,30 @@
       "writtenOn": "2024-04-26T09:30:48Z",
       "side": 1,
       "message": "The name conflicts with the one on line 73.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 27
+      },
+      "revId": "2e9c085a6db5ba6c5d4d9445ee414fd79ed6ae00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8e5bee9_790aca6d",
+        "filename": "core/dex_preopt.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-04-26T15:40:02Z",
+      "side": 1,
+      "message": "Good catch, I have renamed this variable to prevent the conflict.",
+      "parentUuid": "c9999248_899c9cd3",
       "range": {
         "startLine": 129,
         "startChar": 0,
