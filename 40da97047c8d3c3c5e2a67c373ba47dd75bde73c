@@ -16,6 +16,24 @@
       "message": "With this CL I get a handful of these errors when checking the public API:\n\n```\nerror: enabled @FlaggedApi not present in built artifact: symbol\u003dandroid.content.pm.LauncherUserInfo.describeContents() flag\u003dandroid.os.allow_private_profile\n```\n\nThe parsed current.txt file:\n\n```\n  @FlaggedApi(\"android.os.allow_private_profile\") public final class LauncherUserInfo implements android.os.Parcelable {\n    method @FlaggedApi(\"android.os.allow_private_profile\") public int describeContents();\n    [...]\n\n```\n\nAccording to the parsed api-versions.xml:\n\n```\n    \u003cclass name\u003d\"android/content/pm/LauncherUserInfo\" since\u003d\"35\"\u003e\n        \u003cextends name\u003d\"java/lang/Object\"/\u003e\n        \u003cimplements name\u003d\"android/os/Parcelable\"/\u003e\n        [...]\n    \u003c/class\u003e\n```\n\ni.e. the inherited parceable methods are bundled up into \"\u003cimplements ...Parcelable\u003e\" in the XML. I don\u0027t see this for other inherited methods so maybe we should just hard-code the Parcelable methods and ignore those when parsing the current.txt file? WDYT?",
       "revId": "40da97047c8d3c3c5e2a67c373ba47dd75bde73c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db58a942_d365f86f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-04-27T14:04:32Z",
+      "side": 1,
+      "message": "I had a closer look at the input files. The above comment is generic for any interface, not just Parcelable: it just happens to be the case that Parcelable is the only interface that includes a method that doesn\u0027t accept any arguments.\n\nTurns out that API signature files explicitly list methods from implemented interfaces; and api-versions.xml collapses this into `\u003cclass\u003e\u003cimplements name\u003d\"name-of-interface\"\u003e...\u003c/class\u003e`. To fix this properly `parseApiVersions` needs to run a fixup phase after scanning the file to replace `\u003cimplements\u003e` with the methods and fields from that interace.",
+      "parentUuid": "de3b30a7_b0b58b76",
+      "revId": "40da97047c8d3c3c5e2a67c373ba47dd75bde73c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
