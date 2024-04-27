@@ -45,6 +45,14 @@ import org.w3c.dom.Node
  * <pre>
  *   package.class.inner-class.field
  * </pre>
+ *
+ * Method parameters are encoded using the format described in section 4.3.2 of the JVM spec [1],
+ * that is, "package.class.inner-class.method(int, int[], android.util.Clazz)" is represented as
+ * <pre>
+ *   package.class.inner-class.method(II[Landroid/util/Clazz;)
+ * <pre>
+ *
+ * 1. https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.3.2
  */
 @JvmInline
 internal value class Symbol(val name: String) {
@@ -195,10 +203,29 @@ internal fun parseApiSignature(path: String, input: InputStream): Set<Pair<Symbo
               append(".")
               append(method.name())
               append("(")
-              // TODO(334870672): replace this early return with proper parsing of the command line
-              // arguments, followed by translation to Lname/of/class; + III format
-              if (!method.parameters().isEmpty()) {
-                return
+              method.parameters().joinTo(this, separator = "") {
+                val rawTypeParts = it.type().toString().split("[")
+                var numberOfArrays = rawTypeParts.size - 1
+                var rawType = rawTypeParts[0]
+                if (rawType.endsWith("...")) {
+                  numberOfArrays += 1
+                  rawType = rawType.substring(0, rawType.length - 3)
+                }
+                val type =
+                    when (rawType) {
+                      "boolean" -> "Z"
+                      "byte" -> "B"
+                      "char" -> "C"
+                      "double" -> "D"
+                      "float" -> "F"
+                      "int" -> "I"
+                      "long" -> "J"
+                      "object" -> "L"
+                      "short" -> "S"
+                      "void" -> "V"
+                      else -> "L${rawType.replace(Regex("<.*>"), "").replace(".", "/")};"
+                    }
+                "[".repeat(numberOfArrays) + type
               }
               append(")")
             }
@@ -255,7 +282,9 @@ internal fun parseApiVersions(input: InputStream): Set<Symbol> {
           "Bad XML: <field> element without name attribute"
         }
     val className =
-        requireNotNull(field.getParentNode()?.getAttribute("name")) { "Bad XML: top level <field> element" }
+        requireNotNull(field.getParentNode()?.getAttribute("name")) {
+          "Bad XML: top level <field> element"
+        }
     output.add(Symbol.create("${className.replace("/", ".")}.$fieldName"))
   }
 
