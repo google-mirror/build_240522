@@ -115,3 +115,19 @@ python_binary_host {
         },
     },
 }
+
+python_library_host {
+    name: "event_log_tags",
+    srcs: ["event_log_tags.py"],
+}
+
+python_binary_host {
+    name: "merge-event-log-tags",
+    srcs: ["merge-event-log-tags.py"],
+    libs: ["event_log_tags"],
+    version: {
+        py3: {
+            embedded_launcher: true,
+        },
+    },
+}
