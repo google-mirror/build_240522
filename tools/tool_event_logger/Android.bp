@@ -40,6 +40,9 @@ python_binary_host {
         "asuite_cc_client",
         "tool_event_proto",
     ],
+    dist: {
+         targets: ["droidcore"],
+    },
     main: "tool_event_logger.py",
 }
 
