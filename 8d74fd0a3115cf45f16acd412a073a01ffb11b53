@@ -46,6 +46,30 @@
       },
       "revId": "8d74fd0a3115cf45f16acd412a073a01ffb11b53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e39182e0_293fd4e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-04-29T22:15:18Z",
+      "side": 1,
+      "message": "Both. It was answered in a follow-up change though.",
+      "parentUuid": "b9b7a550_3b32b859",
+      "range": {
+        "startLine": 10,
+        "startChar": 22,
+        "endLine": 10,
+        "endChar": 42
+      },
+      "revId": "8d74fd0a3115cf45f16acd412a073a01ffb11b53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
