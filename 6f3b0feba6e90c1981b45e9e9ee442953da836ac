@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae4302d6_d76fc028",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-04-29T10:36:55Z",
+      "side": 1,
+      "message": "I think this should be a separate change, maybe even part of https://r.android.com/3061972.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 79
+      },
+      "revId": "6f3b0feba6e90c1981b45e9e9ee442953da836ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b304315_1401e7d8",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-04-29T10:36:55Z",
+      "side": 1,
+      "message": "Replace with `it.type().internalName()`",
+      "range": {
+        "startLine": 207,
+        "startChar": 16,
+        "endLine": 228,
+        "endChar": 49
+      },
+      "revId": "6f3b0feba6e90c1981b45e9e9ee442953da836ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
