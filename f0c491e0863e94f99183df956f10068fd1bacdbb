@@ -16,6 +16,24 @@
       "message": "There are some edge cases which this cl does not cover. Marking as wip for now.",
       "revId": "f0c491e0863e94f99183df956f10068fd1bacdbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8456f61a_a3f69adf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-04-29T22:33:32Z",
+      "side": 1,
+      "message": "I believe the edge case (coverage builds) will be handled by the preceding cl in this stack.",
+      "parentUuid": "3e578909_f822f051",
+      "revId": "f0c491e0863e94f99183df956f10068fd1bacdbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
