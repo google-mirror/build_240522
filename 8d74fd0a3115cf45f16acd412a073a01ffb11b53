@@ -22,6 +22,30 @@
       },
       "revId": "8d74fd0a3115cf45f16acd412a073a01ffb11b53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9b7a550_3b32b859",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2024-04-29T20:29:28Z",
+      "side": 1,
+      "message": "Not sure if you\u0027re asking because you want an answer or for the answer to be put in the commit message.\n\nIf the former: because the decision was made to use the JNI-style argument descriptors, which use \u0027/\u0027 instead of \u0027.\u0027 to separate namespace components.\n\nIf the latter, I agree, would\u0027ve been nice and a good note for future CLs, but going to resolve this in the interest of getting it submitted ASAP since we\u0027re using the actively using this to validate finalization.",
+      "parentUuid": "861f1edd_e6ecda3d",
+      "range": {
+        "startLine": 10,
+        "startChar": 22,
+        "endLine": 10,
+        "endChar": 42
+      },
+      "revId": "8d74fd0a3115cf45f16acd412a073a01ffb11b53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
