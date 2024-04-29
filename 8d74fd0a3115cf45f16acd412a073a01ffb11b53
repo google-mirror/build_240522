@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "861f1edd_e6ecda3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-04-29T10:31:44Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 10,
+        "startChar": 22,
+        "endLine": 10,
+        "endChar": 42
+      },
+      "revId": "8d74fd0a3115cf45f16acd412a073a01ffb11b53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
