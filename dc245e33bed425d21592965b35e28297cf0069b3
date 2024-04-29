@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddde1b8d_43b38905",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2024-04-29T21:34:25Z",
+      "side": 1,
+      "message": "minor nits throughout, feel free to resolve them without changing.",
+      "revId": "dc245e33bed425d21592965b35e28297cf0069b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a5ef28b_5f3886ad",
+        "filename": "tools/lunchable",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2024-04-29T21:34:25Z",
+      "side": 1,
+      "message": "most of the functions are of the form:\n```\nfunction Help() {\n...\n}\n```\nConsider something like:\n```\nfunction Usage() {\ncat \u003c\u003c@EOF@\nUsage: $0 [options]\n...\n@EOF@\n}\n```",
+      "revId": "dc245e33bed425d21592965b35e28297cf0069b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d32cc7b_d94c4f56",
+        "filename": "tools/lunchable",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2024-04-29T21:34:25Z",
+      "side": 1,
+      "message": "`-c` rather than `c`, ditto for `w`.",
+      "revId": "dc245e33bed425d21592965b35e28297cf0069b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daa501a6_40e73a72",
+        "filename": "tools/lunchable",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1583551
+      },
+      "writtenOn": "2024-04-29T21:34:25Z",
+      "side": 1,
+      "message": "This could be combined with line 40 by using:\n`all_named_products\u003d( $(get_build_var ...) )`.  Lines 36-39 remain unchanged.",
+      "revId": "dc245e33bed425d21592965b35e28297cf0069b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
