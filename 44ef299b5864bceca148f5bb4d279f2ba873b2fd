@@ -16,6 +16,24 @@
       "message": "There are [some CI coverage builds](https://source.corp.google.com/piper///depot/google3/configs/wireless/android/busytown/platform/git_main/git_main.gcl;rcl\u003d629046347;l\u003d3339) that only sets `EMMA_INSTRUMENT` instead of `EMMA_INSTRUMENT_FRAMEWORK`, so it may be safer to check for [all three](https://cs.android.com/android/platform/superproject/main/+/main:build/soong/android/config.go;drc\u003dba270c503ac2651372616d7f3fa7177311f0e11b;l\u003d2037) of these variables.",
       "revId": "44ef299b5864bceca148f5bb4d279f2ba873b2fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91eb0588_d64bb75c",
+        "filename": "core/product_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-04-29T21:32:34Z",
+      "side": 1,
+      "message": "Good point, done",
+      "parentUuid": "5388d211_8ec13aeb",
+      "revId": "44ef299b5864bceca148f5bb4d279f2ba873b2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
