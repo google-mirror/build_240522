@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2955f1dc_514f9a6c",
+        "filename": "tools/tool_event_logger/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-29T22:59:22Z",
+      "side": 1,
+      "message": "btw both `enabled: true` and (now) `embedded_launcher: true` are the defaults, you don\u0027t need this.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 6
+      },
+      "revId": "7b11b7106a05319b5234231911737db65e34ad82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
