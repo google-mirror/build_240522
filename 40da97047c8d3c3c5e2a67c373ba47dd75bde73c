@@ -3,6 +3,29 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0f888201_686374ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-04-29T10:31:19Z",
+      "side": 1,
+      "message": "Not strictly true, as you replace `\u003cinit\u003e` in the `api-versions.xml` file with the simple class name. But true in terms of the main checks that it does.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 68
+      },
+      "revId": "40da97047c8d3c3c5e2a67c373ba47dd75bde73c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "de3b30a7_b0b58b76",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
