@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11c42f58_717eced3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1979435
+      },
+      "writtenOn": "2024-04-29T21:11:03Z",
+      "side": 1,
+      "message": "It\u0027s not really up to whichgit for products to be lunchable. `lunchable` tool is being added in a separate change.",
+      "revId": "c1f344e980fedd538adc385630d7c0388a441d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
