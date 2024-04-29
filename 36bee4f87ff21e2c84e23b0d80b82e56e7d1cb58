@@ -52,6 +52,24 @@
       "parentUuid": "9b1a731c_9b18e3f0",
       "revId": "36bee4f87ff21e2c84e23b0d80b82e56e7d1cb58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbca7d8c_b1af6209",
+        "filename": "tools/aconfig/aconfig_storage_read_api/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-04-29T15:18:49Z",
+      "side": 1,
+      "message": "I tried removing these, but we get linker errors.",
+      "parentUuid": "ead9c11e_0011fe0f",
+      "revId": "36bee4f87ff21e2c84e23b0d80b82e56e7d1cb58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
