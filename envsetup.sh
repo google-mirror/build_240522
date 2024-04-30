@@ -288,6 +288,7 @@ function set_lunch_paths()
     ANDROID_LUNCH_BUILD_PATHS+=:$T/prebuilts/asuite/acloud/$os_arch
     ANDROID_LUNCH_BUILD_PATHS+=:$T/prebuilts/asuite/aidegen/$os_arch
     ANDROID_LUNCH_BUILD_PATHS+=:$T/prebuilts/asuite/atest/$os_arch
+    ANDROID_LUNCH_BUILD_PATHS+=:$T/prebuilts/asuite/tool_event_logger/$os_arch
 
     export ANDROID_JAVA_HOME=$(get_abs_build_var ANDROID_JAVA_HOME)
     export JAVA_HOME=$ANDROID_JAVA_HOME
@@ -1123,6 +1124,7 @@ function run_tool_with_logging() {
   start_time=$(date +%s.%N)
   local logger=${ANDROID_TOOL_LOGGER}
 
+  echo "logger: " $logger
   # Install a trap to call the logger even when the process terminates abnormally.
   # The logger is run in the background and its output suppressed to avoid
   # interference with the user flow.
@@ -1134,7 +1136,7 @@ function run_tool_with_logging() {
     --tool_tag "${tool_tag}" \
     --start_timestamp "${start_time}" \
     --end_timestamp "$(date +%s.%N)" \
-    --tool_args \""${@}"\" \
+    --tool_args "$*" \
     --exit_code "${exit_code}" \
     > /dev/null 2>&1 &
   exit ${exit_code}
