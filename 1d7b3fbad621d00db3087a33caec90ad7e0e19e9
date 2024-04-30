@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "684ba1d6_e59432cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982145
+      },
+      "writtenOn": "2024-04-30T18:06:40Z",
+      "side": 1,
+      "message": "I can\u0027t submit these yet, but would appreciate early feedback.",
+      "revId": "1d7b3fbad621d00db3087a33caec90ad7e0e19e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
