@@ -1112,9 +1112,18 @@ function run_tool_with_logging() {
   local tool_binary="$1"
   shift
 
+  # Split the tool_args and logger_args.
+  for arg in "$@"; do
+    if [[ ! $arg == --logger_args* ]]; then
+      tool_args+=("$arg")
+    else
+      logger_args+=$(echo "$arg" | sed 's/.*--logger_args=//')
+    fi
+  done
+
   # If logging is not enabled or the logger is not configured, run the original command and return.
   if [[ "${ANDROID_ENABLE_TOOL_LOGGING}" != "true" ]] || [[ -z "${ANDROID_TOOL_LOGGER}" ]]; then
-     "${tool_binary}" "${@}"
+     "${tool_binary}" ${tool_args[@]}
      return $?
   fi
 
@@ -1123,6 +1132,7 @@ function run_tool_with_logging() {
   start_time=$(date +%s.%N)
   local logger=${ANDROID_TOOL_LOGGER}
 
+  #echo "logger: " $logger
   # Install a trap to call the logger even when the process terminates abnormally.
   # The logger is run in the background and its output suppressed to avoid
   # interference with the user flow.
@@ -1134,14 +1144,15 @@ function run_tool_with_logging() {
     --tool_tag "${tool_tag}" \
     --start_timestamp "${start_time}" \
     --end_timestamp "$(date +%s.%N)" \
-    --tool_args \""${@}"\" \
+    --tool_args "${tool_args[*]}" \
     --exit_code "${exit_code}" \
-    > /dev/null 2>&1 &
+    "${logger_args[@]}" \
+     > /dev/null 2>&1 &
   exit ${exit_code}
   ' SIGINT SIGTERM SIGQUIT EXIT
 
   # Run the original command.
-  "${tool_binary}" "${@}"
+  "${tool_binary}" "${tool_args[@]}"
   )
 }
 

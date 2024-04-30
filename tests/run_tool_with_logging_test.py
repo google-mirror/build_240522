@@ -27,6 +27,10 @@ import time
 import unittest
 import zipfile
 import sys
+import glob
+from unittest import mock
+
+import shutil
 
 EXII_RETURN_CODE = 0
 INTERRUPTED_RETURN_CODE = 130
@@ -53,9 +57,18 @@ class RunToolWithLoggingTest(unittest.TestCase):
       with zipfile.ZipFile(p, "r") as zip_f:
         zip_f.extractall()
 
+    logger = "tool_event_logger"
+    dest_file = Path(self.working_dir.name).joinpath(logger)
+    with resources.as_file(
+        resources.files("testdata").joinpath(logger)
+    ) as p:
+      shutil.copy(p, dest_file)
+    # Set execute permissions for user, group, and others
+    os.chmod(dest_file, 0o755)
+
   def tearDown(self):
-    self.working_dir.cleanup()
-    super().tearDown()
+      self.working_dir.cleanup()
+      super().tearDown()
 
   def test_does_not_log_when_logging_disabled(self):
     test_tool = TestScript.create(self.working_dir)
@@ -118,7 +131,7 @@ class RunToolWithLoggingTest(unittest.TestCase):
     test_tool.assert_called_once_with_args("arg1 arg2")
     expected_logger_args = (
         "--tool_tag FAKE_TOOL --start_timestamp \d+\.\d+ --end_timestamp"
-        ' \d+\.\d+ --tool_args "arg1 arg2" --exit_code 0'
+        ' \d+\.\d+ --tool_args arg1 arg2 --exit_code 0'
     )
     test_logger.assert_called_once_with_args(expected_logger_args)
 
@@ -196,7 +209,7 @@ class RunToolWithLoggingTest(unittest.TestCase):
 
     expected_logger_args = (
         "--tool_tag FAKE_TOOL --start_timestamp \d+\.\d+ --end_timestamp"
-        ' \d+\.\d+ --tool_args "arg1 arg2" --exit_code 130'
+        ' \d+\.\d+ --tool_args arg1 arg2 --exit_code 130'
     )
     test_logger.assert_called_once_with_args(expected_logger_args)
 
@@ -225,6 +238,23 @@ class RunToolWithLoggingTest(unittest.TestCase):
     """)
 
     test_logger.assert_not_called()
+
+  def test_integration_tool_event_logger_dry_run(self):
+    test_tool = TestScript.create(self.working_dir)
+
+    with mock.patch.dict(os.environ, {"TMPDIR": self.working_dir.name}):
+      self._run_script_and_wait(f"""
+        ANDROID_ENABLE_TOOL_LOGGING=true
+        ANDROID_TOOL_LOGGER="{Path(self.working_dir.name).joinpath("tool_event_logger")}"
+        ANDROID_TOOL_LOGGING_DRY_RUN=true
+        run_tool_with_logging "FAKE_TOOL" {test_tool.executable} arg1 arg2 --logger_args=--dry_run
+      """)
+
+    log_files = glob.glob(self.working_dir.name + "/tool_event_logger_*/*.log")
+    self.assertEqual(len(log_files), 1)
+    with open(log_files[0], "r") as f:
+      lines = f.readlines()
+      self.assertIn("dry run", lines[0])
 
   def _create_build_env_script(self) -> str:
     return f"""
