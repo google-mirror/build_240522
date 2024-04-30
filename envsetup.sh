@@ -1114,7 +1114,7 @@ function run_tool_with_logging() {
 
   # If logging is not enabled or the logger is not configured, run the original command and return.
   if [[ "${ANDROID_ENABLE_TOOL_LOGGING}" != "true" ]] || [[ -z "${ANDROID_TOOL_LOGGER}" ]]; then
-     "${tool_binary}" "${@}"
+     "${tool_binary}" "$@"
      return $?
   fi
 
@@ -1134,14 +1134,15 @@ function run_tool_with_logging() {
     --tool_tag "${tool_tag}" \
     --start_timestamp "${start_time}" \
     --end_timestamp "$(date +%s.%N)" \
-    --tool_args \""${@}"\" \
+    --tool_args "$*" \
     --exit_code "${exit_code}" \
+    $ANDROID_TOOL_LOGGER_EXTRA_ARGS \
     > /dev/null 2>&1 &
   exit ${exit_code}
   ' SIGINT SIGTERM SIGQUIT EXIT
 
   # Run the original command.
-  "${tool_binary}" "${@}"
+  "${tool_binary}" "$@"
   )
 }
 
