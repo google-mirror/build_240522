@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d228fc7_dd484070",
+        "filename": "tools/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-30T18:06:15Z",
+      "side": 1,
+      "message": "Do we need a separate library? I don\u0027t see usages of it in your other cls.",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 1
+      },
+      "revId": "beede79a1a48647d151cd8180bd169ed04618a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cfcff80_b9aa8982",
+        "filename": "tools/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-30T18:06:15Z",
+      "side": 1,
+      "message": "I recently made `embedded_launcher: true` the default value, you don\u0027t need to specify it anymore.",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 6
+      },
+      "revId": "beede79a1a48647d151cd8180bd169ed04618a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
