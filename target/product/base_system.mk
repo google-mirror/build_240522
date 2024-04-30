@@ -493,3 +493,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/build_variables.mk)
 
 # Use "image" APEXes always.
 $(call inherit-product,$(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
+# For eng, enable go/perfetto-persistent-tracing
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
+    PRODUCT_PRODUCT_PROPERTIES += persist.debug.perfetto.persistent_sysui_tracing_for_bugreport=1
+endif
