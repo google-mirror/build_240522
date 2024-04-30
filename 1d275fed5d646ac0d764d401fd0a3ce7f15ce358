@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7272a2e0_5ef383b6",
+        "filename": "core/clear_vars.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-04-30T18:44:20Z",
+      "side": 1,
+      "message": "Nit: missing space before `:\u003d`.",
+      "revId": "1d275fed5d646ac0d764d401fd0a3ce7f15ce358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
