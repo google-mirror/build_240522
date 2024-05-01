@@ -973,3 +973,6 @@ $(call soong_config_set,my_namespace,my_string_variable,baz) # Will be an error 
 [frameworks/base/data/fonts/Android.mk]: https://android.googlesource.com/platform/frameworks/base/+/master/data/fonts/Android.mk
 [hardware/interfaces/health/1.0/README.md]: https://android.googlesource.com/platform/hardware/interfaces/+/master/health/1.0/README.md
 [hardware/interfaces/health/2.1/README.md]: https://android.googlesource.com/platform/hardware/interfaces/+/master/health/2.1/README.md
+public static final int LONG_TIMEOUT_MS = 3000;
+    public static final int SHORT_TIMEOUT_MS = 300;
+        public static final int EXPECTED_FRAMES = 78;
