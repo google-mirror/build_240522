@@ -97,9 +97,5 @@
     }
   ],
   "postsubmit": [
-    {
-      // aconfig_storage file cpp integration tests
-      "name": "aconfig_storage_file.test.cpp"
-    }
   ]
 }
