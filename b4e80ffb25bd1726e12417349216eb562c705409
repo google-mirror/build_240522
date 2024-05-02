@@ -16,6 +16,24 @@
       "message": "I don\u0027t understand what soong is doing. If lunching with aosp_oriole-trunk-eng (which I didn\u0027t mean to do but did anyway) the file is placed in out/target/product/mainline_x86/...; if I lunch sdk-next-eng the file ends up in ${ANDROID_PRODUCT_OUT}.",
       "revId": "b4e80ffb25bd1726e12417349216eb562c705409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fa71033_4a25e120",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-05-02T14:43:35Z",
+      "side": 1,
+      "message": "Isn\u0027t `ANDROID_PRODUCT_OUT\u003dout/target/product/mainline_x86` in the first case?",
+      "parentUuid": "72d658d0_dfd803cd",
+      "revId": "b4e80ffb25bd1726e12417349216eb562c705409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
