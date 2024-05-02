@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc78cce8_e9399faa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-02T18:36:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "076b09e5_ebcd5e2c",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 27
+      },
+      "revId": "de2fd5dd53d5e8df2ab65be9abe30bc1a87a2437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43509a11_d531bd2c",
@@ -380,6 +404,30 @@
       "side": 1,
       "message": "I think so, since the logger just fail silently if anything goes wrong. the only way we can check that the dry run success is that it to check the log contents.\n\nI moved it to a help function.",
       "parentUuid": "e21bdf77_4d934e35",
+      "range": {
+        "startLine": 254,
+        "startChar": 4,
+        "endLine": 259,
+        "endChar": 40
+      },
+      "revId": "de2fd5dd53d5e8df2ab65be9abe30bc1a87a2437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b82e8dae_8e17e9f1",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-02T18:36:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17448699_7ca02c1f",
       "range": {
         "startLine": 254,
         "startChar": 4,
