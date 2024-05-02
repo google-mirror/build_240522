@@ -34,6 +34,24 @@
       "parentUuid": "72d658d0_dfd803cd",
       "revId": "b4e80ffb25bd1726e12417349216eb562c705409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf6475e_9ed999d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-02T14:46:37Z",
+      "side": 1,
+      "message": "Nope:\n\n```\n$ lunch aosp_oriole-trunk-eng\n$ echo $ANDROID_PRODUCT_OUT\n\u003cfull-path-to-android-tree\u003e/out/target/product/oriole\n```",
+      "parentUuid": "4fa71033_4a25e120",
+      "revId": "b4e80ffb25bd1726e12417349216eb562c705409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
