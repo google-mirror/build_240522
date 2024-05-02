@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "076b09e5_ebcd5e2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-02T00:53:15Z",
+      "side": 1,
+      "message": "```\nAdd an integration test\n\nAdd a test to verify that the parameters passed from the envsetup.sh function are compatible with the actual tool event logger implementation.\n\nNote that this change adds support for extra logger arguments. This enables calling the real logger binary with a \u0027dry run\u0027 flag to avoid actual logging during test execution.\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 27
+      },
+      "revId": "de2fd5dd53d5e8df2ab65be9abe30bc1a87a2437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43509a11_d531bd2c",
         "filename": "envsetup.sh",
         "patchSetId": 5
