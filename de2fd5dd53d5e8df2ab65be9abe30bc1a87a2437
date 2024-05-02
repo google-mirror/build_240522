@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65652608_de1ff40b",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-02T18:36:22Z",
+      "side": 1,
+      "message": "Verified if we have multiple args specified in ANDROID_TOOL_LOGGER_EXTRA_ARGS, it will be passed to the logger correctly.",
+      "parentUuid": "da126099_fa9b60ea",
+      "range": {
+        "startLine": 1139,
+        "startChar": 5,
+        "endLine": 1139,
+        "endChar": 35
+      },
+      "revId": "de2fd5dd53d5e8df2ab65be9abe30bc1a87a2437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d733716_bdb6c1de",
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "Ok. I still have doubts but it\u0027s your call.",
       "parentUuid": "00e4c276_f6b4bf39",
+      "range": {
+        "startLine": 124,
+        "startChar": 31,
+        "endLine": 124,
+        "endChar": 40
+      },
+      "revId": "de2fd5dd53d5e8df2ab65be9abe30bc1a87a2437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3734b838_0a66b752",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-02T18:36:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "005795ff_41c3e0e2",
       "range": {
         "startLine": 124,
         "startChar": 31,

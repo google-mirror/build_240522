@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0650fb5_836a2ebf",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-02T18:36:22Z",
+      "side": 1,
+      "message": "Ack, Why couldn\u0027t we just use Path as the type here?",
+      "parentUuid": "cb74831f_290af806",
+      "range": {
+        "startLine": 251,
+        "startChar": 30,
+        "endLine": 251,
+        "endChar": 34
+      },
+      "revId": "1b5b8d861920e35eecc9ed7ae40826cefaa29cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12127822_d24dc9db",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-02T00:50:47Z",
       "side": 1,
       "message": "`assert_logger_dry_run`",
+      "range": {
+        "startLine": 259,
+        "startChar": 7,
+        "endLine": 259,
+        "endChar": 41
+      },
+      "revId": "1b5b8d861920e35eecc9ed7ae40826cefaa29cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ba85c72_680250dc",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-02T18:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12127822_d24dc9db",
       "range": {
         "startLine": 259,
         "startChar": 7,
