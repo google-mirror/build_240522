@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ee92ca3_f50f61f5",
+        "filename": "envsetup.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-02T00:00:54Z",
+      "side": 1,
+      "message": "Added {}, if I add \"\" and ANDROID_TOOL_LOGGER_EXTRA_ARGS is unset, it will pass \"\" as an arg to the logger which will complain for unrecognized args.",
+      "parentUuid": "43509a11_d531bd2c",
+      "range": {
+        "startLine": 1139,
+        "startChar": 5,
+        "endLine": 1139,
+        "endChar": 35
+      },
+      "revId": "de2fd5dd53d5e8df2ab65be9abe30bc1a87a2437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d733716_bdb6c1de",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-01T20:51:06Z",
       "side": 1,
       "message": "Are we losing information about the args this way? What if the args contained `--dry-run` for example? Would that affect the logger?\n\nI think quoting the string is actually correct and you might need a dedicated test for that.",
+      "range": {
+        "startLine": 124,
+        "startChar": 31,
+        "endLine": 124,
+        "endChar": 40
+      },
+      "revId": "de2fd5dd53d5e8df2ab65be9abe30bc1a87a2437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00e4c276_f6b4bf39",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-02T00:00:54Z",
+      "side": 1,
+      "message": "I have verified that current script pass all the args as a single string to --tool_args, if we have --dry_run in the tool args, it will be passed to the logger correctly.",
+      "parentUuid": "8d733716_bdb6c1de",
       "range": {
         "startLine": 124,
         "startChar": 31,
@@ -93,6 +141,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15a276b9_06ecd85c",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-02T00:00:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22a5622d_4a4c9c92",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 32
+      },
+      "revId": "de2fd5dd53d5e8df2ab65be9abe30bc1a87a2437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2b1cb84_5c54334f",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-02T00:00:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5d826ca_a0e76639",
+      "range": {
+        "startLine": 237,
+        "startChar": 7,
+        "endLine": 237,
+        "endChar": 12
+      },
+      "revId": "de2fd5dd53d5e8df2ab65be9abe30bc1a87a2437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a94790f2_5534b0cb",
@@ -110,6 +206,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e29ed6_900a5e85",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-02T00:00:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a94790f2_5534b0cb",
+      "revId": "de2fd5dd53d5e8df2ab65be9abe30bc1a87a2437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e21bdf77_4d934e35",
@@ -123,6 +237,30 @@
       "writtenOn": "2024-05-01T20:51:06Z",
       "side": 1,
       "message": "Do you need to assert the contents? Also, consider a helper assertion method like `self.assert_logger_called`.\n\nTechnically speaking you could wrap your logger with a `TestScript` that forwards arguments to assert it was called :-).",
+      "range": {
+        "startLine": 254,
+        "startChar": 4,
+        "endLine": 259,
+        "endChar": 40
+      },
+      "revId": "de2fd5dd53d5e8df2ab65be9abe30bc1a87a2437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17448699_7ca02c1f",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-02T00:00:54Z",
+      "side": 1,
+      "message": "I think so, since the logger just fail silently if anything goes wrong. the only way we can check that the dry run success is that it to check the log contents.\n\nI moved it to a help function.",
+      "parentUuid": "e21bdf77_4d934e35",
       "range": {
         "startLine": 254,
         "startChar": 4,
