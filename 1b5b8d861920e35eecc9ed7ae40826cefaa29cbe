@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb74831f_290af806",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-02T00:50:47Z",
+      "side": 1,
+      "message": "This should be `pathlib.Path` but you\u0027d need to change the import. I\u0027m ok if you do this in another change later.",
+      "range": {
+        "startLine": 251,
+        "startChar": 30,
+        "endLine": 251,
+        "endChar": 34
+      },
+      "revId": "1b5b8d861920e35eecc9ed7ae40826cefaa29cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12127822_d24dc9db",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-02T00:50:47Z",
+      "side": 1,
+      "message": "`assert_logger_dry_run`",
+      "range": {
+        "startLine": 259,
+        "startChar": 7,
+        "endLine": 259,
+        "endChar": 41
+      },
+      "revId": "1b5b8d861920e35eecc9ed7ae40826cefaa29cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
