@@ -16,6 +16,24 @@
       "message": "Nit: missing space before `:\u003d`.",
       "revId": "1d275fed5d646ac0d764d401fd0a3ce7f15ce358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5a61df6_061904d3",
+        "filename": "core/clear_vars.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-05-02T04:53:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7272a2e0_5ef383b6",
+      "revId": "1d275fed5d646ac0d764d401fd0a3ce7f15ce358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
