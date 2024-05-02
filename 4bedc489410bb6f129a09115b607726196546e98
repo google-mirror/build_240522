@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4893290e_b37e3e9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-05-02T17:45:21Z",
+      "side": 1,
+      "message": "The change title is to remove all jar and aidl.d files, but I have modified it in the latest patchset to only remove the jar files and the artifacts in the `$(OUT_DIR)/target/common/obj/JAVA_LIBRARIES/` directory, and not the aidl.d files. I\u0027ll update the title accordingly after the presubmit is complete.",
+      "revId": "4bedc489410bb6f129a09115b607726196546e98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
