@@ -39,7 +39,7 @@ function run() {
 
     echo "# current"
     check-flagged-apis \
-        --api-signature $(gettop)/out/target/product/mainline_x86/obj/ETC/frameworks-base-api-current.txt_intermediates/frameworks-base-api-current.txt \
+        --api-signature ${ANDROID_PRODUCT_OUT}/obj/ETC/frameworks-base-api-current.txt_intermediates/frameworks-base-api-current.txt \
         --flag-values $(gettop)/out/soong/.intermediates/all_aconfig_declarations.pb \
         --api-versions $(gettop)/out/dist/data/api-versions.xml
     (( errors += $? ))
@@ -47,7 +47,7 @@ function run() {
     echo
     echo "# system-current"
     check-flagged-apis \
-        --api-signature $(gettop)/out/target/product/mainline_x86/obj/ETC/frameworks-base-api-system-current.txt_intermediates/frameworks-base-api-system-current.txt \
+        --api-signature ${ANDROID_PRODUCT_OUT}/obj/ETC/frameworks-base-api-system-current.txt_intermediates/frameworks-base-api-system-current.txt \
         --flag-values $(gettop)/out/soong/.intermediates/all_aconfig_declarations.pb \
         --api-versions $(gettop)/out/dist/system-data/api-versions.xml
     (( errors += $? ))
@@ -55,7 +55,7 @@ function run() {
     echo
     echo "# system-server-current"
     check-flagged-apis \
-        --api-signature $(gettop)/out/target/product/mainline_x86/obj/ETC/frameworks-base-api-system-server-current.txt_intermediates/frameworks-base-api-system-server-current.txt \
+        --api-signature ${ANDROID_PRODUCT_OUT}/obj/ETC/frameworks-base-api-system-server-current.txt_intermediates/frameworks-base-api-system-server-current.txt \
         --flag-values $(gettop)/out/soong/.intermediates/all_aconfig_declarations.pb \
         --api-versions $(gettop)/out/dist/system-server-data/api-versions.xml
     (( errors += $? ))
@@ -63,7 +63,7 @@ function run() {
     echo
     echo "# module-lib"
     check-flagged-apis \
-        --api-signature $(gettop)/out/target/product/mainline_x86/obj/ETC/frameworks-base-api-module-lib-current.txt_intermediates/frameworks-base-api-module-lib-current.txt \
+        --api-signature ${ANDROID_PRODUCT_OUT}/obj/ETC/frameworks-base-api-module-lib-current.txt_intermediates/frameworks-base-api-module-lib-current.txt \
         --flag-values $(gettop)/out/soong/.intermediates/all_aconfig_declarations.pb \
         --api-versions $(gettop)/out/dist/module-lib-data/api-versions.xml
     (( errors += $? ))
