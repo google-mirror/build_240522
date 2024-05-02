@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e78eab12_2f2068ea",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-05-02T11:42:03Z",
+      "side": 1,
+      "message": "Replace with `_` - see https://kotlinlang.org/docs/destructuring-declarations.html#underscore-for-unused-variables\n```suggestion\n    var (methodName, methodArgs, _) \u003d methodSignatureParts\n    val packageAndClassName \u003d\n```",
+      "range": {
+        "startLine": 279,
+        "startChar": 33,
+        "endLine": 279,
+        "endChar": 80
+      },
+      "revId": "778080401cb1177ce95807c188aae43c6115b393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
