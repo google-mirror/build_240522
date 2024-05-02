@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28481e25_b544504d",
+        "filename": "tools/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-05-02T04:54:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d228fc7_dd484070",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 1
+      },
+      "revId": "beede79a1a48647d151cd8180bd169ed04618a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cfcff80_b9aa8982",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-30T18:06:15Z",
       "side": 1,
       "message": "I recently made `embedded_launcher: true` the default value, you don\u0027t need to specify it anymore.",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 6
+      },
+      "revId": "beede79a1a48647d151cd8180bd169ed04618a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "790a47ae_992f7537",
+        "filename": "tools/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-05-02T04:54:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cfcff80_b9aa8982",
       "range": {
         "startLine": 128,
         "startChar": 0,
