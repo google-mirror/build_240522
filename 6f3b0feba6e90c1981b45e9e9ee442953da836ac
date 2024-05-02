@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "300a3463_66e3ef8d",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-02T08:20:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae4302d6_d76fc028",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 79
+      },
+      "revId": "6f3b0feba6e90c1981b45e9e9ee442953da836ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b304315_1401e7d8",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-29T10:36:55Z",
       "side": 1,
       "message": "Replace with `it.type().internalName()`",
+      "range": {
+        "startLine": 207,
+        "startChar": 16,
+        "endLine": 228,
+        "endChar": 49
+      },
+      "revId": "6f3b0feba6e90c1981b45e9e9ee442953da836ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c80dcedc_085c1689",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-02T08:20:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b304315_1401e7d8",
       "range": {
         "startLine": 207,
         "startChar": 16,
