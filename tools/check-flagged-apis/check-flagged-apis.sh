@@ -25,13 +25,17 @@ function m() {
 }
 
 function build() {
-    m sdk dist && m \
+    m \
         check-flagged-apis \
         all_aconfig_declarations \
         frameworks-base-api-current.txt \
         frameworks-base-api-system-current.txt \
         frameworks-base-api-system-server-current.txt \
-        frameworks-base-api-module-lib-current.txt
+        frameworks-base-api-module-lib-current.txt \
+        out/target/common/obj/PACKAGING/api_versions_public_generated-api-versions.xml \
+        out/target/common/obj/PACKAGING/api_versions_system_generated-api-versions.xml \
+        out/target/common/obj/PACKAGING/api_versions_system_server_generated-api-versions.xml \
+        out/target/common/obj/PACKAGING/api_versions_module_lib_generated-api-versions.xml
 }
 
 function aninja() {
@@ -50,7 +54,7 @@ function run() {
     check-flagged-apis \
         --api-signature $(path_to_api_signature_file "frameworks-base-api-current.txt") \
         --flag-values $(gettop)/out/soong/.intermediates/all_aconfig_declarations.pb \
-        --api-versions $(gettop)/out/dist/data/api-versions.xml
+        --api-versions out/target/common/obj/PACKAGING/api_versions_public_generated-api-versions.xml
     (( errors += $? ))
 
     echo
@@ -58,7 +62,7 @@ function run() {
     check-flagged-apis \
         --api-signature $(path_to_api_signature_file "frameworks-base-api-system-current.txt") \
         --flag-values $(gettop)/out/soong/.intermediates/all_aconfig_declarations.pb \
-        --api-versions $(gettop)/out/dist/system-data/api-versions.xml
+        --api-versions out/target/common/obj/PACKAGING/api_versions_system_generated-api-versions.xml
     (( errors += $? ))
 
     echo
@@ -66,7 +70,7 @@ function run() {
     check-flagged-apis \
         --api-signature $(path_to_api_signature_file "frameworks-base-api-system-server-current.txt") \
         --flag-values $(gettop)/out/soong/.intermediates/all_aconfig_declarations.pb \
-        --api-versions $(gettop)/out/dist/system-server-data/api-versions.xml
+        --api-versions out/target/common/obj/PACKAGING/api_versions_system_server_generated-api-versions.xml
     (( errors += $? ))
 
     echo
@@ -74,7 +78,7 @@ function run() {
     check-flagged-apis \
         --api-signature $(path_to_api_signature_file "frameworks-base-api-module-lib-current.txt") \
         --flag-values $(gettop)/out/soong/.intermediates/all_aconfig_declarations.pb \
-        --api-versions $(gettop)/out/dist/module-lib-data/api-versions.xml
+        --api-versions out/target/common/obj/PACKAGING/api_versions_module_lib_generated-api-versions.xml
     (( errors += $? ))
 
     return $errors
