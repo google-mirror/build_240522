@@ -115,3 +115,8 @@ python_binary_host {
         },
     },
 }
+
+python_binary_host {
+    name: "prods-in-dot",
+    srcs: ["prods-in-dot.py"],
+}
