@@ -123,3 +123,8 @@ python_binary_host {
         "merge-event-log-tags.py",
     ],
 }
+
+python_binary_host {
+    name: "prods-in-dot",
+    srcs: ["prods-in-dot.py"],
+}
