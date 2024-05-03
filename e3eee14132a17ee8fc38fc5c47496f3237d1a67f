@@ -22,6 +22,30 @@
       },
       "revId": "e3eee14132a17ee8fc38fc5c47496f3237d1a67f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b34123_dae9f085",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-03T11:50:06Z",
+      "side": 1,
+      "message": "Interesting. I was looking at a flagged interface that was missing (flag enabled), but that seems to be an actual error: the API signature file\u0027s `public interface XmlResourceParser` *does* show up in the XML as `\u003cclass name\u003d\"android/content/res/XmlResourceParser\" since\u003d\"1\"\u003e`. Guess I was just unlucky when looking at a random interface. :/",
+      "parentUuid": "b0ded140_5ff1f913",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 40
+      },
+      "revId": "e3eee14132a17ee8fc38fc5c47496f3237d1a67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
