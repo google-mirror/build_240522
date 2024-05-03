@@ -258,3 +258,63 @@ prebuilt_etc {
     system_ext_specific: true,
     src: ":group_gen_system_ext",
 }
+
+fs_config {
+    name: "fs_config_dirs_system",
+    type: "dirs",
+}
+
+fs_config {
+    name: "fs_config_files_system",
+    type: "files",
+}
+
+fs_config {
+    name: "fs_config_dirs_system_ext",
+    type: "dirs",
+	system_ext_specific: true,
+}
+
+fs_config {
+    name: "fs_config_files_system_ext",
+    type: "files",
+	system_ext_specific: true,
+}
+
+fs_config {
+    name: "fs_config_dirs_product",
+    type: "dirs",
+	product_specific: true,
+}
+
+fs_config {
+    name: "fs_config_files_product",
+    type: "files",
+	product_specific: true,
+}
+
+fs_config {
+    name: "fs_config_dirs_vendor",
+    type: "dirs",
+	vendor: true,
+}
+
+fs_config {
+    name: "fs_config_files_vendor",
+    type: "files",
+	vendor: true,
+}
+
+fs_config {
+    name: "fs_config_dirs_odm",
+    type: "dirs",
+	device_specific: true,
+}
+
+fs_config {
+    name: "fs_config_files_odm",
+    type: "files",
+	device_specific: true,
+}
+
+// TODO(jiyong): add fs_config for oem, system_dlkm, vendor_dlkm, odm_dlkm partitions
