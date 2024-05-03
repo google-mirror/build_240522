@@ -211,6 +211,15 @@ internal fun parseApiSignature(path: String, input: InputStream): Set<Pair<Symbo
         }
 
         private fun getFlagOrNull(item: Item): Flag? {
+          val clazz =
+              if (item is ClassItem) {
+                item
+              } else {
+                item.containingClass()
+              }
+          if (clazz?.isInterface() ?: false) {
+            return null
+          }
           return item.modifiers
               .findAnnotation("android.annotation.FlaggedApi")
               ?.findAttribute("value")
