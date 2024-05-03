@@ -34,6 +34,24 @@
       "parentUuid": "d987c01f_d6f9b2d1",
       "revId": "31f8ea1ab75cd13b23c02decb19ca5cfdfe86fd1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29f1b2f9_1ee832ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-05-03T01:56:02Z",
+      "side": 1,
+      "message": "Ah, you are right. It seems like this file is the only remaining one.",
+      "parentUuid": "d5c566b2_1e0577e1",
+      "revId": "31f8ea1ab75cd13b23c02decb19ca5cfdfe86fd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
