@@ -258,3 +258,53 @@ prebuilt_etc {
     system_ext_specific: true,
     src: ":group_gen_system_ext",
 }
+
+genrule {
+    name: "fs_config_dirs_system_gen",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) fsconfig "
+        + "--aid-header $(location :android_filesystem_config_header) "
+        + "--capability-header $(location :linux_capability_header) "
+        + "--partition system "
+        + "--all-partitions vendor,oem,odm,vendor_dlkm,odm_dlkm,system_dlkm "
+        + "--dirs "
+        + "--out_file $(out) "
+        + "$(locations :target_fs_config_gen)",
+    srcs: [
+        ":android_filesystem_config_header",
+        ":linux_capability_header",
+        ":target_fs_config_gen",
+    ],
+    out: ["out"],
+}
+
+prebuilt_etc {
+    name: "fs_config_dirs_system",
+    filename: "fs_config_dirs",
+    src: ":fs_config_dirs_system_gen",
+}
+
+genrule {
+    name: "fs_config_files_system_gen",
+    tools: ["fs_config_generator"],
+    cmd: "$(location fs_config_generator) fsconfig "
+        + "--aid-header $(location :android_filesystem_config_header) "
+        + "--capability-header $(location :linux_capability_header) "
+        + "--partition system "
+        + "--all-partitions vendor,oem,odm,vendor_dlkm,odm_dlkm,system_dlkm "
+        + "--files "
+        + "--out_file $(out) "
+        + "$(locations :target_fs_config_gen)",
+    srcs: [
+        ":android_filesystem_config_header",
+        ":linux_capability_header",
+        ":target_fs_config_gen",
+    ],
+    out: ["out"],
+}
+
+prebuilt_etc {
+    name: "fs_config_files_system",
+    filename: "fs_config_files",
+    src: ":fs_config_files_system_gen",
+}
