@@ -16,6 +16,24 @@
       "message": "Can we remove the [existing usages](https://cs.android.com/search?q\u003d%22ART_MODULE_BUILD_FROM_SOURCE%22%20f:.mk) of this var altogether?",
       "revId": "31f8ea1ab75cd13b23c02decb19ca5cfdfe86fd1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5c566b2_1e0577e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-05-03T01:54:25Z",
+      "side": 1,
+      "message": "Some of those results are in the now defunct `master` branch. aosp `main` returns this as the only remaining reference https://cs.android.com/search?q\u003d%22ART_MODULE_BUILD_FROM_SOURCE%22%20f:.mk\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain",
+      "parentUuid": "d987c01f_d6f9b2d1",
+      "revId": "31f8ea1ab75cd13b23c02decb19ca5cfdfe86fd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
