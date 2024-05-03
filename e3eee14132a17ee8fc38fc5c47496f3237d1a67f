@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0ded140_5ff1f913",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-05-03T11:41:05Z",
+      "side": 1,
+      "message": "I don\u0027t understand why the fact that they are never instantiated is reason to exclude them. They are still included in `api-versions.xml` files.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 40
+      },
+      "revId": "e3eee14132a17ee8fc38fc5c47496f3237d1a67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
