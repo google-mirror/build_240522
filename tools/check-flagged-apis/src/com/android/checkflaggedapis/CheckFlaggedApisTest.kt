@@ -40,6 +40,9 @@ private val API_SIGNATURE =
         }
         @FlaggedApi("android.flag.bar") public static class Clazz.Builder {
         }
+        @FlaggedApi("android.flag.bar") public interface FlaggedInterface {
+          method public void method();
+        }
       }
 """
         .trim()
