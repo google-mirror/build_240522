@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6b0b026_286a38b8",
+        "filename": "tools/check-flagged-apis/check-flagged-apis.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-05-03T08:00:15Z",
+      "side": 1,
+      "message": "Could you add these to variables to avoid duplicating them below?\n\nI will need to tweak a couple of them and I\u0027d like to do it in just one place ;)",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 86
+      },
+      "revId": "5c54cb18072d84bb32262bead360213190351581",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
