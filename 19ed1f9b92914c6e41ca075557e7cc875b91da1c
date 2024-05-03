@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b1a663a_3a245c07",
+        "filename": "core/clear_vars.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-05-03T21:40:14Z",
+      "side": 1,
+      "message": "Can you move this to match the alphabetical order",
+      "revId": "19ed1f9b92914c6e41ca075557e7cc875b91da1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
