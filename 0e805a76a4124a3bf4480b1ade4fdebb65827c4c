@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4af3fd42_75617ace",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967145
+      },
+      "writtenOn": "2024-05-03T16:49:33Z",
+      "side": 1,
+      "message": "Thank you Wei.  I have a question about the content of the CL.  Please see details in gChat.  Thx!",
+      "revId": "0e805a76a4124a3bf4480b1ade4fdebb65827c4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
