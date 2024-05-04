@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aa20cf1_56ed34c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982145
+      },
+      "writtenOn": "2024-05-04T13:53:11Z",
+      "side": 1,
+      "message": "FYI, I have tested the make changes independent of the soong changes and they do work with having any of the new make variables set.  Theoretically, this could go in before the other CL in the topic, but I think it make sense to keep them together.",
+      "revId": "19ed1f9b92914c6e41ca075557e7cc875b91da1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b1a663a_3a245c07",
@@ -14,6 +31,24 @@
       "writtenOn": "2024-05-03T21:40:14Z",
       "side": 1,
       "message": "Can you move this to match the alphabetical order",
+      "revId": "19ed1f9b92914c6e41ca075557e7cc875b91da1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69ae041e_45c97070",
+        "filename": "core/clear_vars.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1982145
+      },
+      "writtenOn": "2024-05-04T13:53:11Z",
+      "side": 1,
+      "message": "Oops, I used to call it LOCAL_EXTRA_SUPPORT_FILES.\nThanks.",
+      "parentUuid": "0b1a663a_3a245c07",
       "revId": "19ed1f9b92914c6e41ca075557e7cc875b91da1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
