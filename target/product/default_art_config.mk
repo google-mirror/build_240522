@@ -170,3 +170,6 @@ PRODUCT_SYSTEM_PROPERTIES += \
     dalvik.vm.dex2oat-Xmx=512m \
 
 PRODUCT_ENABLE_UFFD_GC := default
+
+# Use 16k ELF alignment.
+PRODUCT_MAX_PAGE_SIZE_SUPPORTED := 16384
