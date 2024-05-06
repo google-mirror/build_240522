@@ -99,6 +99,24 @@
       "parentUuid": "7685f445_3dfc4066",
       "revId": "65b97da888ffce816c8dc1ffc8859b728b866629",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58429a2e_144ed80f",
+        "filename": "tools/fs_config/fs_config.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-06T23:51:45Z",
+      "side": 1,
+      "message": "Ok. Done. The use of defaults was a good idea. Thanks!",
+      "parentUuid": "1e96d39e_ab4baefd",
+      "revId": "65b97da888ffce816c8dc1ffc8859b728b866629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
