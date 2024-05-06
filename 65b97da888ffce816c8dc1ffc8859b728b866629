@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d3c028_fd61568d",
+        "filename": "tools/fs_config/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-06T22:49:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97535ffe_f41f198d",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "65b97da888ffce816c8dc1ffc8859b728b866629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b71282b_8b5f6307",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-05-06T19:07:39Z",
       "side": 1,
       "message": "Could we implement this as a genrule + prebuilt_etc instead of a new module type? Using the `target_fs_config_gen_filegroup` module to replace `ctx.DeviceConfig().TargetFSConfigGen()`.",
+      "revId": "65b97da888ffce816c8dc1ffc8859b728b866629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7685f445_3dfc4066",
+        "filename": "tools/fs_config/fs_config.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-06T22:49:19Z",
+      "side": 1,
+      "message": "I tried that. See PS1 of this change. Then I actually did the same for remaining partitions: system_ext, vendor, odm, and product, but didn\u0027t upload that because it was just so long and had lots of duplications, and wanted to make it simpler. \n\nIf Soong supported a macro feature, I would have used it instead.",
+      "parentUuid": "9b71282b_8b5f6307",
       "revId": "65b97da888ffce816c8dc1ffc8859b728b866629",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
