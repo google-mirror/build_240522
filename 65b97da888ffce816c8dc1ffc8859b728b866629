@@ -81,6 +81,24 @@
       "parentUuid": "9b71282b_8b5f6307",
       "revId": "65b97da888ffce816c8dc1ffc8859b728b866629",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e96d39e_ab4baefd",
+        "filename": "tools/fs_config/fs_config.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-05-06T23:05:19Z",
+      "side": 1,
+      "message": "I think it being long / repetitive is fine, that\u0027s already how the file is for the \"group\" modules. You could use defaults and/or string variables to make it less repetitive though.",
+      "parentUuid": "7685f445_3dfc4066",
+      "revId": "65b97da888ffce816c8dc1ffc8859b728b866629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
