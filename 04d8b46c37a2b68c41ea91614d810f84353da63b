@@ -16,6 +16,24 @@
       "message": "Should we raise a bug for metalava? Feels like a bug on that side of things given the interface itself isn\u0027t self-referential (and if it isn\u0027t a bug, we should add a test once we understand why it does this).",
       "revId": "04d8b46c37a2b68c41ea91614d810f84353da63b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f46c298_66acff48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2024-05-07T11:45:20Z",
+      "side": 1,
+      "message": "Oops, missed the closed comment thread with Paul. Ack.",
+      "parentUuid": "9fefcb19_731bc566",
+      "revId": "04d8b46c37a2b68c41ea91614d810f84353da63b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
