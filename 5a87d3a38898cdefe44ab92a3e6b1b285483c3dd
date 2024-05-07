@@ -22,6 +22,30 @@
       },
       "revId": "5a87d3a38898cdefe44ab92a3e6b1b285483c3dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29b96562_17b081c0",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-07T11:19:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f6651f6f_80db1a9f",
+      "range": {
+        "startLine": 201,
+        "startChar": 24,
+        "endLine": 201,
+        "endChar": 37
+      },
+      "revId": "5a87d3a38898cdefe44ab92a3e6b1b285483c3dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
