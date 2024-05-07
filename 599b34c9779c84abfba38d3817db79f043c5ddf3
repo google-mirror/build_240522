@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ae98b17_44b906aa",
+        "filename": "tools/aconfig/aconfig_device_paths/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-07T20:00:21Z",
+      "side": 1,
+      "message": "I knew I used this name in my POC CL but... libaconfig_java_device_paths doesn\u0027t sound like it follows the soong module naming convention (to the extent there is one). aconfig_device_paths_java? grep around the source for what java libs are usually called and try to find a pattern",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 39
+      },
+      "revId": "599b34c9779c84abfba38d3817db79f043c5ddf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dc924f6_ef1f9eab",
+        "filename": "tools/aconfig/aconfig_device_paths/DevicePathsTemplate.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-07T20:00:21Z",
+      "side": 1,
+      "message": "nit: is this the right directory for this file? Should it be java/src/*.java instead?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "599b34c9779c84abfba38d3817db79f043c5ddf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "992e64e7_bca567da",
+        "filename": "tools/aconfig/aconfig_device_paths/DevicePathsTemplate.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-07T20:00:21Z",
+      "side": 1,
+      "message": "Is this the best package? The Java aconfig protobuf files end up in android.aconfig; should we place this lib in that package as well? WDYT?",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 16,
+        "endChar": 37
+      },
+      "revId": "599b34c9779c84abfba38d3817db79f043c5ddf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
