@@ -16,6 +16,24 @@
       "message": "What\u0027s the difference between `toString()` and `toPrettyString()` given we don\u0027t use the former anywhere? Is this just to force subclasses to implement it?\n\nIf so, consider implementing `toString()` using `toPrettyString()` on `Symbol` -- then we can rely on the the usual interpolation operators below.",
       "revId": "a1fe37137ecff209355df397379b7105f37b6ff5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "328634a5_6921918a",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-07T11:37:20Z",
+      "side": 1,
+      "message": "toString() is used when the asserts in the unit tests fail, and will be auto-generated to something like `ClassSymbol(clazz\u003dandroid/Clazz, superclass\u003djava/lang/Object, interfaces\u003d[])`; I don\u0027t want toString() to exclude some of the class members as this will be confusing trying to understand why two seemingly identical objects are not equal.\n\nOn the other hand, I don\u0027t want the auto-generated toString() format in the end user visible error messages. Hence the need for a new covert-to-string method.\n\nOpen to suggestsions for better names. `toEndUserVisibleString`?",
+      "parentUuid": "24b32649_4d8769de",
+      "revId": "a1fe37137ecff209355df397379b7105f37b6ff5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
