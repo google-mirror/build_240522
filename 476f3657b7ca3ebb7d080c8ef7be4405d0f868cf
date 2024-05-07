@@ -16,6 +16,24 @@
       "message": "Metalava has a lot of support for finding super methods, maybe you could use that. e.g. if the method is not found then you could search for its `MethodItem.superMethods()`. I am concerned that you are essentially rewriting lots of Metalava code.",
       "revId": "476f3657b7ca3ebb7d080c8ef7be4405d0f868cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbd8823b_eb3951cf",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-07T11:26:45Z",
+      "side": 1,
+      "message": "At this point, the code doesn\u0027t have access to the MethodItem anymore, and I don\u0027t want to keep a reference to it when parsing the API signature file because that will make the parsed data different depending on if the input is an API signature file or api-versions.xml.\n\nMaybe the entire tool should be redesigned to use metalava more heavily. Something to consider down the line?",
+      "parentUuid": "8670cb29_d8f48384",
+      "revId": "476f3657b7ca3ebb7d080c8ef7be4405d0f868cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
