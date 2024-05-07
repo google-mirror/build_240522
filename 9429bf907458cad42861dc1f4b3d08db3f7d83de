@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fa530fa_6f5ad791",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-05-07T22:08:39Z",
+      "side": 1,
+      "message": "There seem to be some remaining references to `BRANCH_DEFAULT_MODULE_BUILD_FROM_SOURCE` in the [comments](https://cs.android.com/search?q\u003d%22BRANCH_DEFAULT_MODULE_BUILD_FROM_SOURCE%22). Do you mind cleaning them up as well or filing a bug to do so?",
+      "revId": "9429bf907458cad42861dc1f4b3d08db3f7d83de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25808c8f_be6c3902",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-05-07T22:08:39Z",
+      "side": 1,
+      "message": "Is the plan to remove the \"prefer\" property altogether in the long run?",
+      "revId": "9429bf907458cad42861dc1f4b3d08db3f7d83de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

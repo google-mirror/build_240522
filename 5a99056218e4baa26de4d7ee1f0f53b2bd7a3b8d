@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cec7e903_c95eecfa",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-05-07T22:08:39Z",
+      "side": 0,
+      "message": "nit: Do you mind updating this bug accordingly given that the TODO is being removed?",
+      "revId": "5a99056218e4baa26de4d7ee1f0f53b2bd7a3b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
