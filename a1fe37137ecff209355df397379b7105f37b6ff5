@@ -34,6 +34,24 @@
       "parentUuid": "24b32649_4d8769de",
       "revId": "a1fe37137ecff209355df397379b7105f37b6ff5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0ae6cd7_f650bb40",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2024-05-07T11:39:58Z",
+      "side": 1,
+      "message": "Nope, explanation makes sense and I think the current name is good enough. Missed that the subclasses were data classes.\n\nLGTM.",
+      "parentUuid": "328634a5_6921918a",
+      "revId": "a1fe37137ecff209355df397379b7105f37b6ff5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
