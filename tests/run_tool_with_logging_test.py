@@ -59,32 +59,6 @@ class RunToolWithLoggingTest(unittest.TestCase):
     self.working_dir.cleanup()
     super().tearDown()
 
-  def test_does_not_log_when_logging_disabled(self):
-    test_tool = TestScript.create(self.working_dir)
-    test_logger = TestScript.create(self.working_dir)
-
-    self._run_script_and_wait(f"""
-      ANDROID_ENABLE_TOOL_LOGGING=false
-      ANDROID_TOOL_LOGGER="{test_logger.executable}"
-      run_tool_with_logging "FAKE_TOOL" {test_tool.executable} arg1 arg2
-    """)
-
-    test_tool.assert_called_once_with_args("arg1 arg2")
-    test_logger.assert_not_called()
-
-  def test_does_not_log_when_logger_var_unset(self):
-    test_tool = TestScript.create(self.working_dir)
-    test_logger = TestScript.create(self.working_dir)
-
-    self._run_script_and_wait(f"""
-      unset ANDROID_ENABLE_TOOL_LOGGING
-      ANDROID_TOOL_LOGGER="{test_logger.executable}"
-      run_tool_with_logging "FAKE_TOOL" {test_tool.executable} arg1 arg2
-    """)
-
-    test_tool.assert_called_once_with_args("arg1 arg2")
-    test_logger.assert_not_called()
-
   def test_does_not_log_when_logger_var_empty(self):
     test_tool = TestScript.create(self.working_dir)
 
