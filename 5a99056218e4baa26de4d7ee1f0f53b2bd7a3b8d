@@ -16,6 +16,24 @@
       "message": "nit: Do you mind updating this bug accordingly given that the TODO is being removed?",
       "revId": "5a99056218e4baa26de4d7ee1f0f53b2bd7a3b8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc96ec28_a12e133b",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-05-07T22:24:29Z",
+      "side": 0,
+      "message": "Ack, I will mark b/301454934 as obsolete after this CL",
+      "parentUuid": "cec7e903_c95eecfa",
+      "revId": "5a99056218e4baa26de4d7ee1f0f53b2bd7a3b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb3de36_fb470901",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-05-07T22:24:29Z",
+      "side": 1,
+      "message": "I think the remaining references are in the now defunct `master` branch. After this CL, we will have cleaned up all remaining references to this variable in `main`",
+      "parentUuid": "7fa530fa_6f5ad791",
+      "revId": "9429bf907458cad42861dc1f4b3d08db3f7d83de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25808c8f_be6c3902",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-07T22:08:39Z",
       "side": 1,
       "message": "Is the plan to remove the \"prefer\" property altogether in the long run?",
+      "revId": "9429bf907458cad42861dc1f4b3d08db3f7d83de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5137fd56_dd95ca6a",
+        "filename": "core/android_soong_config_vars.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-05-07T22:24:29Z",
+      "side": 1,
+      "message": "I think there are no concrete plans atm, but it would be nice to replace `prefer` with alternatives, like selects on the rdeps and/or [flagging product packages](https://g3doc.corp.google.com/company/teams/android-core-experiments/trunk-stable/build-system-flags.md?cl\u003dhead#swap-between-prebuilt-apks-defined-in-androidmk-or-androidbp). `prefer` is used in [non-mainline use cases](https://source.corp.google.com/search?q\u003dprefer:%20f:%5C.bp$%20-f:prebuilts%2Fmodule_sdk%20-f:vendor%2Funbundled_google%2Fmodules\u0026sq\u003drepo:googleplex-android%2Fplatform%2Fsuperproject%2Fmain%20b:main) as well, so we will have to be cognizant of not breaking those workflows.",
+      "parentUuid": "25808c8f_be6c3902",
       "revId": "9429bf907458cad42861dc1f4b3d08db3f7d83de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
