@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24b32649_4d8769de",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2024-05-07T11:31:06Z",
+      "side": 1,
+      "message": "What\u0027s the difference between `toString()` and `toPrettyString()` given we don\u0027t use the former anywhere? Is this just to force subclasses to implement it?\n\nIf so, consider implementing `toString()` using `toPrettyString()` on `Symbol` -- then we can rely on the the usual interpolation operators below.",
+      "revId": "a1fe37137ecff209355df397379b7105f37b6ff5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
