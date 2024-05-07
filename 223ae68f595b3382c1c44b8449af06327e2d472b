@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98027fed_6e4e5523",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-07T22:51:08Z",
+      "side": 1,
+      "message": "```\nRemove the ANDROID_ENABLE_TOOL_LOGGING environment variable \n\nReduce the number of variables required to toggle logging. This simplifies configuration and usage.\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 38
+      },
+      "revId": "223ae68f595b3382c1c44b8449af06327e2d472b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
