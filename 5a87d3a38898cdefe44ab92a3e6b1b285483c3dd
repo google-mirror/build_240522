@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6651f6f_80db1a9f",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-05-07T10:44:02Z",
+      "side": 1,
+      "message": "I think that I will modify Metalava to remove self from this as every caller filters it out anyway. The method is poorly specified and has different implementations in the different models.",
+      "range": {
+        "startLine": 201,
+        "startChar": 24,
+        "endLine": 201,
+        "endChar": 37
+      },
+      "revId": "5a87d3a38898cdefe44ab92a3e6b1b285483c3dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
