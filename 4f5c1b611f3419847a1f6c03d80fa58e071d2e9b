@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9103486_e1b31b31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-08T16:15:32Z",
+      "side": 1,
+      "message": "This isn\u0027t harmful, but it would be great if you can share motivation for this from your side with us. ADDITIONAL_SYSTEM_EXT_PROPERTIES is not set by anywhere. If there isn\u0027t any system property on system_ext that\u0027s automatically set by the build system, this isn\u0027t needed.\n\nOr are you adding this just for the symmetry with other partitions?",
+      "revId": "4f5c1b611f3419847a1f6c03d80fa58e071d2e9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
