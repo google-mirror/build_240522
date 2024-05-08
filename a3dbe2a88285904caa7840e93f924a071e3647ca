@@ -16,6 +16,23 @@
       "message": "I think this should be kept in main.mk",
       "revId": "a3dbe2a88285904caa7840e93f924a071e3647ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "791fc09a_0e488ca5",
+        "filename": "core/sysprop_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-05-08T21:27:54Z",
+      "side": 1,
+      "message": "Could you make all of the `ADDITIONAL_*_PROPERTIES` readonly after this point?",
+      "revId": "a3dbe2a88285904caa7840e93f924a071e3647ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
