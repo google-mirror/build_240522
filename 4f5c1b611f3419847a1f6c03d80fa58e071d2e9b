@@ -34,6 +34,41 @@
       "parentUuid": "c9103486_e1b31b31",
       "revId": "4f5c1b611f3419847a1f6c03d80fa58e071d2e9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb6e81d8_f151798a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-08T16:31:04Z",
+      "side": 1,
+      "message": "(this still need to be approved by the owners. but from my perspective, LGTM)",
+      "revId": "4f5c1b611f3419847a1f6c03d80fa58e071d2e9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c78b3a_649d25ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-08T16:31:04Z",
+      "side": 1,
+      "message": "Makes sense. Thanks. But FYI: we are working on to move the sysprop part from Make to Soong. So, adding more properties via a vendor extended hook isn\u0027t likely to be supported in the future.",
+      "parentUuid": "04d8a806_d40694cf",
+      "revId": "4f5c1b611f3419847a1f6c03d80fa58e071d2e9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
