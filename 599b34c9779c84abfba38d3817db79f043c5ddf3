@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53afcf73_ebd0dcc6",
+        "filename": "tools/aconfig/aconfig_device_paths/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-05-08T20:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ae98b17_44b906aa",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 39
+      },
+      "revId": "599b34c9779c84abfba38d3817db79f043c5ddf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dc924f6_ef1f9eab",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79470be8_ad8f0bd7",
+        "filename": "tools/aconfig/aconfig_device_paths/DevicePathsTemplate.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-05-08T20:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dc924f6_ef1f9eab",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "599b34c9779c84abfba38d3817db79f043c5ddf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "992e64e7_bca567da",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-05-07T20:00:21Z",
       "side": 1,
       "message": "Is this the best package? The Java aconfig protobuf files end up in android.aconfig; should we place this lib in that package as well? WDYT?",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 16,
+        "endChar": 37
+      },
+      "revId": "599b34c9779c84abfba38d3817db79f043c5ddf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edbaa4d4_563fc4f7",
+        "filename": "tools/aconfig/aconfig_device_paths/DevicePathsTemplate.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-05-08T20:07:21Z",
+      "side": 1,
+      "message": "`android.aconfig` SGTM--updated.",
+      "parentUuid": "992e64e7_bca567da",
       "range": {
         "startLine": 16,
         "startChar": 8,
