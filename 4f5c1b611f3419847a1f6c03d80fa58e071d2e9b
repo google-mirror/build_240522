@@ -69,6 +69,24 @@
       "parentUuid": "04d8a806_d40694cf",
       "revId": "4f5c1b611f3419847a1f6c03d80fa58e071d2e9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9be354be_b256e12a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-05-08T21:30:37Z",
+      "side": 1,
+      "message": "\u003e we are working on to move the sysprop part from Make to Soong. So, adding more properties via a vendor extended hook isn\u0027t likely to be supported in the future.\n\nYeah, and we\u0027re doing that very soon, work has already started in aosp/3078603. I don\u0027t think we should make it easier to use Android.mk files in a way we\u0027re actively working on deprecating...",
+      "parentUuid": "d8c78b3a_649d25ee",
+      "revId": "4f5c1b611f3419847a1f6c03d80fa58e071d2e9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
