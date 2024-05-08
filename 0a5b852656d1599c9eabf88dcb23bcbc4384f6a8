@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f74fbd8_6632779c",
+        "filename": "core/main.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-08T03:35:15Z",
+      "side": 0,
+      "message": "Do we have a product which satisfy these conditions? I don\u0027t think so.",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 5
+      },
+      "revId": "0a5b852656d1599c9eabf88dcb23bcbc4384f6a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
