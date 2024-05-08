@@ -34,6 +34,24 @@
       "parentUuid": "e23fcace_274f6469",
       "revId": "cffe6c2c019faef80fe719f9136be9ab55b39dc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2052f00_47a999ad",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-05-08T00:17:58Z",
+      "side": 0,
+      "message": "Actually, do you mean that this revert should have actually reapplied the changes in aosp/3070882 on top of it? i.e. the changes in the original changes should be applied again as a new change instead of reverting this change?",
+      "parentUuid": "a9460959_9585a00a",
+      "revId": "cffe6c2c019faef80fe719f9136be9ab55b39dc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
