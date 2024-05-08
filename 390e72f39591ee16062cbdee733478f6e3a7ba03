@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b32af2d_bfd0a135",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-05-08T10:48:55Z",
+      "side": 1,
+      "message": "Conceptually, it\u0027s not that `FLAG_INNER` is disabled just that its state has no effect as if `FLAG_OUTER` is disabled then it prevents any part of the class from being written out.\n\ne.g. If you also had the following:\n```\n  @FlaggedApi(FLAG_INNER) AnotherClazz {\n      @FlaggedApi(FLAG_OUTER) method();\n  }\n```\n\nThen in that case if `FLAG_INNER` was disabled then `FLAG_OUTER` would be ignored.\n\nWhile that seems pathological it is actually a reasonably thing to do if the features underpinning the two flags are being developed independently, have some connection and it is not know what order the features will be completed in.\n\nI wrote the above before reviewing the changes and I see that you have already covered that.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 5
+      },
+      "revId": "390e72f39591ee16062cbdee733478f6e3a7ba03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb0dc154_e63390d5",
+        "filename": "tools/check-flagged-apis/src/com/android/checkflaggedapis/Main.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2024-05-08T10:48:55Z",
+      "side": 1,
+      "message": "Could you document this. Also, it might make sense to rename to something like `isFlagEnabledForSymbol`.\n```suggestion\n  /**\n   * Returns whether the given flag is enabled for the given symbol.\n   *\n   * @param symbol the symbol to check\n   * @param flag the flag to check\n   * @return whether the flag is enabled for the given symbol\n   */\n  fun isFlagEnabledForSymbol(symbol: Symbol, flag: Flag): Boolean {\n```",
+      "range": {
+        "startLine": 389,
+        "startChar": 6,
+        "endLine": 389,
+        "endChar": 19
+      },
+      "revId": "390e72f39591ee16062cbdee733478f6e3a7ba03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
