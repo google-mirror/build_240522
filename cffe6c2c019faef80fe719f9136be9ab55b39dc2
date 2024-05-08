@@ -70,6 +70,24 @@
       "parentUuid": "b2052f00_47a999ad",
       "revId": "cffe6c2c019faef80fe719f9136be9ab55b39dc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c55afe45_17159fdf",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1962375
+      },
+      "writtenOn": "2024-05-08T00:50:41Z",
+      "side": 0,
+      "message": "Thanks for the clarification, and apologies for the noise. I plan to reattempt submitting the changes by the end of week at the latest. Would that be soon enough, or should this change be \"un-reverted\" before then?",
+      "parentUuid": "9cdd2c67_fc08d51c",
+      "revId": "cffe6c2c019faef80fe719f9136be9ab55b39dc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
