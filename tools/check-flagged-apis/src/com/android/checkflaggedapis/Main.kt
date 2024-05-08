@@ -385,10 +385,38 @@ internal fun findErrors(
 
     return false
   }
+
+  fun isFlagEnabled(symbol: Symbol, flag: Flag): Boolean {
+    when (symbol) {
+      is ClassSymbol -> return flags.getValue(flag)
+      is MemberSymbol -> {
+        val memberFlagValue = flags.getValue(flag)
+        if (!memberFlagValue) {
+          return false
+        }
+        // Special case: if the MemberSymbol's flag is enabled, but the outer
+        // ClassSymbol's flag (if the class is flagged) is disabled, consider
+        // the MemberSymbol's flag as disabled:
+        //
+        //   @FlaggedApi(this-flag-is-disabled) Clazz {
+        //       @FlaggedApi(this-flag-is-enabled) method(); // The Clazz' flag "wins"
+        //   }
+        //
+        // Note: the current implemementation does not handle nested classes.
+        val classFlagValue =
+            flaggedSymbolsInSource
+                .find { it.first.toPrettyString() == symbol.clazz }
+                ?.let { flags.getValue(it.second) }
+                ?: true
+        return classFlagValue
+      }
+    }
+  }
+
   val errors = mutableSetOf<ApiError>()
   for ((symbol, flag) in flaggedSymbolsInSource) {
     try {
-      if (flags.getValue(flag)) {
+      if (isFlagEnabled(symbol, flag)) {
         if (!symbolsInOutput.containsSymbol(symbol)) {
           errors.add(EnabledFlaggedApiNotPresentError(symbol, flag))
         }
