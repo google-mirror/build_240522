@@ -17,7 +17,7 @@
 #ifndef _TOOLS_IDE_QUERY_CC_ANALYZER_ANALYZER_H_
 #define _TOOLS_IDE_QUERY_CC_ANALYZER_ANALYZER_H_
 
-#include "ide_query.pb.h"
+#include "analyzer.pb.h"
 
 namespace tools::ide_query::cc_analyzer {
 
