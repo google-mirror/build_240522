@@ -52,6 +52,24 @@
       "parentUuid": "a9460959_9585a00a",
       "revId": "cffe6c2c019faef80fe719f9136be9ab55b39dc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cdd2c67_fc08d51c",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2024-05-08T00:39:17Z",
+      "side": 0,
+      "message": "Yeah:\n\nIt shouldn\u0027t have been a revert, but another copy of these lines.\n\nBut now that it has been reverted, we need to add these lines back so that future additions work properly. If you\u0027re going to resubmit your changes soon, then just doubling them would work. If it\u0027ll be some time, then we should at least add these back soon (maybe doubled to do some cleanup, though we did some resets on the CI servers, so the worst of that is over), then add them again with your changes.",
+      "parentUuid": "b2052f00_47a999ad",
+      "revId": "cffe6c2c019faef80fe719f9136be9ab55b39dc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
