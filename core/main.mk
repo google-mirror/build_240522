@@ -118,6 +118,7 @@ endif
 # system like Android.mk or <product>.mk files.
 _additional_prop_var_names := \
     ADDITIONAL_SYSTEM_PROPERTIES \
+    ADDITIONAL_SYSTEM_EXT_PROPERTIES \
     ADDITIONAL_VENDOR_PROPERTIES \
     ADDITIONAL_ODM_PROPERTIES \
     ADDITIONAL_PRODUCT_PROPERTIES

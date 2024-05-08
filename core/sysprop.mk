@@ -448,7 +448,9 @@ _prop_files_ := $(if $(TARGET_SYSTEM_EXT_PROP),\
 
 # Order matters here. When there are duplicates, the last one wins.
 # TODO(b/117892318): don't allow duplicates so that the ordering doesn't matter
-_prop_vars_ := PRODUCT_SYSTEM_EXT_PROPERTIES
+_prop_vars_ := \
+    ADDITIONAL_SYSTEM_EXT_PROPERTIES \
+    PRODUCT_SYSTEM_EXT_PROPERTIES
 
 INSTALLED_SYSTEM_EXT_BUILD_PROP_TARGET := $(TARGET_OUT_SYSTEM_EXT)/etc/build.prop
 $(eval $(call build-properties,\
