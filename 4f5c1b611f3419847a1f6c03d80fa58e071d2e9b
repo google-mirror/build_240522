@@ -16,6 +16,24 @@
       "message": "This isn\u0027t harmful, but it would be great if you can share motivation for this from your side with us. ADDITIONAL_SYSTEM_EXT_PROPERTIES is not set by anywhere. If there isn\u0027t any system property on system_ext that\u0027s automatically set by the build system, this isn\u0027t needed.\n\nOr are you adding this just for the symmetry with other partitions?",
       "revId": "4f5c1b611f3419847a1f6c03d80fa58e071d2e9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04d8a806_d40694cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942180
+      },
+      "writtenOn": "2024-05-08T16:23:50Z",
+      "side": 1,
+      "message": "The project I\u0027m working on has a hook in main.mk to include a makefile in vendor, and as apart of that I\u0027m setting some properties on /system_ext.\n\nPRODUCT_SYSTEM_EXT_PROPERTIES is not usable in this case since it extends off main.mk, so that leaves ADDITIONAL_SYSTEM_EXT_PROPERTIES.\n\nIt would be unused in AOSP but since the other core partitions have the option (system, product, odm, vendor), figured system_ext should be here too.",
+      "parentUuid": "c9103486_e1b31b31",
+      "revId": "4f5c1b611f3419847a1f6c03d80fa58e071d2e9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
