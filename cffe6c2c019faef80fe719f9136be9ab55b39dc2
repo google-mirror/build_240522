@@ -88,6 +88,24 @@
       "parentUuid": "9cdd2c67_fc08d51c",
       "revId": "cffe6c2c019faef80fe719f9136be9ab55b39dc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85e45323_38aed24d",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2024-05-08T00:59:57Z",
+      "side": 0,
+      "message": "It\u0027s really whether someone else tries to edit this same file in that timeframe -- given the history, it\u0027s unlikely, but anything could happen.",
+      "parentUuid": "c55afe45_17159fdf",
+      "revId": "cffe6c2c019faef80fe719f9136be9ab55b39dc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
