@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e23fcace_274f6469",
+        "filename": "CleanSpec.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2024-05-08T00:02:53Z",
+      "side": 0,
+      "message": "Unfortunately, CleanSpec.mk files aren\u0027t particular compatible with reverts -- this file actually needed new lines removing the jar files again, so as to not run out of disk space.\n\n(The implementation was actually worse -- I don\u0027t know if it\u0027s been fixed. It only counts the number of steps executed in every file, so you cant remove steps, otherwise new steps may not be executed)",
+      "revId": "cffe6c2c019faef80fe719f9136be9ab55b39dc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
