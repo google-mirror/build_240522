@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c070db03_ea202c12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882770
+      },
+      "writtenOn": "2024-05-09T15:05:16Z",
+      "side": 1,
+      "message": "Can we also have an api to read all the defaults into a hashtable? In another cl of course.",
+      "revId": "3cf7c0a2c0e791055394665b34b0d69a69ac3ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbbdca84_b74d072f",
