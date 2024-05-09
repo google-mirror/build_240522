@@ -74,6 +74,7 @@ python_library_host {
     name: "build_test_suites",
     srcs: [
         "build_test_suites.py",
+        "protos/buildcontext.proto",
     ],
 }
 
