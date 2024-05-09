@@ -1,0 +1,63 @@
+/*
+ * Copyright (C) 2024 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package buildcontext_proto;
+
+message BuildContext {
+  // A list of enabled build features.
+  repeated BuildFeature enabled_build_features = 1;
+
+  // Information about tests that will run off this build.
+  optional TestContext test_context = 2;
+
+  message BuildFeature {
+    // The name of the enabled build feature.
+    optional string name = 1;
+  }
+
+  message TestContext {
+    // Information about tests that will run off of this build.
+    repeated TestInfo test_infos = 1;
+
+    message TestInfo {
+      // The name of the test.
+      optional string name = 1;
+
+      // A list of extra options that will be passed to the test.
+      repeated Arg extra_options = 2;
+
+      // The TF command that runs the test.
+      optional string command = 3;
+
+      // An argument for use in a test.
+      // Arguments will be supplied to the command line in the following format:
+      //   command --argument_key argument_value
+      message Arg {
+        // The argument key supplied to the command. The argument key will be supplied
+        // to the command as:
+        //   command --argument_key
+        optional string key = 1;
+
+        // The argument value supplied to the command. Multiple values can also be
+        // supplied which will be formatted in the command line as:
+        //   command --key val1 --key val2
+        repeated string values = 2;
+      }
+    }
+  }
+}
