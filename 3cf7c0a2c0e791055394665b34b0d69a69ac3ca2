@@ -60,6 +60,30 @@
       ],
       "revId": "3cf7c0a2c0e791055394665b34b0d69a69ac3ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b35c2b79_311a3c24",
+        "filename": "tools/aconfig/aconfig_device_paths/src/DevicePathsTemplate.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-05-09T14:20:22Z",
+      "side": 1,
+      "message": "Let\u0027s address in a follow-up CL if you don\u0027t mind, will ping you offline.",
+      "parentUuid": "cbbdca84_b74d072f",
+      "range": {
+        "startLine": 39,
+        "startChar": 24,
+        "endLine": 39,
+        "endChar": 45
+      },
+      "revId": "3cf7c0a2c0e791055394665b34b0d69a69ac3ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
