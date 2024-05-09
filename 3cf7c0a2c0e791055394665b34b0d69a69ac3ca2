@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbbdca84_b74d072f",
+        "filename": "tools/aconfig/aconfig_device_paths/src/DevicePathsTemplate.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1799018
+      },
+      "writtenOn": "2024-05-09T11:03:14Z",
+      "side": 1,
+      "message": "Hi Ted, is there a library that we can get the paths from host side?",
+      "range": {
+        "startLine": 39,
+        "startChar": 24,
+        "endLine": 39,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4509caa8_2f4bf94f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tools/aconfig/aconfig_device_paths/src/DevicePathsTemplate.java",
+              "range": {
+                "startLine": 27,
+                "startChar": 0,
+                "endLine": 30,
+                "endChar": 0
+              },
+              "replacement": "    static final String[] PATHS \u003d {TEMPLATE};\n"
+            },
+            {
+              "path": "tools/aconfig/aconfig_device_paths/src/DevicePathsTemplate.java",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "tools/aconfig/aconfig_device_paths/src/DevicePathsTemplate.java",
+              "range": {
+                "startLine": 37,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": "     *\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3cf7c0a2c0e791055394665b34b0d69a69ac3ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
