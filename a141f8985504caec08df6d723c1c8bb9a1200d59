@@ -176,6 +176,30 @@
       },
       "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01fda394_dd86ed7e",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-10T17:27:45Z",
+      "side": 1,
+      "message": "Could you elaborate on what you mean by the \u0027blob fields\u0027 comment? Isn\u0027t that just forwarding the data?",
+      "parentUuid": "ea5098fd_a267d63b",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 42
+      },
+      "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
