@@ -200,6 +200,30 @@
       },
       "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36bb1dee_563a25f7",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-05-10T19:27:20Z",
+      "side": 1,
+      "message": "Back in 2016, whenever you updated the worknode proto, it would require a schema update to spanner which could take weeks to roll out thus blocking changes. For this reason I suggested to Luca including all fields he would need. However, after your comment, I verified this is no longer necessary because worknode proto has been updated to use a blob proto and thus just forwards the underlying proto.\n\nWith that in mind, I\u0027m wondering what your suggestion is. Is your suggestion just to remove test_mapping_groups_used because he isn\u0027t using it yet? If so, that\u0027s fine with me.",
+      "parentUuid": "01fda394_dd86ed7e",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 42
+      },
+      "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
