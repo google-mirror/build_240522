@@ -272,6 +272,30 @@
       },
       "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "121621ef_7f70331d",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2024-05-10T23:29:49Z",
+      "side": 1,
+      "message": "\u003e 2) Avoid having to constantly change both TH and the build script every time we need a field. The options I can think of are: Forward as bytes or include the ATP proto message.\n\nExcept that kinda needs to happen, and is why we\u0027re using a data format that includes methods of making compatible changes. TH is going to need to present a config that works with months/years old build script versions in addition to the latest.",
+      "parentUuid": "b3ad83a5_b9993850",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 42
+      },
+      "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
