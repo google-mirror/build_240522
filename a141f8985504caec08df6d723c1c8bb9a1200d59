@@ -320,6 +320,30 @@
       },
       "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa3f2fc3_a072e978",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-05-10T23:45:18Z",
+      "side": 1,
+      "message": "The ATP test info object is not actually a proto itself, but i\u0027m not opposed to the idea of packing in a subset of the ATP test info in a proto (we\u0027d have to see what\u0027s ok to include in AOSP and what not). This would allow me to move the logic to the build script, and at worst we can add more of the fields to the proto later on if we need them (which would still require a change to TH or whatever external code we use to pack the data structure into the proto.",
+      "parentUuid": "5897e30c_bdfb96a3",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 42
+      },
+      "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
