@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "160726dd_d390eca6",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-05-10T02:51:03Z",
+      "side": 1,
+      "message": "1) What\u0027s your thinking here?\n\n2) Personally I\u0027m a fan of simple bool fields rather than repeated KeyValue fields. This is taking advantage of the structure of proto to provide documentation and validation for the interface.",
+      "parentUuid": "1c6cc7e7_930efcd2",
+      "range": {
+        "startLine": 23,
+        "startChar": 16,
+        "endLine": 23,
+        "endChar": 39
+      },
+      "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2bf9c6da_0d31637e",
         "filename": "ci/protos/buildcontext.proto",
         "patchSetId": 1
@@ -126,6 +150,30 @@
           ]
         }
       ],
+      "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea5098fd_a267d63b",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-05-10T02:51:03Z",
+      "side": 1,
+      "message": "The worknode proto is a Google-internal proto so we can\u0027t use it here. We don\u0027t generally want to be arbitrarily forwarding data from it out -- it\u0027s better to parse it down to what is really needed first before passing it to Android code.\n\nWe use blob fields for WorkPlan so we can update the proto without waiting for a schema update.",
+      "parentUuid": "2bf9c6da_0d31637e",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 42
+      },
       "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
