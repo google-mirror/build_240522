@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4dc6c988_37f0336a",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-05-10T21:55:40Z",
+      "side": 1,
+      "message": "I think Hadrien is talking about not enabling/disabling BWYN as a whole, but narrowing it down to smaller features. For example if the first step in doing BWYN is just not building mts in presubmit, we should probably roll that out specifically not just fully disable BWYN. I think that\u0027s also where #2 comes in where if we have to add a field for every little feature it\u0027s gonna start getting cluttered quickly. I\u0027m not exactly sure what the best solution is, I think having a list of feature-name/enabled pairs makes sense if we\u0027re gonna get very granular, but I see what David is talking about.",
+      "parentUuid": "160726dd_d390eca6",
+      "range": {
+        "startLine": 23,
+        "startChar": 16,
+        "endLine": 23,
+        "endChar": 39
+      },
+      "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2bf9c6da_0d31637e",
         "filename": "ci/protos/buildcontext.proto",
         "patchSetId": 1
