@@ -296,6 +296,30 @@
       },
       "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5897e30c_bdfb96a3",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-10T23:35:06Z",
+      "side": 1,
+      "message": "Yeah, the version skew was my biggest concern. In theory, the ATP proto should be backwards compatible since it\u0027s proto but it may have restricted visibility.\n\nI suggested packaging into a proto that \u0027sort of\u0027 maps to ATP test configs as a last resort to better group the data.",
+      "parentUuid": "121621ef_7f70331d",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 42
+      },
+      "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
