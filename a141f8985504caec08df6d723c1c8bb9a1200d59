@@ -248,6 +248,30 @@
       },
       "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3ad83a5_b9993850",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-10T23:25:50Z",
+      "side": 1,
+      "message": "Yeah that makes sense and in the spirit of what I meant. I suggested 2 things:\n\n1) Remove fields we\u0027re not currently using or intend on using as it will most likely change.\n\n2) Avoid having to constantly change both TH and the build script every time we need a field. The options I can think of are: Forward as bytes or include the ATP proto message.\n\nYour call if it\u0027s not possible due to visibility issues. As a last resort consider packaging the information in message types (e.g. `TestPlan`) which will probably grow to contain more information.",
+      "parentUuid": "36bb1dee_563a25f7",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 42
+      },
+      "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
