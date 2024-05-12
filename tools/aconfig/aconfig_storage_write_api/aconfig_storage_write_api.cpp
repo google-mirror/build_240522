@@ -17,6 +17,18 @@ using namespace android::base;
 
 namespace aconfig_storage {
 
+/// Get storage file version number
+Result<uint32_t> get_storage_file_version(
+    std::string const& file_path) {
+  auto version_cxx = get_storage_file_version_cxx(
+      rust::Str(file_path.c_str()));
+  if (version_cxx.query_success) {
+    return version_cxx.version_number;
+  } else {
+    return Error() << version_cxx.error_message;
+  }
+}
+
 /// Map a storage file
 Result<MutableMappedStorageFile*> map_mutable_storage_file(std::string const& file) {
   struct stat file_stat;

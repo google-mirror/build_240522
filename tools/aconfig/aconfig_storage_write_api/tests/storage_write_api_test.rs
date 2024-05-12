@@ -4,8 +4,8 @@ mod aconfig_storage_write_api_test {
     use aconfig_storage_read_api::flag_info_query::find_flag_attribute;
     use aconfig_storage_read_api::flag_value_query::find_boolean_flag_value;
     use aconfig_storage_write_api::{
-        map_mutable_storage_file, set_boolean_flag_value, set_flag_has_local_override,
-        set_flag_has_server_override,
+        get_storage_file_version, map_mutable_storage_file, set_boolean_flag_value,
+        set_flag_has_local_override, set_flag_has_server_override,
     };
 
     use std::fs::{self, File};
@@ -33,6 +33,14 @@ mod aconfig_storage_write_api_test {
         let mut bytes = Vec::new();
         f.read_to_end(&mut bytes).unwrap();
         find_flag_attribute(&bytes, value_type, offset).unwrap()
+    }
+
+    #[test]
+    fn test_storage_version_query() {
+        assert_eq!(get_storage_file_version("./package.map").unwrap(), 1);
+        assert_eq!(get_storage_file_version("./flag.map").unwrap(), 1);
+        assert_eq!(get_storage_file_version("./flag.val").unwrap(), 1);
+        assert_eq!(get_storage_file_version("./flag.info").unwrap(), 1);
     }
 
     #[test]

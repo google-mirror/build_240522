@@ -87,12 +87,6 @@ android::base::Result<MappedStorageFile*> get_mapped_file(
     std::string const& container,
     StorageFileType file_type);
 
-/// Get storage file version number
-/// \input file_path: the path to the storage file
-/// \returns the storage file version
-android::base::Result<uint32_t> get_storage_file_version(
-    std::string const& file_path);
-
 /// Get package read context
 /// \input file: mapped storage file
 /// \input package: the flag package name

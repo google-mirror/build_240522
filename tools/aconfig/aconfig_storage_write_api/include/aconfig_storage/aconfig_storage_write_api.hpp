@@ -10,6 +10,12 @@ using namespace android::base;
 
 namespace aconfig_storage {
 
+/// Get storage file version number
+/// \input file_path: the path to the storage file
+/// \returns the storage file version
+android::base::Result<uint32_t> get_storage_file_version(
+    std::string const& file_path);
+
 /// Mapped flag value file
 struct MutableMappedStorageFile : MappedStorageFile {};
 

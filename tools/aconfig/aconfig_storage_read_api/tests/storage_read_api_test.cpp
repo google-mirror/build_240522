@@ -94,22 +94,6 @@ class AconfigStorageTest : public ::testing::Test {
   std::string storage_record_pb;
 };
 
-/// Test to lock down storage file version query api
-TEST_F(AconfigStorageTest, test_storage_version_query) {
-  auto version = api::get_storage_file_version(package_map);
-  ASSERT_TRUE(version.ok());
-  ASSERT_EQ(*version, 1);
-  version = api::get_storage_file_version(flag_map);
-  ASSERT_TRUE(version.ok());
-  ASSERT_EQ(*version, 1);
-  version = api::get_storage_file_version(flag_val);
-  ASSERT_TRUE(version.ok());
-  ASSERT_EQ(*version, 1);
-  version = api::get_storage_file_version(flag_info);
-  ASSERT_TRUE(version.ok());
-  ASSERT_EQ(*version, 1);
-}
-
 /// Negative test to lock down the error when mapping none exist storage files
 TEST_F(AconfigStorageTest, test_none_exist_storage_file_mapping) {
   auto mapped_file_result = private_api::get_mapped_file_impl(

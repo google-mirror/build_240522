@@ -132,18 +132,6 @@ Result<MappedStorageFile*> get_mapped_file(
       kAvailableStorageRecordsPb, container, file_type);
 }
 
-/// Get storage file version number
-Result<uint32_t> get_storage_file_version(
-    std::string const& file_path) {
-  auto version_cxx = get_storage_file_version_cxx(
-      rust::Str(file_path.c_str()));
-  if (version_cxx.query_success) {
-    return version_cxx.version_number;
-  } else {
-    return Error() << version_cxx.error_message;
-  }
-}
-
 /// Get package context
 Result<PackageReadContext> get_package_read_context(
     MappedStorageFile const& file,

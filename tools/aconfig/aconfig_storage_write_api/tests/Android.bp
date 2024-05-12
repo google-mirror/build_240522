@@ -12,6 +12,8 @@ rust_test {
         "libtempfile",
     ],
     data: [
+        "package.map",
+        "flag.map",
         "flag.val",
         "flag.info",
     ],
@@ -33,6 +35,8 @@ cc_test {
         "liblog",
     ],
     data: [
+        "package.map",
+        "flag.map",
         "flag.val",
         "flag.info",
     ],

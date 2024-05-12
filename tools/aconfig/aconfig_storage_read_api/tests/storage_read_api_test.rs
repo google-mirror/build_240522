@@ -4,8 +4,7 @@ mod aconfig_storage_rust_test {
     use aconfig_storage_file::{FlagInfoBit, FlagValueType, StorageFileType, StoredFlagType};
     use aconfig_storage_read_api::{
         get_boolean_flag_value, get_flag_attribute, get_flag_read_context,
-        get_package_read_context, get_storage_file_version, mapped_file::get_mapped_file,
-        PackageReadContext,
+        get_package_read_context, mapped_file::get_mapped_file, PackageReadContext,
     };
     use std::fs;
     use tempfile::NamedTempFile;
@@ -211,13 +210,5 @@ files {{
             format!("{:?}", err),
             "InvalidStorageFileOffset(Flag info offset goes beyond the end of the file.)"
         );
-    }
-
-    #[test]
-    fn test_storage_version_query() {
-        assert_eq!(get_storage_file_version("./package.map").unwrap(), 1);
-        assert_eq!(get_storage_file_version("./flag.map").unwrap(), 1);
-        assert_eq!(get_storage_file_version("./flag.val").unwrap(), 1);
-        assert_eq!(get_storage_file_version("./flag.info").unwrap(), 1);
     }
 }

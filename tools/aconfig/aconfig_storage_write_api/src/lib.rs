@@ -25,14 +25,36 @@ pub mod mapped_file;
 mod test_utils;
 
 use aconfig_storage_file::{
-    AconfigStorageError, FlagInfoHeader, FlagInfoList, FlagInfoNode, FlagTable, FlagValueType,
-    PackageTable, StorageFileType, StoredFlagType, FILE_VERSION,
+    read_u32_from_bytes, AconfigStorageError, FlagInfoHeader, FlagInfoList, FlagInfoNode,
+    FlagTable, FlagValueType, PackageTable, StorageFileType, StoredFlagType, FILE_VERSION,
 };
 
 use anyhow::anyhow;
 use memmap2::MmapMut;
 use std::fs::File;
 use std::io::{Read, Write};
+
+/// Get storage file version number
+///
+/// This function would read the first four bytes of the file and interpret it as the
+/// version number of the file. There are unit tests in aconfig_storage_file crate to
+/// lock down that for all storage files, the first four bytes will be the version
+/// number of the storage file
+pub fn get_storage_file_version(file_path: &str) -> Result<u32, AconfigStorageError> {
+    let mut file = File::open(file_path).map_err(|errmsg| {
+        AconfigStorageError::FileReadFail(anyhow!("Failed to open file {}: {}", file_path, errmsg))
+    })?;
+    let mut buffer = [0; 4];
+    file.read(&mut buffer).map_err(|errmsg| {
+        AconfigStorageError::FileReadFail(anyhow!(
+            "Failed to read 4 bytes from file {}: {}",
+            file_path,
+            errmsg
+        ))
+    })?;
+    let mut head = 0;
+    read_u32_from_bytes(&buffer, &mut head)
+}
 
 /// Get read write mapped storage files.
 ///
@@ -191,6 +213,13 @@ pub fn create_flag_info(
 // Exported rust data structure and methods, c++ code will be generated
 #[cxx::bridge]
 mod ffi {
+    // Storage file version query return for cc interlop
+    pub struct VersionNumberQueryCXX {
+        pub query_success: bool,
+        pub error_message: String,
+        pub version_number: u32,
+    }
+
     // Flag value update return for cc interlop
     pub struct BooleanFlagValueUpdateCXX {
         pub update_success: bool,
@@ -217,6 +246,8 @@ mod ffi {
 
     // Rust export to c++
     extern "Rust" {
+        pub fn get_storage_file_version_cxx(file_path: &str) -> VersionNumberQueryCXX;
+
         pub fn update_boolean_flag_value_cxx(
             file: &mut [u8],
             offset: u32,
@@ -242,6 +273,22 @@ mod ffi {
             flag_map: &str,
             flag_info_out: &str,
         ) -> FlagInfoCreationCXX;
+    }
+}
+
+/// Get storage version number cc interlop
+pub fn get_storage_file_version_cxx(file_path: &str) -> ffi::VersionNumberQueryCXX {
+    match crate::get_storage_file_version(file_path) {
+        Ok(version) => ffi::VersionNumberQueryCXX {
+            query_success: true,
+            error_message: String::new(),
+            version_number: version,
+        },
+        Err(errmsg) => ffi::VersionNumberQueryCXX {
+            query_success: false,
+            error_message: format!("{:?}", errmsg),
+            version_number: 0,
+        },
     }
 }
 
@@ -345,6 +392,15 @@ mod tests {
     use std::fs::File;
     use std::io::Read;
     use tempfile::NamedTempFile;
+
+    #[test]
+    // this test point locks down flag storage file version number query api
+    fn test_storage_version_query() {
+        assert_eq!(get_storage_file_version("./tests/package.map").unwrap(), 1);
+        assert_eq!(get_storage_file_version("./tests/flag.map").unwrap(), 1);
+        assert_eq!(get_storage_file_version("./tests/flag.val").unwrap(), 1);
+        assert_eq!(get_storage_file_version("./tests/flag.info").unwrap(), 1);
+    }
 
     fn get_boolean_flag_value_at_offset(file: &str, offset: u32) -> bool {
         let mut f = File::open(&file).unwrap();

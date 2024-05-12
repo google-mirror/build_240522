@@ -49,16 +49,13 @@ pub use aconfig_storage_file::{AconfigStorageError, FlagValueType, StorageFileTy
 pub use flag_table_query::FlagReadContext;
 pub use package_table_query::PackageReadContext;
 
-use aconfig_storage_file::{read_u32_from_bytes, FILE_VERSION};
+use aconfig_storage_file::FILE_VERSION;
 use flag_info_query::find_flag_attribute;
 use flag_table_query::find_flag_read_context;
 use flag_value_query::find_boolean_flag_value;
 use package_table_query::find_package_read_context;
 
-use anyhow::anyhow;
 use memmap2::Mmap;
-use std::fs::File;
-use std::io::Read;
 
 /// Storage file location pb file
 pub const STORAGE_LOCATION_FILE: &str = "/metadata/aconfig/boot/available_storage_file_records.pb";
@@ -127,28 +124,6 @@ pub fn get_boolean_flag_value(file: &Mmap, index: u32) -> Result<bool, AconfigSt
     find_boolean_flag_value(file, index)
 }
 
-/// Get storage file version number
-///
-/// This function would read the first four bytes of the file and interpret it as the
-/// version number of the file. There are unit tests in aconfig_storage_file crate to
-/// lock down that for all storage files, the first four bytes will be the version
-/// number of the storage file
-pub fn get_storage_file_version(file_path: &str) -> Result<u32, AconfigStorageError> {
-    let mut file = File::open(file_path).map_err(|errmsg| {
-        AconfigStorageError::FileReadFail(anyhow!("Failed to open file {}: {}", file_path, errmsg))
-    })?;
-    let mut buffer = [0; 4];
-    file.read(&mut buffer).map_err(|errmsg| {
-        AconfigStorageError::FileReadFail(anyhow!(
-            "Failed to read 4 bytes from file {}: {}",
-            file_path,
-            errmsg
-        ))
-    })?;
-    let mut head = 0;
-    read_u32_from_bytes(&buffer, &mut head)
-}
-
 /// Get the flag attribute.
 ///
 /// \input file: mapped flag info file
@@ -173,13 +148,6 @@ pub fn get_flag_attribute(
 // Exported rust data structure and methods, c++ code will be generated
 #[cxx::bridge]
 mod ffi {
-    // Storage file version query return for cc interlop
-    pub struct VersionNumberQueryCXX {
-        pub query_success: bool,
-        pub error_message: String,
-        pub version_number: u32,
-    }
-
     // Package table query return for cc interlop
     pub struct PackageReadContextQueryCXX {
         pub query_success: bool,
@@ -214,8 +182,6 @@ mod ffi {
 
     // Rust export to c++
     extern "Rust" {
-        pub fn get_storage_file_version_cxx(file_path: &str) -> VersionNumberQueryCXX;
-
         pub fn get_package_read_context_cxx(
             file: &[u8],
             package: &str,
@@ -333,25 +299,6 @@ impl ffi::FlagAttributeQueryCXX {
     }
 }
 
-/// Implement the storage version number interlop return type, create from actual version number
-/// api return type
-impl ffi::VersionNumberQueryCXX {
-    pub(crate) fn new(version_result: Result<u32, AconfigStorageError>) -> Self {
-        match version_result {
-            Ok(version) => Self {
-                query_success: true,
-                error_message: String::from(""),
-                version_number: version,
-            },
-            Err(errmsg) => Self {
-                query_success: false,
-                error_message: format!("{:?}", errmsg),
-                version_number: 0,
-            },
-        }
-    }
-}
-
 /// Get package read context cc interlop
 pub fn get_package_read_context_cxx(file: &[u8], package: &str) -> ffi::PackageReadContextQueryCXX {
     ffi::PackageReadContextQueryCXX::new(find_package_read_context(file, package))
@@ -383,11 +330,6 @@ pub fn get_flag_attribute_cxx(
         }
         Err(errmsg) => ffi::FlagAttributeQueryCXX::new(Err(errmsg)),
     }
-}
-
-/// Get storage version number cc interlop
-pub fn get_storage_file_version_cxx(file_path: &str) -> ffi::VersionNumberQueryCXX {
-    ffi::VersionNumberQueryCXX::new(get_storage_file_version(file_path))
 }
 
 #[cfg(test)]
@@ -512,14 +454,5 @@ files {{
             assert!((attribute & FlagInfoBit::HasServerOverride as u8) == 0u8);
             assert!((attribute & FlagInfoBit::HasLocalOverride as u8) == 0u8);
         }
-    }
-
-    #[test]
-    // this test point locks down flag storage file version number query api
-    fn test_storage_version_query() {
-        assert_eq!(get_storage_file_version("./tests/package.map").unwrap(), 1);
-        assert_eq!(get_storage_file_version("./tests/flag.map").unwrap(), 1);
-        assert_eq!(get_storage_file_version("./tests/flag.val").unwrap(), 1);
-        assert_eq!(get_storage_file_version("./tests/flag.info").unwrap(), 1);
     }
 }

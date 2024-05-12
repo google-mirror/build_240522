@@ -26,11 +26,8 @@
 #include <android-base/file.h>
 #include <android-base/result.h>
 
-using android::aconfig_storage_metadata::storage_files;
 using namespace android::base;
-
 namespace api = aconfig_storage;
-namespace private_api = aconfig_storage::private_internal_api;
 
 class AconfigStorageTest : public ::testing::Test {
  protected:
@@ -52,18 +49,40 @@ class AconfigStorageTest : public ::testing::Test {
 
   void SetUp() override {
     auto const test_dir = android::base::GetExecutableDirectory();
+    package_map = *copy_to_rw_temp_file(test_dir + "/package.map");
+    flag_map = *copy_to_rw_temp_file(test_dir + "/flag.map");
     flag_val = *copy_to_rw_temp_file(test_dir + "/flag.val");
     flag_info = *copy_to_rw_temp_file(test_dir + "/flag.info");
   }
 
   void TearDown() override {
+    std::remove(package_map.c_str());
+    std::remove(flag_map.c_str());
     std::remove(flag_val.c_str());
     std::remove(flag_info.c_str());
   }
 
+  std::string package_map;
+  std::string flag_map;
   std::string flag_val;
   std::string flag_info;
 };
+
+/// Test to lock down storage file version query api
+TEST_F(AconfigStorageTest, test_storage_version_query) {
+  auto version = api::get_storage_file_version(package_map);
+  ASSERT_TRUE(version.ok());
+  ASSERT_EQ(*version, 1);
+  version = api::get_storage_file_version(flag_map);
+  ASSERT_TRUE(version.ok());
+  ASSERT_EQ(*version, 1);
+  version = api::get_storage_file_version(flag_val);
+  ASSERT_TRUE(version.ok());
+  ASSERT_EQ(*version, 1);
+  version = api::get_storage_file_version(flag_info);
+  ASSERT_TRUE(version.ok());
+  ASSERT_EQ(*version, 1);
+}
 
 /// Negative test to lock down the error when mapping a non writeable storage file
 TEST_F(AconfigStorageTest, test_non_writable_storage_file_mapping) {

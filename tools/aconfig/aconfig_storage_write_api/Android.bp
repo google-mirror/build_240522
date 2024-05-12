@@ -30,6 +30,8 @@ rust_test_host {
     test_suites: ["general-tests"],
     defaults: ["aconfig_storage_write_api.defaults"],
     data: [
+        "tests/package.map",
+        "tests/flag.map",
         "tests/flag.val",
         "tests/flag.info",
     ],
