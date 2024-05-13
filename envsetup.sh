@@ -2057,6 +2057,13 @@ function validate_current_shell() {
 #
 # This allows loading only approved vendorsetup.sh files
 function source_vendorsetup() {
+    # Cog setup should be the first thing to run to ensure, the outdir is
+    # created as a symlink before sourcing the vendorsetup.sh scripts.
+    if [[ "${PWD}" == /google/cog/* ]]; then
+        f="build/make/cogsetup.sh"
+        echo "including $f"; . "$T/$f"
+    fi
+
     unset VENDOR_PYTHONPATH
     local T="$(gettop)"
     allowed=
@@ -2083,11 +2090,6 @@ function source_vendorsetup() {
             fi
         done
     done
-
-    if [[ "${PWD}" == /google/cog/* ]]; then
-        f="build/make/cogsetup.sh"
-        echo "including $f"; . "$T/$f"
-    fi
 }
 
 function showcommands() {
