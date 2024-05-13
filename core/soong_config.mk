@@ -68,6 +68,7 @@ $(call add_json_str,  DeviceArch,                        $(TARGET_ARCH))
 $(call add_json_str,  DeviceArchVariant,                 $(TARGET_ARCH_VARIANT))
 $(call add_json_str,  DeviceCpuVariant,                  $(TARGET_CPU_VARIANT))
 $(call add_json_list, DeviceAbi,                         $(TARGET_CPU_ABI) $(TARGET_CPU_ABI2))
+$(call add_json_str,  DeviceDir,                         $(TARGET_DEVICE_DIR))
 
 $(call add_json_str,  DeviceSecondaryArch,               $(TARGET_2ND_ARCH))
 $(call add_json_str,  DeviceSecondaryArchVariant,        $(TARGET_2ND_ARCH_VARIANT))
@@ -411,6 +412,19 @@ $(call add_json_list, ProductDefaultWifiChannels, $(PRODUCT_DEFAULT_WIFI_CHANNEL
 $(call add_json_bool, BoardUseVbmetaDigestInFingerprint, $(filter true,$(BOARD_USE_VBMETA_DIGTEST_IN_FINGERPRINT)))
 
 $(call add_json_list, OemProperties, $(PRODUCT_OEM_PROPERTIES))
+
+ifdef TARGET_BOARD_INFO_FILES
+  ifdef TARGET_BOARD_INFO_FILE
+    $(warning Both TARGET_BOARD_INFO_FILES and TARGET_BOARD_INFO_FILE are defined.)
+    $(warning Using $(TARGET_BOARD_INFO_FILES) rather than $(TARGET_BOARD_INFO_FILE) for android-info.txt)
+  endif
+endif
+
+$(call add_json_str,  BoardInfoFile,       $(TARGET_BOARD_INFO_FILE))
+$(call add_json_list, BoardInfoFiles,      $(TARGET_BOARD_INFO_FILES))
+$(call add_json_str,  BootloaderBoardName, $(TARGET_BOOTLOADER_BOARD_NAME))
+
+_board_info_files :=
 
 $(call json_end)
 
