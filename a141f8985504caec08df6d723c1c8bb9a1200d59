@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65201a98_8615a904",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-05-13T22:57:35Z",
+      "side": 1,
+      "message": "How do we feel about this? I\u0027m including some of the test information including name, extra_options, and command line. This should be enough info for any features we need right now. I have also changed the boolean to a repeated field of strings for enabled features.\n\nI originally was thinking of a repeated submessage for build features but right now we\u0027d only include a bool for enable/disabled and it makes looking for your particular features a pain on the client side since you\u0027d have to iterate through the whole list looking for your feature name instead of just checking if your enabled feature is in the list of enabled features.",
+      "parentUuid": "4dc6c988_37f0336a",
+      "range": {
+        "startLine": 23,
+        "startChar": 16,
+        "endLine": 23,
+        "endChar": 39
+      },
+      "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2bf9c6da_0d31637e",
         "filename": "ci/protos/buildcontext.proto",
         "patchSetId": 1
@@ -336,6 +360,30 @@
       "side": 1,
       "message": "The ATP test info object is not actually a proto itself, but i\u0027m not opposed to the idea of packing in a subset of the ATP test info in a proto (we\u0027d have to see what\u0027s ok to include in AOSP and what not). This would allow me to move the logic to the build script, and at worst we can add more of the fields to the proto later on if we need them (which would still require a change to TH or whatever external code we use to pack the data structure into the proto.",
       "parentUuid": "5897e30c_bdfb96a3",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 42
+      },
+      "revId": "a141f8985504caec08df6d723c1c8bb9a1200d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ffa23b_ccc29486",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-05-13T22:57:35Z",
+      "side": 1,
+      "message": "I\u0027ve included part of the ATP test info in the proto including name, options, and command line. Is this YAGNI since for the immediate short term we only want the names? These 3 fields should be enough to enable a large variety of features.",
+      "parentUuid": "fa3f2fc3_a072e978",
       "range": {
         "startLine": 26,
         "startChar": 18,
