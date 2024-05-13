@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b1229ef_623140d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-13T06:59:19Z",
+      "side": 1,
+      "message": "I don\u0027t understand: what are the keys and values in the hashtable you propose?",
+      "parentUuid": "c070db03_ea202c12",
+      "revId": "3cf7c0a2c0e791055394665b34b0d69a69ac3ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbbdca84_b74d072f",
