@@ -22,6 +22,30 @@
       },
       "revId": "5cba391313b3b5f1ff4aee6c31f893426eb52d7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53020dbc_4e4c591e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-05-13T21:43:58Z",
+      "side": 1,
+      "message": "yeah PRODUCT_PACKAGES was a simplification here, really we\u0027re checking if the primary file is in `FULL_SYSTEMIMAGE_DEPS` (or the other variables for the other partitions), which accounts for overrides/requireds. We know that `FULL_SYSTEMIMAGE_DEPS` is accurate in spite of these complexities because all the non-extra-zip files in the staging directory are already filtered by it.",
+      "parentUuid": "8897e279_c6c679ab",
+      "range": {
+        "startLine": 13,
+        "startChar": 49,
+        "endLine": 14,
+        "endChar": 43
+      },
+      "revId": "5cba391313b3b5f1ff4aee6c31f893426eb52d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
