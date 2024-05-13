@@ -46,6 +46,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e458761_43e2ec06",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-05-13T23:31:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35d2874d_5f790c07",
+      "revId": "fc2eaebb99c4400277b334431d970d857c30e469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ea5bafe_e4d5b2ca",
@@ -81,6 +99,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "375b597b_0566fc9c",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-05-13T23:31:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ea5bafe_e4d5b2ca",
+      "revId": "fc2eaebb99c4400277b334431d970d857c30e469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "395542a9_48edba43",
@@ -112,6 +148,24 @@
           ]
         }
       ],
+      "revId": "fc2eaebb99c4400277b334431d970d857c30e469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2db5952_1f33c3dd",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-05-13T23:31:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "395542a9_48edba43",
       "revId": "fc2eaebb99c4400277b334431d970d857c30e469",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -163,6 +217,30 @@
           ]
         }
       ],
+      "revId": "fc2eaebb99c4400277b334431d970d857c30e469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e4170ae_f896085b",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-05-13T23:31:09Z",
+      "side": 1,
+      "message": "I\u0027m kind of forced to mimick the Option structure defined here no? https://source.corp.google.com/piper///depot/google3/wireless/android/launchcontrol/pipeline_manager/atp_manager_api.py;l\u003d105",
+      "parentUuid": "a996978f_5e35c9df",
+      "range": {
+        "startLine": 36,
+        "startChar": 18,
+        "endLine": 36,
+        "endChar": 33
+      },
       "revId": "fc2eaebb99c4400277b334431d970d857c30e469",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
