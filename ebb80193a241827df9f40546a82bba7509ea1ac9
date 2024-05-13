@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd396145_e0b03d7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2024-05-13T16:16:11Z",
+      "side": 1,
+      "message": "This really shouldn\u0027t be necessary, it\u0027s a bug if vendorsetup.sh is using out/ immediately -- b/340085999",
+      "revId": "ebb80193a241827df9f40546a82bba7509ea1ac9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
