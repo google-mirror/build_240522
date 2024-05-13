@@ -48,6 +48,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ea5bafe_e4d5b2ca",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-05-13T23:21:12Z",
+      "side": 1,
+      "message": "Just tests is probably enough.",
+      "fixSuggestions": [
+        {
+          "fixId": "c5ccd3fc_f60d0826",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "ci/protos/buildcontext.proto",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 27,
+                "endChar": 0
+              },
+              "replacement": "  repeated TestInfo tests \u003d 2;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fc2eaebb99c4400277b334431d970d857c30e469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "395542a9_48edba43",
         "filename": "ci/protos/buildcontext.proto",
         "patchSetId": 4
