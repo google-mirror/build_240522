@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8897e279_c6c679ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-05-13T21:40:23Z",
+      "side": 1,
+      "message": "I _think_ the answer is yes, but would you also be able to confirm that this is compatible with these two special installation cases\n1. overrides\n2. required",
+      "range": {
+        "startLine": 13,
+        "startChar": 49,
+        "endLine": 14,
+        "endChar": 43
+      },
+      "revId": "5cba391313b3b5f1ff4aee6c31f893426eb52d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
