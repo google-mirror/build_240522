@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35d2874d_5f790c07",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-05-13T23:20:16Z",
+      "side": 1,
+      "message": "Use a message for this.",
+      "fixSuggestions": [
+        {
+          "fixId": "55542b9f_e0f0d2ff",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "ci/protos/buildcontext.proto",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "  repeated BuildFeature enabled_build_features \u003d 1;\n"
+            },
+            {
+              "path": "ci/protos/buildcontext.proto",
+              "range": {
+                "startLine": 28,
+                "startChar": 0,
+                "endLine": 28,
+                "endChar": 0
+              },
+              "replacement": "  message BuildFeature {\n    optional string name \u003d 1;\n  }\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fc2eaebb99c4400277b334431d970d857c30e469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "395542a9_48edba43",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-05-13T23:20:16Z",
+      "side": 1,
+      "message": "Drop this one. It is included in extra_options.",
+      "fixSuggestions": [
+        {
+          "fixId": "707f0de2_7f22dcad",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "ci/protos/buildcontext.proto",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "fc2eaebb99c4400277b334431d970d857c30e469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a996978f_5e35c9df",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-05-13T23:20:16Z",
+      "side": 1,
+      "message": "Please avoid maps and use repeated.",
+      "range": {
+        "startLine": 36,
+        "startChar": 18,
+        "endLine": 36,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2dce15e3_c9b728ac",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "ci/protos/buildcontext.proto",
+              "range": {
+                "startLine": 36,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": "      repeated TestOptionEntry entry \u003d 1;\n"
+            },
+            {
+              "path": "ci/protos/buildcontext.proto",
+              "range": {
+                "startLine": 39,
+                "startChar": 0,
+                "endLine": 40,
+                "endChar": 0
+              },
+              "replacement": "        optional string key \u003d 1;\n        repeated string value \u003d 2;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fc2eaebb99c4400277b334431d970d857c30e469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
