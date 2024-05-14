@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44f8a6bf_d1974705",
+        "filename": "tools/aconfig/aconfig_device_paths/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-14T19:44:41Z",
+      "side": 1,
+      "message": "Just `.trim()` to make it slightly easier to read?",
+      "range": {
+        "startLine": 27,
+        "startChar": 19,
+        "endLine": 27,
+        "endChar": 43
+      },
+      "revId": "e1147cb4d11f7deebd633e70a48828ceb602c32b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
