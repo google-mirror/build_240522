@@ -6072,12 +6072,6 @@ endef
 
 built_ota_tools :=
 
-# We can't build static executables when SANITIZE_TARGET=address
-ifeq (,$(filter address, $(SANITIZE_TARGET)))
-built_ota_tools += \
-    $(call intermediates-dir-for,EXECUTABLES,updater)/updater
-endif
-
 $(BUILT_TARGET_FILES_DIR): PRIVATE_OTA_TOOLS := $(built_ota_tools)
 
 tool_extension := $(wildcard $(tool_extensions)/releasetools.py)
