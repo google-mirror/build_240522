@@ -6092,8 +6092,13 @@ built_ota_tools :=
 
 # We can't build static executables when SANITIZE_TARGET=address
 ifeq (,$(filter address, $(SANITIZE_TARGET)))
-built_ota_tools += \
+# Allow non-AB targets to define their own tools which need to be
+# added to target_files OTA/bin dir
+ifeq (true,$(TARGET_OTA_ALLOW_NON_AB))
+PRODUCT_SOONG_NAMESPACES += bootable/deprecated-ota
+build_ota_tools += \
     $(call intermediates-dir-for,EXECUTABLES,updater)/updater
+endif
 endif
 
 $(BUILT_TARGET_FILES_DIR): PRIVATE_OTA_TOOLS := $(built_ota_tools)
