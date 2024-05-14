@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab688969_bf2a3fc5",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1076194
+      },
+      "writtenOn": "2024-05-14T17:11:49Z",
+      "side": 1,
+      "message": "1. Rename to Arg.\n2. Get rid of TestOption Proto",
+      "fixSuggestions": [
+        {
+          "fixId": "52c27484_9c6ca0b6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "ci/protos/buildcontext.proto",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 36,
+                "endChar": 0
+              },
+              "replacement": "    repeated Arg extra_options \u003d 2;\n"
+            },
+            {
+              "path": "ci/protos/buildcontext.proto",
+              "range": {
+                "startLine": 39,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": "    message Arg {\n      optional string key \u003d 1;\n      repeated string values \u003d 2;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fe6f59f77ded542a4d1aef3b52d49766ca25bb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
