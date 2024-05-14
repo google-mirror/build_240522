@@ -22,6 +22,30 @@
       },
       "revId": "1f9d55d2ab4ed2fd8445fbed067467af0e4e9706",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9757bb47_4053deec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-05-14T19:53:25Z",
+      "side": 1,
+      "message": "Nevermind, it does. Confused this with something else. Please ignore.",
+      "parentUuid": "f02e8276_fdeee3aa",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 13
+      },
+      "revId": "1f9d55d2ab4ed2fd8445fbed067467af0e4e9706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
