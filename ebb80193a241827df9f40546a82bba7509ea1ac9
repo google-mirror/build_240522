@@ -16,6 +16,24 @@
       "message": "This really shouldn\u0027t be necessary, it\u0027s a bug if vendorsetup.sh is using out/ immediately -- b/340085999",
       "revId": "ebb80193a241827df9f40546a82bba7509ea1ac9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45852d10_e3f1e65a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3288188
+      },
+      "writtenOn": "2024-05-14T20:07:10Z",
+      "side": 1,
+      "message": "Thanks for the pointer!",
+      "parentUuid": "cd396145_e0b03d7a",
+      "revId": "ebb80193a241827df9f40546a82bba7509ea1ac9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
