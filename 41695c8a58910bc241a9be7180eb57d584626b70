@@ -138,6 +138,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d01f0da6_96da59fa",
+        "filename": "core/sysprop_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2024-05-15T19:22:16Z",
+      "side": 1,
+      "message": "\u003e Why a future version?\n\nAs you say, implementing that check now means we ought to get it in sync with the build-time logic. If we wait we can instead remove the build time flag altogether and always use CMC for system images and preloads, and then implement the kernel check logic at runtime for module updates only.\n\n\u003e ignore the flag for \u003e6.1 kernels\n\n@lokeshgidra@google.com Just to be clear here, should we say \"6.1 or later\" or \"later than 6.1\"?",
+      "parentUuid": "786b24b4_dab57139",
+      "range": {
+        "startLine": 268,
+        "startChar": 56,
+        "endLine": 268,
+        "endChar": 72
+      },
+      "revId": "41695c8a58910bc241a9be7180eb57d584626b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "630526a8_890c9f6a",
+        "filename": "core/sysprop_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2024-05-15T19:22:16Z",
+      "side": 1,
+      "message": "Done. I kept the doc here too in case readers only look up the system property.",
+      "parentUuid": "12be104e_c8c71fd4",
+      "range": {
+        "startLine": 268,
+        "startChar": 2,
+        "endLine": 268,
+        "endChar": 22
+      },
+      "revId": "41695c8a58910bc241a9be7180eb57d584626b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acec744b_85477b98",
         "filename": "core/sysprop_config.mk",
         "patchSetId": 1
@@ -149,6 +197,30 @@
       "writtenOn": "2024-05-15T15:56:35Z",
       "side": 1,
       "message": "I think it\u0027s better to document this at PRODUCT_ENABLE_UFFD_GC because that\u0027s what a partner would set. https://cs.android.com/android/platform/superproject/main/+/main:build/make/target/product/default_art_config.mk;l\u003d172;drc\u003d0f00fbd681b3550bc13763847b8df3ea0c5eef6c",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 269,
+        "endChar": 56
+      },
+      "revId": "41695c8a58910bc241a9be7180eb57d584626b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b0193a_c4b287af",
+        "filename": "core/sysprop_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2024-05-15T19:22:16Z",
+      "side": 1,
+      "message": "Roland suggested to do that in core/product.mk, where there already is docs. Isn\u0027t it enough?",
+      "parentUuid": "acec744b_85477b98",
       "range": {
         "startLine": 268,
         "startChar": 0,
