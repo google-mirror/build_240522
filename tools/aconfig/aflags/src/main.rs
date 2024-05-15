@@ -35,10 +35,14 @@ enum FlagPermission {
 
 impl std::fmt::Display for FlagPermission {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", match &self {
-            Self::ReadOnly => "read-only",
-            Self::ReadWrite => "read-write",
-        })
+        write!(
+            f,
+            "{}",
+            match &self {
+                Self::ReadOnly => "read-only",
+                Self::ReadWrite => "read-write",
+            }
+        )
     }
 }
 
@@ -50,10 +54,14 @@ enum ValuePickedFrom {
 
 impl std::fmt::Display for ValuePickedFrom {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", match &self {
-            Self::Default => "default",
-            Self::Server => "server",
-        })
+        write!(
+            f,
+            "{}",
+            match &self {
+                Self::Default => "default",
+                Self::Server => "server",
+            }
+        )
     }
 }
 
@@ -77,10 +85,14 @@ impl TryFrom<&str> for FlagValue {
 
 impl std::fmt::Display for FlagValue {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", match &self {
-            Self::Enabled => "enabled",
-            Self::Disabled => "disabled",
-        })
+        write!(
+            f,
+            "{}",
+            match &self {
+                Self::Enabled => "enabled",
+                Self::Disabled => "disabled",
+            }
+        )
     }
 }
 
@@ -153,6 +165,10 @@ enum Command {
         /// Read from the new flag storage.
         #[clap(long)]
         use_new_storage: bool,
+
+        /// Optionally filter by container name.
+        #[clap(short = 'c', long = "container")]
+        container: Option<String>,
     },
 
     /// Enable an aconfig flag on this device, on the next boot.
@@ -215,26 +231,31 @@ fn set_flag(qualified_name: &str, value: &str) -> Result<()> {
     Ok(())
 }
 
-fn list(source_type: FlagSourceType) -> Result<String> {
+fn list(source_type: FlagSourceType, container: Option<String>) -> Result<String> {
     let flags = match source_type {
         FlagSourceType::DeviceConfig => DeviceConfigSource::list_flags()?,
         FlagSourceType::AconfigStorage => AconfigStorageSource::list_flags()?,
-    };
+    }
+    .into_iter()
+    .filter(|flag| match &container {
+        Some(c) => flag.container == *c,
+        None => true,
+    });
     let padding_info = PaddingInfo {
-        longest_flag_col: flags.iter().map(|f| f.qualified_name().len()).max().unwrap_or(0),
-        longest_val_col: flags.iter().map(|f| f.value.to_string().len()).max().unwrap_or(0),
+        longest_flag_col: flags.clone().map(|f| f.qualified_name().len()).max().unwrap_or(0),
+        longest_val_col: flags.clone().map(|f| f.value.to_string().len()).max().unwrap_or(0),
         longest_staged_val_col: flags
-            .iter()
+            .clone()
             .map(|f| f.display_staged_value().len())
             .max()
             .unwrap_or(0),
         longest_value_picked_from_col: flags
-            .iter()
+            .clone()
             .map(|f| f.value_picked_from.to_string().len())
             .max()
             .unwrap_or(0),
         longest_permission_col: flags
-            .iter()
+            .clone()
             .map(|f| f.permission.to_string().len())
             .max()
             .unwrap_or(0),
@@ -251,8 +272,12 @@ fn list(source_type: FlagSourceType) -> Result<String> {
 fn main() {
     let cli = Cli::parse();
     let output = match cli.command {
-        Command::List { use_new_storage: true } => list(FlagSourceType::AconfigStorage).map(Some),
-        Command::List { use_new_storage: false } => list(FlagSourceType::DeviceConfig).map(Some),
+        Command::List { use_new_storage: true, container } => {
+            list(FlagSourceType::AconfigStorage, container).map(Some)
+        }
+        Command::List { use_new_storage: false, container } => {
+            list(FlagSourceType::DeviceConfig, container).map(Some)
+        }
         Command::Enable { qualified_name } => set_flag(&qualified_name, "true").map(|_| None),
         Command::Disable { qualified_name } => set_flag(&qualified_name, "false").map(|_| None),
     };
