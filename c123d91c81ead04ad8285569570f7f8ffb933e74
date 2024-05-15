@@ -1,0 +1,128 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55b1f531_cd61397f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-15T22:24:56Z",
+      "side": 1,
+      "message": "Generally looks good. I\u0027d add @phobbs@google.com as an additional reviewer to get their input.\n\nAlso, take a skim at go/protodosdonts to make sure you\u0027ve got the major items covered.",
+      "revId": "c123d91c81ead04ad8285569570f7f8ffb933e74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fc9a062_f1858048",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-15T22:24:56Z",
+      "side": 1,
+      "message": "I\u0027d embed this in a `TestContext` message.",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "c123d91c81ead04ad8285569570f7f8ffb933e74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f10656d6_d00a7fc6",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-15T22:24:56Z",
+      "side": 1,
+      "message": "Please add a description. For example, what does \u0027name\u0027 exactly mean? You can be more descriptive. For example:\n\n```\nTestInfo represents a unit of testing that is going to be executed by a custom test runner. The command and arguments provided are runner-specific and left to the underlying runner implementation\u0027s interpretation.\n```",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d01f04d6_2a56cc80",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "ci/protos/buildcontext.proto",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": "    // The name of the test.\n"
+            },
+            {
+              "path": "ci/protos/buildcontext.proto",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": "    // Extra options to be supplied to the test.\n"
+            },
+            {
+              "path": "ci/protos/buildcontext.proto",
+              "range": {
+                "startLine": 37,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": "    // The command to run the test.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c123d91c81ead04ad8285569570f7f8ffb933e74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cc6d412_fa76d9d8",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-15T22:24:56Z",
+      "side": 1,
+      "message": "nit: Add a newline.",
+      "range": {
+        "startLine": 46,
+        "startChar": 29,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "c123d91c81ead04ad8285569570f7f8ffb933e74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
