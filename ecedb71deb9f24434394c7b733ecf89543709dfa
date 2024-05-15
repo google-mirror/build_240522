@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c41f4440_7d6bc4aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-05-15T22:58:32Z",
+      "side": 1,
+      "message": "Nit: read the .ro prop during OTA installation, persist that in the SnapshotUpdateStatus proto; in the first stage init, daemon will read the proto directly from /metadata as .ro properties are not available.",
+      "revId": "ecedb71deb9f24434394c7b733ecf89543709dfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
