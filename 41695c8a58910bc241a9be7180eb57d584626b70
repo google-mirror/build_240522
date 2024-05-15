@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5b28072_52c69048",
+        "filename": "core/sysprop_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-05-15T19:07:12Z",
+      "side": 1,
+      "message": "Makes sense.",
+      "parentUuid": "786b24b4_dab57139",
+      "range": {
+        "startLine": 268,
+        "startChar": 56,
+        "endLine": 268,
+        "endChar": 72
+      },
+      "revId": "41695c8a58910bc241a9be7180eb57d584626b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acec744b_85477b98",
         "filename": "core/sysprop_config.mk",
         "patchSetId": 1
