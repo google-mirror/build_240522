@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09c3a31c_a726448e",
+        "filename": "core/sysprop_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2024-05-15T18:06:13Z",
+      "side": 1,
+      "message": "I\u0027m assuming you are talking about a boot-time check in mark_compact.cc to ignore the flag for \u003e6.1 kernels. Would that be ok from dexpreopt pov?",
+      "parentUuid": "0d4c96b3_2677aa80",
+      "range": {
+        "startLine": 268,
+        "startChar": 56,
+        "endLine": 268,
+        "endChar": 72
+      },
+      "revId": "41695c8a58910bc241a9be7180eb57d584626b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acec744b_85477b98",
         "filename": "core/sysprop_config.mk",
         "patchSetId": 1
