@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "786b24b4_dab57139",
+        "filename": "core/sysprop_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-05-15T18:38:31Z",
+      "side": 1,
+      "message": "It\u0027s okay as long as we warn developers that setting `PRODUCT_ENABLE_UFFD_GC :\u003d false` breaks dexpreopt.",
+      "parentUuid": "09c3a31c_a726448e",
+      "range": {
+        "startLine": 268,
+        "startChar": 56,
+        "endLine": 268,
+        "endChar": 72
+      },
+      "revId": "41695c8a58910bc241a9be7180eb57d584626b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acec744b_85477b98",
         "filename": "core/sysprop_config.mk",
         "patchSetId": 1
