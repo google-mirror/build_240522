@@ -34,6 +34,7 @@ PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.userspace.snapshots.enabled=true
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.io_uring.enabled=true
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.xor.enabled=true
 PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.batch_writes=true
+PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.o_direct.enabled = true
 
 # Enabling this property, will improve OTA install time
 # but will use an additional CPU core
