@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3dbed5c_5302d59d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-05-15T15:56:35Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "41695c8a58910bc241a9be7180eb57d584626b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d4c96b3_2677aa80",
+        "filename": "core/sysprop_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-05-15T15:56:35Z",
+      "side": 1,
+      "message": "Why a future version? Can we ignore the setting on kernel 6.1+ right now? Such change is a breaking change for dexpreopt, so it\u0027s better to come with a dessert release rather than a Mainline release to minimize partners\u0027 confusions.",
+      "range": {
+        "startLine": 268,
+        "startChar": 56,
+        "endLine": 268,
+        "endChar": 72
+      },
+      "revId": "41695c8a58910bc241a9be7180eb57d584626b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acec744b_85477b98",
+        "filename": "core/sysprop_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-05-15T15:56:35Z",
+      "side": 1,
+      "message": "I think it\u0027s better to document this at PRODUCT_ENABLE_UFFD_GC because that\u0027s what a partner would set. https://cs.android.com/android/platform/superproject/main/+/main:build/make/target/product/default_art_config.mk;l\u003d172;drc\u003d0f00fbd681b3550bc13763847b8df3ea0c5eef6c",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 269,
+        "endChar": 56
+      },
+      "revId": "41695c8a58910bc241a9be7180eb57d584626b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
