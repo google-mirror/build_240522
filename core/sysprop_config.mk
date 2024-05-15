@@ -265,6 +265,8 @@ ADDITIONAL_SYSTEM_PROPERTIES += ro.force.debuggable=0
 config_enable_uffd_gc := \
   $(firstword $(OVERRIDE_ENABLE_UFFD_GC) $(PRODUCT_ENABLE_UFFD_GC) default)
 
+# This system property controls the ART module. However a future version of it
+# may ignore this setting if the kernel is 6.1 or later.
 # If the value is "default", it will be mangled by post_process_props.py.
 ADDITIONAL_PRODUCT_PROPERTIES += ro.dalvik.vm.enable_uffd_gc=$(config_enable_uffd_gc)
 
