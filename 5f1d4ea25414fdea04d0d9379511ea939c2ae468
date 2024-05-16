@@ -16,6 +16,24 @@
       "message": "Is this currently happening anywhere?  Having a warning here is just going to turn into permanent noise.  Could you combine them with `$(strip $(TARGET_BOARD_INFO_FILE) $(TARGET_BOARD_INFO_FILES))`?",
       "revId": "5f1d4ea25414fdea04d0d9379511ea939c2ae468",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c009ba_5591226a",
+        "filename": "core/soong_config.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-05-16T22:36:42Z",
+      "side": 1,
+      "message": "Or make it an error?",
+      "parentUuid": "36bc8ff1_debebed8",
+      "revId": "5f1d4ea25414fdea04d0d9379511ea939c2ae468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
