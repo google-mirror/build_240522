@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f344ba6_fff26c67",
+        "filename": "tools/releasetools/ota_from_target_files.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2024-05-16T00:18:38Z",
+      "side": 1,
+      "message": "remove extra space",
+      "range": {
+        "startLine": 937,
+        "startChar": 11,
+        "endLine": 937,
+        "endChar": 12
+      },
+      "revId": "dd0ab08840ed40d76b1a42c0d8f4971157987723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
