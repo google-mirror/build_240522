@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "159fd4e4_10f5be2f",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-05-16T22:48:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fc9a062_f1858048",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "c123d91c81ead04ad8285569570f7f8ffb933e74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f10656d6_d00a7fc6",
@@ -102,6 +126,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5663bc0b_6790bf1a",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-05-16T22:48:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f10656d6_d00a7fc6",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 35
+      },
+      "revId": "c123d91c81ead04ad8285569570f7f8ffb933e74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cc6d412_fa76d9d8",
@@ -115,6 +163,30 @@
       "writtenOn": "2024-05-15T22:24:56Z",
       "side": 1,
       "message": "nit: Add a newline.",
+      "range": {
+        "startLine": 46,
+        "startChar": 29,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "c123d91c81ead04ad8285569570f7f8ffb933e74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7060d41_3a829af3",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-05-16T22:48:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cc6d412_fa76d9d8",
       "range": {
         "startLine": 46,
         "startChar": 29,
