@@ -212,6 +212,24 @@
       "message": "Interestingly, in order to understand the TradeFed args, you need the list of builds (repeated Build builds). This is needed in order to resolve {build.target} or {extra_builds[0].target}, etc.\n\nThis is primarily needed for understanding CTS arguments (specifically, where to pull the CTS zip from). Here is a concrete example where the extra builds are needed: https://screenshot.googleplex.com/3rni4FmeX5dKSFH",
       "revId": "c123d91c81ead04ad8285569570f7f8ffb933e74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f15af0e8_79938b54",
+        "filename": "ci/protos/buildcontext.proto",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1900272
+      },
+      "writtenOn": "2024-05-16T22:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6953ac6c_2d6c25da",
+      "revId": "c123d91c81ead04ad8285569570f7f8ffb933e74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
