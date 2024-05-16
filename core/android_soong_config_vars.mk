@@ -77,6 +77,10 @@ ifdef PRODUCT_AVF_ENABLED
 $(call add_soong_config_var_value,ANDROID,avf_enabled,$(PRODUCT_AVF_ENABLED))
 endif
 
+# Enable AVF remote attestation according to the flag value if PRODUCT_AVF_RA_ENABLED is not defined
+AVF_RA_ENABLED := $(if $(filter false,$(PRODUCT_AVF_RA_ENABLED)),false,$(RELEASE_AVF_ENABLE_REMOTE_ATTESTATION))
+$(call add_soong_config_var_value,ANDROID,avf_remote_attestation_enabled,$(AVF_RA_ENABLED))
+
 ifdef PRODUCT_AVF_MICRODROID_GUEST_GKI_VERSION
 $(call add_soong_config_var_value,ANDROID,avf_microdroid_guest_gki_version,$(PRODUCT_AVF_MICRODROID_GUEST_GKI_VERSION))
 endif
