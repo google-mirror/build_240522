@@ -94,7 +94,6 @@ $(call add_soong_config_var_value,ANDROID,release_avf_enable_device_assignment,$
 $(call add_soong_config_var_value,ANDROID,release_avf_enable_dice_changes,$(RELEASE_AVF_ENABLE_DICE_CHANGES))
 $(call add_soong_config_var_value,ANDROID,release_avf_enable_llpvm_changes,$(RELEASE_AVF_ENABLE_LLPVM_CHANGES))
 $(call add_soong_config_var_value,ANDROID,release_avf_enable_multi_tenant_microdroid_vm,$(RELEASE_AVF_ENABLE_MULTI_TENANT_MICRODROID_VM))
-$(call add_soong_config_var_value,ANDROID,release_avf_enable_remote_attestation,$(RELEASE_AVF_ENABLE_REMOTE_ATTESTATION))
 $(call add_soong_config_var_value,ANDROID,release_avf_enable_vendor_modules,$(RELEASE_AVF_ENABLE_VENDOR_MODULES))
 $(call add_soong_config_var_value,ANDROID,release_avf_enable_virt_cpufreq,$(RELEASE_AVF_ENABLE_VIRT_CPUFREQ))
 $(call add_soong_config_var_value,ANDROID,release_avf_microdroid_kernel_version,$(RELEASE_AVF_MICRODROID_KERNEL_VERSION))
@@ -107,6 +106,16 @@ $(call add_soong_config_var_value,ANDROID,release_package_libandroid_runtime_pun
 $(call add_soong_config_var_value,ANDROID,release_selinux_data_data_ignore,$(RELEASE_SELINUX_DATA_DATA_IGNORE))
 
 $(call add_soong_config_var_value,ANDROID,release_write_appcompat_override_system_properties,$(RELEASE_WRITE_APPCOMPAT_OVERRIDE_SYSTEM_PROPERTIES))
+
+# Disable remote attestation for Pixel 8- as the feature requires the changes on VM DICE chain
+# changes: RKP VM marker (b/300911753) and UDS rooted DICE chain (b/325242725).
+# These changes are only introduced in Pixel 8.
+ifeq ("cheetah", $(TARGET_BOOTLOADER_BOARD_NAME))
+  ENABLE_REMOTE_ATTESTATION ?= false
+else
+  ENABLE_REMOTE_ATTESTATION ?= $(RELEASE_AVF_ENABLE_REMOTE_ATTESTATION)
+endif
+$(call add_soong_config_var_value,ANDROID,release_avf_enable_remote_attestation,ENABLE_REMOTE_ATTESTATION)
 
 # Enable system_server optimizations by default unless explicitly set or if
 # there may be dependent runtime jars.
