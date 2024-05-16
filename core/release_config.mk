@@ -125,7 +125,8 @@ ifneq (,$(_use_protobuf))
     $(if $(filter-out 0,$(.SHELLSTATUS)),$(error release-config failed to run))
     # This will also set _all_release_configs for us.
     $(eval include $(OUT_DIR)/soong/release-config/release_config-$(TARGET_PRODUCT)-$(TARGET_RELEASE).mk)
-    $(KATI_extra_file_deps $(OUT_DIR)/release-config $(config_map_files))
+    $(KATI_extra_file_deps $(OUT_DIR)/release-config $(config_map_files) $(_used_files))
+    _used_files :=
     ifeq (,$(_must_protobuf)$(RELEASE_BUILD_FLAGS_IN_PROTOBUF))
         _use_protobuf :=
     endif
