@@ -280,6 +280,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f41cae21_1f249ed9",
+        "filename": "core/sysprop_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-05-16T21:33:15Z",
+      "side": 1,
+      "message": "Thanks, Martin!",
+      "parentUuid": "05ce7b72_ce6777b1",
+      "range": {
+        "startLine": 268,
+        "startChar": 56,
+        "endLine": 268,
+        "endChar": 72
+      },
+      "revId": "41695c8a58910bc241a9be7180eb57d584626b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acec744b_85477b98",
@@ -317,6 +341,30 @@
       "side": 1,
       "message": "Roland suggested to do that in core/product.mk, where there already is docs. Isn\u0027t it enough?",
       "parentUuid": "acec744b_85477b98",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 269,
+        "endChar": 56
+      },
+      "revId": "41695c8a58910bc241a9be7180eb57d584626b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b6d5c8c_e151bd3a",
+        "filename": "core/sysprop_config.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-05-16T21:33:15Z",
+      "side": 1,
+      "message": "Yes, that\u0027s probably even better. I sent out my comment before Roland\u0027s. Forget about it.",
+      "parentUuid": "a6b0193a_c4b287af",
       "range": {
         "startLine": 268,
         "startChar": 0,
