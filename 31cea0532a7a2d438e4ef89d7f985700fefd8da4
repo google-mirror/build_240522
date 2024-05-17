@@ -16,6 +16,23 @@
       "message": "Hi Nikita, I\u0027d like to disable remote attestation for Pixel 6 \u0026 7 as Dan\u0027s changes about VM DICE chain required by RA won\u0027t kick in before Pixel 8. Since disabling RA requires both switching off the flag at build time and unregistering AVF RKP HAL at runtime, the easiest would be to reuse the feature flag as in the cl. Could you please take a look?",
       "revId": "31cea0532a7a2d438e4ef89d7f985700fefd8da4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7234481e_6a0d5a02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-05-17T12:35:58Z",
+      "side": 1,
+      "message": "This is not the right way to do this. AVF trunk stable flags shouldn\u0027t be configured on per-device basis. For optional features we should have different mechanisms for disabling them (e.g. by querying whether bootloader supports remote attestation at runtime, and rejecting the API calls that ask for remote attestation in case support is not there)",
+      "revId": "31cea0532a7a2d438e4ef89d7f985700fefd8da4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
