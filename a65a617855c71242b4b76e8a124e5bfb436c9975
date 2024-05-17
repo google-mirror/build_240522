@@ -22,6 +22,30 @@
       },
       "revId": "a65a617855c71242b4b76e8a124e5bfb436c9975",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cafba1e_b9d8434a",
+        "filename": "core/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3426,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-05-17T21:18:54Z",
+      "side": 0,
+      "message": "well it didn\u0027t work in the deps list. I could keep it for the command line, but it would only be used in one place, so it\u0027s not that useful.",
+      "parentUuid": "0bc48e1a_97a71f5e",
+      "range": {
+        "startLine": 3426,
+        "startChar": 6,
+        "endLine": 3426,
+        "endChar": 41
+      },
+      "revId": "a65a617855c71242b4b76e8a124e5bfb436c9975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
