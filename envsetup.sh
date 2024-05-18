@@ -1146,6 +1146,8 @@ function run_tool_with_logging() {
   )
 }
 
+export -f run_tool_with_logging
+
 # simplified version of ps; output in the form
 # <pid> <procname>
 function qpid() {
