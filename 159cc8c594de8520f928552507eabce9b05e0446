@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61825268_57a3257a",
+        "filename": "tools/perf/format_benchmarks",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1099348
+      },
+      "writtenOn": "2024-05-19T21:26:26Z",
+      "side": 1,
+      "message": "```suggestion\n                cell[0].get(\"modules\", \"---\")\n```\n\nshould do it 😊",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 37
+      },
+      "revId": "159cc8c594de8520f928552507eabce9b05e0446",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
