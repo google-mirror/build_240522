@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6549aa2_06712b61",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-05-20T19:00:00Z",
+      "side": 1,
+      "message": "Convert / remove this too because it depends on `_wrap_build`, which you removed.",
+      "revId": "1448380404b2d4427de30cad8bbce173814a594e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec5e69b7_fa75c03d",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-05-20T19:00:00Z",
+      "side": 1,
+      "message": "Unset `_wrap_build` too",
+      "revId": "1448380404b2d4427de30cad8bbce173814a594e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
