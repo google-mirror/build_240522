@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "711b68ca_2e0ad42b",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-05-20T21:06:48Z",
+      "side": 1,
+      "message": "Acknowledged, yeah I\u0027d also like to see those deduped.",
+      "parentUuid": "2daae48f_60d89710",
+      "revId": "1448380404b2d4427de30cad8bbce173814a594e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec5e69b7_fa75c03d",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "See above. it\u0027s now in shell_utils.sh",
       "parentUuid": "ec5e69b7_fa75c03d",
+      "revId": "1448380404b2d4427de30cad8bbce173814a594e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1a4bc5c_bb7a0351",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-05-20T21:06:48Z",
+      "side": 1,
+      "message": "oh didn\u0027t realize envsetup includes shell_utils.",
+      "parentUuid": "f79b5ad9_809f8d73",
       "revId": "1448380404b2d4427de30cad8bbce173814a594e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
