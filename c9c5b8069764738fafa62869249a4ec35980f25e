@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9d1bcce_3e8d5679",
+        "filename": "core/tasks/performance-tests.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-05-20T22:55:41Z",
+      "side": 1,
+      "message": "Please clear these variables at the end of the makefile, which may require making target-specific copies of them for use in the make target, as the target\u0027s body is evaluated later.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "c9c5b8069764738fafa62869249a4ec35980f25e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
