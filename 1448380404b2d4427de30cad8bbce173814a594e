@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9c51391_861886ec",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000701
+      },
+      "writtenOn": "2024-05-20T21:24:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e694542c_37a4ffef",
+      "revId": "1448380404b2d4427de30cad8bbce173814a594e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6549aa2_06712b61",
