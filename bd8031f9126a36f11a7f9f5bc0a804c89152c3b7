@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94e8a4b3_a81edb4f",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-20T21:35:50Z",
+      "side": 1,
+      "message": "`test_tool_args_with_dashes_are_logged` or something like that.",
+      "range": {
+        "startLine": 208,
+        "startChar": 6,
+        "endLine": 208,
+        "endChar": 66
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ec481d34_8eb0a242",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/run_tool_with_logging_test.py",
+              "range": {
+                "startLine": 208,
+                "startChar": 0,
+                "endLine": 209,
+                "endChar": 0
+              },
+              "replacement": "  def test_tool_args_with_dashes_are_logged(self):\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bd8031f9126a36f11a7f9f5bc0a804c89152c3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8839968_fcc02e93",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-20T21:35:50Z",
+      "side": 1,
+      "message": "Does this really need to be tested with the real logger?",
+      "range": {
+        "startLine": 208,
+        "startChar": 11,
+        "endLine": 208,
+        "endChar": 27
+      },
+      "revId": "bd8031f9126a36f11a7f9f5bc0a804c89152c3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c923ebbd_ac6cae5a",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-20T21:35:50Z",
+      "side": 1,
+      "message": "Add multiple args and assert that you see them passed to the tool logger as a single string.",
+      "range": {
+        "startLine": 216,
+        "startChar": 63,
+        "endLine": 216,
+        "endChar": 69
+      },
+      "revId": "bd8031f9126a36f11a7f9f5bc0a804c89152c3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
