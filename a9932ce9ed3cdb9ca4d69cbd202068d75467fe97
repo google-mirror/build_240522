@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7550875_b8603212",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-05-20T22:31:09Z",
+      "side": 1,
+      "message": "Could you please convert the function to a standalone bash script instead? Joe is doing it for lots of other envsetup functions in aosp/3094897",
+      "revId": "a9932ce9ed3cdb9ca4d69cbd202068d75467fe97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
