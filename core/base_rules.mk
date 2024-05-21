@@ -403,12 +403,14 @@ endif
 ## make clean- targets
 ###########################################################
 cleantarget := clean-$(my_register_name)
+soong_intermediates := $(SOONG_OUT_DIR)/.intermediates/$(LOCAL_PATH)/$(LOCAL_MODULE)
 .PHONY: $(cleantarget)
 $(cleantarget) : PRIVATE_MODULE := $(my_register_name)
 $(cleantarget) : PRIVATE_CLEAN_FILES := \
     $(LOCAL_BUILT_MODULE) \
     $(LOCAL_INSTALLED_MODULE) \
-    $(intermediates)
+    $(intermediates) \
+    $(soong_intermediates)
 $(cleantarget)::
 	@echo "Clean: $(PRIVATE_MODULE)"
 	$(hide) rm -rf $(PRIVATE_CLEAN_FILES)
