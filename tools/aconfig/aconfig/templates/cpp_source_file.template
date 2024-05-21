@@ -25,7 +25,7 @@
 namespace {cpp_namespace} \{
 
 {{ if is_test_mode }}
-    class flag_provider : public flag_provider_interface \{
+    class flag_provider : public flag_provider_test_interface \{
     private:
         std::unordered_map<std::string, bool> overrides_;
 

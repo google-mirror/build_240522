@@ -275,46 +275,57 @@ namespace com::android::aconfig::test {
 
 class flag_provider_interface {
 public:
-
     virtual ~flag_provider_interface() = default;
 
     virtual bool disabled_ro() = 0;
 
-    virtual void disabled_ro(bool val) = 0;
-
     virtual bool disabled_rw() = 0;
-
-    virtual void disabled_rw(bool val) = 0;
 
     virtual bool disabled_rw_exported() = 0;
 
-    virtual void disabled_rw_exported(bool val) = 0;
-
     virtual bool disabled_rw_in_other_namespace() = 0;
-
-    virtual void disabled_rw_in_other_namespace(bool val) = 0;
 
     virtual bool enabled_fixed_ro() = 0;
 
-    virtual void enabled_fixed_ro(bool val) = 0;
-
     virtual bool enabled_fixed_ro_exported() = 0;
-
-    virtual void enabled_fixed_ro_exported(bool val) = 0;
 
     virtual bool enabled_ro() = 0;
 
-    virtual void enabled_ro(bool val) = 0;
-
     virtual bool enabled_ro_exported() = 0;
 
+    virtual bool enabled_rw() = 0;
+};
+
+class flag_provider_test_interface : public flag_provider_interface {
+public:
+    virtual void reset_flags() {}
+
+    using flag_provider_interface::disabled_ro;
+    virtual void disabled_ro(bool val) = 0;
+
+    using flag_provider_interface::disabled_rw;
+    virtual void disabled_rw(bool val) = 0;
+
+    using flag_provider_interface::disabled_rw_exported;
+    virtual void disabled_rw_exported(bool val) = 0;
+
+    using flag_provider_interface::disabled_rw_in_other_namespace;
+    virtual void disabled_rw_in_other_namespace(bool val) = 0;
+
+    using flag_provider_interface::enabled_fixed_ro;
+    virtual void enabled_fixed_ro(bool val) = 0;
+
+    using flag_provider_interface::enabled_fixed_ro_exported;
+    virtual void enabled_fixed_ro_exported(bool val) = 0;
+
+    using flag_provider_interface::enabled_ro;
+    virtual void enabled_ro(bool val) = 0;
+
+    using flag_provider_interface::enabled_ro_exported;
     virtual void enabled_ro_exported(bool val) = 0;
 
-    virtual bool enabled_rw() = 0;
-
+    using flag_provider_interface::enabled_rw;
     virtual void enabled_rw(bool val) = 0;
-
-    virtual void reset_flags() {}
 };
 
 extern std::unique_ptr<flag_provider_interface> provider_;
@@ -324,7 +335,7 @@ inline bool disabled_ro() {
 }
 
 inline void disabled_ro(bool val) {
-    provider_->disabled_ro(val);
+    static_cast<flag_provider_test_interface&>(*provider_).disabled_ro(val);
 }
 
 inline bool disabled_rw() {
@@ -332,7 +343,7 @@ inline bool disabled_rw() {
 }
 
 inline void disabled_rw(bool val) {
-    provider_->disabled_rw(val);
+    static_cast<flag_provider_test_interface&>(*provider_).disabled_rw(val);
 }
 
 inline bool disabled_rw_exported() {
@@ -340,7 +351,7 @@ inline bool disabled_rw_exported() {
 }
 
 inline void disabled_rw_exported(bool val) {
-    provider_->disabled_rw_exported(val);
+    static_cast<flag_provider_test_interface&>(*provider_).disabled_rw_exported(val);
 }
 
 inline bool disabled_rw_in_other_namespace() {
@@ -348,7 +359,7 @@ inline bool disabled_rw_in_other_namespace() {
 }
 
 inline void disabled_rw_in_other_namespace(bool val) {
-    provider_->disabled_rw_in_other_namespace(val);
+    static_cast<flag_provider_test_interface&>(*provider_).disabled_rw_in_other_namespace(val);
 }
 
 inline bool enabled_fixed_ro() {
@@ -356,7 +367,7 @@ inline bool enabled_fixed_ro() {
 }
 
 inline void enabled_fixed_ro(bool val) {
-    provider_->enabled_fixed_ro(val);
+    static_cast<flag_provider_test_interface&>(*provider_).enabled_fixed_ro(val);
 }
 
 inline bool enabled_fixed_ro_exported() {
@@ -364,7 +375,7 @@ inline bool enabled_fixed_ro_exported() {
 }
 
 inline void enabled_fixed_ro_exported(bool val) {
-    provider_->enabled_fixed_ro_exported(val);
+    static_cast<flag_provider_test_interface&>(*provider_).enabled_fixed_ro_exported(val);
 }
 
 inline bool enabled_ro() {
@@ -372,7 +383,7 @@ inline bool enabled_ro() {
 }
 
 inline void enabled_ro(bool val) {
-    provider_->enabled_ro(val);
+    static_cast<flag_provider_test_interface&>(*provider_).enabled_ro(val);
 }
 
 inline bool enabled_ro_exported() {
@@ -380,7 +391,7 @@ inline bool enabled_ro_exported() {
 }
 
 inline void enabled_ro_exported(bool val) {
-    provider_->enabled_ro_exported(val);
+    static_cast<flag_provider_test_interface&>(*provider_).enabled_ro_exported(val);
 }
 
 inline bool enabled_rw() {
@@ -388,11 +399,11 @@ inline bool enabled_rw() {
 }
 
 inline void enabled_rw(bool val) {
-    provider_->enabled_rw(val);
+    static_cast<flag_provider_test_interface&>(*provider_).enabled_rw(val);
 }
 
 inline void reset_flags() {
-    return provider_->reset_flags();
+    static_cast<flag_provider_test_interface&>(*provider_).reset_flags();
 }
 
 }
@@ -702,7 +713,7 @@ bool com_android_aconfig_test_enabled_rw() {
 
 namespace com::android::aconfig::test {
 
-    class flag_provider : public flag_provider_interface {
+    class flag_provider : public flag_provider_test_interface {
         private:
             std::unordered_map<std::string, bool> overrides_;
 
