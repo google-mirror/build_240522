@@ -22,6 +22,7 @@ genrule {
     name: "envsetup_minimum.zip",
     visibility: [
         "//build/make/tests:__subpackages__",
+        "//build/soong/tests:__subpackages__",
     ],
     tools: [
         "soong_zip",
