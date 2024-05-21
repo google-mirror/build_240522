@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdcb92d1_d3e934d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2024-05-21T09:51:44Z",
+      "side": 1,
+      "message": "We find and error that we don\u0027t currently understand when building on aosp for flame when enabling some overlays.\n\nWhen building in the v prerelease for Xperia products, we don\u0027t see this error.\n\nWill upload the changes that I did for device/google/flame as well\n\n[ 99% 122/123] finishing legacy Make module parsing ...\nFAILED: \nbuild/make/core/artifact_path_requirements.mk:31: warning:  build/make/target/product/generic_system.mk produces files outside its artifact path requirement. Allowed paths are root/*, system/*\nOffending entries:\nsystem_ext/overlay/framework-res__aosp_flame__auto_generated_rro_systemext.apk\nIn file included from build/make/core/main.mk:1121:\nbuild/make/core/artifact_path_requirements.mk:31: error: Build failed.\n11:02:27 ckati failed with: exit status 1",
+      "revId": "d42cb4029257a2def0a0338a1caadb9af16bf942",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
