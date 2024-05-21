@@ -16,6 +16,24 @@
       "message": "Could you please convert the function to a standalone bash script instead? Joe is doing it for lots of other envsetup functions in aosp/3094897",
       "revId": "a9932ce9ed3cdb9ca4d69cbd202068d75467fe97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294c1e4e_e0a456e3",
+        "filename": "envsetup.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-21T00:13:00Z",
+      "side": 1,
+      "message": "Nadia is OOO, I\u0027ll try to do the conversion this week.",
+      "parentUuid": "f7550875_b8603212",
+      "revId": "a9932ce9ed3cdb9ca4d69cbd202068d75467fe97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
