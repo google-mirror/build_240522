@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73837309_4c8dea10",
+        "filename": "core/base_rules.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-05-21T15:14:02Z",
+      "side": 1,
+      "message": "If we need this functionality it should be implemented in Soong rather than guessing Soong implementation details in Make.",
+      "revId": "da383aced70b438a6d7e1834b0ec0396f0f2f2e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
