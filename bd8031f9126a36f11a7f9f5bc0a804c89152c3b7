@@ -206,6 +206,30 @@
       },
       "revId": "bd8031f9126a36f11a7f9f5bc0a804c89152c3b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44368c6c_43b51bdf",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2024-05-21T17:47:55Z",
+      "side": 1,
+      "message": "SG. Please change `--arg1` to `--tool-arg1` to make it clear that it\u0027s for the too. Also rename the test `test_tool_args_do_not_fail_logger` and add another `--tool-arg2`.\n\nIdeally, the assertion should be (\u0027not passed to logger\u0027) and we need another test (\u0027passed to tool\u0027).\n\nYour call on if and when to handle those cases, just bringing them to your attention.",
+      "parentUuid": "1533b271_b1c38d87",
+      "range": {
+        "startLine": 216,
+        "startChar": 63,
+        "endLine": 216,
+        "endChar": 69
+      },
+      "revId": "bd8031f9126a36f11a7f9f5bc0a804c89152c3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
