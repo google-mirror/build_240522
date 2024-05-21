@@ -182,6 +182,30 @@
       },
       "revId": "bd8031f9126a36f11a7f9f5bc0a804c89152c3b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1533b271_b1c38d87",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-21T17:40:14Z",
+      "side": 1,
+      "message": "Yes, the newly added test (test_tool_single_args_with_dashes_are_logged) will fail",
+      "parentUuid": "f806b5f1_5838ca96",
+      "range": {
+        "startLine": 216,
+        "startChar": 63,
+        "endLine": 216,
+        "endChar": 69
+      },
+      "revId": "bd8031f9126a36f11a7f9f5bc0a804c89152c3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
