@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f531158_186e9cd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2024-05-21T13:12:57Z",
+      "side": 1,
+      "message": "Build problem on AOSP resolved in latest patchset\n\nConfirmed that enabling RRO for OEM/ODM/SYSTEM/VENDOR/SYSTEM/SYSTEM_EXT does not cause build problems.",
+      "revId": "d62f6763a545be25d525072254bafa635eee2bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b453e54_f28da4d4",
+        "filename": "core/artifact_path_requirements.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2024-05-21T13:12:57Z",
+      "side": 1,
+      "message": "With this change, all RROs can be correctly generated.\n\nThis was not caught in our internal builds, as we do not inherit from:\nhttps://cs.android.com/android/platform/superproject/main/+/main:build/make/target/product/generic_system.mk?q\u003dgeneric_system.mk\n\nAOSP devices inherits from generic_system.mk which will call equire-artifacts-in-path and will trigger the previous problem.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 62
+      },
+      "revId": "d62f6763a545be25d525072254bafa635eee2bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
