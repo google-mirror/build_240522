@@ -65,6 +65,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd1ba8dc_481b0cec",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-21T17:28:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94e8a4b3_a81edb4f",
+      "range": {
+        "startLine": 208,
+        "startChar": 6,
+        "endLine": 208,
+        "endChar": 66
+      },
+      "revId": "bd8031f9126a36f11a7f9f5bc0a804c89152c3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b46fe96_8f453867",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-21T17:28:10Z",
+      "side": 1,
+      "message": "I think so as this can give us the confidence that the real logger can parse the args correctly.",
+      "parentUuid": "d8839968_fcc02e93",
+      "range": {
+        "startLine": 208,
+        "startChar": 11,
+        "endLine": 208,
+        "endChar": 27
+      },
+      "revId": "bd8031f9126a36f11a7f9f5bc0a804c89152c3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c923ebbd_ac6cae5a",
@@ -78,6 +126,30 @@
       "writtenOn": "2024-05-20T21:35:50Z",
       "side": 1,
       "message": "Add multiple args and assert that you see them passed to the tool logger as a single string.",
+      "range": {
+        "startLine": 216,
+        "startChar": 63,
+        "endLine": 216,
+        "endChar": 69
+      },
+      "revId": "bd8031f9126a36f11a7f9f5bc0a804c89152c3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c41d653f_4165e06e",
+        "filename": "tests/run_tool_with_logging_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1114063
+      },
+      "writtenOn": "2024-05-21T17:28:10Z",
+      "side": 1,
+      "message": "This is already done in the dry run test.\nNote if we have multiple args start with \u0027--\u0027, the old logger actually works fine, only the case when there\u0027s a single arg start with \u0027--\u0027 cause the problem fixed in this cl.",
+      "parentUuid": "c923ebbd_ac6cae5a",
       "range": {
         "startLine": 216,
         "startChar": 63,
