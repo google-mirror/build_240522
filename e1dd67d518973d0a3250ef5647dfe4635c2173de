@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d09cd786_9b3f458f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1827146
+      },
+      "writtenOn": "2024-05-22T00:58:30Z",
+      "side": 1,
+      "message": "@tkeren@google.com Could you please advise how to proceed?\n\nWe do have a trendy team already for statsd namespace created in scope of http://b/316232747\nWhat we would like to is to change the trendy team id associated with the statsd namespace\nrecently we have created more narrowed team - who works specifically on android source code\nhttp://android-trendy/manage/engineers/5403245077430272 - this is a new subteam which is part of bigger team 5295809771732992\nCould you please advise what is the proper flow to make this change?",
+      "revId": "e1dd67d518973d0a3250ef5647dfe4635c2173de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
