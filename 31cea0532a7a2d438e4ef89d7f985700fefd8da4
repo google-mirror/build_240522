@@ -33,6 +33,24 @@
       "message": "This is not the right way to do this. AVF trunk stable flags shouldn\u0027t be configured on per-device basis. For optional features we should have different mechanisms for disabling them (e.g. by querying whether bootloader supports remote attestation at runtime, and rejecting the API calls that ask for remote attestation in case support is not there)",
       "revId": "31cea0532a7a2d438e4ef89d7f985700fefd8da4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2df8de59_3bc42ad3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-22T08:06:02Z",
+      "side": 1,
+      "message": "Hi Nikita, I have added a field in the Makefile as we discussed, could you take another look?\n\nThe presubmit error is not related to this change.",
+      "parentUuid": "7234481e_6a0d5a02",
+      "revId": "31cea0532a7a2d438e4ef89d7f985700fefd8da4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
